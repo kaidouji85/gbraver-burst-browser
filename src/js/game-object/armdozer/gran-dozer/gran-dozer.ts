@@ -5,6 +5,7 @@ import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
+import { burst } from "./animation/burst";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
@@ -22,7 +23,6 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { burst } from "./animation/burst";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
@@ -90,6 +90,14 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   burst(): Animate {
     return burst(this.#props);
+  }
+
+  /**
+   * バースト -> 立ち
+   * @returns アニメーション
+   */
+  burstToStand(): Animate {
+    return tackleToStand(this.#props);
   }
 
   /** @override */
