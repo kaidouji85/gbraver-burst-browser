@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
 import { ResourcesContainer } from "../../../resource";
-import { createLightningShotProps } from "./procedures/create-lightning-shot-props";
-import { LightningShotProps } from "./props";
+import { createLightningShotProps } from "./props/create-lightning-shot-props";
+import { LightningShotProps } from "./props/lightning-shot-props";
 
 /** 電撃ショット */
 export class LightningShot {

@@ -1,8 +1,10 @@
-import { ResourcesContainer } from "../../../../resource";
-import { LightningShotProps } from "../props";
-import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import * as THREE from "three";
+
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import { ResourcesContainer } from "../../../../resource";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { createModelInitialValue } from "../model/create-model-initial-value";
+import { LightningShotProps } from "./lightning-shot-props";
 
 /**
  * 電撃ショットのプロパティを生成する
@@ -23,5 +25,7 @@ export function createLightningShotProps(
     height: 200,
   });
 
-  return { mesh };
+  const model = createModelInitialValue();
+
+  return { mesh, model };
 }
