@@ -1,6 +1,7 @@
 import { ResourcesContainer } from "../../../resource";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { LightningShot } from "./lightning-shot";
+import { EnemyLightningShotView } from "./view/enemy-lightning-shot-view";
 import { PlayerLightningShotView } from "./view/player-lightning-shot-view";
 
 /**
@@ -23,6 +24,6 @@ export function playerLightningShot(
 export function enemyLightningShot(
   options: ResourcesContainer & GameObjectActionContainer,
 ): LightningShot {
-  const view = new PlayerLightningShotView(options);
+  const view = new EnemyLightningShotView(options);
   return new LightningShot({ ...options, view });
 }

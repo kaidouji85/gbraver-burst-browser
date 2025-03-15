@@ -6,6 +6,9 @@ import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { LightningShotModel } from "../model/lightning-shot-model";
 import { LightningShotView } from "./lightning-shot-view";
 
+/** メッシュのサイズ */
+const MESH_SIZE = 400;
+
 /** プレイヤーの電撃ショットビュー */
 export class PlayerLightningShotView implements LightningShotView {
   /** メッシュ */
@@ -23,8 +26,8 @@ export class PlayerLightningShotView implements LightningShotView {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 8,
-      width: 200,
-      height: 200,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
     });
   }
 
