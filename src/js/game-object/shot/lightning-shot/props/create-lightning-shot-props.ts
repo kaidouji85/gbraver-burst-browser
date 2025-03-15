@@ -1,5 +1,6 @@
 import { ResourcesContainer } from "../../../../resource";
 import { createModelInitialValue } from "../model/create-model-initial-value";
+import { createLightningShotSounds } from "../sounds/create-lightning-shot-sounds";
 import { LightningShotView } from "../view/lightning-shot-view";
 import { LightningShotProps } from "./lightning-shot-props";
 
@@ -18,5 +19,6 @@ export function createLightningShotProps(
 ): LightningShotProps {
   const { view } = options;
   const model = createModelInitialValue();
-  return { model, view };
+  const sounds = createLightningShotSounds(options);
+  return { model, sounds, view };
 }
