@@ -47,6 +47,8 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     param.attackerArmdozerTD.sprite().endActive(),
   )
     .chain(delay(800))
+    .chain(param.burstArmdozerTD.lightningShot.shot())
+    .chain(delay(300))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
