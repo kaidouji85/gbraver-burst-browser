@@ -45,4 +45,9 @@ export class PlayerLightningShotView implements LightningShotView {
     this.#mesh.getObject3D().position.y = model.position.y;
     this.#mesh.animate(model.animation.frame);
   }
+
+  /** @override */
+  lookAt(camera: THREE.Camera): void {
+    this.getObject3D().quaternion.copy(camera.quaternion);
+  }
 }
