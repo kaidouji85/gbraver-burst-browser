@@ -22,6 +22,7 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
+import { burst } from "./animation/burst";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
@@ -81,6 +82,14 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackleToStand(): Animate {
     return tackleToStand(this.#props);
+  }
+
+  /**
+   * バースト
+   * @returns アニメーション
+   */
+  burst(): Animate {
+    return burst(this.#props);
   }
 
   /** @override */
