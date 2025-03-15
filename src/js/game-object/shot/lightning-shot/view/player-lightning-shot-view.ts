@@ -40,7 +40,9 @@ export class PlayerLightningShotView implements LightningShotView {
 
   /** @override */
   engage(model: LightningShotModel) {
-    // NOP
-    // TODO あとで実装する
+    this.#mesh.opacity(model.opacity);
+    this.#mesh.getObject3D().position.x = model.position.x;
+    this.#mesh.getObject3D().position.y = model.position.y;
+    this.#mesh.animate(model.animation.frame);
   }
 }

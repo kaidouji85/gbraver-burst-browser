@@ -37,7 +37,7 @@ export class LightningShot {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#props.mesh.destructor();
+    this.#props.view.destructor();
     this.#unsubscribers.forEach((unsubscriber) => unsubscriber.unsubscribe());
   }
 
@@ -46,6 +46,6 @@ export class LightningShot {
    * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#props.mesh.getObject3D();
+    return this.#props.view.getObject3D();
   }
 }
