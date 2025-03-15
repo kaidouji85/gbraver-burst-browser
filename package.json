@@ -30,6 +30,7 @@
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.35.2",
     "@html-eslint/parser": "^0.35.2",
+    "@storybook/addon-backgrounds": "^8.6.6",
     "@storybook/html": "^8.6.5",
     "@storybook/html-webpack5": "^8.6.5",
     "@types/howler": "^2.2.12",
