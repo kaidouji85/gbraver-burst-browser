@@ -1,4 +1,4 @@
-import {LightningShot} from "../src/js/game-object/shot/lightning-shot";
+import { playerLightningShot } from "../src/js/game-object/shot/lightning-shot";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
@@ -6,7 +6,7 @@ export default {
 };
 
 /** 電撃ショット */
-export const lightningShot = tdGameObjectStory((params) => {
-  const shot = new LightningShot(params);
+export const player = tdGameObjectStory((params) => {
+  const shot = playerLightningShot(params);
   return { objects: [shot.getObject3D()] };
-})
+});

@@ -4,7 +4,13 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { createModelInitialValue } from "../model/create-model-initial-value";
+import {LightningShotView} from "../view/lightning-shot-view";
 import { LightningShotProps } from "./lightning-shot-props";
+
+/** 電撃ショットプロパティ生成オプション */
+export type lightningShotPropsOptions = ResourcesContainer & {
+  view: LightningShotView;
+}
 
 /**
  * 電撃ショットのプロパティを生成する
@@ -12,9 +18,9 @@ import { LightningShotProps } from "./lightning-shot-props";
  * @returns 電撃ショットのプロパティ
  */
 export function createLightningShotProps(
-  options: ResourcesContainer,
+  options: lightningShotPropsOptions,
 ): LightningShotProps {
-  const { resources } = options;
+  const { resources, view } = options;
   const texture =
     resources.textures.find((t) => t.id === TEXTURE_IDS.LIGHTNING_SHOT)
       ?.texture ?? new THREE.Texture();
@@ -27,5 +33,5 @@ export function createLightningShotProps(
 
   const model = createModelInitialValue();
 
-  return { mesh, model };
+  return { mesh, model, view };
 }
