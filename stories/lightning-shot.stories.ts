@@ -1,5 +1,5 @@
-import { tdGameObjectStory } from "./stub/td-game-object-stub";
 import {LightningShot} from "../src/js/game-object/shot/lightning-shot";
+import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {
   title: "lightning-shot",
