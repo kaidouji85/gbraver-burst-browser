@@ -1,7 +1,9 @@
 import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../../animation/animate";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
+import { shot } from "./animation/shot";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createLightningShotProps,
@@ -47,5 +49,13 @@ export class LightningShot {
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
+  }
+
+  /**
+   * 電撃ショットを発射する
+   * @returns アニメーション
+   */
+  shot(): Animate {
+    return shot(this.#props);
   }
 }
