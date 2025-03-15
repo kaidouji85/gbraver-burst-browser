@@ -28,4 +28,8 @@ module.exports = {
     name: "@storybook/html-webpack5",
     options: {},
   },
+  addons: ["@storybook/addon-backgrounds"],
+  features: {
+    backgroundsStoryGlobals: true,
+  },
 };
