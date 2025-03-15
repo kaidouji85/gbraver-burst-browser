@@ -230,3 +230,37 @@ export const enemyActiveGuard: StoryFn = armdozerSpriteStub(
   EnemyGranDozer,
   activeGuard,
 );
+
+/** バースト */
+const burst = (sprite: GranDozer) => {
+  sprite
+    .burst()
+    .chain(delay(2000))
+    .chain(sprite.burstToStand())
+    .chain(delay(2000))
+    .loop();
+};
+
+/** アクティブ バースト */
+const activeBurst = (sprite: GranDozer) => {
+  burst(sprite);
+  sprite.startActive().play();
+};
+
+/** プレイヤー バースト */
+export const playerBurst: StoryFn = armdozerSpriteStub(PlayerGranDozer, burst);
+
+/** プレイヤー アクティブ バースト */
+export const playerActiveBurst: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  activeBurst,
+);
+
+/** 敵 バースト */
+export const enemyBurst: StoryFn = armdozerSpriteStub(EnemyGranDozer, burst);
+
+/** 敵 アクティブ バースト */
+export const enemyActiveBurst: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  activeBurst,
+);
