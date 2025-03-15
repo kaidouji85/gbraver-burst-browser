@@ -1,7 +1,7 @@
+import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
 import { LightningShotAnimationProps } from "./animation-props";
-import { all } from "../../../../animation/all";
 
 /**
  * 電撃ショットを発射する

@@ -1,5 +1,5 @@
-import { LightningShotView } from "../view/lightning-shot-view";
 import { LightningShotAnimationProps } from "../animation/animation-props";
+import { LightningShotView } from "../view/lightning-shot-view";
 
 /** 電撃ショットのプロパティ */
 export type LightningShotProps = LightningShotAnimationProps & {
