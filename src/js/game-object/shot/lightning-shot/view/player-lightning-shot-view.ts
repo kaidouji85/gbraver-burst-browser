@@ -3,6 +3,11 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
 import { LightningShotModel } from "../model/lightning-shot-model";
 import { LightningShotView } from "./lightning-shot-view";
 
@@ -44,9 +49,11 @@ export class PlayerLightningShotView implements LightningShotView {
   /** @override */
   engage(model: LightningShotModel) {
     this.#mesh.opacity(model.opacity);
-    this.#mesh.getObject3D().position.x = model.position.x;
-    this.#mesh.getObject3D().position.y = model.position.y;
     this.#mesh.animate(model.animation.frame);
+    const target = this.#mesh.getObject3D();
+    target.position.x = ARMDOZER_EFFECT_STANDARD_X - MESH_SIZE / 2 - 80;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 40;
+    target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
   }
 
   /** @override */
