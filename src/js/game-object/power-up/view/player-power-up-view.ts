@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { PowerUpModel } from "../model/power-up-model";
 import type { PowerUpView } from "./power-up-view";
 export const MESH_SIZE = 300;

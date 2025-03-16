@@ -4,7 +4,7 @@ import type { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import type { RaitoModel } from "../model/raito-model";
 import type { RaitoView } from "./raito-view";
@@ -61,7 +61,7 @@ export class PlayerRaitoView implements RaitoView {
       preRender.rendererDOM.clientWidth / 2 +
       (model.position.x - PADDING_RIGHT) * scale;
     this.#mesh.getObject3D().scale.set(scale, scale, scale);
-    this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
+    this.#mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_Z);
     this.#mesh.opacity(model.opacity);
   }
 

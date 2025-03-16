@@ -2,7 +2,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../../../../game-object/armdozer/position";
+} from "../../../../../game-object/td-position";
 import { HUDCoordinate } from "../../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
 import { HUDLayer } from "../../hud";

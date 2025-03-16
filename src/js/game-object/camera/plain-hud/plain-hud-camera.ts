@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { createHUDCamera } from "../../../camera/create-hud-camera";
 import { onResizeOrthographicCamera } from "../../../camera/resize";
 import type { Resize } from "../../../window/resize";
-import { HUD_CAMERA_ZINDEX } from "../../hud-zindex";
+import { HUD_CAMERA_Z } from "../../hud-position";
 
 /**
  * 汎用HUDレイヤー用カメラ
@@ -21,7 +21,7 @@ export class PlainHUDCamera {
    */
   constructor(resize: Observable<Resize>) {
     this.#camera = createHUDCamera();
-    this.#camera.position.z = HUD_CAMERA_ZINDEX;
+    this.#camera.position.z = HUD_CAMERA_Z;
     this.#unsubscriber = resize.subscribe((action) => {
       this.#resize(action);
     });

@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { DamageHalvedModel } from "../model/damage-halved-model";
 import type { DamageHalvedView } from "./damage-halved-view";
 export const MESH_SIZE = 300;

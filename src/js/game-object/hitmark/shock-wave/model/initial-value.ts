@@ -2,7 +2,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_SPRITE_STANDARD_Z,
-} from "../../../armdozer/position";
+} from "../../../td-position";
 import type { ShockWaveModel } from "./shock-wave-model";
 
 /**
