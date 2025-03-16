@@ -4,7 +4,7 @@ import type { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import type {
   AnimationType,
@@ -89,7 +89,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
-    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.position.z = HUD_CUT_IN_Z;
     this.#group.scale.x = scale;
     this.#group.scale.y = scale;
     this.#group.scale.z = scale;

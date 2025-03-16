@@ -7,7 +7,7 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { DamageIndicatorModel } from "../model/damage-indicator-model";
 import type { DamageIndicatorView } from "./damage-indicator-view";
 export const MESH_SIZE = 50;

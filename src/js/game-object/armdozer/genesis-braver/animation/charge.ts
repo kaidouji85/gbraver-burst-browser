@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
+import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
 import { GenesisBraverAnimationProps } from "./animation-props";
 
 /**

@@ -1,6 +1,6 @@
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../position";
+import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
