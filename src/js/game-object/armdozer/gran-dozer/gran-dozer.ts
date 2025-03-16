@@ -6,6 +6,7 @@ import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
 import { burst } from "./animation/burst";
+import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
@@ -97,7 +98,7 @@ export class GranDozer extends EmptyArmdozerSprite {
    * @returns アニメーション
    */
   burstToStand(): Animate {
-    return tackleToStand(this.#props);
+    return burstToStand(this.#props);
   }
 
   /** @override */
