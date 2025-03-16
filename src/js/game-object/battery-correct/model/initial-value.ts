@@ -1,7 +1,7 @@
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { BatteryCorrectModel } from "./battery-correct-model";
 
 /**

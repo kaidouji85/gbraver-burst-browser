@@ -5,7 +5,7 @@ import {
   ARMDOZER_SPRITE_ATTACKER_Z,
   ARMDOZER_SPRITE_STANDARD_X,
   ARMDOZER_SPRITE_STANDARD_Z,
-} from "../../position";
+} from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**

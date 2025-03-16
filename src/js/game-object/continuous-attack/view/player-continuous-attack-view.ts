@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { ContinuousAttackModel } from "../model/continuous-attack-model";
 import type { ContinuousAttackView } from "./continuous-attack-view";
 

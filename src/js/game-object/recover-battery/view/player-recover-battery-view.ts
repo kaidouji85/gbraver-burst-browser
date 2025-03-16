@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { RecoverBatteryModel } from "../model/recover-battery-model";
 import type { RecoverBatteryView } from "./recover-battery-view";
 export const MESH_SIZE = 100;

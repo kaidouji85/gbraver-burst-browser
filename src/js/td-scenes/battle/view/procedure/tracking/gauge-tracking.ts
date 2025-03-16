@@ -4,7 +4,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../../../../game-object/armdozer/position";
+} from "../../../../../game-object/td-position";
 import { Gauge } from "../../../../../game-object/gauge/gauge";
 import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
 import { TrackingParams } from "./tracking-params";

@@ -6,7 +6,7 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
 import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { TurnIndicatorModel } from "../model/turn-indicator-model";
 
 /** ターンインジケータービュー */

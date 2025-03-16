@@ -2,7 +2,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../../armdozer/position";
+} from "../../../td-position";
 import type { LightningModel } from "./lightning-model";
 
 /**

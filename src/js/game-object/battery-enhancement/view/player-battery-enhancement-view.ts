@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
-} from "../../armdozer/position";
+} from "../../td-position";
 import type { BatteryEnhancementModel } from "../model/battery-enhancement-model";
 import type { BatteryEnhancementView } from "./battery-enhancement-view";
 export const MESH_SIZE = 300;

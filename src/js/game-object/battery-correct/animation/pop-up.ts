@@ -2,7 +2,7 @@ import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import { ARMDOZER_EFFECT_STANDARD_Y } from "../../armdozer/position";
+import { ARMDOZER_EFFECT_STANDARD_Y } from "../../td-position";
 import { BatteryCorrectAnimationProps } from "./animation-props";
 
 /**
