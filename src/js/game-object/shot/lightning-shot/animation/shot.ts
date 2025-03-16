@@ -4,6 +4,18 @@ import { tween } from "../../../../animation/tween";
 import { LightningShotAnimationProps } from "./animation-props";
 
 /**
+ * アニメーションフレームを進める
+ * @param props 電撃ショットのアニメーションプロパティ
+ * @returns アニメーション
+ */
+function animateFrame(props: LightningShotAnimationProps): Animate {
+  const { model } = props;
+  return tween(model, (t) => t.to({ animation: { frame: 0 } }, 0)).chain(
+    tween(model, (t) => t.to({ animation: { frame: 1 } }, 1000)),
+  );
+}
+
+/**
  * 電撃ショットを発射する
  * @param props 電撃ショットのアニメーションプロパティ
  * @returns アニメーション
