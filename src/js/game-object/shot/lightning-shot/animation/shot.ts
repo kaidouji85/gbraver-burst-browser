@@ -60,12 +60,13 @@ function hidden(
  * @returns アニメーション
  */
 export function shot(props: LightningShotAnimationProps): Animate {
-  const animateInterval = 500;
+  const animateInterval = 250;
   return all(
     animateFrame(props, animateInterval)
       .chain(animateFrame(props, animateInterval))
+      .chain(animateFrame(props, animateInterval))
       .chain(animateFrame(props, animateInterval)),
 
-    show(props, 300).chain(delay(900)).chain(hidden(props, 300)),
+    show(props, 100).chain(delay(800)).chain(hidden(props, 100)),
   );
 }
