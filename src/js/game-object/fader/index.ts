@@ -1,10 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { GameObjectAction } from "../action/game-object-action";
-import {
-  HUD_FROMTMOST_FADER_ZINDEX,
-  HUD_REARMOST_FADER_ZINDEX,
-} from "../hud-zindex";
+import { HUD_FROMTMOST_FADER_Z, HUD_REARMOST_FADER_Z } from "../hud-position";
 import { Fader } from "./fader";
 
 /** 画面フェーダ生成のパラメータ */
@@ -26,7 +23,7 @@ export function frontmostFader(param: Param): Fader {
   return new Fader({
     isVisible: param.isVisible,
     gameObjectAction: param.gameObjectAction,
-    z: HUD_FROMTMOST_FADER_ZINDEX,
+    z: HUD_FROMTMOST_FADER_Z,
   });
 }
 
@@ -40,6 +37,6 @@ export function rearmostFader(param: Param): Fader {
   return new Fader({
     isVisible: param.isVisible,
     gameObjectAction: param.gameObjectAction,
-    z: HUD_REARMOST_FADER_ZINDEX,
+    z: HUD_REARMOST_FADER_Z,
   });
 }

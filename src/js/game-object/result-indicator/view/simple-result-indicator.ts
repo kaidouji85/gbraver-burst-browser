@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 import type { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import { HUD_RESULT_INDICATOR_ZINDEX } from "../../hud-zindex";
+import { HUD_RESULT_INDICATOR_Z } from "../../hud-position";
 import { hudScale } from "../../scale";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 import type { ResultIndicatorView } from "./result-indicator-view";
@@ -66,7 +66,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
         (preRender.rendererDOM.clientHeight / 2 -
           safeAreaY -
           this.#paddingY * devicePerScale);
-    target.position.z = HUD_RESULT_INDICATOR_ZINDEX;
+    target.position.z = HUD_RESULT_INDICATOR_Z;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     target.quaternion.copy(preRender.camera.quaternion);

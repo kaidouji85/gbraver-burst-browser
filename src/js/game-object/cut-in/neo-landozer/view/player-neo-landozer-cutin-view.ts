@@ -4,7 +4,7 @@ import type { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import type { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import type {
   AnimationType,
@@ -27,7 +27,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.position.z = HUD_CUT_IN_Z;
     const cutInUpResource = resources.textures.find(
       (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
     );

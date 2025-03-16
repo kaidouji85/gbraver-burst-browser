@@ -1,4 +1,4 @@
-import { HUD_ATTENTION_ZINDEX } from "../game-object/hud-zindex";
+import { HUD_ATTENTION_Z } from "../game-object/hud-position";
 import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
@@ -8,7 +8,7 @@ import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-e
  */
 export function attentionBatterySelector(props: CustomBattleEventProps): void {
   props.view.hud.gameObjects.batterySelector.getObject3D().position.z =
-    HUD_ATTENTION_ZINDEX;
+    HUD_ATTENTION_Z;
 }
 
 /**
@@ -29,7 +29,7 @@ export function unattentionBatterySelector(
  */
 export function attentionBurstButton(props: CustomBattleEventProps): void {
   props.view.hud.gameObjects.burstButton.getObject3D().position.z =
-    HUD_ATTENTION_ZINDEX;
+    HUD_ATTENTION_Z;
 }
 
 /**
@@ -48,7 +48,7 @@ export function unattentionBurstButton(props: CustomBattleEventProps): void {
  */
 export function attentionPilotButton(props: CustomBattleEventProps): void {
   props.view.hud.gameObjects.pilotButton.getObject3D().position.z =
-    HUD_ATTENTION_ZINDEX;
+    HUD_ATTENTION_Z;
 }
 
 /**
