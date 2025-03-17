@@ -2,6 +2,7 @@ import { ArmdozerIds } from "gbraver-burst-core";
 
 import {
   genesisBraverBurstButton,
+  granDozerBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
   shinBraverBurstButton,
@@ -30,6 +31,8 @@ export function createBurstButton(
       return wingDozerBurstButton(params);
     case ArmdozerIds.GENESIS_BRAVER:
       return genesisBraverBurstButton(params);
+    case ArmdozerIds.GRAN_DOZER:
+      return granDozerBurstButton(params);
     default:
       return shinBraverBurstButton(params);
   }

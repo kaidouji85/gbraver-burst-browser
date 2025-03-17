@@ -47,4 +47,8 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_DOWN,
     path: "armdozer/gran-dozer/cutin-burst-down.webp",
   },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
+    path: "armdozer/gran-dozer/burst-button-icon.webp",
+  },
 ];
