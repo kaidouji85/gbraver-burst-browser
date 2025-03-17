@@ -1,5 +1,5 @@
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import { AnimationType } from "../model/genesis-braver-cutin-model";
+import { AnimationType } from "../model/gran-dozer-cut-in-model";
 
 /** アニメーション、メッシュマッピング */
 export type AnimationMeshMapping = {

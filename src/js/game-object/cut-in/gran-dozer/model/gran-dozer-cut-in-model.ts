@@ -1,13 +1,12 @@
 /** アニメーションタイプ */
 export type AnimationType = "BURST_UP" | "BURST_DOWN";
 
-/** ジェネシスブレイバー カットイン モデル */
-export type GenesisBraverCutInModel = {
+/** グランドーザ カットイン モデル */
+export type GranDozerCutInModel = {
   /** アニメーション */
   animation: {
     /** アニメーションタイプ */
     type: AnimationType;
-
     /** 0〜1で指定するアニメーションフレーム */
     frame: number;
   };
@@ -15,7 +14,6 @@ export type GenesisBraverCutInModel = {
   tracking: {
     /** x座標 */
     x: number;
-
     /** y座標 */
     y: number;
   };

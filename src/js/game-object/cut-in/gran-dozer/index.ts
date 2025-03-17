@@ -1,39 +1,35 @@
-import { Observable } from "rxjs";
-
 import { ResourcesContainer } from "../../../resource";
-import { GameObjectAction } from "../../action/game-object-action";
-import { GenesisBraverCutIn } from "./genesis-braver-cutin";
-import { EnemyGenesisBraverCutInView } from "./view/enemy-genesis-braver-cutin-view";
-import { PlayerGenesisBraverCutInView } from "./view/player-genesis-braver-cutin-view";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
+import { GranDozerCutIn } from "./gran-dozer-cut-in";
+import { EnemyGranDozerCutInView } from "./view/enemy-gran-dozer-cut-in-view";
+import { PlayerGranDozerCutInView } from "./view/player-gran-dozer-cut-in-view";
 
-/** ジェネシスブレイバー カットイン生成パラメータ */
-export type GenesisBraverCutInCreatorParams = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+/** グランドーザ カットイン生成パラメータ */
+export type GranDozerCutInCreatorParams = ResourcesContainer &
+  GameObjectActionContainer;
 
 /**
- * プレイヤー ジェネシスブレイバー カットイン を生成する
+ * プレイヤー グランドーザ カットイン を生成する
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function playerGenesisBraverCutIn(
-  params: GenesisBraverCutInCreatorParams,
-): GenesisBraverCutIn {
+export function playerGranDozerCutIn(
+  params: GranDozerCutInCreatorParams,
+): GranDozerCutIn {
   const { resources } = params;
-  const view = new PlayerGenesisBraverCutInView(resources);
-  return new GenesisBraverCutIn({ ...params, view });
+  const view = new PlayerGranDozerCutInView(resources);
+  return new GranDozerCutIn({ ...params, view });
 }
 
 /**
- * 敵 ジェネシスブレイバー カットイン を生成する
+ * 敵 グランドーザ カットイン を生成する
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function enemyGenesisBraverCutIn(
-  params: GenesisBraverCutInCreatorParams,
-): GenesisBraverCutIn {
+export function enemyGranDozerCutIn(
+  params: GranDozerCutInCreatorParams,
+): GranDozerCutIn {
   const { resources } = params;
-  const view = new EnemyGenesisBraverCutInView(resources);
-  return new GenesisBraverCutIn({ ...params, view });
+  const view = new EnemyGranDozerCutInView(resources);
+  return new GranDozerCutIn({ ...params, view });
 }

@@ -1,7 +1,7 @@
-import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
+import { GranDozerCutInModel } from "../model/gran-dozer-cut-in-model";
 
-/** ジェネシスブレイバー カットイン アニメーション プロパティ */
-export type GenesisBraverCutInAnimationProps = {
+/** グランドーザ カットイン アニメーション プロパティ */
+export type GranDozerCutInAnimationProps = {
   /** モデル */
-  model: GenesisBraverCutInModel;
+  model: GranDozerCutInModel;
 };

@@ -1,39 +1,37 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { PreRender } from "../../../game-loop/pre-render";
 import { HUDCoordinate } from "../../../tracking/coordinate";
 import { HUDTracking } from "../../../tracking/hud-tracking";
-import { GameObjectAction } from "../../action/game-object-action";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
-  createGenesisBraverCutInProps,
-  PropsCreatorParams,
-} from "./props/create-genesis-braver-cutin-props";
-import { GenesisBraverCutInProps } from "./props/genesis-braver-cutin-props";
+  createGranDozerCutInProps,
+  PropsCreatorOptions,
+} from "./props/create-gran-dozer-cut-in-props";
+import { GranDozerCutInProps } from "./props/gran-dozer-cut-in-props";
 
 /** コンストラクタのパラメータ */
-export type GenesisBraverCutInParams = PropsCreatorParams & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type GranDozerCutInOptions = PropsCreatorOptions &
+  GameObjectActionContainer;
 
-/** ジェネシスブレイバー カットイン */
-export class GenesisBraverCutIn implements HUDTracking {
+/** グランドーザ カットイン */
+export class GranDozerCutIn implements HUDTracking {
   /** プロパティ */
-  #props: GenesisBraverCutInProps;
+  #props: GranDozerCutInProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
-   * @param params パラメータ
+   * @param options オプション
    */
-  constructor(params: GenesisBraverCutInParams) {
-    const { gameObjectAction } = params;
-    this.#props = createGenesisBraverCutInProps(params);
+  constructor(options: GranDozerCutInOptions) {
+    const { gameObjectAction } = options;
+    this.#props = createGranDozerCutInProps(options);
     this.#unsubscribers = [
       gameObjectAction.subscribe((action) => {
         if (action.type === "PreRender") {

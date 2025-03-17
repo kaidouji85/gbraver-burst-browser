@@ -1,6 +1,6 @@
 import { Resources } from "../../../../resource";
-import { genesisBraverCutInBurstDown } from "../mesh/burst-down";
-import { genesisBraverCutInBurstUp } from "../mesh/burst-up";
+import { granDozerCutInBurstDown } from "../mesh/burst-down";
+import { granDozerCutInBurstUp } from "../mesh/burst-up";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
 
 /**
@@ -12,11 +12,11 @@ export function createMeshes(resources: Resources): AnimationMeshMapping[] {
   return [
     {
       type: "BURST_UP",
-      mesh: genesisBraverCutInBurstUp(resources),
+      mesh: granDozerCutInBurstUp(resources),
     },
     {
       type: "BURST_DOWN",
-      mesh: genesisBraverCutInBurstDown(resources),
+      mesh: granDozerCutInBurstDown(resources),
     },
   ];
 }

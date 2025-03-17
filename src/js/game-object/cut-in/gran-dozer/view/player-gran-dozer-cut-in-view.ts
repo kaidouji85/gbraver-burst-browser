@@ -4,16 +4,16 @@ import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../resource";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
+import { GranDozerCutInModel } from "../model/gran-dozer-cut-in-model";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
-import { GenesisBraverCutInView } from "./genesis-braver-cutin-view";
+import { GranDozerCutInView } from "./gran-dozer-cut-in-view";
 import { createMeshes } from "./meshes";
 
 /** ベースとなるpadding top */
 export const BASE_PADDING_TOP = 100;
 
-/** プレイヤー ジェネシスブレイバー カットイン ビュー */
-export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
+/** プレイヤー グランドーザ カットイン ビュー */
+export class PlayerGranDozerCutInView implements GranDozerCutInView {
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
@@ -39,7 +39,7 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
   }
 
   /** @override */
-  engage(model: GenesisBraverCutInModel, preRender: PreRender): void {
+  engage(model: GranDozerCutInModel, preRender: PreRender): void {
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type,
     );

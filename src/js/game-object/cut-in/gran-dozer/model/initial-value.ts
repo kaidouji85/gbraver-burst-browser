@@ -1,10 +1,10 @@
-import { GenesisBraverCutInModel } from "./genesis-braver-cutin-model";
+import { GranDozerCutInModel } from "./gran-dozer-cut-in-model";
 
 /**
  * モデルの初期化を生成する
  * @returns 生成結果
  */
-export function createInitialValue(): GenesisBraverCutInModel {
+export function createInitialValue(): GranDozerCutInModel {
   return {
     animation: {
       type: "BURST_UP",

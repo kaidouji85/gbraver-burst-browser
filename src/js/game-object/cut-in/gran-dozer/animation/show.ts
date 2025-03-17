@@ -2,14 +2,14 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { GenesisBraverCutInAnimationProps } from "./animation-props";
+import { GranDozerCutInAnimationProps } from "./animation-props";
 
 /**
  * カットインを表示する
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function show(props: GenesisBraverCutInAnimationProps): Animate {
+export function show(props: GranDozerCutInAnimationProps): Animate {
   const { model } = props;
   return all(
     tween(model.animation, (t) =>

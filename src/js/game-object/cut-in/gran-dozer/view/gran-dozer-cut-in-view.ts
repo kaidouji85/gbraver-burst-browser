@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
 import { PreRender } from "../../../../game-loop/pre-render";
-import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
+import { GranDozerCutInModel } from "../model/gran-dozer-cut-in-model";
 
-/** ジェネシスブレイバー カットイン ビュー */
-export interface GenesisBraverCutInView {
+/** グランドーザ カットイン ビュー */
+export interface GranDozerCutInView {
   /**
    * デストラクタ相当の処理
    */
@@ -15,7 +15,7 @@ export interface GenesisBraverCutInView {
    * @param model モデル
    * @param preRender プリレンダー
    */
-  engage(model: GenesisBraverCutInModel, preRender: PreRender): void;
+  engage(model: GranDozerCutInModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得

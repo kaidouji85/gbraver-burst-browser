@@ -14,16 +14,16 @@ export const HEIGHT = 800;
 export const MAX_ANIMATION = 4;
 
 /**
- * ジェネシスブレイバー カットイン バーストアップ メッシュを生成
+ * グランドーザ カットイン バーストアップ メッシュを生成
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
-export function genesisBraverCutInBurstUp(
+export function granDozerCutInBurstUp(
   resources: Resources,
 ): HorizontalAnimationMesh {
   const texture =
     resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_UP,
+      (v) => v.id === TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_UP,
     )?.texture ?? new THREE.Texture();
   return new HorizontalAnimationMesh({
     texture,
