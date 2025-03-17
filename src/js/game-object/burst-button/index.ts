@@ -7,7 +7,7 @@ import { BurstButton } from "./burst-button";
 import { GenesisBraverIcon } from "./view/genesis-braver-icon";
 import { GranDozerIcon } from "./view/gran-dozer-icon";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
-import { NeoLandozerIcon } from "./view/neo-landozer-icon";
+import { createNeoLandozerIcon } from "./view/neo-landozer-icon";
 import { createShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
 
@@ -40,7 +40,7 @@ export function neoLandozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new NeoLandozerIcon(resources);
+  const armdozerIcon = createNeoLandozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
