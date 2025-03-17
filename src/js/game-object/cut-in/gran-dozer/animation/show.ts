@@ -1,9 +1,9 @@
+import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
 import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
 import { GranDozerCutInAnimationProps } from "./animation-props";
-import { all } from "../../../../animation/all";
 
 /**
  * カットインを表示する
