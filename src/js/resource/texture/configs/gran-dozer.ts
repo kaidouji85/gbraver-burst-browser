@@ -39,4 +39,12 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_GUARD,
     path: "armdozer/gran-dozer/guard.webp",
   },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_UP,
+    path: "armdozer/gran-dozer/cutin-burst-up.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_DOWN,
+    path: "armdozer/gran-dozer/cutin-burst-down.webp",
+  },
 ];
