@@ -6,7 +6,7 @@ import { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
 import { GenesisBraverIcon } from "./view/genesis-braver-icon";
 import { GranDozerIcon } from "./view/gran-dozer-icon";
-import { LightningDozerIcon } from "./view/lightning-dozer-icon";
+import { createLightningDozerIcon } from "./view/lightning-dozer-icon";
 import { createNeoLandozerIcon } from "./view/neo-landozer-icon";
 import { createShinBraverIcon } from "./view/shin-braver-icon";
 import { createWingDozerIcon } from "./view/wing-dozer-icon";
@@ -53,7 +53,7 @@ export function lightningDozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new LightningDozerIcon(resources);
+  const armdozerIcon = createLightningDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
