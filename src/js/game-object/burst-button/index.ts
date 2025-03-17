@@ -4,7 +4,7 @@ import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
-import { GenesisBraverIcon } from "./view/genesis-braver-icon";
+import { createGenesisBraverIcon } from "./view/genesis-braver-icon";
 import { GranDozerIcon } from "./view/gran-dozer-icon";
 import { createLightningDozerIcon } from "./view/lightning-dozer-icon";
 import { createNeoLandozerIcon } from "./view/neo-landozer-icon";
@@ -79,7 +79,7 @@ export function genesisBraverBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new GenesisBraverIcon(resources);
+  const armdozerIcon = createGenesisBraverIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
