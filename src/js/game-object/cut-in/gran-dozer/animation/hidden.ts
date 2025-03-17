@@ -9,13 +9,5 @@ import { GranDozerCutInAnimationProps } from "./animation-props";
  */
 export function hidden(props: GranDozerCutInAnimationProps): Animate {
   const { model } = props;
-  return tween(model, (t) =>
-    t.to(
-      {
-        opacity: 0,
-        scale: 1.1,
-      },
-      300,
-    ),
-  );
+  return tween(model, (t) => t.to({ opacity: 0, scale: 1.1 }, 300));
 }

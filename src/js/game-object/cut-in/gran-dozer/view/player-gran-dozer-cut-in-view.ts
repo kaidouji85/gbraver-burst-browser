@@ -40,6 +40,7 @@ export class PlayerGranDozerCutInView implements GranDozerCutInView {
 
   /** @override */
   engage(model: GranDozerCutInModel, preRender: PreRender): void {
+    console.log(model);
     const currentMesh = this.#meshes.find(
       (v) => v.type === model.animation.type,
     );
