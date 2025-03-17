@@ -3,6 +3,7 @@ import { StoryFn } from "@storybook/html";
 import {
   BurstButtonCreatorParams,
   genesisBraverBurstButton,
+  granDozerBurstButton,
   lightningDozerBurstButton,
   neoLandozerBurstButton,
   shinBraverBurstButton,
@@ -74,6 +75,9 @@ export const genesisBraver: StoryFn = buttonStory(
   genesisBraverBurstButton,
   operatable,
 );
+
+/** グランドーザ */
+export const granDozer: StoryFn = buttonStory(granDozerBurstButton, operatable);
 
 /**
  * バースト不可能

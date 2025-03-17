@@ -1,10 +1,11 @@
 import { Observable } from "rxjs";
 
-import type { ResourcesContainer } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import type { GameObjectAction } from "../action/game-object-action";
+import { GameObjectAction } from "../action/game-object-action";
 import { BurstButton } from "./burst-button";
 import { GenesisBraverIcon } from "./view/genesis-braver-icon";
+import { GranDozerIcon } from "./view/gran-dozer-icon";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { NeoLandozerIcon } from "./view/neo-landozer-icon";
 import { ShinBraverIcon } from "./view/shin-braver-icon";
@@ -79,5 +80,18 @@ export function genesisBraverBurstButton(
 ): BurstButton {
   const { resources } = params;
   const armdozerIcon = new GenesisBraverIcon(resources);
+  return new BurstButton({ ...params, armdozerIcon });
+}
+
+/**
+ * グランドーザ バーストボタンを生成する
+ * @param params 生成パラメータ
+ * @returns バーストボタン
+ */
+export function granDozerBurstButton(
+  params: BurstButtonCreatorParams,
+): BurstButton {
+  const { resources } = params;
+  const armdozerIcon = new GranDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
