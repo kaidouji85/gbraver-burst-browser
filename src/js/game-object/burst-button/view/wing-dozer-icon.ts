@@ -1,6 +1,6 @@
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { ArmdozerIcon } from "./armdozer-icon";
+import { ArmdozerIcon } from "./armdozer-icon";
 import { SimpleArmdozerIcon } from "./simple-armdozer-icon";
 
 /**
