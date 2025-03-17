@@ -17,7 +17,7 @@ type Options = ResourcesContainer & {
   textureId: TextureId;
 };
 
-/** 画像1枚表示するバーストボタン */
+/** シンプルなバーストボタンの実装 */
 export class SimpleArmdozerIcon implements ArmdozerIcon {
   /** メッシュ */
   #mesh: HorizontalAnimationMesh;
