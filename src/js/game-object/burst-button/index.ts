@@ -9,7 +9,7 @@ import { GranDozerIcon } from "./view/gran-dozer-icon";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { createNeoLandozerIcon } from "./view/neo-landozer-icon";
 import { createShinBraverIcon } from "./view/shin-braver-icon";
-import { WingDozerIcon } from "./view/wing-dozer-icon";
+import { createWingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
 export type BurstButtonCreatorParams = ResourcesContainer &
@@ -66,7 +66,7 @@ export function wingDozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new WingDozerIcon(resources);
+  const armdozerIcon = createWingDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
