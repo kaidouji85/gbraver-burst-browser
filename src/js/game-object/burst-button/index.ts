@@ -8,7 +8,7 @@ import { GenesisBraverIcon } from "./view/genesis-braver-icon";
 import { GranDozerIcon } from "./view/gran-dozer-icon";
 import { LightningDozerIcon } from "./view/lightning-dozer-icon";
 import { NeoLandozerIcon } from "./view/neo-landozer-icon";
-import { ShinBraverIcon } from "./view/shin-braver-icon";
+import { createShinBraverIcon } from "./view/shin-braver-icon";
 import { WingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
@@ -27,7 +27,7 @@ export function shinBraverBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new ShinBraverIcon(resources);
+  const armdozerIcon = createShinBraverIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
