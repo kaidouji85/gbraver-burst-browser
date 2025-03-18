@@ -7,14 +7,14 @@ import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../view/td/game-objects";
 import { StateAnimationProps } from "../state-animation-props";
-import { BurstPlayerParam } from "./burst-player-param";
+import { BurstPlayerParam, toBurstPlayerParam } from "./burst-player-param";
 
 /**
  * バーストアニメーションのパラメータ
  * 本typeを直接指定してはいけない
- * @type TD_ARMDOZER TDアームドーザ
- * @type HUD_ARMDOZER HUDアームドーザ
- * @type BURST バースト
+ * @template TD_ARMDOZER TDアームドーザ
+ * @template HUD_ARMDOZER HUDアームドーザ
+ * @template BURST バースト
  */
 export type BurstAnimationParamX<
   TD_ARMDOZER extends TDArmdozerObjects,
@@ -51,44 +51,17 @@ export type BurstAnimationParam = BurstAnimationParamX<
 export function toBurstAnimationParam(
   props: StateAnimationProps,
   gameState: GameStateX<BurstEffect>,
-): BurstAnimationParam | null | undefined {
-  const effect: BurstEffect = gameState.effect;
-  const burstPlayerState = gameState.players.find(
-    (v) => v.playerId === effect.burstPlayer,
-  );
-  const burstPlayerTD = props.view.td.players.find(
-    (v) => v.playerId === effect.burstPlayer,
-  );
-  const burstPlayerHUD = props.view.hud.players.find(
-    (v) => v.playerId === effect.burstPlayer,
-  );
-  const burstArmdozerHUD = props.view.hud.armdozers.find(
-    (v) => v.playerId === effect.burstPlayer,
-  );
-  const burstArmdozerTD = props.view.td.armdozers.find(
-    (v) => v.playerId === effect.burstPlayer,
-  );
+): BurstAnimationParam | null {
+  const burstPlayerParams = toBurstPlayerParam(props, gameState);
   const attackerArmdozerTD = props.view.td.armdozers.find(
     (v) => v.playerId === gameState.activePlayerId,
   );
-  if (
-    !burstPlayerState ||
-    !burstPlayerTD ||
-    !burstPlayerHUD ||
-    !burstArmdozerHUD ||
-    !burstArmdozerTD ||
-    !attackerArmdozerTD
-  ) {
+  if (!burstPlayerParams || !attackerArmdozerTD) {
     return null;
   }
 
   return {
-    burstPlayerState,
-    burst: effect.burst,
-    burstPlayerTD,
-    burstPlayerHUD,
-    burstArmdozerHUD,
-    burstArmdozerTD,
+    ...burstPlayerParams,
     attackerArmdozerTD,
     tdObjects: props.view.td.gameObjects,
     tdCamera: props.view.td.camera,

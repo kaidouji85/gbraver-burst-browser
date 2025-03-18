@@ -1,15 +1,21 @@
-import { Burst, PlayerState } from "gbraver-burst-core";
+import {
+  Burst,
+  BurstEffect,
+  GameStateX,
+  PlayerState,
+} from "gbraver-burst-core";
 
 import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDPlayer } from "../../../view/td/player";
+import { StateAnimationProps } from "../state-animation-props";
 
 /** バースト側 バーストアニメーションパラメータ */
 export type BurstPlayerParam<
-  TD_ARMDOZER extends TDArmdozerObjects,
-  HUD_ARMDOZER extends HUDArmdozerObjects,
-  BURST extends Burst,
+  TD_ARMDOZER extends TDArmdozerObjects = TDArmdozerObjects,
+  HUD_ARMDOZER extends HUDArmdozerObjects = HUDArmdozerObjects,
+  BURST extends Burst = Burst,
 > = {
   /** バースト発動側ステート */
   readonly burstPlayerState: PlayerState;
@@ -24,3 +30,50 @@ export type BurstPlayerParam<
   /** バースト発動側3Dアームドーザ */
   readonly burstArmdozerTD: TD_ARMDOZER;
 };
+
+/**
+ * バースト側バーストアニメーションパラメータを生成する
+ * @param props 戦闘シーンプロパティ
+ * @param gameState ゲームステート
+ * @returns 生成結果、生成できない場合はnull
+ */
+export function toBurstPlayerParam(
+  props: StateAnimationProps,
+  gameState: GameStateX<BurstEffect>,
+): BurstPlayerParam | null {
+  const { burst, burstPlayer } = gameState.effect;
+  const burstPlayerState = gameState.players.find(
+    (v) => v.playerId === burstPlayer,
+  );
+  const burstPlayerTD = props.view.td.players.find(
+    (v) => v.playerId === burstPlayer,
+  );
+  const burstPlayerHUD = props.view.hud.players.find(
+    (v) => v.playerId === burstPlayer,
+  );
+  const burstArmdozerHUD = props.view.hud.armdozers.find(
+    (v) => v.playerId === burstPlayer,
+  );
+  const burstArmdozerTD = props.view.td.armdozers.find(
+    (v) => v.playerId === burstPlayer,
+  );
+
+  if (
+    burstPlayerState == null ||
+    burstPlayerTD == null ||
+    burstPlayerHUD == null ||
+    burstArmdozerHUD == null ||
+    burstArmdozerTD == null
+  ) {
+    return null;
+  }
+
+  return {
+    burstPlayerState,
+    burst,
+    burstPlayerTD,
+    burstPlayerHUD,
+    burstArmdozerHUD,
+    burstArmdozerTD,
+  };
+}
