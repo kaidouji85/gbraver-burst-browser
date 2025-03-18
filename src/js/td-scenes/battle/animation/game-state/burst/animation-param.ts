@@ -7,6 +7,7 @@ import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../view/td/game-objects";
 import { StateAnimationProps } from "../state-animation-props";
+import { toAttackerParam } from "./attacker-param";
 import { BurstPlayerParam, toBurstPlayerParam } from "./burst-player-param";
 
 /**
@@ -52,17 +53,15 @@ export function toBurstAnimationParam(
   props: StateAnimationProps,
   gameState: GameStateX<BurstEffect>,
 ): BurstAnimationParam | null {
-  const burstPlayerParams = toBurstPlayerParam(props, gameState);
-  const attackerArmdozerTD = props.view.td.armdozers.find(
-    (v) => v.playerId === gameState.activePlayerId,
-  );
-  if (!burstPlayerParams || !attackerArmdozerTD) {
+  const burstPlayerParam = toBurstPlayerParam(props, gameState);
+  const attackerParam = toAttackerParam(props, gameState);
+  if (!burstPlayerParam || !attackerParam) {
     return null;
   }
 
   return {
-    ...burstPlayerParams,
-    attackerArmdozerTD,
+    ...burstPlayerParam,
+    ...attackerParam,
     tdObjects: props.view.td.gameObjects,
     tdCamera: props.view.td.camera,
     hudObjects: props.view.hud.gameObjects,

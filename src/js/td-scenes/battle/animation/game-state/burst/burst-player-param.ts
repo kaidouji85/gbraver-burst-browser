@@ -59,11 +59,11 @@ export function toBurstPlayerParam(
   );
 
   if (
-    burstPlayerState == null ||
-    burstPlayerTD == null ||
-    burstPlayerHUD == null ||
-    burstArmdozerHUD == null ||
-    burstArmdozerTD == null
+    !burstPlayerState ||
+    !burstPlayerTD ||
+    !burstPlayerHUD ||
+    !burstArmdozerHUD ||
+    !burstArmdozerTD
   ) {
     return null;
   }
