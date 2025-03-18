@@ -14,13 +14,13 @@ export type BurstPlayerParam<
   /** バースト発動側ステート */
   readonly burstPlayerState: PlayerState;
   /** バースト情報 */
-  burst: BURST;
+  readonly burst: BURST;
   /** バースト発動側3Dプレイヤーオブジェクト */
-  burstPlayerTD: TDPlayer;
+  readonly burstPlayerTD: TDPlayer;
   /** バースト発動側HUDプレイヤーオブジェクト */
-  burstPlayerHUD: HUDPlayer;
+  readonly burstPlayerHUD: HUDPlayer;
   /** バースト発動側HUDアームドーザ */
-  burstArmdozerHUD: HUD_ARMDOZER;
+  readonly burstArmdozerHUD: HUD_ARMDOZER;
   /** バースト発動側3Dアームドーザ */
-  burstArmdozerTD: TD_ARMDOZER;
+  readonly burstArmdozerTD: TD_ARMDOZER;
 };
