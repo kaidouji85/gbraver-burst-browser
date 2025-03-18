@@ -5,11 +5,11 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
-import { HUDPlayer } from "../../../view/hud/player";
-import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
-import { TDPlayer } from "../../../view/td/player";
-import { StateAnimationProps } from "../state-animation-props";
+import { HUDArmdozerObjects } from "../../../../view/hud/armdozer-objects/hud-armdozer-objects";
+import { HUDPlayer } from "../../../../view/hud/player";
+import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
+import { TDPlayer } from "../../../../view/td/player";
+import { StateAnimationProps } from "../../state-animation-props";
 
 /** バースト側 バーストアニメーションパラメータ */
 export type BurstPlayerParam<

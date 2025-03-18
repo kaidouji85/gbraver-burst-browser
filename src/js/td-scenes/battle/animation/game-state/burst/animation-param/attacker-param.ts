@@ -1,7 +1,7 @@
 import { BurstEffect, GameStateX } from "gbraver-burst-core";
 
-import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
-import { StateAnimationProps } from "../state-animation-props";
+import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
+import { StateAnimationProps } from "../../state-animation-props";
 
 /** 攻撃側バーストアニメーションのパラメータ */
 export type AttackerParam = {
