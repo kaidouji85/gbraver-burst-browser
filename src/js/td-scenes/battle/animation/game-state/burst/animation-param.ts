@@ -1,19 +1,13 @@
-import {
-  Burst,
-  BurstEffect,
-  GameStateX,
-  PlayerState,
-} from "gbraver-burst-core";
+import { Burst, BurstEffect, GameStateX } from "gbraver-burst-core";
 
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
 import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
-import { HUDPlayer } from "../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../view/td/game-objects";
-import { TDPlayer } from "../../../view/td/player";
 import { StateAnimationProps } from "../state-animation-props";
+import { BurstPlayerParam } from "./burst-player-param";
 
 /**
  * バーストアニメーションのパラメータ
@@ -26,20 +20,7 @@ export type BurstAnimationParamX<
   TD_ARMDOZER extends TDArmdozerObjects,
   HUD_ARMDOZER extends HUDArmdozerObjects,
   BURST extends Burst,
-> = {
-  /** バースト発動側ステート */
-  burstPlayerState: PlayerState;
-  /** バースト情報 */
-  burst: BURST;
-  /** バースト発動側3Dプレイヤーオブジェクト */
-  burstPlayerTD: TDPlayer;
-  /** バースト発動側HUDプレイヤーオブジェクト */
-  burstPlayerHUD: HUDPlayer;
-  /** バースト発動側HUDアームドーザ */
-  burstArmdozerHUD: HUD_ARMDOZER;
-  /** バースト発動側3Dアームドーザ */
-  burstArmdozerTD: TD_ARMDOZER;
-
+> = BurstPlayerParam<TD_ARMDOZER, HUD_ARMDOZER, BURST> & {
   /** 攻撃側3Dアームドーザ */
   attackerArmdozerTD: TDArmdozerObjects;
 
