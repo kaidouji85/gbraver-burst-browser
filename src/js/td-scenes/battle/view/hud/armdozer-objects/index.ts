@@ -6,6 +6,7 @@ import {
   enemyGenesisBraverHUD,
   playerGenesisBraverHUD,
 } from "./genesis-braver";
+import { enemyGranDozerHUD, playerGranDozerHUD } from "./gran-dozer";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 import {
   enemyLightningDozerHUD,
@@ -35,6 +36,8 @@ export function playerArmdozerHUD(
       return playerWingDozerHUD(params);
     case ArmdozerIds.GENESIS_BRAVER:
       return playerGenesisBraverHUD(params);
+    case ArmdozerIds.GRAN_DOZER:
+      return playerGranDozerHUD(params);
     default:
       return new EmptyHUDArmdozer(player);
   }
@@ -60,6 +63,8 @@ export function enemyArmdozerHUD(
       return enemyWingDozerHUD(params);
     case ArmdozerIds.GENESIS_BRAVER:
       return enemyGenesisBraverHUD(params);
+    case ArmdozerIds.GRAN_DOZER:
+      return enemyGranDozerHUD(params);
     default:
       return new EmptyHUDArmdozer(enemy);
   }
