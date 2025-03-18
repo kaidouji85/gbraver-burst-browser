@@ -3,7 +3,7 @@ import { Burst, Ineffective } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
-import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
+import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
 import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
@@ -14,7 +14,7 @@ import { BurstAnimationParamX } from "./animation-param";
  */
 export type GranDozerBurst<BURST extends Burst> = BurstAnimationParamX<
   GranDozerTD,
-  HUDArmdozerObjects, // TODO グランドーザのものに置き換える
+  GranDozerHUD,
   BURST
 >;
 
