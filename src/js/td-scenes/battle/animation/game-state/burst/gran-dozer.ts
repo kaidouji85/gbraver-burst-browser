@@ -41,12 +41,20 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
 function ineffective(param: GranDozerBurst<Ineffective>): Animate {
   return all(
     focusToBurstPlayer(param),
+    param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.granDozer.burst(),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.attackerArmdozerTD.sprite().endActive(),
   )
     .chain(delay(800))
+    .chain(
+      all(
+        param.hudObjects.rearmostFader.opacity(0, 300),
+        param.burstArmdozerHUD.cutIn.hidden(),
+      ),
+    )
     .chain(param.burstArmdozerTD.lightningShot.shot())
     .chain(delay(300))
     .chain(

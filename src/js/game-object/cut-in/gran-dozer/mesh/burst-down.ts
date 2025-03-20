@@ -1,14 +1,9 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-
-/** スプライト幅 */
-export const WIDTH = 800;
-
-/** スプライト高 */
-export const HEIGHT = 800;
+import { MESH_SIZE } from "./mesh-size";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
@@ -28,7 +23,7 @@ export function granDozerCutInBurstDown(
   return new HorizontalAnimationMesh({
     texture,
     maxAnimation: MAX_ANIMATION,
-    width: WIDTH,
-    height: HEIGHT,
+    width: MESH_SIZE,
+    height: MESH_SIZE,
   });
 }
