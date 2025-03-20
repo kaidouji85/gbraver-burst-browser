@@ -1,5 +1,6 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
+import { AbortManager } from "../../abort-controller/abort-manager";
 import { createActionManager } from "../../action-manager/action-manager";
 import { createBGMManager } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
@@ -20,7 +21,6 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameProps } from "./index";
-import { AbortManager } from "../../abort-controller/abort-manager";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParams = {
