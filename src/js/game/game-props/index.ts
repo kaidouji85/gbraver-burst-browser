@@ -1,7 +1,7 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
-import { AbortControllerManager } from "../../abort-controller/abort-controller-manager";
+import { AbortManageContainer } from "../../abort-controller/abort-manage-container";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
@@ -32,7 +32,8 @@ export interface GameProps
     ResourcesContainer,
     SEPlayerContainer,
     GameActionManageContainer,
-    Readonly<GameLoopContainer> {
+    Readonly<GameLoopContainer>,
+    Readonly<AbortManageContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -61,9 +62,6 @@ export interface GameProps
   performanceStats: PerformanceStats | null;
   /** ServiceWorkerRegistrationのキャッシュ */
   serviceWorker: ServiceWorkerRegistration | null;
-
-  /** AbortController管理オブジェクト */
-  readonly abortControllerManager: AbortControllerManager;
 
   /** ブラウザ設定リポジトリ */
   readonly config: GBraverBurstBrowserConfigRepository;

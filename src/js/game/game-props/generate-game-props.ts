@@ -20,7 +20,7 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameProps } from "./index";
-import { AbortControllerManager } from "../../abort-controller/abort-controller-manager";
+import { AbortManager } from "../../abort-controller/abort-manager";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParams = {
@@ -70,10 +70,10 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const renderer = new Renderer(resize);
   const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
-  const abortControllerManager = new AbortControllerManager();
+  const abort = new AbortManager();
   return {
     ...params,
-    abortControllerManager,
+    abort,
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
     isFullResourceLoaded: false,
@@ -90,7 +90,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    postBattle: new PostBattleFloater(abortControllerManager),
+    postBattle: new PostBattleFloater(abort),
     renderer,
     tdSceneBinder: new TDSceneBinder(hudUIScale),
     serviceWorker: null,

@@ -1,11 +1,11 @@
 import { AbortControllerContainer } from "./abort-controller-container";
 
 /**
- * AbortController管理オブジェクト
+ * Abort管理オブジェクト
  * Abortされた場合にあたらしいAbortControllerを生成する
  * 本クラスはゲーム内で一つのみ生成される想定である
  */
-export class AbortControllerManager implements AbortControllerContainer {
+export class AbortManager implements AbortControllerContainer {
   /** @override */
   abortController: AbortController;
 
