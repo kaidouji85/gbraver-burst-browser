@@ -8,9 +8,8 @@ import { AbortControllerContainer } from "./abort-controller-container";
 export class AbortControllerManager implements AbortControllerContainer {
   /** @override */
   abortController: AbortController;
+
   /**
-   * @private
-   *
    * プライベート関数#onAbortをthisでbindした関数
    * bind(this)は新しい関数を生成するため、以下コードではコールバック関数の削除が正しく行えない
    * そのため、本プロパティにbindした関数を保持し、コールバック関数の削除を行えるようにする。
@@ -19,16 +18,17 @@ export class AbortControllerManager implements AbortControllerContainer {
    * abortController.signal.addEventListener("abort", this.#onAbort.bind(this));
    * abortController.signal.removeEventListener("abort", this.#onAbort.bind(this));
    * ```
+   * @private
    */
-  readonly #onAboutBound: () => void;
+  readonly #onAbortBound: () => void;
 
   /**
    * コンストラクタ
    */
   constructor() {
     this.abortController = new AbortController();
-    this.#onAboutBound = this.#onAbort.bind(this);
-    this.abortController.signal.addEventListener("abort", this.#onAboutBound);
+    this.#onAbortBound = this.#onAbort.bind(this);
+    this.abortController.signal.addEventListener("abort", this.#onAbortBound);
   }
 
   /**
@@ -38,10 +38,10 @@ export class AbortControllerManager implements AbortControllerContainer {
   #onAbort() {
     this.abortController.signal.removeEventListener(
       "abort",
-      this.#onAboutBound,
+      this.#onAbortBound,
     );
 
     this.abortController = new AbortController();
-    this.abortController.signal.addEventListener("abort", this.#onAboutBound);
+    this.abortController.signal.addEventListener("abort", this.#onAbortBound);
   }
 }
