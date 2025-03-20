@@ -42,21 +42,13 @@ export function toBurstPlayerParam(
   gameState: GameStateX<BurstEffect>,
 ): BurstPlayerParam | null {
   const { burst, burstPlayer } = gameState.effect;
-  const burstPlayerState = gameState.players.find(
-    (v) => v.playerId === burstPlayer,
-  );
-  const burstPlayerTD = props.view.td.players.find(
-    (v) => v.playerId === burstPlayer,
-  );
-  const burstPlayerHUD = props.view.hud.players.find(
-    (v) => v.playerId === burstPlayer,
-  );
-  const burstArmdozerHUD = props.view.hud.armdozers.find(
-    (v) => v.playerId === burstPlayer,
-  );
-  const burstArmdozerTD = props.view.td.armdozers.find(
-    (v) => v.playerId === burstPlayer,
-  );
+  const findBurstPlayer = (options: { playerId: string }) =>
+    options.playerId === burstPlayer;
+  const burstPlayerState = gameState.players.find(findBurstPlayer);
+  const burstPlayerTD = props.view.td.players.find(findBurstPlayer);
+  const burstPlayerHUD = props.view.hud.players.find(findBurstPlayer);
+  const burstArmdozerHUD = props.view.hud.armdozers.find(findBurstPlayer);
+  const burstArmdozerTD = props.view.td.armdozers.find(findBurstPlayer);
 
   if (
     !burstPlayerState ||
