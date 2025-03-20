@@ -1,6 +1,6 @@
 import { Subject, Unsubscribable } from "rxjs";
 
-import {AbortManagerContainer} from "../../abort-controller/abort-manager-container";
+import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../exclusive/exclusive";
 import { PostBattle } from "../../game/post-battle";
 

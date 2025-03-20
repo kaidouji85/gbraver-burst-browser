@@ -1,7 +1,7 @@
 import "../../src/css/style.css";
 
-import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
 import { AbortManager } from "../../src/js/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
 import {
   BGMManagerContainer,
   createBGMManager,
