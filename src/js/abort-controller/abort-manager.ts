@@ -32,6 +32,14 @@ export class AbortManager implements AbortControllerContainer {
   }
 
   /**
+   * 現在有効なAbortControllerを取得する
+   * @returns 取得結果
+   */
+  getAbortController(): AbortController {
+    return this.abortController;
+  }
+
+  /**
    * AbortControllerがabortされた際の処理
    * @private
    */

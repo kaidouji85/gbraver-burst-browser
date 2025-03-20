@@ -12,6 +12,6 @@ export async function bottomUp(props: PostBattleFloaterProps): Promise<void> {
     [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }],
     { duration: 400, fill: "forwards", easing: "ease" },
   );
-  const { signal } = props.abort.abortController;
+  const { signal } = props.abort.getAbortController();
   await waitFinishAnimation(animation, { signal });
 }

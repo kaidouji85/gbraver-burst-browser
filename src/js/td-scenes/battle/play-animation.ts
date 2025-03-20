@@ -12,6 +12,6 @@ type Props = Readonly<AnimationTimeScaleContainer> &
  * @returns アニメーション再生関数
  */
 export const createAnimationPlay = (props: Props) => (animate: Animate) => {
-  const { signal } = props.abort.abortController;
+  const { signal } = props.abort.getAbortController();
   return animate.timeScale(props.animationTimeScale).play({ signal });
 };

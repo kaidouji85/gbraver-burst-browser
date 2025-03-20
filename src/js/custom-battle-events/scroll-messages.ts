@@ -55,7 +55,7 @@ export async function scrollLeftMessages(
   paragraphs: Paragraph[],
 ): Promise<void> {
   const messageWindow = props.view.dom.leftMessageWindow;
-  const signal = props.abort.abortController.signal;
+  const signal = props.abort.getAbortController().signal;
   await scrollMessages({ ...props, messageWindow, paragraphs, signal });
 }
 
@@ -70,6 +70,6 @@ export async function scrollRightMessages(
   paragraphs: Paragraph[],
 ): Promise<void> {
   const messageWindow = props.view.dom.rightMessageWindow;
-  const signal = props.abort.abortController.signal;
+  const signal = props.abort.getAbortController().signal;
   await scrollMessages({ ...props, messageWindow, paragraphs, signal });
 }

@@ -45,9 +45,9 @@ export class BattleScene implements TDScene {
   /** @override */
   destructor(): void {
     // TODO ゲーム全体で見て適切な場所でabortするようにする
-    this.#props.abort.abortController.abort(
-      createAbortError("battle scene is destructed"),
-    );
+    this.#props.abort
+      .getAbortController()
+      .abort(createAbortError("battle scene is destructed"));
     this.#props.view.destructor();
     this.#unSubscribers.forEach((v) => {
       v.unsubscribe();
