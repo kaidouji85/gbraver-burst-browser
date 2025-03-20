@@ -20,6 +20,7 @@ import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { GameProps } from "./index";
+import { AbortControllerManager } from "../../abort-controller/abort-controller-manager";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParams = {
@@ -71,6 +72,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   return {
     ...params,
+    abortControllerManager: new AbortControllerManager(),
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
     isFullResourceLoaded: false,
