@@ -6,7 +6,7 @@ import { StateAnimationProps } from "../../state-animation-props";
 import { AttackerParam, toAttackerParam } from "./attacker-param";
 import { BurstPlayerParam, toBurstPlayerParam } from "./burst-player-param";
 import { OtherParam, toOtherParam } from "./other-param";
-import { OtherPlayerParam, toOtherPlayerParam } from "./other-player";
+import { OtherPlayerParam, toOtherPlayerParam } from "./other-player-param";
 
 /**
  * バーストアニメーションのパラメータ
