@@ -20,7 +20,6 @@ type Options = {
  */
 export async function gotoTitle(options: Options): Promise<InProgress> {
   const { props } = options;
-  props.postBattle.hide();
   await Promise.all([
     (async () => {
       await props.fader.fadeOut();

@@ -46,7 +46,6 @@ export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
 
   const { story } = inProgress;
   const initialEpisodeId = getInitialEpisodeId(story);
-  props.postBattle.hide();
   await startEpisodeSelector(props, initialEpisodeId);
   playTitleBGM(props);
   return { type: "Story", story: { type: "EpisodeSelect" } };
