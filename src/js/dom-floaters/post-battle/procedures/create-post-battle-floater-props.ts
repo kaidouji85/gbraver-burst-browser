@@ -1,12 +1,12 @@
 import { Subject } from "rxjs";
 
-import { AbortControllerContainer } from "../../../abort-controller/abort-controller-container";
+import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { ROOT_CLASS } from "../dom/class-name";
 import { PostBattleFloaterProps } from "../props";
 
 /** PostBattleFloaterProps生成オプション */
-export type PostBattleFloaterPropsOptions = Readonly<AbortControllerContainer>;
+export type PostBattleFloaterPropsOptions = Readonly<AbortManagerContainer>;
 
 /**
  * PostBattleFloaterPropsの初期値を設定するヘルパー関数

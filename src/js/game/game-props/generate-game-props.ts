@@ -90,7 +90,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    postBattle: new PostBattleFloater(abort),
+    postBattle: new PostBattleFloater({ abort }),
     renderer,
     tdSceneBinder: new TDSceneBinder(hudUIScale),
     serviceWorker: null,
