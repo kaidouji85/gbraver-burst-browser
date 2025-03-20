@@ -20,6 +20,5 @@ export async function gotoNPCBattleStage(
   const stage = getCurrentNPCStage(state) ?? DefaultStage;
   const level = getNPCStageLevel(state);
   const player = state.player;
-  props.postBattle.hide();
   await startNPCBattleStage(props, player, stage, level);
 }

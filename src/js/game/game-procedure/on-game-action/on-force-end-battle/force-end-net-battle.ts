@@ -20,8 +20,6 @@ export async function forceEndNetBattle(
     }
   >,
 ) {
-  props.postBattle.hide();
-
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
   await props.api.disconnectWebsocket();
