@@ -1,6 +1,7 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
+import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
@@ -31,7 +32,8 @@ export interface GameProps
     ResourcesContainer,
     SEPlayerContainer,
     GameActionManageContainer,
-    Readonly<GameLoopContainer> {
+    Readonly<GameLoopContainer>,
+    Readonly<AbortManagerContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -48,7 +50,7 @@ export interface GameProps
   /** 遊び方スライドのURL */
   readonly howToPlayURL: string;
   /** ロボ、パイロット説明スライドのURL */
-  characterDescriptionURL: string;
+  readonly characterDescriptionURL: string;
   /** 利用規約ページのURL */
   readonly termsOfServiceURL: string;
   /** プライバシーポリシーページのURL */

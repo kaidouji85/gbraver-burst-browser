@@ -1,6 +1,8 @@
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
+import { AbortManager } from "../../src/js/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
 import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
@@ -23,9 +25,10 @@ import { Resize, resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DCreatorParams = ResourcesContainer &
-  SEPlayerContainer &
-  GameObjectActionContainer & {
+type Object3DCreatorParams = Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<GameObjectActionContainer> &
+  Readonly<AbortManagerContainer> & {
     /** カメラ */
     camera: TDCamera;
   };
@@ -111,6 +114,7 @@ export class TDGameObjectStub {
       se: createSEPlayer(),
       gameObjectAction: this.#gameObjectAction,
       camera: this.#camera,
+      abort: new AbortManager(),
     });
 
     objects.forEach((object3D) => {

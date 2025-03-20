@@ -9,7 +9,4 @@ export function hide(props: PostBattleFloaterProps): void {
     v.unsubscribe();
   });
   props.root.innerHTML = "";
-
-  props.abortController.abort();
-  props.abortController = new AbortController();
 }

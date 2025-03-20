@@ -1,5 +1,6 @@
 import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 
+import { AbortManager } from "../../abort-controller/abort-manager";
 import { createActionManager } from "../../action-manager/action-manager";
 import { createBGMManager } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
@@ -69,8 +70,10 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const renderer = new Renderer(resize);
   const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
+  const abort = new AbortManager();
   return {
     ...params,
+    abort,
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
     isFullResourceLoaded: false,
@@ -87,7 +90,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    postBattle: new PostBattleFloater(),
+    postBattle: new PostBattleFloater({ abort }),
     renderer,
     tdSceneBinder: new TDSceneBinder(hudUIScale),
     serviceWorker: null,
