@@ -30,6 +30,6 @@ export const refreshConversation = async (
   wait = 200,
 ) => {
   invisibleAllMessageWindows(props);
-  const { signal } = props.abortController;
+  const { signal } = props.abort.abortController;
   await waitTime(wait, { signal });
 };

@@ -1,6 +1,7 @@
 import { GameState, Player } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
+import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { createActionManager } from "../../../action-manager/action-manager";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
@@ -33,6 +34,7 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
   ResourcesContainer &
   SEPlayerContainer &
   Readonly<GameLoopContainer> &
+  Readonly<AbortManagerContainer> &
   Readonly<{
     /** 再生するBGM ID */
     playingBGM: SoundId;
@@ -95,7 +97,5 @@ export function createBattleSceneProps(
 
     endBattle: new Subject(),
     battleSceneAction: createActionManager<BattleSceneAction>(),
-
-    abortController: new AbortController(),
   };
 }
