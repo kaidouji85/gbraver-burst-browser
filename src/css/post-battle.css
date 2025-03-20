@@ -5,6 +5,7 @@
     bottom: max(var(--safe-area-bottom), var(--screen-padding-bottom));
     right: max(var(--safe-area-right), var(--screen-padding-right));
     gap: calc(var(--responsive-font-size) * 0.5);
+    z-index: var(--zindex-post-battle-floater);
   }
 }
 
