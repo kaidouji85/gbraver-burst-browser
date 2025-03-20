@@ -6,6 +6,7 @@ import { StateAnimationProps } from "../../state-animation-props";
 import { AttackerParam, toAttackerParam } from "./attacker-param";
 import { BurstPlayerParam, toBurstPlayerParam } from "./burst-player-param";
 import { OtherParam, toOtherParam } from "./other-param";
+import { OtherPlayerParam, toOtherPlayerParam } from "./other-player-param";
 
 /**
  * バーストアニメーションのパラメータ
@@ -20,6 +21,7 @@ export type BurstAnimationParamX<
   BURST extends Burst,
 > = BurstPlayerParam<TD_ARMDOZER, HUD_ARMDOZER, BURST> &
   AttackerParam &
+  OtherPlayerParam &
   OtherParam;
 
 /** バーストアニメーションのパラメータ */
@@ -41,13 +43,15 @@ export function toBurstAnimationParam(
   gameState: GameStateX<BurstEffect>,
 ): BurstAnimationParam | null {
   const burstPlayerParam = toBurstPlayerParam(props, gameState);
+  const otherPlayerParam = toOtherPlayerParam(props, gameState);
   const attackerParam = toAttackerParam(props, gameState);
-  if (!burstPlayerParam || !attackerParam) {
+  if (!burstPlayerParam || !otherPlayerParam || !attackerParam) {
     return null;
   }
 
   return {
     ...burstPlayerParam,
+    ...otherPlayerParam,
     ...attackerParam,
     ...toOtherParam(props),
   };
