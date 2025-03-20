@@ -1,7 +1,7 @@
 import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
-import { AbortControllerContainer } from "../../abort-controller/abort-controller-container";
+import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../exclusive/exclusive";
@@ -29,7 +29,7 @@ export type BattleSceneProps = Readonly<ResourcesContainer> &
   Readonly<BGMManagerContainer> &
   Readonly<SEPlayerContainer> &
   Readonly<BattleSceneActionManageContainer> &
-  Readonly<AbortControllerContainer> &
+  Readonly<AbortManagerContainer> &
   AnimationTimeScaleContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
