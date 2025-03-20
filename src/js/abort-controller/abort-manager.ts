@@ -1,13 +1,11 @@
-import { AbortControllerContainer } from "./abort-controller-container";
-
 /**
  * Abort管理オブジェクト
  * Abortされた場合にあたらしいAbortControllerを生成する
  * 本クラスはゲーム内で一つのみ生成される想定である
  */
-export class AbortManager implements AbortControllerContainer {
-  /** @override */
-  abortController: AbortController;
+export class AbortManager {
+  /** 現在有効なAbortController */
+  #abortController: AbortController;
 
   /**
    * プライベート関数#onAbortをthisでbindした関数
@@ -26,9 +24,9 @@ export class AbortManager implements AbortControllerContainer {
    * コンストラクタ
    */
   constructor() {
-    this.abortController = new AbortController();
+    this.#abortController = new AbortController();
     this.#onAbortBound = this.#onAbort.bind(this);
-    this.abortController.signal.addEventListener("abort", this.#onAbortBound);
+    this.#abortController.signal.addEventListener("abort", this.#onAbortBound);
   }
 
   /**
@@ -36,7 +34,7 @@ export class AbortManager implements AbortControllerContainer {
    * @returns 取得結果
    */
   getAbortController(): AbortController {
-    return this.abortController;
+    return this.#abortController;
   }
 
   /**
@@ -44,12 +42,12 @@ export class AbortManager implements AbortControllerContainer {
    * @private
    */
   #onAbort() {
-    this.abortController.signal.removeEventListener(
+    this.#abortController.signal.removeEventListener(
       "abort",
       this.#onAbortBound,
     );
 
-    this.abortController = new AbortController();
-    this.abortController.signal.addEventListener("abort", this.#onAbortBound);
+    this.#abortController = new AbortController();
+    this.#abortController.signal.addEventListener("abort", this.#onAbortBound);
   }
 }
