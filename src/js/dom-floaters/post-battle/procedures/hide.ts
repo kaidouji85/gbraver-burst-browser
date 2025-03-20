@@ -11,5 +11,4 @@ export function hide(props: PostBattleFloaterProps): void {
   props.root.innerHTML = "";
 
   props.abortController.abort();
-  props.abortController = new AbortController();
 }

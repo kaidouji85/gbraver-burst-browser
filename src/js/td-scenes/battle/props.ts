@@ -25,12 +25,12 @@ export type BattleEnd = {
 };
 
 /** 戦闘シーンプロパティ */
-export type BattleSceneProps = ResourcesContainer &
-  BGMManagerContainer &
-  SEPlayerContainer &
-  BattleSceneActionManageContainer &
-  AnimationTimeScaleContainer &
-  AbortControllerContainer & {
+export type BattleSceneProps = Readonly<ResourcesContainer> &
+  Readonly<BGMManagerContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<BattleSceneActionManageContainer> &
+  Readonly<AbortControllerContainer> &
+  AnimationTimeScaleContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */
