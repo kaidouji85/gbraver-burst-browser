@@ -15,9 +15,9 @@ import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
 /** 幅 */
-export const WIDTH = 800;
+export const WIDTH = 1600;
 /** 高 */
-export const HEIGHT = 800;
+export const HEIGHT = 1600;
 
 /** プレイヤー側 ネオランドーザ カットイン ビュー */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
