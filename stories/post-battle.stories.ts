@@ -25,7 +25,9 @@ export default {
  */
 const postBattleStory = (buttons: PostBattleButtonConfig[]) =>
   domStub((params) => {
-    const floater = new PostBattleFloater();
+    const floater = new PostBattleFloater({
+      abortController: new AbortController(),
+    });
     floater.show({ ...params, buttons });
     floater.selectionCompleteNotifier().subscribe((postBattle) => {
       console.log(postBattle);
@@ -64,7 +66,9 @@ export const postEpisodeLose: StoryFn = postBattleStory(PostEpisodeLoseButtons);
 
 /** 表示、非表示の繰り返し */
 export const showHidden: StoryFn = domStub((params) => {
-  const floater = new PostBattleFloater();
+  const floater = new PostBattleFloater({
+    abortController: new AbortController(),
+  });
   (async () => {
     await floater.show({ ...params, buttons: PostNPCBattleWinButtons });
     await waitTime(3000);

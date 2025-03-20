@@ -70,9 +70,10 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const renderer = new Renderer(resize);
   const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
+  const abortControllerManager = new AbortControllerManager();
   return {
     ...params,
-    abortControllerManager: new AbortControllerManager(),
+    abortControllerManager,
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
     isFullResourceLoaded: false,
@@ -89,7 +90,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
     domDialogBinder: new DOMDialogBinder(),
-    postBattle: new PostBattleFloater(),
+    postBattle: new PostBattleFloater(abortControllerManager),
     renderer,
     tdSceneBinder: new TDSceneBinder(hudUIScale),
     serviceWorker: null,
