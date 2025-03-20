@@ -9,6 +9,9 @@ import { AnimationMeshMapping } from "./animation-mesh-mapping";
 import { GranDozerCutInView } from "./gran-dozer-cut-in-view";
 import { createMeshes } from "./meshes";
 
+/** ベースとなるpadding left */
+export const BASE_PADDING_LEFT = 150;
+
 /** ベースとなるpadding top */
 export const BASE_PADDING_TOP = 100;
 
@@ -56,7 +59,7 @@ export class PlayerGranDozerCutInView implements GranDozerCutInView {
 
     const scale =
       hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this.#group.position.x = model.tracking.x;
+    this.#group.position.x = model.tracking.x + BASE_PADDING_LEFT * scale;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this.#group.position.z = HUD_CUT_IN_Z;
     this.#group.scale.x = scale;
