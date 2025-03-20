@@ -1,5 +1,7 @@
 import "../../src/css/style.css";
 
+import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
+import { AbortManager } from "../../src/js/abort-controller/abort-manager";
 import {
   BGMManagerContainer,
   createBGMManager,
@@ -12,10 +14,11 @@ import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** 生成パラメータ */
-type DOMCreatorParams = BGMManagerContainer &
-  ResourcesContainer &
-  SEPlayerContainer &
-  GameLoopContainer;
+type DOMCreatorParams = Readonly<BGMManagerContainer> &
+  Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<GameLoopContainer> &
+  Readonly<AbortManagerContainer>;
 
 /**
  * HTML要素生成コールバック関数
@@ -50,6 +53,7 @@ export const domStub =
         bgm: createBGMManager(),
         se: createSEPlayer(),
         gameLoop: createGameLoop(),
+        abort: new AbortManager(),
       });
       root.appendChild(component);
     });
