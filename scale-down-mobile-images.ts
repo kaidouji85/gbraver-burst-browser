@@ -42,6 +42,8 @@ const getGranDozerWebpPathsFor25Percent = () =>
     ignore: [
       "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
       "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-down.webp",
+      "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-up.webp",
     ],
   });
 
