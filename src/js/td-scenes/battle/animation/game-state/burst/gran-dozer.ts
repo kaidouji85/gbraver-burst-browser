@@ -48,14 +48,16 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.attackerArmdozerTD.sprite().endActive(),
   )
-    .chain(delay(800))
+    .chain(delay(1000))
     .chain(
       all(
-        param.hudObjects.rearmostFader.opacity(0, 300),
+        toInitial(param.tdCamera, 200),
+        param.hudObjects.rearmostFader.opacity(0, 200),
         param.burstArmdozerHUD.cutIn.hidden(),
+        param.burstArmdozerTD.lightningShot.shot(),
+        param.otherArmdozerTD.sprite().knockBack(),
       ),
     )
-    .chain(param.burstArmdozerTD.lightningShot.shot())
     .chain(delay(300))
     .chain(
       all(
@@ -67,8 +69,8 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     )
     .chain(
       all(
-        toInitial(param.tdCamera, 500),
         param.burstArmdozerTD.granDozer.burstToStand(),
+        param.otherArmdozerTD.sprite().knockBackToStand(),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500),
       ),
