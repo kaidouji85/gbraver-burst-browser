@@ -1,57 +1,51 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { PowerUpModel } from "../model/power-up-model";
-import type { PowerUpView } from "./power-up-view";
+import { PowerUpModel } from "../model/power-up-model";
+import { PowerUpView } from "./power-up-view";
+
+/** メッシュのサイズ */
 export const MESH_SIZE = 300;
 
-/**
- * プレイヤー 攻撃アップ ビュー
- */
+/** プレイヤー 攻撃アップ ビュー */
 export class PlayerPowerUpView implements PowerUpView {
+  /** メッシュ */
   #mesh: HorizontalAnimationMesh;
 
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.POWER_UP,
-    );
-    const playerTurn = playerTurnResource
-      ? playerTurnResource.texture
-      : new THREE.Texture();
+    const texture =
+      resources.textures.find((t) => t.id === TEXTURE_IDS.POWER_UP)?.texture ??
+      new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
-      texture: playerTurn,
+      texture,
       maxAnimation: 1,
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor(): void {
     this.#mesh.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @returns シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   */
+  /** @override */
   engage(model: PowerUpModel): void {
     const target = this.#mesh.getObject3D();
     this.#mesh.opacity(model.opacity);
@@ -62,11 +56,7 @@ export class PlayerPowerUpView implements PowerUpView {
     target.scale.y = model.scale;
   }
 
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
+  /** @override */
   lookAt(camera: THREE.Camera): void {
     this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }

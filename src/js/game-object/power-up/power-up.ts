@@ -1,9 +1,9 @@
-import { Observable, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
-import type { GameObjectAction } from "../action/game-object-action";
+import { PreRender } from "../../game-loop/pre-render";
+import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { popUp } from "./animation/pop-up";
 import {
   createPowerUpProps,
@@ -12,10 +12,7 @@ import {
 import { PowerUpProps } from "./props/power-up-props";
 
 /** コンストラクタのパラメータ */
-export type PowerUpParams = PropsCreatorParams & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PowerUpParams = PropsCreatorParams & GameObjectActionContainer;
 
 /** 攻撃アップ */
 export class PowerUp {

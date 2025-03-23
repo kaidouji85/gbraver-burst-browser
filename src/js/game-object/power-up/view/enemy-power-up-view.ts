@@ -1,20 +1,18 @@
-import type { Resources } from "../../../resource";
-import type { PowerUpModel } from "../model/power-up-model";
+import { Resources } from "../../../resource";
+import { PowerUpModel } from "../model/power-up-model";
 import { PlayerPowerUpView } from "./player-power-up-view";
 
-/**
- * 敵 攻撃アップ ビュー
- */
+/** 敵 攻撃アップ ビュー */
 export class EnemyPowerUpView extends PlayerPowerUpView {
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     super(resources);
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   */
+  /** @override */
   engage(model: PowerUpModel): void {
     super.engage(model);
     const target = super.getObject3D();
