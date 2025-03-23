@@ -4,7 +4,9 @@ import * as THREE from "three";
 import { Animate } from "../../animation/animate";
 import { PreRender } from "../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { hidden } from "./animation/hidden";
 import { popUp } from "./animation/pop-up";
+import { show } from "./animation/show";
 import {
   createIneffectiveProps,
   PropsCreatorOptions,
@@ -47,8 +49,8 @@ export class Ineffective {
   }
 
   /**
+   * @deprecated
    * ポップアップ
-   *
    * @returns アニメーション
    */
   popUp(): Animate {
@@ -56,8 +58,23 @@ export class Ineffective {
   }
 
   /**
+   * 表示
+   * @returns アニメーション
+   */
+  show(): Animate {
+    return show(this.#props);
+  }
+
+  /**
+   * 非表示
+   * @returns アニメsー読ん
+   */
+  hidden(): Animate {
+    return hidden(this.#props);
+  }
+
+  /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -73,7 +90,6 @@ export class Ineffective {
 
   /**
    * プリレンダー時の処置
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
