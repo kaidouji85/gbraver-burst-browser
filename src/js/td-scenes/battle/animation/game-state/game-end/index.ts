@@ -3,7 +3,7 @@ import { GameEnd, GameStateX } from "gbraver-burst-core";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
-import { gameOverAnimation } from "./game-over/game-over";
+import { gameOverAnimation } from "./game-over";
 
 /**
  * ゲーム終了アニメーション
