@@ -5,7 +5,6 @@ import { Animate } from "../../animation/animate";
 import { PreRender } from "../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { hidden } from "./animation/hidden";
-import { popUp } from "./animation/pop-up";
 import { show } from "./animation/show";
 import {
   createIneffectiveProps,
@@ -46,15 +45,6 @@ export class Ineffective {
   destructor(): void {
     this.#props.view.destructor();
     this.#unsubscriber.unsubscribe();
-  }
-
-  /**
-   * @deprecated
-   * ポップアップ
-   * @returns アニメーション
-   */
-  popUp(): Animate {
-    return popUp(this.#props);
   }
 
   /**
