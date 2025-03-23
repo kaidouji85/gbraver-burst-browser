@@ -24,14 +24,11 @@ export class PlayerIneffectiveView implements IneffectiveView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.POWER_UP,
-    );
-    const playerTurn = playerTurnResource
-      ? playerTurnResource.texture
-      : new THREE.Texture();
+    const texture =
+      resources.textures.find((t) => t.id === TEXTURE_IDS.INEFFECTIVE)
+        ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
-      texture: playerTurn,
+      texture,
       maxAnimation: 1,
       width: MESH_SIZE,
       height: MESH_SIZE,
