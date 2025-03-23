@@ -6,7 +6,7 @@ import { EnemyIneffectiveView } from "./view/enemy-ineffective-view";
 import { PlayerIneffectiveView } from "./view/player-ineffective-view";
 
 /** 生成オプション */
-export type IneffectiveOprions = ResourcesContainer &
+export type IneffectiveCreatorOptions = ResourcesContainer &
   SEPlayerContainer &
   GameObjectActionContainer;
 
@@ -15,7 +15,7 @@ export type IneffectiveOprions = ResourcesContainer &
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function playerIneffective(params: IneffectiveOprions): Ineffective {
+export function playerIneffective(params: IneffectiveCreatorOptions): Ineffective {
   const { resources } = params;
   const view = new PlayerIneffectiveView(resources);
   return new Ineffective({ ...params, view });
@@ -26,7 +26,7 @@ export function playerIneffective(params: IneffectiveOprions): Ineffective {
  * @param params 生成パラメータ
  * @returns 生成結果
  */
-export function enemyIneffective(params: IneffectiveOprions): Ineffective {
+export function enemyIneffective(params: IneffectiveCreatorOptions): Ineffective {
   const { resources } = params;
   const view = new EnemyIneffectiveView(resources);
   return new Ineffective({ ...params, view });
