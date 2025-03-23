@@ -48,12 +48,14 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.attackerArmdozerTD.sprite().endActive(),
   )
-    .chain(delay(1000))
+    .chain(delay(800))
+    .chain(all(
+      param.hudObjects.rearmostFader.opacity(0, 300),
+      param.burstArmdozerHUD.cutIn.hidden(),
+    ))
     .chain(
       all(
-        toInitial(param.tdCamera, 200),
-        param.hudObjects.rearmostFader.opacity(0, 200),
-        param.burstArmdozerHUD.cutIn.hidden(),
+        toInitial(param.tdCamera, 300),
         param.burstArmdozerTD.lightningShot.shot(),
         param.otherArmdozerTD.sprite().knockBack(),
       ),
