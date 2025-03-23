@@ -36,11 +36,15 @@ const ineffectiveStory = (
  * @param ineffective 攻撃アップ
  */
 const popUp = (ineffective: Ineffective) => {
-  delay(1000).chain(ineffective.popUp()).loop();
+  delay(1000)
+    .chain(ineffective.show())
+    .chain(delay(1000))
+    .chain(ineffective.hidden())
+    .loop();
 };
 
-/** プレイヤー 攻撃アップ ポップアップ */
-export const playerPopUp: StoryFn = ineffectiveStory(playerIneffective, popUp);
+/** プレイヤー 効果無効 ポップアップ */
+export const player: StoryFn = ineffectiveStory(playerIneffective, popUp);
 
-/** 敵 攻撃アップ ポップアップ */
-export const enemyPopUp: StoryFn = ineffectiveStory(enemyIneffective, popUp);
+/** 敵 効果無効 ポップアップ */
+export const enemy: StoryFn = ineffectiveStory(enemyIneffective, popUp);

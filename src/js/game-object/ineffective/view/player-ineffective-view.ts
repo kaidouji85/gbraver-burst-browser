@@ -49,8 +49,8 @@ export class PlayerIneffectiveView implements IneffectiveView {
   engage(model: IneffectiveModel): void {
     const target = this.#mesh.getObject3D();
     this.#mesh.opacity(model.opacity);
-    target.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
+    target.position.x = ARMDOZER_EFFECT_STANDARD_X - 30;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y - 30;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
     target.scale.x = model.scale;
     target.scale.y = model.scale;
