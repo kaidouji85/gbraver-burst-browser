@@ -57,7 +57,7 @@ export class Ineffective {
 
   /**
    * 非表示
-   * @returns アニメsー読ん
+   * @returns アニメーション
    */
   hidden(): Animate {
     return hidden(this.#props);
