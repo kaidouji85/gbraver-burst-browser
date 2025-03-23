@@ -55,6 +55,7 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
         param.burstArmdozerHUD.cutIn.hidden(),
       ),
     )
+    .chain(delay(100))
     .chain(
       all(
         toInitial(param.tdCamera, 300),
