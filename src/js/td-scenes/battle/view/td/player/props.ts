@@ -8,6 +8,7 @@ import { DamageHalved } from "../../../../../game-object/damage-halved/damage-ha
 import { DamageIndicator } from "../../../../../game-object/damage-indicator/damage-indicator";
 import { Lightning } from "../../../../../game-object/hitmark/lightning/lightning";
 import { ShockWave } from "../../../../../game-object/hitmark/shock-wave/shock-wave";
+import { Ineffective } from "../../../../../game-object/ineffective/ineffective";
 import { PowerUp } from "../../../../../game-object/power-up/power-up";
 import { RecoverBattery } from "../../../../../game-object/recover-battery/recover-battery";
 import { ReflectIndicator } from "../../../../../game-object/reflect-indicator/reflect-indicator";
@@ -35,6 +36,8 @@ export interface TDPlayerProps {
     damageHalved: DamageHalved;
     /** バッテリー増強 */
     batteryEnhancement: BatteryEnhancement;
+    /** 効果無効 */
+    ineffective: Ineffective;
   };
   /** バッテリー数字 */
   batteryNumber: BatteryNumber;
