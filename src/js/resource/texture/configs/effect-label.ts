@@ -23,4 +23,8 @@ export const EffectLabelTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.BATTERY_ENHANCEMENT,
     path: "effect-label/battery-enhancement.webp",
   },
+  {
+    id: TEXTURE_IDS.INEFFECTIVE,
+    path: "effect-label/ineffective.webp",
+  },
 ];
