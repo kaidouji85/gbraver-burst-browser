@@ -7,12 +7,13 @@ import { GameObjectActionContainer } from "../action/game-object-action-containe
 import { popUp } from "./animation/pop-up";
 import {
   createIneffectiveProps,
-  PropsCreatorParams,
+  PropsCreatorOptions,
 } from "./props/create-ineffective-props";
 import { IneffectiveProps } from "./props/ineffective-props";
 
 /** コンストラクタのオプション */
-export type IneffectiveOptions = PropsCreatorParams & GameObjectActionContainer;
+export type IneffectiveOptions = PropsCreatorOptions &
+  GameObjectActionContainer;
 
 /** 効果無効 */
 export class Ineffective {
@@ -23,11 +24,11 @@ export class Ineffective {
 
   /**
    * コンストラクタ
-   * @param params パラメータ
+   * @param options オプション
    */
-  constructor(params: IneffectiveOptions) {
-    const { gameObjectAction } = params;
-    this.#props = createIneffectiveProps(params);
+  constructor(options: IneffectiveOptions) {
+    const { gameObjectAction } = options;
+    this.#props = createIneffectiveProps(options);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();

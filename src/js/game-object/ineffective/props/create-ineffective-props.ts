@@ -1,29 +1,23 @@
-import { ResourcesContainer } from "../../../resource";
-import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialValue } from "../model/initial-value";
-import { IneffectiveUpSounds } from "../sounds/ineffective-up-sounds";
 import { IneffectiveView } from "../view/ineffective-view";
 import { IneffectiveProps } from "./ineffective-props";
 
-/** IneffectiveProps 生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** ビュー */
-    view: IneffectiveView;
-  };
+/** IneffectiveProps 生成オプション */
+export type PropsCreatorOptions = {
+  /** ビュー */
+  view: IneffectiveView;
+};
 
 /**
  * IneffectivePropsを生成する
- * @param params 生成パラメータ
+ * @param options 生成オプション
  * @returns 生成したIneffectiveProps
  */
 export function createIneffectiveProps(
-  params: PropsCreatorParams,
+  options: PropsCreatorOptions,
 ): IneffectiveProps {
-  const { resources } = params;
   return {
-    ...params,
+    ...options,
     model: createInitialValue(),
-    sounds: new IneffectiveUpSounds(resources),
   };
 }

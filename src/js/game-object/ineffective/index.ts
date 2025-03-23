@@ -12,22 +12,26 @@ export type IneffectiveCreatorOptions = ResourcesContainer &
 
 /**
  * プレイヤー 効果無効 ポップアップ
- * @param params 生成パラメータ
+ * @param options 生成パラメータ
  * @returns 生成結果
  */
-export function playerIneffective(params: IneffectiveCreatorOptions): Ineffective {
-  const { resources } = params;
+export function playerIneffective(
+  options: IneffectiveCreatorOptions,
+): Ineffective {
+  const { resources } = options;
   const view = new PlayerIneffectiveView(resources);
-  return new Ineffective({ ...params, view });
+  return new Ineffective({ ...options, view });
 }
 
 /**
  * 敵 効果無効 ポップアップ
- * @param params 生成パラメータ
+ * @param options 生成パラメータ
  * @returns 生成結果
  */
-export function enemyIneffective(params: IneffectiveCreatorOptions): Ineffective {
-  const { resources } = params;
+export function enemyIneffective(
+  options: IneffectiveCreatorOptions,
+): Ineffective {
+  const { resources } = options;
   const view = new EnemyIneffectiveView(resources);
-  return new Ineffective({ ...params, view });
+  return new Ineffective({ ...options, view });
 }

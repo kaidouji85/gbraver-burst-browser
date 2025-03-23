@@ -10,33 +10,12 @@ import { IneffectiveAnimationProps } from "./animation-props";
  * @returns アニメーション
  */
 export function popUp(props: IneffectiveAnimationProps): Animate {
-  const { model, sounds, se } = props;
+  const { model } = props;
   return onStart(() => {
     model.opacity = 0;
     model.scale = 1.2;
-    se.play(sounds.benefitEffect);
   })
-    .chain(
-      tween(model, (t) =>
-        t.to(
-          {
-            opacity: 1,
-            scale: 1,
-          },
-          400,
-        ),
-      ),
-    )
+    .chain(tween(model, (t) => t.to({ opacity: 1, scale: 1 }, 400)))
     .chain(delay(600))
-    .chain(
-      tween(model, (t) =>
-        t.to(
-          {
-            opacity: 0,
-            scale: 1.1,
-          },
-          200,
-        ),
-      ),
-    );
+    .chain(tween(model, (t) => t.to({ opacity: 0, scale: 1.1 }, 200)));
 }
