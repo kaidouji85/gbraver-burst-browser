@@ -17,7 +17,7 @@ export function burst(props: GranDozerAnimationProps) {
     }),
   )
     .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)))
-    .chain(delay(400))
+    .chain(delay(300))
     .chain(
       tween(model, (t) =>
         t
