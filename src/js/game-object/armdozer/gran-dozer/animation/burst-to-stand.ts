@@ -20,7 +20,7 @@ export function burstToStand(props: GranDozerAnimationProps) {
         0,
       )
       .onStart(() => {
-        model.animation.type = "TACKLE_ATTACK";
+        model.animation.type = "BURST_DOWN";
         se.play(sounds.motor);
       }),
   )

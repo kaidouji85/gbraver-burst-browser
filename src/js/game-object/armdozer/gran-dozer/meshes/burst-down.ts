@@ -11,7 +11,7 @@ import { createAnimationMeshes } from "./create-animation-meshes";
 export function burstDown(resources: Resources): AnimationMesh[] {
   return createAnimationMeshes({
     resources,
-    animationType: "DOWN",
+    animationType: "BURST_DOWN",
     textureId: TEXTURE_IDS.GRAN_DOZER_BURST_DOWN,
     maxAnimation: 4,
   });

@@ -22,7 +22,7 @@ export function burst(props: GranDozerAnimationProps) {
       tween(model, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "TACKLE_ATTACK";
+            model.animation.type = "BURST_DOWN";
             se.play(sounds.motor);
           })
           .to(
