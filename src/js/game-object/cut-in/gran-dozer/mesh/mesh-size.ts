@@ -1,2 +1,2 @@
 /** メッシュのサイズ */
-export const MESH_SIZE = 1200;
+export const MESH_SIZE = 1500;
