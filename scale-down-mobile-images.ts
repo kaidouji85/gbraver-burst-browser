@@ -33,6 +33,20 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
   await sharp(buffer).toFile(origin);
 }
 
+/** 50%縮小するグランドーザの画像パスパターン */
+const granDozerWebpPathsFor50Percent = [
+  "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
+  "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-down.webp",
+  "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-up.webp",
+];
+
+/**
+ * 50%縮小するグランドーザの画像パスを取得する
+ * @return グランドーザの画像パス
+ */
+const getGranDozerWebpPathsFor50Percent = () =>
+  glob(granDozerWebpPathsFor50Percent);
+
 /**
  * 25%縮小するグランドーザ画像パスを取得する
  * @return グランドーザの画像パス
@@ -40,22 +54,10 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
 const getGranDozerWebpPathsFor25Percent = () =>
   glob("build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp", {
     ignore: [
+      ...granDozerWebpPathsFor50Percent,
       "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
-      "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
-      "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-down.webp",
-      "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-up.webp",
     ],
   });
-
-/**
- * 50%縮小するグランドーザの画像パスを取得する
- * @return グランドーザの画像パス
- */
-const getGranDozerWebpPathsFor50Percent = () =>
-  glob(
-    "build/production/resources/**/mobile/armdozer/gran-dozer/**/player-select.webp",
-  );
-
 /**
  * pngモデルテクスチャのパスを取得する
  * @return pngモデルテクスチャのパス
@@ -103,8 +105,8 @@ const getWebpPaths = () =>
     getWebpPaths(),
   ]);
   await Promise.all([
-    ...granDozer25percentWebpPaths.map((p) => resizeWebp(p, 0.25)),
     ...granDozer50percentWebpPaths.map((p) => resizeWebp(p, 0.5)),
+    ...granDozer25percentWebpPaths.map((p) => resizeWebp(p, 0.25)),
     ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
     ...webpPaths.map((p) => resizeWebp(p, 0.5)),
   ]);

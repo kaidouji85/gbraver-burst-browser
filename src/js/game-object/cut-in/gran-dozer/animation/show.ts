@@ -19,7 +19,7 @@ export function show(props: GranDozerCutInAnimationProps): Animate {
       }),
     )
       .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)))
-      .chain(delay(400))
+      .chain(delay(300))
       .chain(
         tween(model, (t) =>
           t
@@ -35,7 +35,7 @@ export function show(props: GranDozerCutInAnimationProps): Animate {
             ),
         ),
       )
-      .chain(tween(model, (t) => t.to({ animation: { frame: 1 } }, 300))),
+      .chain(tween(model, (t) => t.to({ animation: { frame: 1 } }, 200))),
     tween(model, (t) => t.to({ opacity: 1 }, 600)),
     tween(model, (t) => t.to({ scale: 0.9 }, 0)).chain(
       tween(model, (t) => t.to({ scale: 1 }, 300)),
