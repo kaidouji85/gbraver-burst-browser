@@ -39,50 +39,52 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
  * @returns アニメーション
  */
 function ineffective(param: GranDozerBurst<Ineffective>): Animate {
-  return all(
-    focusToBurstPlayer(param),
-    param.burstArmdozerHUD.cutIn.show(),
-    param.burstArmdozerTD.granDozer.burst(),
-    param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.attackerArmdozerTD.sprite().endActive(),
-  )
-    .chain(delay(800))
-    .chain(
-      all(
-        param.hudObjects.rearmostFader.opacity(0, 300),
-        param.burstArmdozerHUD.cutIn.hidden(),
-      ),
+  return (
+    all(
+      focusToBurstPlayer(param),
+      //param.burstArmdozerHUD.cutIn.show(),  // TODO カットインアニメを修正したら戻す
+      param.burstArmdozerTD.granDozer.burst(),
+      param.tdObjects.skyBrightness.brightness(0.2, 500),
+      param.tdObjects.illumination.intensity(0.2, 500),
+      //param.hudObjects.rearmostFader.opacity(0.6, 500),   // TODO カットインアニメを修正したら戻す
+      param.attackerArmdozerTD.sprite().endActive(),
     )
-    .chain(delay(100))
-    .chain(
-      all(
-        toInitial(param.tdCamera, 300),
-        param.burstArmdozerTD.lightningShot.shot(),
-        param.otherArmdozerTD.sprite().knockBack(),
-        param.otherPlayerTD.armdozerEffects.ineffective.show(),
-      ),
-    )
-    .chain(delay(300))
-    .chain(
-      all(
-        param.burstPlayerHUD.gauge.battery(
-          param.burstPlayerState.armdozer.battery,
+      .chain(delay(800))
+      // .chain(  // TODO カットインアニメを修正したら戻す
+      //   all(
+      //     param.hudObjects.rearmostFader.opacity(0, 300),
+      //     param.burstArmdozerHUD.cutIn.hidden(),
+      //   ),
+      // )
+      // .chain(delay(100))
+      .chain(
+        all(
+          toInitial(param.tdCamera, 300),
+          param.burstArmdozerTD.lightningShot.shot(),
+          param.otherArmdozerTD.sprite().knockBack(),
+          param.otherPlayerTD.armdozerEffects.ineffective.show(),
         ),
-        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
-      ),
-    )
-    .chain(
-      all(
-        param.burstArmdozerTD.granDozer.burstToStand(),
-        param.otherPlayerTD.armdozerEffects.ineffective.hidden(),
-        param.otherArmdozerTD.sprite().knockBackToStand(),
-        param.tdObjects.skyBrightness.brightness(1, 500),
-        param.tdObjects.illumination.intensity(1, 500),
-      ),
-    )
-    .chain(delay(200));
+      )
+      .chain(delay(300))
+      .chain(
+        all(
+          param.burstPlayerHUD.gauge.battery(
+            param.burstPlayerState.armdozer.battery,
+          ),
+          param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
+        ),
+      )
+      .chain(
+        all(
+          param.burstArmdozerTD.granDozer.burstToStand(),
+          param.otherPlayerTD.armdozerEffects.ineffective.hidden(),
+          param.otherArmdozerTD.sprite().knockBackToStand(),
+          param.tdObjects.skyBrightness.brightness(1, 500),
+          param.tdObjects.illumination.intensity(1, 500),
+        ),
+      )
+      .chain(delay(200))
+  );
 }
 
 /**
