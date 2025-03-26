@@ -17,12 +17,12 @@ export function burst(props: GranDozerAnimationProps) {
     }),
   )
     .chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)))
-    .chain(delay(400))
+    .chain(delay(300))
     .chain(
       tween(model, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "TACKLE_ATTACK";
+            model.animation.type = "BURST_DOWN";
             se.play(sounds.motor);
           })
           .to(
