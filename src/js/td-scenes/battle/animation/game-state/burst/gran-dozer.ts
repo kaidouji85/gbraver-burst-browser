@@ -61,10 +61,13 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
         toInitial(param.tdCamera, 300),
         param.burstArmdozerTD.lightningShot.shot(),
         param.otherArmdozerTD.sprite().knockBack(),
-        param.otherPlayerTD.armdozerEffects.ineffective.show(),
+        param.otherPlayerTD.armdozerEffects.ineffective
+          .show()
+          .chain(delay(800))
+          .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
       ),
     )
-    .chain(delay(300))
+    .chain(delay(200))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
@@ -76,7 +79,6 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
     .chain(
       all(
         param.burstArmdozerTD.granDozer.burstToStand(),
-        param.otherPlayerTD.armdozerEffects.ineffective.hidden(),
         param.otherArmdozerTD.sprite().knockBackToStand(),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500),
