@@ -10,7 +10,6 @@ export function getDedicatedPilot(armdozerId: ArmdozerId): PilotId {
     case ArmdozerIds.SHIN_BRAVER:
       return PilotIds.SHINYA;
     case ArmdozerIds.NEO_LANDOZER:
-    case ArmdozerIds.GRAN_DOZER:
       return PilotIds.GAI;
     case ArmdozerIds.LIGHTNING_DOZER:
       return PilotIds.RAITO;
@@ -18,6 +17,8 @@ export function getDedicatedPilot(armdozerId: ArmdozerId): PilotId {
       return PilotIds.TSUBASA;
     case ArmdozerIds.GENESIS_BRAVER:
       return PilotIds.YUUYA;
+    case ArmdozerIds.GRAN_DOZER:
+      return PilotIds.RAITO;
     default:
       return PilotIds.SHINYA;
   }

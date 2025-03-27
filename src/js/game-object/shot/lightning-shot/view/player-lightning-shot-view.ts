@@ -12,7 +12,7 @@ import { LightningShotModel } from "../model/lightning-shot-model";
 import { LightningShotView } from "./lightning-shot-view";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 280;
+const MESH_SIZE = 380;
 
 /** プレイヤーの電撃ショットビュー */
 export class PlayerLightningShotView implements LightningShotView {
@@ -51,7 +51,7 @@ export class PlayerLightningShotView implements LightningShotView {
     this.#mesh.opacity(model.opacity);
     this.#mesh.animate(model.animation.frame);
     const target = this.#mesh.getObject3D();
-    target.position.x = ARMDOZER_EFFECT_STANDARD_X - MESH_SIZE / 2 - 85;
+    target.position.x = ARMDOZER_EFFECT_STANDARD_X - MESH_SIZE / 2 - 10;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 40;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
   }
