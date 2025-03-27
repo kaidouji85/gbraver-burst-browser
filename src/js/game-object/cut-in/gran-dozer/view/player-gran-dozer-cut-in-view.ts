@@ -30,7 +30,10 @@ export class PlayerGranDozerCutInView implements GranDozerCutInView {
     this.#group = new THREE.Group();
     this.#meshes = createMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
-      this.#group.add(mesh.getObject3D());
+      const target = mesh.getObject3D();
+      target.position.x = BASE_PADDING_LEFT;
+      target.position.y = -BASE_PADDING_TOP;
+      this.#group.add(target);
     });
   }
 
@@ -59,8 +62,8 @@ export class PlayerGranDozerCutInView implements GranDozerCutInView {
 
     const scale =
       hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this.#group.position.x = model.tracking.x + BASE_PADDING_LEFT * scale;
-    this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = model.tracking.y;
     this.#group.position.z = HUD_CUT_IN_Z;
     this.#group.scale.x = scale;
     this.#group.scale.y = scale;
