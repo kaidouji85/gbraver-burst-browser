@@ -12,7 +12,7 @@ export const createGranDozerIcon = (resources: Resources): ArmdozerIcon =>
   new SimpleArmdozerIcon({
     resources,
     size: 420,
-    x: -15,
-    y: 150,
+    x: 0,
+    y: 190,
     textureId: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
   });
