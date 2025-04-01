@@ -13,7 +13,7 @@ import { createMeshes } from "./meshes";
 export const BASE_PADDING_LEFT = 150;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 100;
+export const BASE_PADDING_TOP = 135;
 
 /** プレイヤー グランドーザ カットイン ビュー */
 export class PlayerGranDozerCutInView implements GranDozerCutInView {
