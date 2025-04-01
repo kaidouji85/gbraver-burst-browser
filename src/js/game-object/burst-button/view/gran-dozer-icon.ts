@@ -11,8 +11,8 @@ import { SimpleArmdozerIcon } from "./simple-armdozer-icon";
 export const createGranDozerIcon = (resources: Resources): ArmdozerIcon =>
   new SimpleArmdozerIcon({
     resources,
-    size: 420,
+    size: 460,
     x: 0,
-    y: 190,
+    y: 210,
     textureId: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
   });
