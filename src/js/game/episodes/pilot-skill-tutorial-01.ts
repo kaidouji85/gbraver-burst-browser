@@ -14,7 +14,7 @@ const introduction = `（Episode3. バーストで一発逆転 からの続き�
 
 /** パイロットスキルチュートリアル（前半） */
 export const pilotSkillTutorial01: Episode = {
-  id: EpisodeIDs.Pilot01,
+  id: EpisodeIDs.PILOT_01,
   type: "Side Episode",
   number: "3.1",
   title: "パイロット次第では詰み （負けイベント）",
