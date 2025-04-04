@@ -39,7 +39,7 @@ export async function nextStage(options: Options): Promise<InProgress> {
     const { story } = inProgress;
     await gotoNextEpisode({ ...props, inProgress: { ...inProgress, story } });
     ret = {
-      type: "Story",
+      ...inProgress,
       story: { type: "PlayingEpisode", episode: story.nextEpisode },
     };
   }

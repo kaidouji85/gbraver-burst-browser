@@ -30,7 +30,11 @@ export async function onForceEndBattle(options: ForceEndBattleOptions) {
       break;
     case "Story":
       await forceEndStoryBattle({ ...props, inProgress });
-      props.inProgress = { type: "Story", story: { type: "EpisodeSelect" } };
+      props.inProgress = {
+        ...inProgress,
+        type: "Story",
+        story: { type: "EpisodeSelect" },
+      };
       break;
     default:
       await forceEndBattle(props);

@@ -33,8 +33,7 @@ type Options = {
 
 /**
  * エピソード選択画面に遷移する
- * @param props ゲームプロパティ
- * @param action アクション
+ * @param options オプション
  * @returns 更新後のInProgress
  */
 export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
@@ -48,5 +47,5 @@ export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
   const initialEpisodeId = getInitialEpisodeId(story);
   await startEpisodeSelector(props, initialEpisodeId);
   playTitleBGM(props);
-  return { type: "Story", story: { type: "EpisodeSelect" } };
+  return { ...inProgress, story: { type: "EpisodeSelect" } };
 }
