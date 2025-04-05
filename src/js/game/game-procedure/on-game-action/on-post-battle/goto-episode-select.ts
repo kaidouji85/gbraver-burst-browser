@@ -1,7 +1,6 @@
 import { EpisodeID } from "../../../episodes/episode";
 import { EpisodeIDs } from "../../../episodes/episode-ids";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
 import { StorySubFLow } from "../../../in-progress/story";
 import { GotoEpisodeSelect } from "../../../post-battle";
 import { playTitleBGM } from "../../play-title-bgm";

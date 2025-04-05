@@ -1,6 +1,5 @@
 import { fadeOut, stop } from "../../../../bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
 import { GotoTitle } from "../../../post-network-error";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
