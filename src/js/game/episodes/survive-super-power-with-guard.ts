@@ -1,7 +1,7 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createSurviveSuperPowerWithGuardEvent } from "../../custom-battle-events/survive-super-power-with-guard";
-import { neoLandozerNPCForPrinceOfFallenSun } from "../../npc/neo-landozer-for-prince-of-fallen-sun";
+import { granDozerForSurviveSuperPowerWithGuardNPC } from "../../npc/gran-dozer-for-survice-super-power-with-guard";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { playerUuid } from "../../uuid/player";
@@ -25,7 +25,7 @@ export const surviveSuperPowerWithGuard: Episode = {
       Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0],
     pilot: Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0],
   },
-  npc: neoLandozerNPCForPrinceOfFallenSun(), // TODO 正しいNPCに置き換える
+  npc: granDozerForSurviveSuperPowerWithGuardNPC(),
   event: () => createSurviveSuperPowerWithGuardEvent(),
   bgm: SOUND_IDS.GAI_BATTLE,
   isLosingEvent: false,
