@@ -1,6 +1,5 @@
 import { fadeOut, stop } from "../../../../bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
 import { GotoTitle } from "../../../post-network-error";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
@@ -8,17 +7,17 @@ import { startTitle } from "../../start-title";
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
-  props: Readonly<GameProps>;
+  props: GameProps;
   /** アクション */
   postAction: Readonly<GotoTitle>;
 };
 
 /**
  * タイトルに遷移する
+ * 本関数はprops.inProgressを変更する副作用がある
  * @param options オプション
- * @returns 更新後のInProgress
  */
-export async function gotoTitle(options: Options): Promise<InProgress> {
+export async function gotoTitle(options: Options) {
   const { props } = options;
   await Promise.all([
     (async () => {
@@ -32,5 +31,5 @@ export async function gotoTitle(options: Options): Promise<InProgress> {
   ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
-  return { type: "None" };
+  props.inProgress = { type: "None" };
 }
