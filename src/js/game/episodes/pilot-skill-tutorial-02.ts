@@ -13,7 +13,7 @@ const introduction = `なぜか大田高校と合同練習することになっ�
 
 /** パイロットスキルチュートリアル（後半） */
 export const pilotSkillTutorial02: Episode = {
-  id: EpisodeIDs.Pilot02,
+  id: EpisodeIDs.PILOT_02,
   type: "Side Episode",
   number: "3.2",
   title: "パイロットスキルで意表を突け",
