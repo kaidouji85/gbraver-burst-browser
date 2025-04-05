@@ -8,17 +8,17 @@ import { startTitle } from "../../start-title";
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
-  props: Readonly<GameProps>;
+  props: GameProps;
   /** アクション */
   postAction: Readonly<GotoTitle>;
 };
 
 /**
  * タイトルに遷移する
+ * 本関数はprops.inPrigressを変更する副作用がある
  * @param options オプション
- * @returns 更新後のInProgress
  */
-export async function gotoTitle(options: Options): Promise<InProgress> {
+export async function gotoTitle(options: Options) {
   const { props } = options;
   await Promise.all([
     (async () => {
@@ -32,5 +32,5 @@ export async function gotoTitle(options: Options): Promise<InProgress> {
   ]);
   await props.fader.fadeIn();
   playTitleBGM(props);
-  return { type: "None" };
+  props.inProgress = { type: "None" };
 }
