@@ -12,7 +12,7 @@ import { LightningShotModel } from "../model/lightning-shot-model";
 import { LightningShotView } from "./lightning-shot-view";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 380;
+const MESH_SIZE = 360;
 
 /** プレイヤーの電撃ショットビュー */
 export class PlayerLightningShotView implements LightningShotView {
