@@ -26,8 +26,7 @@ export async function onStoryStart(options: Options): Promise<void> {
   await startEpisodeSelector(props);
   props.inProgress = {
     type: "Story",
-    story: {
-      type: "EpisodeSelect",
-    },
+    isTutorial: false,
+    story: { type: "EpisodeSelect" },
   };
 }

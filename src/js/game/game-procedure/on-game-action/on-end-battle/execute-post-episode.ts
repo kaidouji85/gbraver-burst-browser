@@ -14,13 +14,16 @@ import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,
   PostEpisodeWinButtons,
+  PostTutorialButtons,
+  PostTutorialLoseButtons,
+  PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
 import { getEpisodes } from "../../get-episodes";
 
 /** createPostEpisodeResultのオプション */
 type CreatePostEpisodeResultOptions = {
-  /** 現在のサブフロー */
-  story: PlayingEpisode;
+  /** 現在のステート */
+  inProgress: Story & { story: PlayingEpisode };
   /** エピソード一覧 */
   episodes: Episode[];
   /** ゲーム終了情報 */
@@ -44,7 +47,8 @@ type PostEpisodeResult = {
 const createPostEpisodeResult = (
   options: CreatePostEpisodeResultOptions,
 ): PostEpisodeResult => {
-  const { story, episodes, gameEnd } = options;
+  const { inProgress, episodes, gameEnd } = options;
+  const { story, isTutorial } = inProgress;
   const currentEpisode = story.episode;
   const currentPlayer = currentEpisode.player;
   const sameTypeEpisodes = episodes.filter(
@@ -56,14 +60,19 @@ const createPostEpisodeResult = (
   const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
   const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
 
-  let ret: PostEpisodeResult = { buttons: PostEpisodeButtons, story };
+  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
+  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
   if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
+    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
     ret = {
-      buttons: PostEpisodeWinButtons,
+      buttons,
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
     };
   } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    ret = { buttons: PostEpisodeLoseButtons, story };
+    const buttons = isTutorial
+      ? PostTutorialLoseButtons
+      : PostEpisodeLoseButtons;
+    ret = { buttons, story };
   }
   return ret;
 };
@@ -85,7 +94,7 @@ export async function executePostEpisode(
   }
 
   const { story, buttons } = createPostEpisodeResult({
-    story: inProgress.story,
+    inProgress: { ...inProgress, story: inProgress.story },
     episodes: getEpisodes(props),
     gameEnd,
   });
