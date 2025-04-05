@@ -63,10 +63,11 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
         param.otherArmdozerTD.sprite().knockBack(),
         param.otherPlayerTD.armdozerEffects.ineffective
           .show()
-          .chain(delay(600))
+          .chain(delay(800))
           .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
       ),
     )
+    .chain(delay(100))
     .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
