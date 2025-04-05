@@ -4,9 +4,7 @@ import type { PostBattleButtonConfig } from "../dom-floaters/post-battle/post-ba
 export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
-    action: {
-      type: "NextStage",
-    },
+    action: { type: "NextStage" },
     label: "次のステージ",
   },
 ];
@@ -15,16 +13,12 @@ export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [
 export const PostNPCBattleLoseButtons: PostBattleButtonConfig[] = [
   {
     style: "SubButton",
-    action: {
-      type: "GotoTitle",
-    },
+    action: { type: "GotoTitle" },
     label: "タイトルへ",
   },
   {
     style: "MainButton",
-    action: {
-      type: "Retry",
-    },
+    action: { type: "Retry" },
     label: "リトライ",
   },
 ];
@@ -33,9 +27,7 @@ export const PostNPCBattleLoseButtons: PostBattleButtonConfig[] = [
 export const PostNPCBattleComplete: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
-    action: {
-      type: "GotoEnding",
-    },
+    action: { type: "GotoEnding" },
     label: "エンディングへ",
   },
 ];
@@ -44,9 +36,7 @@ export const PostNPCBattleComplete: PostBattleButtonConfig[] = [
 export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
-    action: {
-      type: "GotoTitle",
-    },
+    action: { type: "GotoTitle" },
     label: "タイトルへ",
   },
 ];
@@ -55,10 +45,17 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
 export const PostEpisodeWinButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
-    action: {
-      type: "NextStage",
-    },
+    action: { type: "NextStage" },
     label: "次のエピソード",
+  },
+];
+
+/** チュートリアル後（プレイヤーの勝利）のアクションボタン */
+export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: { type: "NextStage" },
+    label: "次のチュートリアル",
   },
 ];
 
@@ -66,16 +63,21 @@ export const PostEpisodeWinButtons: PostBattleButtonConfig[] = [
 export const PostEpisodeLoseButtons: PostBattleButtonConfig[] = [
   {
     style: "SubButton",
-    action: {
-      type: "GotoEpisodeSelect",
-    },
+    action: { type: "GotoEpisodeSelect" },
     label: "エピソード選択へ",
   },
   {
     style: "MainButton",
-    action: {
-      type: "Retry",
-    },
+    action: { type: "Retry" },
+    label: "リトライ",
+  },
+];
+
+/** チュートリアル後（プレイヤーの敗北）のアクションボタン */
+export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: { type: "Retry" },
     label: "リトライ",
   },
 ];
@@ -84,9 +86,16 @@ export const PostEpisodeLoseButtons: PostBattleButtonConfig[] = [
 export const PostEpisodeButtons: PostBattleButtonConfig[] = [
   {
     style: "MainButton",
-    action: {
-      type: "GotoEpisodeSelect",
-    },
+    action: { type: "GotoEpisodeSelect" },
     label: "エピソード選択へ",
+  },
+];
+
+/** チュートリアル後のアクションボタン */
+export const PostTutorialButtons: PostBattleButtonConfig[] = [
+  {
+    style: "MainButton",
+    action: { type: "GotoTitle" },
+    label: "タイトルへ",
   },
 ];
