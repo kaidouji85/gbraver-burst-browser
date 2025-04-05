@@ -2,7 +2,7 @@ import {
   ARMDOZER_SPRITE_STANDARD_X,
   ARMDOZER_SPRITE_STANDARD_Y,
   ARMDOZER_SPRITE_STANDARD_Z,
-} from "../../position";
+} from "../../../td-position";
 import type { GenesisBraverModel } from "./genesis-braver-model";
 
 /**

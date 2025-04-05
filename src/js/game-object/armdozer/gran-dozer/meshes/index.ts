@@ -1,10 +1,15 @@
 import { Resources } from "../../../../resource";
 import { AnimationMesh } from "./animation-mesh";
+import { backStep } from "./back-step";
+import { burstDown } from "./burst-down";
+import { down } from "./down";
+import { frontStep } from "./front-step";
+import { guard } from "./guard";
+import { knockBack } from "./knock-back";
 import { stand } from "./stand";
-import { step } from "./step";
 import { tackleAttack } from "./tackle-attack";
 import { tackleCharge } from "./tackle-charge";
-import { tackleToStand } from "./tackle-to-stand";
+import { tackleToBackStep } from "./tackle-to-back-step";
 
 /**
  * ビューで利用するすべてのメッシュを生成する
@@ -16,7 +21,12 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...stand(resources),
     ...tackleCharge(resources),
     ...tackleAttack(resources),
-    ...tackleToStand(resources),
-    ...step(resources),
+    ...tackleToBackStep(resources),
+    ...burstDown(resources),
+    ...frontStep(resources),
+    ...backStep(resources),
+    ...knockBack(resources),
+    ...down(resources),
+    ...guard(resources),
   ];
 }

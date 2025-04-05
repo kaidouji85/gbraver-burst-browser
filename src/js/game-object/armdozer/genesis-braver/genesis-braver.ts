@@ -15,7 +15,7 @@ import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
 import { guard } from "./animation/guard";
-import { guardToStand } from "./animation/guts-to-stand";
+import { guardToStand } from "./animation/guard-to-stand";
 import { knockBack } from "./animation/knock-back";
 import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { spToStand } from "./animation/sp-to-stand";

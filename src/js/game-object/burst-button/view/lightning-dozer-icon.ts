@@ -1,49 +1,18 @@
-import * as THREE from "three";
-
-import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { ArmdozerIcon } from "./armdozer-icon";
+import { ArmdozerIcon } from "./armdozer-icon";
+import { SimpleArmdozerIcon } from "./simple-armdozer-icon";
 
-/** ライトニングドーザアイコン */
-export class LightningDozerIcon implements ArmdozerIcon {
-  #mesh: HorizontalAnimationMesh;
-  #group: THREE.Group;
-
-  /**
-   * コンストラクタ
-   * @param resources リソース管理オブジェクト
-   */
-  constructor(resources: Resources) {
-    this.#group = new THREE.Group();
-    const lightningDozer =
-      resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON,
-      )?.texture ?? new THREE.Texture();
-    this.#mesh = new HorizontalAnimationMesh({
-      texture: lightningDozer,
-      maxAnimation: 1,
-      width: 420,
-      height: 420,
-    });
-    this.#mesh.animate(1);
-    this.#mesh.getObject3D().position.x = -15;
-    this.#mesh.getObject3D().position.y = 200;
-    this.#group.add(this.#mesh.getObject3D());
-  }
-
-  /** @override */
-  destructor(): void {
-    this.#mesh.destructor();
-  }
-
-  /** @override */
-  getObject3D(): THREE.Object3D {
-    return this.#group;
-  }
-
-  /** @override */
-  setOpacity(opacity: number): void {
-    this.#mesh.opacity(opacity);
-  }
-}
+/**
+ * ライトニングドーザアイコンを生成する
+ * @param resources リソース管理オブジェクト
+ * @returns ライトニングドーザアイコン
+ */
+export const createLightningDozerIcon = (resources: Resources): ArmdozerIcon =>
+  new SimpleArmdozerIcon({
+    resources,
+    size: 420,
+    x: -15,
+    y: 200,
+    textureId: TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON,
+  });

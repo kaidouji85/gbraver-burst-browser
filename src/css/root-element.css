@@ -31,6 +31,7 @@
   --sub-background-color: #2d3333;
 
   /** z-index */
+  --zindex-post-battle-floater: 0;
   --zindex-title-armdozers: 0;
   --zindex-title-contents: 1;
   --zindex-title-help: 2;

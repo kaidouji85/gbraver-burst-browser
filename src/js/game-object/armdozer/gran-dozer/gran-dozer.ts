@@ -5,9 +5,16 @@ import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
+import { burst } from "./animation/burst";
+import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
+import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
+import { guard } from "./animation/guard";
+import { guardToStand } from "./animation/guard-to-stand";
+import { knockBack } from "./animation/knock-back";
+import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleToStand } from "./animation/tackle-to-stand";
@@ -76,6 +83,47 @@ export class GranDozer extends EmptyArmdozerSprite {
    */
   tackleToStand(): Animate {
     return tackleToStand(this.#props);
+  }
+
+  /**
+   * バースト
+   * @returns アニメーション
+   */
+  burst(): Animate {
+    return burst(this.#props);
+  }
+
+  /**
+   * バースト -> 立ち
+   * @returns アニメーション
+   */
+  burstToStand(): Animate {
+    return burstToStand(this.#props);
+  }
+
+  /** @override */
+  knockBack(): Animate {
+    return knockBack(this.#props);
+  }
+
+  /** @override */
+  knockBackToStand(): Animate {
+    return knockBackToStand(this.#props);
+  }
+
+  /** @override */
+  down(): Animate {
+    return down(this.#props);
+  }
+
+  /** @override */
+  guard(): Animate {
+    return guard(this.#props);
+  }
+
+  /** @override */
+  guardToStand(): Animate {
+    return guardToStand(this.#props);
   }
 
   /** @override */

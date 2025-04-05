@@ -16,7 +16,7 @@ export async function attackDescription(
   props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
     attackBatteryCaption,
   );
-  const signal = props.abortController.signal;
+  const signal = props.abort.getAbortController().signal;
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });

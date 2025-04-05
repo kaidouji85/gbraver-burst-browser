@@ -13,7 +13,7 @@ import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 export class GenesisBraverHUD implements HUDArmdozerObjects {
   /**
    * コンストラクタ
-   * @param param パラメータ
+   * @param playerId プレイヤーID
    * @param cutIn カットイン
    */
   constructor(

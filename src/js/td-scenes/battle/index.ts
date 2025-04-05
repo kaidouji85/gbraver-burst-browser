@@ -1,6 +1,5 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { createAbortError } from "../../abort-controller/abort-error";
 import { TDScene } from "../td-scene";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
@@ -44,9 +43,6 @@ export class BattleScene implements TDScene {
 
   /** @override */
   destructor(): void {
-    this.#props.abortController.abort(
-      createAbortError("battle scene is destructed"),
-    );
     this.#props.view.destructor();
     this.#unSubscribers.forEach((v) => {
       v.unsubscribe();

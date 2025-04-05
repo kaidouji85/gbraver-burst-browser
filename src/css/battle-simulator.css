@@ -6,7 +6,6 @@
     --dialog-padding: var(--responsive-font-size);
     --player-area-width: calc(var(--responsive-font-size) * 15);
     --player-area-height: calc(var(--responsive-font-size) * 10);
-    --armdozer-size: calc(var(--responsive-font-size) * 19);
     --middle-area-size: calc(var(--responsive-font-size) * 2);
     --turn-indicator-size: calc(var(--responsive-font-size) * 6);
     --battery-icon-size: calc(var(--responsive-font-size) * 0.9);
@@ -154,12 +153,16 @@
   grid-area: player;
   width: var(--player-area-width);
   height: var(--player-area-height);
+  overflow: hidden;
 }
 
-.battle-simulator__player-armdozer {
+.battle-simulator__player-armdozer--shin-braver,
+.battle-simulator__player-armdozer--neo-landozer,
+.battle-simulator__player-armdozer--lightning-dozer,
+.battle-simulator__player-armdozer--wing-dozer,
+.battle-simulator__player-armdozer--genesis-braver,
+.battle-simulator__player-armdozer--gran-dozer {
   position: absolute;
-  width: var(--armdozer-size);
-  height: var(--armdozer-size);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -171,15 +174,55 @@
   grid-area: enemy;
   width: var(--player-area-width);
   height: var(--player-area-height);
+  overflow: hidden;
 }
 
-.battle-simulator__enemy-armdozer {
+.battle-simulator__enemy-armdozer--shin-braver,
+.battle-simulator__enemy-armdozer--neo-landozer,
+.battle-simulator__enemy-armdozer--lightning-dozer,
+.battle-simulator__enemy-armdozer--wing-dozer,
+.battle-simulator__enemy-armdozer--genesis-braver,
+.battle-simulator__enemy-armdozer--gran-dozer {
   position: absolute;
-  width: var(--armdozer-size);
-  height: var(--armdozer-size);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(-1, 1);
+}
+
+.battle-simulator__player-armdozer--shin-braver,
+.battle-simulator__enemy-armdozer--shin-braver {
+  width: calc(var(--responsive-font-size) * 19);
+  height: calc(var(--responsive-font-size) * 19);
+}
+
+.battle-simulator__player-armdozer--neo-landozer,
+.battle-simulator__enemy-armdozer--neo-landozer {
+  width: calc(var(--responsive-font-size) * 19);
+  height: calc(var(--responsive-font-size) * 19);
+}
+
+.battle-simulator__player-armdozer--lightning-dozer,
+.battle-simulator__enemy-armdozer--lightning-dozer {
+  width: calc(var(--responsive-font-size) * 19);
+  height: calc(var(--responsive-font-size) * 19);
+}
+
+.battle-simulator__player-armdozer--wing-dozer,
+.battle-simulator__enemy-armdozer--wing-dozer {
+  width: calc(var(--responsive-font-size) * 19);
+  height: calc(var(--responsive-font-size) * 19);
+}
+
+.battle-simulator__player-armdozer--genesis-braver,
+.battle-simulator__enemy-armdozer--genesis-braver {
+  width: calc(var(--responsive-font-size) * 19);
+  height: calc(var(--responsive-font-size) * 19);
+}
+
+.battle-simulator__player-armdozer--gran-dozer,
+.battle-simulator__enemy-armdozer--gran-dozer {
+  width: calc(var(--responsive-font-size) * 26);
+  height: calc(var(--responsive-font-size) * 26);
 }
 
 .battle-simulator__player-battery-value,

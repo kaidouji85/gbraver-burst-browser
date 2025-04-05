@@ -1,6 +1,8 @@
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
+import { AbortManager } from "../../src/js/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
 import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
 import { PreRender } from "../../src/js/game-loop/pre-render";
 import { Update } from "../../src/js/game-loop/update";
@@ -8,6 +10,7 @@ import {
   GameObjectAction,
   gameObjectStream,
 } from "../../src/js/game-object/action/game-object-action";
+import { GameObjectActionContainer } from "../../src/js/game-object/action/game-object-action-container";
 import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
 import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
@@ -22,11 +25,10 @@ import { Resize, resizeStream } from "../../src/js/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
-type Object3DParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+type Object3DParams = Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<GameObjectActionContainer> &
+  Readonly<AbortManagerContainer>;
 
 /**
  * Object3D生成関数
@@ -100,6 +102,7 @@ export class HUDGameObjectStub {
       resources,
       se: createSEPlayer(),
       gameObjectAction: this.#gameObjectAction,
+      abort: new AbortManager(),
     });
 
     object3Ds.forEach((object3D) => {

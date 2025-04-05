@@ -1,29 +1,43 @@
 import { Unsubscribable } from "rxjs";
 
+import { createAbortError } from "../../../abort-controller/abort-error";
+import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
+import { PostBattleFloater } from "../../../dom-floaters/post-battle";
 import { DOMScene } from "../../../dom-scenes/dom-scene";
 import { DOMSceneBinder } from "../../../dom-scenes/dom-scene-binder";
 import { TDSceneBinder } from "../../../td-scenes/td-scene-binder";
 
-/** シーン切り替えパラメータ */
-type Params = {
+/** シーン切り替えオプション */
+type Options = Readonly<AbortManagerContainer> & {
   /** DOMシーンバインダ */
-  domSceneBinder: DOMSceneBinder;
+  readonly domSceneBinder: DOMSceneBinder;
   /** 3Dシーンバインダ */
-  tdSceneBinder: TDSceneBinder;
+  readonly tdSceneBinder: TDSceneBinder;
   /** 切り替え先のDOMシーン */
-  scene: DOMScene;
+  readonly scene: DOMScene;
+  /** ポストバトルフローター */
+  readonly postBattle: PostBattleFloater;
   /** バインドするシーンに関連するアンサブスクライバ */
-  unsubscribers: Unsubscribable[];
+  readonly unsubscribers: Unsubscribable[];
 };
 
 /**
  * DOMシーンに切り替える
  * 切り替え前に3Dシーンを表示していた場合、そのシーンを破棄する
  * 本関数はこのフォルダ以外では呼び出してはならない
- * @param params シーン切り替えパラメータ
+ * @param options シーン切り替えオプション
  */
-export const switchDOMScene = (params: Params): void => {
-  const { domSceneBinder, tdSceneBinder, scene, unsubscribers } = params;
+export const switchDOMScene = (options: Options): void => {
+  const {
+    abort,
+    postBattle,
+    domSceneBinder,
+    tdSceneBinder,
+    scene,
+    unsubscribers,
+  } = options;
+  abort.getAbortController().abort(createAbortError("switch scene"));
+  postBattle.hide();
   if (tdSceneBinder.isSceneBound()) {
     tdSceneBinder.dispose();
   }

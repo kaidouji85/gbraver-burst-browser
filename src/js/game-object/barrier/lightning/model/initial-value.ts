@@ -1,4 +1,4 @@
-import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../armdozer/position";
+import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../td-position";
 import type { LightningBarrierModel } from "./lightning-barrier-model";
 
 /**

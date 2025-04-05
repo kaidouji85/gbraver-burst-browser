@@ -1,12 +1,17 @@
 import { Observable } from "rxjs";
 
 import { PostBattle } from "../../game/post-battle";
-import { createPostBattleFloaterProps } from "./procedures/create-post-battle-floater-props";
-import { destructor } from "./procedures/destructor";
+import {
+  createPostBattleFloaterProps,
+  PostBattleFloaterPropsOptions,
+} from "./procedures/create-post-battle-floater-props";
 import { hide } from "./procedures/hide";
 import { show } from "./procedures/show";
 import { PostBattleFloaterProps } from "./props";
 import { ShowParams } from "./show-params";
+
+/** コンストラクタのオプション */
+type PostBattleFloaterOptions = PostBattleFloaterPropsOptions;
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
@@ -16,16 +21,10 @@ export class PostBattleFloater {
   /**
    * コンストラクタ
    * 本クラスの初期表示は(display: none)である
+   * @param options オプション
    */
-  constructor() {
-    this.#props = createPostBattleFloaterProps();
-  }
-
-  /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    destructor(this.#props);
+  constructor(options: PostBattleFloaterOptions) {
+    this.#props = createPostBattleFloaterProps(options);
   }
 
   /**
@@ -48,9 +47,8 @@ export class PostBattleFloater {
   /**
    * フローターを非表示にする
    */
-  hidden(): void {
+  hide(): void {
     hide(this.#props);
-    destructor(this.#props);
   }
 
   /**

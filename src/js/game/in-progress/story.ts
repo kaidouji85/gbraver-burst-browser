@@ -30,6 +30,8 @@ export type StorySubFLow = EpisodeSelect | PlayingEpisode | GoingNextEpisode;
 /** ストーリーモード */
 export type Story = {
   type: "Story";
+  /** チュートリアルか否か、trueならチュートリアル */
+  readonly isTutorial: boolean;
   /** サブフロー */
   readonly story: StorySubFLow;
 };

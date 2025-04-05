@@ -1,10 +1,11 @@
 import * as THREE from "three";
 
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../../game-object/armdozer/position";
+import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../../game-object/td-position";
 import { HUDCoordinate } from "../../../../../tracking/coordinate";
 import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
 import { GenesisBraverHUD } from "../../hud/armdozer-objects/genesis-braver";
+import { GranDozerHUD } from "../../hud/armdozer-objects/gran-dozer";
 import { HUDArmdozerObjects } from "../../hud/armdozer-objects/hud-armdozer-objects";
 import { LightningDozerHUD } from "../../hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../../hud/armdozer-objects/neo-landozer";
@@ -23,7 +24,8 @@ function extractArmdozerCutIn(hudArmdozer: Readonly<HUDArmdozerObjects>) {
     hudArmdozer instanceof NeoLandozerHUD ||
     hudArmdozer instanceof LightningDozerHUD ||
     hudArmdozer instanceof WingDozerHUD ||
-    hudArmdozer instanceof GenesisBraverHUD
+    hudArmdozer instanceof GenesisBraverHUD ||
+    hudArmdozer instanceof GranDozerHUD
   ) {
     return hudArmdozer.cutIn;
   }

@@ -3,7 +3,7 @@ import { Burst, Ineffective } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
-import { HUDArmdozerObjects } from "../../../view/hud/armdozer-objects/hud-armdozer-objects";
+import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
 import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
@@ -14,7 +14,7 @@ import { BurstAnimationParamX } from "./animation-param";
  */
 export type GranDozerBurst<BURST extends Burst> = BurstAnimationParamX<
   GranDozerTD,
-  HUDArmdozerObjects, // TODO グランドーザのものに置き換える
+  GranDozerHUD,
   BURST
 >;
 
@@ -41,21 +41,44 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
 function ineffective(param: GranDozerBurst<Ineffective>): Animate {
   return all(
     focusToBurstPlayer(param),
+    param.burstArmdozerHUD.cutIn.show(),
+    param.burstArmdozerTD.granDozer.burst(),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.attackerArmdozerTD.sprite().endActive(),
-    delay(200).chain(
+  )
+    .chain(delay(800))
+    .chain(
+      all(
+        param.hudObjects.rearmostFader.opacity(0, 300),
+        param.burstArmdozerHUD.cutIn.hidden(),
+      ),
+    )
+    .chain(delay(100))
+    .chain(
+      all(
+        toInitial(param.tdCamera, 300),
+        param.burstArmdozerTD.lightningShot.shot(),
+        param.otherArmdozerTD.sprite().knockBack(),
+        param.otherPlayerTD.armdozerEffects.ineffective
+          .show()
+          .chain(delay(600))
+          .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
+      ),
+    )
+    .chain(
       all(
         param.burstPlayerHUD.gauge.battery(
           param.burstPlayerState.armdozer.battery,
         ),
         param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery),
       ),
-    ),
-  )
+    )
     .chain(
       all(
-        toInitial(param.tdCamera, 500),
+        param.burstArmdozerTD.granDozer.burstToStand(),
+        param.otherArmdozerTD.sprite().knockBackToStand(),
         param.tdObjects.skyBrightness.brightness(1, 500),
         param.tdObjects.illumination.intensity(1, 500),
       ),

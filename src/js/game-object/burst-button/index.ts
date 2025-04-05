@@ -1,21 +1,18 @@
-import { Observable } from "rxjs";
-
-import type { ResourcesContainer } from "../../resource";
+import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
-import type { GameObjectAction } from "../action/game-object-action";
+import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { BurstButton } from "./burst-button";
-import { GenesisBraverIcon } from "./view/genesis-braver-icon";
-import { LightningDozerIcon } from "./view/lightning-dozer-icon";
-import { NeoLandozerIcon } from "./view/neo-landozer-icon";
-import { ShinBraverIcon } from "./view/shin-braver-icon";
-import { WingDozerIcon } from "./view/wing-dozer-icon";
+import { createGenesisBraverIcon } from "./view/genesis-braver-icon";
+import { createGranDozerIcon } from "./view/gran-dozer-icon";
+import { createLightningDozerIcon } from "./view/lightning-dozer-icon";
+import { createNeoLandozerIcon } from "./view/neo-landozer-icon";
+import { createShinBraverIcon } from "./view/shin-braver-icon";
+import { createWingDozerIcon } from "./view/wing-dozer-icon";
 
 /** 生成パラメータ */
 export type BurstButtonCreatorParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+  SEPlayerContainer &
+  GameObjectActionContainer;
 
 /**
  * シンブレイバー バーストボタンを生成する
@@ -26,7 +23,7 @@ export function shinBraverBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new ShinBraverIcon(resources);
+  const armdozerIcon = createShinBraverIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
@@ -39,7 +36,7 @@ export function neoLandozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new NeoLandozerIcon(resources);
+  const armdozerIcon = createNeoLandozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
@@ -52,7 +49,7 @@ export function lightningDozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new LightningDozerIcon(resources);
+  const armdozerIcon = createLightningDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
@@ -65,7 +62,7 @@ export function wingDozerBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new WingDozerIcon(resources);
+  const armdozerIcon = createWingDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }
 
@@ -78,6 +75,19 @@ export function genesisBraverBurstButton(
   params: BurstButtonCreatorParams,
 ): BurstButton {
   const { resources } = params;
-  const armdozerIcon = new GenesisBraverIcon(resources);
+  const armdozerIcon = createGenesisBraverIcon(resources);
+  return new BurstButton({ ...params, armdozerIcon });
+}
+
+/**
+ * グランドーザ バーストボタンを生成する
+ * @param params 生成パラメータ
+ * @returns バーストボタン
+ */
+export function granDozerBurstButton(
+  params: BurstButtonCreatorParams,
+): BurstButton {
+  const { resources } = params;
+  const armdozerIcon = createGranDozerIcon(resources);
   return new BurstButton({ ...params, armdozerIcon });
 }

@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../resource";
-import { HUD_CUT_IN_ZNIDEX } from "../../../hud-zindex";
+import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 import { AnimationMeshMapping } from "./animation-mesh-mapping";
@@ -58,7 +58,7 @@ export class PlayerGenesisBraverCutInView implements GenesisBraverCutInView {
       hudScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
-    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.position.z = HUD_CUT_IN_Z;
     this.#group.scale.x = scale;
     this.#group.scale.y = scale;
     this.#group.scale.z = scale;

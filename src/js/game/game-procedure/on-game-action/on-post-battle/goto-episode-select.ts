@@ -1,7 +1,6 @@
 import { EpisodeID } from "../../../episodes/episode";
 import { EpisodeIDs } from "../../../episodes/episode-ids";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
 import { StorySubFLow } from "../../../in-progress/story";
 import { GotoEpisodeSelect } from "../../../post-battle";
 import { playTitleBGM } from "../../play-title-bgm";
@@ -26,18 +25,17 @@ const getInitialEpisodeId = (story: StorySubFLow): EpisodeID => {
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
-  props: Readonly<GameProps>;
+  props: GameProps;
   /** アクション */
   postAction: Readonly<GotoEpisodeSelect>;
 };
 
 /**
  * エピソード選択画面に遷移する
- * @param props ゲームプロパティ
- * @param action アクション
- * @returns 更新後のInProgress
+ * 本関数はprops.inProgressを変更する副作用がある
+ * @param options オプション
  */
-export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
+export async function gotoEpisodeSelect(options: Options) {
   const { props } = options;
   const { inProgress } = props;
   if (inProgress.type !== "Story") {
@@ -46,8 +44,7 @@ export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
 
   const { story } = inProgress;
   const initialEpisodeId = getInitialEpisodeId(story);
-  props.postBattle.hidden();
   await startEpisodeSelector(props, initialEpisodeId);
   playTitleBGM(props);
-  return { type: "Story", story: { type: "EpisodeSelect" } };
+  props.inProgress = { ...inProgress, story: { type: "EpisodeSelect" } };
 }

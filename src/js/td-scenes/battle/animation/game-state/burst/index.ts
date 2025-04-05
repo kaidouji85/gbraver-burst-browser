@@ -1,8 +1,9 @@
-import type { BurstEffect, GameStateX } from "gbraver-burst-core";
+import { BurstEffect, GameStateX } from "gbraver-burst-core";
 
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { GenesisBraverHUD } from "../../../view/hud/armdozer-objects/genesis-braver";
+import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";
 import { NeoLandozerHUD } from "../../../view/hud/armdozer-objects/neo-landozer";
 import { ShinBraverHUD } from "../../../view/hud/armdozer-objects/shin-braver";
@@ -22,21 +23,6 @@ import { lightningDozerBurst } from "./lightning-dozer";
 import { neoLandozerBurst } from "./neo-landozer";
 import { shinBraverBurst } from "./shin-braver";
 import { wingDozerBurst } from "./wingdozer";
-
-/**
- * バーストアニメーション
- *
- * @param props 戦闘シーンプロパティ
- * @param gameState ゲーム状態
- * @returns バーストアニメーション
- */
-export function burstAnimation(
-  props: StateAnimationProps,
-  gameState: GameStateX<BurstEffect>,
-): Animate {
-  const param = toBurstAnimationParam(props, gameState);
-  return param ? armdozerAnimation(param) : empty();
-}
 
 /**
  * アームドーザごとのバーストアニメーション
@@ -72,9 +58,27 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     burstArmdozerHUD instanceof GenesisBraverHUD
   ) {
     ret = genesisBraverBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
-  } else if (burstArmdozerTD instanceof GranDozerTD) {
-    ret = granDozerBurst({ ...param, burstArmdozerTD });
+  } else if (
+    burstArmdozerTD instanceof GranDozerTD &&
+    burstArmdozerHUD instanceof GranDozerHUD
+  ) {
+    ret = granDozerBurst({ ...param, burstArmdozerTD, burstArmdozerHUD });
   }
 
   return ret;
+}
+
+/**
+ * バーストアニメーション
+ *
+ * @param props 戦闘シーンプロパティ
+ * @param gameState ゲーム状態
+ * @returns バーストアニメーション
+ */
+export function burstAnimation(
+  props: StateAnimationProps,
+  gameState: GameStateX<BurstEffect>,
+): Animate {
+  const param = toBurstAnimationParam(props, gameState);
+  return param ? armdozerAnimation(param) : empty();
 }

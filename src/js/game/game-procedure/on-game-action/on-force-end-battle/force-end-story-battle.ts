@@ -1,27 +1,24 @@
 import { fadeOut, stop } from "../../../../bgm/bgm-operators";
-import { batterySystemTutorial } from "../../../episodes/battery-system-tutorial";
 import { GameProps } from "../../../game-props";
-import { Story } from "../../../in-progress/story";
+import { InProgress } from "../../../in-progress";
+import { PlayingEpisode, Story } from "../../../in-progress/story";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startEpisodeSelector } from "../../start-episode-selector";
+import { startTitle } from "../../start-title";
 
 /**
- * ストーリーモードバトルを強制終了する
+ * エピソードセレクターに遷移する
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-export async function forceEndStoryBattle(
-  props: Readonly<GameProps & { inProgress: Story }>,
-) {
-  props.postBattle.hidden();
-
-  const selectedEpisodeId =
-    props.inProgress.story.type === "PlayingEpisode"
-      ? props.inProgress.story.episode.id
-      : batterySystemTutorial.id;
+const gotoEpisodeSelector = async (
+  props: Readonly<
+    GameProps & { inProgress: Story & { story: PlayingEpisode } }
+  >,
+) => {
+  const selectedEpisodeId = props.inProgress.story.episode.id;
   await Promise.all([
     (async () => {
-      props.postBattle.hidden();
       await startEpisodeSelector(props, selectedEpisodeId);
     })(),
     (async () => {
@@ -31,4 +28,46 @@ export async function forceEndStoryBattle(
   ]);
 
   playTitleBGM(props);
+};
+
+/**
+ * タイトル画面に遷移する
+ * @param props ゲームプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+const gotoTitle = async (props: Readonly<GameProps>) => {
+  await props.fader.fadeOut();
+  await Promise.all([
+    (async () => {
+      await startTitle(props);
+    })(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
+  await props.fader.fadeIn();
+  playTitleBGM(props);
+};
+
+/**
+ * ストーリーモードバトルを強制終了する
+ * @param props ゲームプロパティ
+ * @returns inProgress更新結果
+ */
+export async function forceEndStoryBattle(
+  props: Readonly<GameProps & { inProgress: Story }>,
+): Promise<InProgress> {
+  const { inProgress } = props;
+  const { story, isTutorial } = inProgress;
+  if (story.type === "PlayingEpisode" && !isTutorial) {
+    await gotoEpisodeSelector({
+      ...props,
+      inProgress: { ...inProgress, story },
+    });
+    return { ...inProgress, story: { type: "EpisodeSelect" } };
+  }
+
+  await gotoTitle(props);
+  return { type: "None" };
 }

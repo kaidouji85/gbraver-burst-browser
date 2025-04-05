@@ -16,11 +16,43 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     path: "armdozer/gran-dozer/tackle-attack.webp",
   },
   {
-    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_STAND,
-    path: "armdozer/gran-dozer/tackle-to-stand.webp",
+    id: TEXTURE_IDS.GRAN_DOZER_TACKLE_TO_BACK_STEP,
+    path: "armdozer/gran-dozer/tackle-to-back-step.webp",
   },
   {
-    id: TEXTURE_IDS.GRAN_DOZER_STEP,
-    path: "armdozer/gran-dozer/step.webp",
+    id: TEXTURE_IDS.GRAN_DOZER_BURST_DOWN,
+    path: "armdozer/gran-dozer/burst-down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_FRONT_STEP,
+    path: "armdozer/gran-dozer/front-step.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_BACK_STEP,
+    path: "armdozer/gran-dozer/back-step.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_KNOCK_BACK,
+    path: "armdozer/gran-dozer/knock-back.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_DOWN,
+    path: "armdozer/gran-dozer/down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_GUARD,
+    path: "armdozer/gran-dozer/guard.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_UP,
+    path: "armdozer/gran-dozer/cutin-burst-up.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_DOWN,
+    path: "armdozer/gran-dozer/cutin-burst-down.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
+    path: "armdozer/gran-dozer/burst-button-icon.webp",
   },
 ];

@@ -1,10 +1,11 @@
 import { Subject, Unsubscribable } from "rxjs";
 
+import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../exclusive/exclusive";
 import { PostBattle } from "../../game/post-battle";
 
 /** PostBattleFloaterのプロパティ */
-export type PostBattleFloaterProps = {
+export type PostBattleFloaterProps = Readonly<AbortManagerContainer> & {
   /** ルートHTML要素 */
   readonly root: HTMLElement;
   /** 排他制御 */
