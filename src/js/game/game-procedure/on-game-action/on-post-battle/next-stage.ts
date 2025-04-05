@@ -1,7 +1,7 @@
 import { GameProps } from "../../../game-props";
 import { PlayingEpisode } from "../../../in-progress/story";
 import { NextStage } from "../../../post-battle";
-import {startEpisode} from "../../start-episode";
+import { startEpisode } from "../../start-episode";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
 
 /** オプション */
