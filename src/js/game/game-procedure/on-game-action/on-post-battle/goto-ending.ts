@@ -15,7 +15,7 @@ type Options = {
 
 /**
  * エンディングに遷移する
- * 本関数はprops.inPrigressを変更する副作用を持つ
+ * 本関数はprops.inProgressを変更する副作用を持つ
  * @param options オプション
  * @returns 更新後のInProgress
  */

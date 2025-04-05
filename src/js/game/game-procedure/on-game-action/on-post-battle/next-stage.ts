@@ -14,7 +14,7 @@ type Options = {
 
 /**
  * 次のステージ
- * 本関数はprops.inPrigressを変更する副作用を持つ
+ * 本関数はprops.inProgressを変更する副作用を持つ
  * @param options オプション
  */
 export async function nextStage(options: Options) {

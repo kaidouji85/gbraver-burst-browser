@@ -14,7 +14,7 @@ type Options = {
 
 /**
  * タイトルに遷移する
- * 本関数はprops.inPrigressを変更する副作用がある
+ * 本関数はprops.inProgressを変更する副作用がある
  * @param options オプション
  */
 export async function gotoTitle(options: Options) {
