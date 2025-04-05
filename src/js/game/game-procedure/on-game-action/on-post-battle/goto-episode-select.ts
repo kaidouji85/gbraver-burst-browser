@@ -26,17 +26,17 @@ const getInitialEpisodeId = (story: StorySubFLow): EpisodeID => {
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
-  props: Readonly<GameProps>;
+  props: GameProps;
   /** アクション */
   postAction: Readonly<GotoEpisodeSelect>;
 };
 
 /**
  * エピソード選択画面に遷移する
+ * 本関数はprops.inPrigressを変更する副作用がある
  * @param options オプション
- * @returns 更新後のInProgress
  */
-export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
+export async function gotoEpisodeSelect(options: Options) {
   const { props } = options;
   const { inProgress } = props;
   if (inProgress.type !== "Story") {
@@ -47,5 +47,5 @@ export async function gotoEpisodeSelect(options: Options): Promise<InProgress> {
   const initialEpisodeId = getInitialEpisodeId(story);
   await startEpisodeSelector(props, initialEpisodeId);
   playTitleBGM(props);
-  return { type: "Story", story: { type: "EpisodeSelect" } };
+  props.inProgress = { ...inProgress, story: { type: "EpisodeSelect" } };
 }
