@@ -1,7 +1,7 @@
 import { GameProps } from "../../../game-props";
 import { PlayingEpisode } from "../../../in-progress/story";
 import { NextStage } from "../../../post-battle";
-import { gotoNextEpisode } from "./goto-next-episode";
+import {startEpisode} from "../../start-episode";
 import { gotoNPCBattleStage } from "./goto-npc-battle-stage";
 
 /** オプション */
@@ -38,6 +38,6 @@ export async function nextStage(options: Options) {
       episode: inProgress.story.nextEpisode,
     };
     props.inProgress = { ...inProgress, story };
-    await gotoNextEpisode({ ...props, inProgress: { ...inProgress, story } });
+    await startEpisode(props, story.episode);
   }
 }
