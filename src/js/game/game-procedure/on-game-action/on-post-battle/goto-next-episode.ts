@@ -1,5 +1,5 @@
 import { GameProps } from "../../../game-props";
-import { GoingNextEpisode, Story } from "../../../in-progress/story";
+import { PlayingEpisode, Story } from "../../../in-progress/story";
 import { startEpisode } from "../../start-episode";
 
 /**
@@ -9,9 +9,9 @@ import { startEpisode } from "../../start-episode";
  */
 export async function gotoNextEpisode(
   props: Readonly<
-    GameProps & { inProgress: Story & { story: GoingNextEpisode } }
+    GameProps & { inProgress: Story & { story: PlayingEpisode } }
   >,
 ): Promise<void> {
-  const playingEpisode = props.inProgress.story;
-  await startEpisode(props, playingEpisode.nextEpisode);
+  const { story } = props.inProgress;
+  await startEpisode(props, story.episode);
 }
