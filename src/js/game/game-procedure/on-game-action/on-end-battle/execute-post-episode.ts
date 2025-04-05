@@ -14,6 +14,7 @@ import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,
   PostEpisodeWinButtons,
+  PostTutorialButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
@@ -59,7 +60,8 @@ const createPostEpisodeResult = (
   const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
   const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
 
-  let ret: PostEpisodeResult = { buttons: PostEpisodeButtons, story };
+  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
+  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
   if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
     const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
     ret = {
