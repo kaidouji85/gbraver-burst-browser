@@ -1,7 +1,7 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createSurviveSuperPowerWithGuardEvent } from "../../custom-battle-events/survive-super-power-with-guard";
-import { granDozerForSurviveSuperPowerWithGuardNPC } from "../../npc/gran-dozer-for-survice-super-power-with-guard";
+import { granDozerForSurviveSuperPowerWithGuardNPC } from "../../npc/gran-dozer-for-survive-super-power-with-guard";
 import { PathIds } from "../../resource/path/ids";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { playerUuid } from "../../uuid/player";
