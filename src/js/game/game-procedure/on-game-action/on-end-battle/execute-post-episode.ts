@@ -14,6 +14,7 @@ import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,
   PostEpisodeWinButtons,
+  PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
 import { getEpisodes } from "../../get-episodes";
@@ -66,7 +67,10 @@ const createPostEpisodeResult = (
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
     };
   } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    ret = { buttons: PostEpisodeLoseButtons, story };
+    const buttons = isTutorial
+      ? PostTutorialLoseButtons
+      : PostEpisodeLoseButtons;
+    ret = { buttons, story };
   }
   return ret;
 };
