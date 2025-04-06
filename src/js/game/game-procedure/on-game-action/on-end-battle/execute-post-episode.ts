@@ -20,6 +20,7 @@ import {
 import { Episode } from "../../../story/episode";
 import { getNextEpisode } from "../../../story/get-next-episode";
 import { isPlayerWin } from "../../../story/is-player-win";
+import { isTutorialEnd } from "../../../story/is-tutorial-end";
 import { getEpisodes } from "../../get-episodes";
 
 /** エピソード終了後の結果 */
@@ -78,10 +79,15 @@ const createPostEpisodeResultWhenTutorial = (options: {
   const { story } = inProgress;
   const { episode: currentEpisode } = story;
   const isPlayerWon = isPlayerWin({ currentEpisode, gameEnd });
+  const isFinalTutorial = isTutorialEnd(currentEpisode);
   const nextEpisode = getNextEpisode({ currentEpisode, episodes });
 
   let ret: PostEpisodeResult = { buttons: PostTutorialButtons, story };
-  if ((isPlayerWon || currentEpisode.isLosingEvent) && nextEpisode) {
+  if (
+    (isPlayerWon || currentEpisode.isLosingEvent) &&
+    !isFinalTutorial &&
+    nextEpisode
+  ) {
     ret = {
       buttons: PostTutorialWinButtons,
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
