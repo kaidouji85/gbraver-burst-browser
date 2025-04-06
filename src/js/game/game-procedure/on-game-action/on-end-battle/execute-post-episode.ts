@@ -20,16 +20,6 @@ import {
 import { Episode } from "../../../story/episode";
 import { getEpisodes } from "../../get-episodes";
 
-/** @deprecated createPostEpisodeResultのオプション */
-type CreatePostEpisodeResultOptions = {
-  /** 現在のステート */
-  inProgress: Story & { story: PlayingEpisode };
-  /** エピソード一覧 */
-  episodes: Episode[];
-  /** ゲーム終了情報 */
-  gameEnd: GameEnd;
-};
-
 /** エピソード終了後の結果 */
 type PostEpisodeResult = {
   /** バトル終了後のボタン */
@@ -38,15 +28,91 @@ type PostEpisodeResult = {
   story: StorySubFLow;
 };
 
-//TODO ユニットテストを書く
+/*
+const createPostEpisodeResult = (options: {
+  inProgress: Story & { story: PlayingEpisode };
+  episodes: Episode[];
+  gameEnd: GameEnd;
+}): PostEpisodeResult => {
+  const { inProgress, episodes, gameEnd } = options;
+  const { story, isTutorial } = inProgress;
+  const currentEpisode = story.episode;
+  const currentPlayer = currentEpisode.player;
+  const sameTypeEpisodes = episodes.filter(
+    (e) => e.type === currentEpisode.type,
+  );
+  const isPlayerWin =
+    gameEnd.result.type === "GameOver" &&
+    gameEnd.result.winner === currentPlayer.playerId;
+  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
+  const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
+
+  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
+  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
+  if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
+    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
+    ret = {
+      buttons,
+      story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
+    };
+  } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
+    const buttons = isTutorial
+      ? PostTutorialLoseButtons
+      : PostEpisodeLoseButtons;
+    ret = { buttons, story };
+  }
+  return ret;
+};
+*/
+
 /**
  * エピソード終了後の結果を作成する
  * @param options オプション
+ * @param options.inProgress ストーリー進行状況
+ * @param options.episodes エピソード一覧
+ * @param options.gameEnd ゲーム終了情報
  * @returns 生成結果
  */
-const createPostEpisodeResult = (
-  options: CreatePostEpisodeResultOptions,
-): PostEpisodeResult => {
+const createPostEpisodeResult = (options: {
+  inProgress: Story & { story: PlayingEpisode; isTutorial: false };
+  episodes: Episode[];
+  gameEnd: GameEnd;
+}): PostEpisodeResult => {
+  const { inProgress, episodes, gameEnd } = options;
+  const { story, isTutorial } = inProgress;
+  const currentEpisode = story.episode;
+  const currentPlayer = currentEpisode.player;
+  const sameTypeEpisodes = episodes.filter(
+    (e) => e.type === currentEpisode.type,
+  );
+  const isPlayerWin =
+    gameEnd.result.type === "GameOver" &&
+    gameEnd.result.winner === currentPlayer.playerId;
+  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
+  const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
+
+  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
+  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
+  if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
+    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
+    ret = {
+      buttons,
+      story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
+    };
+  } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
+    const buttons = isTutorial
+      ? PostTutorialLoseButtons
+      : PostEpisodeLoseButtons;
+    ret = { buttons, story };
+  }
+  return ret;
+};
+
+const createPostEpisodeResultWhenTutorial = (options: {
+  inProgress: Story & { story: PlayingEpisode };
+  episodes: Episode[];
+  gameEnd: GameEnd;
+}): PostEpisodeResult => {
   const { inProgress, episodes, gameEnd } = options;
   const { story, isTutorial } = inProgress;
   const currentEpisode = story.episode;
@@ -88,16 +154,24 @@ export async function executePostEpisode(
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {
   const { inProgress } = props;
+  const { isTutorial, story: currentStory } = props.inProgress;
   const { gameEnd } = action;
-  if (inProgress.story.type !== "PlayingEpisode") {
+  if (currentStory.type !== "PlayingEpisode") {
     return inProgress;
   }
 
-  const { story, buttons } = createPostEpisodeResult({
-    inProgress: { ...inProgress, story: inProgress.story },
-    episodes: getEpisodes(props),
-    gameEnd,
-  });
+  const episodes = getEpisodes(props);
+  const { story, buttons } = isTutorial
+    ? createPostEpisodeResultWhenTutorial({
+        inProgress: { ...inProgress, isTutorial, story: currentStory },
+        episodes,
+        gameEnd,
+      })
+    : createPostEpisodeResult({
+        inProgress: { ...inProgress, isTutorial, story: currentStory },
+        episodes,
+        gameEnd,
+      });
   await props.postBattle.show({ ...props, buttons });
   return { ...inProgress, story };
 }
