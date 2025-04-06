@@ -18,6 +18,8 @@ import {
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
 import { Episode } from "../../../story/episode";
+import { getNextEpisode } from "../../../story/get-next-episode";
+import { isPlayerWin } from "../../../story/is-player-win";
 import { getEpisodes } from "../../get-episodes";
 
 /** エピソード終了後の結果 */
@@ -27,43 +29,6 @@ type PostEpisodeResult = {
   /** サブフロー更新結果 */
   story: StorySubFLow;
 };
-
-/*
-const createPostEpisodeResult = (options: {
-  inProgress: Story & { story: PlayingEpisode };
-  episodes: Episode[];
-  gameEnd: GameEnd;
-}): PostEpisodeResult => {
-  const { inProgress, episodes, gameEnd } = options;
-  const { story, isTutorial } = inProgress;
-  const currentEpisode = story.episode;
-  const currentPlayer = currentEpisode.player;
-  const sameTypeEpisodes = episodes.filter(
-    (e) => e.type === currentEpisode.type,
-  );
-  const isPlayerWin =
-    gameEnd.result.type === "GameOver" &&
-    gameEnd.result.winner === currentPlayer.playerId;
-  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
-  const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
-
-  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
-  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
-  if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
-    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
-    ret = {
-      buttons,
-      story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
-    };
-  } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    const buttons = isTutorial
-      ? PostTutorialLoseButtons
-      : PostEpisodeLoseButtons;
-    ret = { buttons, story };
-  }
-  return ret;
-};
-*/
 
 /**
  * エピソード終了後の結果を作成する
@@ -79,31 +44,19 @@ const createPostEpisodeResult = (options: {
   gameEnd: GameEnd;
 }): PostEpisodeResult => {
   const { inProgress, episodes, gameEnd } = options;
-  const { story, isTutorial } = inProgress;
-  const currentEpisode = story.episode;
-  const currentPlayer = currentEpisode.player;
-  const sameTypeEpisodes = episodes.filter(
-    (e) => e.type === currentEpisode.type,
-  );
-  const isPlayerWin =
-    gameEnd.result.type === "GameOver" &&
-    gameEnd.result.winner === currentPlayer.playerId;
-  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
-  const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
+  const { story } = inProgress;
+  const { episode: currentEpisode } = story;
+  const isPlayerWon = isPlayerWin({ currentEpisode, gameEnd });
+  const nextEpisode = getNextEpisode({ currentEpisode, episodes });
 
-  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
-  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
-  if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
-    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
+  let ret: PostEpisodeResult = { buttons: PostEpisodeButtons, story };
+  if ((isPlayerWon || currentEpisode.isLosingEvent) && nextEpisode) {
     ret = {
-      buttons,
+      buttons: PostEpisodeWinButtons,
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
     };
-  } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    const buttons = isTutorial
-      ? PostTutorialLoseButtons
-      : PostEpisodeLoseButtons;
-    ret = { buttons, story };
+  } else if (!isPlayerWon && !currentEpisode.isLosingEvent) {
+    ret = { buttons: PostEpisodeLoseButtons, story };
   }
   return ret;
 };
