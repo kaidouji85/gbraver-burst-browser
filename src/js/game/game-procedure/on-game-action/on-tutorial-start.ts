@@ -1,6 +1,6 @@
-import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
 import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
+import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
 import { loadFullResource } from "../load-full-resource";
 import { startEpisode } from "../start-episode";
 

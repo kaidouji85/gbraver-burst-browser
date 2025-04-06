@@ -1,11 +1,11 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createConfrontationTwoBraverEvent } from "../../custom-battle-events/confrontation-two-braver";
-import { genesisBraverNPC } from "../../npc/genesis-braver";
-import { PathIds } from "../../resource/path/ids";
-import { SOUND_IDS } from "../../resource/sound/ids";
-import { playerUuid } from "../../uuid/player";
-import { Episode } from "./episode";
+import { createConfrontationTwoBraverEvent } from "../../../custom-battle-events/confrontation-two-braver";
+import { genesisBraverNPC } from "../../../npc/genesis-braver";
+import { PathIds } from "../../../resource/path/ids";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { playerUuid } from "../../../uuid/player";
+import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
