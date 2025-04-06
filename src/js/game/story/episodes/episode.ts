@@ -1,10 +1,10 @@
 import { Player } from "gbraver-burst-core";
 
-import { NPC } from "../../npc/npc";
-import { Resources } from "../../resource";
-import { PathId } from "../../resource/path/resource";
-import { SoundId } from "../../resource/sound/resource";
-import { CustomBattleEvent } from "../../td-scenes/battle/custom-battle-event";
+import { NPC } from "../../../npc/npc";
+import { Resources } from "../../../resource";
+import { PathId } from "../../../resource/path/resource";
+import { SoundId } from "../../../resource/sound/resource";
+import { CustomBattleEvent } from "../../../td-scenes/battle/custom-battle-event";
 
 /** エピソードID */
 export type EpisodeID = string;

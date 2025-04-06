@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../../game/episodes/episode";
+import { EpisodeID } from "../../../game/story/episodes/episode";
 import { EpisodeSelectorProps } from "../props";
 import { selectEpisodeElement } from "./select-episode";
 import { setEpisodeDetail } from "./set-episode-detail";

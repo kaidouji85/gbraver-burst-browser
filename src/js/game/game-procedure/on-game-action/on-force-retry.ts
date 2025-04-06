@@ -1,4 +1,3 @@
-import { batterySystemTutorial } from "../../episodes/battery-system-tutorial";
 import { ForceRetry } from "../../game-actions/force-retry";
 import { GameProps } from "../../game-props";
 import { NPCBattle, PlayingNPCBattle } from "../../in-progress/npc-battle";
@@ -6,6 +5,7 @@ import { Story } from "../../in-progress/story";
 import { getCurrentNPCStage } from "../../npc-battle/get-current-npc-stage";
 import { getNPCStageLevel } from "../../npc-battle/get-npc-stage-level";
 import { DefaultStage } from "../../npc-battle/stages/default-stage";
+import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
 import { startEpisode } from "../start-episode";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 

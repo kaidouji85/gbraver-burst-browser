@@ -2,7 +2,7 @@ import { StoryFn } from "@storybook/html";
 import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import { EpisodeTitle } from "../src/js/dom-scenes/episode-title";
-import { EpisodeNumber } from "../src/js/game/episodes/episode";
+import { EpisodeNumber } from "../src/js/game/story/episodes/episode";
 import { domStub } from "./stub/dom-stub";
 
 export default {

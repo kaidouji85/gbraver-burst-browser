@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../../game/episodes/episode";
+import { EpisodeID } from "../../../game/story/episodes/episode";
 import { Resources } from "../../../resource";
 import { PathId } from "../../../resource/path/resource";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";

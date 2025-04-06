@@ -1,6 +1,6 @@
-import { Episodes, EpisodesInDevelopment } from "../episodes";
-import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
+import { Episodes, EpisodesInDevelopment } from "../story/episodes";
+import { Episode } from "../story/episodes/episode";
 
 /**
  * エピソード一覧を取得するヘルパー関数

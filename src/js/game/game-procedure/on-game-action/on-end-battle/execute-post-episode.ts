@@ -1,7 +1,6 @@
 import { GameEnd } from "gbraver-burst-core";
 
 import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
-import { Episode } from "../../../episodes/episode";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
@@ -18,6 +17,7 @@ import {
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
+import { Episode } from "../../../story/episodes/episode";
 import { getEpisodes } from "../../get-episodes";
 
 /** createPostEpisodeResultのオプション */
