@@ -2,7 +2,7 @@ import {
   EpisodeID,
   EpisodeNumber,
   EpisodeType,
-} from "../../game/story/episodes/episode";
+} from "../../game/story/episode";
 
 /** 本画面で利用するエピソード情報 */
 export type Episode = {

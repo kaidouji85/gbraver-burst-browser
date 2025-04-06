@@ -1,4 +1,4 @@
-import { Episode } from "./episodes/episode";
+import { Episode } from "./episode";
 
 /**
  * 次のエピソードを取得する

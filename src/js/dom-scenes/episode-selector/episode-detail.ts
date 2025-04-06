@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../game/story/episodes/episode";
+import { EpisodeID } from "../../game/story/episode";
 import { Resources } from "../../resource";
 import { Episode } from "./episode";
 

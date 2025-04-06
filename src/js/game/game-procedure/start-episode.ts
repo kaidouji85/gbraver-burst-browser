@@ -7,7 +7,7 @@ import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
 import { GameProps } from "../game-props";
-import { Episode } from "../story/episodes/episode";
+import { Episode } from "../story/episode";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
 

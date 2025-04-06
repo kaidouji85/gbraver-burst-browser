@@ -1,6 +1,6 @@
 import { GameEnd } from "gbraver-burst-core";
 
-import { Episode } from "./episodes/episode";
+import { Episode } from "./episode";
 
 /**
  * プレイヤーが勝利したかどうかを判定する

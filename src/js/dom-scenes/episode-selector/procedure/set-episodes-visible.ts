@@ -1,4 +1,4 @@
-import { EpisodeType } from "../../../game/story/episodes/episode";
+import { EpisodeType } from "../../../game/story/episode";
 import { EpisodeSelectorProps } from "../props";
 
 /**

@@ -17,10 +17,10 @@ import {
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
-import { Episode } from "../../../story/episodes/episode";
+import { Episode } from "../../../story/episode";
 import { getEpisodes } from "../../get-episodes";
 
-/** createPostEpisodeResultのオプション */
+/** @deprecated createPostEpisodeResultのオプション */
 type CreatePostEpisodeResultOptions = {
   /** 現在のステート */
   inProgress: Story & { story: PlayingEpisode };

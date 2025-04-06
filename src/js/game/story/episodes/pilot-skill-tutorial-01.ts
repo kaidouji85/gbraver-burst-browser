@@ -5,7 +5,7 @@ import { pilotSkillTutorialNPC } from "../../../npc/pilot-skill-tutorial";
 import { PathIds } from "../../../resource/path/ids";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
-import { Episode } from "./episode";
+import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */

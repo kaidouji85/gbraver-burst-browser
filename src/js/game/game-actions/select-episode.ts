@@ -1,4 +1,4 @@
-import { EpisodeID } from "../story/episodes/episode";
+import { EpisodeID } from "../story/episode";
 
 /** エピソード選択完了 */
 export type SelectEpisode = {

@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../../game/story/episodes/episode";
+import { EpisodeID } from "../../../game/story/episode";
 
 /** エピソード選択情報 */
 export type EpisodeSelect = {
