@@ -39,7 +39,7 @@ type PostEpisodeResult = {
  * @returns 生成結果
  */
 const createPostEpisodeResult = (options: {
-  inProgress: Story & { story: PlayingEpisode; isTutorial: false };
+  inProgress: Story & { story: PlayingEpisode };
   episodes: Episode[];
   gameEnd: GameEnd;
 }): PostEpisodeResult => {
@@ -70,7 +70,7 @@ const createPostEpisodeResult = (options: {
  * @returns 生成結果
  */
 const createPostEpisodeResultWhenTutorial = (options: {
-  inProgress: Story & { story: PlayingEpisode; isTutorial: true };
+  inProgress: Story & { story: PlayingEpisode };
   episodes: Episode[];
   gameEnd: GameEnd;
 }): PostEpisodeResult => {
@@ -110,17 +110,14 @@ export async function executePostEpisode(
   }
 
   const episodes = getEpisodes(props);
-  const { story, buttons } = isTutorial
-    ? createPostEpisodeResultWhenTutorial({
-        inProgress: { ...inProgress, isTutorial, story: currentStory },
-        episodes,
-        gameEnd,
-      })
-    : createPostEpisodeResult({
-        inProgress: { ...inProgress, isTutorial, story: currentStory },
-        episodes,
-        gameEnd,
-      });
+  const createResult = isTutorial
+    ? createPostEpisodeResultWhenTutorial
+    : createPostEpisodeResult;
+  const { story, buttons } = createResult({
+    inProgress: { ...inProgress, isTutorial, story: currentStory },
+    episodes,
+    gameEnd,
+  });
   await props.postBattle.show({ ...props, buttons });
   return { ...inProgress, story };
 }
