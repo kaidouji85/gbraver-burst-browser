@@ -61,37 +61,33 @@ const createPostEpisodeResult = (options: {
   return ret;
 };
 
+/**
+ * チュートリアル終了後の結果を作成する
+ * @param options オプション
+ * @param options.inProgress ストーリー進行状況
+ * @param options.episodes エピソード一覧
+ * @param options.gameEnd ゲーム終了情報
+ * @returns 生成結果
+ */
 const createPostEpisodeResultWhenTutorial = (options: {
-  inProgress: Story & { story: PlayingEpisode };
+  inProgress: Story & { story: PlayingEpisode; isTutorial: true };
   episodes: Episode[];
   gameEnd: GameEnd;
 }): PostEpisodeResult => {
   const { inProgress, episodes, gameEnd } = options;
-  const { story, isTutorial } = inProgress;
-  const currentEpisode = story.episode;
-  const currentPlayer = currentEpisode.player;
-  const sameTypeEpisodes = episodes.filter(
-    (e) => e.type === currentEpisode.type,
-  );
-  const isPlayerWin =
-    gameEnd.result.type === "GameOver" &&
-    gameEnd.result.winner === currentPlayer.playerId;
-  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
-  const nextEpisode = sameTypeEpisodes.at(currentEpisodeIndex + 1);
+  const { story } = inProgress;
+  const { episode: currentEpisode } = story;
+  const isPlayerWon = isPlayerWin({ currentEpisode, gameEnd });
+  const nextEpisode = getNextEpisode({ currentEpisode, episodes });
 
-  const defaultButtons = isTutorial ? PostTutorialButtons : PostEpisodeButtons;
-  let ret: PostEpisodeResult = { buttons: defaultButtons, story };
-  if ((isPlayerWin || currentEpisode.isLosingEvent) && nextEpisode) {
-    const buttons = isTutorial ? PostTutorialWinButtons : PostEpisodeWinButtons;
+  let ret: PostEpisodeResult = { buttons: PostTutorialButtons, story };
+  if ((isPlayerWon || currentEpisode.isLosingEvent) && nextEpisode) {
     ret = {
-      buttons,
+      buttons: PostTutorialWinButtons,
       story: { type: "GoingNextEpisode", currentEpisode, nextEpisode },
     };
-  } else if (!isPlayerWin && !currentEpisode.isLosingEvent) {
-    const buttons = isTutorial
-      ? PostTutorialLoseButtons
-      : PostEpisodeLoseButtons;
-    ret = { buttons, story };
+  } else if (!isPlayerWon && !currentEpisode.isLosingEvent) {
+    ret = { buttons: PostTutorialLoseButtons, story };
   }
   return ret;
 };
