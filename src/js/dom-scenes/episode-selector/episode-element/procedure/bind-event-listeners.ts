@@ -1,6 +1,6 @@
 import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../../dom/push-dom";
+import { domClickStream } from "../../../../dom/push-dom";
 import { EpisodeElementProps } from "../props";
 import { onRootPush } from "./on-root-push";
 
@@ -13,7 +13,7 @@ export function bindEventListeners(
   props: Readonly<EpisodeElementProps>,
 ): Unsubscribable[] {
   return [
-    domPushStream(props.root).subscribe((action) => {
+    domClickStream(props.root).subscribe((action) => {
       onRootPush(props, action);
     }),
   ];
