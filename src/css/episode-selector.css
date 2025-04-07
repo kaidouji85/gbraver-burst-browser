@@ -32,6 +32,8 @@
   background-color: var(--sub-background-color);
   padding: calc(var(--responsive-font-size) * 0.5);
   border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
+  position: relative;
+  overflow: scroll;
 }
 
 .episode-selector__episode-type-tabs {
@@ -68,9 +70,6 @@
 .episode-selector__episodes {
   grid-area: episodes;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
   overflow-y: scroll;
 }
 
