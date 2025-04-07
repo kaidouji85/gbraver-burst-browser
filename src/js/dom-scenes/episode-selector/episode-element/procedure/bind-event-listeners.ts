@@ -1,8 +1,8 @@
-import { throttleTime, Unsubscribable } from "rxjs";
+import { Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../../dom/push-dom";
+import { domClickStream } from "../../../../dom/push-dom";
 import { EpisodeElementProps } from "../props";
-import { onRootPush } from "./on-root-push";
+import { onRootClick } from "./on-root-click";
 
 /**
  * イベントリスナを関連付ける
@@ -13,10 +13,8 @@ export function bindEventListeners(
   props: Readonly<EpisodeElementProps>,
 ): Unsubscribable[] {
   return [
-    domPushStream(props.root)
-      .pipe(throttleTime(500))
-      .subscribe((action) => {
-        onRootPush({ props, action });
-      }),
+    domClickStream(props.root).subscribe((action) => {
+      onRootClick({ props, action });
+    }),
   ];
 }
