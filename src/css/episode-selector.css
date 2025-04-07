@@ -33,7 +33,7 @@
   padding: calc(var(--responsive-font-size) * 0.5);
   border-radius: 0 0 var(--button-border-radius) var(--button-border-radius);
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .episode-selector__episode-type-tabs {
