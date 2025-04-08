@@ -1,8 +1,8 @@
 import { Unsubscribable } from "rxjs";
 
-import { domClickStream } from "../../../../dom/push-dom";
+import { domPushStream } from "../../../../dom/push-dom";
 import { EpisodeElementProps } from "../props";
-import { onRootClick } from "./on-root-click";
+import { onRootPush } from "./on-root-push";
 
 /**
  * イベントリスナを関連付ける
@@ -13,8 +13,8 @@ export function bindEventListeners(
   props: Readonly<EpisodeElementProps>,
 ): Unsubscribable[] {
   return [
-    domClickStream(props.root).subscribe((action) => {
-      onRootClick({ props, action });
+    domPushStream(props.root).subscribe((action) => {
+      onRootPush({ props, action });
     }),
   ];
 }

@@ -50,7 +50,7 @@ export class EpisodeElement {
   }
 
   /**
-   * 選択通知
+   * エピソードが選択されたことを通知する
    * @returns 通知ストリーム
    */
   selectionNotifier(): Observable<void> {
