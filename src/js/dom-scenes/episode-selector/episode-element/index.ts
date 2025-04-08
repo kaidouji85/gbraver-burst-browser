@@ -50,7 +50,8 @@ export class EpisodeElement {
   }
 
   /**
-   * 選択通知
+   * エピソードが選択されたことを通知する
+   * 本通信はタッチデバイスで二重発火されることがあるので、購読側でその制御をすること
    * @returns 通知ストリーム
    */
   selectionNotifier(): Observable<void> {

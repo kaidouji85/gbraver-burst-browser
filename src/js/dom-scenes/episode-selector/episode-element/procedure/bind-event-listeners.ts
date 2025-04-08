@@ -14,7 +14,7 @@ export function bindEventListeners(
 ): Unsubscribable[] {
   return [
     domPushStream(props.root).subscribe((action) => {
-      onRootPush(props, action);
+      onRootPush({ props, action });
     }),
   ];
 }

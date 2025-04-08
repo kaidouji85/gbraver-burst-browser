@@ -12,6 +12,11 @@ export function onEpisodeSelect(
   props: Readonly<EpisodeSelectorProps>,
   episodeElement: EpisodeElement,
 ): void {
+  const currentEpisode = props.episodeElements.find((v) => v.isChecked());
+  if (!currentEpisode || currentEpisode.id === episodeElement.id) {
+    return;
+  }
+
   const episodeDetail = props.episodeDetails.find(
     (v) => v.id === episodeElement.id,
   );
