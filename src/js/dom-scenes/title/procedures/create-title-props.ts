@@ -1,6 +1,5 @@
 import { Subject } from "rxjs";
 
-import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -18,8 +17,7 @@ import { TitleProps } from "../props";
 /** タイトル画面プロパティ生成パラメータ */
 export type CreateTitlePropsParams = RootInnerHTMLParams &
   ResourcesContainer &
-  SEPlayerContainer &
-  AbortManagerContainer;
+  SEPlayerContainer;
 
 /**
  * タイトル画面プロパティを生成する
