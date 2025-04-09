@@ -34,9 +34,8 @@ export async function initialize(props: GameProps): Promise<void> {
   await waitTime(500 - latency);
   await props.fader.fadeOut();
   invisibleFirstView();
-  title.playOpeningAnimation({
-    signal: props.abort.getAbortController().signal,
-  });
+  const { signal } = props.abort.getAbortController();
+  title.playOpeningAnimation({ signal });
   await props.fader.fadeIn();
   playTitleBGM(props);
 }
