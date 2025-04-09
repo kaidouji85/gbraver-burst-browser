@@ -6,6 +6,10 @@ import {
   createTitleProps,
   CreateTitlePropsParams,
 } from "./procedures/create-title-props";
+import {
+  OpeningAnimationOptions,
+  playOpeningAnimation,
+} from "./procedures/play-opening-animation";
 import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
@@ -104,6 +108,15 @@ export class Title implements DOMScene {
    */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * オープニングアニメーションを再生する
+   * @param options オプション
+   * @returns アニメーションPromise
+   */
+  playOpeningAnimation(options?: OpeningAnimationOptions): Promise<void> {
+    return playOpeningAnimation(this.#props, options);
   }
 
   /**
