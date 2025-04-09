@@ -20,16 +20,13 @@ export async function playOpeningAnimation(
     logo.animate(
       [
         {
-          transform: "translate(30vh)",
-        },
-        {
-          transform: `translate(0)`,
+          transform: `translateY(0)`,
         },
       ],
       {
-        duration: 200,
+        duration: 500,
         fill: "forwards",
-        easing: "ease",
+        //easing: "ease",
       },
     ),
     options,

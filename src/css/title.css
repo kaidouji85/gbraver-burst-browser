@@ -228,6 +228,7 @@
 
 .title__title-logo {
   height: 35vh;
+  transform: translateY(-5vh);
 }
 
 .title__copy-rights,
