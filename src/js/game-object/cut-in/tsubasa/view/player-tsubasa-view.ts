@@ -1,13 +1,14 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type { TsubasaModel } from "../model/tsubasa-model";
-import type { TsubasaView } from "./tsubasa-view";
+import { TsubasaModel } from "../model/tsubasa-model";
+import { TsubasaView } from "./tsubasa-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 550;
@@ -30,9 +31,10 @@ export class PlayerTsubasaView implements TsubasaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const tsubasa =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.TSUBASA_CUTIN)
-        ?.texture ?? new THREE.Texture();
+    const tsubasa = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.TSUBASA_CUTIN,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: tsubasa,
       maxAnimation: MAX_ANIMATION,

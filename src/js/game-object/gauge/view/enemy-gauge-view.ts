@@ -1,15 +1,16 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { hudUIScale } from "../../scale";
-import type { GaugeModel } from "../model/gauge-model";
+import { GaugeModel } from "../model/gauge-model";
 import { BATTERY_UNIT_GAUGE_PIXEL_WIDTH } from "./battery-gauge-unit";
 import { EnemyBatteryGauge } from "./enemy-battery-gauge";
 import { EnemyHpBar } from "./enemy-hp-bar";
-import type { GaugeView } from "./gauge-view";
+import { GaugeView } from "./gauge-view";
 import { HpNumber } from "./hp-number";
 
 /** 基本拡大率 */
@@ -32,9 +33,10 @@ export class EnemyGaugeView implements GaugeView {
     this.#group = new THREE.Group();
     this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
-    const hpFrameTexture =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.ENEMY_HP_GAUGE)
-        ?.texture ?? new THREE.Texture();
+    const hpFrameTexture = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.ENEMY_HP_GAUGE,
+    ).texture;
     this.#hpFrame = new HorizontalAnimationMesh({
       width: 1024,
       height: 1024,
@@ -56,9 +58,10 @@ export class EnemyGaugeView implements GaugeView {
     this.#maxHpNumber.getObject3D().position.set(10, 52, 1);
     this.#group.add(this.#maxHpNumber.getObject3D());
 
-    const batteryFrameTexture =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.ENEMY_BATTERY_GAUGE)
-        ?.texture ?? new THREE.Texture();
+    const batteryFrameTexture = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
+    ).texture;
     this.#batteryFrame = new HorizontalAnimationMesh({
       width: 1024,
       height: 1024,

@@ -1,16 +1,17 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type {
+import {
   AnimationType,
   WingDozerCutInModel,
 } from "../model/wing-dozer-cutin-model";
-import type { WingDozerCutInView } from "./wing-dozer-cutin-view";
+import { WingDozerCutInView } from "./wing-dozer-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 1000;
@@ -32,24 +33,20 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const burstUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_UP,
-    );
-    const burstUp = burstUpResource
-      ? burstUpResource.texture
-      : new THREE.Texture();
+    const burstUp = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.WING_DOZER_BURST_UP,
+    ).texture;
     this.#burstUp = new HorizontalAnimationMesh({
       texture: burstUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4,
     });
-    const burstDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.WING_DOZER_BURST_DOWN,
-    );
-    const burstDown = burstDownResource
-      ? burstDownResource.texture
-      : new THREE.Texture();
+    const burstDown = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.WING_DOZER_BURST_DOWN,
+    ).texture;
     this.#burstDown = new HorizontalAnimationMesh({
       texture: burstDown,
       width: MESH_SIZE,

@@ -1,9 +1,8 @@
-import * as THREE from "three";
-
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { MESH_SIZE } from "./mesh-size";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
@@ -16,10 +15,10 @@ export const MAX_ANIMATION = 4;
 export function granDozerCutInBurstDown(
   resources: Resources,
 ): HorizontalAnimationMesh {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_DOWN,
-    )?.texture ?? new THREE.Texture();
+  const { texture } = findTextureOrThrow(
+    resources,
+    TEXTURE_IDS.GRAN_DOZER_CUTIN_BURST_DOWN,
+  );
   return new HorizontalAnimationMesh({
     texture,
     maxAnimation: MAX_ANIMATION,

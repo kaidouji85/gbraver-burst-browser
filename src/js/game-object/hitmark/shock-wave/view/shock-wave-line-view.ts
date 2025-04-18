@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 import { SPRITE_RENDER_ORDER } from "../../../../render/render-order/td-render-order";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ShockWaveLineModel } from "../model/shock-wave-model";
+import { ShockWaveLineModel } from "../model/shock-wave-model";
 import { LINE_Z_INDEX } from "./z-index";
 
 /** メッシュ幅 */
@@ -21,12 +22,10 @@ export class ShockWaveLineView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
     );
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
     const material = new THREE.MeshBasicMaterial({
       side: THREE.FrontSide,
       blending: THREE.AdditiveBlending,
