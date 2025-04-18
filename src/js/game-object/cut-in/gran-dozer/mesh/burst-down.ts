@@ -1,8 +1,8 @@
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { MESH_SIZE } from "./mesh-size";
-import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
