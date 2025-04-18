@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { LightningBarrierModel } from "../model/lightning-barrier-model";
+import { LightningBarrierModel } from "../model/lightning-barrier-model";
 
 /** メッシュ幅 */
 const WIDTH = 500;
@@ -21,12 +22,10 @@ export class LightningBarrierView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BARRIER_LIGHTNING,
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BARRIER_LIGHTNING,
     );
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,

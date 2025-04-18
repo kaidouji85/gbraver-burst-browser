@@ -1,7 +1,6 @@
-import * as THREE from "three";
-
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
 import { ArmdozerAnimation } from "./armdozer-animation";
 
@@ -31,9 +30,7 @@ type Options = ResourcesContainer & {
  */
 export function createStandardMesh(options: Options): ArmdozerAnimation {
   const { resources, textureId, offset } = options;
-  const texture =
-    resources.textures.find((v) => v.id === textureId)?.texture ??
-    new THREE.Texture();
+  const { texture } = findTextureOrThrow(resources, textureId);
   const ret = new HorizontalAnimationMesh({
     ...options,
     texture,
