@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
@@ -24,9 +25,7 @@ export class PlayerPowerUpView implements PowerUpView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const texture =
-      resources.textures.find((t) => t.id === TEXTURE_IDS.POWER_UP)?.texture ??
-      new THREE.Texture();
+    const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.POWER_UP);
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,

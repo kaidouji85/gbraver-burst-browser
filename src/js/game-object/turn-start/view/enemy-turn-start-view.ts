@@ -1,12 +1,13 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { hudScale } from "../../scale";
-import type { TurnStartModel } from "../model/turn-start-model";
-import type { TurnStartView } from "./turn-start-view";
+import { TurnStartModel } from "../model/turn-start-model";
+import { TurnStartView } from "./turn-start-view";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 400;
@@ -16,12 +17,10 @@ export class EnemyTurnStartView implements TurnStartView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const enemyTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.ENEMY_TURN,
-    );
-    const enemyTurn = enemyTurnResource
-      ? enemyTurnResource.texture
-      : new THREE.Texture();
+    const enemyTurn = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.ENEMY_TURN,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: enemyTurn,
       maxAnimation: 1,
