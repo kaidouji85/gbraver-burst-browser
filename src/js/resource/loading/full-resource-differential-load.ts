@@ -13,6 +13,7 @@ import {
 } from "./resource-loading";
 
 /**
+ * @deprecated
  * リソース差分読み込み
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
  * @param resources 読み込んだリソース

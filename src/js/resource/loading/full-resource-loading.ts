@@ -7,6 +7,7 @@ import {
 import { ResourceLoading, resourceLoading } from "./resource-loading";
 
 /**
+ * @deprecated
  * フルリソースを読み込む
  * @param resourceRoot リソースルート
  * @returns リソース読み込みオブジェクト
@@ -22,6 +23,7 @@ export function fullResourceLoading(
 }
 
 /**
+ * @deprecated
  * 開発中素材も含めたフルリソースを読み込む
  * @param resourceRoot リソースルート
  * @returns リソース読み込みオブジェクト

@@ -1,6 +1,6 @@
 import { Observable, Subject } from "rxjs";
 
-import type { Resources } from "..";
+import { Resources } from "..";
 import { loadCanvasImage } from "../canvas-image/load-canvas-image";
 import {
   CanvasImageConfig,
@@ -17,13 +17,13 @@ import { getAllPaths } from "../path/get-all-paths";
 import { preLoadImage } from "../path/pre-load-image";
 import { PathConfig } from "../path/resource";
 import { toPath } from "../path/to-path";
-import type { ResourceRoot } from "../resource-root";
+import { ResourceRoot } from "../resource-root";
 import { loadSound } from "../sound/load";
-import type { SoundResource } from "../sound/resource";
-import type { SoundConfig } from "../sound/resource";
+import { SoundResource } from "../sound/resource";
+import { SoundConfig } from "../sound/resource";
 import { loadTexture } from "../texture/load";
-import type { TextureConfig, TextureResource } from "../texture/resource";
-import type { LoadingActions } from "./loading-actions";
+import { TextureConfig, TextureResource } from "../texture/resource";
+import { LoadingActions } from "./loading-actions";
 
 /** 読み込み対象となるリソースの設定をあつめたもの */
 export type LoadingTargetConfigs = {

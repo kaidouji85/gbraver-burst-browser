@@ -2,6 +2,7 @@ import type { Resources } from "..";
 import { LoadingTargetConfigs } from "./resource-loading";
 
 /**
+ * @deprecated
  * 読みこまれていないリソース設定を抽出する
  * @param configs 抽出対象となるリソース設定
  * @param resources 既に読みこんだリソース

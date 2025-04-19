@@ -8,7 +8,7 @@ import {
 } from "../texture/configs";
 import { LoadingTargetConfigs } from "./resource-loading";
 
-/** フルリソースの設定 */
+/** @deprecated フルリソースの設定 */
 export const FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
   gltfConfigs: GLTF_CONFIGS,
   textureConfigs: TEXTURE_CONFIGS,
@@ -17,7 +17,7 @@ export const FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
   soundConfigs: SOUND_CONFIGS,
 };
 
-/** 開発中素材も含めたフルリソース設定 */
+/** @deprecated 開発中素材も含めたフルリソース設定 */
 export const DEVELOPING_FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {
   gltfConfigs: GLTF_CONFIGS,
   textureConfigs: [...TEXTURE_CONFIGS, ...DEVELOPING_TEXTURE_CONFIGS],
