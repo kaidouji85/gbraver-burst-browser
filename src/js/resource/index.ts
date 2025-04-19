@@ -1,5 +1,5 @@
 import { CanvasImageResource } from "./canvas-image";
-import { CubeTextureResource } from "./cube-texture";
+import { CubeTextureResource } from "./cube-texture/resource";
 import { GlTFResource } from "./gltf/resource";
 import { Path } from "./path/resource";
 import { ResourceRoot } from "./resource-root";
