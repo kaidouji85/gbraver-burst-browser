@@ -75,4 +75,4 @@ export const ShinBraverTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_BOW,
     path: "armdozer/shin-braver/bow.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

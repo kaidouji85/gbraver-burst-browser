@@ -71,4 +71,4 @@ export const WingDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.WING_DOZER_BOW,
     path: "armdozer/wing-dozer/bow.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

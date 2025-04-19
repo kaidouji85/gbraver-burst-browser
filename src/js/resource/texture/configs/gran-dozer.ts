@@ -55,4 +55,4 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/gran-dozer/burst-button-icon.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

@@ -1,14 +1,10 @@
-import { PathIds } from "../../path/ids";
-import { PathConfig } from "../../path/resource";
+import { TEXTURE_IDS } from "../ids";
+import { TextureConfig } from "../resource";
 
-/** シンヤ パス設定 */
-export const ShinyaPathConfigs: PathConfig[] = [
+/** シンヤのテクスチャ設定をあつめたもの */
+export const ShinyaTextureConfigs: TextureConfig[] = [
   {
-    id: PathIds.SHINYA_ICON,
-    path: (root) => `${root.get()}/pilot/shinya/player-select.webp`,
+    id: TEXTURE_IDS.SHINYA_CUTIN,
+    path: "pilot/shinya/skill-cutin.webp",
   },
-  {
-    id: PathIds.SHINYA_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/shinya/skill-cutin.webp`,
-  },
-];
+].map((t) => ({ ...t, type: "Shared" }));

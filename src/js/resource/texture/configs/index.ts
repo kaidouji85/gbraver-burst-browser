@@ -17,7 +17,7 @@ import { ResultTextureConfigs } from "./result";
 import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShotTextureConfigs } from "./shot";
-import { ShinyaTextureConfigs } from "./sinya";
+import { ShinyaTextureConfigs } from "./shinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";

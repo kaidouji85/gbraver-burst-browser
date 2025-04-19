@@ -7,4 +7,4 @@ export const YuuyaTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.YUUYA_CUTIN,
     path: "pilot/yuuya/skill-cutin.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

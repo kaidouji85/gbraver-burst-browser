@@ -7,4 +7,4 @@ export const DamageNumberTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.DAMAGE_NUMBER,
     path: "damage-indicator/damage-number.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

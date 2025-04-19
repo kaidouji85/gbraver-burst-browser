@@ -7,4 +7,4 @@ export const ShotTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_SHOT,
     path: "shot/lightning/lightning-shot.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

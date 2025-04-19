@@ -1,4 +1,3 @@
-import { ShinyaPathConfigs } from "../../texture/configs/shinya";
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
 import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
@@ -18,6 +17,7 @@ import { NPCCoursePathConfigs } from "./npc-course";
 import { PlayInLandscapePathConfigs } from "./play-in-landscape";
 import { RaitoPathConfigs } from "./raito";
 import { ShinBraverPathConfigs } from "./shin-braver";
+import { ShinyaPathConfigs } from "./shinya";
 import { TsubasaPathConfigs } from "./tsubasa";
 import { TurnIndicatorConfigs } from "./turn-indicator";
 import { UserConfigs } from "./user";

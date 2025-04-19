@@ -7,4 +7,4 @@ export const RaitoTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.RAITO_CUTIN,
     path: "pilot/raito/skill-cutin.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

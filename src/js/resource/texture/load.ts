@@ -18,11 +18,7 @@ export function loadTexture(
   return new Promise((resolve, reject) => {
     loader.load(
       `${resourceRoot.get()}/${config.path}`,
-      (texture) =>
-        resolve({
-          id: config.id,
-          texture,
-        }),
+      (texture) => resolve({ ...config, texture }),
       undefined,
       (error) => {
         reject(error);

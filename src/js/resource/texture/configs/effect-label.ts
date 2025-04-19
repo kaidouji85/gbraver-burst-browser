@@ -27,4 +27,4 @@ export const EffectLabelTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.INEFFECTIVE,
     path: "effect-label/ineffective.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));
