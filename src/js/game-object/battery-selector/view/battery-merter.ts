@@ -3,10 +3,11 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { BatterySelectorModel } from "../model";
+import { BatterySelectorModel } from "../model";
 import {
   batteryNumber,
   batteryNumberPosition,
@@ -45,9 +46,10 @@ export class BatteryMeter {
     });
     this.#group.add(this.#disk.getObject3D());
 
-    const disk4 =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_METER_4)
-        ?.texture ?? new THREE.Texture();
+    const disk4 = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTERY_METER_4,
+    ).texture;
     this.#disk4 = new HorizontalAnimationMesh({
       texture: disk4,
       width: 1024,
@@ -56,9 +58,10 @@ export class BatteryMeter {
     });
     this.#group.add(this.#disk4.getObject3D());
 
-    const disk8 =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_METER_8)
-        ?.texture ?? new THREE.Texture();
+    const disk8 = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTERY_METER_8,
+    ).texture;
     this.#disk8 = new HorizontalAnimationMesh({
       texture: disk8,
       width: 1024,
@@ -67,19 +70,19 @@ export class BatteryMeter {
     });
     this.#group.add(this.#disk8.getObject3D());
 
-    const disActiveNumber =
-      resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
-      )?.texture ?? new THREE.Texture();
+    const disActiveNumber = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
+    ).texture;
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
       (value: number) => batteryNumber(value, disActiveNumber),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
-    const activeNumber =
-      resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
-      )?.texture ?? new THREE.Texture();
+    const activeNumber = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
+    ).texture;
     this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
       batteryNumber(value, activeNumber),
     );

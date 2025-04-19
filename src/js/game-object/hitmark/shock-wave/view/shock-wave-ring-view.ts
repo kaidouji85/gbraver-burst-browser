@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 import { SPRITE_RENDER_ORDER } from "../../../../render/render-order/td-render-order";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { ShockWaveRingModel } from "../model/shock-wave-model";
+import { ShockWaveRingModel } from "../model/shock-wave-model";
 import { RING_Z_INDEX } from "./z-index";
 
 /** メッシュ幅 */
@@ -19,12 +20,10 @@ export class ShockWaveRingView {
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
     );
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
     const material = new THREE.MeshBasicMaterial({
       side: THREE.FrontSide,
       blending: THREE.AdditiveBlending,

@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
 import { ArmdozerIcon } from "./armdozer-icon";
 
@@ -31,9 +32,7 @@ export class SimpleArmdozerIcon implements ArmdozerIcon {
   constructor(options: Options) {
     const { resources, size, x, y, textureId } = options;
     this.#group = new THREE.Group();
-    const texture =
-      resources.textures.find((v) => v.id === textureId)?.texture ??
-      new THREE.Texture();
+    const { texture } = findTextureOrThrow(resources, textureId);
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,

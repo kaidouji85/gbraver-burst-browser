@@ -1,16 +1,17 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type {
+import {
   AnimationType,
   NeoLandozerCutInModel,
 } from "../model/neo-landozer-cutin-model";
-import type { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
+import { NeoLandozerCutInView } from "./neo-landozer-cutin-view";
 
 /** アニメーション枚数 */
 export const MAX_ANIMATION = 4;
@@ -28,24 +29,20 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
     this.#group.position.z = HUD_CUT_IN_Z;
-    const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
-    );
-    const cutInUp = cutInUpResource
-      ? cutInUpResource.texture
-      : new THREE.Texture();
+    const cutInUp = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
+    ).texture;
     this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
       height: HEIGHT,
     });
-    const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
-    );
-    const cutInDown = cutInDownResource
-      ? cutInDownResource.texture
-      : new THREE.Texture();
+    const cutInDown = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
+    ).texture;
     this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       maxAnimation: MAX_ANIMATION,

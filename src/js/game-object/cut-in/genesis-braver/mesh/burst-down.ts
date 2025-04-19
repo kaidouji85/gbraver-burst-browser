@@ -1,7 +1,6 @@
-import * as THREE from "three";
-
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 
 /** スプライト幅 */
@@ -21,10 +20,10 @@ export const MAX_ANIMATION = 4;
 export function genesisBraverCutInBurstDown(
   resources: Resources,
 ): HorizontalAnimationMesh {
-  const texture =
-    resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_DOWN,
-    )?.texture ?? new THREE.Texture();
+  const { texture } = findTextureOrThrow(
+    resources,
+    TEXTURE_IDS.GENESIS_BRAVER_CUTIN_BURST_DOWN,
+  );
   return new HorizontalAnimationMesh({
     texture,
     maxAnimation: MAX_ANIMATION,

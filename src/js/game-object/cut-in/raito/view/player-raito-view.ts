@@ -1,13 +1,14 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type { RaitoModel } from "../model/raito-model";
-import type { RaitoView } from "./raito-view";
+import { RaitoModel } from "../model/raito-model";
+import { RaitoView } from "./raito-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 550;
@@ -30,9 +31,10 @@ export class PlayerRaitoView implements RaitoView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const raito =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.RAITO_CUTIN)
-        ?.texture ?? new THREE.Texture();
+    const raito = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.RAITO_CUTIN,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: raito,
       maxAnimation: MAX_ANIMATION,

@@ -1,15 +1,17 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { BatteryEnhancementModel } from "../model/battery-enhancement-model";
-import type { BatteryEnhancementView } from "./battery-enhancement-view";
+import { BatteryEnhancementModel } from "../model/battery-enhancement-model";
+import { BatteryEnhancementView } from "./battery-enhancement-view";
+
 export const MESH_SIZE = 300;
 
 /**
@@ -19,12 +21,10 @@ export class PlayerBatteryEnhancementView implements BatteryEnhancementView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.BATTERY_ENHANCEMENT,
-    );
-    const playerTurn = playerTurnResource
-      ? playerTurnResource.texture
-      : new THREE.Texture();
+    const playerTurn = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTERY_ENHANCEMENT,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,

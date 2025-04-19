@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { toSilhouette } from "../../../canvas/to-silhouette";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
 import { CanvasDisposeTexture } from "../../../texture/canvas-dispose-texture";
 import { ArmdozerAnimation } from "./armdozer-animation";
@@ -74,9 +75,7 @@ export function createOutlineMesh(
   options: CreateOutlineMeshOptions,
 ): ArmdozerAnimation {
   const { resources, textureId, maxAnimation, offset } = options;
-  const texture =
-    resources.textures.find((v) => v.id === textureId)?.texture ??
-    new THREE.Texture();
+  const { texture } = findTextureOrThrow(resources, textureId);
   const silhouetteTexture = createOutlineSilhouetteTexture({
     ...options,
     texture,

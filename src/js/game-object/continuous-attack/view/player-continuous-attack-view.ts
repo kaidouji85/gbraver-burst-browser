@@ -1,15 +1,16 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { ContinuousAttackModel } from "../model/continuous-attack-model";
-import type { ContinuousAttackView } from "./continuous-attack-view";
+import { ContinuousAttackModel } from "../model/continuous-attack-model";
+import { ContinuousAttackView } from "./continuous-attack-view";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 300;
@@ -19,12 +20,10 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.CONTINUOUS_ATTACK,
-    );
-    const playerTurn = playerTurnResource
-      ? playerTurnResource.texture
-      : new THREE.Texture();
+    const playerTurn = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.CONTINUOUS_ATTACK,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,

@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { GameObjectAction } from "../../action/game-object-action";
 import { PushDetector } from "../../push-detector";
@@ -63,11 +64,10 @@ export class PredicatedDamageView {
 
     this.#group = new THREE.Group();
 
-    const texture =
-      resources.textures.find(
-        (t) => t.id === TEXTURE_IDS.PREDICATED_DAMAGE_NUMBER,
-      )?.texture ?? new THREE.Texture();
-
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.PREDICATED_DAMAGE_NUMBER,
+    );
     this.#numbers = R.times(
       () =>
         new HorizontalAnimationMesh({
