@@ -24,6 +24,7 @@ export default class ShoppingStreet implements Stage {
       : {
           id: "",
           object: new THREE.Group(),
+          type: "Shared",
         };
     this.#gltf.object.scale.set(100, 100, 100);
     this.#gltf.object.position.z = -50;
