@@ -2,6 +2,7 @@ import { Resources } from "..";
 
 /**
  * 読みこんだリソースをマージする
+ * rootPath、pathsは一度生成されたら変更されない想定なので、本関数ではマージしない
  * @params options マージオプション
  * @param options.resources マージ前のリソース
  * @param options.loaded 読みこまれたリソース
@@ -13,7 +14,8 @@ export function mergeResources(options: {
 }): Resources {
   const { resources, loaded } = options;
   return {
-    ...resources,
+    rootPath: resources.rootPath,
+    paths: resources.paths,
     gltfs: [...resources.gltfs, ...loaded.gltfs],
     textures: [...resources.textures, ...loaded.textures],
     cubeTextures: [...resources.cubeTextures, ...loaded.cubeTextures],
