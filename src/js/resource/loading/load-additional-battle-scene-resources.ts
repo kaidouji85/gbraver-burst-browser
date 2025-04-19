@@ -20,13 +20,13 @@ const getResourceTypes = (resources: Resources): ResourceType[] => {
 };
 
 /**
- * 追加読み込み、削除するアームドーザーのIDを取得する
+ * 追加読み込みするアームドーザーのIDを取得する
  * @param options オプション
  * @param options.resourceTypes リソース種類
  * @param options.players バトルに参加するプレイヤーの情報
- * @returns 取得結果
+ * @returns 追加読み込みするアームドーザーのID
  */
-const getArmdozerIdsForLoadingAndRemoval = (options: {
+const getAdditionalArmdozerIds = (options: {
   resourceTypes: ResourceType[];
   players: [Player, Player];
 }) => {
@@ -36,13 +36,10 @@ const getArmdozerIdsForLoadingAndRemoval = (options: {
     ...new Set(
       resourceTypes
         .filter((t) => t.type === "DynamicArmdozer")
-        .map((v) => v.id),
+        .map((v) => v.armdozerId),
     ),
   ];
-  const additionalArmdozerIds = playersArmdozerIds.filter(
-    (id) => !resourceArmdozerIds.includes(id),
-  );
-  return { additionalArmdozerIds };
+  return playersArmdozerIds.filter((id) => !resourceArmdozerIds.includes(id));
 };
 
 /**
@@ -58,12 +55,13 @@ export function loadAdditionalBattleSceneResources(options: {
 }): ResourceLoading {
   const { players, resources } = options;
   const resourceTypes = getResourceTypes(resources);
-  const { additionalArmdozerIds } = getArmdozerIdsForLoadingAndRemoval({
+  const additionalArmdozerIds = getAdditionalArmdozerIds({
     resourceTypes,
     players,
   });
   const shouldLoading = (t: ResourceType) =>
-    t.type === "DynamicArmdozer" && additionalArmdozerIds.includes(t.id);
+    t.type === "DynamicArmdozer" &&
+    additionalArmdozerIds.includes(t.armdozerId);
   return loadResources({
     resourceRoot: resources.rootPath,
     preLoadImages: [],

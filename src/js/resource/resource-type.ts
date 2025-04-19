@@ -20,5 +20,5 @@ export type SharedResource = {
 export type DynamicArmdozerResource = {
   type: "DynamicArmdozer";
   /** アームドーザーのID */
-  id: ArmdozerId;
+  armdozerId: ArmdozerId;
 };

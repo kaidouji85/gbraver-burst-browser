@@ -2,6 +2,8 @@ import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { loadAdditionalBattleSceneResources } from "../../resource/loading/load-additional-battle-scene-resources";
+import { mergeResources } from "../../resource/loading/merge-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
@@ -18,7 +20,7 @@ import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
  * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisode(
-  props: Readonly<GameProps>,
+  props: GameProps,
   episode: Episode,
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
@@ -40,6 +42,17 @@ export async function startEpisode(
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+
+  const additionalLoading = loadAdditionalBattleSceneResources({
+    ...props,
+    players: [npcBattle.player, npcBattle.enemy],
+  });
+  const additionalResources = await additionalLoading.resources;
+  props.resources = mergeResources({
+    resources: props.resources,
+    loaded: additionalResources,
+  });
+
   const battleScene = new BattleScene({
     ...props,
     playingBGM: episode.bgm,
