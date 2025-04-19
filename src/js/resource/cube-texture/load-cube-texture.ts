@@ -1,44 +1,7 @@
 import * as THREE from "three";
 
-import type { ResourceRoot } from "./resource-root";
-
-/** キューブテクスチャID */
-export type CuteTextureId = string;
-
-/** キューブテクスチャ設定 */
-export type CubeTextureConfig = {
-  id: CuteTextureId;
-  px: string;
-  nx: string;
-  py: string;
-  ny: string;
-  pz: string;
-  nz: string;
-};
-
-/** キューブテクスチャリソース */
-export type CubeTextureResource = {
-  id: CuteTextureId;
-  texture: THREE.CubeTexture;
-};
-
-/** キューブテクスチャIDをまとめたもの */
-export const CUBE_TEXTURE_IDS = {
-  BlueSky: "BlueSky",
-};
-
-/** キューブテクスチャ設定をまとめたもの */
-export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
-  {
-    id: CUBE_TEXTURE_IDS.BlueSky,
-    px: "sky-box/blue-sky/px.webp",
-    nx: "sky-box/blue-sky/nx.webp",
-    py: "sky-box/blue-sky/py.webp",
-    ny: "sky-box/blue-sky/ny.webp",
-    pz: "sky-box/blue-sky/pz.webp",
-    nz: "sky-box/blue-sky/nz.webp",
-  },
-];
+import type { ResourceRoot } from "../resource-root";
+import { CubeTextureConfig, CubeTextureResource } from "./resource";
 
 /**
  * キューブテクスチャを読み込み

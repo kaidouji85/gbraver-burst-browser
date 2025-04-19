@@ -3,8 +3,11 @@ import { Observable, Subject } from "rxjs";
 import type { Resources } from "..";
 import type { CanvasImageConfig, CanvasImageResource } from "../canvas-image";
 import { loadCanvasImage } from "../canvas-image";
-import type { CubeTextureConfig, CubeTextureResource } from "../cube-texture";
-import { loadCubeTexture } from "../cube-texture";
+import { loadCubeTexture } from "../cube-texture/load-cube-texture";
+import {
+  CubeTextureConfig,
+  CubeTextureResource,
+} from "../cube-texture/resource";
 import { loadGlTF } from "../gltf/load-gltf";
 import { GlTFConfig, GlTFResource } from "../gltf/resource";
 import { getAllPaths } from "../path/get-all-paths";
