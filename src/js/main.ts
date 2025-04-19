@@ -26,7 +26,6 @@ declare let GBRAVER_BURST_COGNITO_USER_POOL_ID: string;
 declare let GBRAVER_BURST_COGNITO_CLIENT_ID: string;
 declare let GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: string;
 declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
-declare let GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 
@@ -63,8 +62,6 @@ export async function main(): Promise<void> {
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
     canPlayEpisodeInDevelopment:
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT === "true",
-    shouldLoadDevelopingResource:
-      GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE === "true",
     canPlayDevelopingArmdozer:
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER === "true",
     canPlayDevelopingPilot: GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT === "true",

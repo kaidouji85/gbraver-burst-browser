@@ -40,8 +40,6 @@ export interface GameProps
   readonly isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   readonly canPlayEpisodeInDevelopment: boolean;
-  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  readonly shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
   readonly canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
