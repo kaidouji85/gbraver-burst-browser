@@ -10,7 +10,9 @@ import { switchLoading } from "./switch-scene/switch-loading";
  * @param props ゲームプロパティ
  * @returns 処理完了したら発火するPromise
  */
-export async function loadAdditionalSharedResources(props: GameProps): Promise<void> {
+export async function loadAdditionalSharedResources(
+  props: GameProps,
+): Promise<void> {
   await props.fader.fadeOut();
   const resourceLoading = loadSharedResources(props);
   const scene = new Loading(resourceLoading.loading);
