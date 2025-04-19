@@ -1,4 +1,4 @@
-import { CANVAS_IMAGE_CONFIGS } from "../canvas-image";
+import { CANVAS_IMAGE_CONFIGS } from "../canvas-image/configs";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture/configs";
 import { GLTF_CONFIGS } from "../gltf/configs";
 import { SOUND_CONFIGS } from "../sound/configs";

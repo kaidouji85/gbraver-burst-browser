@@ -2,7 +2,7 @@ import { StoryFn } from "@storybook/html";
 import * as THREE from "three";
 
 import { toSilhouette } from "../src/js/canvas/to-silhouette";
-import { CANVAS_IMAGE_IDS } from "../src/js/resource/canvas-image";
+import { CANVAS_IMAGE_IDS } from "../src/js/resource/canvas-image/ids";
 import { TEXTURE_IDS } from "../src/js/resource/texture/ids";
 import { domStub } from "./stub/dom-stub";
 
