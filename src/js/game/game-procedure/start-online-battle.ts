@@ -7,6 +7,7 @@ import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../../dom-scenes/match-card";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { BattleProgress } from "../../td-scenes/battle/battle-progress";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -56,7 +57,7 @@ function createBattleProgress(
  * @param caption 対戦カードのキャプション
  */
 export async function startOnlineBattle(
-  props: Readonly<GameProps>,
+  props: GameProps,
   battle: BattleSDK,
   caption: string,
 ): Promise<void> {
@@ -81,6 +82,10 @@ export async function startOnlineBattle(
   const battleProgress = createBattleProgress(props, battle);
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players: [battle.player, battle.enemy],
+  });
   const battleScene = new BattleScene({
     ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,

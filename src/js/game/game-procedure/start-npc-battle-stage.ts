@@ -5,6 +5,7 @@ import { createSeriousMatchEvent } from "../../custom-battle-events/serious-matc
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
@@ -23,7 +24,7 @@ import { switchStageTitle } from "./switch-scene/switch-stage-title";
  * @param level ステージレベル
  */
 export async function startNPCBattleStage(
-  props: Readonly<GameProps>,
+  props: GameProps,
   player: Player,
   stage: NPCBattleStage,
   level: number,
@@ -52,6 +53,10 @@ export async function startNPCBattleStage(
   };
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players: [npcBattle.player, npcBattle.enemy],
+  });
   const battleScene = new BattleScene({
     ...props,
     playingBGM: stage.bgm,
