@@ -1,3 +1,5 @@
+import { ArmdozerIds } from "gbraver-burst-core";
+
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
 
@@ -75,4 +77,8 @@ export const ShinBraverTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_BOW,
     path: "armdozer/shin-braver/bow.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.SHIN_BRAVER,
+}));
