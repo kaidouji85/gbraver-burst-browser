@@ -1,8 +1,9 @@
 import * as THREE from "three";
 
 import type { Resources } from "../../../resource";
-import type { GlTFResource } from "../../../resource/gltf";
-import { disposeGltfModel, GLTF_IDS } from "../../../resource/gltf";
+import { disposeGltfModel } from "../../../resource/gltf/dispose-gltf-model";
+import { GLTF_IDS } from "../../../resource/gltf/ids";
+import { GlTFResource } from "../../../resource/gltf/resource";
 import type { Stage } from "../stage";
 
 /** 商店街 */
