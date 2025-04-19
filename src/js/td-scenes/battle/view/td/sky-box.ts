@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
-import { CUBE_TEXTURE_IDS } from "../../../../resource/cube-texture";
+import { CUBE_TEXTURE_IDS } from "../../../../resource/cube-texture/ids";
 
 /**
  * スカイボックスを生成するヘルパー関数
