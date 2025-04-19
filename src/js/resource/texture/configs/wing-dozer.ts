@@ -1,5 +1,6 @@
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
+import { ArmdozerIds } from "gbraver-burst-core";
 
 /** ウィングドーザのテクスチャ設定をあつめたもの */
 export const WingDozerTextureConfigs: TextureConfig[] = [
@@ -71,4 +72,8 @@ export const WingDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.WING_DOZER_BOW,
     path: "armdozer/wing-dozer/bow.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.WING_DOZER,
+}));

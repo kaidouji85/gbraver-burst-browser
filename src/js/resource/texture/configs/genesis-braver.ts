@@ -1,5 +1,6 @@
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
+import { ArmdozerIds } from "gbraver-burst-core";
 
 /** ジェネシスブレイバーのテクスチャ設定をあつめたもの */
 export const GenesisBraverTextureConfigs: TextureConfig[] = [
@@ -67,4 +68,8 @@ export const GenesisBraverTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
     path: "armdozer/genesis-braver/burst-button-icon.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.GENESIS_BRAVER,
+}));

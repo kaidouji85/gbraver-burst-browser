@@ -1,5 +1,6 @@
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
+import { ArmdozerIds } from "gbraver-burst-core";
 
 /** グランドーザのテクスチャ設定をあつめたもの */
 export const GranDozerTextureConfigs: TextureConfig[] = [
@@ -55,4 +56,8 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/gran-dozer/burst-button-icon.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.GRAN_DOZER,
+}));

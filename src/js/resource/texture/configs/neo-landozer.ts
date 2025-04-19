@@ -1,5 +1,6 @@
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
+import { ArmdozerIds } from "gbraver-burst-core";
 
 /** ネオランドーザのテクスチャ設定をあつめたもの */
 export const NeoLandozerTextureConfigs: TextureConfig[] = [
@@ -67,4 +68,8 @@ export const NeoLandozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_BOW,
     path: "armdozer/neo-landozer/bow.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.NEO_LANDOZER,
+}));
