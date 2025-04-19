@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { PrivateMatchHostStart } from "../../game-actions/private-match-host-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
-import { loadFullResource } from "../load-full-resource";
+import { loadAdditionalSharedResources } from "../load-additional-shared-resources";
 
 /** オプション */
 type Options = {
@@ -22,8 +22,8 @@ type Options = {
 export async function onPrivateMatchHostStart(options: Options): Promise<void> {
   const { props } = options;
   props.domDialogBinder.hidden();
-  if (!props.isFullResourceLoaded) {
-    await loadFullResource(props);
+  if (!props.isSharedResourcesLoaded) {
+    await loadAdditionalSharedResources(props);
   }
 
   props.inProgress = {

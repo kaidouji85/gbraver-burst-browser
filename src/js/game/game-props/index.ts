@@ -100,6 +100,6 @@ export interface GameProps
 
   /** リソースルート */
   readonly resourceRoot: ResourceRoot;
-  /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
-  isFullResourceLoaded: boolean;
+  /** Sharedリソースを読み込んだか、trueで全リソースを読み込んだ */
+  isSharedResourcesLoaded: boolean;
 }
