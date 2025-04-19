@@ -46,10 +46,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ResultTextureConfigs,
   ...YuuyaTextureConfigs,
   ...PredicatedDamageTextureConfigs,
-];
-
-/** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   ...GranDozerTextureConfigs,
   ...ShotTextureConfigs,
 ];

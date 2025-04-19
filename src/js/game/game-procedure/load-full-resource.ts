@@ -1,9 +1,7 @@
 import { Loading } from "../../dom-scenes/loading";
-import {
-  developingFullResourceDifferentialLoad,
-  fullResourceDifferentialLoad,
-} from "../../resource/loading/full-resource-differential-load";
-import type { GameProps } from "../game-props";
+import { loadSharedResources } from "../../resource/loading/load-shared-resources";
+import { mergeResources } from "../../resource/loading/merge-resources";
+import { GameProps } from "../game-props";
 import { switchLoading } from "./switch-scene/switch-loading";
 
 /**
@@ -14,12 +12,11 @@ import { switchLoading } from "./switch-scene/switch-loading";
  */
 export async function loadFullResource(props: GameProps): Promise<void> {
   await props.fader.fadeOut();
-  const resourceLoading = props.shouldLoadDevelopingResource
-    ? developingFullResourceDifferentialLoad(props.resources)
-    : fullResourceDifferentialLoad(props.resources);
+  const resourceLoading = loadSharedResources(props);
   const scene = new Loading(resourceLoading.loading);
   switchLoading(props, scene);
   await props.fader.fadeIn();
-  props.resources = await resourceLoading.resources;
+  const loaded = await resourceLoading.resources;
+  props.resources = mergeResources({ resources: props.resources, loaded });
   props.isFullResourceLoaded = true;
 }
