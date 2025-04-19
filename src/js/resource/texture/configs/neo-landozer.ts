@@ -1,6 +1,7 @@
+import { ArmdozerIds } from "gbraver-burst-core";
+
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
-import { ArmdozerIds } from "gbraver-burst-core";
 
 /** ネオランドーザのテクスチャ設定をあつめたもの */
 export const NeoLandozerTextureConfigs: TextureConfig[] = [
