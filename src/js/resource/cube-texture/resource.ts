@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
 /** キューブテクスチャID */
-export type CuteTextureId = string;
+export type CubeTextureId = string;
 
 /** キューブテクスチャ設定 */
 export type CubeTextureConfig = {
-  id: CuteTextureId;
+  id: CubeTextureId;
   px: string;
   nx: string;
   py: string;
@@ -16,6 +16,6 @@ export type CubeTextureConfig = {
 
 /** キューブテクスチャリソース */
 export type CubeTextureResource = {
-  id: CuteTextureId;
+  id: CubeTextureId;
   texture: THREE.CubeTexture;
 };
