@@ -1,47 +1,5 @@
-import * as THREE from "three";
-
-import type { ResourceRoot } from "./resource-root";
-
-/** キャンバス用画像ID */
-export type CanvasImageId = string;
-
-/** キャンバス用画像設定 */
-export type CanvasImageConfig = {
-  id: CanvasImageId;
-  path: string;
-};
-
-/** キャンバス用画像リソース */
-export type CanvasImageResource = {
-  id: CanvasImageId;
-  image: HTMLImageElement;
-};
-
-/** キャンバス用画像IDリストをあつめたもの */
-export const CANVAS_IMAGE_IDS = {
-  BATTERY_BUTTON: "BATTERY_BUTTON",
-  BATTERY_PLUS: "BATTERY_PLUS",
-  BATTERY_MINUS: "BATTERY_MINUS",
-  BATTERY_METER: "BATTERY_METER",
-  BATTERY_NEEDLE: "BATTERY_NEEDLE",
-  BATTERY_LABEL_ATTACK: "BATTERY_LABEL_ATTACK",
-  BATTERY_LABEL_DEFENSE: "BATTERY_LABEL_DEFENSE",
-  TURN_INDICATOR: "TURN_INDICATOR",
-  BURST_BUTTON: "BURST_BUTTON",
-  BURST_BUTTON_LABEL: "BURST_BUTTON_LABEL",
-  PILOT_BUTTON: "PILOT_BUTTON",
-  PILOT_BUTTON_LABEL: "PILOT_BUTTON_LABEL",
-  BIG_BUTTON_DISABLED: "BIG_BUTTON_DISABLED",
-  SMALL_BUTTON_DISABLED: "SMALL_BUTTON_DISABLED",
-  HP_BAR: "HP_BAR",
-  HP_BAR_BACK: "HP_BAR_BACK",
-  BATTERY_GAUGE: "BATTERY_GAUGE",
-  BATTERY_GAUGE_BACK: "BATTERY_GAUGE_BACK",
-  TIME_SCALE_BUTTON: "TIME_SCALE_BUTTON",
-  TIME_SCALE_100: "TIME_SCALE_100",
-  TIME_SCALE_050: "TIME_SCALE_050",
-  TIME_SCALE_025: "TIME_SCALE_025",
-};
+import { CANVAS_IMAGE_IDS } from "./ids";
+import { CanvasImageConfig } from "./resource";
 
 /** キャンバス用画像設定をあつめたもの */
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
@@ -134,32 +92,3 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: "button/time-scale-025.webp",
   },
 ];
-
-/**
- * キャンバス用画像を読み込む
- *
- * @param resourceRoot リソースルート
- * @param config 読み込み設定
- * @returns 読み込み結果
- */
-export function loadCanvasImage(
-  resourceRoot: ResourceRoot,
-  config: CanvasImageConfig,
-): Promise<CanvasImageResource> {
-  return new Promise((resolve, reject) => {
-    const loader = new THREE.ImageLoader();
-    loader.load(
-      `${resourceRoot.get()}/${config.path}`,
-      (image: HTMLImageElement) => {
-        resolve({
-          id: config.id,
-          image: image,
-        });
-      },
-      undefined,
-      (error) => {
-        reject(error);
-      },
-    );
-  });
-}

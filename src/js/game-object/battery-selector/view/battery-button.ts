@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
 import { ResourcesContainer } from "../../../resource";
-import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { GameObjectAction } from "../../action/game-object-action";
