@@ -1,7 +1,7 @@
 import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
 import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
-import { loadFullResource } from "../load-full-resource";
+import { loadAdditionalSharedResources } from "../load-additional-shared-resources";
 import { startEpisode } from "../start-episode";
 
 /** オプション */
@@ -20,8 +20,8 @@ type Options = {
  */
 export async function onTutorialStart(options: Options): Promise<void> {
   const { props } = options;
-  if (!props.isFullResourceLoaded) {
-    await loadFullResource(props);
+  if (!props.isSharedResourcesLoaded) {
+    await loadAdditionalSharedResources(props);
   }
 
   const episode = batterySystemTutorial;

@@ -76,7 +76,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     abort,
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
-    isFullResourceLoaded: false,
+    isSharedResourcesLoaded: false,
     inProgress: {
       type: "None",
     },

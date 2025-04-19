@@ -67,4 +67,4 @@ export const NeoLandozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_BOW,
     path: "armdozer/neo-landozer/bow.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

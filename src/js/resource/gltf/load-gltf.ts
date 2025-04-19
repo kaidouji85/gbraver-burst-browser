@@ -23,11 +23,7 @@ export function loadGlTF(
   return new Promise((resolve, reject) => {
     const fullPath = `${resourceRoot.get()}/${config.path}`;
 
-    const onLoad = (gltf: GLTF) =>
-      resolve({
-        id: config.id,
-        object: gltf.scene,
-      });
+    const onLoad = (gltf: GLTF) => resolve({ ...config, object: gltf.scene });
 
     const onProgress = () => {
       //NOP

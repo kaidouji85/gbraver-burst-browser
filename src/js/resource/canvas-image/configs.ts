@@ -91,4 +91,4 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.TIME_SCALE_025,
     path: "button/time-scale-025.webp",
   },
-];
+].map((c) => ({ ...c, type: "Shared" }));

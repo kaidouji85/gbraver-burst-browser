@@ -23,4 +23,4 @@ export const BatterySelectorTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.BATTERY_METER_4,
     path: "battery-selector/meter-4.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

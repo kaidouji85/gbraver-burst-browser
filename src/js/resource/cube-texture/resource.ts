@@ -1,10 +1,12 @@
 import * as THREE from "three";
 
+import { ResourceType } from "../resource-type";
+
 /** キューブテクスチャID */
 export type CubeTextureId = string;
 
 /** キューブテクスチャ設定 */
-export type CubeTextureConfig = {
+export type CubeTextureConfig = ResourceType & {
   id: CubeTextureId;
   px: string;
   nx: string;
@@ -15,7 +17,7 @@ export type CubeTextureConfig = {
 };
 
 /** キューブテクスチャリソース */
-export type CubeTextureResource = {
+export type CubeTextureResource = ResourceType & {
   id: CubeTextureId;
   texture: THREE.CubeTexture;
 };

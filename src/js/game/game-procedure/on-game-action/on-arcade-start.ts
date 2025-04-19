@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { ArcadeStart } from "../../game-actions/arcade-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
-import { loadFullResource } from "../load-full-resource";
+import { loadAdditionalSharedResources } from "../load-additional-shared-resources";
 
 /** オプション */
 type Options = {
@@ -21,8 +21,8 @@ type Options = {
  */
 export async function onArcadeStart(options: Options): Promise<void> {
   const { props } = options;
-  if (!props.isFullResourceLoaded) {
-    await loadFullResource(props);
+  if (!props.isSharedResourcesLoaded) {
+    await loadAdditionalSharedResources(props);
   }
 
   props.inProgress = {

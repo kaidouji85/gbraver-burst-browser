@@ -9,7 +9,7 @@ import {
 import { createGameLoop } from "../../src/js/game-loop/game-loop";
 import { GameLoopContainer } from "../../src/js/game-loop/game-loop-container";
 import { ResourcesContainer } from "../../src/js/resource";
-import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
@@ -46,7 +46,7 @@ export const domStub =
   () => {
     const root = document.createElement("div");
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = developingFullResourceLoading(resourceRoot);
+    const resourceLoading = loadFullResources(resourceRoot);
     resourceLoading.resources.then((resources) => {
       const component = creator({
         resources,

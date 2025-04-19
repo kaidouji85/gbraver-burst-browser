@@ -1,12 +1,13 @@
 import { Howl } from "howler";
 
 import { ResourceRoot } from "../resource-root";
+import { ResourceType } from "../resource-type";
 
 /** 音リソースのユニークID */
 export type SoundId = string;
 
 /** 音リソースの設定 */
-export type SoundConfig = {
+export type SoundConfig = ResourceType & {
   /** 音ID*/
   readonly id: SoundId;
   /** ボリュームスケール */
@@ -21,7 +22,7 @@ export type SoundConfig = {
 };
 
 /**音リソース */
-export type SoundResource = {
+export type SoundResource = ResourceType & {
   /** 音ID */
   readonly id: SoundId;
   /** 音声データ */

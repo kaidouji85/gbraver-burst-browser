@@ -1,10 +1,12 @@
 import * as THREE from "three";
 
+import { ResourceType } from "../resource-type";
+
 /** glTFリソースID */
 export type GlTFId = string;
 
 /** glTFリソース設定 */
-export type GlTFConfig = {
+export type GlTFConfig = ResourceType & {
   /** ID */
   id: GlTFId;
   /** glTFファイルのパス */
@@ -12,7 +14,7 @@ export type GlTFConfig = {
 };
 
 /** glTFリソース */
-export type GlTFResource = {
+export type GlTFResource = ResourceType & {
   /** ID */
   id: GlTFId;
   /** glTFモデル */

@@ -15,7 +15,7 @@ import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-
 import { Renderer } from "../../src/js/render";
 import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
 import { ResourcesContainer } from "../../src/js/resource";
-import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import {
   createSafeAreaInset,
   SafeAreaInset,
@@ -95,7 +95,7 @@ export class HUDGameObjectStub {
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = developingFullResourceLoading(resourceRoot);
+    const resourceLoading = loadFullResources(resourceRoot);
     const resources = await resourceLoading.resources;
 
     const object3Ds = this.#creator({

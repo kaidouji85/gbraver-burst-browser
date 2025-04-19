@@ -67,4 +67,4 @@ export const GenesisBraverTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GENESIS_BRAVER_BURST_ICON,
     path: "armdozer/genesis-braver/burst-button-icon.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

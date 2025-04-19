@@ -11,4 +11,4 @@ export const TurnTexureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.ENEMY_TURN,
     path: "turn/enemy-turn.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

@@ -1,5 +1,5 @@
 import { invisibleFirstView } from "../../first-view/first-view-visible";
-import { titleResourceLoading } from "../../resource/loading/title-resource-loading";
+import { loadBootResources } from "../../resource/loading/load-boot-resources";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
@@ -22,7 +22,7 @@ export async function initialize(props: GameProps): Promise<void> {
     props.serviceWorker = await loadServiceWorker();
   }
 
-  const resourceLoading = titleResourceLoading(props.resourceRoot);
+  const resourceLoading = loadBootResources(props);
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   applyPerformanceStatsVisibility(props, config.performanceStatsVisibility);
