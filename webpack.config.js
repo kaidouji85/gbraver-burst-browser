@@ -147,9 +147,6 @@ module.exports = async () => ({
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: JSON.stringify(
         process.env.CAN_PLAY_EPISODE_IN_DEVELOPMENT,
       ),
-      GBRAVER_BURST_SHOULD_LOAD_DEVELOPING_RESOURCE: JSON.stringify(
-        process.env.SHOULD_LOAD_DEVELOPING_RESOURCE,
-      ),
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: JSON.stringify(
         process.env.CAN_PLAY_DEVELOPING_ARMDOZER,
       ),
