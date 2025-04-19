@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import type { ResourceRoot } from "../resource-root";
+import { ResourceRoot } from "../resource-root";
 import { CubeTextureConfig, CubeTextureResource } from "./resource";
 
 /**
@@ -27,10 +27,7 @@ export function loadCubeTexture(
       ],
       (texture: THREE.CubeTexture) => {
         texture.colorSpace = THREE.LinearSRGBColorSpace;
-        resolve({
-          id: config.id,
-          texture: texture,
-        });
+        resolve({ ...config, texture });
       },
       () => {
         // NOP

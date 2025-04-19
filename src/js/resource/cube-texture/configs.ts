@@ -12,4 +12,4 @@ export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
     pz: "sky-box/blue-sky/pz.webp",
     nz: "sky-box/blue-sky/nz.webp",
   },
-];
+].map((c) => ({ ...c, type: "Shared" }));
