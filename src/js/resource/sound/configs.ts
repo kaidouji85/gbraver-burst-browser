@@ -4,13 +4,13 @@ import { SoundConfig } from "./resource";
 /** 音設定をあつめたもの */
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
-    type: "Shared",
+    type: "Boot",
     id: SOUND_IDS.PUSH_BUTTON,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/push-button.mp3`,
     volumeScale: 1,
   },
   {
-    type: "Shared",
+    type: "Boot",
     id: SOUND_IDS.CHANGE_VALUE,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/change-value.mp3`,
     volumeScale: 0.4,
@@ -66,7 +66,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     volumeScale: 0.2,
   },
   {
-    type: "Shared",
+    type: "Boot",
     id: SOUND_IDS.TITLE_BGM,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
     volumeScale: 0.2,

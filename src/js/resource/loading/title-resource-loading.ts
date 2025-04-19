@@ -4,7 +4,7 @@ import { SOUND_IDS } from "../sound/ids";
 import type { ResourceLoading } from "./resource-loading";
 import { resourceLoading } from "./resource-loading";
 
-/** タイトルで利用する音声 */
+/** @deprecated タイトルで利用する音声 */
 const TITLE_SOUND_IDS = [
   SOUND_IDS.PUSH_BUTTON,
   SOUND_IDS.CHANGE_VALUE,
@@ -12,6 +12,7 @@ const TITLE_SOUND_IDS = [
 ];
 
 /**
+ * @deprecated
  * タイトルで利用するリソースを読み込む
  *
  * @param resourceRoot リソースルート
