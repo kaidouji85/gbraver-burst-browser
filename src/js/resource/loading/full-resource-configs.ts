@@ -6,7 +6,7 @@ import {
   DEVELOPING_TEXTURE_CONFIGS,
   TEXTURE_CONFIGS,
 } from "../texture/configs";
-import { LoadingTargetConfigs } from "./resource-loading";
+import { LoadingTargetConfigs } from "./load-resources";
 
 /** @deprecated フルリソースの設定 */
 export const FULL_RESOURCE_CONFIGS: LoadingTargetConfigs = {

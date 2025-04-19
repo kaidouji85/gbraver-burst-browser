@@ -168,9 +168,7 @@ export type ResourceLoading = {
  * @param params 読み込みパラメータ
  * @returns リソース読み込みオブジェクト
  */
-export function resourceLoading(
-  params: ResourceLoadingParams,
-): ResourceLoading {
+export function loadResources(params: ResourceLoadingParams): ResourceLoading {
   const loadings = startLoading(params);
   return {
     loading: createLoadingActions(loadings),

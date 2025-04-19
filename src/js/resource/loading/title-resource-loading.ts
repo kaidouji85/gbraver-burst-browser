@@ -1,8 +1,8 @@
 import type { ResourceRoot } from "../resource-root";
 import { SOUND_CONFIGS } from "../sound/configs";
 import { SOUND_IDS } from "../sound/ids";
-import type { ResourceLoading } from "./resource-loading";
-import { resourceLoading } from "./resource-loading";
+import type { ResourceLoading } from "./load-resources";
+import { loadResources } from "./load-resources";
 
 /** @deprecated タイトルで利用する音声 */
 const TITLE_SOUND_IDS = [
@@ -24,7 +24,7 @@ export function titleResourceLoading(
   const soundConfigs = SOUND_CONFIGS.filter((v) =>
     TITLE_SOUND_IDS.includes(v.id),
   );
-  return resourceLoading({
+  return loadResources({
     resourceRoot,
     preLoadImages: [],
     gltfConfigs: [],

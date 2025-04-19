@@ -1,5 +1,5 @@
 import type { Resources } from "..";
-import { LoadingTargetConfigs } from "./resource-loading";
+import { LoadingTargetConfigs } from "./load-resources";
 
 /**
  * @deprecated

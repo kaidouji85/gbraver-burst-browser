@@ -4,7 +4,7 @@ import {
   DEVELOPING_FULL_RESOURCE_CONFIGS,
   FULL_RESOURCE_CONFIGS,
 } from "./full-resource-configs";
-import { ResourceLoading, resourceLoading } from "./resource-loading";
+import { ResourceLoading, loadResources } from "./load-resources";
 
 /**
  * @deprecated
@@ -15,7 +15,7 @@ import { ResourceLoading, resourceLoading } from "./resource-loading";
 export function fullResourceLoading(
   resourceRoot: ResourceRoot,
 ): ResourceLoading {
-  return resourceLoading({
+  return loadResources({
     ...FULL_RESOURCE_CONFIGS,
     resourceRoot,
     preLoadImages: PreLoadPathConfigs,
@@ -31,7 +31,7 @@ export function fullResourceLoading(
 export function developingFullResourceLoading(
   resourceRoot: ResourceRoot,
 ): ResourceLoading {
-  return resourceLoading({
+  return loadResources({
     ...DEVELOPING_FULL_RESOURCE_CONFIGS,
     resourceRoot,
     preLoadImages: PreLoadPathConfigs,

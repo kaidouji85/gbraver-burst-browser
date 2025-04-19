@@ -9,8 +9,8 @@ import { mergeResources } from "./merge-resources";
 import {
   LoadingTargetConfigs,
   ResourceLoading,
-  resourceLoading,
-} from "./resource-loading";
+  loadResources,
+} from "./load-resources";
 
 /**
  * @deprecated
@@ -28,7 +28,7 @@ function resourceDifferentialLoad(
     configs,
     resources,
   );
-  const loading = resourceLoading({
+  const loading = loadResources({
     ...differentialConfigs,
     resourceRoot: resources.rootPath,
     preLoadImages: PreLoadPathConfigs,
