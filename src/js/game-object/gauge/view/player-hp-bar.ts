@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { CanvasMesh } from "../../../mesh/canvas-mesh";
 import { SPRITE_RENDER_ORDER } from "../../../render/render-order/td-render-order";
 import type { Resources } from "../../../resource";
-import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { animatedTexture } from "../../../texture/animation/texture-animation";
 
 /** HPバー キャンバス横幅 */

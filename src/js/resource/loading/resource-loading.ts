@@ -1,8 +1,11 @@
 import { Observable, Subject } from "rxjs";
 
 import type { Resources } from "..";
-import type { CanvasImageConfig, CanvasImageResource } from "../canvas-image";
-import { loadCanvasImage } from "../canvas-image";
+import { loadCanvasImage } from "../canvas-image/load-canvas-image";
+import {
+  CanvasImageConfig,
+  CanvasImageResource,
+} from "../canvas-image/resource";
 import { loadCubeTexture } from "../cube-texture/load-cube-texture";
 import {
   CubeTextureConfig,
