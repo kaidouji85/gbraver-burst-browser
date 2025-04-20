@@ -5,7 +5,7 @@ import { ArmdozerId } from "gbraver-burst-core";
  * @param options オプション
  * @param options.playerArmdozerIds プレイヤーステートに存在するアームドーザのID
  * @param options.resourceArmdozerIds リソース管理オブジェクトに存在するアームドーザのID
- * @returns 追加読み込みするアームドーザーのID
+ * @returns 削除するアームドーザーのID
  */
 export const getDeletionArmdozerIds = (options: {
   playerArmdozerIds: ArmdozerId[];
