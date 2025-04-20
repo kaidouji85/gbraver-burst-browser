@@ -22,7 +22,7 @@ import { getResourceTypes } from "./get-resource-types";
  * @returns リソース読み込みオブジェクト
  */
 export async function updateBattleSceneResources(options: {
-  resources: Resources;
+  resources: Readonly<Resources>;
   players: [Player, Player];
 }): Promise<Resources> {
   const { players, resources } = options;
