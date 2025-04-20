@@ -16,7 +16,7 @@ import { TEXTURE_CONFIGS } from "../texture/configs";
  * @param options.additionalArmdozerIds 追加読み込みするアームドーザーのID
  * @returns 追加読み込みしたリソース
  */
-export const loadAdditionalResources = async (options: {
+export const loadAdditionalResources = (options: {
   resources: Readonly<Resources>;
   additionalArmdozerIds: Readonly<ArmdozerId[]>;
 }): Promise<Resources> => {
@@ -33,5 +33,5 @@ export const loadAdditionalResources = async (options: {
     canvasImageConfigs: CANVAS_IMAGE_CONFIGS.filter(shouldLoading),
     soundConfigs: SOUND_CONFIGS.filter(shouldLoading),
   });
-  return await additionalLoading.resources;
+  return additionalLoading.resources;
 };
