@@ -21,17 +21,17 @@ export const loadAdditionalResources = (options: {
   additionalArmdozerIds: Readonly<ArmdozerId[]>;
 }): Promise<Resources> => {
   const { resources, additionalArmdozerIds } = options;
-  const shouldLoading = (t: ResourceType) =>
+  const shouldLoad = (t: ResourceType) =>
     t.type === "DynamicArmdozer" &&
     additionalArmdozerIds.includes(t.armdozerId);
   const additionalLoading = loadResources({
     resourceRoot: resources.rootPath,
     preLoadImages: [],
-    gltfConfigs: GLTF_CONFIGS.filter(shouldLoading),
-    textureConfigs: TEXTURE_CONFIGS.filter(shouldLoading),
-    cubeTextureConfigs: CUBE_TEXTURE_CONFIGS.filter(shouldLoading),
-    canvasImageConfigs: CANVAS_IMAGE_CONFIGS.filter(shouldLoading),
-    soundConfigs: SOUND_CONFIGS.filter(shouldLoading),
+    gltfConfigs: GLTF_CONFIGS.filter(shouldLoad),
+    textureConfigs: TEXTURE_CONFIGS.filter(shouldLoad),
+    cubeTextureConfigs: CUBE_TEXTURE_CONFIGS.filter(shouldLoad),
+    canvasImageConfigs: CANVAS_IMAGE_CONFIGS.filter(shouldLoad),
+    soundConfigs: SOUND_CONFIGS.filter(shouldLoad),
   });
   return additionalLoading.resources;
 };
