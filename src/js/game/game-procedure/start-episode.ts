@@ -3,7 +3,6 @@ import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
-import { mergeResources } from "../../resource/loading/merge-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";

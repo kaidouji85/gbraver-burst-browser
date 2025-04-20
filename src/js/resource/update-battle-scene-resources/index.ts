@@ -10,6 +10,8 @@ import { ResourceType } from "../resource-type";
 import { SOUND_CONFIGS } from "../sound/configs";
 import { TEXTURE_CONFIGS } from "../texture/configs";
 import { getAdditionalArmdozerIds } from "./get-additional-armdozer-ids";
+import { getPlayerArmdozerIds } from "./get-player-armdozer-ids";
+import { getResourceArmdozerIds } from "./get-resource-armdozer-ids";
 import { getResourceTypes } from "./get-resource-types";
 
 /**
@@ -25,9 +27,11 @@ export async function updateBattleSceneResources(options: {
 }): Promise<Resources> {
   const { players, resources } = options;
   const resourceTypes = getResourceTypes(resources);
+  const playerArmdozerIds = getPlayerArmdozerIds(players);
+  const resourceArmdozerIds = getResourceArmdozerIds(resourceTypes);
   const additionalArmdozerIds = getAdditionalArmdozerIds({
-    resourceTypes,
-    players,
+    playerArmdozerIds,
+    resourceArmdozerIds,
   });
   const shouldLoading = (t: ResourceType) =>
     t.type === "DynamicArmdozer" &&
