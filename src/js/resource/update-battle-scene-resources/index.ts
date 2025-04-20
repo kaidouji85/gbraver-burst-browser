@@ -2,7 +2,9 @@ import { Player } from "gbraver-burst-core";
 
 import { Resources } from "../index";
 import { mergeResources } from "../loading/merge-resources";
+import { deleteUnusedResources } from "./delete-unused-resources";
 import { getAdditionalArmdozerIds } from "./get-additional-armdozer-ids";
+import { getDeletionArmdozerIds } from "./get-deletion-armdozer-ids";
 import { getPlayerArmdozerIds } from "./get-player-armdozer-ids";
 import { getResourceArmdozerIds } from "./get-resource-armdozer-ids";
 import { getResourceTypes } from "./get-resource-types";
@@ -23,13 +25,27 @@ export async function updateBattleSceneResources(options: {
   const resourceTypes = getResourceTypes(resources);
   const playerArmdozerIds = getPlayerArmdozerIds(players);
   const resourceArmdozerIds = getResourceArmdozerIds(resourceTypes);
+
+  const deletionArmdozerIds = getDeletionArmdozerIds({
+    playerArmdozerIds,
+    resourceArmdozerIds,
+  });
+  const resourcesAfterDeletion = deleteUnusedResources({
+    resources,
+    deletionArmdozerIds,
+  });
+
   const additionalArmdozerIds = getAdditionalArmdozerIds({
     playerArmdozerIds,
     resourceArmdozerIds,
   });
-  const additonalResources = await loadAdditionalResources({
+  const additionalResources = await loadAdditionalResources({
     resources,
     additionalArmdozerIds,
   });
-  return mergeResources({ resources, loaded: additonalResources });
+
+  return mergeResources({
+    resources: resourcesAfterDeletion,
+    loaded: additionalResources,
+  });
 }
