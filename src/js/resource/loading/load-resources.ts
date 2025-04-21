@@ -1,4 +1,4 @@
-import { Observable, Subject } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 
 import { Resources } from "..";
 import { loadCanvasImage } from "../canvas-image/load-canvas-image";
@@ -100,7 +100,7 @@ function startLoading(params: LoadingStartParams): LoadingPromises {
 function createLoadingActions(
   loadings: LoadingPromises,
 ): Observable<LoadingActions> {
-  const loadingActions = new Subject<LoadingActions>();
+  const loadingActions = new ReplaySubject<LoadingActions>(1);
   const allLoadings = [
     ...loadings.gltfLoadings,
     ...loadings.textureLoadings,
