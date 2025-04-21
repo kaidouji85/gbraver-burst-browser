@@ -11,7 +11,8 @@ export type Idle = {
 /** ロード中 */
 export type Loading = {
   type: "Loading";
-  loading: ResourceLoading;
+  /** Sharedリソースの読み込みオブジェクト */
+  resourceLoading: ResourceLoading;
 };
 
 /** ロード完了 */

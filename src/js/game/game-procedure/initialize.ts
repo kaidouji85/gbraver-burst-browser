@@ -8,6 +8,7 @@ import { applyPerformanceStatsVisibility } from "./apply-performance-stats-visib
 import { applySoundVolume } from "./apply-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { startTitle } from "./start-title";
+import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 
 /**
  * ゲームの初期化
@@ -36,4 +37,8 @@ export async function initialize(props: GameProps): Promise<void> {
   invisibleFirstView();
   await props.fader.fadeIn();
   playTitleBGM(props);
+  props.sharedResourceState = {
+    type: "Loading",
+    resourceLoading: loadSharedResources(props),
+  };
 }
