@@ -21,6 +21,7 @@ import { GBraverBurstBrowserConfigRepository } from "../config/repository/reposi
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
+import { SharedResourceState } from "../shared-resource-state";
 import { GameActionManageContainer } from "./game-action-manage-container";
 
 /**
@@ -100,4 +101,6 @@ export interface GameProps
   readonly resourceRoot: ResourceRoot;
   /** @deprecated Sharedリソースを読み込んだか、trueで全リソースを読み込んだ */
   isSharedResourcesLoaded: boolean;
+  /** Sharedリソースのステート */
+  sharedResourceState: SharedResourceState;
 }

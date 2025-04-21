@@ -1,7 +1,7 @@
 import { ResourceLoading } from "../resource/loading/load-resources";
 
 /** Sharedリソースの状態 */
-export type ResourceStatus = Idle | Loading | Complete;
+export type SharedResourceState = Idle | Loading | Complete;
 
 /** アイドル */
 export type Idle = {
