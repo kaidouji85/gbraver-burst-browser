@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { ArcadeStart } from "../../game-actions/arcade-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
-import { loadAdditionalSharedResources } from "../load-additional-shared-resources";
+import { waitUntilSharedResourcesLoading } from "../waitUntilSharedResourcesLoading";
 
 /** オプション */
 type Options = {
@@ -21,9 +21,7 @@ type Options = {
  */
 export async function onArcadeStart(options: Options): Promise<void> {
   const { props } = options;
-  if (!props.isSharedResourcesLoaded) {
-    await loadAdditionalSharedResources(props);
-  }
+  await waitUntilSharedResourcesLoading(props);
 
   props.inProgress = {
     type: "NPCBattle",

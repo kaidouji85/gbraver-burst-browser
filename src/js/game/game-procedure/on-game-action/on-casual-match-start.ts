@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { CasualMatchStart } from "../../game-actions/casual-match-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
-import { loadAdditionalSharedResources } from "../load-additional-shared-resources";
+import { waitUntilSharedResourcesLoading } from "../waitUntilSharedResourcesLoading";
 
 /** オプション */
 type Options = {
@@ -22,9 +22,7 @@ type Options = {
 export async function onCasualMatchStart(options: Options): Promise<void> {
   const { props } = options;
   props.domDialogBinder.hidden();
-  if (!props.isSharedResourcesLoaded) {
-    await loadAdditionalSharedResources(props);
-  }
+  await waitUntilSharedResourcesLoading(props);
 
   props.inProgress = {
     type: "CasualMatch",
