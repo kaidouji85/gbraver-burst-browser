@@ -1,5 +1,6 @@
 import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { loadBootResources } from "../../resource/loading/load-boot-resources";
+import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
@@ -8,7 +9,6 @@ import { applyPerformanceStatsVisibility } from "./apply-performance-stats-visib
 import { applySoundVolume } from "./apply-sound-volume";
 import { playTitleBGM } from "./play-title-bgm";
 import { startTitle } from "./start-title";
-import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 
 /**
  * ゲームの初期化
