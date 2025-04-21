@@ -98,6 +98,6 @@ export interface GameProps
 
   /** リソースルート */
   readonly resourceRoot: ResourceRoot;
-  /** Sharedリソースを読み込んだか、trueで全リソースを読み込んだ */
+  /** @deprecated Sharedリソースを読み込んだか、trueで全リソースを読み込んだ */
   isSharedResourcesLoaded: boolean;
 }
