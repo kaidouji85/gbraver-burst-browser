@@ -11,7 +11,7 @@ import { switchLoading } from "./switch-scene/switch-loading";
  * @param props ゲームプロパティ
  * @returns 処理完了したら発火するPromise
  */
-export async function waitUntilSharedResourcesLoading(props: GameProps) {
+export async function waitUntilSharedResourcesLoaded(props: GameProps) {
   if (props.sharedResourceState.type !== "Loading") {
     return;
   }

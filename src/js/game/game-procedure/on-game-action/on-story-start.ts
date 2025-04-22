@@ -1,7 +1,7 @@
 import { StoryStart } from "../../game-actions/story-start";
 import { GameProps } from "../../game-props";
 import { startEpisodeSelector } from "../start-episode-selector";
-import { waitUntilSharedResourcesLoading } from "../wait-until-shared-resources-loading";
+import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 
 /** オプション */
 type Options = {
@@ -19,7 +19,7 @@ type Options = {
  */
 export async function onStoryStart(options: Options): Promise<void> {
   const { props } = options;
-  await waitUntilSharedResourcesLoading(props);
+  await waitUntilSharedResourcesLoaded(props);
 
   await startEpisodeSelector(props);
   props.inProgress = {

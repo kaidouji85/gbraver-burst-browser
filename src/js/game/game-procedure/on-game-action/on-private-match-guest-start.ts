@@ -3,7 +3,7 @@ import { waitTime } from "../../../wait/wait-time";
 import { PrivateMatchGuestStart } from "../../game-actions/private-match-guest-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
-import { waitUntilSharedResourcesLoading } from "../wait-until-shared-resources-loading";
+import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 
 /** オプション */
 type Options = {
@@ -24,7 +24,7 @@ export async function onPrivateMatchGuestStart(
 ): Promise<void> {
   const { props } = options;
   props.domDialogBinder.hidden();
-  await waitUntilSharedResourcesLoading(props);
+  await waitUntilSharedResourcesLoaded(props);
 
   props.inProgress = {
     type: "PrivateMatchGuest",

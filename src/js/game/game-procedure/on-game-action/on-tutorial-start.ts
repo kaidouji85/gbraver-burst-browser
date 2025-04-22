@@ -2,7 +2,7 @@ import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
 import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
 import { startEpisode } from "../start-episode";
-import { waitUntilSharedResourcesLoading } from "../wait-until-shared-resources-loading";
+import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 
 /** オプション */
 type Options = {
@@ -20,7 +20,7 @@ type Options = {
  */
 export async function onTutorialStart(options: Options): Promise<void> {
   const { props } = options;
-  await waitUntilSharedResourcesLoading(props);
+  await waitUntilSharedResourcesLoaded(props);
 
   const episode = batterySystemTutorial;
   props.inProgress = {
