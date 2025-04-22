@@ -4,8 +4,10 @@ import { GameProps } from "../game-props";
 import { switchLoading } from "./switch-scene/switch-loading";
 
 /**
- * Sharedリソースの読み込みが完了するまで待機する
- * 本関数ではフェードアウトを行い、props.sharedResourceStateを更新する
+ * Sharedリソースの読み込みが完了するまで待機する。
+ * リソースが読み込まれていない場合はローディング画面を表示して待機し、
+ * リソースが読み込まれている場合は何もしない。
+ * 本関数ではフェードアウトを行い、props.sharedResourceStateを更新する。
  * @param props ゲームプロパティ
  * @returns 処理完了したら発火するPromise
  */

@@ -2,7 +2,7 @@ import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
 import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
 import { startEpisode } from "../start-episode";
-import { waitUntilSharedResourcesLoading } from "../waitUntilSharedResourcesLoading";
+import { waitUntilSharedResourcesLoading } from "../wait-until-shared-resources-loading";
 
 /** オプション */
 type Options = {

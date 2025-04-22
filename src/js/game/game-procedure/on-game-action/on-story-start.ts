@@ -1,7 +1,7 @@
 import { StoryStart } from "../../game-actions/story-start";
 import { GameProps } from "../../game-props";
 import { startEpisodeSelector } from "../start-episode-selector";
-import { waitUntilSharedResourcesLoading } from "../waitUntilSharedResourcesLoading";
+import { waitUntilSharedResourcesLoading } from "../wait-until-shared-resources-loading";
 
 /** オプション */
 type Options = {
