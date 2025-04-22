@@ -99,8 +99,6 @@ export interface GameProps
 
   /** リソースルート */
   readonly resourceRoot: ResourceRoot;
-  /** @deprecated Sharedリソースを読み込んだか、trueで全リソースを読み込んだ */
-  isSharedResourcesLoaded: boolean;
   /** Sharedリソースのステート */
   sharedResourceState: SharedResourceState;
 }
