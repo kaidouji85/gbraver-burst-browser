@@ -1,3 +1,5 @@
+import { PilotIds } from "gbraver-burst-core";
+
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
 
@@ -7,4 +9,4 @@ export const GaiTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GAI_CUTIN,
     path: "pilot/gai/skill-cutin.webp",
   },
-].map((t) => ({ ...t, type: "Shared" }));
+].map((t) => ({ ...t, type: "DynamicPilot", pilotId: PilotIds.GAI }));
