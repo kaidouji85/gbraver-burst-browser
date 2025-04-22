@@ -1,5 +1,6 @@
 import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { loadBootResources } from "../../resource/loading/load-boot-resources";
+import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
@@ -36,4 +37,8 @@ export async function initialize(props: GameProps): Promise<void> {
   invisibleFirstView();
   await props.fader.fadeIn();
   playTitleBGM(props);
+  props.sharedResourceState = {
+    type: "Loading",
+    resourceLoading: loadSharedResources(props),
+  };
 }
