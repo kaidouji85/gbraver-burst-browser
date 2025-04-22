@@ -1,4 +1,4 @@
-import { ArmdozerId } from "gbraver-burst-core";
+import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 import { CANVAS_IMAGE_CONFIGS } from "../canvas-image/configs";
 import { CUBE_TEXTURE_CONFIGS } from "../cube-texture/configs";
@@ -12,18 +12,21 @@ import { TEXTURE_CONFIGS } from "../texture/configs";
 /**
  * リソースを追加読み込みする
  * @param options オプション
- * @param options.resources リソース管理オブジェクト
- * @param options.additionalArmdozerIds 追加読み込みするアームドーザーのID
  * @returns 追加読み込みしたリソース
  */
 export const loadAdditionalResources = (options: {
+  /** リソース管理オブジェクト*/
   resources: Readonly<Resources>;
+  /** 追加読み込みするアームドーザーのID */
   additionalArmdozerIds: Readonly<ArmdozerId[]>;
+  /** 追加読み込みするパイロットのID */
+  additionalPilotIds: Readonly<PilotId[]>;
 }): Promise<Resources> => {
-  const { resources, additionalArmdozerIds } = options;
+  const { resources, additionalArmdozerIds, additionalPilotIds } = options;
   const shouldLoad = (t: ResourceType) =>
-    t.type === "DynamicArmdozer" &&
-    additionalArmdozerIds.includes(t.armdozerId);
+    (t.type === "DynamicArmdozer" &&
+      additionalArmdozerIds.includes(t.armdozerId)) ||
+    (t.type === "DynamicPilot" && additionalPilotIds.includes(t.pilotId));
   const additionalLoading = loadResources({
     resourceRoot: resources.rootPath,
     preLoadImages: [],

@@ -1,4 +1,4 @@
-import { ArmdozerId } from "gbraver-burst-core";
+import { ArmdozerId, PilotId } from "gbraver-burst-core";
 import * as R from "ramda";
 
 import { disposeGltfModel } from "../gltf/dispose-gltf-model";
@@ -8,17 +8,21 @@ import { ResourceType } from "../resource-type";
 /**
  * 不要なリソースを削除する
  * @param options オプション
- * @param options.resources リソース管理オブジェクト
- * @param options.deletionArmdozerIds 削除するリソースのArmdozerId
  * @returns 削除後のリソース管理オブジェクト
  */
 export const deleteUnusedResources = (options: {
+  /** リソース管理オブジェクト */
   resources: Readonly<Resources>;
+  /** 削除するリソースのArmdozerId */
   deletionArmdozerIds: Readonly<ArmdozerId[]>;
+  /** 削除するリソースのPilotId */
+  deletionPilotIds: Readonly<PilotId[]>;
 }): Resources => {
-  const { resources, deletionArmdozerIds } = options;
+  const { resources, deletionArmdozerIds, deletionPilotIds } = options;
   const shouldDelete = (t: ResourceType) =>
-    t.type === "DynamicArmdozer" && deletionArmdozerIds.includes(t.armdozerId);
+    (t.type === "DynamicArmdozer" &&
+      deletionArmdozerIds.includes(t.armdozerId)) ||
+    (t.type === "DynamicPilot" && deletionPilotIds.includes(t.pilotId));
 
   const { deleteGltfs, keepGltfs } = R.groupBy(
     (g) => (shouldDelete(g) ? "deleteGltfs" : "keepGltfs"),
