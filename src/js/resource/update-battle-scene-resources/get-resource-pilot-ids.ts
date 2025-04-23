@@ -1,4 +1,4 @@
-import { PlayerId } from "gbraver-burst-core";
+import { PilotId } from "gbraver-burst-core";
 
 import { ResourceType } from "../resource-type";
 
@@ -9,7 +9,7 @@ import { ResourceType } from "../resource-type";
  */
 export const getResourcePilotIds = (
   resourceTypes: ResourceType[],
-): PlayerId[] => [
+): PilotId[] => [
   ...new Set(
     resourceTypes
       .filter((t) => t.type === "DynamicPilot")
