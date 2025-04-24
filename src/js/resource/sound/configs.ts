@@ -122,7 +122,8 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     type: "Shared",
     id: SOUND_IDS.GRAN_DOZER_STRIKE,
-    path: (resourceRoot) => `${resourceRoot.get()}/sounds/gran-dozer-strike.mp3`,
+    path: (resourceRoot) =>
+      `${resourceRoot.get()}/sounds/gran-dozer-strike.mp3`,
     volumeScale: 0.3,
-  }
+  },
 ];
