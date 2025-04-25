@@ -27,6 +27,6 @@ export const surviveSuperPowerWithGuard: Episode = {
   },
   npc: granDozerForSurviveSuperPowerWithGuardNPC(),
   event: () => createSurviveSuperPowerWithGuardEvent(),
-  bgm: SOUND_IDS.GAI_BATTLE,
+  bgm: SOUND_IDS.GRAN_DOZER_STRIKE,
   isLosingEvent: false,
 };
