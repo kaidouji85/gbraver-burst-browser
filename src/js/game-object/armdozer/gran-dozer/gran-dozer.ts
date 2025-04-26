@@ -24,6 +24,10 @@ import {
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
@@ -134,6 +138,26 @@ export class GranDozer extends EmptyArmdozerSprite {
   /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#props);
+  }
+
+  /** @override */
+  upright(): Animate {
+    return upright(this.#props);
+  }
+
+  /** @override */
+  uprightToStand(): Animate {
+    return uprightToStand(this.#props);
+  }
+
+  /** @override */
+  bowDown(): Animate {
+    return bowDown(this.#props);
+  }
+
+  /** @override */
+  bowUp(): Animate {
+    return bowUp(this.#props);
   }
 
   /** @override */
