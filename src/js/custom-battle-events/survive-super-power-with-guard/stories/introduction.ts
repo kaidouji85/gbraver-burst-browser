@@ -39,9 +39,8 @@ export async function introduction(props: CustomBattleEventProps) {
     ["ライト", `「わいらは${wbr}クラブチームや`],
     [`オーナーさえ${wbr}了承すれば${wbr}何ら問題あらへん`],
     [
-      `それに Gブレイバーを${wbr}倒す${wbr}ために ロボ・${wbr}パイロットの${wbr}組み合わせで${wbr}意表を突く`,
+      `打倒${wbr}Gブレイバーの${wbr}ためには 足の引っ張り合いを${wbr}しとる${wbr}場合や${wbr}ないからな」`,
     ],
-    [`ちゅうこと${wbr}には わいも${wbr}同意や`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -58,10 +57,21 @@ export async function introduction(props: CustomBattleEventProps) {
   ]);
   props.view.dom.leftMessageWindow.darken();
 
-  await refreshConversation(props);
+  activeRightMessageWindowWithFace(props, "Tsubasa");
+  await scrollRightMessages(props, [
+    ["ツバサ", `「そう来ると${wbr}思った`],
+    [`シンヤ サポートは${wbr}君に任せたぞ」`],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Shinya");
-  props.view.dom.rightMessageWindow.messages(["シンヤ", "「姿勢を正して"]);
+  await scrollRightMessages(props, [["シンヤ", `「了解ッス ツバサ先輩」`]]);
+  props.view.dom.rightMessageWindow.darken();
+
+  await refreshConversation(props);
+
+  activeRightMessageWindowWithFace(props, "Gai");
+  props.view.dom.rightMessageWindow.messages(["ガイ", "「姿勢を正して"]);
   await playAnimation(synchronizedUpright(props));
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
