@@ -264,3 +264,49 @@ export const enemyActiveBurst: StoryFn = armdozerSpriteStub(
   EnemyGranDozer,
   activeBurst,
 );
+
+/**
+ * 気をつけ、礼
+ * @param sprite スプライト
+ */
+const uprightBow = (sprite: GranDozer) => {
+  delay(1000)
+    .chain(sprite.upright())
+    .chain(delay(500))
+    .chain(sprite.bowDown())
+    .chain(delay(200))
+    .chain(sprite.bowUp())
+    .chain(delay(500))
+    .chain(sprite.uprightToStand())
+    .loop();
+};
+
+/** プレイヤー 気をつけ、礼 */
+export const playerUprightBow: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  uprightBow,
+);
+
+/** プレイヤー アクティブ 気をつけ、礼 */
+export const playerActiveUprightBow: StoryFn = armdozerSpriteStub(
+  PlayerGranDozer,
+  (sprite) => {
+    uprightBow(sprite);
+    sprite.startActive().play();
+  },
+);
+
+/** 敵 気をつけ、礼 */
+export const enemyUprightBow: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  uprightBow,
+);
+
+/** 敵 アクティブ 気をつけ、礼 */
+export const enemyActiveUprightBow: StoryFn = armdozerSpriteStub(
+  EnemyGranDozer,
+  (sprite) => {
+    uprightBow(sprite);
+    sprite.startActive().play();
+  },
+);

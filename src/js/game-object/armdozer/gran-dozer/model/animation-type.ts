@@ -9,4 +9,6 @@ export type AnimationType =
   | "BACK_STEP"
   | "KNOCK_BACK"
   | "DOWN"
-  | "GUARD";
+  | "GUARD"
+  | "UPRIGHT"
+  | "BOW";

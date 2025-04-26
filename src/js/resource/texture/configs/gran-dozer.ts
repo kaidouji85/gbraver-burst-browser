@@ -57,6 +57,14 @@ export const GranDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.GRAN_DOZER_BURST_BUTTON_ICON,
     path: "armdozer/gran-dozer/burst-button-icon.webp",
   },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_UPRIGHT,
+    path: "armdozer/gran-dozer/upright.webp",
+  },
+  {
+    id: TEXTURE_IDS.GRAN_DOZER_BOW,
+    path: "armdozer/gran-dozer/bow.webp",
+  },
 ].map((t) => ({
   ...t,
   type: "DynamicArmdozer",
