@@ -22,8 +22,8 @@ export const surviveSuperPowerWithGuard: Episode = {
   player: {
     playerId: playerUuid(),
     armdozer:
-      Armdozers.find((v) => v.id === ArmdozerIds.SHIN_BRAVER) ?? Armdozers[0],
-    pilot: Pilots.find((v) => v.id === PilotIds.SHINYA) ?? Pilots[0],
+      Armdozers.find((v) => v.id === ArmdozerIds.WING_DOZER) ?? Armdozers[0],
+    pilot: Pilots.find((v) => v.id === PilotIds.TSUBASA) ?? Pilots[0],
   },
   npc: granDozerForSurviveSuperPowerWithGuardNPC(),
   event: () => createSurviveSuperPowerWithGuardEvent(),

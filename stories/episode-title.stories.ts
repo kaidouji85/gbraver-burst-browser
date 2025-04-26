@@ -59,6 +59,13 @@ export const episode4: StoryFn = episodeTitleStory(
   ArmdozerIds.SHIN_BRAVER,
 );
 
+/** エピソード5 */
+export const episode5: StoryFn = episodeTitleStory(
+  "5",
+  "超火力はガードで凌げ",
+  ArmdozerIds.WING_DOZER,
+);
+
 /** サイドエピソード3.1 */
 export const sideEpisode31: StoryFn = episodeTitleStory(
   "3.1",

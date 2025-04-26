@@ -46,10 +46,12 @@ export async function playStateHistory(
           next &&
           parallelPlayEffects.includes(next.effect.name) &&
           parallelPlayEffects.includes(gameState.effect.name);
+        const updateUntilNow = gameStateHistory.slice(0, index + 1);
         const customStateAnimationProps = {
           ...props,
           currentState: gameState,
           update: gameStateHistory,
+          updateUntilNow,
         };
         const anime = all(
           stateAnimation(props, gameState),
