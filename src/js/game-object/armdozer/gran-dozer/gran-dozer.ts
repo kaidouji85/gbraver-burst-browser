@@ -5,6 +5,8 @@ import { Animate } from "../../../animation/animate";
 import { GameObjectAction } from "../../action/game-object-action";
 import { EmptyArmdozerSprite } from "../empty-armdozer-sprite";
 import { backStep } from "./animation/back-step";
+import { bowDown } from "./animation/bow-down";
+import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
@@ -18,16 +20,14 @@ import { knockBackToStand } from "./animation/knock-back-to-stand";
 import { startActive } from "./animation/start-active";
 import { tackle } from "./animation/tackle";
 import { tackleToStand } from "./animation/tackle-to-stand";
+import { upright } from "./animation/upright";
+import { uprightToStand } from "./animation/upright-to-stand";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import {
   createGranDozerProps,
   GranDozerPropsCreatorOptions,
 } from "./props/create-gran-dozer-props";
 import { GranDozerProps } from "./props/gran-dozer-props";
-import { upright } from "./animation/upright";
-import { uprightToStand } from "./animation/upright-to-stand";
-import { bowDown } from "./animation/bow-down";
-import { bowUp } from "./animation/bow-up";
 
 /** オプション */
 type Options = GranDozerPropsCreatorOptions & {
