@@ -68,7 +68,7 @@ function forceTurnEndOverview(burst: ForceTurnEnd): string {
  * @returns 説明文
  */
 function ineffectiveOverview(burst: Ineffective): string {
-  return `バッテリー${burst.recoverBattery}回復、相手の効果を無効化`;
+  return `バッテリー${burst.recoverBattery}回復、相手の効果を無視する`;
 }
 
 /**
