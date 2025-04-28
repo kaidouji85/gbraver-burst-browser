@@ -60,7 +60,7 @@ export async function introduction(props: CustomBattleEventProps) {
   await refreshConversation(props);
 
   activeRightMessageWindowWithFace(props, "Shinya");
-  props.view.dom.rightMessageWindow.messages(["シンヤ", "「姿勢を正して"]);
+  props.view.dom.rightMessageWindow.messages(["シンヤ", "「双方 姿勢を正して"]);
   await playAnimation(synchronizedUpright(props));
   props.view.dom.rightMessageWindow.nextMessageIconVisible(true);
   await waitUntilWindowPush(props);
