@@ -18,7 +18,7 @@ export const surviveSuperPowerWithGuard: Episode = {
   number: "5",
   title: "超火力はガードで凌げ（開発中）",
   introduction,
-  imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM, // TODO 画像を正式版に置き換える
+  imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
   player: {
     playerId: playerUuid(),
     armdozer:
