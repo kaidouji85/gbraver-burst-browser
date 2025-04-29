@@ -30,17 +30,16 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「ライト もう一度${wbr}確認するが`],
-    [`我々は${wbr}チーム統合する ということで${wbr}相違ないな」`],
+    [`我々は 打倒Gブレイバーのために${wbr}チーム統合する`],
+    [`ということで${wbr}相違ないな」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「わいらは${wbr}クラブチームやさかい`],
-    [`オーナーさえ${wbr}了承すれば${wbr}何ら問題あらへん`],
-    [
-      `打倒Gブレイバーの${wbr}ためには 足の引っ張り合いを${wbr}しとる場合や${wbr}ないからな」`,
-    ],
+    ["ライト", `「間違いあらへん`],
+    [`わいらは${wbr}クラブチームやさかい`],
+    [`オーナーさえ${wbr}了承すれば${wbr}何ら問題あらへん」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -53,7 +52,7 @@ export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「愚問やな`],
-    [`わいらは機動倶楽部 試合で${wbr}白黒つけようや」`],
+    [`機動倶楽部なら 試合で${wbr}白黒つける${wbr}しかないやろ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
