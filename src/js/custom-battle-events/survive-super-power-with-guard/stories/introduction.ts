@@ -52,7 +52,7 @@ export async function introduction(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「愚問やな`],
-    [`機動倶楽部なら 試合で${wbr}白黒つける${wbr}しかないやろ」`],
+    [`そんなん試合に${wbr}勝った方に${wbr}決まっとるやろ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
