@@ -1,16 +1,17 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type {
+import {
   AnimationType,
   LightningDozerCutInModel,
 } from "../model/lightning-dozer-cutin-model";
-import type { LightningDozerCutInView } from "./lightning-dozer-cutin-view";
+import { LightningDozerCutInView } from "./lightning-dozer-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 900;
@@ -33,24 +34,20 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const cutInUpResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP,
-    );
-    const cutInUp = cutInUpResource
-      ? cutInUpResource.texture
-      : new THREE.Texture();
+    const cutInUp = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP,
+    ).texture;
     this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4,
     });
-    const cutInDownResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
-    );
-    const cutInDown = cutInDownResource
-      ? cutInDownResource.texture
-      : new THREE.Texture();
+    const cutInDown = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
+    ).texture;
     this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       width: MESH_SIZE,

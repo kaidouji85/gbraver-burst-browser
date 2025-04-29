@@ -1,14 +1,12 @@
-import { PathIds } from "../../path/ids";
-import { PathConfig } from "../../path/resource";
+import { PilotIds } from "gbraver-burst-core";
 
-/** シンヤ パス設定 */
-export const ShinyaPathConfigs: PathConfig[] = [
+import { TEXTURE_IDS } from "../ids";
+import { TextureConfig } from "../resource";
+
+/** シンヤのテクスチャ設定をあつめたもの */
+export const ShinyaTextureConfigs: TextureConfig[] = [
   {
-    id: PathIds.SHINYA_ICON,
-    path: (root) => `${root.get()}/pilot/shinya/player-select.webp`,
+    id: TEXTURE_IDS.SHINYA_CUTIN,
+    path: "pilot/shinya/skill-cutin.webp",
   },
-  {
-    id: PathIds.SHINYA_SKILL_CUTIN,
-    path: (root) => `${root.get()}/pilot/shinya/skill-cutin.webp`,
-  },
-];
+].map((t) => ({ ...t, type: "DynamicPilot", pilotId: PilotIds.SHINYA }));

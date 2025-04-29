@@ -30,8 +30,6 @@ export type GamePropsGeneratorParams = {
   isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
-  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
   canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
@@ -76,7 +74,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     abort,
     performanceStats: null,
     resources: emptyResources(params.resourceRoot),
-    isFullResourceLoaded: false,
+    sharedResourceState: { type: "Idle" },
     inProgress: {
       type: "None",
     },

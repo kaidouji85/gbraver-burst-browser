@@ -1,15 +1,17 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { DamageHalvedModel } from "../model/damage-halved-model";
-import type { DamageHalvedView } from "./damage-halved-view";
+import { DamageHalvedModel } from "../model/damage-halved-model";
+import { DamageHalvedView } from "./damage-halved-view";
+
 export const MESH_SIZE = 300;
 
 /**プレイヤー ダメージ半減 ビュー*/
@@ -22,9 +24,10 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const playerTurn =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.DAMAGE_HALVED)
-        ?.texture ?? new THREE.Texture();
+    const playerTurn = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.DAMAGE_HALVED,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,

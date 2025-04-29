@@ -1,7 +1,7 @@
 import { StoryFn } from "@storybook/html";
 
 import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
-import { EpisodesInDevelopment } from "../src/js/game/episodes";
+import { EpisodesInDevelopment } from "../src/js/game/story/episodes";
 import { domStub } from "./stub/dom-stub";
 
 export default {

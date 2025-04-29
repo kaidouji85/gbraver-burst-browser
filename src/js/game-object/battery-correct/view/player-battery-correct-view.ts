@@ -1,12 +1,13 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { ARMDOZER_EFFECT_STANDARD_Z } from "../../td-position";
-import type { BatteryCorrectModel } from "../model/battery-correct-model";
-import type { BatteryCorrectView } from "./battery-correct-view";
+import { BatteryCorrectModel } from "../model/battery-correct-model";
+import { BatteryCorrectView } from "./battery-correct-view";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 50;
@@ -36,9 +37,10 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const batteryNumber =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.BATTERY_NUMBER)
-        ?.texture ?? new THREE.Texture();
+    const batteryNumber = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTERY_NUMBER,
+    ).texture;
     this.#value = new HorizontalAnimationMesh({
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,

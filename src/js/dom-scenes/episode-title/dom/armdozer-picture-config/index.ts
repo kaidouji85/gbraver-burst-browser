@@ -4,6 +4,7 @@ import { Resources } from "../../../../resource";
 import { ArmdozerPictureConfig } from "./armdozer-picture-config";
 import { genesisBraver } from "./genesis-braver";
 import { shinBraver } from "./shin-braver";
+import { wingDozer } from "./wing-dozer";
 
 /**
  * アームドーザIDに応じた画像設定を生成する
@@ -18,6 +19,8 @@ export function createArmdozerPictureConfig(
   switch (armdozerId) {
     case ArmdozerIds.SHIN_BRAVER:
       return shinBraver(resources);
+    case ArmdozerIds.WING_DOZER:
+      return wingDozer(resources);
     case ArmdozerIds.GENESIS_BRAVER:
       return genesisBraver(resources);
     default:

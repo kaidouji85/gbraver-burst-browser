@@ -1,10 +1,11 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import type { LightningModel } from "../model/lightning-model";
-import type { LightningView } from "./lightning-view";
+import { LightningModel } from "../model/lightning-model";
+import { LightningView } from "./lightning-view";
 
 /** メッシュ幅 */
 const WIDTH = 350;
@@ -22,12 +23,10 @@ export class PlayerLightningView implements LightningView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING,
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.HITMARK_LIGHTNING_RING,
     );
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,

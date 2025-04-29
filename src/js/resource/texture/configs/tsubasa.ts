@@ -1,3 +1,5 @@
+import { PilotIds } from "gbraver-burst-core";
+
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
 
@@ -7,4 +9,4 @@ export const TsubasaTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.TSUBASA_CUTIN,
     path: "pilot/tsubasa/skill-cutin.webp",
   },
-];
+].map((t) => ({ ...t, type: "DynamicPilot", pilotId: PilotIds.TSUBASA }));

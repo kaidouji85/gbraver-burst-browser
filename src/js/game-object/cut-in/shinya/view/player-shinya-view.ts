@@ -1,13 +1,14 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../../game-loop/pre-render";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
-import type { ShinyaModel } from "../model/shinya-model";
-import type { ShinyaView } from "./shinya-view";
+import { ShinyaModel } from "../model/shinya-model";
+import { ShinyaView } from "./shinya-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 500;
@@ -30,10 +31,10 @@ export class PlayerShinyaView implements ShinyaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const shinyaResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.SHINYA_CUTIN,
-    );
-    const shinya = shinyaResource?.texture ?? new THREE.Texture();
+    const shinya = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.SHINYA_CUTIN,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: shinya,
       maxAnimation: MAX_ANIMATION,

@@ -2,7 +2,7 @@ import { StoryFn } from "@storybook/html";
 import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import { EpisodeTitle } from "../src/js/dom-scenes/episode-title";
-import { EpisodeNumber } from "../src/js/game/episodes/episode";
+import { EpisodeNumber } from "../src/js/game/story/episode";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -57,6 +57,13 @@ export const episode4: StoryFn = episodeTitleStory(
   "4",
   "対決、二人のブレイバー！！（負けイベント）",
   ArmdozerIds.SHIN_BRAVER,
+);
+
+/** エピソード5 */
+export const episode5: StoryFn = episodeTitleStory(
+  "5",
+  "超火力はガードで凌げ",
+  ArmdozerIds.WING_DOZER,
 );
 
 /** サイドエピソード3.1 */

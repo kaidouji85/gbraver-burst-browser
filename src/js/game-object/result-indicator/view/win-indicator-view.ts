@@ -1,8 +1,7 @@
-import * as THREE from "three";
-
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { ResultIndicatorView } from "./result-indicator-view";
+import { ResultIndicatorView } from "./result-indicator-view";
 import { SimpleIndicatorView } from "./simple-result-indicator";
 
 /**
@@ -12,8 +11,6 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  * @returns 生成結果
  */
 export function winIndicatorView(resources: Resources): ResultIndicatorView {
-  const texture =
-    resources.textures.find((v) => v.id === TEXTURE_IDS.WIN)?.texture ??
-    new THREE.Texture();
+  const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.WIN);
   return new SimpleIndicatorView(texture, 130, 60);
 }

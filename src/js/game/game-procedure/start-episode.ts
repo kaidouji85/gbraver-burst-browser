@@ -2,12 +2,13 @@ import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
 import { waitTime } from "../../wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { Episode } from "../episodes/episode";
 import { GameProps } from "../game-props";
+import { Episode } from "../story/episode";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
 
@@ -18,7 +19,7 @@ import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
  * @returns 処理が完了したら発火するPromise
  */
 export async function startEpisode(
-  props: Readonly<GameProps>,
+  props: GameProps,
   episode: Episode,
 ): Promise<void> {
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
@@ -40,6 +41,10 @@ export async function startEpisode(
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players: [npcBattle.player, npcBattle.enemy],
+  });
   const battleScene = new BattleScene({
     ...props,
     playingBGM: episode.bgm,

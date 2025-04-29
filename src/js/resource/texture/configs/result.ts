@@ -15,4 +15,4 @@ export const ResultTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.DRAW,
     path: "result/draw.png",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

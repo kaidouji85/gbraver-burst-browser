@@ -15,9 +15,9 @@ import { PredicatedDamageTextureConfigs } from "./predicated-damage";
 import { RaitoTextureConfigs } from "./raito";
 import { ResultTextureConfigs } from "./result";
 import { ShinBraverTextureConfigs } from "./shin-braver";
+import { ShinyaTextureConfigs } from "./shinya";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShotTextureConfigs } from "./shot";
-import { ShinyaTextureConfigs } from "./sinya";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
@@ -46,10 +46,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ResultTextureConfigs,
   ...YuuyaTextureConfigs,
   ...PredicatedDamageTextureConfigs,
-];
-
-/** 開発中のテクスチャリソース設定をあつめたもの */
-export const DEVELOPING_TEXTURE_CONFIGS: TextureConfig[] = [
   ...GranDozerTextureConfigs,
   ...ShotTextureConfigs,
 ];

@@ -19,11 +19,7 @@ export function loadSound(
       src: [config.path(resourceRoot)],
       volume: config.volumeScale,
     });
-    const resource: SoundResource = {
-      id: config.id,
-      sound: sound,
-      volumeScale: config.volumeScale,
-    };
+    const resource: SoundResource = { ...config, sound };
 
     if (sound.state() === "loaded") {
       resolve(resource);

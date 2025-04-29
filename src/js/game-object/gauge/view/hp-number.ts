@@ -2,8 +2,10 @@ import * as R from "ramda";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+
 export const NUMBER_OF_DIGITS = 4;
 export const MAX_ANIMATION = 16;
 export const MESH_SIZE = 64;
@@ -17,12 +19,10 @@ export class HpNumber {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const hpNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.HP_NUMBER,
-    );
-    const hpNumber = hpNumberResource
-      ? hpNumberResource.texture
-      : new THREE.Texture();
+    const hpNumber = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.HP_NUMBER,
+    ).texture;
     this.#meshList = R.times((v) => {
       const mesh = new HorizontalAnimationMesh({
         texture: hpNumber,

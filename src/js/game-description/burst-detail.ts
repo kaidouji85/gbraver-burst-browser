@@ -64,7 +64,7 @@ function continuousAttackDetail(burst: ContinuousAttack): string[] {
  */
 function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
   return [
-    `ゲーム終了まで、最大バッテリーを${burst.maxBattery}にする。`,
+    `ゲーム終了まで、本来の最大バッテリーを${burst.maxBattery}として扱う。`,
     `バッテリーを${burst.recoverBattery}回復する。`,
   ];
 }
@@ -90,7 +90,7 @@ function forceTurnEndDetail(burst: ForceTurnEnd): string[] {
 function ineffectiveDetail(burst: Ineffective): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
-    `1ターンだけ、戦闘中に相手の効果が無効化される。`,
+    `1ターンだけ、バッテリー宣言、ダメージ計算時に相手の効果を無視する。`,
   ];
 }
 

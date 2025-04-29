@@ -3,13 +3,14 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import type { ResourcesContainer } from "../../../resource";
-import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image";
+import { ResourcesContainer } from "../../../resource";
+import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { GameObjectAction } from "../../action/game-object-action";
-import type { PushDetector } from "../../push-detector";
+import { GameObjectAction } from "../../action/game-object-action";
+import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import type { BatterySelectorModel } from "../model";
+import { BatterySelectorModel } from "../model";
 
 /** バッテリー現在値 最大フレーム数 */
 const BATTERY_VALUE_MAX_ANIMATION = 16;
@@ -77,10 +78,10 @@ export class BatteryButton {
     });
     this.#defenseLabel.getObject3D().position.set(32, -96, 0);
     this.#group.add(this.#defenseLabel.getObject3D());
-    const currentBattery =
-      param.resources.textures.find(
-        (v) => v.id === TEXTURE_IDS.BATTERY_CURRENT_VALUE,
-      )?.texture ?? new THREE.Texture();
+    const currentBattery = findTextureOrThrow(
+      param.resources,
+      TEXTURE_IDS.BATTERY_CURRENT_VALUE,
+    ).texture;
     this.#batteryValue = new HorizontalAnimationMesh({
       texture: currentBattery,
       maxAnimation: BATTERY_VALUE_MAX_ANIMATION,

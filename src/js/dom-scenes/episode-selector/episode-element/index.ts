@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { EpisodeID, EpisodeType } from "../../../game/episodes/episode";
+import { EpisodeID, EpisodeType } from "../../../game/story/episode";
 import { Resources } from "../../../resource";
 import { Episode } from "../episode";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
@@ -50,7 +50,8 @@ export class EpisodeElement {
   }
 
   /**
-   * 選択通知
+   * エピソードが選択されたことを通知する
+   * 本通信はタッチデバイスで二重発火されることがあるので、購読側でその制御をすること
    * @returns 通知ストリーム
    */
   selectionNotifier(): Observable<void> {

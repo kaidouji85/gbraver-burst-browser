@@ -3,7 +3,7 @@ import * as THREE from "three";
 
 import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import type { ResourcesContainer } from "../../src/js/resource";
-import { developingFullResourceLoading } from "../../src/js/resource/loading/full-resource-loading";
+import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** レンダラ設定 */
@@ -103,7 +103,7 @@ export function stillImageStub(params: StubParams): HTMLElement {
     camera.position.z = position.z;
     camera.lookAt(target.x, target.y, target.z);
     const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = developingFullResourceLoading(resourceRoot);
+    const resourceLoading = loadFullResources(resourceRoot);
     const resources = await resourceLoading.resources;
     const emptyGameObjectAction: Subject<GameObjectAction> = new Subject();
     const { objects, skyBox } = params.creator({

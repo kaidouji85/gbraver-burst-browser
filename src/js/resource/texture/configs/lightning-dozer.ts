@@ -1,3 +1,5 @@
+import { ArmdozerIds } from "gbraver-burst-core";
+
 import { TEXTURE_IDS } from "../ids";
 import { TextureConfig } from "../resource";
 
@@ -71,4 +73,8 @@ export const LightningDozerTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_BOW,
     path: "armdozer/lightning-dozer/bow.webp",
   },
-];
+].map((t) => ({
+  ...t,
+  type: "DynamicArmdozer",
+  armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+}));

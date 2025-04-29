@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
@@ -12,7 +13,7 @@ import { LightningShotModel } from "../model/lightning-shot-model";
 import { LightningShotView } from "./lightning-shot-view";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 380;
+const MESH_SIZE = 360;
 
 /** プレイヤーの電撃ショットビュー */
 export class PlayerLightningShotView implements LightningShotView {
@@ -25,9 +26,10 @@ export class PlayerLightningShotView implements LightningShotView {
    */
   constructor(options: ResourcesContainer) {
     const { resources } = options;
-    const texture =
-      resources.textures.find((t) => t.id === TEXTURE_IDS.LIGHTNING_SHOT)
-        ?.texture ?? new THREE.Texture();
+    const { texture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.LIGHTNING_SHOT,
+    );
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 8,

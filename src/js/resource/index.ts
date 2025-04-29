@@ -1,10 +1,10 @@
-import type { CanvasImageResource } from "./canvas-image";
-import type { CubeTextureResource } from "./cube-texture";
-import type { GlTFResource } from "./gltf";
-import type { Path } from "./path/resource";
-import type { ResourceRoot } from "./resource-root";
-import type { SoundResource } from "./sound/resource";
-import type { TextureResource } from "./texture/resource";
+import { CanvasImageResource } from "./canvas-image/resource";
+import { CubeTextureResource } from "./cube-texture/resource";
+import { GlTFResource } from "./gltf/resource";
+import { Path } from "./path/resource";
+import { ResourceRoot } from "./resource-root";
+import { SoundResource } from "./sound/resource";
+import { TextureResource } from "./texture/resource";
 
 /** ゲームで使うリソースを集めたもの */
 export type Resources = {

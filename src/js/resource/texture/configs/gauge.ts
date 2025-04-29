@@ -23,4 +23,4 @@ export const GaugeTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.ENEMY_BATTERY_GAUGE,
     path: "gauge/enemy-battery-gauge.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));

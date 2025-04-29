@@ -21,6 +21,7 @@ import { GBraverBurstBrowserConfigRepository } from "../config/repository/reposi
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
+import { SharedResourceState } from "../shared-resource-state";
 import { GameActionManageContainer } from "./game-action-manage-container";
 
 /**
@@ -40,8 +41,6 @@ export interface GameProps
   readonly isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   readonly canPlayEpisodeInDevelopment: boolean;
-  /** 開発中のリソースをロードするか否かのフラグ、trueでロードする */
-  readonly shouldLoadDevelopingResource: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
   readonly canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
@@ -100,6 +99,6 @@ export interface GameProps
 
   /** リソースルート */
   readonly resourceRoot: ResourceRoot;
-  /** 全リソースを読み込んだか否かのフラグ、trueで全リソースを読み込んだ */
-  isFullResourceLoaded: boolean;
+  /** Sharedリソースのステート */
+  sharedResourceState: SharedResourceState;
 }

@@ -1,5 +1,5 @@
 import { PushDOM } from "../../../dom/push-dom";
-import { EpisodeType } from "../../../game/episodes/episode";
+import { EpisodeType } from "../../../game/story/episode";
 import { EpisodeSelectorProps } from "../props";
 import { getFirstVisibleEpisodeElement } from "./get-first-visible-episode-element";
 import { isSideEpisodeTabSelected } from "./is-episode-tab-selected";

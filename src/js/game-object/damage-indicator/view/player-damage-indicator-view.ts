@@ -2,14 +2,16 @@ import * as R from "ramda";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { DamageIndicatorModel } from "../model/damage-indicator-model";
-import type { DamageIndicatorView } from "./damage-indicator-view";
+import { DamageIndicatorModel } from "../model/damage-indicator-model";
+import { DamageIndicatorView } from "./damage-indicator-view";
+
 export const MESH_SIZE = 50;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
@@ -22,12 +24,10 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const damageNumberResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.DAMAGE_NUMBER,
-    );
-    const damageNumber = damageNumberResource
-      ? damageNumberResource.texture
-      : new THREE.Texture();
+    const damageNumber = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.DAMAGE_NUMBER,
+    ).texture;
     this.#numbers = R.times(
       () =>
         new HorizontalAnimationMesh({

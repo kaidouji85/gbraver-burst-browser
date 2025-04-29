@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { PilotIcon } from "./pilot-icon";
+import { PilotIcon } from "./pilot-icon";
 
 /**
  * ガイ パイロットアイコン
@@ -19,9 +20,7 @@ export class GaiIcon implements PilotIcon {
    */
   constructor(resources: Resources) {
     this.#group = new THREE.Group();
-    const texture =
-      resources.textures.find((v) => v.id === TEXTURE_IDS.GAI_CUTIN)?.texture ??
-      new THREE.Texture();
+    const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.GAI_CUTIN);
     this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,

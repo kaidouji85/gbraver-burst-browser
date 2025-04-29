@@ -1,15 +1,17 @@
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
-import type { Resources } from "../../../resource";
+import { Resources } from "../../../resource";
+import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import type { ReflectIndocatorModel } from "../model/reflect-indocator-model";
-import type { ReflectIndicatorView } from "./reflect-indicator-view";
+import { ReflectIndocatorModel } from "../model/reflect-indocator-model";
+import { ReflectIndicatorView } from "./reflect-indicator-view";
+
 export const MESH_SIZE = 300;
 
 /**
@@ -19,12 +21,10 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
   #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const playerTurnResource = resources.textures.find(
-      (v) => v.id === TEXTURE_IDS.REFLECT,
-    );
-    const playerTurn = playerTurnResource
-      ? playerTurnResource.texture
-      : new THREE.Texture();
+    const playerTurn = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.REFLECT,
+    ).texture;
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,

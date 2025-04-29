@@ -7,4 +7,4 @@ export const LightingTextureConfigs: TextureConfig[] = [
     id: TEXTURE_IDS.HITMARK_LIGHTNING_RING,
     path: "hitmark/lightning/lightning-ring.webp",
   },
-];
+].map((t) => ({ ...t, type: "Shared" }));
