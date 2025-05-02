@@ -78,7 +78,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const { battery1, battery3, minimumSurviveBattery, burst, pilot } =
     getDefenseRoutineCondition(data);
 
-  let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
+  let selectedCommand: Command = burst ??
+    pilot ?? { type: "BATTERY_COMMAND", battery: enemy.armdozer.battery };
   if (enemy.armdozer.battery === 5 && battery3) {
     selectedCommand = battery3;
   } else if (enemy.armdozer.battery === 0 && burst) {
@@ -88,9 +89,6 @@ const defenseRoutine: SimpleRoutine = (data) => {
   } else if (minimumSurviveBattery.isExist) {
     const { value: battery } = minimumSurviveBattery;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
-  } else if (!minimumSurviveBattery.isExist) {
-    const battery = enemy.armdozer.battery;
-    selectedCommand = burst ?? pilot ?? { type: "BATTERY_COMMAND", battery };
   }
 
   return selectedCommand;
