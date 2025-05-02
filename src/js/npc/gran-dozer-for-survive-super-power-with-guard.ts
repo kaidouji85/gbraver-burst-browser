@@ -76,6 +76,8 @@ const defenseRoutine: SimpleRoutine = (data) => {
     selectedCommand = battery3;
   } else if (enemy.armdozer.battery === 0 && burst) {
     selectedCommand = burst;
+  } else if (battery1 && !burst && pilot) {
+    selectedCommand = pilot;
   } else if (minimumSurviveBattery.isExist) {
     const { value: battery } = minimumSurviveBattery;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
