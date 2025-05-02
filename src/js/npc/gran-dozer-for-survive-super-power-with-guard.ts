@@ -9,7 +9,6 @@ import {
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
-import { getMinimumBatteryToHitOrCritical } from "./get-minimum-battery-to-hit-or-critical";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
@@ -24,14 +23,8 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  * @returns 攻撃ルーチンの条件オブジェクト
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
-  battery4: findBatteryCommand(4, data.commands),
   battery5: findBatteryCommand(5, data.commands),
   minimumBeatDownBattery: getMinimumBeatDownBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  ),
-  minimumHitOrCriticalBattery: getMinimumBatteryToHitOrCritical(
     data.enemy,
     data.player,
     data.player.armdozer.battery,
@@ -45,25 +38,14 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const {
-    battery5,
-    battery4,
-    minimumBeatDownBattery,
-    minimumHitOrCriticalBattery,
-    burst,
-    pilot,
-  } = getAttackRoutineCondition(data);
+  const { battery5, minimumBeatDownBattery, burst, pilot } =
+    getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
   if (battery5 && pilot && burst) {
     selectedCommand = battery5;
-  } else if (battery4) {
-    selectedCommand = battery4;
   } else if (minimumBeatDownBattery.isExist) {
     const { value: battery } = minimumBeatDownBattery;
-    selectedCommand = { type: "BATTERY_COMMAND", battery };
-  } else if (minimumHitOrCriticalBattery.isExist) {
-    const { value: battery } = minimumHitOrCriticalBattery;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   }
 
