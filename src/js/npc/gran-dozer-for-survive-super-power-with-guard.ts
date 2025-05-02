@@ -11,6 +11,7 @@ import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
+import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
@@ -50,6 +51,11 @@ const attackRoutine: SimpleRoutine = (data) => {
  * @returns 防御ルーチンの条件オブジェクト
  */
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
+  minimumSurviveBattery: getMinimumSurvivableBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
   battery1: findBatteryCommand(1, data.commands),
   battery3: findBatteryCommand(3, data.commands),
   burst: findBurstCommand(data.commands),
@@ -62,15 +68,20 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const { battery1, battery3, burst, pilot } = getDefenseRoutineCondition(data);
+  const { battery1, battery3, minimumSurviveBattery, burst, pilot } =
+    getDefenseRoutineCondition(data);
 
   let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
   if (enemy.armdozer.battery === 5 && battery3) {
     selectedCommand = battery3;
   } else if (enemy.armdozer.battery === 0 && burst) {
     selectedCommand = burst;
-  } else if (battery1 && !burst && pilot) {
-    selectedCommand = pilot;
+  } else if (minimumSurviveBattery.isExist) {
+    const { value: battery } = minimumSurviveBattery;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
+  } else if (!minimumSurviveBattery.isExist) {
+    const battery = enemy.armdozer.battery;
+    selectedCommand = pilot ?? { type: "BATTERY_COMMAND", battery };
   }
 
   return selectedCommand;
