@@ -8,9 +8,9 @@
     "email": "kaidouji85@gmail.com"
   },
   "dependencies": {
-    "@gbraver-burst-network/browser-sdk": "1.16.22",
+    "@gbraver-burst-network/browser-sdk": "1.16.23",
     "@tweenjs/tween.js": "^25.0.0",
-    "gbraver-burst-core": "1.36.1",
+    "gbraver-burst-core": "1.36.2",
     "handlebars": "^4.7.8",
     "howler": "^2.2.4",
     "jsqr": "^1.4.0",
@@ -25,11 +25,11 @@
     "workbox-precaching": "^7.3.0",
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0",
-    "zod": "^3.24.3"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.39.0",
-    "@html-eslint/parser": "^0.39.0",
+    "@html-eslint/eslint-plugin": "^0.40.0",
+    "@html-eslint/parser": "^0.40.0",
     "@storybook/addon-backgrounds": "^8.6.12",
     "@storybook/html": "^8.6.12",
     "@storybook/html-webpack5": "^8.6.12",
@@ -46,7 +46,7 @@
     "css-loader": "^7.1.2",
     "dependency-cruiser": "^16.10.1",
     "dotenv": "^16.5.0",
-    "eslint": "^9.25.1",
+    "eslint": "^9.26.0",
     "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "glob": "^11.0.2",
@@ -73,7 +73,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.0",
+    "typescript-eslint": "^8.32.0",
     "webpack": "^5.99.7",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
