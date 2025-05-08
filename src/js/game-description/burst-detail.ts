@@ -3,6 +3,7 @@ import type {
   BuffPower,
   Burst,
   ContinuousAttack,
+  EffectClear,
   ForceTurnEnd,
   Ineffective,
   LightningBarrier,
@@ -64,7 +65,7 @@ function continuousAttackDetail(burst: ContinuousAttack): string[] {
  */
 function batteryLimitBreakDetail(burst: BatteryLimitBreak): string[] {
   return [
-    `ゲーム終了まで、本来の最大バッテリーを${burst.maxBattery}として扱う。`,
+    `ゲーム終了まで、本来の最大バッテリーを${burst.maxBattery}とする。`,
     `バッテリーを${burst.recoverBattery}回復する。`,
   ];
 }
@@ -95,6 +96,18 @@ function ineffectiveDetail(burst: Ineffective): string[] {
 }
 
 /**
+ * 効果クリア詳細
+ * @param burst バースト情報
+ * @returns 説明文
+ */
+function effectClearDetail(burst: EffectClear): string[] {
+  return [
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `相手に適用されている、すべての効果を完全に消去する。`,
+  ];
+}
+
+/**
  * バースト詳細を生成する
  * @param burst 情報
  * @returns 説明文
@@ -115,6 +128,8 @@ export function burstDetail(burst: Burst): string[] {
       return forceTurnEndDetail(burst);
     case "Ineffective":
       return ineffectiveDetail(burst);
+    case "EffectClear":
+      return effectClearDetail(burst);
     default:
       return [];
   }
