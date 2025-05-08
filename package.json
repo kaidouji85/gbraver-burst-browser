@@ -10,7 +10,7 @@
   "dependencies": {
     "@gbraver-burst-network/browser-sdk": "1.16.23",
     "@tweenjs/tween.js": "^25.0.0",
-    "gbraver-burst-core": "1.36.2",
+    "gbraver-burst-core": "1.37.0",
     "handlebars": "^4.7.8",
     "howler": "^2.2.4",
     "jsqr": "^1.4.0",
