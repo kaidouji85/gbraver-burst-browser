@@ -1,4 +1,4 @@
-import { Burst, Ineffective } from "gbraver-burst-core";
+import { Burst, EffectClear } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
@@ -34,11 +34,11 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
 }
 
 /**
- * グランドーザ バッテリー回復 アニメーション
+ * グランドーザ 効果クリア アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
-function ineffective(param: GranDozerBurst<Ineffective>): Animate {
+function effectClear(param: GranDozerBurst<EffectClear>): Animate {
   return all(
     focusToBurstPlayer(param),
     param.burstArmdozerHUD.cutIn.show(),
@@ -95,8 +95,8 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
 export function granDozerBurst(param: GranDozerBurst<Burst>): Animate {
   const { burst } = param;
   let ret = empty();
-  if (burst.type === "Ineffective") {
-    ret = ineffective({ ...param, burst });
+  if (burst.type === "EffectClear") {
+    ret = effectClear({ ...param, burst });
   }
 
   return ret;
