@@ -7,6 +7,7 @@ import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
 import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
+import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 
 /**
  * グランドーザ バーストアニメーション パラメータ
@@ -65,6 +66,9 @@ function effectClear(param: GranDozerBurst<EffectClear>): Animate {
           .show()
           .chain(delay(800))
           .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
+        param.otherArmdozerTD instanceof LightningDozerTD
+          ? param.otherArmdozerTD.lightningBarrier.hidden()
+          : empty(),
       ),
     )
     .chain(delay(100))
