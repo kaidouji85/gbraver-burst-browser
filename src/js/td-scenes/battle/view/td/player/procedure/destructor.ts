@@ -15,6 +15,6 @@ export function destructor(props: TDPlayerProps) {
   props.armdozerEffects.continuousAttack.destructor();
   props.armdozerEffects.damageHalved.destructor();
   props.armdozerEffects.batteryEnhancement.destructor();
-  props.armdozerEffects.ineffective.destructor();
+  props.armdozerEffects.effectClear.destructor();
   props.recoverBattery.destructor();
 }

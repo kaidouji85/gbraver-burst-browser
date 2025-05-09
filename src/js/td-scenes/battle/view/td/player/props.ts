@@ -6,9 +6,9 @@ import { BatteryNumber } from "../../../../../game-object/battery-number/battery
 import { ContinuousAttackIndicator } from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
 import { DamageHalved } from "../../../../../game-object/damage-halved/damage-halved";
 import { DamageIndicator } from "../../../../../game-object/damage-indicator/damage-indicator";
+import { EffectClear } from "../../../../../game-object/effect-clear/effectClear";
 import { Lightning } from "../../../../../game-object/hitmark/lightning/lightning";
 import { ShockWave } from "../../../../../game-object/hitmark/shock-wave/shock-wave";
-import { Ineffective } from "../../../../../game-object/ineffective/ineffective";
 import { PowerUp } from "../../../../../game-object/power-up/power-up";
 import { RecoverBattery } from "../../../../../game-object/recover-battery/recover-battery";
 import { ReflectIndicator } from "../../../../../game-object/reflect-indicator/reflect-indicator";
@@ -36,8 +36,8 @@ export interface TDPlayerProps {
     damageHalved: DamageHalved;
     /** バッテリー増強 */
     batteryEnhancement: BatteryEnhancement;
-    /** 効果無効 */
-    ineffective: Ineffective;
+    /** 効果消去 */
+    effectClear: EffectClear;
   };
   /** バッテリー数字 */
   batteryNumber: BatteryNumber;

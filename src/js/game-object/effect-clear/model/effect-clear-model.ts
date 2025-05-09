@@ -1,5 +1,5 @@
-/** * 効果無効 モデル*/
-export type IneffectiveModel = {
+/** * 効果消去 モデル*/
+export type EffectClearModel = {
   /** 不透明度 */
   opacity: number;
   /** スケール */
