@@ -9,14 +9,14 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../td-position";
-import { IneffectiveModel } from "../model/ineffective-model";
-import { IneffectiveView } from "./ineffective-view";
+import { EffectClearModel } from "../model/effect-clear-model";
+import { EffectClearView } from "./effect-clear-view";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 300;
 
-/** プレイヤー 効果無効 ビュー */
-export class PlayerIneffectiveView implements IneffectiveView {
+/** プレイヤー 効果消去 ビュー */
+export class PlayerEffectClearView implements EffectClearView {
   /** メッシュ */
   #mesh: HorizontalAnimationMesh;
 
@@ -45,7 +45,7 @@ export class PlayerIneffectiveView implements IneffectiveView {
   }
 
   /** @override */
-  engage(model: IneffectiveModel): void {
+  engage(model: EffectClearModel): void {
     const target = this.#mesh.getObject3D();
     this.#mesh.opacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X - 30;

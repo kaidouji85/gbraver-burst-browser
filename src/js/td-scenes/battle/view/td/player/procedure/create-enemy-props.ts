@@ -6,7 +6,7 @@ import { enemyDamageHalved } from "../../../../../../game-object/damage-halved";
 import { enemyDamageIndicator } from "../../../../../../game-object/damage-indicator";
 import { enemyLightning } from "../../../../../../game-object/hitmark/lightning";
 import { enemyShockWave } from "../../../../../../game-object/hitmark/shock-wave";
-import { enemyIneffective } from "../../../../../../game-object/ineffective";
+import { enemyEffectClear } from "../../../../../../game-object/effect-clear";
 import { enemyPowerUp } from "../../../../../../game-object/power-up";
 import { enemyRecoverBattery } from "../../../../../../game-object/recover-battery";
 import { enemyReflectIndicator } from "../../../../../../game-object/reflect-indicator";
@@ -34,7 +34,7 @@ export function createEnemyProps(
       continuousAttack: enemyContinuousAttack(params),
       damageHalved: enemyDamageHalved(params),
       batteryEnhancement: enemyBatteryEnhancement(params),
-      ineffective: enemyIneffective(params),
+      ineffective: enemyEffectClear(params),
     },
     batteryNumber: enemyBatteryNumber(params),
     batteryCorrect: enemyBatteryCorrect(params),

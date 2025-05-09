@@ -7,19 +7,19 @@ import { GameObjectActionContainer } from "../action/game-object-action-containe
 import { hidden } from "./animation/hidden";
 import { show } from "./animation/show";
 import {
-  createIneffectiveProps,
+  createEffectClearProps,
   PropsCreatorOptions,
-} from "./props/create-ineffective-props";
-import { IneffectiveProps } from "./props/ineffective-props";
+} from "./props/create-effect-clear-props";
+import { EffectClearProps } from "./props/effect-clear-props";
 
 /** コンストラクタのオプション */
-export type IneffectiveOptions = PropsCreatorOptions &
+export type EffectClearOptions = PropsCreatorOptions &
   GameObjectActionContainer;
 
-/** 効果無効 */
-export class Ineffective {
+/** 効果消去 */
+export class EffectClear {
   /** プロパティ */
-  #props: IneffectiveProps;
+  #props: EffectClearProps;
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
@@ -27,9 +27,9 @@ export class Ineffective {
    * コンストラクタ
    * @param options オプション
    */
-  constructor(options: IneffectiveOptions) {
+  constructor(options: EffectClearOptions) {
     const { gameObjectAction } = options;
-    this.#props = createIneffectiveProps(options);
+    this.#props = createEffectClearProps(options);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         this.#onUpdate();

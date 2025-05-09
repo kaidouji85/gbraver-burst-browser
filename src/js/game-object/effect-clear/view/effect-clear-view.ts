@@ -1,11 +1,9 @@
 import * as THREE from "three";
 
-import { IneffectiveModel } from "../model/ineffective-model";
+import { EffectClearModel } from "../model/effect-clear-model";
 
-/**
- * ポップアップ ビュー
- */
-export interface IneffectiveView {
+/** 効果消去 ビュー */
+export interface EffectClearView {
   /**
    * デストラクタ相当の処理
    */
@@ -15,7 +13,7 @@ export interface IneffectiveView {
    * モデルをビューに反映させる
    * @param model モデル
    */
-  engage(model: IneffectiveModel): void;
+  engage(model: EffectClearModel): void;
 
   /**
    * カメラの真正面を向く

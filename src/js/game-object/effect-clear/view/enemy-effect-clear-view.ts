@@ -1,9 +1,9 @@
 import type { Resources } from "../../../resource";
-import type { IneffectiveModel } from "../model/ineffective-model";
-import { PlayerIneffectiveView } from "./player-ineffective-view";
+import type { EffectClearModel } from "../model/effect-clear-model";
+import { PlayerEffectClearView } from "./player-effect-clear-view";
 
-/** 敵 効果無効 ビュー */
-export class EnemyIneffectiveView extends PlayerIneffectiveView {
+/** 敵 効果消去 ビュー */
+export class EnemyEffectClearView extends PlayerEffectClearView {
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
@@ -13,7 +13,7 @@ export class EnemyIneffectiveView extends PlayerIneffectiveView {
   }
 
   /** @override */
-  engage(model: IneffectiveModel): void {
+  engage(model: EffectClearModel): void {
     super.engage(model);
     const target = super.getObject3D();
     target.position.x *= -1;
