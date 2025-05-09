@@ -25,7 +25,7 @@ export class PlayerIneffectiveView implements IneffectiveView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.INEFFECTIVE);
+    const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.EFFECT_CLEAR);
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
