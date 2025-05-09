@@ -5,9 +5,9 @@ import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
+import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
-import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 
 /**
  * グランドーザ バーストアニメーション パラメータ
@@ -62,10 +62,10 @@ function effectClear(param: GranDozerBurst<EffectClear>): Animate {
         toInitial(param.tdCamera, 300),
         param.burstArmdozerTD.lightningShot.shot(),
         param.otherArmdozerTD.sprite().knockBack(),
-        param.otherPlayerTD.armdozerEffects.ineffective
+        param.otherPlayerTD.armdozerEffects.effectClear
           .show()
           .chain(delay(800))
-          .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
+          .chain(param.otherPlayerTD.armdozerEffects.effectClear.hidden()),
         param.otherArmdozerTD instanceof LightningDozerTD
           ? param.otherArmdozerTD.lightningBarrier.hidden()
           : empty(),

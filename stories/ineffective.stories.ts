@@ -2,8 +2,8 @@ import { StoryFn } from "@storybook/html";
 
 import { delay } from "../src/js/animation/delay";
 import {
-  enemyEffectClear,
   EffectClearCreatorOptions,
+  enemyEffectClear,
   playerEffectClear,
 } from "../src/js/game-object/effect-clear";
 import { EffectClear } from "../src/js/game-object/effect-clear/effectClear";
