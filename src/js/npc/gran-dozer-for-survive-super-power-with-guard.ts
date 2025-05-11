@@ -9,7 +9,6 @@ import {
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
-import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
@@ -24,11 +23,6 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
   battery5: findBatteryCommand(5, data.commands),
-  minimumBeatDownBattery: getMinimumBeatDownBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  ),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
 });
@@ -38,14 +32,13 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { battery5, minimumBeatDownBattery, burst, pilot } =
-    getAttackRoutineCondition(data);
+  const { battery5, burst, pilot } = getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
   if (battery5 && pilot && burst) {
     selectedCommand = battery5;
-  } else if (minimumBeatDownBattery.isExist) {
-    const { value: battery } = minimumBeatDownBattery;
+  } else if (1 < data.enemy.armdozer.battery) {
+    const battery = data.enemy.armdozer.battery - 1;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   }
 
@@ -64,7 +57,7 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
     data.player.armdozer.battery,
   ),
   battery1: findBatteryCommand(1, data.commands),
-  battery3: findBatteryCommand(3, data.commands),
+  battery2: findBatteryCommand(2, data.commands),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
 });
@@ -75,13 +68,13 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const { battery1, battery3, minimumSurviveBattery, burst, pilot } =
+  const { battery1, battery2, minimumSurviveBattery, burst, pilot } =
     getDefenseRoutineCondition(data);
 
   let selectedCommand: Command = burst ??
     pilot ?? { type: "BATTERY_COMMAND", battery: enemy.armdozer.battery };
-  if (enemy.armdozer.battery === 5 && battery3) {
-    selectedCommand = battery3;
+  if (burst && pilot && enemy.armdozer.battery === 5 && battery2) {
+    selectedCommand = battery2;
   } else if (enemy.armdozer.battery === 0 && burst) {
     selectedCommand = burst;
   } else if (battery1 && !burst && pilot) {
