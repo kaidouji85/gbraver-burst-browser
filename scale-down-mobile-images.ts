@@ -33,31 +33,6 @@ async function resizeWebp(origin: string, scale: number): Promise<void> {
   await sharp(buffer).toFile(origin);
 }
 
-/** 50%縮小するグランドーザの画像パスパターン */
-const granDozerWebpPathsFor50Percent = [
-  "build/production/resources/**/mobile/armdozer/gran-dozer/player-select.webp",
-  "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-down.webp",
-  "build/production/resources/**/mobile/armdozer/gran-dozer/cutin-burst-up.webp",
-];
-
-/**
- * 50%縮小するグランドーザの画像パスを取得する
- * @return グランドーザの画像パス
- */
-const getGranDozerWebpPathsFor50Percent = () =>
-  glob(granDozerWebpPathsFor50Percent);
-
-/**
- * 25%縮小するグランドーザ画像パスを取得する
- * @return グランドーザの画像パス
- */
-const getGranDozerWebpPathsFor25Percent = () =>
-  glob("build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp", {
-    ignore: [
-      ...granDozerWebpPathsFor50Percent,
-      "build/production/resources/**/mobile/armdozer/gran-dozer/bust-shot.webp",
-    ],
-  });
 /**
  * pngモデルテクスチャのパスを取得する
  * @return pngモデルテクスチャのパス
@@ -81,9 +56,8 @@ const getWebpPaths = () =>
       "build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp",
       "build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp",
       "build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp",
+      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-down.webp",
       "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-      "build/production/resources/**/mobile/armdozer/genesis-braver/cutin-burst-up.webp",
-      "build/production/resources/**/mobile/armdozer/gran-dozer/**/*.webp",
     ],
   });
 
@@ -93,20 +67,11 @@ const getWebpPaths = () =>
 (async () => {
   console.log("start scale down mobile images");
 
-  const [
-    granDozer25percentWebpPaths,
-    granDozer50percentWebpPaths,
-    pngModelTexturePaths,
-    webpPaths,
-  ] = await Promise.all([
-    getGranDozerWebpPathsFor25Percent(),
-    getGranDozerWebpPathsFor50Percent(),
+  const [pngModelTexturePaths, webpPaths] = await Promise.all([
     getPngModelTexturePaths(),
     getWebpPaths(),
   ]);
   await Promise.all([
-    ...granDozer50percentWebpPaths.map((p) => resizeWebp(p, 0.5)),
-    ...granDozer25percentWebpPaths.map((p) => resizeWebp(p, 0.25)),
     ...pngModelTexturePaths.map((p) => resizePng(p, 0.25)),
     ...webpPaths.map((p) => resizeWebp(p, 0.5)),
   ]);
