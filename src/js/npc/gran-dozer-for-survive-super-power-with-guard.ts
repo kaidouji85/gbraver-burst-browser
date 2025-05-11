@@ -68,13 +68,13 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const { battery1, battery2, minimumSurviveBattery, burst, pilot } =
+  const { battery1, minimumSurviveBattery, burst, pilot } =
     getDefenseRoutineCondition(data);
 
   let selectedCommand: Command = burst ??
     pilot ?? { type: "BATTERY_COMMAND", battery: enemy.armdozer.battery };
-  if (burst && pilot && enemy.armdozer.battery === 5 && battery2) {
-    selectedCommand = battery2;
+  if (burst && pilot && enemy.armdozer.battery === 5 && battery1) {
+    selectedCommand = battery1;
   } else if (enemy.armdozer.battery === 0 && burst) {
     selectedCommand = burst;
   } else if (battery1 && !burst && pilot) {
