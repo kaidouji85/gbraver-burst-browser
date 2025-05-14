@@ -61,9 +61,13 @@ const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
   const { battery3, burst, pilot } = getDefenseRoutineCondition(data);
 
-  let selectedCommand: Command = burst ?? pilot ?? ZERO_BATTERY;
+  let selectedCommand: Command = ZERO_BATTERY;
   if (burst && pilot && enemy.armdozer.battery === 5 && battery3) {
     selectedCommand = battery3;
+  } else if (burst) {
+    selectedCommand = burst;
+  } else if (pilot) {
+    selectedCommand = pilot;
   } else if (1 < enemy.armdozer.battery) {
     const battery = enemy.armdozer.battery;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
@@ -77,8 +81,9 @@ const defenseRoutine: SimpleRoutine = (data) => {
  * @returns NPC
  */
 export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
-  const armdozer =
+  const originArmdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
+  const armdozer = { ...originArmdozer, maxHp: 3300 };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
