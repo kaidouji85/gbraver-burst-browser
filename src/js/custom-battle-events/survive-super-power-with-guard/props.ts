@@ -1,3 +1,4 @@
+import { LastStateCondition } from "./last-state-condition";
 import { SurviveSuperPowerWithGuardState } from "./state";
 import { StateAnimationType } from "./state-animation-type";
 
@@ -5,9 +6,17 @@ import { StateAnimationType } from "./state-animation-type";
 export type SurviveSuperPowerWithGuardProps = {
   /** ステート */
   state: SurviveSuperPowerWithGuardState;
+
   /**
    * アニメーション種別条件判断オブジェクト
    * 本プロパティはonStateAnimationが呼び出されるたびに更新される想定
    */
   stateAnimationType: StateAnimationType;
+
+  /**
+   * LatState系イベントで利用する条件判断オブジェクト
+   * 本プロパティはbeforeLastStateが呼び出されるたびに更新される想定
+   * イベントが実行されていない場合、本プロパティはnull
+   */
+  lastStateCondition: LastStateCondition | null;
 };
