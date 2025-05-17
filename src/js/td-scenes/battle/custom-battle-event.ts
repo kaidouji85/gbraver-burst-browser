@@ -57,6 +57,8 @@ export type CustomStateAnimation = CustomBattleEventProps & {
   readonly update: GameState[];
   /** コマンド入力から現在のステートまでの更新履歴 */
   readonly updateUntilNow: GameState[];
+  /** 現在のステートまでの更新履歴 */
+  readonly stateHistoryUntilNow: GameState[];
 };
 
 /** 最終ステート系イベントのプロパティ */
