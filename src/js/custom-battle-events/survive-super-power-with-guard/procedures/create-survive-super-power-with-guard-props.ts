@@ -9,4 +9,5 @@ export const createSurviveSuperPowerWithGuardProps =
     state: {
       isIntroductionComplete: false,
     },
+    stateAnimationType: "None",
   });

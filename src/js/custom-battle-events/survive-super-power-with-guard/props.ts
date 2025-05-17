@@ -1,7 +1,13 @@
 import { SurviveSuperPowerWithGuardState } from "./state";
+import { StateAnimationType } from "./state-animation-type";
 
 /** 「超火力はガードで凌げ」用のプロパティ */
 export type SurviveSuperPowerWithGuardProps = {
   /** ステート */
   state: SurviveSuperPowerWithGuardState;
+  /**
+   * アニメーション種別条件判断オブジェクト
+   * 本プロパティはonStateAnimationが呼び出されるたびに更新される想定
+   */
+  stateAnimationType: StateAnimationType;
 };

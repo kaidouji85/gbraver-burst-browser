@@ -20,7 +20,7 @@ function extractBattle(stateHistory: GameState[]): GameStateX<Battle>[] {
  * @param stateHistory ステートヒストリー
  * @returns 戦闘回数
  */
-export function battleCount(stateHistory: GameState[]): number {
+export function getBattleCount(stateHistory: GameState[]): number {
   return extractBattle(stateHistory).length;
 }
 
@@ -30,7 +30,7 @@ export function battleCount(stateHistory: GameState[]): number {
  * @param playerId プレイヤーID
  * @returns 戦闘回数
  */
-export function playerBattleCount(
+export function getPlayerBattleCount(
   stateHistory: GameState[],
   playerId: PlayerId,
 ): number {

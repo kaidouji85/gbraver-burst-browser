@@ -1,4 +1,5 @@
 import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { invisibleShoutMessageWindowWhenInputCommand } from "../../invisible-shout-message-window";
 import { SurviveSuperPowerWithGuardProps } from "../props";
 import { SurviveSuperPowerWithGuardState } from "../state";
 import { introduction } from "../stories/introduction";
@@ -11,8 +12,9 @@ import { introduction } from "../stories/introduction";
 export async function beforeLastState(
   props: Readonly<LastState & SurviveSuperPowerWithGuardProps>,
 ): Promise<SurviveSuperPowerWithGuardState> {
-  let updatedState = props.state;
+  invisibleShoutMessageWindowWhenInputCommand(props);
 
+  let updatedState = props.state;
   if (!updatedState.isIntroductionComplete) {
     await introduction(props);
     updatedState = { ...updatedState, isIntroductionComplete: true };

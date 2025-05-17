@@ -1,7 +1,7 @@
 import { Animate } from "../../../../animation/animate";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaFourthAttackShout1 } from "../../animation/tsubasa-fourth-attack-shout1";
 import { tsubasaFourthAttackShout2 } from "../../animation/tsubasa-fourth-attack-shout2";
 import { QueenOfTragedyProps } from "../../props";
@@ -14,7 +14,7 @@ export const tsubasaFourthAttack: ConditionalAnimation<
 
   const { enemyId, stateHistory } = props;
   const { effect } = props.currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const battleCount = getPlayerBattleCount(stateHistory, enemyId);
 
   if (
     battleCount === 4 &&
