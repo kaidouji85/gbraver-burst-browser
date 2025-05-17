@@ -2,7 +2,7 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { tsubasaFirstAttackShout } from "../animation/tsubasa-first-attack-shout";
-import { StateAnimationType } from "../state-animation-type";
+import { StateAnimationTypeContainer } from "../state-animation-type";
 
 /**
  * カスタムステートアニメーション
@@ -10,9 +10,7 @@ import { StateAnimationType } from "../state-animation-type";
  * @returns カスタムステートアニメーション
  */
 export function onStateAnimation(
-  props: CustomStateAnimation & {
-    stateAnimationType: StateAnimationType;
-  },
+  props: Readonly<CustomStateAnimation & StateAnimationTypeContainer>,
 ): Animate {
   const { stateAnimationType } = props;
   switch (stateAnimationType) {
