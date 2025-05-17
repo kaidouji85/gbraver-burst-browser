@@ -1,22 +1,24 @@
-import { LastStateCondition } from "./last-state-condition";
+import {
+  LastStateCondition,
+  LastStateConditionContainer,
+} from "./last-state-condition";
 import { SurviveSuperPowerWithGuardState } from "./state";
 import { StateAnimationType } from "./state-animation-type";
 
 /** 「超火力はガードで凌げ」用のプロパティ */
-export type SurviveSuperPowerWithGuardProps = {
-  /** ステート */
-  state: SurviveSuperPowerWithGuardState;
-
-  /**
-   * アニメーション種別条件判断オブジェクト
-   * 本プロパティはonStateAnimationが呼び出されるたびに更新される想定
-   */
-  stateAnimationType: StateAnimationType;
-
+export type SurviveSuperPowerWithGuardProps =
   /**
    * LatState系イベントで利用する条件判断オブジェクト
    * 本プロパティはbeforeLastStateが呼び出されるたびに更新される想定
-   * イベントが実行されていない場合、本プロパティはnull
+   * イベントが実行されていない場合、本プロパティはundefined
    */
-  lastStateCondition: LastStateCondition | null;
-};
+  Partial<LastStateConditionContainer> & {
+    /** ステート */
+    state: SurviveSuperPowerWithGuardState;
+
+    /**
+     * アニメーション種別条件判断オブジェクト
+     * 本プロパティはonStateAnimationが呼び出されるたびに更新される想定
+     */
+    stateAnimationType: StateAnimationType;
+  };
