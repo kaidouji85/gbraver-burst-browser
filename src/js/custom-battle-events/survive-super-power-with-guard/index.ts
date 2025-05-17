@@ -7,6 +7,7 @@ import {
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
 import { beforeLastState } from "./procedures/before-last-state";
+import { createLastStateCondition } from "./procedures/create-last-state-condition";
 import { createStateAnimationTypeCondition } from "./procedures/create-state-animation-type-condition";
 import { createSurviveSuperPowerWithGuardProps } from "./procedures/create-survive-super-power-with-guard-props";
 import { getStateAnimationType } from "./procedures/get-state-animation-type";
@@ -36,7 +37,13 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.#props.state = await beforeLastState({ ...props, ...this.#props });
+    const lastStateCondition = createLastStateCondition(props);
+    this.#props.lastStateCondition = lastStateCondition;
+    this.#props.state = await beforeLastState({
+      ...props,
+      ...this.#props,
+      lastStateCondition,
+    });
   }
 
   /** @override */
