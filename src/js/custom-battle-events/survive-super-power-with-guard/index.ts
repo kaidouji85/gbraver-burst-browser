@@ -28,11 +28,8 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    const stateAnimationCondition = createStateAnimationTypeCondition(props);
-    const stateAnimationType = getStateAnimationType(
-      props,
-      stateAnimationCondition,
-    );
+    const condition = createStateAnimationTypeCondition(props);
+    const stateAnimationType = getStateAnimationType({ props, condition });
     this.#props.stateAnimationType = stateAnimationType;
     return onStateAnimation({ ...props, stateAnimationType });
   }
