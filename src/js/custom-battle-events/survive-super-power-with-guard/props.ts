@@ -1,7 +1,4 @@
-import {
-  LastStateCondition,
-  LastStateConditionContainer,
-} from "./last-state-condition";
+import { LastStateConditionContainer } from "./last-state-condition";
 import { SurviveSuperPowerWithGuardState } from "./state";
 import { StateAnimationType } from "./state-animation-type";
 
