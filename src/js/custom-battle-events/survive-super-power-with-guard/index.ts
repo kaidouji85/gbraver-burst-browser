@@ -10,6 +10,7 @@ import { SurviveSuperPowerWithGuardProps } from "./props";
 import { Animate } from "../../animation/animate";
 import { createStateAnimationConditions } from "./procedures/create-state-animation-conditions";
 import { empty } from "../../animation/delay";
+import { onStateAnimation } from "./procedures/on-state-animation";
 
 /** 「超火力はガードで凌げ」用のカスタムバトルイベント*/
 class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
@@ -26,8 +27,9 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimation): Animate {
-    this.#props.stateAnimationCondition = createStateAnimationConditions(props);
-    return empty();
+    const stateAnimationCondition = createStateAnimationConditions(props);
+    this.#props.stateAnimationCondition = stateAnimationCondition;
+    return onStateAnimation({ ...props, stateAnimationCondition });
   }
 
   /** @override */
