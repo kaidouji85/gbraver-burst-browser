@@ -1,6 +1,6 @@
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
 import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { isEnemyPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
@@ -30,7 +30,7 @@ export const tsubasaShout: ConditionalAnimation<
     }
 
     const { enemy } = players;
-    return playerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
+    return getPlayerBattleCount(props.stateHistory, enemy.playerId) === 1 &&
       props.currentState.effect.name === "BatteryDeclaration" &&
       props.currentState.effect.attacker === enemy.playerId
       ? tsubasaFirstAttackShout(props)

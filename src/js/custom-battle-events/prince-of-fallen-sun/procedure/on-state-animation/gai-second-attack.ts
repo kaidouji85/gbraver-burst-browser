@@ -1,8 +1,8 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { gaiSecondAttackShout } from "../../animation/gai-second-attack-shout";
 import { PrinceOfFallenSunProps } from "../../props";
 
@@ -14,7 +14,7 @@ export const gaiSecondAttack: ConditionalAnimation<
 
   const { stateHistory, currentState, enemyId } = props;
   const { effect } = currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const battleCount = getPlayerBattleCount(stateHistory, enemyId);
 
   if (
     battleCount === 2 &&

@@ -1,7 +1,7 @@
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { QueenOfTragedyProps } from "../../props";
 
@@ -11,7 +11,7 @@ export const tsubasaFirstAttack: ConditionalAnimation<
 > = (props) => {
   const { enemyId, stateHistory } = props;
   const { effect } = props.currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const battleCount = getPlayerBattleCount(stateHistory, enemyId);
 
   if (
     battleCount === 1 &&
