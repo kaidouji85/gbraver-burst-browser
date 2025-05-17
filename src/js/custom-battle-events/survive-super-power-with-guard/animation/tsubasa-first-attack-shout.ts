@@ -15,6 +15,6 @@ export const tsubasaFirstAttackShout = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `ライト こちらから${wbr}行かせてもらうぞ`,
+      `ライト こちらから${wbr}行くぞ`,
     );
   });
