@@ -2,7 +2,7 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { tsubasaFirstAttackShout } from "../animation/tsubasa-first-attack-shout";
-import { StateAnimationConditions } from "../state-animation-conditions";
+import { StateAnimationType } from "../state-animation-type";
 
 /**
  * カスタムステートアニメーション
@@ -11,19 +11,14 @@ import { StateAnimationConditions } from "../state-animation-conditions";
  */
 export function onStateAnimation(
   props: CustomStateAnimation & {
-    stateAnimationCondition: StateAnimationConditions;
+    stateAnimationType: StateAnimationType;
   },
 ): Animate {
-  const { currentState } = props;
-  const { player, playerBattleCount } = props.stateAnimationCondition;
-
-  if (
-    currentState.effect.name === "BatteryDeclaration" &&
-    currentState.effect.attacker === player.playerId &&
-    playerBattleCount === 0
-  ) {
-    return tsubasaFirstAttackShout(props);
+  const { stateAnimationType } = props;
+  switch (stateAnimationType) {
+    case "TsubasaFirstAttack":
+      return tsubasaFirstAttackShout(props);
+    default:
+      return empty();
   }
-
-  return empty();
 }
