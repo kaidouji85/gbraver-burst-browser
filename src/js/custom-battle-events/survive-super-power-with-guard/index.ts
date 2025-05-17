@@ -11,6 +11,7 @@ import { Animate } from "../../animation/animate";
 import { createStateAnimationConditions } from "./procedures/create-state-animation-conditions";
 import { empty } from "../../animation/delay";
 import { onStateAnimation } from "./procedures/on-state-animation";
+import { afterLastState } from "./procedures/after-last-state";
 
 /** 「超火力はガードで凌げ」用のカスタムバトルイベント*/
 class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
@@ -35,6 +36,11 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.#props.state = await beforeLastState({ ...props, ...this.#props });
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    await afterLastState(props);
   }
 }
 
