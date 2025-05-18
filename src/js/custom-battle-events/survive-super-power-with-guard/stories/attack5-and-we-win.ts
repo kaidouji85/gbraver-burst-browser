@@ -11,11 +11,9 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export async function attack5AndWeWin(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「フハハハハ 見ろ${wbr}大田高校`],
-    [
-      `この新型の${wbr}グランドーザの${wbr}パワーなら ウィングドーザなど${wbr}一撃`,
-    ],
-    [`5攻撃を${wbr}凌げなければ 俺たちの勝ちだ」`],
+    ["ガイ", `「見ろ大田高校 こちらの新型${wbr}グランランドーザを`],
+    [`こいつの${wbr}パワーなら お前らの${wbr}ロボなど一撃`],
+    [`このターン ５攻撃で${wbr}俺たちの勝ちだ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 

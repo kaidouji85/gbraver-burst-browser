@@ -26,7 +26,7 @@ export async function beforeLastState(
     updatedState = { ...updatedState, isIntroductionComplete: true };
   } else if (shouldPlayAttack5AndWeWin(props)) {
     await attack5AndWeWin(props);
-    updatedState = { ...updatedState, isIntroductionComplete: false };
+    updatedState = { ...updatedState, isAttack5AndWeWinComplete: false };
   }
 
   return updatedState;
