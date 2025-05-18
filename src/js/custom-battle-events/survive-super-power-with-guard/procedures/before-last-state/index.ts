@@ -3,7 +3,9 @@ import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-
 import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
+import { attack5AndWeWin } from "../../stories/attack5-and-we-win";
 import { introduction } from "../../stories/introduction";
+import { shouldPlayAttack5AndWeWin } from "./should-play-attack5-and-we-win";
 import { shouldPlayIntroduction } from "./should-play-introduction";
 
 /**
@@ -22,6 +24,9 @@ export async function beforeLastState(
   if (shouldPlayIntroduction(props)) {
     await introduction(props);
     updatedState = { ...updatedState, isIntroductionComplete: true };
+  } else if (shouldPlayAttack5AndWeWin(props)) {
+    await attack5AndWeWin(props);
+    updatedState = { ...updatedState, isIntroductionComplete: false };
   }
 
   return updatedState;
