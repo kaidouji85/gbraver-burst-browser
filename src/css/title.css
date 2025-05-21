@@ -252,11 +252,15 @@
 .title__story {
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
-  min-height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   box-shadow: var(--sub-button-box-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__config {
@@ -281,7 +285,6 @@
 
 .title__tutorial {
   grid-area: tutorial;
-  min-height: calc(var(--responsive-font-size) * 3);
   font-size: calc(var(--responsive-font-size) * 1.1);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
@@ -289,4 +292,11 @@
   border: var(--button-border);
   background-color: var(--button-background-color);
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title__tutorial-icon {
+  font-size: calc(var(--responsive-font-size) * 2);
 }
