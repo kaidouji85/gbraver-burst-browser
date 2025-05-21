@@ -257,6 +257,11 @@
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   box-shadow: var(--sub-button-box-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__config {
