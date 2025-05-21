@@ -15,6 +15,6 @@ export const shinyaPilotSkillShout = (
     playerPilotOnlyShout(
       props,
       "Shinya",
-      `なぜか${wbr}無性に${wbr}やる気が${wbr}出てきたッス`,
+      `何故か${wbr}やる気が${wbr}出てきたッス`,
     );
   });
