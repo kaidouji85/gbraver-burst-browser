@@ -4,6 +4,7 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
 } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
@@ -24,4 +25,6 @@ export async function secondTurnLose(props: CustomBattleEventProps) {
     [`5防御していれば即死は免れたはずだ」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
+
+  invisibleAllMessageWindows(props);
 }
