@@ -4,8 +4,8 @@ import { BatterySystemTutorialProps } from "../../props";
 import { BatterySystemTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
 import { doBattleDescriptionIfNeeded } from "./do-battle-description-if-needed";
-import { doSelfInitiatedPilotSkillIfNeeded } from "./do-self-initialated-pilot-skill-if-needed";
 import { doSelfInitiatedBurstIfNeeded } from "./do-self-initiated-burst-if-needed";
+import { doSelfInitiatedPilotSkillIfNeeded } from "./do-self-initiated-pilot-skill-if-needed";
 
 /**
  * 最終ステート直前イベント
