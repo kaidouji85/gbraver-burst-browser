@@ -7,10 +7,10 @@ import {
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
- * 3ターン目で負けた
+ * 2ターン目で負けた
  * @param props イベントプロパティ
  */
-export async function thirdTurnLose(props: CustomBattleEventProps) {
+export async function secondTurnLose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「どや わいらの${wbr}勝ちや」`],
