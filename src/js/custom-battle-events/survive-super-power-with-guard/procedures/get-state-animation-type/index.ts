@@ -4,6 +4,7 @@ import {
   StateAnimationTypeCondition,
 } from "../../state-animation-type";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
+import { isRaitoFinishBlow } from "./is-raito-finish-blow";
 
 /**
  * 条件に応じたテートアニメーションタイプを取得する
@@ -19,6 +20,8 @@ export function getStateAnimationType(options: {
   let result: StateAnimationType = "None";
   if (isTsubasaFirstAttack(options)) {
     result = "TsubasaFirstAttack";
+  } else if (isRaitoFinishBlow(options)) {
+    result = "RaitoFinishBlow";
   }
 
   return result;
