@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
@@ -7,7 +7,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ ファーストバトル */
 export const shinyaFirstBattle: ConditionalAnimation<
-  CustomStateAnimation & ConfrontationTwoBraverProps
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
     const player = separatePlayersFromCurrentState(props)?.player;

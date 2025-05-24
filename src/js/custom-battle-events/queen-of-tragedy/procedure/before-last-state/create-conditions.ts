@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
 import { QueenOfTragedyProps } from "../../props";
@@ -10,7 +10,7 @@ import { Conditions } from "./conditions";
  * @returns 条件オブジェクト、生成できない場合はnull
  */
 export function createConditions(
-  props: LastState & QueenOfTragedyProps,
+  props: LastStateEventProps & QueenOfTragedyProps,
 ): Conditions | null {
   const separatedPlayers = separatePlayersFromLastState(props);
   const turn = turnCount(props.stateHistory);

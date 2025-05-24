@@ -1,13 +1,13 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { yuuyaBattleShoutWhenNormalHit } from "../../animation/yuuya-battle-shout-when-normal-hit";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ユウヤ 戦闘 通常ヒット */
 export const yuuyaBattleWhenNormalHit: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

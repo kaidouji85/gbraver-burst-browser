@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill";
@@ -9,7 +9,7 @@ import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill
  * @returns ステート更新結果
  */
 export async function executeSelfInitiatedPilotSkillIfNeeded(
-  props: Readonly<LastState & ZeroDefenseTutorialProps>,
+  props: Readonly<LastStateEventProps & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
   const hasPilotSkill = props.update.some(
     (state) => state.effect.name === "PilotSkillEffect",

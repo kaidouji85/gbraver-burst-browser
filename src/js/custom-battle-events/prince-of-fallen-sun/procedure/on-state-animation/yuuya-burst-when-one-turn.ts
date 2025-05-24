@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { turnCount } from "../../../turn-count";
 import { yuuyaBurstShoutWhenOneTurn } from "../../animation/yuuya-burst-shout-when-one-turn";
@@ -7,7 +7,7 @@ import { PrinceOfFallenSunProps } from "../../props";
 
 /** ユウヤ バースト（1ターン目） */
 export const yuuyaBurstWhenOneTurn: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
   const { stateHistory, currentState, playerId } = props;

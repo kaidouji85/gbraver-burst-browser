@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { zeroBatteryChance } from "../../stories/zero-battery-chance";
@@ -9,7 +9,7 @@ import { zeroBatteryChance } from "../../stories/zero-battery-chance";
  * @returns ステート更新結果
  */
 export async function executeZeroBatteryChanceIfNeeded(
-  props: Readonly<LastState & ZeroDefenseTutorialProps>,
+  props: Readonly<LastStateEventProps & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
   if (props.eventState.isZeroBatteryChangeComplete) {
     return props.eventState;

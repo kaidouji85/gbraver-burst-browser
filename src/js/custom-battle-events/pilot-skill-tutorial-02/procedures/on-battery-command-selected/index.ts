@@ -1,5 +1,5 @@
 import {
-  BatteryCommandSelected,
+  BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../../td-scenes/battle/custom-battle-event";
 import { PilotSkillTutorial02Props } from "../../props";
@@ -21,7 +21,7 @@ type Ret = {
  * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
+  props: Readonly<BatteryCommandSelectedEventProps & PilotSkillTutorial02Props>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {

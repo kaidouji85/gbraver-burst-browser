@@ -1,4 +1,4 @@
-import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { unattentionBurstButton } from "../../../attention";
 import {
   focusInBatterySelector,
@@ -24,7 +24,9 @@ import { BatteryCommandSelectedEnd } from "./battery-command-selected-end";
  * @returns 実行した場合は終了情報、しなかった場合はnull
  */
 export async function doZeroBatteryIdNeeded(
-  props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,
+  props: Readonly<
+    BatteryCommandSelectedEventProps & BatterySystemTutorialProps
+  >,
 ): Promise<BatteryCommandSelectedEnd | null> {
   const isNotZeroBatteryCommand = props.battery.battery !== 0;
   if (isNotZeroBatteryCommand) {

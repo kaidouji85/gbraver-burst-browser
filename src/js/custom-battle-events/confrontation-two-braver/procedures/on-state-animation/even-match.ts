@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { yuuyaShout1WhenEvenMatch } from "../../animation/yuuya-shout1-when-even-match";
@@ -7,7 +7,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 
 /** イーブンマッチ カスタムステートアニメーション */
 export const evenMatch: ConditionalAnimation<
-  CustomStateAnimation & ConfrontationTwoBraverProps
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
     return props.eventState.chapter.type === "EvenMatch" &&

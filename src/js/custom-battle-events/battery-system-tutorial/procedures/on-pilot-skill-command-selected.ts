@@ -1,6 +1,6 @@
 import type {
   CommandCanceled,
-  PilotSkillCommandSelected,
+  PilotSkillSelectedEventProps,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton, isPilotButtonFocused } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
@@ -20,7 +20,7 @@ type Ret = {
  * @returns イベント終了情報
  */
 export async function onPilotSkillCommandSelected(
-  props: Readonly<PilotSkillCommandSelected & BatterySystemTutorialProps>,
+  props: Readonly<PilotSkillSelectedEventProps & BatterySystemTutorialProps>,
 ): Promise<Ret> {
   if (isPilotButtonFocused(props)) {
     focusOutPilotButton(props);

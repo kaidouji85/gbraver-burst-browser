@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { BatterySystemTutorialProps } from "../../props";
 import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill";
 
@@ -8,7 +8,7 @@ import { selfInitiatedPilotSkill } from "../../stories/self-intiated-pilot-skill
  * @returns 実行した場合はtrue、そうでない場合はfalse
  */
 export async function doSelfInitiatedPilotSkillIfNeeded(
-  props: Readonly<LastState & BatterySystemTutorialProps>,
+  props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<boolean> {
   const hasPilotSkill = props.update.some(
     (state) => state.effect.name === "PilotSkillEffect",

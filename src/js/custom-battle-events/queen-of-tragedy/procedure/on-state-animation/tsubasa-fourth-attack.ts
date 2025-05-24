@@ -1,5 +1,5 @@
 import { Animate } from "../../../../animation/animate";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaFourthAttackShout1 } from "../../animation/tsubasa-fourth-attack-shout1";
@@ -8,7 +8,7 @@ import { QueenOfTragedyProps } from "../../props";
 
 /** ツバサ 4回目攻撃 */
 export const tsubasaFourthAttack: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
 

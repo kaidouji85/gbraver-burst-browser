@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../../props";
 import { BurstTutorialState } from "../../state";
 import { introduction } from "../../stories/introduction";
@@ -12,7 +12,7 @@ import { executeSelfInitiatedPilotSkillIfNeeded } from "./execute-self-initiated
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState & BurstTutorialProps>,
+  props: Readonly<LastStateEventProps & BurstTutorialProps>,
 ): Promise<BurstTutorialState> {
   if (!props.eventState.isIntroductionComplete) {
     await introduction(props);

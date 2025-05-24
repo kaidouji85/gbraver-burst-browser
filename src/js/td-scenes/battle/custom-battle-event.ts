@@ -43,14 +43,14 @@ export type LastStateContainer = {
 };
 
 /** ステート更新開始イベントのプロパティ */
-export type StateUpdateStarted = CustomBattleEventProps &
+export type StateUpdateStartedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** コマンド入力から最終ステートまでのステート更新履歴 */
     readonly update: GameState[];
   };
 
 /** カスタムステートアニメーションのプロパティ */
-export type CustomStateAnimation = CustomBattleEventProps & {
+export type CustomStateAnimationProps = CustomBattleEventProps & {
   /** 再生するステート */
   readonly currentState: GameState;
   /** コマンド入力から最終ステートまでの更新履歴 */
@@ -62,28 +62,28 @@ export type CustomStateAnimation = CustomBattleEventProps & {
 };
 
 /** 最終ステート系イベントのプロパティ */
-export type LastState = CustomBattleEventProps &
+export type LastStateEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** コマンド入力から最終ステートまでのステート更新履歴 */
     readonly update: GameState[];
   };
 
 /** バッテリーコマンド選択イベントのプロパティ */
-export type BatteryCommandSelected = CustomBattleEventProps &
+export type BatteryCommandSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したバッテリーコマンド */
     readonly battery: BatteryCommand;
   };
 
 /** バーストコマンド選択イベントのプロパティ */
-export type BurstCommandSelected = CustomBattleEventProps &
+export type BurstSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したバーストコマンド */
     readonly burst: BurstCommand;
   };
 
 /** パイロットスキル選択イベントのプロパティ */
-export type PilotSkillCommandSelected = CustomBattleEventProps &
+export type PilotSkillSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したパイロットスキルコマンド */
     readonly pilot: PilotSkillCommand;
@@ -101,7 +101,7 @@ export interface CustomBattleEvent {
    * ステート更新が開始された時に呼ばれるイベント
    * @param props イベントプロパティ
    */
-  onStateUpdateStarted(props: StateUpdateStarted): void;
+  onStateUpdateStarted(props: StateUpdateStartedEventProps): void;
 
   /**
    * カスタムステートアニメーション
@@ -110,7 +110,7 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @returns カスタムステートアニメーション
    */
-  onStateAnimation(props: CustomStateAnimation): Animate;
+  onStateAnimation(props: CustomStateAnimationProps): Animate;
 
   /**
    * ステートアニメ終了後に呼ばれる、カスタムステートアニメーション
@@ -119,14 +119,14 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @returns カスタムステートアニメーション
    */
-  afterStateAnimation(props: CustomStateAnimation): Animate;
+  afterStateAnimation(props: CustomStateAnimationProps): Animate;
 
   /**
    * 最終ステート直前イベント
    * @param props イベントプロパティ
    * @returns 処理が完了したら発火するPromise
    */
-  beforeLastState(props: LastState): Promise<void>;
+  beforeLastState(props: LastStateEventProps): Promise<void>;
 
   /**
    * 最終ステートイベント
@@ -134,14 +134,14 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @returns 処理が完了したら発火するPromise
    */
-  onLastState(props: LastState): Promise<void>;
+  onLastState(props: LastStateEventProps): Promise<void>;
 
   /**
    * 最終ステート完了後イベント
    * @param props イベントプロパティ
    * @returns 処理が完了したら発火するPromise
    */
-  afterLastState(props: LastState): Promise<void>;
+  afterLastState(props: LastStateEventProps): Promise<void>;
 
   /**
    * バッテリーコマンド選択イベント
@@ -149,7 +149,7 @@ export interface CustomBattleEvent {
    * @returns コマンドキャンセル情報
    */
   onBatteryCommandSelected(
-    props: BatteryCommandSelected,
+    props: BatteryCommandSelectedEventProps,
   ): Promise<CommandCanceled>;
 
   /**
@@ -157,7 +157,9 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @returns コマンドキャンセル情報
    */
-  onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled>;
+  onBurstCommandSelected(
+    props: BurstSelectedEventProps,
+  ): Promise<CommandCanceled>;
 
   /**
    * パイロットスキルコマンド選択イベント
@@ -165,6 +167,6 @@ export interface CustomBattleEvent {
    * @returns コマンドキャンセル情報
    */
   onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected,
+    props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled>;
 }

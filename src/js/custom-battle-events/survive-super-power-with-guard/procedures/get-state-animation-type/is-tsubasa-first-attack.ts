@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { StateAnimationTypeCondition } from "../../state-animation-type";
 
 /**
@@ -8,7 +8,7 @@ import { StateAnimationTypeCondition } from "../../state-animation-type";
  */
 export function isTsubasaFirstAttack(options: {
   /** カスタムステートアニメーションプロパティ */
-  props: CustomStateAnimation;
+  props: CustomStateAnimationProps;
   /** 条件オブジェクト */
   condition: StateAnimationTypeCondition;
 }): boolean {

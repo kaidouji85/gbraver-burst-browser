@@ -1,6 +1,6 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
-import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../invisible-shout-message-window";
 import { tsubasaFirstAttackShout } from "../animation/tsubasa-first-attack-shout";
 import { StateAnimationTypeContainer } from "../state-animation-type";
@@ -11,7 +11,7 @@ import { StateAnimationTypeContainer } from "../state-animation-type";
  * @returns アニメーション
  */
 function getAnimate(
-  props: Readonly<CustomStateAnimation & StateAnimationTypeContainer>,
+  props: Readonly<CustomStateAnimationProps & StateAnimationTypeContainer>,
 ) {
   const { stateAnimationType } = props;
   switch (stateAnimationType) {
@@ -28,6 +28,6 @@ function getAnimate(
  * @returns カスタムステートアニメーション
  */
 export const onStateAnimation = (
-  props: Readonly<CustomStateAnimation & StateAnimationTypeContainer>,
+  props: Readonly<CustomStateAnimationProps & StateAnimationTypeContainer>,
 ): Animate =>
   invisibleShoutMessageWindowWhenTurnChange(props) ?? getAnimate(props);

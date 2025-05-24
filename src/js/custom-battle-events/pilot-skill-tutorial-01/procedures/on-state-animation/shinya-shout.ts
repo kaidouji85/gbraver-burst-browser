@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import {
   getBattleCount,
@@ -16,7 +16,7 @@ import { PilotSkillTutorial01Props } from "../../props";
 
 /** シンヤ 叫び */
 export const shinyaShout: ConditionalAnimation<
-  CustomStateAnimation & PilotSkillTutorial01Props
+  CustomStateAnimationProps & PilotSkillTutorial01Props
 >[] = [
   (props) => {
     const players = separatePlayersFromCurrentState(props);

@@ -1,14 +1,14 @@
 import { Animate } from "../animation/animate";
 import { empty } from "../animation/delay";
 import type {
-  BatteryCommandSelected,
-  BurstCommandSelected,
+  BatteryCommandSelectedEventProps,
+  BurstSelectedEventProps,
   CommandCanceled,
   CustomBattleEvent,
-  CustomStateAnimation,
-  LastState,
-  PilotSkillCommandSelected,
-  StateUpdateStarted,
+  CustomStateAnimationProps,
+  LastStateEventProps,
+  PilotSkillSelectedEventProps,
+  StateUpdateStartedEventProps,
 } from "../td-scenes/battle/custom-battle-event";
 
 /**
@@ -18,42 +18,42 @@ import type {
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  onStateUpdateStarted(props: StateUpdateStarted): void {
+  onStateUpdateStarted(props: StateUpdateStartedEventProps): void {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  onStateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimationProps): Animate {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return empty();
   }
 
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  afterStateAnimation(props: CustomStateAnimation): Animate {
+  afterStateAnimation(props: CustomStateAnimationProps): Animate {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return empty();
   }
 
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async beforeLastState(props: LastState): Promise<void> {
+  async beforeLastState(props: LastStateEventProps): Promise<void> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async onLastState(props: LastState): Promise<void> {
+  async onLastState(props: LastStateEventProps): Promise<void> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
 
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  async afterLastState(props: LastState): Promise<void> {
+  async afterLastState(props: LastStateEventProps): Promise<void> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
@@ -61,7 +61,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected,
+    props: BatteryCommandSelectedEventProps,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
@@ -72,7 +72,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBurstCommandSelected(
-    props: BurstCommandSelected,
+    props: BurstSelectedEventProps,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {
@@ -83,7 +83,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected,
+    props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     return {

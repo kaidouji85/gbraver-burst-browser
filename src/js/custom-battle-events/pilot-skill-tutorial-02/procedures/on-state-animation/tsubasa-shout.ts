@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { tsubasaBurst } from "../../animation/tsubasa-burst";
@@ -7,7 +7,7 @@ import { PilotSkillTutorial02Props } from "../../props";
 
 /** ツバサの叫び */
 export const tsubasaShout: ConditionalAnimation<
-  CustomStateAnimation & PilotSkillTutorial02Props
+  CustomStateAnimationProps & PilotSkillTutorial02Props
 >[] = [
   (props) =>
     isEnemyBurstActivatedFromCurrentState(props) ? tsubasaBurst(props) : null,

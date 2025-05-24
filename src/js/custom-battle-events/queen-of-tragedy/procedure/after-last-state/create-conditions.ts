@@ -1,6 +1,6 @@
 import { GameEnd } from "gbraver-burst-core";
 
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { QueenOfTragedyProps } from "../../props";
 import { Conditions } from "./conditions";
 
@@ -10,7 +10,7 @@ import { Conditions } from "./conditions";
  * @returns 条件オブジェクト
  */
 export function createConditions(
-  props: LastState & QueenOfTragedyProps,
+  props: LastStateEventProps & QueenOfTragedyProps,
 ): Conditions {
   const foundGameEnd = props.update
     .map((s) => s.effect)

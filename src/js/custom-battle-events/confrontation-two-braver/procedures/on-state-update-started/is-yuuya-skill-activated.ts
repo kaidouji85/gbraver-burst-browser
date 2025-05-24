@@ -1,4 +1,4 @@
-import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStartedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 
 /**
  * ユウヤがスキルを発動したかどうかを判定する
@@ -6,7 +6,7 @@ import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-e
  * @returns ユウヤがスキルを発動したかどうか
  */
 export function isYuuyaSkillActivated(
-  props: Readonly<StateUpdateStarted>,
+  props: Readonly<StateUpdateStartedEventProps>,
 ): boolean {
   return props.update.some(
     (state) =>

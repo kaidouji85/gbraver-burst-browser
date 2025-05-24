@@ -1,4 +1,4 @@
-import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStartedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { QueenOfTragedyProps } from "../../props";
 import { Conditions } from "./conditions";
@@ -9,7 +9,7 @@ import { Conditions } from "./conditions";
  * @returns 条件判断オブジェクト
  */
 export function createConditions(
-  props: StateUpdateStarted & QueenOfTragedyProps,
+  props: StateUpdateStartedEventProps & QueenOfTragedyProps,
 ): Conditions {
   const { stateHistory, update, playerId } = props;
   const turn = turnCount(stateHistory);

@@ -1,7 +1,7 @@
 import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
-  CustomStateAnimation,
+  CustomStateAnimationProps,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterStateAnimation } from "./procedures/after-state-animation";
@@ -17,12 +17,12 @@ class SeriousMatchEvent extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  onStateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimationProps): Animate {
     return onStateAnimation(props);
   }
 
   /** @override */
-  afterStateAnimation(props: CustomStateAnimation): Animate {
+  afterStateAnimation(props: CustomStateAnimationProps): Animate {
     return afterStateAnimation(props);
   }
 }

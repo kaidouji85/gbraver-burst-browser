@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { shinyaAttackShoutWhenYuuyaTakesDamage } from "../../animation/shinya-attack-shout-when-yuuya-takes-damage";
@@ -6,7 +6,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ 戦闘 ユウヤがダメージを受けている */
 export const shinyaBattleWhenYuuyaTakesDamage: ConditionalAnimation<
-  CustomStateAnimation & ConfrontationTwoBraverProps
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
     const separatedResult = separatePlayersFromCurrentState(props);

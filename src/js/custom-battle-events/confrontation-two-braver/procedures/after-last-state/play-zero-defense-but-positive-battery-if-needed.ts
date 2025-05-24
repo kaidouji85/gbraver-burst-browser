@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { isZeroDefenseButBatteryPositiveFromLastState } from "../../../is-zero-defense-but-battery-positive";
 import { zeroDefenseButPositiveBattery } from "../../stories/zero-defense-but-positive-battery";
 
@@ -8,7 +8,7 @@ import { zeroDefenseButPositiveBattery } from "../../stories/zero-defense-but-po
  * @returns ストーリーを再生したらtrueを返す
  */
 export async function playZeroDefenseButPositiveBatteryIfNeeded(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): Promise<boolean> {
   if (isZeroDefenseButBatteryPositiveFromLastState(props)) {
     await zeroDefenseButPositiveBattery(props);

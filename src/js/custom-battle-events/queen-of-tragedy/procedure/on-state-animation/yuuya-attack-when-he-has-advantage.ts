@@ -1,5 +1,5 @@
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerAdvantage } from "../../../is-player-advantage";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
@@ -8,7 +8,7 @@ import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ 攻撃（ユウヤ有利） */
 export const yuuyaAttackWhenHeHasAdvantage: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   const { playerId } = props;
   const { effect } = props.currentState;
