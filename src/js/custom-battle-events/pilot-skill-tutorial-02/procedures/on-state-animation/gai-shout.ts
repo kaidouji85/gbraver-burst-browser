@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isPlayerPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
 import { gaiFinishBlow } from "../../animation/gai-finish-blow";
@@ -7,7 +7,7 @@ import { PilotSkillTutorial02Props } from "../../props";
 
 /** ガイの叫び */
 export const gaiShout: ConditionalAnimation<
-  CustomStateAnimation & PilotSkillTutorial02Props
+  CustomStateAnimationProps & PilotSkillTutorial02Props
 >[] = [
   (props) =>
     isPlayerPilotSkillActivatedFromCurrentState(props)

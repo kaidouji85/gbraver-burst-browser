@@ -1,4 +1,4 @@
-import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStartedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { ConfrontationTwoBraverState } from "../../state";
@@ -11,7 +11,7 @@ import { isYuuyaSkillActivated } from "./is-yuuya-skill-activated";
  * @returns 更新後のイベントステート
  */
 export function onStateUpdateStarted(
-  props: Readonly<StateUpdateStarted & ConfrontationTwoBraverProps>,
+  props: Readonly<StateUpdateStartedEventProps & ConfrontationTwoBraverProps>,
 ): ConfrontationTwoBraverState {
   const { lastState } = props;
   const isPlayerTurn = lastState.activePlayerId === props.playerId;

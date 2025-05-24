@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../../props";
 import { selfInitiatedBurst } from "../../stories/self-initiated-burst";
 
@@ -8,7 +8,7 @@ import { selfInitiatedBurst } from "../../stories/self-initiated-burst";
  * @returns 処理が完了したら発火するPromise
  */
 export async function executeSelfInitiatedBurstIfNeeded(
-  props: Readonly<LastState & BurstTutorialProps>,
+  props: Readonly<LastStateEventProps & BurstTutorialProps>,
 ): Promise<void> {
   const hasPlayerBurst = props.update.some(
     (state) =>

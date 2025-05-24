@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import {
   ConditionalAnimation,
   getAnimationIfConditionMet,
@@ -28,10 +28,10 @@ import { yuuyaHasAdvantage } from "./yuuya-has-advantage";
  * @returns アニメーション
  */
 export function onStateAnimation(
-  props: Readonly<CustomStateAnimation & ConfrontationTwoBraverProps>,
+  props: Readonly<CustomStateAnimationProps & ConfrontationTwoBraverProps>,
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
-    CustomStateAnimation & ConfrontationTwoBraverProps
+    CustomStateAnimationProps & ConfrontationTwoBraverProps
   >[] = [
     ...shinyaHasAdvantage,
     ...yuuyaHasAdvantage,

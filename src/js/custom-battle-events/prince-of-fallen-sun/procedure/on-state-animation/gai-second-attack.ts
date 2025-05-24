@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
 import { gaiSecondAttackShout } from "../../animation/gai-second-attack-shout";
@@ -8,7 +8,7 @@ import { PrinceOfFallenSunProps } from "../../props";
 
 /** ガイ セカンドアタック */
 export const gaiSecondAttack: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

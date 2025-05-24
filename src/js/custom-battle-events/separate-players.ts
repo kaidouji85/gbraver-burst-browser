@@ -2,7 +2,7 @@ import { GameState, PlayerState } from "gbraver-burst-core";
 
 import {
   CustomBattleEventProps,
-  CustomStateAnimation,
+  CustomStateAnimationProps,
   LastStateContainer,
 } from "../td-scenes/battle/custom-battle-event";
 
@@ -44,5 +44,5 @@ export const separatePlayersFromLastState = (
  * @returns 分割されたプレイヤー、分割できない場合null
  */
 export const separatePlayersFromCurrentState = (
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimationProps>,
 ) => separatePlayers(props, props.currentState);

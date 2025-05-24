@@ -2,8 +2,8 @@ import { Animate } from "../animation/animate";
 import { onStart } from "../animation/on-start";
 import {
   CustomBattleEventProps,
-  CustomStateAnimation,
-  LastState,
+  CustomStateAnimationProps,
+  LastStateEventProps,
 } from "../td-scenes/battle/custom-battle-event";
 
 /**
@@ -24,7 +24,7 @@ function invisibleShoutMessageWindow(
  * @returns ターン開始時なら再生するアニメーション、それ以外はnull
  */
 export function invisibleShoutMessageWindowWhenTurnChange(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimationProps>,
 ): Animate | null {
   return props.currentState.effect.name === "TurnChange"
     ? onStart(() => {
@@ -39,7 +39,7 @@ export function invisibleShoutMessageWindowWhenTurnChange(
  * @param props イベントプロパティ
  */
 export function invisibleShoutMessageWindowWhenInputCommand(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): void {
   const { lastState } = props;
   if (lastState.effect.name !== "InputCommand") {
@@ -64,7 +64,7 @@ export function invisibleShoutMessageWindowWhenInputCommand(
  * @param props イベントプロパティ
  */
 export function invisibleShoutMessageWindowWhenGameEnd(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): void {
   const { lastState } = props;
   if (lastState.effect.name === "GameEnd") {

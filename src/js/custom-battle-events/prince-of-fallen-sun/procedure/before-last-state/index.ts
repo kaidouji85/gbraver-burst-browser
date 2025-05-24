@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
 import { PrinceOfFallenSunState } from "../../state";
@@ -14,7 +14,7 @@ import { shouldPlaySunOfNoble } from "./should-play-sun-of-noble";
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: LastState & PrinceOfFallenSunProps,
+  props: LastStateEventProps & PrinceOfFallenSunProps,
 ): Promise<PrinceOfFallenSunState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
 

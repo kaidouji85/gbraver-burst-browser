@@ -1,13 +1,13 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { yuuyaBattleShoutWhenFeint } from "../../animation/yuuya-battle-shout-when-feint";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ユウヤ 戦闘 フェイント */
 export const yuuyaBattleWhenFeint: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

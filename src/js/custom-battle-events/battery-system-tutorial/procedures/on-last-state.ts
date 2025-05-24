@@ -1,4 +1,4 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
 import { BatterySystemTutorialState } from "../state";
@@ -10,7 +10,7 @@ import { attackDescription } from "../stories/attack-description";
  * @returns ステート更新結果
  */
 export async function onLastState(
-  props: Readonly<LastState & BatterySystemTutorialProps>,
+  props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
   if (props.eventState.isBatterySystemDescriptionComplete) {
     return props.eventState;

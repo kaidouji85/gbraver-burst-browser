@@ -1,12 +1,12 @@
 import { Animate } from "../animation/animate";
-import { CustomStateAnimation } from "../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 再生条件とアニメーションのペア
  * @param props イベントプロパティ
  * @returns 再生するアニメーション、再生条件を満たさない場合はnull
  */
-export type ConditionalAnimation<X extends CustomStateAnimation> = (
+export type ConditionalAnimation<X extends CustomStateAnimationProps> = (
   props: X,
 ) => Animate | null;
 
@@ -17,7 +17,7 @@ export type ConditionalAnimation<X extends CustomStateAnimation> = (
  * @param animations 再生条件とアニメーションのリスト
  * @returns 再生するアニメーション、再生条件を満たすアニメーションがない場合はnull
  */
-export function getAnimationIfConditionMet<X extends CustomStateAnimation>(
+export function getAnimationIfConditionMet<X extends CustomStateAnimationProps>(
   props: X,
   animations: ConditionalAnimation<X>[],
 ): Animate | null {

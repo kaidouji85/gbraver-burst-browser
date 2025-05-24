@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
@@ -11,7 +11,9 @@ import { shouldPlayThirdTurnLose } from "./should-play-third-turn-lose";
  */
 export async function afterLastState(
   props: Readonly<
-    LastState & SurviveSuperPowerWithGuardProps & LastStateConditionContainer
+    LastStateEventProps &
+      SurviveSuperPowerWithGuardProps &
+      LastStateConditionContainer
   >,
 ) {
   invisibleShoutMessageWindowWhenGameEnd(props);

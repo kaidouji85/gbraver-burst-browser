@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { isZeroDefenseButBatteryPositiveFromLastState } from "../../../is-zero-defense-but-battery-positive";
 import { isZeroDefenseButEnableBurstFromLastState } from "../../../is-zero-defense-but-enable-burst";
@@ -16,7 +16,7 @@ import { shouldYuuyaVictory } from "./should-yuuya-victory";
  * @param props イベントプロパティ
  */
 export async function afterLastState(
-  props: LastState & PrinceOfFallenSunProps,
+  props: LastStateEventProps & PrinceOfFallenSunProps,
 ) {
   invisibleShoutMessageWindowWhenGameEnd(props);
 

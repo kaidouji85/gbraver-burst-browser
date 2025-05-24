@@ -1,12 +1,12 @@
 import { Animate } from "../../../../animation/animate";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { yuuyaPilotSkillShout } from "../../animation/yuuya-pilot-skill-shout";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ユウヤ パイロットスキル */
 export const yuuyaPilotSkill: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

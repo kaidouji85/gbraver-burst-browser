@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { shinyaAttackShoutWhenYuuyaHPIsFull } from "../../animation/shinya-attack-shout-when-yuuya-hp-is-full";
@@ -6,7 +6,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤ 戦闘 ユウヤのHPが満タン */
 export const shinyaBattleWhenYuuyaHPIsFull: ConditionalAnimation<
-  CustomStateAnimation & ConfrontationTwoBraverProps
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
     const separatedResult = separatePlayersFromCurrentState(props);

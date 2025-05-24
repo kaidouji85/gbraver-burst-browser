@@ -1,4 +1,4 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../turn-count";
 import { LastStateCondition } from "../last-state-condition";
 
@@ -7,7 +7,9 @@ import { LastStateCondition } from "../last-state-condition";
  * @param props イベントプロパティ
  * @returns LastStateCondition
  */
-export function createLastStateCondition(props: LastState): LastStateCondition {
+export function createLastStateCondition(
+  props: LastStateEventProps,
+): LastStateCondition {
   const turn = turnCount(props.stateHistory);
   return { turn };
 }
