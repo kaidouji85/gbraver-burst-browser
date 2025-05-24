@@ -13,6 +13,7 @@ import { createSurviveSuperPowerWithGuardProps } from "./procedures/create-survi
 import { getStateAnimationType } from "./procedures/get-state-animation-type";
 import { onStateAnimation } from "./procedures/on-state-animation";
 import { SurviveSuperPowerWithGuardProps } from "./props";
+import { prop } from "ramda";
 
 /** 「超火力はガードで凌げ」用のカスタムバトルイベント*/
 class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
@@ -48,7 +49,9 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastStateEventProps): Promise<void> {
-    await afterLastState(props);
+    const lastStateCondition =
+      this.#props.lastStateCondition ?? createLastStateCondition(props);
+    await afterLastState({ ...props, ...this.#props, lastStateCondition });
   }
 }
 
