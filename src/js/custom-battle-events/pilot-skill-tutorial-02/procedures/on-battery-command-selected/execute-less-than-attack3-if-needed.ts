@@ -1,4 +1,4 @@
-import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { PilotSkillTutorial02Props } from "../../props";
 import { lessThanAttack3 } from "../../stories/less-than-attack3";
 
@@ -8,7 +8,7 @@ import { lessThanAttack3 } from "../../stories/less-than-attack3";
  * @returns 再生した否か、trueで再生した
  */
 export async function executeLessThanAttack3IfNeeded(
-  props: Readonly<BatteryCommandSelected & PilotSkillTutorial02Props>,
+  props: Readonly<BatteryCommandSelectedEventProps & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const { lastState } = props;
   const player = lastState.players.find((p) => p.playerId === props.playerId);

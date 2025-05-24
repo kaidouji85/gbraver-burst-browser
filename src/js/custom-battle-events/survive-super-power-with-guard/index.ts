@@ -1,8 +1,8 @@
 import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
-  CustomStateAnimation,
-  LastState,
+  CustomStateAnimationProps,
+  LastStateEventProps,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
@@ -28,7 +28,7 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  onStateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimationProps): Animate {
     const condition = createStateAnimationTypeCondition(props);
     const stateAnimationType = getStateAnimationType({ props, condition });
     this.#props.stateAnimationType = stateAnimationType;
@@ -36,7 +36,7 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async beforeLastState(props: LastState): Promise<void> {
+  async beforeLastState(props: LastStateEventProps): Promise<void> {
     const lastStateCondition = createLastStateCondition(props);
     this.#props.lastStateCondition = lastStateCondition;
     this.#props.state = await beforeLastState({
@@ -47,7 +47,7 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async afterLastState(props: LastState): Promise<void> {
+  async afterLastState(props: LastStateEventProps): Promise<void> {
     await afterLastState(props);
   }
 }

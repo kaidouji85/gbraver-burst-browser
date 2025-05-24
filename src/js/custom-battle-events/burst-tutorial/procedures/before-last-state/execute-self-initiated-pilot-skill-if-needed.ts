@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../../props";
 import { selfInitiatedPilotSkill } from "../../stories/self-initiated-pilot-skill";
 
@@ -8,7 +8,7 @@ import { selfInitiatedPilotSkill } from "../../stories/self-initiated-pilot-skil
  * @returns 処理が完了したら発火するPromise
  */
 export async function executeSelfInitiatedPilotSkillIfNeeded(
-  props: Readonly<LastState & BurstTutorialProps>,
+  props: Readonly<LastStateEventProps & BurstTutorialProps>,
 ): Promise<void> {
   const hasPlayerPilotSkill = props.update.some(
     (state) =>

@@ -1,4 +1,4 @@
-import { StateUpdateStarted } from "../../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStartedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { QueenOfTragedyProps } from "../../props";
 import { QueenOfTragedyState } from "../../state";
 import { createConditions } from "./create-conditions";
@@ -10,7 +10,7 @@ import { isTraumaOfLastYearStart } from "./is-trauma-of-last-year-start";
  * @returns ステート更新結果
  */
 export function onStateUpdateStarted(
-  props: StateUpdateStarted & QueenOfTragedyProps,
+  props: StateUpdateStartedEventProps & QueenOfTragedyProps,
 ): QueenOfTragedyState {
   let result: QueenOfTragedyState = props.eventState;
   const conditions = createConditions(props);

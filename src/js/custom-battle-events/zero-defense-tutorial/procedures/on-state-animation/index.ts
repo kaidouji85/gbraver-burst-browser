@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import {
   ConditionalAnimation,
   getAnimationIfConditionMet,
@@ -15,10 +15,10 @@ import { shinyaPilotSkill } from "./shinya-pilot-skill";
  * @returns アニメーション
  */
 export function onStateAnimation(
-  props: Readonly<CustomStateAnimation & ZeroDefenseTutorialProps>,
+  props: Readonly<CustomStateAnimationProps & ZeroDefenseTutorialProps>,
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
-    CustomStateAnimation & ZeroDefenseTutorialProps
+    CustomStateAnimationProps & ZeroDefenseTutorialProps
   >[] = [...shinyaBurst, ...shinyaPilotSkill];
   return getAnimationIfConditionMet(props, conditionalAnimations) ?? empty();
 }

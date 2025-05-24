@@ -1,4 +1,4 @@
-import { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { focusInBatterySelector } from "../../focus";
 
@@ -9,7 +9,7 @@ import { focusInBatterySelector } from "../../focus";
  * @returns ストーリーが完了したら発火するPromise
  */
 export async function attackDescription(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
   attackBatteryCaption: string,
 ): Promise<void> {
   await focusInBatterySelector(props);

@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../td-scenes/battle/custom-battle-event";
 import { getPlayerBattleCount } from "../../get-battle-count";
 import { separatePlayersFromCurrentState } from "../../separate-players";
 import { StateAnimationTypeCondition } from "../state-animation-type";
@@ -9,7 +9,7 @@ import { StateAnimationTypeCondition } from "../state-animation-type";
  * @returns 条件オブジェクト
  */
 export function createStateAnimationTypeCondition(
-  props: CustomStateAnimation,
+  props: CustomStateAnimationProps,
 ): StateAnimationTypeCondition {
   const separatedPlayers = separatePlayersFromCurrentState(props);
   const player = separatedPlayers?.player ?? props.currentState.players[0];

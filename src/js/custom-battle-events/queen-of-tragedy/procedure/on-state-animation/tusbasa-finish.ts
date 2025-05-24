@@ -1,5 +1,5 @@
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
 import { tsubasaFinishShout } from "../../animation/tsubasa-finish-shout";
@@ -7,7 +7,7 @@ import { QueenOfTragedyProps } from "../../props";
 
 /** ツバサ トドメの一撃 */
 export const tsubasaFinish: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   const { stateHistory, currentState, enemyId } = props;
   const { effect } = currentState;

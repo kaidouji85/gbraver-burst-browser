@@ -1,4 +1,4 @@
-import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import {
   focusOutBatterySelector,
   isBatterySelectorFocused,
@@ -13,7 +13,9 @@ import { doZeroBatteryIdNeeded } from "./do-zero-battery-if-needed";
  * @returns 終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected & BatterySystemTutorialProps>,
+  props: Readonly<
+    BatteryCommandSelectedEventProps & BatterySystemTutorialProps
+  >,
 ): Promise<BatteryCommandSelectedEnd> {
   const doneZeroBattery = await doZeroBatteryIdNeeded(props);
   if (doneZeroBattery) {

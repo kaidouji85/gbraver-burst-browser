@@ -1,6 +1,6 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { LastState } from "../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * バーストが使えるのに0防御したかを判定する
@@ -27,7 +27,7 @@ export function isZeroDefenseButEnableBurst(
  * @returns 判定結果、trueでバーストが使えるのに0防御した
  */
 export function isZeroDefenseButEnableBurstFromLastState(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): boolean {
   const isGameOver = props.update.some(
     (s) => s.effect.name === "GameEnd" && s.effect.result.type === "GameOver",

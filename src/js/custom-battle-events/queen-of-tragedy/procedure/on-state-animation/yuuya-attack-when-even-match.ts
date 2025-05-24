@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEvenMatch } from "../../../is-even-match";
 import { separatePlayersFromCurrentState } from "../../../separate-players";
@@ -8,7 +8,7 @@ import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ 攻撃（イーブンマッチ） */
 export const yuuyaAttackWhenEvenMatch: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   const { playerId } = props;
   const { effect } = props.currentState;

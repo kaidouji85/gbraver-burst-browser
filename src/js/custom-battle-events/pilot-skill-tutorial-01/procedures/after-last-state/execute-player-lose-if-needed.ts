@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
 import { playerLose } from "../../stories/player-lose";
 
@@ -8,7 +8,7 @@ import { playerLose } from "../../stories/player-lose";
  * @returns trueでストーリーを再生した
  */
 export async function executePlayerLoseIfNeeded(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): Promise<boolean> {
   const foundGameEnd = props.update.find((v) => v.effect.name === "GameEnd");
   if (!foundGameEnd || foundGameEnd.effect.name !== "GameEnd") {

@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { BatterySystemTutorialProps } from "../../props";
 import { BatterySystemTutorialState } from "../../state";
@@ -13,7 +13,7 @@ import { doSelfInitiatedBurstIfNeeded } from "./do-self-initiated-burst-if-neede
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState & BatterySystemTutorialProps>,
+  props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState> {
   const turn = turnCount(props.stateHistory);
   if (turn === 1) {

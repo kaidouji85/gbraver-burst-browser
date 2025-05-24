@@ -1,6 +1,6 @@
 import { Battle } from "gbraver-burst-core";
 
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../../wait/wait-time";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
 import { turnCount } from "../../../turn-count";
@@ -17,7 +17,7 @@ import { playerAttack } from "../../stories/player-attack";
  * @returns 説明をした場合はステート更新結果、そうでない場合はnull
  */
 export async function doBattleDescriptionIfNeeded(
-  props: Readonly<LastState & BatterySystemTutorialProps>,
+  props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<BatterySystemTutorialState | null> {
   const hasGameEnd = props.update.some(
     (state) => state.effect.name === "GameEnd",

@@ -1,5 +1,5 @@
 import {
-  BatteryCommandSelected,
+  BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import {
@@ -32,7 +32,7 @@ type Ret = {
  * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected & ZeroDefenseTutorialProps>,
+  props: Readonly<BatteryCommandSelectedEventProps & ZeroDefenseTutorialProps>,
 ): Promise<Ret> {
   const isNotZeroBatteryCommand = props.battery.battery !== 0;
   if (isNotZeroBatteryCommand) {

@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
 import { turnCount } from "../../../turn-count";
@@ -14,7 +14,7 @@ import { executeDoPilotSkillIfNeeded } from "./execute-do-pilot-skill-if-needed"
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState & PilotSkillTutorial02Props>,
+  props: Readonly<LastStateEventProps & PilotSkillTutorial02Props>,
 ): Promise<PilotSkillTutorial02State> {
   invisibleShoutMessageWindowWhenInputCommand(props);
 

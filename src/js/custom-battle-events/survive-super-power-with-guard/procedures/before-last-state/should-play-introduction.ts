@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 
@@ -9,7 +9,9 @@ import { SurviveSuperPowerWithGuardProps } from "../../props";
  */
 export const shouldPlayIntroduction = (
   props: Readonly<
-    LastState & SurviveSuperPowerWithGuardProps & LastStateConditionContainer
+    LastStateEventProps &
+      SurviveSuperPowerWithGuardProps &
+      LastStateConditionContainer
   >,
 ) => {
   const { isIntroductionComplete } = props.state;

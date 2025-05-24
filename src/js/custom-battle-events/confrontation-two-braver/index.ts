@@ -1,9 +1,9 @@
 import { Animate } from "../../animation/animate";
 import {
   CustomBattleEvent,
-  CustomStateAnimation,
-  LastState,
-  StateUpdateStarted,
+  CustomStateAnimationProps,
+  LastStateEventProps,
+  StateUpdateStartedEventProps,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
@@ -28,7 +28,7 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  onStateUpdateStarted(props: StateUpdateStarted): void {
+  onStateUpdateStarted(props: StateUpdateStartedEventProps): void {
     this.#eventProps.eventState = onStateUpdateStarted({
       ...props,
       ...this.#eventProps,
@@ -36,7 +36,7 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async beforeLastState(props: LastState): Promise<void> {
+  async beforeLastState(props: LastStateEventProps): Promise<void> {
     this.#eventProps.eventState = await beforeLastState({
       ...props,
       ...this.#eventProps,
@@ -44,17 +44,17 @@ class ConfrontationTwoBraverEvent extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async afterLastState(props: LastState): Promise<void> {
+  async afterLastState(props: LastStateEventProps): Promise<void> {
     await afterLastState(props);
   }
 
   /** @override */
-  onStateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimationProps): Animate {
     return onStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
-  afterStateAnimation(props: CustomStateAnimation): Animate {
+  afterStateAnimation(props: CustomStateAnimationProps): Animate {
     return afterStateAnimation({ ...props, ...this.#eventProps });
   }
 }

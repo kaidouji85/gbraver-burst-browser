@@ -1,7 +1,7 @@
 import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
-import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 
 /**
@@ -10,7 +10,7 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
  * @returns アニメーション
  */
 export function afterStateAnimation(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimationProps>,
 ): Animate {
   if (props.currentState.effect.name === "PilotSkillEffect") {
     return onStart(() => {
