@@ -2,6 +2,8 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../invisible-shout-message-window";
+import { raitoFinishBlowShout } from "../animation/raito-finish-blow-shout";
+import { raitoShockAtSurvivalShout } from "../animation/raito-shock-at-survival-shout";
 import { tsubasaFirstAttackShout } from "../animation/tsubasa-first-attack-shout";
 import { StateAnimationTypeContainer } from "../state-animation-type";
 
@@ -17,6 +19,10 @@ function getAnimate(
   switch (stateAnimationType) {
     case "TsubasaFirstAttack":
       return tsubasaFirstAttackShout(props);
+    case "RaitoFinishBlow":
+      return raitoFinishBlowShout(props);
+    case "RaitoShockAtSurvivalShout":
+      return raitoShockAtSurvivalShout(props);
     default:
       return empty();
   }
