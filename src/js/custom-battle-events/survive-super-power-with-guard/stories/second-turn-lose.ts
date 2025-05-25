@@ -21,10 +21,10 @@ export async function secondTurnLose(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「あの攻撃 ……ガードしないと${wbr}即死するのか`],
+    ["ツバサ", `「あの攻撃 ……ガードしないと${wbr}即死する${wbr}のか`],
     [
-      highlight(`攻撃と防御が同じ数字${wbr}ならダメージ半減`),
-      ` ……5防御すれば${wbr}勝機はあった」`,
+      highlight(`攻撃と${wbr}防御が${wbr}同じ数字なら${wbr}ダメージ半減`),
+      `……5防御すれば${wbr}勝機は${wbr}あった」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
