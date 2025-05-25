@@ -26,9 +26,10 @@ export async function surviveThirdTurnWithGuard(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「悪いな${wbr}ガイ君`],
+    ["ツバサ", `「悪いな ガイ君`],
     [
-      `${highlight("攻撃と防御が同じ")}${wbr}数字だとガード ${highlight("ダメージを半減")}${wbr}させてもらった」`,
+      highlight(`攻撃と防御が同じ${wbr}数字ならダメージ半減`) +
+        ` 攻撃をガード${wbr}できるんだ」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();

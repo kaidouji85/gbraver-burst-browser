@@ -343,9 +343,6 @@ export const highlightText: StoryFn = domStub((params) => {
   dom.visible(true);
   dom.face("Tsubasa");
   dom.faceVisible(true);
-  dom.messages([
-    "ツバサ",
-    `${highlight("攻撃と防御が同じ")}${wbr}数字だとガード ${highlight("ダメージを半減")}${wbr}させてもらった`,
-  ]);
+  dom.messages([highlight(`攻撃と防御が同じ${wbr}数字ならダメージ半減`)]);
   return dom.getRootHTMLElement();
 });
