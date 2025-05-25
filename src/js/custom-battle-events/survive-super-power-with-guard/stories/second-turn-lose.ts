@@ -1,4 +1,5 @@
 import { wbr } from "../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -6,7 +7,6 @@ import {
 } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import { highlight } from "../../../game-dom/message-window/dom/highlight";
 
 /**
  * 2ターン目で負けた
@@ -23,7 +23,7 @@ export async function secondTurnLose(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ツバサ", `「あの攻撃 ……ガードしないと${wbr}即死するのか`],
     [
-      highlight(`攻撃と防御が同じ${wbr}数字ならダメージ半減`),
+      highlight(`攻撃と防御が同じ数字${wbr}ならダメージ半減`),
       ` ……5防御すれば${wbr}勝機はあった」`,
     ],
   ]);

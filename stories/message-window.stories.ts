@@ -3,11 +3,11 @@ import { StoryFn } from "@storybook/html";
 import { attackBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/defense-battery-caption-inner-html";
 import { yoroshikuOnegaiShimasu } from "../src/js/custom-battle-events/yoroshiku-onegai-shimasu";
+import { wbr } from "../src/js/dom/wbr";
 import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
-import { domStub } from "./stub/dom-stub";
 import { highlight } from "../src/js/game-dom/message-window/dom/highlight";
-import { wbr } from "../src/js/dom/wbr";
+import { domStub } from "./stub/dom-stub";
 
 export default {
   title: "message-window",
@@ -343,6 +343,6 @@ export const highlightText: StoryFn = domStub((params) => {
   dom.visible(true);
   dom.face("Tsubasa");
   dom.faceVisible(true);
-  dom.messages([highlight(`攻撃と防御が同じ${wbr}数字ならダメージ半減`)]);
+  dom.messages([highlight(`攻撃と防御が同じ数字${wbr}ならダメージ半減`)]);
   return dom.getRootHTMLElement();
 });
