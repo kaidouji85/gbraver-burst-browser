@@ -2,6 +2,6 @@
 export type SurviveSuperPowerWithGuardState = {
   /** イントロダクションが完了したか否か、trueで完了 */
   readonly isIntroductionComplete: boolean;
-  /** 「5攻撃すれば勝利」が完了したか否か、trueで完了 */
-  readonly isAttack5AndWeWinComplete: boolean;
+  /** 3ターン目開始時のイベントが完了したか否か、trueで完了 */
+  readonly isThirdTurnEventComplete: boolean;
 };

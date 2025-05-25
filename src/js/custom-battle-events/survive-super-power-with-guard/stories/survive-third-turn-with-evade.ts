@@ -6,26 +6,24 @@ import {
   refreshConversation,
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
+import { RAITO_SHIBAKI } from "./raito-shibaki";
 
 /**
- * 5攻撃すれば勝利
+ * 3ターン目で回避して生き残った
  * @param props イベントプロパティ
  */
-export async function attack5AndWeWin(props: CustomBattleEventProps) {
+export async function surviveThirdTurnWithEvade(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「見ろ大田高校 こちらの新型${wbr}グランランドーザを`],
-    [`こいつの${wbr}パワーなら お前らの${wbr}ロボなど一撃だ」`],
+    ["ガイ", `「6回避だと！！`],
+    [`即死級の${wbr}攻撃力も これでは……」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
-  await refreshConversation(props);
+  await refreshConversation(props, 100);
 
   activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, [
-    ["ライト", `(こちらの情報を${wbr}ペラペラと`],
-    [`オーナーの息子${wbr}やなかったら${wbr}シバき倒しとる${wbr}ところや)`],
-  ]);
+  await scrollLeftMessages(props, RAITO_SHIBAKI);
   props.view.dom.leftMessageWindow.darken();
 
   invisibleAllMessageWindows(props);

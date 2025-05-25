@@ -3,6 +3,7 @@ import {
   StateAnimationType,
   StateAnimationTypeCondition,
 } from "../../state-animation-type";
+import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
 
 /**
@@ -19,6 +20,8 @@ export function getStateAnimationType(options: {
   let result: StateAnimationType = "None";
   if (isTsubasaFirstAttack(options)) {
     result = "TsubasaFirstAttack";
+  } else if (isRaitoFirstAttack(options)) {
+    result = "RaitoFirstAttack";
   }
 
   return result;

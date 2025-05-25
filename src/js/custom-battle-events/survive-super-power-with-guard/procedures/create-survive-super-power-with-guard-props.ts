@@ -8,7 +8,7 @@ export const createSurviveSuperPowerWithGuardProps =
   (): SurviveSuperPowerWithGuardProps => ({
     state: {
       isIntroductionComplete: false,
-      isAttack5AndWeWinComplete: false,
+      isThirdTurnEventComplete: false,
     },
     stateAnimationType: "None",
   });

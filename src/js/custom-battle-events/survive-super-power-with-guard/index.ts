@@ -48,7 +48,9 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastStateEventProps): Promise<void> {
-    await afterLastState(props);
+    const lastStateCondition =
+      this.#props.lastStateCondition ?? createLastStateCondition(props);
+    await afterLastState({ ...props, ...this.#props, lastStateCondition });
   }
 }
 

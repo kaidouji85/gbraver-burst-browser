@@ -2,6 +2,7 @@ import { Animate } from "../../../animation/animate";
 import { empty } from "../../../animation/delay";
 import { CustomStateAnimationProps } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../invisible-shout-message-window";
+import { raitoFirstAttackShout } from "../animation/raito-first-attack-shout";
 import { tsubasaFirstAttackShout } from "../animation/tsubasa-first-attack-shout";
 import { StateAnimationTypeContainer } from "../state-animation-type";
 
@@ -17,6 +18,8 @@ function getAnimate(
   switch (stateAnimationType) {
     case "TsubasaFirstAttack":
       return tsubasaFirstAttackShout(props);
+    case "RaitoFirstAttack":
+      return raitoFirstAttackShout(props);
     default:
       return empty();
   }
