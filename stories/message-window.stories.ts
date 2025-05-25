@@ -6,11 +6,14 @@ import { yoroshikuOnegaiShimasu } from "../src/js/custom-battle-events/yoroshiku
 import { MessageWindow } from "../src/js/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game-dom/message-window/dom/class-name";
 import { domStub } from "./stub/dom-stub";
+import { highlight } from "../src/js/game-dom/message-window/dom/highlight";
+import { wbr } from "../src/js/dom/wbr";
 
 export default {
   title: "message-window",
 };
 
+/** 3行表示 */
 export const threeLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -22,6 +25,7 @@ export const threeLine: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 2行表示 */
 export const twoLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -29,6 +33,7 @@ export const twoLine: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 1行表示 */
 export const oneLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -36,6 +41,7 @@ export const oneLine: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 0行表示 */
 export const zeroLine: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -43,6 +49,7 @@ export const zeroLine: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 左側表示 */
 export const left: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -53,6 +60,7 @@ export const left: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 右側表示 */
 export const right: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -63,6 +71,7 @@ export const right: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** シンヤ（左側表示） */
 export const shinya: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -77,6 +86,7 @@ export const shinya: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** シンヤ（右側表示） */
 export const shinyaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -91,6 +101,7 @@ export const shinyaRight: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ガイ（左側表示） */
 export const gai: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -105,6 +116,7 @@ export const gai: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ガイ（右側表示） */
 export const gaiRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -119,6 +131,7 @@ export const gaiRight: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ライト（左側表示） */
 export const raito: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -133,6 +146,7 @@ export const raito: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ライト（右側表示） */
 export const raitoRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -147,6 +161,7 @@ export const raitoRight: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ツバサ（左側表示） */
 export const tsubasa: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -161,6 +176,7 @@ export const tsubasa: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ツバサ（右側表示） */
 export const tsubasaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -175,6 +191,7 @@ export const tsubasaRight: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ユウヤ（左側表示） */
 export const yuuya: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -192,6 +209,7 @@ export const yuuya: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** ユウヤ（右側表示） */
 export const yuuyaRight: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -209,6 +227,7 @@ export const yuuyaRight: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** メッセージウインドウを2つ並べる */
 export const doubleMessageWindows: StoryFn = domStub((params) => {
   const root = document.createElement("div");
   const rightMessageWindow = new MessageWindow({
@@ -237,6 +256,7 @@ export const doubleMessageWindows: StoryFn = domStub((params) => {
   return root;
 });
 
+/** プレイヤー側の叫びウインドウ */
 export const playerShout: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -251,6 +271,7 @@ export const playerShout: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** 敵側の叫びウインドウ */
 export const enemyShout: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -265,6 +286,7 @@ export const enemyShout: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** innerHTMLでメッセージを指定 */
 export const messagesInInnerHTML: StoryFn = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
@@ -275,6 +297,7 @@ export const messagesInInnerHTML: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** バッテリーシステムチュートリアルの攻撃バッテリーキャプション */
 export const attackBatteryCaption: StoryFn = domStub((params) => {
   const { resources } = params;
   const dom = new MessageWindow(params);
@@ -283,6 +306,7 @@ export const attackBatteryCaption: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** バッテリーシステムチュートリアルの防御バッテリーキャプション */
 export const defenseBatteryCaption: StoryFn = domStub((params) => {
   const { resources } = params;
   const dom = new MessageWindow(params);
@@ -291,6 +315,7 @@ export const defenseBatteryCaption: StoryFn = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** プレイヤー側の「よろしくお願いします」 */
 export const playerYorosikuOnegaishimasu: StoryFn = domStub((params) => {
   const dom = new MessageWindow({
     ...params,
@@ -304,5 +329,23 @@ export const playerYorosikuOnegaishimasu: StoryFn = domStub((params) => {
   dom.faceVisible(true);
   dom.messagesInInnerHTML(yoroshikuOnegaiShimasu());
   dom.nextMessageIconVisible(false);
+  return dom.getRootHTMLElement();
+});
+
+/** ハイライト */
+export const highlightText: StoryFn = domStub((params) => {
+  const dom = new MessageWindow({
+    ...params,
+    type: "Right",
+    faceOrientation: "Left",
+    facePosition: "Right",
+  });
+  dom.visible(true);
+  dom.face("Tsubasa");
+  dom.faceVisible(true);
+  dom.messages([
+    "ツバサ",
+    `${highlight("攻撃と防御が同じ")}${wbr}数字だとガード ${highlight("ダメージを半減")}${wbr}させてもらった`,
+  ]);
   return dom.getRootHTMLElement();
 });

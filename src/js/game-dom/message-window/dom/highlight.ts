@@ -6,4 +6,4 @@ import { ROOT_CLASS } from "./class-name";
  * @return ハイライトされたテキストを含むHTML文字列
  */
 export const highlight = (text: string) =>
-  `<span class="${ROOT_CLASS}__hi">${text}</span>`;
+  `<span class="${ROOT_CLASS}__highlight">${text}</span>`;

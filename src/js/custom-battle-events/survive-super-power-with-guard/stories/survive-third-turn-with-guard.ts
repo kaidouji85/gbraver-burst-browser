@@ -1,4 +1,5 @@
 import { wbr } from "../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -10,7 +11,6 @@ import {
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { RAITO_SHIBAKI } from "./raito-shibaki";
-import { highlight } from "../../../game-dom/message-window/dom/highlight";
 
 /**
  * 3ターン目でガードして生き残った
