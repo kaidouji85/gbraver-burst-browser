@@ -4,7 +4,9 @@ import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { introduction } from "../../stories/introduction";
+import { surviveThirdTurnWithGuard } from "../../stories/survive-third-turn-with-guard";
 import { shouldPlayIntroduction } from "./should-play-introduction";
+import { shouldPlaySurviveThirdTurnWithGuard } from "./should-play-survive-third-turn-with-guard";
 
 /**
  * 最終ステート直前イベント
@@ -24,6 +26,8 @@ export async function beforeLastState(
   if (shouldPlayIntroduction(props)) {
     await introduction(props);
     updatedState = { ...updatedState, isIntroductionComplete: true };
+  } else if (shouldPlaySurviveThirdTurnWithGuard(props)) {
+    await surviveThirdTurnWithGuard(props);
   }
 
   return updatedState;
