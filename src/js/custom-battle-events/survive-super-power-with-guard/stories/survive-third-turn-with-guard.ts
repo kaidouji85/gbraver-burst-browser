@@ -10,6 +10,7 @@ import {
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { RAITO_SHIBAKI } from "./raito-shibaki";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 
 /**
  * 3ターン目でガードして生き残った
@@ -19,15 +20,16 @@ export async function surviveThirdTurnWithGuard(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「バカな`],
-    [`新型ロボの${wbr}攻撃を受けたのに${wbr}即死しないだと」`],
+    [`新型ロボの${wbr}攻撃をくらったのに${wbr}即死しないだと」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「残念だったな ガイ君`],
-    [`攻撃側と防御側で${wbr}同じ数字を出した${wbr}場合はガード`],
-    [`ダメージは${wbr}半減される」`],
+    ["ツバサ", `「悪いな${wbr}ガイ君`],
+    [
+      `${highlight("攻撃と防御が同じ")}${wbr}数字だとガード ${highlight("ダメージを半減")}${wbr}させてもらった」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
