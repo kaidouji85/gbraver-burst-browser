@@ -9,6 +9,7 @@ import {
   refreshConversation,
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import { RAITO_SHIBAKI } from "./raito-shibaki";
 
 /**
  * 3ターン目でガードして生き残った
@@ -33,10 +34,7 @@ export async function surviveThirdTurnWithGuard(props: CustomBattleEventProps) {
   await refreshConversation(props, 100);
 
   activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, [
-    ["ライト", `(ガイの奴 こちらの情報を${wbr}ペラペラと`],
-    [`オーナーの息子${wbr}やなかったら${wbr}シバき倒しとる${wbr}ところや)`],
-  ]);
+  await scrollLeftMessages(props, RAITO_SHIBAKI);
   props.view.dom.leftMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
