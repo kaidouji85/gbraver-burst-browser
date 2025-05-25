@@ -14,18 +14,15 @@ export const shouldPlaySurviveThirdTurnWithGuard = (
       LastStateConditionContainer
   >,
 ) => {
-  const { isIntroductionComplete } = props.state;
+  const { isThirdTurnEventComplete } = props.state;
   const { turn, enemy } = props.lastStateCondition;
-  const hasNotGameEnd = !props.stateHistory.some(
-    (s) => s.effect.name === "GameEnd",
-  );
-  const isEnemyAttackGuard = props.update.some(
-    (s) =>
-      s.effect.name === "Battle" &&
-      s.effect.result.name === "Guard" &&
-      s.effect.attacker === enemy.playerId,
-  );
-  return (
-    !isIntroductionComplete && turn === 3 && hasNotGameEnd && isEnemyAttackGuard
-  );
+  const lastBattle = props.stateHistory
+    .map((s) => s.effect)
+    .filter((e) => e.name === "Battle")
+    .at(-1);
+  const isEnemyAttackGuard =
+    lastBattle?.result.name === "Guard" &&
+    lastBattle.attacker === enemy.playerId;
+
+  return !isThirdTurnEventComplete && turn === 3 && isEnemyAttackGuard;
 };

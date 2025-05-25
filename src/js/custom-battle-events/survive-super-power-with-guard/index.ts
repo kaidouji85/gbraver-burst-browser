@@ -13,7 +13,6 @@ import { createSurviveSuperPowerWithGuardProps } from "./procedures/create-survi
 import { getStateAnimationType } from "./procedures/get-state-animation-type";
 import { onStateAnimation } from "./procedures/on-state-animation";
 import { SurviveSuperPowerWithGuardProps } from "./props";
-import { prop } from "ramda";
 
 /** 「超火力はガードで凌げ」用のカスタムバトルイベント*/
 class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
