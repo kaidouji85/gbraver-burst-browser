@@ -3,6 +3,8 @@ import { PlayerState } from "gbraver-burst-core";
 /** カスタムステートアニメーション種別 */
 export type StateAnimationType =
   | "TsubasaFirstAttack"
+  | "TsubasaAttackTurnBurst"
+  | "TsubasaDefenseTurnBurst"
   | "RaitoFirstAttack"
   | "RaitoFinishBlow"
   | "RaitoShockAtSurvivalShout"
