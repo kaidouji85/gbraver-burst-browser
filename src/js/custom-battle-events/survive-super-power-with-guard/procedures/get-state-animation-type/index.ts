@@ -4,6 +4,8 @@ import {
   StateAnimationTypeCondition,
 } from "../../state-animation-type";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
+import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
+import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
 
 /**
@@ -20,6 +22,10 @@ export function getStateAnimationType(options: {
   let result: StateAnimationType = "None";
   if (isTsubasaFirstAttack(options)) {
     result = "TsubasaFirstAttack";
+  } else if (isTsubasaAttackTurnBurst(options)) {
+    result = "TsubasaAttackTurnBurst";
+  } else if (isTsubasaDefenseTurnBurst(options)) {
+    result = "TsubasaDefenseTurnBurst";
   } else if (isRaitoFirstAttack(options)) {
     result = "RaitoFirstAttack";
   }
