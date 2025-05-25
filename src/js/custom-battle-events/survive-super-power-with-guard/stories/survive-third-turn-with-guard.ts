@@ -19,7 +19,7 @@ export async function surviveThirdTurnWithGuard(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「バカな`],
-    [`新型ロボの${wbr}攻撃を受けたのに${wbr}即死しないだと`],
+    [`新型ロボの${wbr}攻撃を受けたのに${wbr}即死しないだと」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
