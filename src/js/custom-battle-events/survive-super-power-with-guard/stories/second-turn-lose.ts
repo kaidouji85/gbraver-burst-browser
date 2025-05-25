@@ -6,6 +6,7 @@ import {
 } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 
 /**
  * 2ターン目で負けた
@@ -20,9 +21,11 @@ export async function secondTurnLose(props: CustomBattleEventProps) {
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「あの攻撃を${wbr}ガード出来て${wbr}いれば${wbr}勝機はあった`],
-    [`攻撃と${wbr}防御で${wbr}同じ数字${wbr}だった場合は${wbr}ダメージ半減`],
-    [`5防御して${wbr}いれば即死は免れた${wbr}はずだ」`],
+    ["ツバサ", `「あの攻撃 ……ガードしないと${wbr}即死するのか`],
+    [
+      highlight(`攻撃と防御が同じ${wbr}数字ならダメージ半減`),
+      ` ……5防御すれば${wbr}勝機はあった」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
