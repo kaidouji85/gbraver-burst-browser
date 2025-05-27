@@ -8,7 +8,7 @@ import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
 import { beforeLastState } from "./procedures/before-last-state";
 import { createLastStateCondition } from "./procedures/create-last-state-condition";
-import { createStateAnimationTypeCondition } from "./procedures/create-state-animation-type-condition";
+import { createStateAnimationCondition } from "./procedures/create-state-animation-condition";
 import { createSurviveSuperPowerWithGuardProps } from "./procedures/create-survive-super-power-with-guard-props";
 import { onStateAnimation } from "./procedures/on-state-animation";
 import { SurviveSuperPowerWithGuardProps } from "./props";
@@ -28,7 +28,7 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
 
   /** @override */
   onStateAnimation(props: CustomStateAnimationProps): Animate {
-    const stateAnimationCondition = createStateAnimationTypeCondition(props);
+    const stateAnimationCondition = createStateAnimationCondition(props);
     this.#props.stateAnimationCondition = stateAnimationCondition;
     return onStateAnimation({
       ...props,

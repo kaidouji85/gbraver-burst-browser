@@ -8,7 +8,7 @@ import { StateAnimationCondition } from "../state-animation-condition";
  * @param props カスタムステートアニメーションプロパティ
  * @returns 条件オブジェクト
  */
-export function createStateAnimationTypeCondition(
+export function createStateAnimationCondition(
   props: CustomStateAnimationProps,
 ): StateAnimationCondition {
   const separatedPlayers = separatePlayersFromCurrentState(props);
