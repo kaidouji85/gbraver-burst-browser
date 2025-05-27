@@ -8,7 +8,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaDefenseTurnBurst = (
+export const tsubasaDefenseTurnBurstShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {

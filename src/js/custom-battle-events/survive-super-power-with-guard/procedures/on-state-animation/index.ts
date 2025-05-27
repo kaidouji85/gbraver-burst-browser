@@ -4,7 +4,7 @@ import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-b
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
-import { tsubasaDefenseTurnBurst } from "../../animation/tsubasa-defense-turn-burst";
+import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { StateAnimationConditionContainer } from "../../state-animation-condition";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
@@ -26,7 +26,7 @@ function getAnimate(
   } else if (isTsubasaAttackTurnBurst(props)) {
     result = tsubasaAttackTurnBurstShout(props);
   } else if (isTsubasaDefenseTurnBurst(props)) {
-    result = tsubasaDefenseTurnBurst(props);
+    result = tsubasaDefenseTurnBurstShout(props);
   } else if (isRaitoFirstAttack(props)) {
     result = raitoFirstAttackShout(props);
   }
