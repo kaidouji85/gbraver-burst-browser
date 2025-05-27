@@ -10,5 +10,4 @@ export const createSurviveSuperPowerWithGuardProps =
       isIntroductionComplete: false,
       isThirdTurnEventComplete: false,
     },
-    stateAnimationType: "None",
   });
