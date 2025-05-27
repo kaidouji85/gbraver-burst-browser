@@ -189,7 +189,7 @@
 
   position: fixed;
   top: 0;
-  left: calc(50vw - 120vh);
+  right: calc(50vw - 30vh);
   width: var(--size);
   height: var(--size);
 }
@@ -257,7 +257,7 @@
   color: var(--button-font-color);
   box-shadow: var(--sub-button-box-shadow);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: calc(var(--responsive-font-size) * 0.5);
