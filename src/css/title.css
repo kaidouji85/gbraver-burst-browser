@@ -185,7 +185,7 @@
 }
 
 .title__neo-landozer {
-  --size: 150vh;
+  --size: 90vw;
 
   position: fixed;
   top: 0;
@@ -195,7 +195,7 @@
 }
 
 .title__shin-braver {
-  --size: 150vh;
+  --size: 90vw;
 
   position: fixed;
   top: 0;
