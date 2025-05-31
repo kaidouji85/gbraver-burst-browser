@@ -215,7 +215,7 @@
   box-sizing: border-box;
   padding: var(--screen-padding-top) var(--screen-padding-right)
     var(--screen-padding-bottom) var(--screen-padding-left);
-  gap: calc(var(--responsive-font-size) * 1.6);
+  gap: calc(var(--responsive-font-size) * 1);
 }
 
 .title__title {
@@ -227,7 +227,7 @@
 }
 
 .title__title-logo {
-  height: 35vh;
+  height: 30vh;
 }
 
 .title__copy-rights,
