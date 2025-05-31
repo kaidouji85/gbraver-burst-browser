@@ -185,21 +185,21 @@
 }
 
 .title__neo-landozer {
-  --size: 80vw;
+  --size: min(150vh, 100vw);
 
   position: fixed;
   top: 0;
-  right: calc(50vw - 25vh);
+  right: calc(50vw - 30vh);
   width: var(--size);
   height: var(--size);
 }
 
 .title__shin-braver {
-  --size: 80vw;
+  --size: min(150vh, 100vw);
 
   position: fixed;
   top: 0;
-  left: calc(50vw - 25vh);
+  left: calc(50vw - 30vh);
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
