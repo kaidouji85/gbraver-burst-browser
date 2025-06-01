@@ -30,6 +30,26 @@ export function separatePlayers(
 }
 
 /**
+ * プレイヤーを自キャラ、敵に分割する、分割できない場合は例外を投げる
+ * @param props カスタムバトルイベントプロパティ
+ * @param state ゲームステート
+ * @returns 分割されたプレイヤー
+ */
+export const separatePlayersOrThrow = (
+  props: Readonly<CustomBattleEventProps>,
+  state: Readonly<GameState>,
+): SeparatedPlayers => {
+  const separated = separatePlayers(props, state);
+  if (!separated) {
+    throw new Error(
+      `Failed to separate players: playerId=${props.playerId}, enemyId=${props.enemyId}`,
+    );
+  }
+  return separated;
+};
+
+/**
+ * @deprecated
  * 最終ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
  * @returns 分割されたプレイヤー、分割できない場合null
@@ -39,6 +59,7 @@ export const separatePlayersFromLastState = (
 ) => separatePlayers(props, props.lastState);
 
 /**
+ * @deprecated
  * 現在ステートからプレイヤーを自キャラ、敵に分割する
  * @param props カスタムバトルイベントプロパティ
  * @returns 分割されたプレイヤー、分割できない場合null
