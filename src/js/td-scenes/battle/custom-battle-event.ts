@@ -4,6 +4,7 @@ import {
   GameState,
   PilotSkillCommand,
   PlayerId,
+  PlayerState,
 } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
@@ -59,11 +60,31 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
   readonly updateUntilNow: GameState[];
   /** 現在のステートまでの更新履歴 */
   readonly stateHistoryUntilNow: GameState[];
+
+  /** プレイヤーのステート */
+  readonly player: PlayerState;
+  /** プレイヤーのメインターン数 */
+  readonly playerMainTurnCount: number;
+
+  /** 敵のステート */
+  readonly enemy: PlayerState;
+  /** 敵のメインターン数 */
+  readonly enemyMainTurnCount: number;
 };
 
 /** 最終ステート系イベントのプロパティ */
 export type LastStateEventProps = CustomBattleEventProps &
   LastStateContainer & {
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
+
     /** コマンド入力から最終ステートまでのステート更新履歴 */
     readonly update: GameState[];
   };
