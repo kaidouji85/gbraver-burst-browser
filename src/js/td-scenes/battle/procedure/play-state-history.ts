@@ -34,11 +34,6 @@ export async function playStateHistory(
     return;
   }
 
-  const separatedPlayersFromLastState = separatePlayers(props, lastState);
-  if (!separatedPlayersFromLastState) {
-    return;
-  }
-
   props.customBattleEvent?.onStateUpdateStarted({
     ...props,
     update: gameStateHistory,
@@ -65,12 +60,27 @@ export async function playStateHistory(
           ...previousStateHistory,
           ...updateUntilNow,
         ];
+        const separatedPlayers = separatePlayers(props, gameState);
+        const player = separatedPlayers?.player ?? gameState.players[0];
+        const playerMainTurnCount = getMainTurnCount({
+          stateHistory: gameStateHistory,
+          playerId: player.playerId,
+        });
+        const enemy = separatedPlayers?.enemy ?? gameState.players[1];
+        const enemyMainTurnCount = getMainTurnCount({
+          stateHistory: gameStateHistory,
+          playerId: enemy.playerId,
+        });
         const customStateAnimationProps = {
           ...props,
           currentState: gameState,
           update: gameStateHistory,
           updateUntilNow,
           stateHistoryUntilNow,
+          player,
+          playerMainTurnCount,
+          enemy,
+          enemyMainTurnCount,
         };
         const anime = all(
           stateAnimation(props, gameState),
@@ -97,18 +107,22 @@ export async function playStateHistory(
       ),
   );
 
+  const separatedPlayersFromLastState = separatePlayers(props, lastState);
+  const player = separatedPlayersFromLastState?.player ?? lastState.players[0];
+  const enemy = separatedPlayersFromLastState?.enemy ?? lastState.players[1];
   const playerMainTurnCount = getMainTurnCount({
     stateHistory: gameStateHistory,
-    playerId: separatedPlayersFromLastState.player.playerId,
+    playerId: player.playerId,
   });
   const enemyMainTurnCount = getMainTurnCount({
     stateHistory: gameStateHistory,
-    playerId: separatedPlayersFromLastState.enemy.playerId,
+    playerId: enemy.playerId,
   });
   const eventProps = {
     ...props,
-    ...separatedPlayersFromLastState,
+    player,
     playerMainTurnCount,
+    enemy,
     enemyMainTurnCount,
     update: gameStateHistory,
     lastState,
