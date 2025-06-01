@@ -1,8 +1,4 @@
-import {
-  EMPTY_GAME_STATE,
-  GameState,
-  PlayerId,
-} from "gbraver-burst-core";
+import { EMPTY_GAME_STATE, GameState, PlayerId } from "gbraver-burst-core";
 
 import { getMainTurnCount } from "../../../src/js/custom-battle-events/get-main-turn-count";
 
