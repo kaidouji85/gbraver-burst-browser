@@ -2,6 +2,8 @@ import { GameState } from "gbraver-burst-core";
 
 import { all } from "../../../animation/all";
 import { empty } from "../../../animation/delay";
+import { getMainTurnCount } from "../../../custom-battle-events/get-main-turn-count";
+import { separatePlayers } from "../../../custom-battle-events/separate-players";
 import { stateAnimation } from "../animation/game-state";
 import { createAnimationPlay } from "../play-animation";
 import { BattleSceneProps } from "../props";
@@ -31,6 +33,12 @@ export async function playStateHistory(
   if (!lastState) {
     return;
   }
+
+  const separatedPlayersFromLastState = separatePlayers(props, lastState);
+  if (!separatedPlayersFromLastState) {
+    return;
+  }
+
   props.customBattleEvent?.onStateUpdateStarted({
     ...props,
     update: gameStateHistory,
@@ -89,7 +97,22 @@ export async function playStateHistory(
       ),
   );
 
-  const eventProps = { ...props, update: gameStateHistory, lastState };
+  const playerMainTurnCount = getMainTurnCount({
+    stateHistory: gameStateHistory,
+    playerId: separatedPlayersFromLastState.player.playerId,
+  });
+  const enemyMainTurnCount = getMainTurnCount({
+    stateHistory: gameStateHistory,
+    playerId: separatedPlayersFromLastState.enemy.playerId,
+  });
+  const eventProps = {
+    ...props,
+    ...separatedPlayersFromLastState,
+    playerMainTurnCount,
+    enemyMainTurnCount,
+    update: gameStateHistory,
+    lastState,
+  };
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
     playAnimation(stateAnimation(props, lastState)),
