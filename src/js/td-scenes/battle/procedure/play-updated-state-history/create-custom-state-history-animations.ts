@@ -21,26 +21,36 @@ export const parallelPlayEffects = [
 
 /**
  * 連続した効果が並列再生かどうか判定する
+ * @param options 判定に必要な情報
+ * @returns 並列再生かどうか、trueなら並列再生
  */
 function isParallelForCustomStateHistory(options: {
+  /** 現在のステート */
   currentState: GameState;
-  next: GameState | undefined;
+  /** 次のステート */
+  nextState: GameState | undefined;
 }): boolean {
-  const { currentState, next } = options;
+  const { currentState, nextState } = options;
   return (
-    !!next &&
-    parallelPlayEffects.includes(next.effect.name) &&
+    !!nextState &&
+    parallelPlayEffects.includes(nextState.effect.name) &&
     parallelPlayEffects.includes(currentState.effect.name)
   );
 }
 
 /**
  * customStateAnimationPropsを生成する
+ * @param options 生成に必要な情報
+ * @returns 生成結果
  */
 function createCustomStateAnimationProps(options: {
+  /** 戦闘シーンのプロパティ */
   props: Readonly<BattleSceneProps>;
+  /** 現在のステート */
   currentState: GameState;
+  /** 更新分のステートヒストリー */
   update: GameState[];
+  /** 現在のステートまでの更新分ステートヒストリー */
   updateUntilNow: GameState[];
 }) {
   const { props, currentState, update, updateUntilNow } = options;
@@ -78,10 +88,15 @@ function createCustomStateAnimationProps(options: {
 
 /**
  * animeを生成する
+ * @param options 生成に必要な情報
+ * @returns 生成結果
  */
 function createCustomStateAnime(options: {
+  /** 戦闘シーンのプロパティ */
   props: Readonly<BattleSceneProps>;
+  /** 現在のステート */
   currentState: GameState;
+  /** カスタムステートアニメーションのプロパティ */
   customStateAnimationProps: CustomStateAnimationProps;
 }) {
   const { props, currentState, customStateAnimationProps } = options;
@@ -109,8 +124,8 @@ export function createCustomStateHistoryAnimations(
   const stateHistoryWithLastRemoved = update.slice(0, -1);
   return stateHistoryWithLastRemoved
     .map((currentState, index) => {
-      const next = stateHistoryWithLastRemoved[index + 1];
-      const isParallel = isParallelForCustomStateHistory({ currentState, next });
+      const nextState = stateHistoryWithLastRemoved[index + 1];
+      const isParallel = isParallelForCustomStateHistory({ currentState, nextState });
       const updateUntilNow = update.slice(0, index + 1);
       const customStateAnimationProps = createCustomStateAnimationProps({
         props,
