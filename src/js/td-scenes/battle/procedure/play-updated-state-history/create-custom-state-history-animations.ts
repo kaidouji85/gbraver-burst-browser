@@ -52,7 +52,7 @@ function createCustomStateAnimationProps(options: {
   update: GameState[];
   /** 現在のステートまでの更新分ステートヒストリー */
   updateUntilNow: GameState[];
-}) {
+}): CustomStateAnimationProps {
   const { props, currentState, update, updateUntilNow } = options;
   const previousStateHistoryLength = props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
@@ -98,7 +98,7 @@ function combineNormalAndCustomStateAnimations(options: {
   currentState: GameState;
   /** カスタムステートアニメーションのプロパティ */
   customStateAnimationProps: CustomStateAnimationProps;
-}) {
+}): Animate {
   const { props, currentState, customStateAnimationProps } = options;
   return all(
     stateAnimation(props, currentState),
@@ -112,13 +112,15 @@ function combineNormalAndCustomStateAnimations(options: {
 }
 
 /**
- * ステートヒストリーカスタムアニメーションをまとめて生成し合成する
+ * 更新分のステートヒストリーのアニメーションを生成する
  * @param props 戦闘シーンプロパティ
  * @param update 再生対象となる更新分のステートヒストリー
- * @returns 合成済みアニメーション
+ * @returns アニメーション
  */
-export function createCustomStateHistoryAnimations(
+export function createStateHistoryAnimations(
+  /** 戦闘シーンのプロパティ */
   props: Readonly<BattleSceneProps>,
+  /** 再生対象となる更新分のステートヒストリー */
   update: GameState[],
 ): Animate {
   const stateHistoryWithLastRemoved = update.slice(0, -1);

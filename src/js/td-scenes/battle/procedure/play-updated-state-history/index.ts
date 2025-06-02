@@ -3,7 +3,7 @@ import { GameState } from "gbraver-burst-core";
 import { stateAnimation } from "../../animation/game-state";
 import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
-import { createCustomStateHistoryAnimations } from "./create-custom-state-history-animations";
+import { createStateHistoryAnimations } from "./create-custom-state-history-animations";
 import { createLastStateEventProps } from "./create-last-state-event-props";
 
 /**
@@ -28,10 +28,7 @@ export async function playUpdatedStateHistory(
     lastState,
   });
   const playAnimation = createAnimationPlay(props);
-  const customStateAnimations = createCustomStateHistoryAnimations(
-    props,
-    update,
-  );
+  const customStateAnimations = createStateHistoryAnimations(props, update);
   await playAnimation(customStateAnimations);
 
   const eventProps = createLastStateEventProps(props, update);
