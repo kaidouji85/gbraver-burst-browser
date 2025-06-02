@@ -39,24 +39,24 @@ function isParallelForCustomStateHistory(options: {
  */
 function createCustomStateAnimationProps(options: {
   props: Readonly<BattleSceneProps>;
-  gameState: GameState;
+  currentState: GameState;
   update: GameState[];
   updateUntilNow: GameState[];
 }) {
-  const { props, gameState, update, updateUntilNow } = options;
+  const { props, currentState, update, updateUntilNow } = options;
   const previousStateHistoryLength = props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
     0,
     previousStateHistoryLength,
   );
   const stateHistoryUntilNow = [...previousStateHistory, ...updateUntilNow];
-  const separatedPlayers = separatePlayers(props, gameState);
-  const player = separatedPlayers?.player ?? gameState.players[0];
+  const separatedPlayers = separatePlayers(props, currentState);
+  const player = separatedPlayers?.player ?? currentState.players[0];
   const playerMainTurnCount = getMainTurnCount({
     stateHistory: stateHistoryUntilNow,
     playerId: player.playerId,
   });
-  const enemy = separatedPlayers?.enemy ?? gameState.players[1];
+  const enemy = separatedPlayers?.enemy ?? currentState.players[1];
   const enemyMainTurnCount = getMainTurnCount({
     stateHistory: stateHistoryUntilNow,
     playerId: enemy.playerId,
@@ -64,7 +64,7 @@ function createCustomStateAnimationProps(options: {
   const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
   return {
     ...props,
-    currentState: gameState,
+    currentState,
     update,
     updateUntilNow,
     stateHistoryUntilNow,
@@ -81,12 +81,12 @@ function createCustomStateAnimationProps(options: {
  */
 function createCustomStateAnime(options: {
   props: Readonly<BattleSceneProps>;
-  gameState: GameState;
+  currentState: GameState;
   customStateAnimationProps: CustomStateAnimationProps;
 }) {
-  const { props, gameState, customStateAnimationProps } = options;
+  const { props, currentState, customStateAnimationProps } = options;
   return all(
-    stateAnimation(props, gameState),
+    stateAnimation(props, currentState),
     props.customBattleEvent?.onStateAnimation(customStateAnimationProps) ??
       empty(),
   ).chain(
@@ -108,19 +108,19 @@ export function createCustomStateHistoryAnimations(
 ): Animate {
   const stateHistoryWithLastRemoved = update.slice(0, -1);
   return stateHistoryWithLastRemoved
-    .map((gameState, index) => {
+    .map((currentState, index) => {
       const next = stateHistoryWithLastRemoved[index + 1];
-      const isParallel = isParallelForCustomStateHistory({ gameState, next });
+      const isParallel = isParallelForCustomStateHistory({ gameState: currentState, next });
       const updateUntilNow = update.slice(0, index + 1);
       const customStateAnimationProps = createCustomStateAnimationProps({
         props,
         update,
-        gameState,
+        currentState,
         updateUntilNow,
       });
       const anime = createCustomStateAnime({
         props,
-        gameState,
+        currentState,
         customStateAnimationProps,
       });
       return { anime, isParallel };
