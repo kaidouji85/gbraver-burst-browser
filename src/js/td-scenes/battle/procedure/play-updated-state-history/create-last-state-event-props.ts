@@ -17,7 +17,9 @@ export function createLastStateEventProps(
 ): LastStateEventProps {
   const lastState = update.at(-1);
   if (!lastState) {
-    throw new Error("gameStateHistory is empty");
+    throw new Error(
+      "The 'update' parameter is empty, no last state available.",
+    );
   }
   const separatedPlayers = separatePlayers(props, lastState);
   const player = separatedPlayers?.player ?? lastState.players[0];
