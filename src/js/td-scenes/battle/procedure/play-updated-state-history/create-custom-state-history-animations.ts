@@ -23,12 +23,10 @@ export const parallelPlayEffects = [
  * 連続した効果が並列再生かどうか判定する
  */
 function isParallelForCustomStateHistory(options: {
-  stateHistoryWithLastRemoved: GameState[];
   gameState: GameState;
-  index: number;
+  next: GameState | undefined;
 }): boolean {
-  const { stateHistoryWithLastRemoved, gameState, index } = options;
-  const next = stateHistoryWithLastRemoved[index + 1];
+  const { gameState, next } = options;
   return (
     !!next &&
     parallelPlayEffects.includes(next.effect.name) &&
@@ -41,12 +39,11 @@ function isParallelForCustomStateHistory(options: {
  */
 function createCustomStateAnimationProps(options: {
   props: Readonly<BattleSceneProps>;
-  update: GameState[];
   gameState: GameState;
-  index: number;
+  update: GameState[];
+  updateUntilNow: GameState[];
 }) {
-  const { props, update, gameState, index } = options;
-  const updateUntilNow = update.slice(0, index + 1);
+  const { props, gameState, update, updateUntilNow } = options;
   const previousStateHistoryLength = props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
     0,
@@ -112,16 +109,14 @@ export function createCustomStateHistoryAnimations(
   const stateHistoryWithLastRemoved = update.slice(0, -1);
   return stateHistoryWithLastRemoved
     .map((gameState, index) => {
-      const isParallel = isParallelForCustomStateHistory({
-        stateHistoryWithLastRemoved,
-        gameState,
-        index,
-      });
+      const next = stateHistoryWithLastRemoved[index + 1];
+      const isParallel = isParallelForCustomStateHistory({ gameState, next });
+      const updateUntilNow = update.slice(0, index + 1);
       const customStateAnimationProps = createCustomStateAnimationProps({
         props,
         update,
         gameState,
-        index,
+        updateUntilNow,
       });
       const anime = createCustomStateAnime({
         props,
