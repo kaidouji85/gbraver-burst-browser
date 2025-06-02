@@ -57,12 +57,12 @@ function createCustomStateHistoryAnimation(options: {
   const separatedPlayers = separatePlayers(props, gameState);
   const player = separatedPlayers?.player ?? gameState.players[0];
   const playerMainTurnCount = getMainTurnCount({
-    stateHistory: gameStateHistory,
+    stateHistory: stateHistoryUntilNow,
     playerId: player.playerId,
   });
   const enemy = separatedPlayers?.enemy ?? gameState.players[1];
   const enemyMainTurnCount = getMainTurnCount({
-    stateHistory: gameStateHistory,
+    stateHistory: stateHistoryUntilNow,
     playerId: enemy.playerId,
   });
   const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;

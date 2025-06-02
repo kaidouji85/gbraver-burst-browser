@@ -12,6 +12,6 @@ export function isRaitoFirstAttack(
   return (
     currentState.effect.name === "BatteryDeclaration" &&
     currentState.effect.attacker === enemy.playerId &&
-    enemyMainTurnCount === 0
+    enemyMainTurnCount === 1
   );
 }

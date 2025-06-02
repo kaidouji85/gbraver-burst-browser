@@ -12,6 +12,6 @@ export function isTsubasaFirstAttack(
   return (
     currentState.effect.name === "BatteryDeclaration" &&
     currentState.effect.attacker === player.playerId &&
-    playerMainTurnCount === 0
+    playerMainTurnCount === 1
   );
 }
