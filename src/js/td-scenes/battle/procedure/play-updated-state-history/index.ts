@@ -28,7 +28,10 @@ export async function playUpdatedStateHistory(
     lastState,
   });
   const playAnimation = createAnimationPlay(props);
-  const customStateAnimations = createCustomStateHistoryAnimations(props, update);
+  const customStateAnimations = createCustomStateHistoryAnimations(
+    props,
+    update,
+  );
   await playAnimation(customStateAnimations);
 
   const eventProps = createLastStateEventProps(props, update);

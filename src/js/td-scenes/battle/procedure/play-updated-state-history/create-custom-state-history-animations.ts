@@ -87,11 +87,11 @@ function createCustomStateAnimationProps(options: {
 }
 
 /**
- * animeを生成する
- * @param options 生成に必要な情報
- * @returns 生成結果
+ * ステートアニメーション（Normal）とカスタムステートアニメーション（Custom）を並列で合成する
+ * @param options オプション
+ * @returns 合成されたアニメーション
  */
-function createCustomStateAnime(options: {
+function combineNormalAndCustomStateAnimations(options: {
   /** 戦闘シーンのプロパティ */
   props: Readonly<BattleSceneProps>;
   /** 現在のステート */
@@ -125,7 +125,10 @@ export function createCustomStateHistoryAnimations(
   return stateHistoryWithLastRemoved
     .map((currentState, index) => {
       const nextState = stateHistoryWithLastRemoved[index + 1];
-      const isParallel = isParallelForCustomStateHistory({ currentState, nextState });
+      const isParallel = isParallelForCustomStateHistory({
+        currentState,
+        nextState,
+      });
       const updateUntilNow = update.slice(0, index + 1);
       const customStateAnimationProps = createCustomStateAnimationProps({
         props,
@@ -133,7 +136,7 @@ export function createCustomStateHistoryAnimations(
         currentState,
         updateUntilNow,
       });
-      const anime = createCustomStateAnime({
+      const anime = combineNormalAndCustomStateAnimations({
         props,
         currentState,
         customStateAnimationProps,
