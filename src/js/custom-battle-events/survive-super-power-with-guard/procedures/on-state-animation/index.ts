@@ -6,7 +6,6 @@ import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout"
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
-import { StateAnimationConditionContainer } from "../../state-animation-condition";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
@@ -17,9 +16,7 @@ import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-function getAnimate(
-  props: Readonly<CustomStateAnimationProps & StateAnimationConditionContainer>,
-) {
+function getAnimate(props: Readonly<CustomStateAnimationProps>) {
   let result = empty();
   if (isTsubasaFirstAttack(props)) {
     result = tsubasaFirstAttackShout(props);
@@ -40,6 +37,6 @@ function getAnimate(
  * @returns カスタムステートアニメーション
  */
 export const onStateAnimation = (
-  props: Readonly<CustomStateAnimationProps & StateAnimationConditionContainer>,
+  props: Readonly<CustomStateAnimationProps>,
 ): Animate =>
   invisibleShoutMessageWindowWhenTurnChange(props) ?? getAnimate(props);
