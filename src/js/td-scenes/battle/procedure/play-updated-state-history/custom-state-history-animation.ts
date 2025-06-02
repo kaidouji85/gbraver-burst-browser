@@ -33,21 +33,15 @@ export function createCustomStateHistoryAnimation(options: {
   /** インデックス */
   index: number;
 }) {
-  const {
-    props,
-    update,
-    stateHistoryWithLastRemoved,
-    gameState,
-    index,
-  } = options;
+  const { props, update, stateHistoryWithLastRemoved, gameState, index } =
+    options;
   const next = stateHistoryWithLastRemoved[index + 1];
   const isParallel =
     next &&
     parallelPlayEffects.includes(next.effect.name) &&
     parallelPlayEffects.includes(gameState.effect.name);
   const updateUntilNow = update.slice(0, index + 1);
-  const previousStateHistoryLength =
-    props.stateHistory.length - update.length;
+  const previousStateHistoryLength = props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
     0,
     previousStateHistoryLength,
