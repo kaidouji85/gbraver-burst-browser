@@ -61,6 +61,9 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
   /** 現在のステートまでの更新履歴 */
   readonly stateHistoryUntilNow: GameState[];
 
+  /** メインターン数 */
+  readonly mainTurnCount: number;
+
   /** プレイヤーのステート */
   readonly player: PlayerState;
   /** プレイヤーのメインターン数 */
@@ -79,6 +82,9 @@ export type LastStateEventProps = CustomBattleEventProps &
     readonly player: PlayerState;
     /** プレイヤーのメインターン数 */
     readonly playerMainTurnCount: number;
+
+    /** メインターン数 */
+    readonly mainTurnCount: number;
 
     /** 敵のステート */
     readonly enemy: PlayerState;

@@ -1,6 +1,5 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
-import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { secondTurnLose } from "../../stories/second-turn-lose";
 import { shouldPlaySecondTurnLose } from "./should-play-second-turn-lose";
@@ -10,11 +9,7 @@ import { shouldPlaySecondTurnLose } from "./should-play-second-turn-lose";
  * @param props イベントプロパティ
  */
 export async function afterLastState(
-  props: Readonly<
-    LastStateEventProps &
-      SurviveSuperPowerWithGuardProps &
-      LastStateConditionContainer
-  >,
+  props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
   invisibleShoutMessageWindowWhenGameEnd(props);
 

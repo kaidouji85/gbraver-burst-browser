@@ -1,6 +1,5 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
-import { LastStateConditionContainer } from "../../last-state-condition";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { introduction } from "../../stories/introduction";
@@ -16,11 +15,7 @@ import { shouldPlaySurviveThirdTurnWithGuard } from "./should-play-survive-third
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<
-    LastStateEventProps &
-      SurviveSuperPowerWithGuardProps &
-      LastStateConditionContainer
-  >,
+  props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ): Promise<SurviveSuperPowerWithGuardState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
 

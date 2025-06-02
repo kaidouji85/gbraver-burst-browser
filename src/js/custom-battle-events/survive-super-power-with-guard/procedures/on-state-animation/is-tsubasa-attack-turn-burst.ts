@@ -1,5 +1,4 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { StateAnimationConditionContainer } from "../../state-animation-condition";
 
 /**
  * 「TsubasaAttackTurnBurst」か否かを判定する
@@ -7,10 +6,9 @@ import { StateAnimationConditionContainer } from "../../state-animation-conditio
  * @returns 判定結果、trueの場合は「TsubasaAttackTurnBurst」
  */
 export function isTsubasaAttackTurnBurst(
-  props: Readonly<CustomStateAnimationProps & StateAnimationConditionContainer>,
+  props: Readonly<CustomStateAnimationProps>,
 ): boolean {
-  const { currentState } = props;
-  const { player } = props.stateAnimationCondition;
+  const { currentState, player } = props;
   return (
     currentState.effect.name === "BurstEffect" &&
     currentState.effect.burstPlayer === player.playerId &&
