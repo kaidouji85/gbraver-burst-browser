@@ -6,6 +6,7 @@ import { empty } from "../../../../animation/delay";
 import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
 import { separatePlayers } from "../../../../custom-battle-events/separate-players";
 import { stateAnimation } from "../../animation/game-state";
+import { CustomStateAnimationProps } from "../../custom-battle-event";
 import { BattleSceneProps } from "../../props";
 
 /**
@@ -19,28 +20,32 @@ export const parallelPlayEffects = [
 ];
 
 /**
- * ステートヒストリーカスタムアニメーションを生成する
- * @param options オプション
+ * 連続した効果が並列再生かどうか判定する
  */
-function createCustomStateHistoryAnimation(options: {
-  /** 戦闘シーンプロパティ */
-  props: Readonly<BattleSceneProps>;
-  /** 更新分のステートヒストリー */
-  update: GameState[];
-  /** 最後のステートを除いたヒストリー */
+function isParallelForCustomStateHistory(options: {
   stateHistoryWithLastRemoved: GameState[];
-  /** 現在のゲームステート */
   gameState: GameState;
-  /** stateHistoryWithLastRemovedのインデックス */
+  index: number;
+}): boolean {
+  const { stateHistoryWithLastRemoved, gameState, index } = options;
+  const next = stateHistoryWithLastRemoved[index + 1];
+  return (
+    !!next &&
+    parallelPlayEffects.includes(next.effect.name) &&
+    parallelPlayEffects.includes(gameState.effect.name)
+  );
+}
+
+/**
+ * customStateAnimationPropsを生成する
+ */
+function createCustomStateAnimationProps(options: {
+  props: Readonly<BattleSceneProps>;
+  update: GameState[];
+  gameState: GameState;
   index: number;
 }) {
-  const { props, update, stateHistoryWithLastRemoved, gameState, index } =
-    options;
-  const next = stateHistoryWithLastRemoved[index + 1];
-  const isParallel =
-    next &&
-    parallelPlayEffects.includes(next.effect.name) &&
-    parallelPlayEffects.includes(gameState.effect.name);
+  const { props, update, gameState, index } = options;
   const updateUntilNow = update.slice(0, index + 1);
   const previousStateHistoryLength = props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
@@ -60,7 +65,7 @@ function createCustomStateHistoryAnimation(options: {
     playerId: enemy.playerId,
   });
   const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
-  const customStateAnimationProps = {
+  return {
     ...props,
     currentState: gameState,
     update,
@@ -72,7 +77,18 @@ function createCustomStateHistoryAnimation(options: {
     enemy,
     enemyMainTurnCount,
   };
-  const anime = all(
+}
+
+/**
+ * animeを生成する
+ */
+function createCustomStateAnime(options: {
+  props: Readonly<BattleSceneProps>;
+  gameState: GameState;
+  customStateAnimationProps: CustomStateAnimationProps;
+}) {
+  const { props, gameState, customStateAnimationProps } = options;
+  return all(
     stateAnimation(props, gameState),
     props.customBattleEvent?.onStateAnimation(customStateAnimationProps) ??
       empty(),
@@ -81,10 +97,6 @@ function createCustomStateHistoryAnimation(options: {
     props.customBattleEvent?.afterStateAnimation(customStateAnimationProps) ??
       empty(),
   );
-  return {
-    anime,
-    isParallel,
-  };
 }
 
 /**
@@ -99,15 +111,25 @@ export function createCustomStateHistoryAnimations(
 ): Animate {
   const stateHistoryWithLastRemoved = update.slice(0, -1);
   return stateHistoryWithLastRemoved
-    .map((gameState, index) =>
-      createCustomStateHistoryAnimation({
-        props,
-        update,
+    .map((gameState, index) => {
+      const isParallel = isParallelForCustomStateHistory({
         stateHistoryWithLastRemoved,
         gameState,
         index,
-      }),
-    )
+      });
+      const customStateAnimationProps = createCustomStateAnimationProps({
+        props,
+        update,
+        gameState,
+        index,
+      });
+      const anime = createCustomStateAnime({
+        props,
+        gameState,
+        customStateAnimationProps,
+      });
+      return { anime, isParallel };
+    })
     .reduce(
       (previous, current) =>
         current.isParallel
