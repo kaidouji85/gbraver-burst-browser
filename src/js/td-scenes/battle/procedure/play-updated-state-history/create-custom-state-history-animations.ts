@@ -1,6 +1,7 @@
 import { GameState } from "gbraver-burst-core";
 
 import { all } from "../../../../animation/all";
+import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
 import { separatePlayers } from "../../../../custom-battle-events/separate-players";
@@ -21,7 +22,7 @@ export const parallelPlayEffects = [
  * ステートヒストリーカスタムアニメーションを生成する
  * @param options オプション
  */
-export function createCustomStateHistoryAnimation(options: {
+function createCustomStateHistoryAnimation(options: {
   /** 戦闘シーンプロパティ */
   props: Readonly<BattleSceneProps>;
   /** 更新分のステートヒストリー */
@@ -30,7 +31,7 @@ export function createCustomStateHistoryAnimation(options: {
   stateHistoryWithLastRemoved: GameState[];
   /** 現在のゲームステート */
   gameState: GameState;
-  /** インデックス */
+  /** stateHistoryWithLastRemovedのインデックス */
   index: number;
 }) {
   const { props, update, stateHistoryWithLastRemoved, gameState, index } =
@@ -84,4 +85,34 @@ export function createCustomStateHistoryAnimation(options: {
     anime,
     isParallel,
   };
+}
+
+/**
+ * ステートヒストリーカスタムアニメーションをまとめて生成し合成する
+ * @param props 戦闘シーンプロパティ
+ * @param update 再生対象となる更新分のステートヒストリー
+ * @returns 合成済みアニメーション
+ */
+export function createCustomStateHistoryAnimations(
+  props: Readonly<BattleSceneProps>,
+  update: GameState[],
+): Animate {
+  const stateHistoryWithLastRemoved = update.slice(0, -1);
+  return stateHistoryWithLastRemoved
+    .map((gameState, index) =>
+      createCustomStateHistoryAnimation({
+        props,
+        update,
+        stateHistoryWithLastRemoved,
+        gameState,
+        index,
+      }),
+    )
+    .reduce(
+      (previous, current) =>
+        current.isParallel
+          ? previous.chain(empty(), current.anime)
+          : previous.chain(current.anime),
+      empty(),
+    );
 }

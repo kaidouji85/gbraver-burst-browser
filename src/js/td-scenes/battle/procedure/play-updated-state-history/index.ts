@@ -1,11 +1,10 @@
 import { GameState } from "gbraver-burst-core";
 
-import { empty } from "../../../../animation/delay";
 import { stateAnimation } from "../../animation/game-state";
 import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
 import { createLastStateEventProps } from "./create-last-state-event-props";
-import { createCustomStateHistoryAnimation } from "./custom-state-history-animation";
+import { createCustomStateHistoryAnimations } from "./create-custom-state-history-animations";
 
 /**
  * 更新されたステートヒストリーを再生する
@@ -29,26 +28,8 @@ export async function playUpdatedStateHistory(
     lastState,
   });
   const playAnimation = createAnimationPlay(props);
-  const stateHistoryWithLastRemoved = update.slice(0, -1);
-  await playAnimation(
-    stateHistoryWithLastRemoved
-      .map((gameState, index) =>
-        createCustomStateHistoryAnimation({
-          props,
-          update: update,
-          stateHistoryWithLastRemoved,
-          gameState,
-          index,
-        }),
-      )
-      .reduce(
-        (previous, current) =>
-          current.isParallel
-            ? previous.chain(empty(), current.anime)
-            : previous.chain(current.anime),
-        empty(),
-      ),
-  );
+  const customStateAnimations = createCustomStateHistoryAnimations(props, update);
+  await playAnimation(customStateAnimations);
 
   const eventProps = createLastStateEventProps(props, update);
   await props.customBattleEvent?.beforeLastState(eventProps);
