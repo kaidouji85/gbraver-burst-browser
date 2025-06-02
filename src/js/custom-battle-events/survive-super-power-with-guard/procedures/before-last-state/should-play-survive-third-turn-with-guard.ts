@@ -10,8 +10,7 @@ export const shouldPlaySurviveThirdTurnWithGuard = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
   const { isThirdTurnEventComplete } = props.state;
-  const { playerMainTurnCount, enemy, enemyMainTurnCount } = props;
-  const turn = playerMainTurnCount + enemyMainTurnCount;
+  const { mainTurnCount, enemy } = props;
   const lastBattle = props.stateHistory
     .map((s) => s.effect)
     .filter((e) => e.name === "Battle")
@@ -19,5 +18,5 @@ export const shouldPlaySurviveThirdTurnWithGuard = (
   const isEnemyAttackGuard =
     lastBattle?.result.name === "Guard" &&
     lastBattle.attacker === enemy.playerId;
-  return !isThirdTurnEventComplete && turn === 3 && isEnemyAttackGuard;
+  return !isThirdTurnEventComplete && mainTurnCount === 3 && isEnemyAttackGuard;
 };

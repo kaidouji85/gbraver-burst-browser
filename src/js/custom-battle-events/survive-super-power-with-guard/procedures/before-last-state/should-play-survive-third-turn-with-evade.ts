@@ -10,8 +10,7 @@ export const shouldPlaySurviveThirdTurnWithEvade = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
   const { isThirdTurnEventComplete } = props.state;
-  const { playerMainTurnCount, enemy, enemyMainTurnCount } = props;
-  const turn = playerMainTurnCount + enemyMainTurnCount;
+  const { mainTurnCount, enemy } = props;
   const lastBattle = props.stateHistory
     .map((s) => s.effect)
     .filter((e) => e.name === "Battle")
@@ -19,5 +18,5 @@ export const shouldPlaySurviveThirdTurnWithEvade = (
   const isEnemyAttackMiss =
     lastBattle?.result.name === "Miss" &&
     lastBattle.attacker === enemy.playerId;
-  return !isThirdTurnEventComplete && turn === 3 && isEnemyAttackMiss;
+  return !isThirdTurnEventComplete && mainTurnCount === 3 && isEnemyAttackMiss;
 };

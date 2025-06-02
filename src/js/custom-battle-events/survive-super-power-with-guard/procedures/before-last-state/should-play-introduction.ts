@@ -10,7 +10,6 @@ export const shouldPlayIntroduction = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
   const { isIntroductionComplete } = props.state;
-  const { playerMainTurnCount, enemyMainTurnCount } = props;
-  const turn = playerMainTurnCount + enemyMainTurnCount;
-  return !isIntroductionComplete && turn === 1;
+  const { mainTurnCount } = props;
+  return !isIntroductionComplete && mainTurnCount === 1;
 };
