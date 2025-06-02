@@ -24,7 +24,7 @@ export const parallelPlayEffects = [
 export function createCustomStateHistoryAnimation(options: {
   /** 戦闘シーンプロパティ */
   props: Readonly<BattleSceneProps>;
-  /** 更新されたステートヒストリー */
+  /** 更新分のステートヒストリー */
   update: GameState[];
   /** 最後のステートを除いたヒストリー */
   stateHistoryWithLastRemoved: GameState[];

@@ -9,9 +9,9 @@ import { createCustomStateHistoryAnimation } from "./custom-state-history-animat
 
 /**
  * 更新されたステートヒストリーを再生する
- * 本関数は、props.stateHistory に更新後のステートヒストリーが追加されていることを前提とする
+ * 本関数は、props.stateHistory に更新分のステートヒストリーが追加されていることを前提とする
  * @param props 戦闘シーンのプロパティ
- * @param update 再生対象となる更新されたステートヒストリー
+ * @param update 再生対象となる更新分のステートヒストリー
  * @returns アニメーション
  */
 export async function playUpdatedStateHistory(

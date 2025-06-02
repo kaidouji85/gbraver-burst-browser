@@ -12,6 +12,10 @@ export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
     props.view.dom.hamburgerMenu.show();
     props.bgm.do(play(props.sounds.bgm));
+    // ゲームスタート時は
+    //   - 更新前のステートヒストリー   =  0レコード
+    //   - 更新分のステートヒストリー = 1レコード以上
+    // なので、「更新後のステートヒストリー」と「更新分のステートヒストリー」が一致する
     await playUpdatedStateHistory(props, props.stateHistory);
   });
 }

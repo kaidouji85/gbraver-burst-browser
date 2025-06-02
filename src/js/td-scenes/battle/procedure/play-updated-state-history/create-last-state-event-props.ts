@@ -8,7 +8,7 @@ import { BattleSceneProps } from "../../props";
 /**
  * LastStateEventPropsを生成する
  * @param props 戦闘シーンプロパティ
- * @param update 更新されたステートヒストリー
+ * @param update 更新分のステートヒストリー
  * @returns eventProps
  */
 export function createLastStateEventProps(
