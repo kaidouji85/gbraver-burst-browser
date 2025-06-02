@@ -1,6 +1,6 @@
 import { play } from "../../../bgm/bgm-operators";
-import type { BattleSceneProps } from "../props";
-import { playStateHistory } from "./play-state-history";
+import { BattleSceneProps } from "../props";
+import { playUpdatedStateHistory } from "./play-updated-state-history";
 
 /**
  * 戦闘シーンを開始する
@@ -12,6 +12,6 @@ export async function start(props: Readonly<BattleSceneProps>): Promise<void> {
   return props.exclusive.execute(async (): Promise<void> => {
     props.view.dom.hamburgerMenu.show();
     props.bgm.do(play(props.sounds.bgm));
-    await playStateHistory(props, props.stateHistory);
+    await playUpdatedStateHistory(props, props.stateHistory);
   });
 }

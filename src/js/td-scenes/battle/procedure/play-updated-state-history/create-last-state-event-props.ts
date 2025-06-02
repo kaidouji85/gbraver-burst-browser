@@ -8,14 +8,14 @@ import { BattleSceneProps } from "../../props";
 /**
  * LastStateEventPropsを生成する
  * @param props 戦闘シーンプロパティ
- * @param gameStateHistory ゲームステートヒストリー
+ * @param update 更新されたステートヒストリー
  * @returns eventProps
  */
 export function createLastStateEventProps(
   props: Readonly<BattleSceneProps>,
-  gameStateHistory: GameState[],
+  update: GameState[],
 ): LastStateEventProps {
-  const lastState = gameStateHistory.at(-1);
+  const lastState = update.at(-1);
   if (!lastState) {
     throw new Error("gameStateHistory is empty");
   }
@@ -38,7 +38,7 @@ export function createLastStateEventProps(
     mainTurnCount,
     enemy,
     enemyMainTurnCount,
-    update: gameStateHistory,
+    update,
     lastState,
   };
 }

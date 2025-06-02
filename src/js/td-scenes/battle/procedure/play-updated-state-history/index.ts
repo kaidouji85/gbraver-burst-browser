@@ -8,34 +8,34 @@ import { createLastStateEventProps } from "./create-last-state-event-props";
 import { createCustomStateHistoryAnimation } from "./custom-state-history-animation";
 
 /**
- * ステートヒストリーアニメーションを再生し、カスタムバトルイベントを呼び出す
- * 本関数を呼び出す前にprops.stateHistoryを最新化すること
- * @param props 戦闘シーンプロパティ
- * @param gameStateHistory 再生するゲームステートヒストリー
+ * 更新されたステートヒストリーを再生する
+ * 本関数は、props.stateHistory に更新後のステートヒストリーが追加されていることを前提とする
+ * @param props 戦闘シーンのプロパティ
+ * @param update 再生対象となる更新されたステートヒストリー
  * @returns アニメーション
  */
-export async function playStateHistory(
+export async function playUpdatedStateHistory(
   props: Readonly<BattleSceneProps>,
-  gameStateHistory: GameState[],
+  update: GameState[],
 ): Promise<void> {
-  const lastState = gameStateHistory.at(-1);
+  const lastState = update.at(-1);
   if (!lastState) {
     return;
   }
 
   props.customBattleEvent?.onStateUpdateStarted({
     ...props,
-    update: gameStateHistory,
+    update,
     lastState,
   });
   const playAnimation = createAnimationPlay(props);
-  const stateHistoryWithLastRemoved = gameStateHistory.slice(0, -1);
+  const stateHistoryWithLastRemoved = update.slice(0, -1);
   await playAnimation(
     stateHistoryWithLastRemoved
       .map((gameState, index) =>
         createCustomStateHistoryAnimation({
           props,
-          gameStateHistory,
+          update: update,
           stateHistoryWithLastRemoved,
           gameState,
           index,
@@ -50,7 +50,7 @@ export async function playStateHistory(
       ),
   );
 
-  const eventProps = createLastStateEventProps(props, gameStateHistory);
+  const eventProps = createLastStateEventProps(props, update);
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
     playAnimation(stateAnimation(props, lastState)),

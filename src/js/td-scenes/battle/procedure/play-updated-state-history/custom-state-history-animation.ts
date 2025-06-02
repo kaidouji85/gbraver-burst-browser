@@ -24,8 +24,8 @@ export const parallelPlayEffects = [
 export function createCustomStateHistoryAnimation(options: {
   /** 戦闘シーンプロパティ */
   props: Readonly<BattleSceneProps>;
-  /** 再生するゲームステートヒストリー */
-  gameStateHistory: GameState[];
+  /** 更新されたステートヒストリー */
+  update: GameState[];
   /** 最後のステートを除いたヒストリー */
   stateHistoryWithLastRemoved: GameState[];
   /** 現在のゲームステート */
@@ -35,7 +35,7 @@ export function createCustomStateHistoryAnimation(options: {
 }) {
   const {
     props,
-    gameStateHistory,
+    update,
     stateHistoryWithLastRemoved,
     gameState,
     index,
@@ -45,9 +45,9 @@ export function createCustomStateHistoryAnimation(options: {
     next &&
     parallelPlayEffects.includes(next.effect.name) &&
     parallelPlayEffects.includes(gameState.effect.name);
-  const updateUntilNow = gameStateHistory.slice(0, index + 1);
+  const updateUntilNow = update.slice(0, index + 1);
   const previousStateHistoryLength =
-    props.stateHistory.length - gameStateHistory.length;
+    props.stateHistory.length - update.length;
   const previousStateHistory = props.stateHistory.slice(
     0,
     previousStateHistoryLength,
@@ -68,7 +68,7 @@ export function createCustomStateHistoryAnimation(options: {
   const customStateAnimationProps = {
     ...props,
     currentState: gameState,
-    update: gameStateHistory,
+    update,
     updateUntilNow,
     stateHistoryUntilNow,
     mainTurnCount,
