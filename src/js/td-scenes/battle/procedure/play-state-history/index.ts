@@ -1,12 +1,13 @@
 import { GameState } from "gbraver-burst-core";
 
-import { all } from "../../../animation/all";
-import { empty } from "../../../animation/delay";
-import { getMainTurnCount } from "../../../custom-battle-events/get-main-turn-count";
-import { separatePlayers } from "../../../custom-battle-events/separate-players";
-import { stateAnimation } from "../animation/game-state";
-import { createAnimationPlay } from "../play-animation";
-import { BattleSceneProps } from "../props";
+import { all } from "../../../../animation/all";
+import { empty } from "../../../../animation/delay";
+import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
+import { separatePlayers } from "../../../../custom-battle-events/separate-players";
+import { stateAnimation } from "../../animation/game-state";
+import { createAnimationPlay } from "../../play-animation";
+import { BattleSceneProps } from "../../props";
+import { createLastStateEventProps } from "./create-last-state-event-props";
 
 /**
  * 同時再生する効果
@@ -136,28 +137,7 @@ export async function playStateHistory(
       ),
   );
 
-  const separatedPlayersFromLastState = separatePlayers(props, lastState);
-  const player = separatedPlayersFromLastState?.player ?? lastState.players[0];
-  const enemy = separatedPlayersFromLastState?.enemy ?? lastState.players[1];
-  const playerMainTurnCount = getMainTurnCount({
-    stateHistory: props.stateHistory,
-    playerId: player.playerId,
-  });
-  const enemyMainTurnCount = getMainTurnCount({
-    stateHistory: props.stateHistory,
-    playerId: enemy.playerId,
-  });
-  const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
-  const eventProps = {
-    ...props,
-    player,
-    playerMainTurnCount,
-    mainTurnCount,
-    enemy,
-    enemyMainTurnCount,
-    update: gameStateHistory,
-    lastState,
-  };
+  const eventProps = createLastStateEventProps(props, gameStateHistory);
   await props.customBattleEvent?.beforeLastState(eventProps);
   await Promise.all([
     playAnimation(stateAnimation(props, lastState)),
