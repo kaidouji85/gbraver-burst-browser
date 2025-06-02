@@ -23,14 +23,14 @@ export const parallelPlayEffects = [
  * 連続した効果が並列再生かどうか判定する
  */
 function isParallelForCustomStateHistory(options: {
-  gameState: GameState;
+  currentState: GameState;
   next: GameState | undefined;
 }): boolean {
-  const { gameState, next } = options;
+  const { currentState, next } = options;
   return (
     !!next &&
     parallelPlayEffects.includes(next.effect.name) &&
-    parallelPlayEffects.includes(gameState.effect.name)
+    parallelPlayEffects.includes(currentState.effect.name)
   );
 }
 
@@ -110,7 +110,7 @@ export function createCustomStateHistoryAnimations(
   return stateHistoryWithLastRemoved
     .map((currentState, index) => {
       const next = stateHistoryWithLastRemoved[index + 1];
-      const isParallel = isParallelForCustomStateHistory({ gameState: currentState, next });
+      const isParallel = isParallelForCustomStateHistory({ currentState, next });
       const updateUntilNow = update.slice(0, index + 1);
       const customStateAnimationProps = createCustomStateAnimationProps({
         props,
