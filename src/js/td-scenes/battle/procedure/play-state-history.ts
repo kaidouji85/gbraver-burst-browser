@@ -138,11 +138,11 @@ export async function playStateHistory(
   const player = separatedPlayersFromLastState?.player ?? lastState.players[0];
   const enemy = separatedPlayersFromLastState?.enemy ?? lastState.players[1];
   const playerMainTurnCount = getMainTurnCount({
-    stateHistory: gameStateHistory,
+    stateHistory: props.stateHistory,
     playerId: player.playerId,
   });
   const enemyMainTurnCount = getMainTurnCount({
-    stateHistory: gameStateHistory,
+    stateHistory: props.stateHistory,
     playerId: enemy.playerId,
   });
   const eventProps = {
