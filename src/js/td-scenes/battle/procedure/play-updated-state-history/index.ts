@@ -3,8 +3,8 @@ import { GameState } from "gbraver-burst-core";
 import { stateAnimation } from "../../animation/game-state";
 import { createAnimationPlay } from "../../play-animation";
 import { BattleSceneProps } from "../../props";
-import { createStateHistoryAnimations } from "./create-custom-state-history-animations";
 import { createLastStateEventProps } from "./create-last-state-event-props";
+import { createStateHistoryAnimations } from "./create-state-history-animations";
 
 /**
  * 更新されたステートヒストリーを再生する
