@@ -65,12 +65,14 @@ function createCustomStateHistoryAnimation(options: {
     stateHistory: gameStateHistory,
     playerId: enemy.playerId,
   });
+  const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
   const customStateAnimationProps = {
     ...props,
     currentState: gameState,
     update: gameStateHistory,
     updateUntilNow,
     stateHistoryUntilNow,
+    mainTurnCount,
     player,
     playerMainTurnCount,
     enemy,
@@ -145,10 +147,12 @@ export async function playStateHistory(
     stateHistory: props.stateHistory,
     playerId: enemy.playerId,
   });
+  const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
   const eventProps = {
     ...props,
     player,
     playerMainTurnCount,
+    mainTurnCount,
     enemy,
     enemyMainTurnCount,
     update: gameStateHistory,
