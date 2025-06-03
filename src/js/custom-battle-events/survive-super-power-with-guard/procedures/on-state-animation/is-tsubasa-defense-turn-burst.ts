@@ -1,9 +1,9 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 
 /**
- * 「TsubasaDefenseTurnBurst」か否かを判定する
+ * 「tsubasaDefenseTurnBurst」か否かを判定する
  * @param props イベントプロパティ
- * @returns 判定結果、trueの場合は「TsubasaDefenseTurnBurst」
+ * @returns 判定結果、trueの場合は「tsubasaDefenseTurnBurst」
  */
 export function isTsubasaDefenseTurnBurst(
   props: Readonly<CustomStateAnimationProps>,

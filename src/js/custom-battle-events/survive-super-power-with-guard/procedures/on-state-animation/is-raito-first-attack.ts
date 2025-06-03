@@ -1,9 +1,9 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 
 /**
- * 「RaitoFirstAttack」か否かを判定する
+ * 「raitoFirstAttack」か否かを判定する
  * @param props イベントプロパティ
- * @returns 判定結果、trueの場合は「RaitoFirstAttack」
+ * @returns 判定結果、trueの場合は「raitoFirstAttack」
  */
 export function isRaitoFirstAttack(
   props: Readonly<CustomStateAnimationProps>,
