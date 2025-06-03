@@ -7,11 +7,13 @@ import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
+import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shout";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack-shout";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
+import { isTsubasaPilotSkillShout } from "./is-tsubasa-pilot-skill-shout";
 
 /**
  * アニメーション種別に応じたアニメーションを取得する
@@ -28,6 +30,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = tsubasaAttackTurnBurstShout(props);
   } else if (isTsubasaDefenseTurnBurst(props)) {
     result = tsubasaDefenseTurnBurstShout(props);
+  } else if (isTsubasaPilotSkillShout(props)) {
+    result = tsubasaPilotSkillShout(props);
   } else if (isRaitoFirstAttack(props)) {
     result = raitoFirstAttackShout(props);
   }

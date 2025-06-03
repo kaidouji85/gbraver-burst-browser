@@ -15,6 +15,6 @@ export const tsubasaPilotSkillShout = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `少し無理を${wbr}するぞ ウィングドーザ`,
+      `少し無茶を${wbr}するぞ ウィングドーザ`,
     );
   });
