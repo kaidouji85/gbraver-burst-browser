@@ -4,6 +4,7 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
+import { isContinuousActiveTurn } from "../../../../custom-battle-events/is-continuous-active-turn";
 import { separatePlayers } from "../../../../custom-battle-events/separate-players";
 import { stateAnimation } from "../../animation/game-state";
 import { CustomStateAnimationProps } from "../../custom-battle-event";
@@ -72,6 +73,7 @@ function createCustomStateAnimationProps(options: {
     playerId: enemy.playerId,
   });
   const mainTurnCount = playerMainTurnCount + enemyMainTurnCount;
+  const isContinuousActive = isContinuousActiveTurn(stateHistoryUntilNow);
   return {
     ...props,
     currentState,
@@ -83,6 +85,7 @@ function createCustomStateAnimationProps(options: {
     playerMainTurnCount,
     enemy,
     enemyMainTurnCount,
+    isContinuousActive,
   };
 }
 
