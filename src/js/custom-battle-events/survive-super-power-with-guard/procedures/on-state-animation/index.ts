@@ -4,10 +4,12 @@ import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-b
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
+import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
+import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack-shout";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
 
@@ -18,7 +20,9 @@ import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
  */
 function getAnimate(props: Readonly<CustomStateAnimationProps>) {
   let result = empty();
-  if (isTsubasaFirstAttack(props)) {
+  if (isTsubasaComboAttack(props)) {
+    result = tsubasaComboAttackShout(props);
+  } else if (isTsubasaFirstAttack(props)) {
     result = tsubasaFirstAttackShout(props);
   } else if (isTsubasaAttackTurnBurst(props)) {
     result = tsubasaAttackTurnBurstShout(props);

@@ -15,6 +15,6 @@ export const tsubasaComboAttackShout = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `まだ私の${wbr}攻撃は${wbr}終わって${wbr}いない`,
+      `私の${wbr}攻撃は まだ${wbr}終わって${wbr}いない`,
     );
   });
