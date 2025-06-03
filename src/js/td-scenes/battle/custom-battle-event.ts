@@ -63,6 +63,8 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
 
   /** メインターン数 */
   readonly mainTurnCount: number;
+  /**連続行動中のターンかどうか、trueで連続行動中のターン */
+  readonly isContinuousActive: boolean;
 
   /** プレイヤーのステート */
   readonly player: PlayerState;
