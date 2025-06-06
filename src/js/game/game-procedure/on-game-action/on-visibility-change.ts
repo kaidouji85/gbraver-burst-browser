@@ -3,6 +3,21 @@ import { Howler } from "howler";
 import { VisibilityChange } from "../../game-actions/visibility-change";
 import { GameProps } from "../../game-props";
 
+/**
+ * visibilityState = "hidden" の場合の処理
+ */
+const onHidden = () => {
+  Howler.mute(true);
+};
+
+/**
+ * visibilityState = "visible" の場合の処理
+ */
+const onVisible = () => {
+  Howler.mute(false);
+  Howler.ctx.resume();
+};
+
 /** オプション */
 type Options = {
   /** ゲームプロパティ */
@@ -18,6 +33,9 @@ type Options = {
 export function onVisibilityChange(
   options: Options, // eslint-disable-line @typescript-eslint/no-unused-vars
 ): void {
-  const shouldMute = document.visibilityState === "hidden";
-  Howler.mute(shouldMute);
+  if (document.visibilityState === "hidden") {
+    onHidden();
+  } else {
+    onVisible();
+  }
 }
