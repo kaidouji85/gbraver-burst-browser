@@ -17,7 +17,21 @@ const onHidden = () => {
 const onVisible = () => {
   console.log("visibilityState = visible"); // TODO: ログ出力を削除する
   Howler.mute(false);
-  Howler.ctx.resume();
+  if (Howler.ctx && typeof Howler.ctx.resume === "function") {
+    Howler.ctx.resume().catch(() => {
+      // resume失敗時はユーザー操作で再試行
+      const tryResume = () => {
+        Howler.ctx.resume().then(() => {
+          // ここで再生中の音があれば再度play()を呼ぶ必要がある場合はここで呼ぶ
+        }).finally(() => {
+          document.body.removeEventListener("touchend", tryResume);
+          document.body.removeEventListener("mousedown", tryResume);
+        });
+      };
+      document.body.addEventListener("touchend", tryResume, { once: true });
+      document.body.addEventListener("mousedown", tryResume, { once: true });
+    });
+  }
 };
 
 /** オプション */
