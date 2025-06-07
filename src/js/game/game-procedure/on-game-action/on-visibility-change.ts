@@ -7,7 +7,6 @@ import { GameProps } from "../../game-props";
  * visibilityState = "hidden" の場合の処理
  */
 const onHidden = () => {
-  console.log("visibilityState = hidden", Howler); // TODO: ログ出力を削除する
   Howler.mute(true);
 };
 
@@ -34,7 +33,6 @@ const resumeHowlerAudioContextOnTouch = () => {
  * visibilityState = "visible" の場合の処理
  */
 const onVisible = () => {
-  console.log("visibilityState = visible", Howler); // TODO: ログ出力を削除する
   Howler.mute(false);
   document.addEventListener("touchstart", resumeHowlerAudioContextOnTouch, {
     once: true,
