@@ -12,27 +12,34 @@ const onHidden = () => {
 };
 
 /**
+ * HowlerのAudioContextがsuspendedならWebAudioContextをresumeする
+ *
+ * この関数はトップレベルで宣言し、addEventListenerのコールバックとして直接渡すことで、
+ * 同じ関数・同じオプションでの重複登録を防いでいる。
+ *
+ * MDN EventTarget: addEventListener() メソッドより引用
+ * https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener
+ * > addEventListener() メソッドは、関数または handleEvent() 関数を実装したオブジェクトを、
+ * > 呼び出される EventTarget における指定されたイベント種別のイベントリスナーのリストに加えることで動作します。
+ * > その関数やオブジェクトが既にターゲットのイベントリスナーのリストにあった場合は、
+ * > その関数やオブジェクトが二重に追加されることはありません。
+ */
+const resumeHowlerAudioContextOnTouch = () => {
+  if (Howler.ctx.state === "suspended") {
+    Howler.ctx.resume();
+  }
+};
+
+/**
  * visibilityState = "visible" の場合の処理
  */
 const onVisible = () => {
   console.log("visibilityState = visible", Howler); // TODO: ログ出力を削除する
   Howler.mute(false);
-  document.addEventListener(
-    "touchstart",
-    () => {
-      if (Howler.ctx.state === "suspended") {
-        Howler.ctx
-          .resume()
-          .then(() => {
-            console.log("Audio context resumed");
-          })
-          .catch((error) => {
-            console.error("Failed to resume audio context:", error);
-          });
-      }
-    },
-    { once: true, capture: true },
-  );
+  document.addEventListener("touchstart", resumeHowlerAudioContextOnTouch, {
+    once: true,
+    capture: true,
+  });
 };
 
 /** オプション */
