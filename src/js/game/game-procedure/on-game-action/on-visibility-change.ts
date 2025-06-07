@@ -7,7 +7,7 @@ import { GameProps } from "../../game-props";
  * visibilityState = "hidden" の場合の処理
  */
 const onHidden = () => {
-  console.log("visibilityState = hidden", Howler.ctx); // TODO: ログ出力を削除する
+  console.log("visibilityState = hidden", Howler); // TODO: ログ出力を削除する
   Howler.mute(true);
 };
 
@@ -15,7 +15,7 @@ const onHidden = () => {
  * visibilityState = "visible" の場合の処理
  */
 const onVisible = () => {
-  console.log("visibilityState = visible", Howler.ctx); // TODO: ログ出力を削除する
+  console.log("visibilityState = visible", Howler); // TODO: ログ出力を削除する
   Howler.mute(false);
 };
 
