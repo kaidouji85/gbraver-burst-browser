@@ -8,6 +8,7 @@ import { GameProps } from "../../game-props";
  */
 const onHidden = () => {
   console.log("visibilityState = hidden", Howler); // TODO: ログ出力を削除する
+  Howler.autoUnlock = true;
   Howler.mute(true);
 };
 
