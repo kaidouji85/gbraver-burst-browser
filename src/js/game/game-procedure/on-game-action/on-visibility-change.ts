@@ -8,7 +8,6 @@ import { GameProps } from "../../game-props";
  */
 const onHidden = () => {
   console.log("visibilityState = hidden", Howler); // TODO: ログ出力を削除する
-  Howler.autoUnlock = true;
   Howler.mute(true);
 };
 
@@ -17,6 +16,11 @@ const onHidden = () => {
  */
 const onVisible = () => {
   console.log("visibilityState = visible", Howler); // TODO: ログ出力を削除する
+  // @ts-expect-error: _autoResumeの存在チェック
+  if (typeof Howler._autoResume === "function") {
+    // @ts-expect-error: _autoResumeはHowlerの内部メソッドだが、必要なため呼び出す
+    Howler._autoResume();
+  }
   Howler.mute(false);
 };
 
