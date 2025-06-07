@@ -34,6 +34,10 @@ const resumeHowlerAudioContextOnTouch = () => {
  */
 const onVisible = () => {
   Howler.mute(false);
+  // iPad、iPhoneなどのタッチデバイスではHome画面からの復帰時に
+  // WebAudioContextがsuspended状態になることがある。
+  // しかしユーザーインタラクションがないとWebAudioContextはresumeされないため、
+  // touchstartイベント(iPad、iPhoneではユーザーインタラクションと見なされる)でresumeする。
   document.addEventListener("touchstart", resumeHowlerAudioContextOnTouch, {
     once: true,
     capture: true,
