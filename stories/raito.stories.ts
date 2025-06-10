@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   enemyRaitoCutIn,
@@ -27,14 +25,14 @@ const cutinAnimation = (pilot: RaitoCutIn) => {
 };
 
 /** ライト カットイン プレイヤー側 */
-export const player: StoryFn = hudGameObjectStory((params) => {
+export const player = hudGameObjectStory((params) => {
   const pilot = playerRaitoCutIn(params);
   cutinAnimation(pilot);
   return [pilot.getObject3D()];
 });
 
 /** ライト カットイン 敵側 */
-export const enemy: StoryFn = hudGameObjectStory((params) => {
+export const enemy = hudGameObjectStory((params) => {
   const pilot = enemyRaitoCutIn(params);
   cutinAnimation(pilot);
   return [pilot.getObject3D()];

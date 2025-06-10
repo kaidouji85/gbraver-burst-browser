@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { all } from "../src/js/animation/all";
 import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { shinBraverBurstButton } from "../src/js/game-object/burst-button";
@@ -11,7 +9,7 @@ export default {
 };
 
 /** コントローラーをすべて表示する */
-export const commands: StoryFn = hudGameObjectStory((params) => {
+export const commands = hudGameObjectStory((params) => {
   const batterySelector = new BatterySelector(params);
   const burstButton = shinBraverBurstButton(params);
   const pilotButton = shinyaPilotButton(params);

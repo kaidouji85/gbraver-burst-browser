@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
@@ -50,16 +49,10 @@ const visible = (indicator: ResultIndicator) => {
 };
 
 /** win 表示 */
-export const winVisible: StoryFn = resultIndicatorStory(winIndicator, visible);
+export const winVisible = resultIndicatorStory(winIndicator, visible);
 
 /** lose 表示 */
-export const loseVisible: StoryFn = resultIndicatorStory(
-  loseIndicator,
-  visible,
-);
+export const loseVisible = resultIndicatorStory(loseIndicator, visible);
 
 /** draw 表示 */
-export const drawVisible: StoryFn = resultIndicatorStory(
-  drawIndicator,
-  visible,
-);
+export const drawVisible = resultIndicatorStory(drawIndicator, visible);

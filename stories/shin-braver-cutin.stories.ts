@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
 import {
@@ -27,14 +25,14 @@ function cutInAnimation(cutIn: ShinBraverCutIn): Animate {
 }
 
 /** シンブレイバー カットイン プレイヤー側 */
-export const player: StoryFn = hudGameObjectStory((params) => {
+export const player = hudGameObjectStory((params) => {
   const cutIn = playerShinBraverCutIn(params);
   cutInAnimation(cutIn).loop();
   return [cutIn.getObject3D()];
 });
 
 /** シンブレイバー カットイン 敵側 */
-export const enemy: StoryFn = hudGameObjectStory((params) => {
+export const enemy = hudGameObjectStory((params) => {
   const cutIn = enemyShinBraverCutIn(params);
   cutInAnimation(cutIn).loop();
   return [cutIn.getObject3D()];
