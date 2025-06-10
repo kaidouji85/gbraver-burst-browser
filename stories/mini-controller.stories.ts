@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import { MiniController } from "../src/js/game-dom/mini-controller";
 import { ButtonConfig } from "../src/js/game-dom/mini-controller/button-config";
@@ -42,70 +40,70 @@ const miniControllerStory = (config: ButtonConfig) =>
     return controller.getRootHTMLElement();
   });
 
-export const battery5Full: StoryFn = miniControllerStory({
+export const battery5Full = miniControllerStory({
   battery: 5,
   maxBattery: 5,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const battery5: StoryFn = miniControllerStory({
+export const battery5 = miniControllerStory({
   battery: 3,
   maxBattery: 5,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const battery4Full: StoryFn = miniControllerStory({
+export const battery4Full = miniControllerStory({
   battery: 4,
   maxBattery: 4,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const battery4: StoryFn = miniControllerStory({
+export const battery4 = miniControllerStory({
   battery: 2,
   maxBattery: 4,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const battery8Full: StoryFn = miniControllerStory({
+export const battery8Full = miniControllerStory({
   battery: 8,
   maxBattery: 8,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const battery8: StoryFn = miniControllerStory({
+export const battery8 = miniControllerStory({
   battery: 3,
   maxBattery: 8,
   canBurst: true,
   canPilotSkill: true,
 });
 
-export const disabledBurst: StoryFn = miniControllerStory({
+export const disabledBurst = miniControllerStory({
   battery: 2,
   maxBattery: 5,
   canBurst: false,
   canPilotSkill: true,
 });
 
-export const disabledPilot: StoryFn = miniControllerStory({
+export const disabledPilot = miniControllerStory({
   battery: 3,
   maxBattery: 5,
   canBurst: true,
   canPilotSkill: false,
 });
 
-export const disabledAll: StoryFn = miniControllerStory({
+export const disabledAll = miniControllerStory({
   battery: 0,
   maxBattery: 5,
   canBurst: false,
   canPilotSkill: false,
 });
 
-export const showHidden: StoryFn = domStub((params) => {
+export const showHidden = domStub((params) => {
   const controller = new MiniController(params);
   controller.engage({
     battery: 5,

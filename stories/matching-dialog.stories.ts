@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { MatchingDialog } from "../src/js/dom-dialogs/matching/matching-dialog";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const dialog = new MatchingDialog(params);
   dialog.notifyMatchingCanceled().subscribe(() => {
     console.log("matching canceled");

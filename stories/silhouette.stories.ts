@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import * as THREE from "three";
 
 import { toSilhouette } from "../src/js/canvas/to-silhouette";
@@ -10,7 +9,7 @@ export default {
   title: "silhouette",
 };
 
-export const texture: StoryFn = domStub(({ resources }) => {
+export const texture = domStub(({ resources }) => {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();
@@ -18,7 +17,7 @@ export const texture: StoryFn = domStub(({ resources }) => {
   return toSilhouette({ image, r: 255, g: 0, b: 0 });
 });
 
-export const scaleDownTexture: StoryFn = domStub(({ resources }) => {
+export const scaleDownTexture = domStub(({ resources }) => {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND)
       ?.texture ?? new THREE.Texture();
@@ -26,7 +25,7 @@ export const scaleDownTexture: StoryFn = domStub(({ resources }) => {
   return toSilhouette({ image, r: 255, g: 0, b: 0, scale: 0.5 });
 });
 
-export const horizontalTexture: StoryFn = domStub(({ resources }) => {
+export const horizontalTexture = domStub(({ resources }) => {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
       ?.texture ?? new THREE.Texture();
@@ -34,7 +33,7 @@ export const horizontalTexture: StoryFn = domStub(({ resources }) => {
   return toSilhouette({ image, r: 255, g: 0, b: 0 });
 });
 
-export const scaleDownHorizontalTexture: StoryFn = domStub(({ resources }) => {
+export const scaleDownHorizontalTexture = domStub(({ resources }) => {
   const texture =
     resources.textures.find((v) => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN)
       ?.texture ?? new THREE.Texture();
@@ -42,14 +41,14 @@ export const scaleDownHorizontalTexture: StoryFn = domStub(({ resources }) => {
   return toSilhouette({ image, r: 255, g: 0, b: 0, scale: 0.5 });
 });
 
-export const canvasImage: StoryFn = domStub(({ resources }) => {
+export const canvasImage = domStub(({ resources }) => {
   const image =
     resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
       ?.image ?? new Image();
   return toSilhouette({ image, r: 0, g: 0, b: 255 });
 });
 
-export const scaleDownCanvasImage: StoryFn = domStub(({ resources }) => {
+export const scaleDownCanvasImage = domStub(({ resources }) => {
   const image =
     resources.canvasImages.find((v) => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
       ?.image ?? new Image();

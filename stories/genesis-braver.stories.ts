@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   EnemyGenesisBraver,
@@ -13,15 +11,12 @@ export default {
 };
 
 /** プレイヤー 立ち */
-export const playerStand: StoryFn = armdozerSpriteStub(
-  PlayerGenesisBraver,
-  () => {
-    // NOP
-  },
-);
+export const playerStand = armdozerSpriteStub(PlayerGenesisBraver, () => {
+  // NOP
+});
 
 /** プレイヤー アクティブ 立ち */
-export const playerActiveStand: StoryFn = armdozerSpriteStub(
+export const playerActiveStand = armdozerSpriteStub(
   PlayerGenesisBraver,
   (sprite) => {
     sprite.startActive().play();
@@ -29,15 +24,12 @@ export const playerActiveStand: StoryFn = armdozerSpriteStub(
 );
 
 /** 敵 立ち */
-export const enemyStand: StoryFn = armdozerSpriteStub(
-  EnemyGenesisBraver,
-  () => {
-    // NOP
-  },
-);
+export const enemyStand = armdozerSpriteStub(EnemyGenesisBraver, () => {
+  // NOP
+});
 
 /** 敵 アクティブ 立ち */
-export const enemyActiveStand: StoryFn = armdozerSpriteStub(
+export const enemyActiveStand = armdozerSpriteStub(
   EnemyGenesisBraver,
   (sprite) => {
     sprite.startActive().play();
@@ -69,25 +61,25 @@ const activeStraightPunch = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー ストレートパンチ */
-export const playerStraightPunch: StoryFn = armdozerSpriteStub(
+export const playerStraightPunch = armdozerSpriteStub(
   PlayerGenesisBraver,
   straightPunch,
 );
 
 /** プレイヤー アクティブ ストレートパンチ */
-export const playerActiveStraightPunch: StoryFn = armdozerSpriteStub(
+export const playerActiveStraightPunch = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeStraightPunch,
 );
 
 /** 敵 ストレートパンチ */
-export const enemyStraightPunch: StoryFn = armdozerSpriteStub(
+export const enemyStraightPunch = armdozerSpriteStub(
   EnemyGenesisBraver,
   straightPunch,
 );
 
 /** 敵 アクティブ ストレートパンチ */
-export const enemyActiveStraightPunch: StoryFn = armdozerSpriteStub(
+export const enemyActiveStraightPunch = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeStraightPunch,
 );
@@ -115,25 +107,22 @@ const activeKnockBack = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー ノックバック */
-export const playerKnockBack: StoryFn = armdozerSpriteStub(
+export const playerKnockBack = armdozerSpriteStub(
   PlayerGenesisBraver,
   knockBack,
 );
 
 /** プレイヤー アクティブ ノックバック */
-export const playerActiveKnockBack: StoryFn = armdozerSpriteStub(
+export const playerActiveKnockBack = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeKnockBack,
 );
 
 /** 敵 ノックバック */
-export const enemyKnockBack: StoryFn = armdozerSpriteStub(
-  EnemyGenesisBraver,
-  knockBack,
-);
+export const enemyKnockBack = armdozerSpriteStub(EnemyGenesisBraver, knockBack);
 
 /** 敵 アクティブ ノックバック */
-export const enemyActiveKnockBack: StoryFn = armdozerSpriteStub(
+export const enemyActiveKnockBack = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeKnockBack,
 );
@@ -161,25 +150,19 @@ const activeGuard = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー ガード */
-export const playerGuard: StoryFn = armdozerSpriteStub(
-  PlayerGenesisBraver,
-  guard,
-);
+export const playerGuard = armdozerSpriteStub(PlayerGenesisBraver, guard);
 
 /** プレイヤー アクティブ ガード */
-export const playerActiveGuard: StoryFn = armdozerSpriteStub(
+export const playerActiveGuard = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeGuard,
 );
 
 /** 敵 ガード */
-export const enemyGuard: StoryFn = armdozerSpriteStub(
-  EnemyGenesisBraver,
-  guard,
-);
+export const enemyGuard = armdozerSpriteStub(EnemyGenesisBraver, guard);
 
 /** 敵 アクティブ ガード */
-export const enemyActiveGuard: StoryFn = armdozerSpriteStub(
+export const enemyActiveGuard = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeGuard,
 );
@@ -202,22 +185,19 @@ const activeDown = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー ダウン */
-export const playerDown: StoryFn = armdozerSpriteStub(
-  PlayerGenesisBraver,
-  down,
-);
+export const playerDown = armdozerSpriteStub(PlayerGenesisBraver, down);
 
 /** プレイヤー アクティブ ダウン */
-export const playerActiveDown: StoryFn = armdozerSpriteStub(
+export const playerActiveDown = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeDown,
 );
 
 /** 敵 ダウン */
-export const enemyDown: StoryFn = armdozerSpriteStub(EnemyGenesisBraver, down);
+export const enemyDown = armdozerSpriteStub(EnemyGenesisBraver, down);
 
 /** 敵 アクティブ ダウン */
-export const enemyActiveDown: StoryFn = armdozerSpriteStub(
+export const enemyActiveDown = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeDown,
 );
@@ -241,25 +221,19 @@ const activeAvoid = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー 回避 */
-export const playerAvoid: StoryFn = armdozerSpriteStub(
-  PlayerGenesisBraver,
-  avoid,
-);
+export const playerAvoid = armdozerSpriteStub(PlayerGenesisBraver, avoid);
 
 /** プレイヤー アクティブ 回避 */
-export const playerActiveAvoid: StoryFn = armdozerSpriteStub(
+export const playerActiveAvoid = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeAvoid,
 );
 
 /** 敵 回避 */
-export const enemyAvoid: StoryFn = armdozerSpriteStub(
-  EnemyGenesisBraver,
-  avoid,
-);
+export const enemyAvoid = armdozerSpriteStub(EnemyGenesisBraver, avoid);
 
 /** 敵 アクティブ 回避 */
-export const enemyActiveAvoid: StoryFn = armdozerSpriteStub(
+export const enemyActiveAvoid = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeAvoid,
 );
@@ -287,25 +261,19 @@ const activeBurst = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー バースト */
-export const playerBurst: StoryFn = armdozerSpriteStub(
-  PlayerGenesisBraver,
-  burst,
-);
+export const playerBurst = armdozerSpriteStub(PlayerGenesisBraver, burst);
 
 /** プレイヤー アクティブ バースト */
-export const playerActiveBurst: StoryFn = armdozerSpriteStub(
+export const playerActiveBurst = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeBurst,
 );
 
 /** 敵 バースト */
-export const enemyBurst: StoryFn = armdozerSpriteStub(
-  EnemyGenesisBraver,
-  burst,
-);
+export const enemyBurst = armdozerSpriteStub(EnemyGenesisBraver, burst);
 
 /** 敵 アクティブ バースト */
-export const enemyActiveBurst: StoryFn = armdozerSpriteStub(
+export const enemyActiveBurst = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeBurst,
 );
@@ -336,25 +304,25 @@ const activeUprightBow = (sprite: GenesisBraver) => {
 };
 
 /** プレイヤー 気をつけ、礼 */
-export const playerUprightBow: StoryFn = armdozerSpriteStub(
+export const playerUprightBow = armdozerSpriteStub(
   PlayerGenesisBraver,
   uprightBow,
 );
 
 /** プレイヤー アクティブ 気をつけ、礼 */
-export const playerActiveUprightBow: StoryFn = armdozerSpriteStub(
+export const playerActiveUprightBow = armdozerSpriteStub(
   PlayerGenesisBraver,
   activeUprightBow,
 );
 
 /** 敵 気をつけ、礼 */
-export const enemyUprightBow: StoryFn = armdozerSpriteStub(
+export const enemyUprightBow = armdozerSpriteStub(
   EnemyGenesisBraver,
   uprightBow,
 );
 
 /** 敵 アクティブ 気をつけ、礼 */
-export const enemyActiveUprightBow: StoryFn = armdozerSpriteStub(
+export const enemyActiveUprightBow = armdozerSpriteStub(
   EnemyGenesisBraver,
   activeUprightBow,
 );

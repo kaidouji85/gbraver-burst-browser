@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { circlePushDetector } from "../src/js/game-object/push-detector/circle-push-detector";
 import { planePushDetector } from "../src/js/game-object/push-detector/square-push-detector";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
@@ -9,7 +7,7 @@ export default {
 };
 
 /** あたり判定 円形 */
-export const circle: StoryFn = hudGameObjectStory(({ gameObjectAction }) => {
+export const circle = hudGameObjectStory(({ gameObjectAction }) => {
   const pushDetector = circlePushDetector({
     radius: 32,
     segments: 32,
@@ -23,7 +21,7 @@ export const circle: StoryFn = hudGameObjectStory(({ gameObjectAction }) => {
 });
 
 /** あたり判定 平面 */
-export const plane: StoryFn = hudGameObjectStory(({ gameObjectAction }) => {
+export const plane = hudGameObjectStory(({ gameObjectAction }) => {
   const pushDetector = planePushDetector({
     width: 64,
     height: 64,

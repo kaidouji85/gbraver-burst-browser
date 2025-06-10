@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -64,7 +63,7 @@ const blueLine: Generator = (gameObjectAction) => {
 };
 
 /** 右上 */
-export const rightUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
+export const rightUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = 40;
   b.position.x = a.position.x + 200;
@@ -74,7 +73,7 @@ export const rightUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 左上 */
-export const leftUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
+export const leftUpper = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = 40;
   b.position.x = a.position.x - 200;
@@ -84,7 +83,7 @@ export const leftUpper: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 右下 */
-export const rightLover: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
+export const rightLover = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = 30;
   a.position.y = -40;
   b.position.x = a.position.x + 200;
@@ -94,7 +93,7 @@ export const rightLover: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
 });
 
 /** 左下 */
-export const leftLover: StoryFn = leadLineStory(blueLine, (leadLine, a, b) => {
+export const leftLover = leadLineStory(blueLine, (leadLine, a, b) => {
   a.position.x = -30;
   a.position.y = -40;
   b.position.x = a.position.x - 200;

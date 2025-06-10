@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   DamageHalvedCreatorParams,
@@ -40,10 +38,7 @@ const popUp = (damageHalved: DamageHalved) => {
 };
 
 /** プレイヤー ダメージ半減インジケータ ポップアップ */
-export const playerPopUp: StoryFn = damageHalvedStory(
-  playerDamageHalved,
-  popUp,
-);
+export const playerPopUp = damageHalvedStory(playerDamageHalved, popUp);
 
 /** 敵 ダメージ半減インジケータ ポップアップ */
-export const enemyPopUp: StoryFn = damageHalvedStory(enemyDamageHalved, popUp);
+export const enemyPopUp = damageHalvedStory(enemyDamageHalved, popUp);

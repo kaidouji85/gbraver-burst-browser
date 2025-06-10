@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   EffectClearCreatorOptions,
@@ -44,7 +42,7 @@ const popUp = (ineffective: EffectClear) => {
 };
 
 /** プレイヤー 効果無効 ポップアップ */
-export const player: StoryFn = ineffectiveStory(playerEffectClear, popUp);
+export const player = ineffectiveStory(playerEffectClear, popUp);
 
 /** 敵 効果無効 ポップアップ */
-export const enemy: StoryFn = ineffectiveStory(enemyEffectClear, popUp);
+export const enemy = ineffectiveStory(enemyEffectClear, popUp);

@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { TimeScaleButton } from "../src/js/game-object/time-scale-button/time-scale-button";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
@@ -31,7 +29,7 @@ const operable = (timeScaleButton: TimeScaleButton) => {
 };
 
 /** 操作可能 タイムスケールボタン */
-export const operableButton: StoryFn = timeScaleButtonStory(operable);
+export const operableButton = timeScaleButtonStory(operable);
 
 /**
  * 操作不可能なタイムスケールボタン
@@ -43,4 +41,4 @@ const disabled = (timeScaleButton: TimeScaleButton) => {
 };
 
 /** 操作不可能 タイムスケールボタン */
-export const disabledButton: StoryFn = timeScaleButtonStory(disabled);
+export const disabledButton = timeScaleButtonStory(disabled);

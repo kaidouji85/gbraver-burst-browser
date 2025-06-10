@@ -1,5 +1,8 @@
 import "../../src/css/style.css";
 
+import { StoryFn } from "@storybook/react";
+import React from "react";
+
 import { AbortManager } from "../../src/js/abort-controller/abort-manager";
 import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
 import {
@@ -41,21 +44,36 @@ export type DOMStubStory = () => HTMLElement;
  * @param creator HTML要素生成コールバック関数
  * @returns ストーリー
  */
+
+/**
+ * React用のダミーコンポーネントを返す
+ * @param creator HTML要素生成コールバック関数
+ * @returns Reactコンポーネント
+ */
 export const domStub =
-  (creator: DOMCreator): DOMStubStory =>
+  (creator: DOMCreator): StoryFn =>
   () => {
-    const root = document.createElement("div");
-    const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = loadFullResources(resourceRoot);
-    resourceLoading.resources.then((resources) => {
-      const component = creator({
-        resources,
-        bgm: createBGMManager(),
-        se: createSEPlayer(),
-        gameLoop: createGameLoop(),
-        abort: new AbortManager(),
+    const ref = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+      const resourceRoot = new StorybookResourceRoot();
+      const resourceLoading = loadFullResources(resourceRoot);
+      resourceLoading.resources.then((resources) => {
+        const component = creator({
+          resources,
+          bgm: createBGMManager(),
+          se: createSEPlayer(),
+          gameLoop: createGameLoop(),
+          abort: new AbortManager(),
+        });
+        if (ref.current) {
+          ref.current.appendChild(component);
+        }
       });
-      root.appendChild(component);
-    });
-    return root;
+      return () => {
+        if (ref.current) {
+          ref.current.innerHTML = "";
+        }
+      };
+    }, []);
+    return React.createElement("div", { ref });
   };

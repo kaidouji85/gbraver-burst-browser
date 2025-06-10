@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { Title } from "../src/js/dom-scenes/title";
 import {
   GuestAccount,
@@ -11,7 +9,7 @@ export default {
   title: "title",
 };
 
-export const guestAccount: StoryFn = domStub((params) => {
+export const guestAccount = domStub((params) => {
   const account: GuestAccount = {
     type: "GuestAccount",
   };
@@ -28,7 +26,7 @@ export const guestAccount: StoryFn = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const loggedInAccount: StoryFn = domStub((params) => {
+export const loggedInAccount = domStub((params) => {
   const account: LoggedInAccount = {
     type: "LoggedInAccount",
     name: "test-account",

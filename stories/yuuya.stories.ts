@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   enemyYuuyaCutIn,
@@ -51,7 +49,7 @@ const show = (cutIn: YuuyaCutIn) => {
 };
 
 /** プレイヤー側 ユウヤ カットイン */
-export const player: StoryFn = cutInStory(playerYuuyaCutIn, show);
+export const player = cutInStory(playerYuuyaCutIn, show);
 
 /** 敵側 ユウヤ カットイン */
-export const enemy: StoryFn = cutInStory(enemyYuuyaCutIn, show);
+export const enemy = cutInStory(enemyYuuyaCutIn, show);

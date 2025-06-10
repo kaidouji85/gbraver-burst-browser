@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { PostBattleFloater } from "../src/js/dom-floaters/post-battle";
 import { PostBattleButtonConfig } from "../src/js/dom-floaters/post-battle/post-battle-button-config";
 import {
@@ -34,36 +32,28 @@ const postBattleStory = (buttons: PostBattleButtonConfig[]) =>
   });
 
 /** NPCバトル勝利 */
-export const postNPCBattleWin: StoryFn = postBattleStory(
-  PostNPCBattleWinButtons,
-);
+export const postNPCBattleWin = postBattleStory(PostNPCBattleWinButtons);
 
 /** NPCバトル敗北 PostNPCBattleLoseButtons */
-export const postNPCBattleLose: StoryFn = postBattleStory(
-  PostNPCBattleLoseButtons,
-);
+export const postNPCBattleLose = postBattleStory(PostNPCBattleLoseButtons);
 
 /** NPCバトル完全クリア  */
-export const postNPCBattleComplete: StoryFn = postBattleStory(
-  PostNPCBattleComplete,
-);
+export const postNPCBattleComplete = postBattleStory(PostNPCBattleComplete);
 
 /** ネット対戦終了 */
-export const postNetworkBattle: StoryFn = postBattleStory(
-  PostNetworkBattleButtons,
-);
+export const postNetworkBattle = postBattleStory(PostNetworkBattleButtons);
 
 /** エピソード終了 */
-export const postEpisode: StoryFn = postBattleStory(PostEpisodeButtons);
+export const postEpisode = postBattleStory(PostEpisodeButtons);
 
 /** エピソード終了（プレイヤーの勝利） */
-export const postEpisodeWin: StoryFn = postBattleStory(PostEpisodeWinButtons);
+export const postEpisodeWin = postBattleStory(PostEpisodeWinButtons);
 
 /** エピソード終了（プレイヤーの敗北） */
-export const postEpisodeLose: StoryFn = postBattleStory(PostEpisodeLoseButtons);
+export const postEpisodeLose = postBattleStory(PostEpisodeLoseButtons);
 
 /** 表示、非表示の繰り返し */
-export const showHidden: StoryFn = domStub((params) => {
+export const showHidden = domStub((params) => {
   const floater = new PostBattleFloater(params);
   (async () => {
     await floater.show({ ...params, buttons: PostNPCBattleWinButtons });

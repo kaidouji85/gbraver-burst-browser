@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { RejectPrivateMatchEntryDialog } from "../src/js/dom-dialogs/reject-private-match-entry";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const dialog = new RejectPrivateMatchEntryDialog(params);
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");

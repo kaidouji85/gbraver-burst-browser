@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { LoginDialog } from "../src/js/dom-dialogs/login";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const dialog = new LoginDialog({
     ...params,
     caption: "ネット対戦をするにはログインしてください",
