@@ -28,7 +28,7 @@ module.exports = {
     name: "@storybook/react-webpack5",
     options: {},
   },
-  addons: ["@storybook/addon-backgrounds"],
+  addons: [],
   features: {
     backgroundsStoryGlobals: true,
   },
