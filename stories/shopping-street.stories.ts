@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
@@ -12,7 +10,7 @@ export default {
 };
 
 /** ゲーム画面での表示 */
-export const game: StoryFn = tdGameObjectStory(
+export const game = tdGameObjectStory(
   ({ resources, gameObjectAction }) => {
     const illumination = new Illumination(gameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
@@ -29,7 +27,7 @@ export const game: StoryFn = tdGameObjectStory(
 );
 
 /** 静止画 ハイレゾリューション */
-export const highResolutionStillImage: StoryFn = (): HTMLElement => {
+export const highResolutionStillImage = (): HTMLElement => {
   const renderer = {
     width: 7680,
     height: 4320,

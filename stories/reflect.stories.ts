@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
@@ -45,13 +44,13 @@ const popUp = (reflect: ReflectIndicator) => {
 };
 
 /** プレイヤー ダメージ反射インジケータ ポップアップ */
-export const playerPopUp: StoryFn = reflectIndicatorStory(
+export const playerPopUp = reflectIndicatorStory(
   playerReflectIndicator,
   popUp,
 );
 
 /** 敵 ダメージ反射インジケータ ポップアップ */
-export const enemyPopUp: StoryFn = reflectIndicatorStory(
+export const enemyPopUp = reflectIndicatorStory(
   enemyReflectIndicator,
   popUp,
 );
