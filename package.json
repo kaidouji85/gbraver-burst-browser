@@ -30,6 +30,7 @@
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.41.0",
     "@html-eslint/parser": "^0.41.0",
+    "@storybook/react": "^9.0.6",
     "@storybook/react-webpack5": "^9.0.6",
     "@types/howler": "^2.2.12",
     "@types/jest": "^29.5.14",
