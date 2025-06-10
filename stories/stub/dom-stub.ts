@@ -55,11 +55,9 @@ export const domStub =
   () => {
     const ref = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
-      let mounted = true;
       const resourceRoot = new StorybookResourceRoot();
       const resourceLoading = loadFullResources(resourceRoot);
       resourceLoading.resources.then((resources) => {
-        if (!mounted) return;
         const component = creator({
           resources,
           bgm: createBGMManager(),
@@ -68,12 +66,13 @@ export const domStub =
           abort: new AbortManager(),
         });
         if (ref.current) {
-          ref.current.innerHTML = "";
           ref.current.appendChild(component);
         }
       });
       return () => {
-        mounted = false;
+        if (ref.current) {
+          ref.current.innerHTML = "";
+        }
       };
     }, []);
     return React.createElement("div", { ref });
