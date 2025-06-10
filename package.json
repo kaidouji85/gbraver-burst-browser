@@ -126,8 +126,5 @@
     "start-storybook": "storybook dev -p 6006",
     "test": "jest",
     "type-check": "tsc --noEmit"
-  },
-  "overrides": {
-    "storybook": "$storybook"
   }
 }
