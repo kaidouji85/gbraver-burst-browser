@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/react";
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
@@ -88,35 +89,55 @@ type StubParams = {
  * @param params パラメータ
  * @returns storybookが利用するHTMLElement
  */
-export function stillImageStub(params: StubParams): HTMLElement {
-  const renderer = new THREE.WebGLRenderer();
-  const { pixelRatio, width, height } = params.renderer;
-  renderer.setPixelRatio(pixelRatio);
-  renderer.setSize(width, height);
 
-  (async () => {
-    const aspect = width / height;
-    const camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
-    const { position, target } = params.camera;
-    camera.position.x = position.x;
-    camera.position.y = position.y;
-    camera.position.z = position.z;
-    camera.lookAt(target.x, target.y, target.z);
-    const resourceRoot = new StorybookResourceRoot();
-    const resourceLoading = loadFullResources(resourceRoot);
-    const resources = await resourceLoading.resources;
-    const emptyGameObjectAction: Subject<GameObjectAction> = new Subject();
-    const { objects, skyBox } = params.creator({
-      resources,
-      emptyGameObjectAction,
-    });
-    const scene = new THREE.Scene();
-    objects.forEach((v) => {
-      scene.add(v);
-    });
-    scene.background = skyBox ?? null;
-    renderer.render(scene, camera);
-  })();
+import React from "react";
 
-  return renderer.domElement;
-}
+/**
+ * 静止画スタブ（Reactコンポーネント版）
+ * @param params パラメータ
+ * @returns Reactコンポーネント
+ */
+export const stillImageStub =
+  (params: StubParams): StoryFn =>
+  () => {
+    const ref = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+      const renderer = new THREE.WebGLRenderer();
+      const { pixelRatio, width, height } = params.renderer;
+      renderer.setPixelRatio(pixelRatio);
+      renderer.setSize(width, height);
+
+      (async () => {
+        const aspect = width / height;
+        const camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
+        const { position, target } = params.camera;
+        camera.position.x = position.x;
+        camera.position.y = position.y;
+        camera.position.z = position.z;
+        camera.lookAt(target.x, target.y, target.z);
+        const resourceRoot = new StorybookResourceRoot();
+        const resourceLoading = loadFullResources(resourceRoot);
+        const resources = await resourceLoading.resources;
+        const emptyGameObjectAction: Subject<GameObjectAction> = new Subject();
+        const { objects, skyBox } = params.creator({
+          resources,
+          emptyGameObjectAction,
+        });
+        const scene = new THREE.Scene();
+        objects.forEach((v) => {
+          scene.add(v);
+        });
+        scene.background = skyBox ?? null;
+        renderer.render(scene, camera);
+        if (ref.current) {
+          ref.current.appendChild(renderer.domElement);
+        }
+      })();
+      return () => {
+        if (ref.current) {
+          ref.current.innerHTML = "";
+        }
+      };
+    }, []);
+    return React.createElement("div", { ref });
+  };

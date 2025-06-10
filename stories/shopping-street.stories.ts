@@ -1,7 +1,7 @@
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
-import type { Object3DsGeneratorParams } from "./stub/still-image-stub";
+import { Object3DsGeneratorParams } from "./stub/still-image-stub";
 import { stillImageStub } from "./stub/still-image-stub";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
@@ -25,7 +25,7 @@ export const game = tdGameObjectStory(({ resources, gameObjectAction }) => {
 });
 
 /** 静止画 ハイレゾリューション */
-export const highResolutionStillImage = (): HTMLElement => {
+export const highResolutionStillImage = (() => {
   const renderer = {
     width: 7680,
     height: 4320,
@@ -64,9 +64,5 @@ export const highResolutionStillImage = (): HTMLElement => {
     };
   };
 
-  return stillImageStub({
-    camera,
-    renderer,
-    creator,
-  });
-};
+  return stillImageStub({ camera, renderer, creator });
+})();
