@@ -25,7 +25,7 @@ module.exports = {
     };
   },
   framework: {
-    name: "@storybook/html-webpack5",
+    name: "@storybook/react-webpack5",
     options: {},
   },
   addons: ["@storybook/addon-backgrounds"],

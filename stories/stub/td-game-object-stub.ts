@@ -1,5 +1,7 @@
+import React from "react";
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
+import { StoryFn } from "@storybook/react";
 
 import { AbortManager } from "../../src/js/abort-controller/abort-manager";
 import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
@@ -157,9 +159,21 @@ export class TDGameObjectStub {
  * @param creator 3Dオブジェクト生成関数
  * @returns ストーリー
  */
-export const tdGameObjectStory =
-  (creator: Object3DCreator) => (): HTMLElement => {
+export const tdGameObjectStory = (creator: Object3DCreator): StoryFn => () => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
     const stub = new TDGameObjectStub(creator);
-    stub.start();
-    return stub.domElement();
-  };
+    stub.start().then(() => {
+      if (ref.current) {
+        const dom = stub.domElement();
+        ref.current.appendChild(dom);
+      }
+    });
+    return () => {
+      if (ref.current) {
+        ref.current.innerHTML = "";
+      }
+    };
+  }, []);
+  return React.createElement("div", { ref });
+};
