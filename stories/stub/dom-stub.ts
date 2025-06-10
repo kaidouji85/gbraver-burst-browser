@@ -1,7 +1,7 @@
 import "../../src/css/style.css";
 
-import React from "react";
 import { StoryFn } from "@storybook/react";
+import React from "react";
 
 import { AbortManager } from "../../src/js/abort-controller/abort-manager";
 import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
@@ -50,8 +50,9 @@ export type DOMStubStory = () => HTMLElement;
  * @param creator HTML要素生成コールバック関数
  * @returns Reactコンポーネント
  */
-export const domStub = (creator: DOMCreator): StoryFn => {
-  return function DomStubReactComponent() {
+export const domStub =
+  (creator: DOMCreator): StoryFn =>
+  () => {
     const ref = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
       let mounted = true;
@@ -77,4 +78,3 @@ export const domStub = (creator: DOMCreator): StoryFn => {
     }, []);
     return React.createElement("div", { ref });
   };
-};

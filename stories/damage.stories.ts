@@ -38,13 +38,7 @@ const popUp = (damageIndicator: DamageIndicator) => {
 };
 
 /** プレイヤー ダメージインジケータ ポップアップ */
-export const playerPopUp = damageIndicatorStory(
-  playerDamageIndicator,
-  popUp,
-);
+export const playerPopUp = damageIndicatorStory(playerDamageIndicator, popUp);
 
 /** 敵 ダメージインジケータ ポップアップ */
-export const enemyPopUp = damageIndicatorStory(
-  enemyDamageIndicator,
-  popUp,
-);
+export const enemyPopUp = damageIndicatorStory(enemyDamageIndicator, popUp);

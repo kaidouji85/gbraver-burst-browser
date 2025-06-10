@@ -38,10 +38,7 @@ const popUp = (damageHalved: DamageHalved) => {
 };
 
 /** プレイヤー ダメージ半減インジケータ ポップアップ */
-export const playerPopUp = damageHalvedStory(
-  playerDamageHalved,
-  popUp,
-);
+export const playerPopUp = damageHalvedStory(playerDamageHalved, popUp);
 
 /** 敵 ダメージ半減インジケータ ポップアップ */
 export const enemyPopUp = damageHalvedStory(enemyDamageHalved, popUp);

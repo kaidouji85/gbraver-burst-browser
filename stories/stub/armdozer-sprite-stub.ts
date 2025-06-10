@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
 import { StoryFn } from "@storybook/react";
+import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game-object/armdozer/armdozer-sprite";

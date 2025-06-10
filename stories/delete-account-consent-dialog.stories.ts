@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { DeleteAccountConsentDialog } from "../src/js/dom-dialogs/delete-account-consent";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const deleteAccountConsentDialog = new DeleteAccountConsentDialog(params);
   deleteAccountConsentDialog.notifyAccountDeletion().subscribe(() => {
     console.log("delete account");

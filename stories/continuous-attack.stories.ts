@@ -40,13 +40,7 @@ const popUp = (continuousAttack: ContinuousAttackIndicator) => {
 };
 
 /** プレイヤー 連続攻撃インジケータ ポップアップ */
-export const playerPopUp = continuousAttackStory(
-  playerContinuousAttack,
-  popUp,
-);
+export const playerPopUp = continuousAttackStory(playerContinuousAttack, popUp);
 
 /** 敵 連続攻撃インジケータ ポップアップ */
-export const enemyPopUp = continuousAttackStory(
-  enemyContinuousAttack,
-  popUp,
-);
+export const enemyPopUp = continuousAttackStory(enemyContinuousAttack, popUp);

@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { BattleHamburgerMenu } from "../src/js/game-dom/battle-hamburger-menu";
 import { domStub } from "./stub/dom-stub";
 
@@ -34,7 +32,7 @@ const hamburgerMenuStory = (isEnabled: boolean) =>
   });
 
 /** すべてが操作可能 */
-export const enabled: StoryFn = hamburgerMenuStory(true);
+export const enabled = hamburgerMenuStory(true);
 
 /** 一部操作不可能 */
-export const disabled: StoryFn = hamburgerMenuStory(false);
+export const disabled = hamburgerMenuStory(false);
