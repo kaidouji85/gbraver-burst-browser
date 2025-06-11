@@ -99,6 +99,18 @@ npm run start-storybook
 # ブラウザからlocalhost:6006を開く
 ```
 
+## Windows用バイナリをビルドする
+windowsで実行する場合は、管理者権限でターミナルを起動すること
+
+```bat
+npm run build:production
+npm run generate-icons
+npm run scale-down-mobile-images
+npm run build:electron
+
+rem build/electronフォルダにWindows用のバイナリが生成される
+```
+
 ## その他コード解析
 
 本プロジェクトは、以下ツールでコード解析が可能です。
