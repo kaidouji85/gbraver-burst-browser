@@ -1,6 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+/**
+ * ブラウザウインドウを生成する
+ */
 function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
