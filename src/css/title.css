@@ -131,6 +131,10 @@
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
+.title__help-icon--invisible {
+  display: none;
+}
+
 .title__help-menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);

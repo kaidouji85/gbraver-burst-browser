@@ -36,3 +36,9 @@ export const GAME_MENU_CLASS = `${ROOT_CLASS}__game-menu`;
 
 /** ゲームメニュー APIサーバー利用不可時 class属性 */
 export const GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED = `${GAME_MENU_CLASS}--api-server-disabled`;
+
+/** ヘルプアイコン class属性 */
+export const HELP_ICON_CLASS = `${ROOT_CLASS}__help-icon`;
+
+/** ヘルプアイコン 非表示 class属性 */
+export const INVISIBLE_HELP_ICON_CLASS = `${HELP_ICON_CLASS}--invisible`;
