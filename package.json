@@ -47,6 +47,7 @@
     "dependency-cruiser": "^16.10.2",
     "dotenv": "^16.5.0",
     "electron": "^36.4.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.28.0",
     "eslint-plugin-jest": "^28.13.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -89,7 +90,7 @@
     "three.js"
   ],
   "license": "CC-BY-4.0",
-  "main": "src/js/index.js",
+  "main": "electron-main.js",
   "repository": "https://github.com/kaidouji85/study-three-js",
   "scripts": {
     "add-csp": "node add-csp.js",
