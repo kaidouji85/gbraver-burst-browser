@@ -1,3 +1,5 @@
 appId: gbraver.burst
 win:
   icon: "build/production/app-icon-512x512.png"
+directories:
+  output: "build/electron"
