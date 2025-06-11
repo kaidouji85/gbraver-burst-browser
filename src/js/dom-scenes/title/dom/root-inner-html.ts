@@ -23,6 +23,8 @@ export type RootInnerHTMLParams = ResourcesContainer & {
   account: TitleAccount;
   /** APIサーバが利用可能か否か、trueで利用可能である */
   isAPIServerEnable: boolean;
+  /** タイトルヘルプアイコンを表示するか否かのフラグ、trueで表示する */
+  isTitleHelpIconEnable: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** ロボ、パイロット説明スライドのURL */
