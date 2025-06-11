@@ -68,8 +68,12 @@ export function rootInnerHTML(
   const neoLandozerPath =
     params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
       ?.path ?? "";
-  const gameClassName = params.isAPIServerEnable ? GAME_MENU_CLASS : GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED;
-  const helpIconClassName = params.isTitleHelpIconEnable ? HELP_ICON_CLASS : INVISIBLE_HELP_ICON_CLASS;
+  const gameClassName = params.isAPIServerEnable
+    ? GAME_MENU_CLASS
+    : GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED;
+  const helpIconClassName = params.isTitleHelpIconEnable
+    ? HELP_ICON_CLASS
+    : INVISIBLE_HELP_ICON_CLASS;
   return template({
     ROOT_CLASS,
     INVISIBLE__HELP_MENU_CLASS,

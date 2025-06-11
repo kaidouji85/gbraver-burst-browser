@@ -66,8 +66,7 @@ export async function main(): Promise<void> {
     canPlayDevelopingArmdozer:
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER === "true",
     canPlayDevelopingPilot: GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT === "true",
-    isTitleHelpIconEnable:
-      GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE === "true",
+    isTitleHelpIconEnable: GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE === "true",
   });
   await game.initialize();
 }
