@@ -100,6 +100,7 @@ npm run start-storybook
 ```
 
 ## Windows用バイナリをビルドする
+
 windowsで実行する場合は、管理者権限でターミナルを起動すること
 
 ```bat
