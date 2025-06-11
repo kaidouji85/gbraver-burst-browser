@@ -153,6 +153,9 @@ module.exports = async () => ({
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: JSON.stringify(
         process.env.CAN_PLAY_DEVELOPING_PILOT,
       ),
+      GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: JSON.stringify(
+        process.env.IS_TITLE_HELP_ICON_ENABLE,
+      ),
     }),
   ],
 });

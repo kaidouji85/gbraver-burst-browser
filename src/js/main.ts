@@ -28,6 +28,7 @@ declare let GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: string;
 declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
+declare let GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: string;
 
 /** モバイル用リソースルート */
 const mobileResourceRoot = { get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT };
@@ -65,6 +66,7 @@ export async function main(): Promise<void> {
     canPlayDevelopingArmdozer:
       GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER === "true",
     canPlayDevelopingPilot: GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT === "true",
+    isTitleHelpIconEnable: GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE === "true",
   });
   await game.initialize();
 }

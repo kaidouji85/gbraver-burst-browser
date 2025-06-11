@@ -34,6 +34,8 @@ export type GamePropsGeneratorParams = {
   canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
   canPlayDevelopingPilot: boolean;
+  /** タイトルヘルプアイコンを表示するか否かのフラグ、trueで表示する */
+  isTitleHelpIconEnable: boolean;
 
   /** 遊び方スライドのURL */
   howToPlayURL: string;

@@ -131,6 +131,10 @@
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
+.title__help-icon--invisible {
+  display: none;
+}
+
 .title__help-menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
@@ -237,13 +241,23 @@
   text-shadow: 1px 1px 4px black;
 }
 
-.title__game-menu {
+.title__game-menu,
+.title__game-menu--api-server-disabled {
   width: 100%;
   display: grid;
+  gap: calc(var(--responsive-font-size) * 0.3);
+}
+
+.title__game-menu {
   grid-template:
     "net-battle story  tutorial" 1fr
     "config     arcade tutorial" 1fr / 1fr 1fr 1fr;
-  gap: calc(var(--responsive-font-size) * 0.3);
+}
+
+.title__game-menu--api-server-disabled {
+  grid-template:
+    "arcade story tutorial" 1fr
+    "config story tutorial" 1fr / 1fr 1fr 1fr;
 }
 
 .title__config,

@@ -45,6 +45,8 @@ export interface GameProps
   readonly canPlayDevelopingArmdozer: boolean;
   /** 開発中のパイロットを選択できるか否かのフラグ、trueで選択できる */
   readonly canPlayDevelopingPilot: boolean;
+  /** タイトルヘルプアイコンを表示するか否かのフラグ、trueで表示する */
+  readonly isTitleHelpIconEnable: boolean;
 
   /** 遊び方スライドのURL */
   readonly howToPlayURL: string;
