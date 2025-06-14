@@ -5,7 +5,7 @@ import type {
   GameStateX,
 } from "gbraver-burst-core";
 
-import type { LastState } from "../../../td-scenes/battle/custom-battle-event";
+import type { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import {
   extractBatteryDeclaration,
   extractGameEnd,
@@ -23,7 +23,7 @@ import { zeroDefenseWin } from "../stories/zero-defense-win";
  * @returns ステート更新結果
  */
 export async function afterLastState(
-  props: Readonly<LastState & ZeroDefenseTutorialProps>,
+  props: Readonly<LastStateEventProps & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
   const extractedBatteryDeclaration = extractBatteryDeclaration(props.update);
   const extractedGameEnd = extractGameEnd(props.update);

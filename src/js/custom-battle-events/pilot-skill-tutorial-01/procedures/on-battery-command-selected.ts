@@ -1,5 +1,5 @@
 import {
-  BatteryCommandSelected,
+  BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -13,7 +13,7 @@ import { noZeroDefense } from "../stories/no-zero-defense";
  * @returns 再生した否か、trueで再生した
  */
 async function executeNoZeroDefenseIfNeeded(
-  props: Readonly<BatteryCommandSelected>,
+  props: Readonly<BatteryCommandSelectedEventProps>,
 ): Promise<boolean> {
   const { lastState } = props;
   const player = lastState.players.find((v) => v.playerId === props.playerId);
@@ -50,7 +50,7 @@ type Ret = {
  * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected & PilotSkillTutorial01Props>,
+  props: Readonly<BatteryCommandSelectedEventProps & PilotSkillTutorial01Props>,
 ): Promise<Ret> {
   const isNoZeroDefenseExecuted = await executeNoZeroDefenseIfNeeded(props);
   if (isNoZeroDefenseExecuted) {

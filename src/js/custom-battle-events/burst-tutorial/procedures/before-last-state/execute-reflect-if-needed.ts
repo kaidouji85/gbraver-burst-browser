@@ -1,6 +1,6 @@
 import { Battle, GameState } from "gbraver-burst-core";
 
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { failReflectDamage } from "../../stories/fail-reflect-damage";
 import { successReflectDamage } from "../../stories/success-reflect-damage";
 
@@ -10,7 +10,7 @@ import { successReflectDamage } from "../../stories/success-reflect-damage";
  * @returns 処理が完了したら発火するPromise
  */
 export async function executeReflectIfNeeded(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): Promise<void> {
   const foundLastBattle = props.update.find((v) => v.effect.name === "Battle");
   if (!foundLastBattle) {

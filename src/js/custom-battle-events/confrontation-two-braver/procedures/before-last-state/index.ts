@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { ConfrontationTwoBraverState } from "../../state";
@@ -18,7 +18,7 @@ import { startYuuyaHasAdvantageIfNeeded } from "./start-yuuya-has-advantage-if-n
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: Readonly<LastState & ConfrontationTwoBraverProps>,
+  props: Readonly<LastStateEventProps & ConfrontationTwoBraverProps>,
 ): Promise<ConfrontationTwoBraverState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
   if (!props.eventState.isIntroductionComplete) {

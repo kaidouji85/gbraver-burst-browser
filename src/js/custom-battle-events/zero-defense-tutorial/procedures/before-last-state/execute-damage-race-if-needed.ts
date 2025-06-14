@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { separatePlayers } from "../../../separate-players";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
@@ -10,7 +10,7 @@ import { damageRace } from "../../stories/damage-race";
  * @returns ステート更新結果
  */
 export async function executeDamageRaceIfNeeded(
-  props: Readonly<LastState & ZeroDefenseTutorialProps>,
+  props: Readonly<LastStateEventProps & ZeroDefenseTutorialProps>,
 ): Promise<ZeroDefenseTutorialState> {
   if (props.eventState.isDamageRaceComplete) {
     return props.eventState;

@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { PrinceOfFallenSunProps } from "../../props";
 
@@ -7,7 +7,9 @@ import { PrinceOfFallenSunProps } from "../../props";
  * @param props イベントプロパティ
  * @returns 条件オブジェクト
  */
-export function createConditions(props: LastState & PrinceOfFallenSunProps) {
+export function createConditions(
+  props: LastStateEventProps & PrinceOfFallenSunProps,
+) {
   const turn = turnCount(props.stateHistory);
   return { turn };
 }

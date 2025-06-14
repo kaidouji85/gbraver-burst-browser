@@ -1,11 +1,11 @@
 import { Animate } from "../../animation/animate";
 import {
-  BatteryCommandSelected,
+  BatteryCommandSelectedEventProps,
   CommandCanceled,
   CustomBattleEvent,
-  CustomStateAnimation,
-  LastState,
-  PilotSkillCommandSelected,
+  CustomStateAnimationProps,
+  LastStateEventProps,
+  PilotSkillSelectedEventProps,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
@@ -32,12 +32,12 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  onStateAnimation(props: CustomStateAnimation): Animate {
+  onStateAnimation(props: CustomStateAnimationProps): Animate {
     return onStateAnimation({ ...props, ...this.#eventProps });
   }
 
   /** @override */
-  async beforeLastState(props: LastState): Promise<void> {
+  async beforeLastState(props: LastStateEventProps): Promise<void> {
     this.#eventProps.eventState = await beforeLastState({
       ...props,
       ...this.#eventProps,
@@ -45,7 +45,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async afterLastState(props: LastState): Promise<void> {
+  async afterLastState(props: LastStateEventProps): Promise<void> {
     this.#eventProps.eventState = await afterLastState({
       ...props,
       ...this.#eventProps,
@@ -54,7 +54,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(
-    props: BatteryCommandSelected,
+    props: BatteryCommandSelectedEventProps,
   ): Promise<CommandCanceled> {
     const { eventState, cancel } = await onBatteryCommandSelected({
       ...props,
@@ -66,7 +66,7 @@ class PilotSkillTutorial02 extends EmptyCustomBattleEvent {
 
   /** @override */
   async onPilotSkillCommandSelected(
-    props: PilotSkillCommandSelected,
+    props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled> {
     const { eventState, cancel } = await onPilotSkillCommandSelected({
       ...props,

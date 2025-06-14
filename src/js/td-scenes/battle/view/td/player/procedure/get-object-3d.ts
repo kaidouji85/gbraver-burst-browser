@@ -16,7 +16,7 @@ export function getObject3Ds(props: TDPlayerProps): THREE.Object3D[] {
     props.armdozerEffects.continuousAttack.getObject3D(),
     props.armdozerEffects.damageHalved.getObject3D(),
     props.armdozerEffects.batteryEnhancement.getObject3D(),
-    props.armdozerEffects.ineffective.getObject3D(),
+    props.armdozerEffects.effectClear.getObject3D(),
     props.batteryNumber.getObject3D(),
     props.batteryCorrect.getObject3D(),
     props.recoverBattery.getObject3D(),

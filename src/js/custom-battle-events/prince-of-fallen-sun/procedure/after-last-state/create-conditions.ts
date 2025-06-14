@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { PrinceOfFallenSunProps } from "../../props";
 import { Conditions } from "./conditions";
 
@@ -8,7 +8,7 @@ import { Conditions } from "./conditions";
  * @returns 条件オブジェクト
  */
 export function createConditions(
-  props: LastState & PrinceOfFallenSunProps,
+  props: LastStateEventProps & PrinceOfFallenSunProps,
 ): Conditions {
   const { update } = props;
   const gameEnd =

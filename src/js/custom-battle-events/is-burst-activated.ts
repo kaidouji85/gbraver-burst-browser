@@ -1,6 +1,6 @@
 import { GameState, PlayerId } from "gbraver-burst-core";
 
-import { CustomStateAnimation } from "../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 指定したプレイヤーがバーストを発動したかを判定する
@@ -17,7 +17,7 @@ const isBurstActivated = (state: GameState, playerId: PlayerId): boolean =>
  * @returns trueでバーストを発動した
  */
 export const isPlayerBurstActivatedFromCurrentState = (
-  props: CustomStateAnimation,
+  props: CustomStateAnimationProps,
 ) => isBurstActivated(props.currentState, props.playerId);
 
 /**
@@ -26,5 +26,5 @@ export const isPlayerBurstActivatedFromCurrentState = (
  * @returns trueでバーストを発動した
  */
 export const isEnemyBurstActivatedFromCurrentState = (
-  props: CustomStateAnimation,
+  props: CustomStateAnimationProps,
 ) => isBurstActivated(props.currentState, props.enemyId);

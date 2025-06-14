@@ -21,7 +21,7 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  * @returns 攻撃ルーチンの条件オブジェクト
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
-  battery4: findBatteryCommand(4, data.commands),
+  battery1: findBatteryCommand(1, data.commands),
   battery5: findBatteryCommand(5, data.commands),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
@@ -32,13 +32,11 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { battery5, battery4, burst, pilot } = getAttackRoutineCondition(data);
+  const { battery1, battery5, burst, pilot } = getAttackRoutineCondition(data);
 
-  let selectedCommand: Command = ZERO_BATTERY;
+  let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
   if (battery5 && pilot && burst) {
     selectedCommand = battery5;
-  } else if (battery4) {
-    selectedCommand = battery4;
   }
 
   return selectedCommand;
@@ -50,7 +48,6 @@ const attackRoutine: SimpleRoutine = (data) => {
  * @returns 防御ルーチンの条件オブジェクト
  */
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
-  battery1: findBatteryCommand(1, data.commands),
   battery3: findBatteryCommand(3, data.commands),
   burst: findBurstCommand(data.commands),
   pilot: findPilotSkillCommand(data.commands),
@@ -62,15 +59,18 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const { battery1, battery3, burst, pilot } = getDefenseRoutineCondition(data);
+  const { battery3, burst, pilot } = getDefenseRoutineCondition(data);
 
-  let selectedCommand: Command = battery1 ?? ZERO_BATTERY;
-  if (enemy.armdozer.battery === 5 && battery3) {
+  let selectedCommand: Command = ZERO_BATTERY;
+  if (burst && pilot && enemy.armdozer.battery === 5 && battery3) {
     selectedCommand = battery3;
-  } else if (enemy.armdozer.battery === 0 && burst) {
+  } else if (burst) {
     selectedCommand = burst;
-  } else if (battery1 && !burst && pilot) {
+  } else if (pilot) {
     selectedCommand = pilot;
+  } else if (1 < enemy.armdozer.battery) {
+    const battery = enemy.armdozer.battery;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   }
 
   return selectedCommand;
@@ -81,8 +81,9 @@ const defenseRoutine: SimpleRoutine = (data) => {
  * @returns NPC
  */
 export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
-  const armdozer =
+  const originArmdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
+  const armdozer = { ...originArmdozer, maxHp: 3300 };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

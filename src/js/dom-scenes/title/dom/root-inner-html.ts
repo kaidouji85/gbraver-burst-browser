@@ -3,9 +3,13 @@ import { PathIds } from "../../../resource/path/ids";
 import { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
+  GAME_MENU_CLASS,
+  GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED,
+  HELP_ICON_CLASS,
   INVISIBLE__HELP_MENU_CLASS,
   INVISIBLE_ACCOUNT_CLASS,
   INVISIBLE_ACCOUNT_MENU_CLASS,
+  INVISIBLE_HELP_ICON_CLASS,
   INVISIBLE_LOGIN_CLASS,
   INVISIBLE_NET_BATTLE_CLASS,
   LOGIN_CLASS,
@@ -21,6 +25,8 @@ export type RootInnerHTMLParams = ResourcesContainer & {
   account: TitleAccount;
   /** APIサーバが利用可能か否か、trueで利用可能である */
   isAPIServerEnable: boolean;
+  /** タイトルヘルプアイコンを表示するか否かのフラグ、trueで表示する */
+  isTitleHelpIconEnable: boolean;
   /** 遊び方スライドのURL */
   howToPlayURL: string;
   /** ロボ、パイロット説明スライドのURL */
@@ -62,6 +68,12 @@ export function rootInnerHTML(
   const neoLandozerPath =
     params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
       ?.path ?? "";
+  const gameClassName = params.isAPIServerEnable
+    ? GAME_MENU_CLASS
+    : GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED;
+  const helpIconClassName = params.isTitleHelpIconEnable
+    ? HELP_ICON_CLASS
+    : INVISIBLE_HELP_ICON_CLASS;
   return template({
     ROOT_CLASS,
     INVISIBLE__HELP_MENU_CLASS,
@@ -74,5 +86,7 @@ export function rootInnerHTML(
     netBattleClassName,
     shinBraverPath,
     neoLandozerPath,
+    gameClassName,
+    helpIconClassName,
   });
 }

@@ -6,7 +6,7 @@ import {
   PlayerId,
 } from "gbraver-burst-core";
 
-import { playerBattleCount } from "../../../src/js/custom-battle-events/battle-count";
+import { getPlayerBattleCount } from "../../../src/js/custom-battle-events/get-battle-count";
 
 /**
  * Battleのゲームステートを生成する
@@ -49,7 +49,7 @@ const other: GameState = {
 
 test("指定したプレイヤーの戦闘回数を正しくカウントすることができる", () => {
   expect(
-    playerBattleCount(
+    getPlayerBattleCount(
       [
         other,
         player01Battle,
@@ -70,7 +70,7 @@ test("指定したプレイヤーの戦闘回数を正しくカウントする�
 
 test("ステートに戦闘があっても指定したプレイヤーのものでなければカウントされない", () => {
   expect(
-    playerBattleCount(
+    getPlayerBattleCount(
       [
         other,
         other,
@@ -88,11 +88,11 @@ test("ステートに戦闘があっても指定したプレイヤーのもの�
 });
 
 test("ステートヒストリーにバトルがない場合は0回とみなす", () => {
-  expect(playerBattleCount([other, other, other, other, other], player01)).toBe(
-    0,
-  );
+  expect(
+    getPlayerBattleCount([other, other, other, other, other], player01),
+  ).toBe(0);
 });
 
 test("ステートヒストリーが空配列の場合は0回とみなす", () => {
-  expect(playerBattleCount([], player01)).toBe(0);
+  expect(getPlayerBattleCount([], player01)).toBe(0);
 });

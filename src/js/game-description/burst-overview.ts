@@ -3,6 +3,7 @@ import type {
   BuffPower,
   Burst,
   ContinuousAttack,
+  EffectClear,
   ForceTurnEnd,
   Ineffective,
   LightningBarrier,
@@ -72,6 +73,15 @@ function ineffectiveOverview(burst: Ineffective): string {
 }
 
 /**
+ * 効果クリア概要
+ * @param burst バースト情報
+ * @returns 説明文
+ */
+function effectClearOverview(burst: EffectClear): string {
+  return `バッテリー${burst.recoverBattery}回復、相手にかかっているすべての効果を消す`;
+}
+
+/**
  * バースト概要を生成する
  * @param burst バースト情報
  * @returns 説明文
@@ -92,6 +102,8 @@ export function burstOverview(burst: Burst): string {
       return forceTurnEndOverview(burst);
     case "Ineffective":
       return ineffectiveOverview(burst);
+    case "EffectClear":
+      return effectClearOverview(burst);
     default:
       return "";
   }

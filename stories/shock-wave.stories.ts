@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   enemyShockWave,
@@ -40,7 +38,7 @@ const popUp = (shockWave: ShockWave) => {
 };
 
 /** プレイヤー衝撃波 ポップアップ */
-export const player: StoryFn = shockWaveStory(playerShockWave, popUp);
+export const player = shockWaveStory(playerShockWave, popUp);
 
 /** 敵衝撃波 ポップアップ */
-export const enemy: StoryFn = shockWaveStory(enemyShockWave, popUp);
+export const enemy = shockWaveStory(enemyShockWave, popUp);

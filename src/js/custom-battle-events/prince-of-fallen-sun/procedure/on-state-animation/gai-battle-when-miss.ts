@@ -1,13 +1,13 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { gaiBattleShoutWhenMiss } from "../../animation/gai-battle-shout-when-miss";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ガイ 戦闘 ミス */
 export const gaiBattleWhenMiss: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

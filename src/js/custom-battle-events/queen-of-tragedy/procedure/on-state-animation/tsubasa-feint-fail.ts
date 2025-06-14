@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { tsubasaFeintFailShout } from "../../animation/tsubasa-feint-fail-shout";
 import { tsubasaFeintFailShoutAfterThird } from "../../animation/tsubasa-feint-fail-shout-after-third";
@@ -9,7 +9,7 @@ import { QueenOfTragedyProps } from "../../props";
 
 /** ツバサ フェイント 失敗 */
 export const tsubasaFeintFail: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
   const { enemyId, stateHistory } = props;

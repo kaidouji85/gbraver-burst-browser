@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { isZeroDefenseButEnableBurstFromLastState } from "../../../is-zero-defense-but-enable-burst";
 import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable-burst";
 
@@ -8,7 +8,7 @@ import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable
  * @returns ストーリーを再生したらtrueを返す
  */
 export async function playZeroDefenseButEnableBurstIfNeeded(
-  props: Readonly<LastState>,
+  props: Readonly<LastStateEventProps>,
 ): Promise<boolean> {
   if (isZeroDefenseButEnableBurstFromLastState(props)) {
     await zeroDefenseButEnableBurst(props);

@@ -1,6 +1,6 @@
 import { totalCorrectPower } from "gbraver-burst-core";
 
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { PilotSkillTutorial02Props } from "../../props";
 import { doPilotSkill } from "../../stories/do-pilot-skill";
@@ -11,7 +11,7 @@ import { doPilotSkill } from "../../stories/do-pilot-skill";
  * @returns ストーリーを再生したか否か、trueで再生した
  */
 export async function executeDoPilotSkillIfNeeded(
-  props: Readonly<LastState & PilotSkillTutorial02Props>,
+  props: Readonly<LastStateEventProps & PilotSkillTutorial02Props>,
 ): Promise<boolean> {
   const { lastState } = props;
   const player = lastState.players.find((v) => v.playerId === props.playerId);

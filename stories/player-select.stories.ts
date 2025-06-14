@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { PlayerSelect } from "../src/js/dom-scenes/player-select";
@@ -12,7 +11,7 @@ export default {
   title: "player-select",
 };
 
-export const scene: StoryFn = domStub((params) => {
+export const scene = domStub((params) => {
   const scene = new PlayerSelect({
     ...params,
     armdozerIds: PlayableArmdozers,
@@ -21,7 +20,7 @@ export const scene: StoryFn = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const armdozerSelector: StoryFn = domStub((params) => {
+export const armdozerSelector = domStub((params) => {
   const armdozerIds = [
     ArmdozerIds.NEO_LANDOZER,
     ArmdozerIds.SHIN_BRAVER,
@@ -36,7 +35,7 @@ export const armdozerSelector: StoryFn = domStub((params) => {
   return component.getRootHTMLElement();
 });
 
-export const pilotSelector: StoryFn = domStub((params) => {
+export const pilotSelector = domStub((params) => {
   const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
   const component = new PilotSelector({
     ...params,

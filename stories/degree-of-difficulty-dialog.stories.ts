@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { DifficultyDialog } from "../src/js/dom-dialogs/difficulty";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const dialog = new DifficultyDialog(params);
   dialog.notifySelectionComplete().subscribe((diffuculty) => {
     console.log(diffuculty);

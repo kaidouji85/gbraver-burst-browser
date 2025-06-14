@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   enemyGenesisBraverCutIn,
@@ -25,14 +23,14 @@ const story = (cutIn: GenesisBraverCutIn) => {
 };
 
 /** プレイヤーカットイン */
-export const playerCutIn: StoryFn = hudGameObjectStory((params) => {
+export const playerCutIn = hudGameObjectStory((params) => {
   const cutIn = playerGenesisBraverCutIn(params);
   story(cutIn);
   return [cutIn.getObject3D()];
 });
 
 /** 敵カットイン */
-export const enemyCutIn: StoryFn = hudGameObjectStory((params) => {
+export const enemyCutIn = hudGameObjectStory((params) => {
   const cutIn = enemyGenesisBraverCutIn(params);
   story(cutIn);
   return [cutIn.getObject3D()];

@@ -1,6 +1,6 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { LastState } from "../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーが残っているのに0防御したかを判定する
@@ -28,7 +28,7 @@ export function isZeroDefenseButBatteryPositive(
  * @returns 判定結果、trueでバッテリーが残っているのに0防御した
  */
 export function isZeroDefenseButBatteryPositiveFromLastState(
-  props: LastState,
+  props: LastStateEventProps,
 ): boolean {
   const isGameOver = props.update.some(
     (s) => s.effect.name === "GameEnd" && s.effect.result.type === "GameOver",

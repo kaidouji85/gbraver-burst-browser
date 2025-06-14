@@ -1,10 +1,11 @@
-import { Burst, Ineffective } from "gbraver-burst-core";
+import { Burst, EffectClear } from "gbraver-burst-core";
 
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { delay, empty } from "../../../../../animation/delay";
 import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
+import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 import { toInitial } from "../../td-camera";
 import { BurstAnimationParamX } from "./animation-param";
 
@@ -34,11 +35,11 @@ function focusToBurstPlayer(param: GranDozerBurst<Burst>) {
 }
 
 /**
- * グランドーザ バッテリー回復 アニメーション
+ * グランドーザ 効果クリア アニメーション
  * @param param パラメータ
  * @returns アニメーション
  */
-function ineffective(param: GranDozerBurst<Ineffective>): Animate {
+function effectClear(param: GranDozerBurst<EffectClear>): Animate {
   return all(
     focusToBurstPlayer(param),
     param.burstArmdozerHUD.cutIn.show(),
@@ -61,10 +62,13 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
         toInitial(param.tdCamera, 300),
         param.burstArmdozerTD.lightningShot.shot(),
         param.otherArmdozerTD.sprite().knockBack(),
-        param.otherPlayerTD.armdozerEffects.ineffective
+        param.otherPlayerTD.armdozerEffects.effectClear
           .show()
           .chain(delay(800))
-          .chain(param.otherPlayerTD.armdozerEffects.ineffective.hidden()),
+          .chain(param.otherPlayerTD.armdozerEffects.effectClear.hidden()),
+        param.otherArmdozerTD instanceof LightningDozerTD
+          ? param.otherArmdozerTD.lightningBarrier.hidden()
+          : empty(),
       ),
     )
     .chain(delay(100))
@@ -95,8 +99,8 @@ function ineffective(param: GranDozerBurst<Ineffective>): Animate {
 export function granDozerBurst(param: GranDozerBurst<Burst>): Animate {
   const { burst } = param;
   let ret = empty();
-  if (burst.type === "Ineffective") {
-    ret = ineffective({ ...param, burst });
+  if (burst.type === "EffectClear") {
+    ret = effectClear({ ...param, burst });
   }
 
   return ret;

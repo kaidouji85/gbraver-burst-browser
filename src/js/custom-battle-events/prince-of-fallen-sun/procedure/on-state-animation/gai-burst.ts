@@ -1,12 +1,12 @@
 import { Animate } from "../../../../animation/animate";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { gaiBurstShoutWhenEnemy4OrLessBattery } from "../../animation/gai-burst-shout-when-enemy-4-or-less-battery";
 import { PrinceOfFallenSunProps } from "../../props";
 
 /** ガイ バースト */
 export const gaiBurst: ConditionalAnimation<
-  CustomStateAnimation & PrinceOfFallenSunProps
+  CustomStateAnimationProps & PrinceOfFallenSunProps
 > = (props) => {
   let result: Animate | null = null;
 

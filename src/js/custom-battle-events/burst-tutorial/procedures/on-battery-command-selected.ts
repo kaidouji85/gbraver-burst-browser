@@ -1,5 +1,5 @@
 import {
-  BatteryCommandSelected,
+  BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusInBurstButton } from "../../focus";
@@ -18,7 +18,7 @@ import { shouldDefense5Again } from "../stories/should-defense5-again";
  * @returns 処理が完了したら発火するPromise
  */
 async function defense5(
-  props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
+  props: Readonly<BatteryCommandSelectedEventProps & BurstTutorialProps>,
 ): Promise<void> {
   if (props.eventState.isLoseIfNoDefense5Complete) {
     await shouldDefense5Again(props);
@@ -41,7 +41,7 @@ type BatteryEventResult = {
  * @returns イベント終了情報
  */
 export async function onBatteryCommandSelected(
-  props: Readonly<BatteryCommandSelected & BurstTutorialProps>,
+  props: Readonly<BatteryCommandSelectedEventProps & BurstTutorialProps>,
 ): Promise<BatteryEventResult> {
   let result: BatteryEventResult = {
     eventState: props.eventState,

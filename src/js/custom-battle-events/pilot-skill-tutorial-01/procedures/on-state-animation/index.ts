@@ -1,6 +1,6 @@
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import {
   ConditionalAnimation,
   getAnimationIfConditionMet,
@@ -16,10 +16,10 @@ import { tsubasaShout } from "./tsubasa-shout";
  * @returns アニメーション
  */
 export function onStateAnimation(
-  props: Readonly<CustomStateAnimation & PilotSkillTutorial01Props>,
+  props: Readonly<CustomStateAnimationProps & PilotSkillTutorial01Props>,
 ): Animate {
   const conditionalAnimations: ConditionalAnimation<
-    CustomStateAnimation & PilotSkillTutorial01Props
+    CustomStateAnimationProps & PilotSkillTutorial01Props
   >[] = [
     ...tsubasaShout,
     ...shinyaShout,

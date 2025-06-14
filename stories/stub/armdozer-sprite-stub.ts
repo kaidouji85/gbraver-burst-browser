@@ -1,3 +1,4 @@
+import { StoryFn } from "@storybook/react";
 import { Observable } from "rxjs";
 
 import { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
@@ -31,7 +32,7 @@ type SpriteGenerator<X extends ArmdozerSprite> = (params: GeneratorParams) => X;
 export const armdozerSpriteStub = <X extends ArmdozerSprite>(
   generator: SpriteGenerator<X>,
   fn: (sprite: X) => void,
-) =>
+): StoryFn =>
   tdGameObjectStory((params) => {
     const sprite = generator(params);
     fn(sprite);

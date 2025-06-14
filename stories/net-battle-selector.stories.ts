@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { NetBattleSelectorDialog } from "../src/js/dom-dialogs/net-battle-selector";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog: StoryFn = domStub((params) => {
+export const dialog = domStub((params) => {
   const dialog = new NetBattleSelectorDialog(params);
   dialog.notifyCasualMatchSelection().subscribe(() => {
     console.log("select casual match");

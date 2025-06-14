@@ -1,6 +1,6 @@
 import { GameState, PlayerId } from "gbraver-burst-core";
 
-import { CustomStateAnimation } from "../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * 指定したプレイヤーがパイロットスキルを発動したかを判定する
@@ -18,7 +18,7 @@ const isPilotSkillActivated = (state: GameState, playerId: PlayerId): boolean =>
  * @returns trueでパイロットスキルを発動した
  */
 export const isPlayerPilotSkillActivatedFromCurrentState = (
-  props: CustomStateAnimation,
+  props: CustomStateAnimationProps,
 ) => isPilotSkillActivated(props.currentState, props.playerId);
 
 /**
@@ -27,5 +27,5 @@ export const isPlayerPilotSkillActivatedFromCurrentState = (
  * @returns trueでパイロットスキルを発動した
  */
 export const isEnemyPilotSkillActivatedFromCurrentState = (
-  props: CustomStateAnimation,
+  props: CustomStateAnimationProps,
 ) => isPilotSkillActivated(props.currentState, props.enemyId);

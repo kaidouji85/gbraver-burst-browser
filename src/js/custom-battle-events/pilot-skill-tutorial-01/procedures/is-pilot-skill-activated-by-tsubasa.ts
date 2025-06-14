@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../td-scenes/battle/custom-battle-event";
 
 /**
  * ツバサ先輩のパイロットスキル発動か否かを判定する
@@ -6,7 +6,7 @@ import { CustomStateAnimation } from "../../../td-scenes/battle/custom-battle-ev
  * @returns trueでツバサ先輩がスキル発動
  */
 export function isPilotSkillActivatedByTsubasa(
-  props: Readonly<CustomStateAnimation>,
+  props: Readonly<CustomStateAnimationProps>,
 ): boolean {
   return (
     props.currentState.effect.name === "PilotSkillEffect" &&

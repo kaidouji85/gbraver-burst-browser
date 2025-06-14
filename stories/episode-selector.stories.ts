@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { EpisodeSelector } from "../src/js/dom-scenes/episode-selector";
 import { EpisodesInDevelopment } from "../src/js/game/story/episodes";
 import { domStub } from "./stub/dom-stub";
@@ -9,7 +7,7 @@ export default {
 };
 
 /** シーン表示 */
-export const scene: StoryFn = domStub((params) => {
+export const scene = domStub((params) => {
   const scene = new EpisodeSelector({
     ...params,
     episodes: EpisodesInDevelopment,

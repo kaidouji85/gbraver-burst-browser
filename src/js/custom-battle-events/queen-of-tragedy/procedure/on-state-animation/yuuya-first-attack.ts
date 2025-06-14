@@ -1,20 +1,20 @@
 import { Animate } from "../../../../animation/animate";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { yuuyaFirstAttackShout1 } from "../../animation/yuuya-first-attack-shout1";
 import { yuuyaFirstAttackShout2 } from "../../animation/yuuya-first-attack-shout2";
 import { QueenOfTragedyProps } from "../../props";
 
 /** ユウヤ ファーストアタック */
 export const yuuyaFirstAttack: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   let result: Animate | null = null;
 
   const { stateHistory, currentState, playerId, eventState } = props;
   const { effect } = currentState;
-  const battleCount = playerBattleCount(stateHistory, playerId);
+  const battleCount = getPlayerBattleCount(stateHistory, playerId);
 
   if (
     eventState.chapter.type === "None" &&

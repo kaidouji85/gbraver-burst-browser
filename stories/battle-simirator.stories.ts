@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/html";
 import {
   ArmdozerEffect,
   ArmdozerId,
@@ -119,7 +118,7 @@ const battleSimulatorStory = (storyParams: BattleSimulatorStoryParams) =>
   });
 
 /** プレイヤーのターン */
-export const playerTurn: StoryFn = battleSimulatorStory({
+export const playerTurn = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.SHIN_BRAVER,
@@ -134,7 +133,7 @@ export const playerTurn: StoryFn = battleSimulatorStory({
 });
 
 /** 敵のターン */
-export const enemyTurn: StoryFn = battleSimulatorStory({
+export const enemyTurn = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.WING_DOZER,
@@ -149,7 +148,7 @@ export const enemyTurn: StoryFn = battleSimulatorStory({
 });
 
 /** プレイヤーのバッテリー補正 */
-export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
+export const playerBatteryCorrect = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.LIGHTNING_DOZER,
@@ -165,7 +164,7 @@ export const playerBatteryCorrect: StoryFn = battleSimulatorStory({
 });
 
 /** 敵のバッテリー補正 */
-export const enemyBatteryCorrect: StoryFn = battleSimulatorStory({
+export const enemyBatteryCorrect = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.SHIN_BRAVER,
@@ -181,7 +180,7 @@ export const enemyBatteryCorrect: StoryFn = battleSimulatorStory({
 });
 
 /** プレイヤーの攻撃補正 */
-export const playerCorrectPower: StoryFn = battleSimulatorStory({
+export const playerCorrectPower = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.NEO_LANDOZER,
@@ -197,7 +196,7 @@ export const playerCorrectPower: StoryFn = battleSimulatorStory({
 });
 
 /** 敵の攻撃補正 */
-export const enemyCorrectPower: StoryFn = battleSimulatorStory({
+export const enemyCorrectPower = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.WING_DOZER,
@@ -213,7 +212,7 @@ export const enemyCorrectPower: StoryFn = battleSimulatorStory({
 });
 
 /** プレイヤーの複合効果 */
-export const playerMultiEffects: StoryFn = battleSimulatorStory({
+export const playerMultiEffects = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.NEO_LANDOZER,
@@ -229,7 +228,7 @@ export const playerMultiEffects: StoryFn = battleSimulatorStory({
 });
 
 /** 敵の複合効果 */
-export const enemyMultiEffects: StoryFn = battleSimulatorStory({
+export const enemyMultiEffects = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.GENESIS_BRAVER,
@@ -245,7 +244,7 @@ export const enemyMultiEffects: StoryFn = battleSimulatorStory({
 });
 
 /** プレイヤーのグランドーザ */
-export const playerGranDozer: StoryFn = battleSimulatorStory({
+export const playerGranDozer = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.GRAN_DOZER,
@@ -260,7 +259,7 @@ export const playerGranDozer: StoryFn = battleSimulatorStory({
 });
 
 /** 敵のグランドーザ */
-export const enemyGranDozer: StoryFn = battleSimulatorStory({
+export const enemyGranDozer = battleSimulatorStory({
   player: createPlayerState({
     playerId: "player",
     armdozerId: ArmdozerIds.WING_DOZER,

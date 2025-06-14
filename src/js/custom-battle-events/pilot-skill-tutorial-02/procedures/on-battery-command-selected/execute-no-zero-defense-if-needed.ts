@@ -1,4 +1,4 @@
-import { BatteryCommandSelected } from "../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { noZeroDefense } from "../../stories/no-zero-defense";
 
 /**
@@ -7,7 +7,7 @@ import { noZeroDefense } from "../../stories/no-zero-defense";
  * @returns 再生した否か、trueで再生した
  */
 export async function executeNoZeroDefenseIfNeeded(
-  props: Readonly<BatteryCommandSelected>,
+  props: Readonly<BatteryCommandSelectedEventProps>,
 ): Promise<boolean> {
   const { lastState } = props;
   const player = lastState.players.find((p) => p.playerId === props.playerId);

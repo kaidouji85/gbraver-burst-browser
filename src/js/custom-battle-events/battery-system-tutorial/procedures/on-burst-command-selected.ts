@@ -1,5 +1,5 @@
 import type {
-  BurstCommandSelected,
+  BurstSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
@@ -20,7 +20,7 @@ type Ret = {
  * @returns コマンドキャンセル情報
  */
 export async function onBurstCommandSelected(
-  props: Readonly<BurstCommandSelected & BatterySystemTutorialProps>,
+  props: Readonly<BurstSelectedEventProps & BatterySystemTutorialProps>,
 ): Promise<Ret> {
   if (isBurstButtonFocused(props)) {
     focusOutBurstButton(props);

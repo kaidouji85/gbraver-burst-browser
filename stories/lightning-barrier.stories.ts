@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import { LightningBarrierGameEffect } from "../src/js/game-object/barrier/lightning/lightning-barrier";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
@@ -25,7 +23,7 @@ const lightningBarrierStory = (
   });
 
 /** 表示->非表示 */
-export const showHidden: StoryFn = lightningBarrierStory(
+export const showHidden = lightningBarrierStory(
   (barrier: LightningBarrierGameEffect) => {
     delay(1000)
       .chain(barrier.show())

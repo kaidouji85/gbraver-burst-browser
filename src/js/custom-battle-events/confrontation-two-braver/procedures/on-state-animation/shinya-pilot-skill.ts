@@ -1,4 +1,4 @@
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
 import { isEvenMatch } from "../../../is-even-match";
@@ -12,7 +12,7 @@ import { ConfrontationTwoBraverProps } from "../../props";
 
 /** シンヤパイロットスキル カスタムステートアニメーション */
 export const shinyaPilotSkill: ConditionalAnimation<
-  CustomStateAnimation & ConfrontationTwoBraverProps
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
 >[] = [
   (props) => {
     const separatedPlayers = separatePlayersFromCurrentState(props);

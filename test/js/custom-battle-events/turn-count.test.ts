@@ -8,6 +8,7 @@ const turnChange: GameState = {
   effect: {
     name: "TurnChange",
     recoverBattery: 3,
+    reason: "Normal",
   },
 };
 

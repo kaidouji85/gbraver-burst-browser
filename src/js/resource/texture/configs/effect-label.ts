@@ -24,7 +24,7 @@ export const EffectLabelTextureConfigs: TextureConfig[] = [
     path: "effect-label/battery-enhancement.webp",
   },
   {
-    id: TEXTURE_IDS.INEFFECTIVE,
-    path: "effect-label/ineffective.webp",
+    id: TEXTURE_IDS.EFFECT_CLEAR,
+    path: "effect-label/effect-clear.webp",
   },
 ].map((t) => ({ ...t, type: "Shared" }));

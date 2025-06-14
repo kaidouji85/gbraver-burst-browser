@@ -1,17 +1,17 @@
 import { empty } from "../../../../animation/delay";
-import { CustomStateAnimation } from "../../../../td-scenes/battle/custom-battle-event";
-import { playerBattleCount } from "../../../battle-count";
+import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaAttackShoutWhenContinuousAttack } from "../../animation/tsubasa-attack-shout-when-continuous-attack";
 import { QueenOfTragedyProps } from "../../props";
 
 /** ツバサ 連続攻撃の2回目 */
 export const tsubasaAttackWhenContinuousAttack: ConditionalAnimation<
-  CustomStateAnimation & QueenOfTragedyProps
+  CustomStateAnimationProps & QueenOfTragedyProps
 > = (props) => {
   const { enemyId, stateHistory } = props;
   const { effect } = props.currentState;
-  const battleCount = playerBattleCount(stateHistory, enemyId);
+  const battleCount = getPlayerBattleCount(stateHistory, enemyId);
 
   if (
     battleCount === 3 &&

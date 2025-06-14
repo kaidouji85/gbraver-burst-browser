@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { delay } from "../src/js/animation/delay";
 import {
   enemyLightning,
@@ -40,7 +38,7 @@ const popUp = (lightning: Lightning) => {
 };
 
 /** プレイヤー 電撃アタック ポップアップ */
-export const playerPopUp: StoryFn = lightingStory(playerLightning, popUp);
+export const playerPopUp = lightingStory(playerLightning, popUp);
 
 /** 敵 電撃アタック ポップアップ */
-export const enemyPopUp: StoryFn = lightingStory(enemyLightning, popUp);
+export const enemyPopUp = lightingStory(enemyLightning, popUp);

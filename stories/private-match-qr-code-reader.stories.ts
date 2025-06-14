@@ -1,5 +1,3 @@
-import { StoryFn } from "@storybook/html";
-
 import { PrivateMatchQRCodeReader } from "../src/js/dom-dialogs/private-match-guest/qr-code-reader";
 import { waitTime } from "../src/js/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
@@ -9,7 +7,7 @@ export default {
 };
 
 /** QRコードリーダー */
-export const qrCodeReadr: StoryFn = domStub((params) => {
+export const qrCodeReadr = domStub((params) => {
   const reader = new PrivateMatchQRCodeReader(params);
   reader.start();
   reader.notifyReadQRCode().subscribe(async (roomID) => {

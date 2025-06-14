@@ -37,4 +37,9 @@ export const EpisodePathConfigs: PathConfig[] = [
     id: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
     path: (root) => `${root.get()}/episodes/image-cut-queen-of-tragedy.webp`,
   },
+  {
+    id: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
+    path: (root) =>
+      `${root.get()}/episodes/image-cut-survive-super-power-with-guard.webp`,
+  },
 ];

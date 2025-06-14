@@ -141,6 +141,11 @@
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
   }
+
+  .message-window__highlight {
+    font-weight: bold;
+    color: #ffa500;
+  }
 }
 
 @media (orientation: portrait) {

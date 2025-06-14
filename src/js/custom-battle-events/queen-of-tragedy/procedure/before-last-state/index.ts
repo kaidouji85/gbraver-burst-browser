@@ -1,4 +1,4 @@
-import { LastState } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-shout-message-window";
 import { QueenOfTragedyProps } from "../../props";
 import { QueenOfTragedyState } from "../../state";
@@ -19,7 +19,7 @@ import { updateEventStateAfterStartOfTurn3 } from "./update-event-state-after-st
  * @returns ステート更新結果
  */
 export async function beforeLastState(
-  props: LastState & QueenOfTragedyProps,
+  props: LastStateEventProps & QueenOfTragedyProps,
 ): Promise<QueenOfTragedyState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
 
