@@ -25,10 +25,10 @@ export async function beforeLastState(
     updatedState = { ...updatedState, isIntroductionComplete: true };
   } else if (shouldPlaySurviveSecondTurnWithGuard(props)) {
     await surviveSecondTurnWithGuard(props);
-    updatedState = { ...updatedState, isThirdTurnEventComplete: true };
+    updatedState = { ...updatedState, isSecondTurnEventComplete: true };
   } else if (shouldPlaySurviveSecondTurnWithEvade(props)) {
     await surviveSecondTurnWithEvade(props);
-    updatedState = { ...updatedState, isThirdTurnEventComplete: true };
+    updatedState = { ...updatedState, isSecondTurnEventComplete: true };
   }
 
   return updatedState;
