@@ -1,7 +1,7 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
-import { fistTurnLose } from "../../stories/first-turn-lose";
+import { firstTurnLose } from "../../stories/first-turn-lose";
 import { shouldPlayFirstTurnLose } from "./should-play-first-turn-lose";
 
 /**
@@ -14,6 +14,6 @@ export async function afterLastState(
   invisibleShoutMessageWindowWhenGameEnd(props);
 
   if (shouldPlayFirstTurnLose(props)) {
-    await fistTurnLose(props);
+    await firstTurnLose(props);
   }
 }

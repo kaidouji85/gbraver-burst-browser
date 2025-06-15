@@ -7,7 +7,7 @@ import { surviveSecondTurnWithEvade } from "../../stories/survive-second-turn-wi
 import { surviveSecondTurnWithGuard } from "../../stories/survive-second-turn-with-guard";
 import { shouldPlayIntroduction } from "./should-play-introduction";
 import { shouldPlaySurviveSecondTurnWithEvade } from "./should-play-survive-second-turn-with-evade";
-import { shouldPlaySurviveSecondTurnWithGuard } from "./should-play-survive-sedond-turn-with-guard";
+import { shouldPlaySurviveSecondTurnWithGuard } from "./should-play-survive-second-turn-with-guard";
 
 /**
  * 最終ステート直前イベント

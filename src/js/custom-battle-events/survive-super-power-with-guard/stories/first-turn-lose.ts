@@ -12,7 +12,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * 1ターン目で負けた
  * @param props イベントプロパティ
  */
-export async function fistTurnLose(props: CustomBattleEventProps) {
+export async function firstTurnLose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「なんや もう${wbr}終わり${wbr}かいな`],
