@@ -8,7 +8,6 @@ import {
 
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
-import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 
@@ -21,10 +20,7 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  * @returns 攻撃ルーチンの条件オブジェクト
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
-  battery1: findBatteryCommand(1, data.commands),
   battery5: findBatteryCommand(5, data.commands),
-  burst: findBurstCommand(data.commands),
-  pilot: findPilotSkillCommand(data.commands),
 });
 
 /**
@@ -32,14 +28,11 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { enemy } = data;
-  const { battery1, battery5, burst, pilot } = getAttackRoutineCondition(data);
+  const { battery5 } = getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
-  if (battery5 && pilot && burst) {
+  if (battery5) {
     selectedCommand = battery5;
-  } else if (battery1 && 0 < enemy.armdozer.battery) {
-    selectedCommand = battery1;
   }
 
   return selectedCommand;
@@ -53,7 +46,6 @@ const attackRoutine: SimpleRoutine = (data) => {
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
   battery1: findBatteryCommand(1, data.commands),
   burst: findBurstCommand(data.commands),
-  pilot: findPilotSkillCommand(data.commands),
 });
 
 /**
@@ -61,13 +53,11 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { burst, pilot, battery1 } = getDefenseRoutineCondition(data);
+  const { burst, battery1 } = getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst) {
     selectedCommand = burst;
-  } else if (pilot) {
-    selectedCommand = pilot;
   } else if (battery1) {
     selectedCommand = battery1;
   }
@@ -85,7 +75,6 @@ export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
   const armdozer = {
     ...originArmdozer,
     maxHp: 3300,
-    batteryAutoRecovery: 2,
     speed: 3000,
   };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
