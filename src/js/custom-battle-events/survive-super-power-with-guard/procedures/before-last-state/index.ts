@@ -3,11 +3,11 @@ import { invisibleShoutMessageWindowWhenInputCommand } from "../../../invisible-
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { introduction } from "../../stories/introduction";
-import { surviveThirdTurnWithEvade } from "../../stories/survive-third-turn-with-evade";
-import { surviveSecondTurnWithGuard } from "../../stories/survive-third-turn-with-guard";
+import { surviveSecondTurnWithEvade } from "../../stories/survive-second-turn-with-evade";
+import { surviveSecondTurnWithGuard } from "../../stories/survive-second-turn-with-guard";
 import { shouldPlayIntroduction } from "./should-play-introduction";
-import { shouldPlaySurviveThirdTurnWithEvade } from "./should-play-survive-third-turn-with-evade";
-import { shouldPlaySurviveSecondTurnWithGuard } from "./should-play-survive-third-turn-with-guard";
+import { shouldPlaySurviveSecondTurnWithEvade } from "./should-play-survive-second-turn-with-evade";
+import { shouldPlaySurviveSecondTurnWithGuard } from "./should-play-survive-sedond-turn-with-guard";
 
 /**
  * 最終ステート直前イベント
@@ -26,8 +26,8 @@ export async function beforeLastState(
   } else if (shouldPlaySurviveSecondTurnWithGuard(props)) {
     await surviveSecondTurnWithGuard(props);
     updatedState = { ...updatedState, isThirdTurnEventComplete: true };
-  } else if (shouldPlaySurviveThirdTurnWithEvade(props)) {
-    await surviveThirdTurnWithEvade(props);
+  } else if (shouldPlaySurviveSecondTurnWithEvade(props)) {
+    await surviveSecondTurnWithEvade(props);
     updatedState = { ...updatedState, isThirdTurnEventComplete: true };
   }
 

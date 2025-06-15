@@ -9,10 +9,12 @@ import { scrollLeftMessages } from "../../scroll-messages";
 import { RAITO_SHIBAKI } from "./raito-shibaki";
 
 /**
- * 3ターン目で回避して生き残った
+ * 2ターン目で回避して生き残った
  * @param props イベントプロパティ
  */
-export async function surviveThirdTurnWithEvade(props: CustomBattleEventProps) {
+export async function surviveSecondTurnWithEvade(
+  props: CustomBattleEventProps,
+) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「6回避だと！！`],
@@ -20,7 +22,7 @@ export async function surviveThirdTurnWithEvade(props: CustomBattleEventProps) {
   ]);
   props.view.dom.leftMessageWindow.darken();
 
-  await refreshConversation(props, 100);
+  await refreshConversation(props);
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, RAITO_SHIBAKI);
