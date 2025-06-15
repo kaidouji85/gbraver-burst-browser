@@ -13,28 +13,33 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 import { RAITO_SHIBAKI } from "./raito-shibaki";
 
 /**
- * 3ターン目でガードして生き残った
+ * 2ターン目で回避して生き残った
  * @param props イベントプロパティ
  */
-export async function surviveThirdTurnWithGuard(props: CustomBattleEventProps) {
+export async function surviveSecondTurnWithEvade(
+  props: CustomBattleEventProps,
+) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「バカな`],
-    [`新型ロボの${wbr}攻撃をくらったのに${wbr}即死しないだと」`],
+    ["ガイ", `「6回避だと！！`],
+    [`当たれば${wbr}即死の${wbr}攻撃も これでは」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「悪いな ガイ君`],
+    ["ツバサ", `「……それは${wbr}厄介だな`],
+    [`ならば${wbr}回避か${wbr}ガードで${wbr}凌ぐ${wbr}しかない`],
     [
-      highlight(`攻撃と${wbr}防御が${wbr}同じ数字なら${wbr}ダメージ半減`),
-      `攻撃をガード${wbr}できるんだ」`,
+      highlight(`攻撃と防御が同じ`) +
+        `なら ガードで` +
+        highlight(`ダメージ半減`) +
+        `だ」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
-  await refreshConversation(props, 100);
+  await refreshConversation(props);
 
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, RAITO_SHIBAKI);
