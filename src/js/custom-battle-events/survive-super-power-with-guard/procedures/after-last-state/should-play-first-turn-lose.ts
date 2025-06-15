@@ -2,11 +2,11 @@ import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 
 /**
- * SecondTurnLoseを再生するかどうかの判定
+ * FirstTurnLoseを再生するかどうかの判定
  * @param props イベントプロパティ
  * @returns 再生する場合はtrue
  */
-export const shouldPlaySecondTurnLose = (
+export const shouldPlayFirstTurnLose = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
   const { mainTurnCount, enemy } = props;
@@ -16,5 +16,5 @@ export const shouldPlaySecondTurnLose = (
       s.effect.result.type === "GameOver" &&
       s.effect.result.winner === enemy.playerId,
   );
-  return mainTurnCount === 2 && isEnemyWin;
+  return mainTurnCount === 1 && isEnemyWin;
 };
