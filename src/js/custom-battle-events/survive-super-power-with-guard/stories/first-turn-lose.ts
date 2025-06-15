@@ -23,7 +23,11 @@ export async function fistTurnLose(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「完全に${wbr}出鼻を${wbr}挫かれた`],
-    [`攻撃と防御が` + highlight(`同じなら${wbr}ダメージ半減`)],
+    [
+      highlight(`攻撃と防御が同じ`) +
+        `なら ガードで` +
+        highlight(`ダメージ半減`),
+    ],
     [`5防御すれば${wbr}即死は${wbr}免れた」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
