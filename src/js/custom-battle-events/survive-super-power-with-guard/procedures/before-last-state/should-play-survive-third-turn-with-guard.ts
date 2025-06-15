@@ -2,11 +2,11 @@ import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 
 /**
- * SurviveThirdTurnWithGuardを再生するかどうかの判定
+ * SurviveSecondTurnWithGuardを再生するかどうかの判定
  * @param props イベントプロパティ
  * @returns 再生する場合はtrue
  */
-export const shouldPlaySurviveThirdTurnWithGuard = (
+export const shouldPlaySurviveSecondTurnWithGuard = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
   const { isThirdTurnEventComplete } = props.state;
@@ -18,5 +18,5 @@ export const shouldPlaySurviveThirdTurnWithGuard = (
   const isEnemyAttackGuard =
     lastBattle?.result.name === "Guard" &&
     lastBattle.attacker === enemy.playerId;
-  return !isThirdTurnEventComplete && mainTurnCount === 3 && isEnemyAttackGuard;
+  return !isThirdTurnEventComplete && mainTurnCount === 2 && isEnemyAttackGuard;
 };
