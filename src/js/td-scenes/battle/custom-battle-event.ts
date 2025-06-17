@@ -15,6 +15,7 @@ import { PushWindow } from "../../window/push-window";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
+import { readonly } from "zod/v4";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
@@ -23,6 +24,8 @@ import { BattleSceneView } from "./view";
 export type CustomBattleEventProps = Readonly<SEPlayerContainer> &
   Readonly<AnimationTimeScaleContainer> &
   Readonly<AbortManagerContainer> & {
+    /** リトライした戦闘かどうか、trueでリトライした */
+    readonly isRetry: boolean;
     /** 戦闘画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */
