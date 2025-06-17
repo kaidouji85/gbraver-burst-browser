@@ -14,14 +14,16 @@ import { switchEpisodeTitle } from "./switch-scene/switch-episode-title";
 
 /**
  * エピソードを開始するヘルパー関数
- * @param props ゲームプロパティ
- * @param episode エピソード
+ * @param options オプションオブジェクト
  * @returns 処理が完了したら発火するPromise
  */
-export async function startEpisode(
-  props: GameProps,
-  episode: Episode,
-): Promise<void> {
+export async function startEpisode(options: {
+  /** ゲームプロパティ */
+  props: GameProps;
+  /** エピソード */
+  episode: Episode;
+}): Promise<void> {
+  const { props, episode } = options;
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
   await Promise.all([
     props.fader.fadeOut(),

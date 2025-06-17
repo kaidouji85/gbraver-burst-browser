@@ -33,11 +33,9 @@ export async function nextStage(options: Options) {
     inProgress.type === "Story" &&
     inProgress.story.type === "GoingNextEpisode"
   ) {
-    const story: PlayingEpisode = {
-      type: "PlayingEpisode",
-      episode: inProgress.story.nextEpisode,
-    };
+    const episode = inProgress.story.nextEpisode;
+    const story: PlayingEpisode = { type: "PlayingEpisode", episode };
     props.inProgress = { ...inProgress, story };
-    await startEpisode(props, story.episode);
+    await startEpisode({ props, episode });
   }
 }

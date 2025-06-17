@@ -44,7 +44,7 @@ async function forceRetryStoryBattle(props: GameProps & { inProgress: Story }) {
         return batterySystemTutorial;
     }
   })();
-  await startEpisode(props, episode);
+  await startEpisode({ props, episode });
 }
 
 /** onForceRetryオプション */

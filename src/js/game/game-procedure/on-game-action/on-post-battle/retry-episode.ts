@@ -12,6 +12,6 @@ export async function retryEpisode(
     GameProps & { inProgress: Story & { story: PlayingEpisode } }
   >,
 ): Promise<void> {
-  const playingEpisode = props.inProgress.story;
-  await startEpisode(props, playingEpisode.episode);
+  const episode = props.inProgress.story.episode;
+  await startEpisode({ props, episode });
 }
