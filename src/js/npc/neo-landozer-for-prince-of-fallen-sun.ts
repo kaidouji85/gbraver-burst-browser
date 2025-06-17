@@ -36,9 +36,9 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
     data.player.armdozer.battery,
   ),
   minimumGuardBattery: getMinimumGuardBattery(
-    data.player,
     data.enemy,
-    data.enemy.armdozer.battery,
+    data.player,
+    data.player.armdozer.battery,
   ),
 });
 
