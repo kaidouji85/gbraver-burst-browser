@@ -22,8 +22,13 @@ export async function startEpisode(options: {
   props: GameProps;
   /** エピソード */
   episode: Episode;
+  /**
+   * リトライした戦闘か否か、trueでリトライした
+   * @default false
+   */
+  isRetry?: boolean;
 }): Promise<void> {
-  const { props, episode } = options;
+  const { props, episode, isRetry } = options;
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
   await Promise.all([
     props.fader.fadeOut(),
@@ -49,6 +54,7 @@ export async function startEpisode(options: {
   });
   const battleScene = new BattleScene({
     ...props,
+    isRetry,
     playingBGM: episode.bgm,
     initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress: npcBattle,

@@ -13,5 +13,5 @@ export async function retryEpisode(
   >,
 ): Promise<void> {
   const episode = props.inProgress.story.episode;
-  await startEpisode({ props, episode });
+  await startEpisode({ props, episode, isRetry: true });
 }

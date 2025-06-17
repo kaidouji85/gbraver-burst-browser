@@ -38,7 +38,7 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
   Readonly<{
     /**
      * リトライした戦闘かどうか、trueでリトライした
-     * デフォルト値はfalse
+     * @default false
      */
     isRetry?: boolean;
 
