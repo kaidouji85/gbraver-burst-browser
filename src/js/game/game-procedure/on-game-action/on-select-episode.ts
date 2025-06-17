@@ -31,5 +31,5 @@ export async function onSelectEpisode(options: Options): Promise<void> {
     ...inProgress,
     story: { type: "PlayingEpisode", episode },
   };
-  await startEpisode(props, episode);
+  await startEpisode({ props, episode });
 }

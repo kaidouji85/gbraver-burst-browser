@@ -21,7 +21,7 @@ export async function beforeLastState(
   props: Readonly<LastStateEventProps & ConfrontationTwoBraverProps>,
 ): Promise<ConfrontationTwoBraverState> {
   invisibleShoutMessageWindowWhenInputCommand(props);
-  if (!props.eventState.isIntroductionComplete) {
+  if (!props.eventState.isIntroductionComplete && !props.isRetry) {
     await introduction(props);
     return {
       ...props.eventState,

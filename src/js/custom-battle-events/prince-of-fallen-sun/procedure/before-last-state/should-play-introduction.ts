@@ -10,4 +10,7 @@ import { Conditions } from "./conditions";
 export const shouldPlayIntroduction = (
   latestEventState: PrinceOfFallenSunState,
   conditions: Conditions,
-) => conditions.turn === 1 && !latestEventState.isIntroductionComplete;
+) =>
+  conditions.turn === 1 &&
+  !latestEventState.isIntroductionComplete &&
+  !conditions.isRetry;

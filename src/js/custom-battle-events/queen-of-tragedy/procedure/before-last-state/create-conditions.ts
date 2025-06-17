@@ -14,5 +14,6 @@ export function createConditions(
 ): Conditions | null {
   const separatedPlayers = separatePlayersFromLastState(props);
   const turn = turnCount(props.stateHistory);
-  return separatedPlayers ? { ...separatedPlayers, turn } : null;
+  const { isRetry } = props;
+  return separatedPlayers ? { ...separatedPlayers, turn, isRetry } : null;
 }
