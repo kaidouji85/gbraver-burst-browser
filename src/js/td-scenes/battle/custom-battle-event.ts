@@ -15,7 +15,6 @@ import { PushWindow } from "../../window/push-window";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
-import { readonly } from "zod/v4";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
