@@ -10,4 +10,7 @@ import { Conditions } from "./conditions";
 export const shouldPlayIntroduction = (
   latestEventState: QueenOfTragedyState,
   conditions: Conditions,
-): boolean => conditions.turn === 1 && !latestEventState.isIntroductionComplete;
+): boolean =>
+  conditions.turn === 1 &&
+  !latestEventState.isIntroductionComplete &&
+  !conditions.isRetry;
