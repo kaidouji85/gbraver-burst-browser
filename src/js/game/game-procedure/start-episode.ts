@@ -28,7 +28,7 @@ export async function startEpisode(options: {
    */
   isRetry?: boolean;
 }): Promise<void> {
-  const { props, episode, isRetry } = options;
+  const { props, episode, isRetry = false } = options;
   const npcBattle = new NPCBattleRoom(episode.player, episode.npc);
   await Promise.all([
     props.fader.fadeOut(),
