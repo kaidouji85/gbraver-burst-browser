@@ -14,8 +14,8 @@ const introduction = `なぜか大田高校と合同練習することになっ�
 /** パイロットスキルチュートリアル（後半） */
 export const pilotSkillTutorial02: Episode = {
   id: EpisodeIDs.PILOT_02,
-  type: "Side Episode",
-  number: "3.2",
+  type: "Episode",
+  number: "5",
   title: "パイロットスキルで意表を突け",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
