@@ -6,4 +6,6 @@
 export type Conditions = {
   /** ターン数 */
   readonly turn: number;
+  /** リトライした戦闘かどうか、trueならリトライ */
+  readonly isRetry: boolean;
 };
