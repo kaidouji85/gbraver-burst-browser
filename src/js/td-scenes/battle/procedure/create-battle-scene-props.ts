@@ -36,6 +36,12 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
   Readonly<GameLoopContainer> &
   Readonly<AbortManagerContainer> &
   Readonly<{
+    /**
+     * リトライした戦闘かどうか、trueでリトライした
+     * デフォルト値はfalse
+     */
+    isRetry?: boolean;
+
     /** 再生するBGM ID */
     playingBGM: SoundId;
 
@@ -82,6 +88,8 @@ export function createBattleSceneProps(
 ): BattleSceneProps {
   return {
     ...params,
+
+    isRetry: params.isRetry ?? false,
 
     playerId: params.player.playerId,
     enemyId: params.enemy.playerId,
