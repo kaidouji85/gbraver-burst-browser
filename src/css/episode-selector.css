@@ -71,6 +71,7 @@
   grid-area: episodes;
   flex: 1;
   overflow-y: scroll;
+  padding-bottom: calc(var(--responsive-font-size) * 3);
 }
 
 .episode-selector__episode-detail {
