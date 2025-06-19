@@ -19,12 +19,9 @@ export async function startEpisodeSelector(
 ) {
   await props.fader.fadeOut();
   const episodes = getEpisodes(props);
-  const scene = new EpisodeSelector({
-    ...props,
-    episodes,
-    initialSelectedEpisodeID,
-  });
+  const scene = new EpisodeSelector({ ...props, episodes });
   switchEpisodeSelector(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
+  scene.initialize(initialSelectedEpisodeID);
   await props.fader.fadeIn();
 }
