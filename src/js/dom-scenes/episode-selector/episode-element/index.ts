@@ -89,4 +89,15 @@ export class EpisodeElement {
   isVisible(): boolean {
     return isVisible(this.#props);
   }
+
+  /**
+   * このエピソード要素が画面内に収まるようにスクロールする
+   */
+  scrollIntoView(): void {
+    this.#props.root.scrollIntoView({
+      behavior: "instant",
+      block: "start",
+      inline: "nearest",
+    });
+  }
 }

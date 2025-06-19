@@ -12,9 +12,7 @@ import { initialize } from "./procedure/initialize";
 import { EpisodeSelectorProps } from "./props";
 
 /** コンストラクタのパラメータ */
-export type EpisodeSelectorParams = PropsCreatorParams & {
-  initialSelectedEpisodeID?: EpisodeID;
-};
+export type EpisodeSelectorParams = PropsCreatorParams;
 
 /** エピソードセレクト画面 */
 export class EpisodeSelector implements DOMScene {
@@ -28,9 +26,16 @@ export class EpisodeSelector implements DOMScene {
    * @param params パラメータ
    */
   constructor(params: EpisodeSelectorParams) {
-    const { initialSelectedEpisodeID } = params;
     this.#props = createEpisodeSelectorProps(params);
     this.#unsubscribers = bindEventListeners(this.#props);
+  }
+
+  /**
+   * ダイアログを初期化する
+   * 本メソッドはHTML要素のバインドの完了後に呼び出すこと
+   * @param initialSelectedEpisodeID 初期選択エピソードID
+   */
+  initialize(initialSelectedEpisodeID?: EpisodeID): void {
     initialize(this.#props, initialSelectedEpisodeID);
   }
 
