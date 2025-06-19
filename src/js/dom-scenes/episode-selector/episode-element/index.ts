@@ -94,6 +94,10 @@ export class EpisodeElement {
    * このエピソード要素が画面内に収まるようにスクロールする
    */
   scrollIntoView(): void {
-    this.#props.root.scrollIntoView();
+    this.#props.root.scrollIntoView({
+      behavior: "instant",
+      block: "start",
+      inline: "nearest",
+    });
   }
 }
