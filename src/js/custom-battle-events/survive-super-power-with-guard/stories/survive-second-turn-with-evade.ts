@@ -28,8 +28,10 @@ export async function surviveSecondTurnWithEvade(
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「……それは${wbr}厄介だな`],
-    [`ならば${wbr}回避か${wbr}ガードで${wbr}凌ぐ${wbr}しかない`],
+    [
+      "ツバサ",
+      `「なるほど ならば${wbr}回避か${wbr}ガードで${wbr}凌がせて${wbr}もらおう`,
+    ],
     [
       highlight(`攻撃と防御が同じ`) +
         `なら ガードで` +
