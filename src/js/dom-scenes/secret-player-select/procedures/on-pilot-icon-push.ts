@@ -4,7 +4,6 @@ import { pop } from "../../../dom/pop";
 import { PILOT_SELECTION_COMPLETE } from "../dom/class-name";
 import { SecretPlayerSelectProps } from "../props";
 import { enableOKButtonIfNeeded } from "./enable-ok-button-if-needed";
-import { getPilotSeelctionDetail } from "./get-pilot-selection-detail";
 
 /**
  * パイロットアイコンが押された際の処理
@@ -25,9 +24,7 @@ export function onPilotIconPush(
     selectionNumber,
   };
   props.pilotSelectionIndicator.className = PILOT_SELECTION_COMPLETE;
-  props.pilotSelectionDetail.innerText = getPilotSeelctionDetail(
-    props.pilotSelection,
-  );
+  props.pilotSelectionDetail.innerText = "選択完了";
   props.se.play(props.pushButtonSound);
   pop(props.pilotSelectionIndicator, 1.2);
   enableOKButtonIfNeeded(props);
