@@ -2,12 +2,16 @@ import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
+import { raitoBurstShout } from "../../animation/raito-burst-shout";
+import { raitoBurstShoutWhenIgnoreComboAttack } from "../../animation/raito-burst-shout-when-ignore-combo-attack";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shout";
+import { isRaitoBurst } from "./is-raito-burst";
+import { isRaitoBurstWhenIgnoreComboAttack } from "./is-raito-burst-when-ignore-combo-attack";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
@@ -34,6 +38,10 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = tsubasaPilotSkillShout(props);
   } else if (isRaitoFirstAttack(props)) {
     result = raitoFirstAttackShout(props);
+  } else if (isRaitoBurstWhenIgnoreComboAttack(props)) {
+    result = raitoBurstShoutWhenIgnoreComboAttack(props);
+  } else if (isRaitoBurst(props)) {
+    result = raitoBurstShout(props);
   }
 
   return result;
