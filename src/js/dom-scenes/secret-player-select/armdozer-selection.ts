@@ -10,8 +10,6 @@ export type ArmdozerSelectionComplete = {
   type: "ArmdozerSelectionComplete";
   /** 選択したアームドーザのID */
   armdozerId: ArmdozerId;
-  /** 選択回数 */
-  selectionNumber: number;
 };
 
 /** アームドーザ選択状況 */

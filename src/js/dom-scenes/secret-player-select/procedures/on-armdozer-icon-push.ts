@@ -14,17 +14,9 @@ export function onArmdozerIconPush(
   props: SecretPlayerSelectProps,
   armdozerId: ArmdozerId,
 ): void {
-  const selectionNumber =
-    props.armdozerSelection.type === "ArmdozerSelectionComplete"
-      ? props.armdozerSelection.selectionNumber + 1
-      : 1;
-  props.armdozerSelection = {
-    type: "ArmdozerSelectionComplete",
-    armdozerId,
-    selectionNumber,
-  };
+  props.armdozerSelection = { type: "ArmdozerSelectionComplete", armdozerId };
   props.armdozerSelectionIndicator.className = ARMDOZER_SELECTION_COMPLETE;
-  props.armdozerSelectionDetail.innerText = "選択完了"
+  props.armdozerSelectionDetail.innerText = "選択完了";
   props.se.play(props.pushButtonSound);
   pop(props.armdozerSelectionIndicator, 1.2);
   enableOKButtonIfNeeded(props);

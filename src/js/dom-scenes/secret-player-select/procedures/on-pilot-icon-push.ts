@@ -14,15 +14,7 @@ export function onPilotIconPush(
   props: SecretPlayerSelectProps,
   pilotId: PilotId,
 ): void {
-  const selectionNumber =
-    props.pilotSelection.type === "PilotSelectionComplete"
-      ? props.pilotSelection.selectionNumber + 1
-      : 1;
-  props.pilotSelection = {
-    type: "PilotSelectionComplete",
-    pilotId,
-    selectionNumber,
-  };
+  props.pilotSelection = { type: "PilotSelectionComplete", pilotId };
   props.pilotSelectionIndicator.className = PILOT_SELECTION_COMPLETE;
   props.pilotSelectionDetail.innerText = "選択完了";
   props.se.play(props.pushButtonSound);
