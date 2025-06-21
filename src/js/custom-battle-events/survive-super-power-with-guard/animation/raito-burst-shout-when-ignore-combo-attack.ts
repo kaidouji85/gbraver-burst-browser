@@ -15,6 +15,6 @@ export const raitoBurstShoutWhenIgnoreComboAttack = (
     enemyPilotOnlyShout(
       props,
       "Raito",
-      `どや これで${wbr}2回行動は${wbr}できないで`,
+      `どや これで${wbr}2回行動は${wbr}できひんで`,
     );
   });

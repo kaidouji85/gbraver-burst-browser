@@ -12,5 +12,5 @@ export const tsubasaFirstAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Tsubasa", `次は${wbr}こちらの番だ ライト`);
+    playerPilotOnlyShout(props, "Tsubasa", `挨拶は${wbr}返さ${wbr}なくてはな`);
   });

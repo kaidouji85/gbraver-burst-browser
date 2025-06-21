@@ -10,5 +10,9 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  */
 export const raitoBurstShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Raito", `ここは${wbr}手堅く${wbr}バーストや`);
+    enemyPilotOnlyShout(
+      props,
+      "Raito",
+      `バーストで${wbr}0防御を${wbr}ケア${wbr}するで`,
+    );
   });

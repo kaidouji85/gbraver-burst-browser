@@ -12,5 +12,5 @@ export const raitoFirstAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Raito", `これは ほんの${wbr}挨拶がわりや`);
+    enemyPilotOnlyShout(props, "Raito", `これは ほんの${wbr}挨拶や`);
   });
