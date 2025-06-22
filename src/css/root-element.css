@@ -38,6 +38,14 @@
   --zindex-title-account: 2;
   --zindex-mini-controller: 3;
   --zindex-battle-hamburger-menu: 4;
+  /** 
+   * 通信待機ダイアログ系のz-index
+   * 通信待機中でもメニューを開けるようにするために、
+   * 通常ダイアログよりも下に表示されるようにしている
+   */
+  --zindex-waiting-background: 50;
+  --zindex-waiting-dialog: 51;
+  /** 通常ダイアログ系のz-index */
   --zindex-background: 100;
   --zindex-dialog: 101;
   --zindex-close: 102;
