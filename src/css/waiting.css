@@ -23,7 +23,7 @@
   height: 100dvh;
   background-color: #000;
   opacity: 0.5;
-  z-index: var(--zindex-background);
+  z-index: var(--zindex-waiting-background);
 }
 
 .waiting__dialog {
@@ -43,5 +43,5 @@
   justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
-  z-index: var(--zindex-dialog);
+  z-index: var(--zindex-waiting-dialog);
 }
