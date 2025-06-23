@@ -6,7 +6,7 @@ import { raitoBurstShout } from "../../animation/raito-burst-shout";
 import { raitoBurstShoutWhenIgnoreComboAttack } from "../../animation/raito-burst-shout-when-ignore-combo-attack";
 import { raitoBurstShoutWhenIgnoreSkill } from "../../animation/raito-burst-shout-when-ignore-skill";
 import { raitoFeintShout } from "../../animation/raito-feint-shout";
-import { raitoFinishShoutWhenPlayerBattery0 } from "../../animation/raito-finish-shout-when-player-battery0";
+import { raitoFinishShout } from "../../animation/raito-finish-shout";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
@@ -17,7 +17,7 @@ import { isRaitoBurst } from "./is-raito-burst";
 import { isRaitoBurstWhenIgnoreComboAttack } from "./is-raito-burst-when-ignore-combo-attack";
 import { isRaitoBurstWhenIgnoreSkill } from "./is-raito-burst-when-ignore-skill";
 import { isRaitoFeint } from "./is-raito-feint";
-import { isRaitoFinishWhenPlayerBattery0 } from "./is-raito-finish-when-player-battery0";
+import { isRaitoFinish } from "./is-raito-finish";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
@@ -52,8 +52,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoBurstShout(props);
   } else if (isRaitoFeint(props)) {
     result = raitoFeintShout(props);
-  } else if (isRaitoFinishWhenPlayerBattery0(props)) {
-    result = raitoFinishShoutWhenPlayerBattery0(props);
+  } else if (isRaitoFinish(props)) {
+    result = raitoFinishShout(props);
   }
 
   return result;
