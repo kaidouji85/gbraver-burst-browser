@@ -1,24 +1,17 @@
 import { wbr } from "../../../dom/wbr";
 import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import {
-  activeLeftMessageWindowWithFace,
-  activeRightMessageWindowWithFace,
-} from "../../active-message-window";
+import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
+import { scrollRightMessages } from "../../scroll-messages";
+import { chiniOchita } from "./chini-ochita";
 
 /**
  * 1ターン目で負けた
  * @param props イベントプロパティ
  */
 export async function firstTurnLose(props: CustomBattleEventProps) {
-  activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, [
-    ["ライト", `「なんや もう${wbr}終わり${wbr}かいな`],
-    [`全国２位も${wbr}地に落ちた${wbr}もんやな`],
-  ]);
-  props.view.dom.leftMessageWindow.darken();
+  await chiniOchita(props);
 
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
