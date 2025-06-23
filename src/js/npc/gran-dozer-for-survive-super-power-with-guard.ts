@@ -20,6 +20,7 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  * @returns 攻撃ルーチンの条件オブジェクト
  */
 const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
+  battery1: findBatteryCommand(1, data.commands),
   battery5: findBatteryCommand(5, data.commands),
 });
 
@@ -28,11 +29,18 @@ const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { battery5 } = getAttackRoutineCondition(data);
+  const { player } = data;
+  const { battery1, battery5 } = getAttackRoutineCondition(data);
 
   let selectedCommand: Command = ZERO_BATTERY;
   if (battery5) {
     selectedCommand = battery5;
+  } else if (
+    player.armdozer.battery <= 0 &&
+    !player.armdozer.enableBurst &&
+    battery1
+  ) {
+    selectedCommand = battery1;
   }
 
   return selectedCommand;
