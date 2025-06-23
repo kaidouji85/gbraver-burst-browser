@@ -25,7 +25,7 @@ export async function firstTurnLose(props: CustomBattleEventProps) {
     ["ツバサ", `「完全に${wbr}出鼻を${wbr}挫かれた`],
     [
       highlight(`攻撃と防御が同じ`) +
-        `なら ガードで` +
+        `ならガードで${wbr}` +
         highlight(`ダメージ半減`),
     ],
     [`5防御すれば${wbr}即死は${wbr}免れた」`],
