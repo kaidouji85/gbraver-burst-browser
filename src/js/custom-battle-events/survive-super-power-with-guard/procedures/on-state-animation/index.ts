@@ -5,6 +5,7 @@ import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-sh
 import { raitoBurstShout } from "../../animation/raito-burst-shout";
 import { raitoBurstShoutWhenIgnoreComboAttack } from "../../animation/raito-burst-shout-when-ignore-combo-attack";
 import { raitoBurstShoutWhenIgnoreSkill } from "../../animation/raito-burst-shout-when-ignore-skill";
+import { raitoFeintShout } from "../../animation/raito-feint-shout";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
@@ -14,6 +15,7 @@ import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shou
 import { isRaitoBurst } from "./is-raito-burst";
 import { isRaitoBurstWhenIgnoreComboAttack } from "./is-raito-burst-when-ignore-combo-attack";
 import { isRaitoBurstWhenIgnoreSkill } from "./is-raito-burst-when-ignore-skill";
+import { isRaitoFeint } from "./is-raito-feint";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
@@ -46,6 +48,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoBurstShoutWhenIgnoreSkill(props);
   } else if (isRaitoBurst(props)) {
     result = raitoBurstShout(props);
+  } else if (isRaitoFeint(props)) {
+    result = raitoFeintShout(props);
   }
 
   return result;
