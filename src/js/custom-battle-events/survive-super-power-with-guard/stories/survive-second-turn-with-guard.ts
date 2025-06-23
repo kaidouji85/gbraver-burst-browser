@@ -31,9 +31,9 @@ export async function surviveSecondTurnWithGuard(
     ["ツバサ", `「悪いな ガイ君`],
     [
       highlight(`攻撃と防御が同じ`) +
-        `なら ガードで` +
+        `ならガードで${wbr}` +
         highlight(`ダメージ半減`) +
-        `だ」`,
+        `${wbr}だ」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
