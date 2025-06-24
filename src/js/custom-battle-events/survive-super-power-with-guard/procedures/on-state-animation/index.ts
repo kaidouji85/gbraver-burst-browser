@@ -4,6 +4,9 @@ import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-b
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { raitoBurstShout } from "../../animation/raito-burst-shout";
 import { raitoBurstShoutWhenIgnoreComboAttack } from "../../animation/raito-burst-shout-when-ignore-combo-attack";
+import { raitoBurstShoutWhenIgnoreSkill } from "../../animation/raito-burst-shout-when-ignore-skill";
+import { raitoFeintShout } from "../../animation/raito-feint-shout";
+import { raitoFinishShout } from "../../animation/raito-finish-shout";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
@@ -12,6 +15,9 @@ import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-sh
 import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shout";
 import { isRaitoBurst } from "./is-raito-burst";
 import { isRaitoBurstWhenIgnoreComboAttack } from "./is-raito-burst-when-ignore-combo-attack";
+import { isRaitoBurstWhenIgnoreSkill } from "./is-raito-burst-when-ignore-skill";
+import { isRaitoFeint } from "./is-raito-feint";
+import { isRaitoFinish } from "./is-raito-finish";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
@@ -40,8 +46,14 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoFirstAttackShout(props);
   } else if (isRaitoBurstWhenIgnoreComboAttack(props)) {
     result = raitoBurstShoutWhenIgnoreComboAttack(props);
+  } else if (isRaitoBurstWhenIgnoreSkill(props)) {
+    result = raitoBurstShoutWhenIgnoreSkill(props);
   } else if (isRaitoBurst(props)) {
     result = raitoBurstShout(props);
+  } else if (isRaitoFeint(props)) {
+    result = raitoFeintShout(props);
+  } else if (isRaitoFinish(props)) {
+    result = raitoFinishShout(props);
   }
 
   return result;

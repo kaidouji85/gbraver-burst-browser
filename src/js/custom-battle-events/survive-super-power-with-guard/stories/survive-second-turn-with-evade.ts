@@ -30,13 +30,13 @@ export async function surviveSecondTurnWithEvade(
   await scrollRightMessages(props, [
     [
       "ツバサ",
-      `「なるほど ならば${wbr}回避か${wbr}ガードで${wbr}凌がせて${wbr}もらおう`,
+      `「なるほど ならば${wbr}回避か${wbr}ガードで${wbr}凌ぐ${wbr}までだ`,
     ],
     [
       highlight(`攻撃と防御が同じ`) +
-        `なら ガードで` +
+        `ならガードで${wbr}` +
         highlight(`ダメージ半減`) +
-        `だ」`,
+        `${wbr}だ」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();

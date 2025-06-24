@@ -4,15 +4,17 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ライト バースト 叫び
+ * ライト バースト パイロットスキル無効化 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const raitoBurstShout = (props: Readonly<CustomBattleEventProps>) =>
+export const raitoBurstShoutWhenIgnoreSkill = (
+  props: Readonly<CustomBattleEventProps>,
+) =>
   onStart(() => {
     enemyPilotOnlyShout(
       props,
       "Raito",
-      `ここは${wbr}手堅く${wbr}バースト${wbr}や`,
+      `あんさんの${wbr}スキルは${wbr}封じたで`,
     );
   });

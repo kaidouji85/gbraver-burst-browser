@@ -15,27 +15,12 @@ import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
 
 /**
- * 攻撃ルーチンの条件オブジェクトを生成する
- * @param data ルーチンに渡すデータ
- * @returns 攻撃ルーチンの条件オブジェクト
- */
-const getAttackRoutineCondition = (data: SimpleRoutineData) => ({
-  battery5: findBatteryCommand(5, data.commands),
-});
-
-/**
  * @override
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { battery5 } = getAttackRoutineCondition(data);
-
-  let selectedCommand: Command = ZERO_BATTERY;
-  if (battery5) {
-    selectedCommand = battery5;
-  }
-
-  return selectedCommand;
+  const { enemy } = data;
+  return { type: "BATTERY_COMMAND", battery: enemy.armdozer.battery };
 };
 
 /**
