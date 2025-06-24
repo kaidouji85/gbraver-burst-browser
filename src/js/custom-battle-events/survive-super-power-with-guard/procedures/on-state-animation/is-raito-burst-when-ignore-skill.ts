@@ -14,7 +14,6 @@ export function isRaitoBurstWhenIgnoreSkill(
       .at(-2)
       ?.players.find((p) => p.playerId === player.playerId)
       ?.armdozer.effects.some((e) => e.type === "BatteryCorrection") ?? false;
-
   return (
     currentState.effect.name === "BurstEffect" &&
     currentState.effect.burstPlayer === enemy.playerId &&
