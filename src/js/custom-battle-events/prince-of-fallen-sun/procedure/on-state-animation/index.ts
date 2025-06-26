@@ -5,6 +5,7 @@ import { getAnimationIfConditionMet } from "../../../get-animation-if-conditiona
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { PrinceOfFallenSunProps } from "../../props";
 import { gaiBattleWhenGuard } from "./gai-battle-when-guard";
+import { gaiBattleWhenHit } from "./gai-battle-when-hit";
 import { gaiBattleWhenMiss } from "./gai-battle-when-miss";
 import { gaiBurst } from "./gai-burst";
 import { gaiFeintSuccess } from "./gai-feint-success";
@@ -50,6 +51,7 @@ export function onStateAnimation(
     gaiFeintSuccess,
     gaiFirstAttack,
     gaiSecondAttack,
+    gaiBattleWhenHit,
     gaiBattleWhenGuard,
     gaiBattleWhenMiss,
     invisibleShoutMessageWindowWhenTurnChange,
