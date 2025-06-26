@@ -14,7 +14,7 @@ import { executeSelfInitiatedPilotSkillIfNeeded } from "./execute-self-initiated
 export async function beforeLastState(
   props: Readonly<LastStateEventProps & BurstTutorialProps>,
 ): Promise<BurstTutorialState> {
-  if (!props.eventState.isIntroductionComplete) {
+  if (!props.eventState.isIntroductionComplete && !props.isRetry) {
     await introduction(props);
     return { ...props.eventState, isIntroductionComplete: true };
   }

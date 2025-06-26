@@ -2,14 +2,18 @@ import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 
 /**
- * Introductionを再生するかどうかの判定
+ * playerLoseを再生するかどうかの判定
  * @param props イベントプロパティ
  * @returns 再生する場合はtrue
  */
-export const shouldPlayIntroduction = (
+export const shouldPlayPlayerLose = (
   props: Readonly<LastStateEventProps & SurviveSuperPowerWithGuardProps>,
 ) => {
-  const { isIntroductionComplete } = props.state;
-  const { mainTurnCount, isRetry } = props;
-  return !isIntroductionComplete && mainTurnCount === 1 && !isRetry;
+  const { enemy } = props;
+  return props.stateHistory.some(
+    (s) =>
+      s.effect.name === "GameEnd" &&
+      s.effect.result.type === "GameOver" &&
+      s.effect.result.winner === enemy.playerId,
+  );
 };

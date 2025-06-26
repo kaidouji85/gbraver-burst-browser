@@ -4,13 +4,17 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ライト ファーストアタック 叫び
+ * ライト バースト 2回行動無効化 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const raitoFirstAttackShout = (
+export const raitoBurstShoutWhenIgnoreComboAttack = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Raito", `これは ほんの${wbr}挨拶や`);
+    enemyPilotOnlyShout(
+      props,
+      "Raito",
+      `どや これで${wbr}2回行動は${wbr}できひんで`,
+    );
   });

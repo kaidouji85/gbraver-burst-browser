@@ -31,6 +31,9 @@ export type BattleSceneProps = Readonly<ResourcesContainer> &
   Readonly<BattleSceneActionManageContainer> &
   Readonly<AbortManagerContainer> &
   AnimationTimeScaleContainer & {
+    /** リトライした戦闘かどうか、trueでリトライした */
+    readonly isRetry: boolean;
+
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;
     /** 敵プレイヤーのID */

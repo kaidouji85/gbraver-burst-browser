@@ -15,7 +15,7 @@ const introduction = `世界初の競技用巨大ロボを製造した浅草重�
 export const PrinceOfFallenSun: Episode = {
   id: EpisodeIDs.PRINCE_OF_FALLEN_SUN,
   type: "Side Episode",
-  number: "4.2",
+  number: "6.2",
   title: "創業家の御曹司",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PRINCE_OF_FALLEN_SUN,

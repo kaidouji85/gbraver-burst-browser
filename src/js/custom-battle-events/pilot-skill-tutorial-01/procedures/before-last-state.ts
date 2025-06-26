@@ -17,7 +17,11 @@ export async function beforeLastState(
 ): Promise<PilotSkillTutorial01State> {
   invisibleShoutMessageWindowWhenInputCommand(props);
   const turn = turnCount(props.stateHistory);
-  if (turn === 1 && !props.eventState.isIntroductionComplete) {
+  if (
+    turn === 1 &&
+    !props.eventState.isIntroductionComplete &&
+    !props.isRetry
+  ) {
     await introduction(props);
     invisibleAllMessageWindows(props);
     return { ...props.eventState, isIntroductionComplete: true };

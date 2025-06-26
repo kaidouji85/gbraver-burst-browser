@@ -10,4 +10,6 @@ export type Conditions = {
   readonly turn: number;
   /** 敵のステート */
   readonly enemy: PlayerState;
+  /** リトライした戦闘かどうか、trueならリトライ */
+  readonly isRetry: boolean;
 };

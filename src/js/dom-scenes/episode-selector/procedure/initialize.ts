@@ -34,4 +34,5 @@ export function initialize(
   }
 
   setEpisodeDetail(props, episodeDetail);
+  episode.scrollIntoView();
 }

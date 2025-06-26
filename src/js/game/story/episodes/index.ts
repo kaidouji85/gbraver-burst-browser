@@ -14,16 +14,13 @@ export const MainEpisodes: Episode[] = [
   batterySystemTutorial,
   zeroDefenseTutorial,
   burstTutorial,
+  pilotSkillTutorial01,
+  pilotSkillTutorial02,
   confrontationTwoBraver,
 ];
 
 /** サイドエピソード */
-export const SideEpisodes: Episode[] = [
-  pilotSkillTutorial01,
-  pilotSkillTutorial02,
-  QueenOfTragedy,
-  PrinceOfFallenSun,
-];
+export const SideEpisodes: Episode[] = [QueenOfTragedy, PrinceOfFallenSun];
 
 /** エピソードを集めたもの */
 export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];

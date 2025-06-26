@@ -15,7 +15,7 @@ const introduction = `新人戦から数日後、シンヤのもとに 全国大
 export const confrontationTwoBraver: Episode = {
   id: EpisodeIDs.TWO_BRAVER,
   type: "Episode",
-  number: "4",
+  number: "6",
   title: "対決、二人のブレイバー！！ （負けイベント）",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,

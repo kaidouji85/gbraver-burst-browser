@@ -15,7 +15,7 @@ export const introduction = `後で考える`;
 export const surviveSuperPowerWithGuard: Episode = {
   id: EpisodeIDs.SURVIVE_SUPER_POWER,
   type: "Episode",
-  number: "5",
+  number: "7",
   title: "超火力はガードで凌げ（開発中）",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,

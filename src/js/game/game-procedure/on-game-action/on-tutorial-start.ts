@@ -28,5 +28,5 @@ export async function onTutorialStart(options: Options): Promise<void> {
     isTutorial: true,
     story: { type: "PlayingEpisode", episode },
   };
-  await startEpisode(props, episode);
+  await startEpisode({ props, episode });
 }

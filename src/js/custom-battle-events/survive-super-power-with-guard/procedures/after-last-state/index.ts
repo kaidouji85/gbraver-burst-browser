@@ -1,8 +1,10 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
-import { secondTurnLose } from "../../stories/second-turn-lose";
-import { shouldPlaySecondTurnLose } from "./should-play-second-turn-lose";
+import { firstTurnLose } from "../../stories/first-turn-lose";
+import { playerLose } from "../../stories/player-lose";
+import { shouldPlayPlayerLose } from "./shoud-play-player-lose";
+import { shouldPlayFirstTurnLose } from "./should-play-first-turn-lose";
 
 /**
  * 最終ステート完了後イベント
@@ -13,7 +15,9 @@ export async function afterLastState(
 ) {
   invisibleShoutMessageWindowWhenGameEnd(props);
 
-  if (shouldPlaySecondTurnLose(props)) {
-    await secondTurnLose(props);
+  if (shouldPlayFirstTurnLose(props)) {
+    await firstTurnLose(props);
+  } else if (shouldPlayPlayerLose(props)) {
+    await playerLose(props);
   }
 }
