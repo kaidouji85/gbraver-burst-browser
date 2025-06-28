@@ -12,5 +12,5 @@ export const raitoSecondAttackShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    enemyPilotOnlyShout(props, "Raito", `ここで${wbr}勝負に${wbr}出るで`);
+    enemyPilotOnlyShout(props, "Raito", `ここは${wbr}賭けに${wbr}出るで`);
   });

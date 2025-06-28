@@ -1,4 +1,5 @@
 import { onStart } from "../../../animation/on-start";
+import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
@@ -11,5 +12,5 @@ export const tsubasaFinishBlowShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Tsubasa", `私の勝ちだ ライト`);
+    playerPilotOnlyShout(props, "Tsubasa", `ライト また${wbr}私の${wbr}勝ちだ`);
   });
