@@ -8,6 +8,7 @@ import { raitoBurstShoutWhenIgnoreSkill } from "../../animation/raito-burst-shou
 import { raitoFeintShout } from "../../animation/raito-feint-shout";
 import { raitoFinishShout } from "../../animation/raito-finish-shout";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
+import { raitoSecondAttackShout } from "../../animation/raito-second-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
@@ -19,6 +20,7 @@ import { isRaitoBurstWhenIgnoreSkill } from "./is-raito-burst-when-ignore-skill"
 import { isRaitoFeint } from "./is-raito-feint";
 import { isRaitoFinish } from "./is-raito-finish";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
+import { isRaitoSecondAttack } from "./is-raito-second-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
@@ -44,6 +46,10 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = tsubasaPilotSkillShout(props);
   } else if (isRaitoFirstAttack(props)) {
     result = raitoFirstAttackShout(props);
+  } else if (isRaitoFinish(props)) {
+    result = raitoFinishShout(props);
+  } else if (isRaitoSecondAttack(props)) {
+    result = raitoSecondAttackShout(props);
   } else if (isRaitoBurstWhenIgnoreComboAttack(props)) {
     result = raitoBurstShoutWhenIgnoreComboAttack(props);
   } else if (isRaitoBurstWhenIgnoreSkill(props)) {
@@ -52,8 +58,6 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoBurstShout(props);
   } else if (isRaitoFeint(props)) {
     result = raitoFeintShout(props);
-  } else if (isRaitoFinish(props)) {
-    result = raitoFinishShout(props);
   }
 
   return result;
