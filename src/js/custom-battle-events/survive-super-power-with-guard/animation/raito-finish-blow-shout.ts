@@ -8,7 +8,7 @@ import { enemyPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const raitoFinishShout = (props: Readonly<CustomBattleEventProps>) =>
+export const raitoFinishBlowShout = (props: Readonly<CustomBattleEventProps>) =>
   onStart(() => {
     enemyPilotOnlyShout(props, "Raito", `この勝負${wbr}もろたで ツバサ`);
   });

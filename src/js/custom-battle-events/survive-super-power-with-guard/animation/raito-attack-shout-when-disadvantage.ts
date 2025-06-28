@@ -1,20 +1,20 @@
 import { onStart } from "../../../animation/on-start";
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { playerPilotOnlyShout } from "../../pilot-shout";
+import { enemyPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ツバサ ファーストアタック 叫び
+ * ライト 攻撃 自分が不利 叫び
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaFirstAttackShout = (
+export const raitoAttackShoutWhenDisadvantage = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(
+    enemyPilotOnlyShout(
       props,
-      "Tsubasa",
-      `さすがライト 攻守${wbr}ともに${wbr}隙がない`,
+      "Raito",
+      `さすがツバサ 全国2位は${wbr}伊達やない`,
     );
   });
