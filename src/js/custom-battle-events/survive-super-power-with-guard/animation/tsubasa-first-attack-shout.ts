@@ -15,6 +15,6 @@ export const tsubasaFirstAttackShout = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `さすがライト まったく${wbr}隙が${wbr}ない`,
+      `さすがライト 攻守${wbr}ともに${wbr}卒がない`,
     );
   });
