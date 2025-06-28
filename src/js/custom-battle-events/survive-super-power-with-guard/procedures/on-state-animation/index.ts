@@ -3,6 +3,7 @@ import { empty } from "../../../../animation/delay";
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { raitoAttackShoutWhenAdvantage } from "../../animation/raito-attack-shout-when-advantage";
+import { raitoAttackShoutWhenDisadvantage } from "../../animation/raito-attack-shout-when-disadvantage";
 import { raitoAttackShoutWhenEven } from "../../animation/raito-attack-shout-when-even";
 import { raitoBurstShout } from "../../animation/raito-burst-shout";
 import { raitoBurstShoutWhenIgnoreComboAttack } from "../../animation/raito-burst-shout-when-ignore-combo-attack";
@@ -17,6 +18,7 @@ import { tsubasaFinishBlowShout } from "../../animation/tsubasa-finish-blow-shou
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shout";
 import { isRaitoAttackWhenAdvantage } from "./is-raito-attack-when-advantage";
+import { isRaitoAttackWhenDisadvantage } from "./is-raito-attack-when-disadvantage";
 import { isRaitoAttackWhenEven } from "./is-raito-attack-when-even";
 import { isRaitoBurst } from "./is-raito-burst";
 import { isRaitoBurstWhenIgnoreComboAttack } from "./is-raito-burst-when-ignore-combo-attack";
@@ -56,6 +58,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoFinishBlowShout(props);
   } else if (isRaitoAttackWhenAdvantage(props)) {
     result = raitoAttackShoutWhenAdvantage(props);
+  } else if (isRaitoAttackWhenDisadvantage(props)) {
+    result = raitoAttackShoutWhenDisadvantage(props);
   } else if (isRaitoAttackWhenEven(props)) {
     result = raitoAttackShoutWhenEven(props);
   } else if (isRaitoBurstWhenIgnoreComboAttack(props)) {
