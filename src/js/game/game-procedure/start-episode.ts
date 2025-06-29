@@ -41,6 +41,7 @@ export async function startEpisode(options: {
     ...episode,
     resources: props.resources,
     armdozerId: episode.player.armdozer.id,
+    imageCutPathId: episode.imageCutPathId,
   });
   switchEpisodeTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
