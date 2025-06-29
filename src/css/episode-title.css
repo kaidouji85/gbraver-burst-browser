@@ -29,13 +29,10 @@
 }
 
 .episode-title__title {
-  position: absolute;
   font-size: var(--font-size);
   text-shadow: #16160e 1px 1px 10px;
   -webkit-text-stroke: 1px #d3d3d3;
   z-index: var(--zindex-title);
-  left: max(var(--safe-area-left), calc(var(--font-size) * 2));
-  top: max(var(--safe-area-top), calc(var(--font-size) * 2));
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
@@ -97,7 +94,7 @@
 
   position: absolute;
   top: -10vh;
-  right: calc(-0.2 * var(--width));
+  right: calc(-0.3 * var(--width));
   width: var(--width);
   filter: brightness(20%);
   z-index: var(--zindex-bust-shot);
@@ -136,6 +133,12 @@
   width: var(--size);
   height: var(--size);
   z-index: var(--zindex-stand);
+}
+
+.episode-title__image-cut {
+  filter: brightness(0.7);
+  position: absolute;
+  width: calc(80% - var(--screen-padding-left) - var(--screen-padding-right));
 }
 
 .episode-title__loading {
