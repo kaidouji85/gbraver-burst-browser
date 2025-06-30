@@ -12,7 +12,7 @@ export function burst(props: GranDozerAnimationProps) {
   const { model, sounds, se } = props;
   return tween(model.animation, (t) =>
     t.to({ frame: 0 }, 0).onStart(() => {
-      model.animation.type = "TACKLE_CHARGE";
+      model.animation.type = "BURST_UP";
       se.play(sounds.motor);
     }),
   )

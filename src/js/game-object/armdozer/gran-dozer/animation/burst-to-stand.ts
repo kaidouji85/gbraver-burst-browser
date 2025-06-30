@@ -29,7 +29,7 @@ export function burstToStand(props: GranDozerAnimationProps) {
       tween(model, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "TACKLE_CHARGE";
+            model.animation.type = "BURST_UP";
           })
           .to({ animation: { frame: 1 } }, 0),
       ),

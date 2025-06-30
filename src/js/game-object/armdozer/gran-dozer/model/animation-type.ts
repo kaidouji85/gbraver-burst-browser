@@ -4,6 +4,7 @@ export type AnimationType =
   | "TACKLE_CHARGE"
   | "TACKLE_ATTACK"
   | "TACKLE_TO_BACK_STEP"
+  | "BURST_UP"
   | "BURST_DOWN"
   | "FRONT_STEP"
   | "BACK_STEP"
