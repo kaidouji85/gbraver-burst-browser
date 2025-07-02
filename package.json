@@ -96,7 +96,7 @@
     "add-csp": "node add-csp.js",
     "build": "run-s build:*",
     "build:clear-sw": "webpack --config webpack.clear.sw.js",
-    "build:electron": "electron-builder --win",
+    "build:electron": "electron-builder --win --publish=never",
     "build:production": "webpack --mode=production",
     "build:storybook": "storybook build -o build/storybook",
     "build:sw": "webpack --config webpack.sw.js",
