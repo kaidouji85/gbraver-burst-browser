@@ -1,6 +1,12 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
+// GPU優先設定（Windowsの場合）
+if (process.platform === 'win32') {
+  // 高性能GPU優先を設定（これだけで十分）
+  app.commandLine.appendSwitch('force_high_performance_gpu');
+}
+
 /**
  * ブラウザウインドウを生成する
  */
