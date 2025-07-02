@@ -1,9 +1,9 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
-if (process.platform === 'win32') {
+if (process.platform === "win32") {
   // GPU優先設定（Windowsの場合）
-  app.commandLine.appendSwitch('force_high_performance_gpu');
+  app.commandLine.appendSwitch("force_high_performance_gpu");
 }
 
 /**
