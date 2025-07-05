@@ -11,6 +11,7 @@ import { raitoBurstShoutWhenIgnoreSkill } from "../../animation/raito-burst-shou
 import { raitoFeintShout } from "../../animation/raito-feint-shout";
 import { raitoFinishBlowShout } from "../../animation/raito-finish-blow-shout";
 import { raitoFirstAttackShout } from "../../animation/raito-first-attack-shout";
+import { raitoSecondAttackShout } from "../../animation/raito-second-attack-shout";
 import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn-burst-shout";
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
@@ -27,6 +28,7 @@ import { isRaitoBurstWhenIgnoreSkill } from "./is-raito-burst-when-ignore-skill"
 import { isRaitoFeint } from "./is-raito-feint";
 import { isRaitoFinishBlow } from "./is-raito-finish-blow";
 import { isRaitoFirstAttack } from "./is-raito-first-attack";
+import { isRaitoSecondAttack } from "./is-raito-second-attack";
 import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
@@ -60,6 +62,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = raitoFirstAttackShout(props);
   } else if (isRaitoFinishBlow(props)) {
     result = raitoFinishBlowShout(props);
+  } else if (isRaitoSecondAttack(props)) {
+    result = raitoSecondAttackShout(props);
   } else if (isRaitoAttackWhenAdvantage(props)) {
     result = raitoAttackShoutWhenAdvantage(props);
   } else if (isRaitoAttackWhenDisadvantage(props)) {

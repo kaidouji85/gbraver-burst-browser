@@ -3,8 +3,10 @@ import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { firstTurnLose } from "../../stories/first-turn-lose";
 import { playerLose } from "../../stories/player-lose";
+import { tsubasaVictory } from "../../stories/tsubasa-victory";
 import { shouldPlayPlayerLose } from "./shoud-play-player-lose";
 import { shouldPlayFirstTurnLose } from "./should-play-first-turn-lose";
+import { shouldPlayTsubasaVictory } from "./should-play-tsubasa-victory";
 
 /**
  * 最終ステート完了後イベント
@@ -19,5 +21,7 @@ export async function afterLastState(
     await firstTurnLose(props);
   } else if (shouldPlayPlayerLose(props)) {
     await playerLose(props);
+  } else if (shouldPlayTsubasaVictory(props)) {
+    await tsubasaVictory(props);
   }
 }
