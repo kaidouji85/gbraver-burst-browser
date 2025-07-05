@@ -12,7 +12,7 @@ export async function zeroDefenseButEnableBurst(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「なんで${wbr}バーストを${wbr}発動せぇへん${wbr}のや`],
-    [`勝負を${wbr}捨てたか ツバサ」`],
+    [`わいのこと${wbr}バカに${wbr}しとんのか ツバサ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
