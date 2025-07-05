@@ -12,5 +12,9 @@ export const tsubasaFinishBlowShout = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Tsubasa", `また${wbr}私の${wbr}勝ちだ ライト`);
+    playerPilotOnlyShout(
+      props,
+      "Tsubasa",
+      `また${wbr}私の${wbr}勝ちだな ライト`,
+    );
   });

@@ -11,8 +11,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export async function tsubasaVictory(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
-    ["ガイ", `「そんな……`],
-    [`「ライト先輩でも 大田高校に${wbr}勝てない${wbr}なんて`],
+    ["ガイ", `「……ライト先輩でも 大田高校に${wbr}勝てない${wbr}なんて`],
     [`かくなる上は アレを${wbr}出すしか${wbr}ない」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
