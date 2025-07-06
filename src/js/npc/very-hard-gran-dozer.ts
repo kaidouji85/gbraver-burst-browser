@@ -10,10 +10,10 @@ import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
+import { getMinimumGuardBattery } from "./get-minimum-guard-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
-import { getMinimumGuardBattery } from "./get-minimum-guard-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
