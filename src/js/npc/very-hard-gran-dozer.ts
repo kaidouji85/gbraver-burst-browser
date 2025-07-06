@@ -12,6 +12,7 @@ import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumGuardBattery } from "./get-minimum-guard-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
+import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 
@@ -73,6 +74,7 @@ const attackRoutine: SimpleRoutine = (data) => {
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
   battery1: findBatteryCommand(1, data.commands),
   battery5: findBatteryCommand(5, data.commands),
+  optimalDefenseBattery: getOptimalDefenseBattery(data.enemy),
   minimumSurvivableBattery: getMinimumSurvivableBattery(
     data.enemy,
     data.player,
@@ -87,17 +89,35 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { burst, pilot, battery1, battery5, minimumSurvivableBattery } =
-    getDefenseRoutineCondition(data);
+  const {
+    burst,
+    pilot,
+    battery1,
+    battery5,
+    minimumSurvivableBattery,
+    optimalDefenseBattery,
+  } = getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst && pilot && battery5) {
     selectedCommand = battery5;
+  } else if (
+    optimalDefenseBattery.isExist &&
+    minimumSurvivableBattery.isExist
+  ) {
+    const battery = Math.max(
+      optimalDefenseBattery.value,
+      minimumSurvivableBattery.value,
+    );
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (minimumSurvivableBattery.isExist) {
     const battery = minimumSurvivableBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (!minimumSurvivableBattery.isExist && burst) {
     selectedCommand = burst;
+  } else if (optimalDefenseBattery.isExist) {
+    const battery = optimalDefenseBattery.value;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (battery1) {
     selectedCommand = battery1;
   }
