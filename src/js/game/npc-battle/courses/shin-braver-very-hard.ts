@@ -15,7 +15,7 @@ export const ShinBraverVeryHard: NPCBattleCourse = {
   stages: [
     { ...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01 },
     { ...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_02 },
-    { ...VeryHardGranDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
+    { ...VeryHardGranDozer, bgm: SOUND_IDS.GRAN_DOZER_STRIKE },
     { ...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03 },
     { ...VeryHardGenesisBraver, bgm: SOUND_IDS.YUUYA_BATTLE },
   ],
