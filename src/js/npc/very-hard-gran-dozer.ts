@@ -54,7 +54,10 @@ const attackRoutine: SimpleRoutine = (data) => {
   } else if (minimumBeatDownBattery.isExist) {
     const battery = minimumBeatDownBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
-  } else if (minimumGuardBattery.isExist) {
+  } else if (
+    minimumGuardBattery.isExist &&
+    minimumGuardBattery.value < data.enemy.armdozer.battery
+  ) {
     const battery = minimumGuardBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   }
