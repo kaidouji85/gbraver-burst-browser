@@ -5,14 +5,16 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * プレイヤーが負けた
+ * バッテリーが残っているのに0防御した
  * @param props イベントプロパティ
  */
-export async function playerLose(props: CustomBattleEventProps) {
+export async function zeroDefenseButPositiveBattery(
+  props: CustomBattleEventProps,
+) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「東日本ブロック${wbr}での借りは${wbr}返したで ツバサ`],
-    [`これが わいの${wbr}実力なんや」`],
+    ["ライト", `「どないした まだバッテリーが${wbr}残っとるや${wbr}ないか`],
+    [`わいの${wbr}強さに${wbr}恐れを${wbr}なしたか ツバサ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
