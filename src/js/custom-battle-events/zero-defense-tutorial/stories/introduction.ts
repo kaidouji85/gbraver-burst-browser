@@ -26,7 +26,7 @@ export const introduction = async (props: CustomBattleEventProps) => {
   const playAnimation = createAnimationPlay(props);
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    ["シンヤ", `「俺${wbr} 都立${wbr}大田高校の${wbr}シンヤ`],
+    ["シンヤ", `「俺は都立${wbr}大田高校の${wbr}シンヤ`],
     [`同じ${wbr}一年生同士${wbr} よろしく${wbr}頼むッス」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
