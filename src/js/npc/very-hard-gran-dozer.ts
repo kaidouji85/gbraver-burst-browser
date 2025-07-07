@@ -99,7 +99,9 @@ const defenseRoutine: SimpleRoutine = (data) => {
   } = getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
-  if (burst && pilot && battery5) {
+  if (burst && data.enemy.armdozer.battery <= 0) {
+    selectedCommand = burst;
+  } else if (burst && pilot && battery5) {
     selectedCommand = battery5;
   } else if (
     optimalDefenseBattery.isExist &&
