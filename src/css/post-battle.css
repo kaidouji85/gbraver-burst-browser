@@ -31,13 +31,12 @@
 }
 
 .post-battle__main-action::before {
-  content: "✨";
+  content: "🌟";
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .post-battle__main-action {
   border: 3px solid #00b0e6;
-  font-weight: bold;
   background-color: var(--button-background-color);
   box-shadow: var(--sub-button-box-shadow);
 }
