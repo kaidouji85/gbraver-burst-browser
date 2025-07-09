@@ -11,8 +11,8 @@ import { scrollLeftMessages } from "../../scroll-messages";
 export async function playerLose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「全国2位に${wbr}勝った`],
-    [`これで${wbr}名実ともに わいが${wbr}部長や」`],
+    ["ライト", `「これで${wbr}名実ともに わいが${wbr}部長や`],
+    [`これからは${wbr}ビシバシ${wbr}いかせて${wbr}もらうで」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
