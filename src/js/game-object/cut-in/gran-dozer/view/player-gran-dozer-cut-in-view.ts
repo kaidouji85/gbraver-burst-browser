@@ -10,7 +10,7 @@ import { GranDozerCutInView } from "./gran-dozer-cut-in-view";
 import { createMeshes } from "./meshes";
 
 /** ベースとなるpadding left */
-export const BASE_PADDING_LEFT = 150;
+export const BASE_PADDING_LEFT = 170;
 
 /** ベースとなるpadding top */
 export const BASE_PADDING_TOP = 135;
