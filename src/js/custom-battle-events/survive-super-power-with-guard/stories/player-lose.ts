@@ -12,7 +12,7 @@ export async function playerLose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「これで${wbr}名実ともに わいが${wbr}部長や`],
-    [`これからは${wbr}ビシバシ${wbr}いかせて${wbr}もらうで」`],
+    [`明日から${wbr}ビシバシ${wbr}いくから 覚悟せぇ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
 

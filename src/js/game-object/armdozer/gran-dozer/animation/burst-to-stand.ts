@@ -1,6 +1,9 @@
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
+import {
+  ARMDOZER_SPRITE_ATTACKER_Z,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
@@ -50,7 +53,13 @@ export function burstToStand(props: GranDozerAnimationProps) {
           .onStart(() => {
             model.animation.type = "STAND";
           })
-          .to({ animation: { frame: 0 } }, 0),
+          .to(
+            {
+              animation: { frame: 0 },
+              position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+            },
+            0,
+          ),
       ),
     );
 }
