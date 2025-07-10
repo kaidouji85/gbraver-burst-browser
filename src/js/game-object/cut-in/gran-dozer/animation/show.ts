@@ -2,7 +2,7 @@ import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
+import { ARMDOZER_SPRITE_FRONT_Z } from "../../../td-position";
 import { GranDozerCutInAnimationProps } from "./animation-props";
 
 /**
@@ -29,7 +29,7 @@ export function show(props: GranDozerCutInAnimationProps): Animate {
             .to(
               {
                 animation: { frame: 0 },
-                position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
+                position: { z: ARMDOZER_SPRITE_FRONT_Z },
               },
               0,
             ),
