@@ -65,7 +65,7 @@ npm start
 **secrets**
 | シークレット名 | 値 |
 |-------|----|
-| CC_TEST_REPORTER_ID | CODE CLIMATEの[test reporter id](https://docs.codeclimate.com/docs/finding-your-test-coverage-token) |
+| SONAR_TOKEN | SonarQube Cloudのトークン |
 
 ## AWS環境設定
 
