@@ -1,6 +1,10 @@
 /** チュートリアル節目う */
 @media (orientation: landscape) {
   .tutorial-description {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    --dialog-padding: var(--responsive-font-size);
+
     display: block;
   }
 }
@@ -38,4 +42,13 @@
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--responsive-font-size) * 3)
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+}
+
+.tutorial-description__closer {
+  z-index: var(--closer-z-index);
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
 }
