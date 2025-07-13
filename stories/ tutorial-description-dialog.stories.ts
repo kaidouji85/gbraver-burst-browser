@@ -6,7 +6,7 @@ export default {
 };
 
 /** 通常表示 */
-export const dialog = domStub(() => {
-  const dialog = new TutorialDescriptionDialog();
+export const dialog = domStub((options) => {
+  const dialog = new TutorialDescriptionDialog(options);
   return dialog.getRootHTMLElement();
 });
