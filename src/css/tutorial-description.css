@@ -1,0 +1,41 @@
+/** チュートリアル節目う */
+@media (orientation: landscape) {
+  .tutorial-description {
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .tutorial-description {
+    display: none;
+  }
+}
+
+.tutorial-description__background {
+  position: absolute;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.tutorial-description__dialog {
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding: max(var(--closer-height) / 2, var(--responsive-font-size) * 3)
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+}
