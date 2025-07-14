@@ -1,4 +1,7 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMDialog } from "../dialog";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createTutorialDescriptionProps,
   TutorialDescriptionDialogPropsOptions,
@@ -12,6 +15,8 @@ type TutorialDescriptionDialogOptions = TutorialDescriptionDialogPropsOptions;
 export class TutorialDescriptionDialog implements DOMDialog {
   /** プロパティ */
   readonly #props: TutorialDescriptionDialogProps;
+  /** アンサブスクライバ */
+  readonly unsubscribables: Unsubscribable[];
 
   /**
    * @constructor
@@ -19,11 +24,12 @@ export class TutorialDescriptionDialog implements DOMDialog {
    */
   constructor(options: TutorialDescriptionDialogOptions) {
     this.#props = createTutorialDescriptionProps(options);
+    this.unsubscribables = bindEventListeners(this.#props);
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.unsubscribables.forEach((unsub) => unsub.unsubscribe());
   }
 
   /** @override */

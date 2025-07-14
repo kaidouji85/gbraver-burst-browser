@@ -1,3 +1,6 @@
+import { Subject } from "rxjs";
+
+import { Exclusive } from "../../../exclusive/exclusive";
 import { ROOT } from "../dom/class-name";
 import {
   extractCloseButton,
@@ -24,5 +27,9 @@ export const createTutorialDescriptionProps = (
   const closer = extractCloser(root);
   const startTutorial = extractStartTutorial(root);
   const close = extractCloseButton(root);
-  return { root, closer, startTutorial, close };
+
+  const exclusive = new Exclusive();
+
+  const closeNotifier = new Subject<void>();
+  return { root, closer, startTutorial, close, exclusive, closeNotifier };
 };
