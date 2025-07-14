@@ -1,4 +1,9 @@
 import { ROOT } from "../dom/class-name";
+import {
+  extractCloseButton,
+  extractCloser,
+  extractStartTutorial,
+} from "../dom/elements";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { TutorialDescriptionDialogProps } from "../props";
 
@@ -15,5 +20,9 @@ export const createTutorialDescriptionProps = (
   const root = document.createElement("div");
   root.className = ROOT;
   root.innerHTML = rootInnerHTML(options);
-  return { root };
+
+  const closer = extractCloser(root);
+  const startTutorial = extractStartTutorial(root);
+  const close = extractCloseButton(root);
+  return { root, closer, startTutorial, close };
 };
