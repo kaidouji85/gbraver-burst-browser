@@ -11,11 +11,8 @@ import template from "./root-inner-html.hbs";
 export function rootInnerHTML(resources: Resources): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
-  const caption =
-    "アカウント削除をすると、ネット対戦が出来なくなります。本当にアカウント削除しますか？";
   return template({
     ROOT_CLASS,
     closerPath,
-    caption,
   });
 }

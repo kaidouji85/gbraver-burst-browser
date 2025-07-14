@@ -4,6 +4,7 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
 
     display: block;
   }
@@ -46,6 +47,11 @@
   flex-direction: column;
 }
 
+.tutorial-description__description {
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
 .tutorial-description__closer {
   z-index: var(--closer-z-index);
   width: var(--closer-width);
@@ -53,4 +59,25 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.tutorial-description__close {
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--sub-button-background-color);
+  color: var(--button-font-color);
+  border: var(--sub-button-border);
+  box-shadow: var(--sub-button-box-shadow);
+}
+
+.tutorial-description__start-tutorial {
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
