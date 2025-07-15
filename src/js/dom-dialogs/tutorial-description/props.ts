@@ -25,4 +25,6 @@ export type TutorialDescriptionDialogProps = SEPlayerContainer & {
 
   /** 閉じる通知 */
   closeNotifier: Subject<void>;
+  /** 「チュートリアルをはじめる」通知 */
+  startTutorialNotifier: Subject<void>;
 };

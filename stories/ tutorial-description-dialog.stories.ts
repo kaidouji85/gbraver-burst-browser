@@ -11,5 +11,8 @@ export const dialog = domStub((options) => {
   dialog.notifyClose().subscribe(() => {
     console.log("close");
   });
+  dialog.notifyStartTutorial().subscribe(() => {
+    console.log("start tutorial");
+  });
   return dialog.getRootHTMLElement();
 });

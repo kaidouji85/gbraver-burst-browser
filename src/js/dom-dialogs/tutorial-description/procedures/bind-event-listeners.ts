@@ -4,6 +4,7 @@ import { domPushStream } from "../../../dom/push-dom";
 import { TutorialDescriptionDialogProps } from "../props";
 import { onCloseButtonPush } from "./on-close-button-push";
 import { onCloserPush } from "./on-closer-push";
+import { onStartTutorialButtonPush } from "./on-start-tutorial-button-push";
 
 /**
  * イベントリスナーをバインドする
@@ -19,6 +20,9 @@ export const bindEventListeners = (
     }),
     domPushStream(props.closeButton).subscribe((action) => {
       onCloseButtonPush({ props, action });
+    }),
+    domPushStream(props.startTutorialButton).subscribe((action) => {
+      onStartTutorialButtonPush({ props, action });
     }),
   ];
 };

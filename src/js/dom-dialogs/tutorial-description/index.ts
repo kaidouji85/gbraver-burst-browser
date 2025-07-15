@@ -42,6 +42,14 @@ export class TutorialDescriptionDialog implements DOMDialog {
    * @returns 閉じる通知のオブザーバブル
    */
   notifyClose(): Observable<void> {
-    return this.#props.closeNotifier.asObservable();
+    return this.#props.closeNotifier;
+  }
+
+  /**
+   * 「チュートリアルをはじめる」ボタンが押されたことを通知する
+   * @returns 「チュートリアルをはじめる」通知のオブザーバブル
+   */
+  notifyStartTutorial(): Observable<void> {
+    return this.#props.startTutorialNotifier;
   }
 }

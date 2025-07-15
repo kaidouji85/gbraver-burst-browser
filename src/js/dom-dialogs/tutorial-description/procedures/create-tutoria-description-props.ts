@@ -43,6 +43,7 @@ export const createTutorialDescriptionProps = (
   const exclusive = new Exclusive();
 
   const closeNotifier = new Subject<void>();
+  const startTutorialNotifier = new Subject<void>();
 
   return {
     root,
@@ -57,5 +58,6 @@ export const createTutorialDescriptionProps = (
     exclusive,
 
     closeNotifier,
+    startTutorialNotifier,
   };
 };
