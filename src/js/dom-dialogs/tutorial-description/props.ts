@@ -11,9 +11,9 @@ export type TutorialDescriptionDialogProps = SEPlayerContainer & {
   /** クロージャー */
   closer: HTMLImageElement;
   /** 「チュートリアルをはじめる」ボタン */
-  startTutorial: HTMLButtonElement;
+  startTutorialButton: HTMLButtonElement;
   /** 「閉じる」ボタン */
-  close: HTMLButtonElement;
+  closeButton: HTMLButtonElement;
 
   /** 決定音 */
   pushButtonSound: SoundResource;

@@ -8,7 +8,7 @@ import { ROOT } from "../dom/class-name";
 import {
   extractCloseButton,
   extractCloser,
-  extractStartTutorial,
+  extractStartTutorialButton,
 } from "../dom/elements";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { TutorialDescriptionDialogProps } from "../props";
@@ -30,8 +30,8 @@ export const createTutorialDescriptionProps = (
   root.innerHTML = rootInnerHTML(options);
 
   const closer = extractCloser(root);
-  const startTutorial = extractStartTutorial(root);
-  const close = extractCloseButton(root);
+  const startTutorialButton = extractStartTutorialButton(root);
+  const closeButton = extractCloseButton(root);
 
   const pushButtonSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
@@ -47,8 +47,8 @@ export const createTutorialDescriptionProps = (
   return {
     root,
     closer,
-    startTutorial,
-    close,
+    startTutorialButton,
+    closeButton,
 
     se,
     pushButtonSound,

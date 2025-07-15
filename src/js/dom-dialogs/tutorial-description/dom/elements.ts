@@ -12,7 +12,7 @@ export const extractCloser = (root: HTMLElement): HTMLImageElement =>
  * @param root ルート要素
  * @returns 抽出結果
  */
-export const extractStartTutorial = (root: HTMLElement): HTMLButtonElement =>
+export const extractStartTutorialButton = (root: HTMLElement): HTMLButtonElement =>
   root.querySelector<HTMLButtonElement>('[data-id="start-tutorial"]') ??
   document.createElement("button");
 
