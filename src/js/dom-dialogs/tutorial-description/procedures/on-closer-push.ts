@@ -16,7 +16,8 @@ export const onCloserPush = (options: {
   action.event.stopPropagation();
   action.event.preventDefault();
   props.exclusive.execute(async () => {
-    await pop(props.closer);
+    props.se.play(props.changeValueSound);
+    await pop(props.closer, 1.3);
     props.closeNotifier.next();
   });
 };

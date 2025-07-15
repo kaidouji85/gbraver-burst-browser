@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
@@ -35,5 +35,13 @@ export class TutorialDescriptionDialog implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ダイアログを閉じたことを通知する
+   * @returns 閉じる通知のオブザーバブル
+   */
+  notifyClose(): Observable<void> {
+    return this.#props.closeNotifier.asObservable();
   }
 }
