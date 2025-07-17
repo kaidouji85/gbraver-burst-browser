@@ -14,6 +14,8 @@ export type TutorialDescriptionDialogProps = SEPlayerContainer & {
   startTutorialButton: HTMLButtonElement;
   /** 「閉じる」ボタン */
   closeButton: HTMLButtonElement;
+  /** バックグラウンド */
+  backGround: HTMLDivElement;
 
   /** 決定音 */
   pushButtonSound: SoundResource;

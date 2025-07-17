@@ -6,6 +6,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT } from "../dom/class-name";
 import {
+  extractBackGround,
   extractCloseButton,
   extractCloser,
   extractStartTutorialButton,
@@ -32,6 +33,7 @@ export const createTutorialDescriptionProps = (
   const closer = extractCloser(root);
   const startTutorialButton = extractStartTutorialButton(root);
   const closeButton = extractCloseButton(root);
+  const backGround = extractBackGround(root);
 
   const pushButtonSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
@@ -50,6 +52,7 @@ export const createTutorialDescriptionProps = (
     closer,
     startTutorialButton,
     closeButton,
+    backGround,
 
     se,
     pushButtonSound,
