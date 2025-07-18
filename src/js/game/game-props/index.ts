@@ -6,7 +6,7 @@ import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { PostBattleFloater } from "../../dom-floaters/post-battle";
-import { DOMSceneBinder } from "../../dom-scenes/dom-scene-binder";
+import { DOMSceneBinderContainer } from "../../dom-scenes/dom-scene-binder";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../../game-loop/game-loop-container";
 import { Renderer } from "../../render";
@@ -34,7 +34,8 @@ export interface GameProps
     SEPlayerContainer,
     GameActionManageContainer,
     Readonly<GameLoopContainer>,
-    Readonly<AbortManagerContainer> {
+    Readonly<AbortManagerContainer>,
+    Readonly<DOMSceneBinderContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
@@ -87,8 +88,6 @@ export interface GameProps
   readonly fader: DOMFader;
   /** 強制割込シーン管理オブジェクト */
   readonly interruptScenes: InterruptScenes;
-  /** DOMシーンバインダー */
-  readonly domSceneBinder: DOMSceneBinder;
   /** DOMダイアログバインダー */
   readonly domDialogBinder: DOMDialogBinder;
   /** ポストバトルフローター */
