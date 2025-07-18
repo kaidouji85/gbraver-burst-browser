@@ -10,7 +10,7 @@ import { TitleProps } from "../props";
 export function onTutorialPush(props: TitleProps, action: Readonly<PushDOM>) {
   props.exclusive.execute(async (): Promise<void> => {
     action.event.preventDefault();
-    props.se.play(props.pushButton);
+    props.se.play(props.changeValue);
     await pop(props.tutorial);
     props.pushTutorial.next();
   });
