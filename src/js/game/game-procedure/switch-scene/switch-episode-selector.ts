@@ -17,7 +17,7 @@ export const switchEpisodeSelector = (
     ...props,
     scene,
     unsubscribers: props.gameAction.connect([
-      scene.notifyPrev().pipe(map(() => ({ type: "CancelTutorialSelect" }))),
+      scene.notifyPrev().pipe(map(() => ({ type: "CancelEpisodeSelect" }))),
       scene
         .notifySelection()
         .pipe(map((a) => ({ ...a, type: "SelectEpisode" }))),

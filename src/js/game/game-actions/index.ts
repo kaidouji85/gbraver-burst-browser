@@ -1,7 +1,7 @@
 import { AccountDeleteConsent } from "./account-delete-consent";
 import { ArcadeStart } from "./arcade-start";
 import { CancelAccountDeletion } from "./cancel-account-deletion";
-import { CancelTutorialSelect } from "./cancel-tutorial-select";
+import { CancelEpisodeSelect } from "./cancel-episode-select";
 import { CasualMatchStart } from "./casual-match-start";
 import { ConfigChangeCancel } from "./config-change-cancel";
 import { ConfigChangeComplete } from "./config-change-complete";
@@ -29,6 +29,8 @@ import { SelectionCancel } from "./selection-cancel";
 import { SelectionComplete } from "./selection-complete";
 import { StoryStart } from "./story-start";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
+import { TutorialCancel } from "./tutorial-cancel";
+import { TutorialConsent } from "./tutorial-consent";
 import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
@@ -67,9 +69,11 @@ export type GameAction =
   | ConfigChangeStart
   | ConfigChangeComplete
   | ConfigChangeCancel
+  | TutorialConsent
   | TutorialStart
+  | TutorialCancel
   | StoryStart
-  | CancelTutorialSelect
+  | CancelEpisodeSelect
   | SelectEpisode
   | VisibilityChange
   | ForceEndBattle
