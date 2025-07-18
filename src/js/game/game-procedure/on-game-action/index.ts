@@ -3,7 +3,7 @@ import { GameProps } from "../../game-props";
 import { onAccountDeleteConsent } from "./on-account-delete-consent";
 import { onArcadeStart } from "./on-arcade-start";
 import { onCancelAccountDeletion } from "./on-cancel-account-deletion";
-import { onCancelTutorialSelect } from "./on-cancel-tutorial-select";
+import { onCancelEpisodeSelect } from "./on-cancel-episode-select";
 import { onCasualMatchStart } from "./on-casual-match-start";
 import { onConfigChangeCancel } from "./on-config-change-cancel";
 import { onConfigChangeComplete } from "./on-config-change-complete";
@@ -95,8 +95,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onTutorialStart({ props, action });
     case "StoryStart":
       return onStoryStart({ props, action });
-    case "CancelTutorialSelect":
-      return onCancelTutorialSelect({ props, action });
+    case "CancelEpisodeSelect":
+      return onCancelEpisodeSelect({ props, action });
     case "SelectEpisode":
       return onSelectEpisode({ props, action });
     case "NetBattleStart":

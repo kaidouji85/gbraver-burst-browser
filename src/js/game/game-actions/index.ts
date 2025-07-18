@@ -1,7 +1,7 @@
 import { AccountDeleteConsent } from "./account-delete-consent";
 import { ArcadeStart } from "./arcade-start";
 import { CancelAccountDeletion } from "./cancel-account-deletion";
-import { CancelTutorialSelect } from "./cancel-tutorial-select";
+import { CancelEpisodeSelect } from "./cancel-episode-select";
 import { CasualMatchStart } from "./casual-match-start";
 import { ConfigChangeCancel } from "./config-change-cancel";
 import { ConfigChangeComplete } from "./config-change-complete";
@@ -71,7 +71,7 @@ export type GameAction =
   | TutorialConsent
   | TutorialStart
   | StoryStart
-  | CancelTutorialSelect
+  | CancelEpisodeSelect
   | SelectEpisode
   | VisibilityChange
   | ForceEndBattle
