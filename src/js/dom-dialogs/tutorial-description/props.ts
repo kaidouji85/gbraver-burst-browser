@@ -5,28 +5,28 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 
 /** チュートリアル説明ダイアログのプロパティ */
-export type TutorialDescriptionDialogProps = SEPlayerContainer & {
+export type TutorialDescriptionDialogProps = Readonly<SEPlayerContainer> & {
   /** ルート要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** クロージャー */
-  closer: HTMLImageElement;
+  readonly closer: HTMLImageElement;
   /** 「チュートリアルをはじめる」ボタン */
-  startTutorialButton: HTMLButtonElement;
+  readonly startTutorialButton: HTMLButtonElement;
   /** 「閉じる」ボタン */
-  closeButton: HTMLButtonElement;
+  readonly closeButton: HTMLButtonElement;
   /** バックグラウンド */
-  backGround: HTMLDivElement;
+  readonly backGround: HTMLDivElement;
 
   /** 決定音 */
-  pushButtonSound: SoundResource;
+  readonly pushButtonSound: SoundResource;
   /** 閉じる音 */
-  changeValueSound: SoundResource;
+  readonly changeValueSound: SoundResource;
 
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
 
   /** 閉じる通知 */
-  closeNotifier: Subject<void>;
+  readonly closeNotifier: Subject<void>;
   /** 「チュートリアルをはじめる」通知 */
-  startTutorialNotifier: Subject<void>;
+  readonly startTutorialNotifier: Subject<void>;
 };
