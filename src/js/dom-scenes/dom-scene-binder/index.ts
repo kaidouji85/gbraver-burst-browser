@@ -51,9 +51,3 @@ export class DOMSceneBinder {
     return this.#props.scene !== null;
   }
 }
-
-/** DOMシーンバインダのコンテナ */
-export type DOMSceneBinderContainer = {
-  /** DOMシーンバインダ */
-  domSceneBinder: DOMSceneBinder;
-};

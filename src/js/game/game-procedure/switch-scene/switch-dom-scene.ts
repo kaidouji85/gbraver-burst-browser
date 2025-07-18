@@ -4,7 +4,7 @@ import { createAbortError } from "../../../abort-controller/abort-error";
 import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { PostBattleFloater } from "../../../dom-floaters/post-battle";
 import { DOMScene } from "../../../dom-scenes/dom-scene";
-import { DOMSceneBinderContainer } from "../../../dom-scenes/dom-scene-binder";
+import { DOMSceneBinderContainer } from "../../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { TDSceneBinder } from "../../../td-scenes/td-scene-binder";
 
 /** シーン切り替えオプション */

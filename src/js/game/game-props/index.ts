@@ -6,7 +6,7 @@ import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { PostBattleFloater } from "../../dom-floaters/post-battle";
-import { DOMSceneBinderContainer } from "../../dom-scenes/dom-scene-binder";
+import { DOMSceneBinderContainer } from "../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../../game-loop/game-loop-container";
 import { Renderer } from "../../render";
