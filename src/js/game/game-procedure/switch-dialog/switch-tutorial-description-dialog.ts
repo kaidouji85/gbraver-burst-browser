@@ -16,5 +16,6 @@ export const switchTutorialDescriptionDialog = (
     dialog,
     props.gameAction.connect([
       dialog.notifyStartTutorial().pipe(map(() => ({ type: "TutorialStart" }))),
+      dialog.notifyClose().pipe(map(() => ({ type: "TutorialCancel" }))),
     ]),
   );

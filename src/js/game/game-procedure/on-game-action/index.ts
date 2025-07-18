@@ -31,6 +31,7 @@ import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
 import { onStoryStart } from "./on-story-start";
 import { onSuddenlyBattleEnd } from "./on-suddenly-battle-end";
+import { onTutorialCancel } from "./on-tutorial-cancel";
 import { onTutorialConsent } from "./on-tutorial-consent";
 import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
@@ -94,6 +95,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onConfigChangeComplete({ props, action });
     case "TutorialStart":
       return onTutorialStart({ props, action });
+    case "TutorialCancel":
+      return onTutorialCancel({ props, action });
     case "TutorialConsent":
       return onTutorialConsent({ props, action });
     case "StoryStart":
