@@ -29,6 +29,7 @@ import { SelectionCancel } from "./selection-cancel";
 import { SelectionComplete } from "./selection-complete";
 import { StoryStart } from "./story-start";
 import { SuddenlyBattleEnd } from "./suddenly-battle-end";
+import { TutorialConsent } from "./tutorial-consent";
 import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
@@ -67,6 +68,7 @@ export type GameAction =
   | ConfigChangeStart
   | ConfigChangeComplete
   | ConfigChangeCancel
+  | TutorialConsent
   | TutorialStart
   | StoryStart
   | CancelTutorialSelect
