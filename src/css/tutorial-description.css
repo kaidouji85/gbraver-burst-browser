@@ -49,7 +49,6 @@
 }
 
 .tutorial-description__description {
-  font-size: calc(var(--responsive-font-size) * 0.8);
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
