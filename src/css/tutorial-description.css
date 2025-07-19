@@ -3,7 +3,6 @@
   .tutorial-description {
     --closer-width: 48px;
     --closer-height: 48px;
-    --dialog-padding: var(--responsive-font-size);
     --control-button-height: calc(var(--responsive-font-size) * 3);
 
     display: block;
@@ -28,6 +27,8 @@
 }
 
 .tutorial-description__dialog {
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
+
   top: 50vh;
   top: 50dvh;
   left: 50vw;
