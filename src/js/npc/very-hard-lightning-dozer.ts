@@ -13,6 +13,7 @@ import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { NPC } from "./npc";
 import { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
+import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -53,7 +54,10 @@ const attackRoutine: SimpleRoutine = (data) => {
   } else if (minimumBeatDownBattery.isExist) {
     const battery = minimumBeatDownBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
-  } else if (minimumGuardBattery.isExist) {
+  } else if (
+    minimumGuardBattery.isExist &&
+    minimumGuardBattery.value < data.enemy.armdozer.battery
+  ) {
     const battery = minimumGuardBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   }
@@ -71,6 +75,13 @@ const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
   battery1: data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   ),
+  isDefeatedWithBattery1: canBeatDown(
+    data.player,
+    data.player.armdozer.battery,
+    data.enemy,
+    1,
+  ),
+  optimalDefenseBattery: getOptimalDefenseBattery(data.enemy),
   minimumSurviveBattery: getMinimumSurvivableBattery(
     data.enemy,
     data.player,
@@ -80,12 +91,7 @@ const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
     (v) =>
       v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
   ),
-  isDefeatedWithBattery1: canBeatDown(
-    data.player,
-    data.player.armdozer.battery,
-    data.enemy,
-    1,
-  ),
+  hasReflect: data.enemy.armdozer.effects.some((e) => e.type === "TryReflect"),
 });
 
 /**
@@ -95,8 +101,10 @@ const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
 const defenseRoutine: SimpleRoutine = (data) => {
   const {
     burst,
+    hasReflect,
     battery1,
     isDefeatedWithBattery1,
+    optimalDefenseBattery,
     minimumSurviveBattery,
     allBattery,
   } = getDefenseRoutineConditions(data);
@@ -104,8 +112,14 @@ const defenseRoutine: SimpleRoutine = (data) => {
 
   if (burst) {
     selectedCommand = burst;
-  } else if (!isDefeatedWithBattery1 && battery1) {
+  } else if (hasReflect && !isDefeatedWithBattery1 && battery1) {
     selectedCommand = battery1;
+  } else if (optimalDefenseBattery.isExist && minimumSurviveBattery.isExist) {
+    const battery = Math.max(
+      optimalDefenseBattery.value,
+      minimumSurviveBattery.value,
+    );
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (minimumSurviveBattery.isExist) {
     const battery = minimumSurviveBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
