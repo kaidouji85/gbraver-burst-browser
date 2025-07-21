@@ -20,7 +20,7 @@ const ZERO_BATTERY: Command = {
 
 /**
  * 攻撃ルーチンの条件判断オブジェクトを取得する
- * @param data ルーチンデータ
+ * @param data ルーチンに渡されるデータ
  * @returns 攻撃ルーチンの条件判断オブジェクト
  */
 const getAttackRoutineConditions = (data: SimpleRoutineData) => ({
@@ -80,38 +80,45 @@ const attackRoutine: SimpleRoutine = (data) => {
 };
 
 /**
- * @override
- * 防御ルーチン
+ * 防御ルーチンの条件判断オブジェクトを取得する
+ * @param data ルーチンに渡されるデータ
+ * @returns 防御ルーチンの条件判断オブジェクト
  */
-const defenseRoutine: SimpleRoutine = (data) => {
-  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
-  const battery1 = data.commands.find(
+const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
+  burst: data.commands.find((v) => v.type === "BURST_COMMAND"),
+  battery1: data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
-  );
-  const allBattery = data.commands.find(
+  ),
+  allBattery: data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
-  );
-  const isDefeatedWithBattery1 = canBeatDown(
+  ),
+  isDefeatedWithBattery1: canBeatDown(
     data.player,
     data.player.armdozer.battery,
     data.enemy,
     1,
-  );
+  ),
+});
+
+/**
+ * @override
+ * 防御ルーチン
+ */
+const defenseRoutine: SimpleRoutine = (data) => {
+  const { burst, battery1, allBattery, isDefeatedWithBattery1 } =
+    getDefenseRoutineConditions(data);
+  let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst) {
-    return burst;
+    selectedCommand = burst;
+  } else if (isDefeatedWithBattery1 && allBattery) {
+    selectedCommand = allBattery;
+  } else if (battery1) {
+    selectedCommand = battery1;
   }
 
-  if (isDefeatedWithBattery1 && allBattery) {
-    return allBattery;
-  }
-
-  if (battery1) {
-    return battery1;
-  }
-
-  return ZERO_BATTERY;
+  return selectedCommand;
 };
 
 /**
