@@ -2,18 +2,17 @@ import {
   ArmdozerIds,
   Armdozers,
   Command,
-  correctPower,
   PilotIds,
   Pilots,
 } from "gbraver-burst-core";
 
 import { canBeatDown } from "./can-beat-down";
-import type { NPC } from "./npc";
-import type { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
-import { SimpleNPC } from "./simple-npc";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumGuardBattery } from "./get-minimum-guard-battery";
-import { minimum } from "zod/v4-mini";
+import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
+import { NPC } from "./npc";
+import { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
+import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
@@ -72,6 +71,11 @@ const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
   battery1: data.commands.find(
     (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
   ),
+  minimumSurviveBattery: getMinimumSurvivableBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
   allBattery: data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
@@ -89,16 +93,24 @@ const getDefenseRoutineConditions = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { burst, battery1, allBattery, isDefeatedWithBattery1 } =
-    getDefenseRoutineConditions(data);
+  const {
+    burst,
+    battery1,
+    isDefeatedWithBattery1,
+    minimumSurviveBattery,
+    allBattery,
+  } = getDefenseRoutineConditions(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst) {
     selectedCommand = burst;
-  } else if (isDefeatedWithBattery1 && allBattery) {
-    selectedCommand = allBattery;
-  } else if (battery1) {
+  } else if (!isDefeatedWithBattery1 && battery1) {
     selectedCommand = battery1;
+  } else if (minimumSurviveBattery.isExist) {
+    const battery = minimumSurviveBattery.value;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
+  } else if (allBattery) {
+    selectedCommand = allBattery;
   }
 
   return selectedCommand;
