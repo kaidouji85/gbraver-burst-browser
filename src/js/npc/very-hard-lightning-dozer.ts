@@ -10,10 +10,10 @@ import { canBeatDown } from "./can-beat-down";
 import { getMinimumBeatDownBattery } from "./get-minimum-beat-down-battery";
 import { getMinimumGuardBattery } from "./get-minimum-guard-battery";
 import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
+import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
-import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = {
