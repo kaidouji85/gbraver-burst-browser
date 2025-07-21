@@ -9,7 +9,7 @@ import {
 
 import { canBeatDown } from "./can-beat-down";
 import type { NPC } from "./npc";
-import type { SimpleRoutine } from "./simple-npc";
+import type { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
@@ -19,50 +19,64 @@ const ZERO_BATTERY: Command = {
 };
 
 /**
- * @override
- * 攻撃ルーチン
+ * 攻撃ルーチンの条件判断オブジェクトを取得する
+ * @param data ルーチンデータ
+ * @returns 攻撃ルーチンの条件判断オブジェクト
  */
-const attackRoutine: SimpleRoutine = (data) => {
-  const hasCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
-  const pilot = data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND");
-  const allBattery = data.commands.find(
+const getAttackRoutineConditions = (data: SimpleRoutineData) => ({
+  hasCorrectPower: 0 < correctPower(data.enemy.armdozer.effects),
+  pilot: data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND"),
+  allBattery: data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" && v.battery === data.enemy.armdozer.battery,
-  );
-  const allBatteryMinusOne = data.commands.find(
+  ),
+  allBatteryMinusOne: data.commands.find(
     (v) =>
       v.type === "BATTERY_COMMAND" &&
       v.battery === data.enemy.armdozer.battery - 1,
-  );
-  const canBeatDownWithAllBattery = canBeatDown(
+  ),
+  canBeatDownWithAllBattery: canBeatDown(
     data.enemy,
     data.enemy.armdozer.battery,
     data.player,
     data.player.armdozer.battery,
-  );
+  ),
+});
+
+/**
+ * @override
+ * 攻撃ルーチン
+ */
+const attackRoutine: SimpleRoutine = (data) => {
+  const {
+    hasCorrectPower,
+    pilot,
+    allBattery,
+    allBatteryMinusOne,
+    canBeatDownWithAllBattery,
+  } = getAttackRoutineConditions(data);
+  let selectedCommand: Command = ZERO_BATTERY;
 
   if (data.enemy.armdozer.battery === 5 && pilot) {
-    return pilot;
-  }
-
-  if (hasCorrectPower && data.enemy.armdozer.battery === 5 && allBattery) {
-    return allBattery;
-  }
-
-  if (
+    selectedCommand = pilot;
+  } else if (
+    hasCorrectPower &&
+    data.enemy.armdozer.battery === 5 &&
+    allBattery
+  ) {
+    selectedCommand = allBattery;
+  } else if (
     canBeatDownWithAllBattery &&
     !data.player.armdozer.enableBurst &&
     !data.player.pilot.enableSkill &&
     allBattery
   ) {
-    return allBattery;
+    selectedCommand = allBattery;
+  } else if (allBatteryMinusOne) {
+    selectedCommand = allBatteryMinusOne;
   }
 
-  if (allBatteryMinusOne) {
-    return allBatteryMinusOne;
-  }
-
-  return ZERO_BATTERY;
+  return selectedCommand;
 };
 
 /**
