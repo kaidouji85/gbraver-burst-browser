@@ -28,6 +28,9 @@ const ZERO_BATTERY: Command = {
  */
 const getAttackRoutineConditions = (data: SimpleRoutineData) => ({
   pilot: data.commands.find((v) => v.type === "PILOT_SKILL_COMMAND"),
+  isBuffedPower: data.enemy.armdozer.effects.some(
+    (e) => e.type === "CorrectPower",
+  ),
   minimumBeatDownBattery: getMinimumBeatDownBattery(
     data.enemy,
     data.player,
@@ -45,12 +48,15 @@ const getAttackRoutineConditions = (data: SimpleRoutineData) => ({
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { pilot, minimumBeatDownBattery, minimumGuardBattery } =
+  const { pilot, isBuffedPower, minimumBeatDownBattery, minimumGuardBattery } =
     getAttackRoutineConditions(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (data.enemy.armdozer.battery === 5 && pilot) {
     selectedCommand = pilot;
+  } else if (data.enemy.armdozer.enableBurst && isBuffedPower) {
+    const battery = data.enemy.armdozer.battery;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (minimumBeatDownBattery.isExist) {
     const battery = minimumBeatDownBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
