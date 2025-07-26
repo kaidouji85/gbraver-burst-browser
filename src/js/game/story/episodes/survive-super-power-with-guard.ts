@@ -16,7 +16,7 @@ export const surviveSuperPowerWithGuard: Episode = {
   id: EpisodeIDs.SURVIVE_SUPER_POWER,
   type: "Episode",
   number: "7",
-  title: "超火力はガードで凌げ",
+  title: "攻撃と防御が同じならダメージ半減",
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
   player: {
