@@ -7,7 +7,7 @@ import { PilotSkillShout } from "./pilot-skill-shout";
  */
 export const raitoAttackShout = (): PilotSkillShout => ({
   face: "Raito",
-  message: `ここは${wbr}様子見や`,
+  message: `本番前に あんたとは${wbr}戦わん`,
 });
 
 /**
