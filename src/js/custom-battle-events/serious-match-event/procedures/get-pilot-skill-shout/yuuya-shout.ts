@@ -19,5 +19,5 @@ export const yuuyaAttackShout = (player: PlayerState): PilotSkillShout => ({
  */
 export const yuuyaDefenseShout = (player: PlayerState): PilotSkillShout => ({
   face: "Yuuya",
-  message: `つれないなあ かつてのチームメイトじゃないか`,
+  message: `つれないなあ かつての${wbr}チームメイト${wbr}じゃないか`,
 });
