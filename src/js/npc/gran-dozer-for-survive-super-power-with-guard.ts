@@ -10,6 +10,7 @@ import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
+import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
@@ -30,6 +31,7 @@ const attackRoutine: SimpleRoutine = (data) => {
  */
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
   battery1: findBatteryCommand(1, data.commands),
+  optimalDefenseBattery: getOptimalDefenseBattery(data.enemy),
   burst: findBurstCommand(data.commands),
 });
 
@@ -38,11 +40,15 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { burst, battery1 } = getDefenseRoutineCondition(data);
+  const { burst, battery1, optimalDefenseBattery } =
+    getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
-  if (burst) {
+  if (data.enemy.armdozer.battery <= 0 && burst) {
     selectedCommand = burst;
+  } else if (optimalDefenseBattery.isExist) {
+    const battery = optimalDefenseBattery.value;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (battery1) {
     selectedCommand = battery1;
   }
