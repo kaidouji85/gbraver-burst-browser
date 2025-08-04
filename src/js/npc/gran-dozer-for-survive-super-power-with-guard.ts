@@ -8,9 +8,10 @@ import {
 
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
+import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
-import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
+import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
@@ -32,6 +33,11 @@ const attackRoutine: SimpleRoutine = (data) => {
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
   battery1: findBatteryCommand(1, data.commands),
   optimalDefenseBattery: getOptimalDefenseBattery(data.enemy),
+  minimumSurvivableBattery: getMinimumSurvivableBattery(
+    data.enemy,
+    data.player,
+    data.player.armdozer.battery,
+  ),
   burst: findBurstCommand(data.commands),
 });
 
@@ -40,14 +46,23 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const { burst, battery1, optimalDefenseBattery } =
+  const { burst, battery1, optimalDefenseBattery, minimumSurvivableBattery } =
     getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
-  if (data.enemy.armdozer.battery <= 0 && burst) {
+  if (!minimumSurvivableBattery.isExist && burst) {
     selectedCommand = burst;
-  } else if (optimalDefenseBattery.isExist) {
-    const battery = optimalDefenseBattery.value;
+  } else if (
+    optimalDefenseBattery.isExist &&
+    minimumSurvivableBattery.isExist
+  ) {
+    const battery = Math.max(
+      optimalDefenseBattery.value,
+      minimumSurvivableBattery.value,
+    );
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
+  } else if (minimumSurvivableBattery.isExist) {
+    const battery = minimumSurvivableBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (battery1) {
     selectedCommand = battery1;
