@@ -16,7 +16,7 @@
     grid-template:
       "tabs     detail" auto
       "episodes detail" 1fr / 1fr 1fr;
-    grid-gap: 0 var(--gap);
+    gap: 0 var(--gap);
   }
 }
 

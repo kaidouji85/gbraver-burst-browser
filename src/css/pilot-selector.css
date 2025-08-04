@@ -21,7 +21,7 @@
 .pilot-selector__controllers {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: calc(var(--responsive-font-size) * 0.5);
+  gap: calc(var(--responsive-font-size) * 0.5);
   width: 50vw;
 }
 
