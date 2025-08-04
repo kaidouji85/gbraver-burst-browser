@@ -8,10 +8,10 @@ import {
 
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
+import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
-import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
