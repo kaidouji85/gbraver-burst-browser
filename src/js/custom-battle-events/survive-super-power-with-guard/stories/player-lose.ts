@@ -1,8 +1,12 @@
 import { wbr } from "../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindowWithFace,
+} from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { scrollLeftMessages } from "../../scroll-messages";
+import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
  * プレイヤーが負けた
@@ -15,6 +19,17 @@ export async function playerLose(props: CustomBattleEventProps) {
     [`明日から${wbr}ビシバシ${wbr}いくから 覚悟せぇ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, "Tsubasa");
+  await scrollRightMessages(props, [
+    ["ツバサ", `「防御用の${wbr}バッテリーが${wbr}足りなかった`],
+    [`${highlight("0攻撃")}でバッテリーの節約`],
+    [
+      `${highlight("バースト")}や${highlight("パイロットスキル")}で${wbr}バッテリー回復`,
+    ],
+    [`こうすれば${wbr}負けなかった」`],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
 }
