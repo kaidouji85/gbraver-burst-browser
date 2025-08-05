@@ -23,14 +23,11 @@ export async function playerLose(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「防御用の${wbr}バッテリーが${wbr}足りなかった`],
-    [highlight("0攻撃") + "でバッテリーの節約"],
+    [`${highlight("0攻撃")}でバッテリーの節約`],
     [
-      highlight("バースト") +
-        "や" +
-        highlight("パイロットスキル") +
-        "で バッテリー回復",
+      `${highlight("バースト")}や${highlight("パイロットスキル")}で${wbr}バッテリー回復`,
     ],
-    ["こうしていれば 負けなかった」"],
+    [`こうすれば${wbr}負けなかった」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
