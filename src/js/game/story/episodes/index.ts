@@ -17,6 +17,7 @@ export const MainEpisodes: Episode[] = [
   pilotSkillTutorial01,
   pilotSkillTutorial02,
   confrontationTwoBraver,
+  surviveSuperPowerWithGuard,
 ];
 
 /** サイドエピソード */
@@ -28,6 +29,5 @@ export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 /** 開発中のエピソードをあつめたもの */
 export const EpisodesInDevelopment: Episode[] = [
   ...MainEpisodes,
-  surviveSuperPowerWithGuard,
   ...SideEpisodes,
 ];
