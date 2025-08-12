@@ -9,13 +9,11 @@ export const PlayableArmdozers: ArmdozerId[] = [
   ArmdozerIds.NEO_LANDOZER,
   ArmdozerIds.LIGHTNING_DOZER,
   ArmdozerIds.GENESIS_BRAVER,
+  ArmdozerIds.GRAN_DOZER,
 ];
 
 /** 開発中も含めたプレイアブルアームドーザ */
-export const DevelopingPlayableArmdozers: ArmdozerId[] = [
-  ...PlayableArmdozers,
-  ArmdozerIds.GRAN_DOZER,
-];
+export const DevelopingPlayableArmdozers: ArmdozerId[] = [...PlayableArmdozers];
 
 /**
  * プレイアブルアームドーザを取得するヘルパー関数
