@@ -85,9 +85,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
     document.createElement("div");
   const foundGranDozer = root.querySelector(`[data-id="${ids.granDozer}"]`);
   const granDozer: HTMLImageElement =
-    foundGranDozer instanceof HTMLImageElement
-      ? foundGranDozer
-      : new Image();
+    foundGranDozer instanceof HTMLImageElement ? foundGranDozer : new Image();
   const foundShinBraver = root.querySelector(`[data-id="${ids.shinBraver}"]`);
   const shinBraver: HTMLImageElement =
     foundShinBraver instanceof HTMLImageElement ? foundShinBraver : new Image();
