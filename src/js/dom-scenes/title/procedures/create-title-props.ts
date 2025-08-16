@@ -40,7 +40,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     arcade: domUuid(),
     netBattle: domUuid(),
     config: domUuid(),
-    neoLandozer: domUuid(),
+    granDozer: domUuid(),
     shinBraver: domUuid(),
   };
   const root = document.createElement("div");
@@ -60,7 +60,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
   elements.helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
-  const isNeoLandozerLoaded = waitElementLoaded(elements.neoLandozer);
+  const isGranDozerLoaded = waitElementLoaded(elements.granDozer);
   const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
   return {
     ...params,
@@ -71,7 +71,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isLogoLoaded,
     isAvatarLoaded,
     isHelpIconLoaded,
-    isNeoLandozerLoaded,
+    isGranDozerLoaded,
     isShinBraverLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??

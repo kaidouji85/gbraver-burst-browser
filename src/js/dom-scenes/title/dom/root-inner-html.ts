@@ -65,8 +65,8 @@ export function rootInnerHTML(
   const shinBraverPath =
     params.resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? "";
-  const neoLandozerPath =
-    params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
+  const granDozerPath =
+    params.resources.paths.find((p) => p.id === PathIds.GRAN_DOZER_BUST_SHOT)
       ?.path ?? "";
   const gameClassName = params.isAPIServerEnable
     ? GAME_MENU_CLASS
@@ -85,7 +85,7 @@ export function rootInnerHTML(
     accountClassName,
     netBattleClassName,
     shinBraverPath,
-    neoLandozerPath,
+    granDozerPath,
     gameClassName,
     helpIconClassName,
   });
