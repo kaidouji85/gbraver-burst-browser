@@ -36,8 +36,8 @@ export type TitleProps = Readonly<SEPlayerContainer> & {
   /** 設定 */
   readonly config: HTMLElement;
 
-  /** ネオランドーザ画像を読み込んだら発火するPromise */
-  readonly isNeoLandozerLoaded: Promise<void>;
+  /** グランドーザ画像を読み込んだら発火するPromise */
+  readonly isGranDozerLoaded: Promise<void>;
   /** シンブレイバー画像を読み込んだら発火するPromise */
   readonly isShinBraverLoaded: Promise<void>;
   /** アバター画像を読み込んだら発火するPromise */

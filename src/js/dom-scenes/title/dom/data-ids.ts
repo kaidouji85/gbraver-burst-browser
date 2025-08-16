@@ -26,8 +26,8 @@ export type DataIDs = {
   netBattle: string;
   /** 設定 */
   config: string;
-  /** ネオランドーザ画像 */
-  neoLandozer: string;
+  /** グランドーザ画像 */
+  granDozer: string;
   /** シンブレイバー画像 */
   shinBraver: string;
 };
