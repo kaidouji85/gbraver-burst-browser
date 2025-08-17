@@ -30,10 +30,7 @@ export async function surviveSecondTurnWithGuard(
   await scrollRightMessages(props, [
     ["ツバサ", `「悪いな ガイ君`],
     [
-      highlight(`攻撃と防御が同じ`) +
-        `ならガードで${wbr}` +
-        highlight(`ダメージ半減`) +
-        `${wbr}だ」`,
+      `${highlight(`攻撃と防御が同じ`)}なら ガードで${wbr}${highlight(`ダメージ半減`)}${wbr}だ」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
