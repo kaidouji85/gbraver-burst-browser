@@ -188,12 +188,12 @@
   z-index: var(--zindex-title-armdozers);
 }
 
-.title__neo-landozer {
-  --size: min(150vh, 90vw);
+.title__gran-dozer {
+  --size: calc(min(150vh, 90vw) * 1.5);
 
   position: fixed;
-  top: 0;
-  right: calc(50vw - 30vh);
+  top: calc(var(--size) * -0.14);
+  right: calc(50vw - var(--size) * 0.4);
   width: var(--size);
   height: var(--size);
 }

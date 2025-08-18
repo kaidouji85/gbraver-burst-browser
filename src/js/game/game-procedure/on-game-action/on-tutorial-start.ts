@@ -20,6 +20,8 @@ type Options = {
  */
 export async function onTutorialStart(options: Options): Promise<void> {
   const { props } = options;
+
+  props.domDialogBinder.hidden();
   await waitUntilSharedResourcesLoaded(props);
 
   const episode = batterySystemTutorial;

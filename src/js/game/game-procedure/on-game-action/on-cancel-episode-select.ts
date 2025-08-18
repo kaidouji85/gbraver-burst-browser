@@ -1,4 +1,4 @@
-import { CancelTutorialSelect } from "../../game-actions/cancel-tutorial-select";
+import { CancelEpisodeSelect } from "../../game-actions/cancel-episode-select";
 import { GameProps } from "../../game-props";
 import { startTitle } from "../start-title";
 
@@ -7,15 +7,15 @@ type Options = {
   /** ゲームプロパティ */
   props: Readonly<GameProps>;
   /** アクション */
-  action: CancelTutorialSelect;
+  action: CancelEpisodeSelect;
 };
 
 /**
- * チュートリアル選択キャンセル
+ * エピソード選択キャンセル
  * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-export async function onCancelTutorialSelect(options: Options): Promise<void> {
+export async function onCancelEpisodeSelect(options: Options): Promise<void> {
   const { props } = options;
   await props.fader.fadeOut();
   await startTitle(props);

@@ -6,7 +6,7 @@ import { hasDeliveredFinishBlow } from "../../../has-delivered-finish-blow";
  * @param props イベントプロパティ
  * @returns 判定結果、trueの場合は「raitoFinishShout」
  */
-export function isRaitoFinish(
+export function isRaitoFinishBlow(
   props: Readonly<CustomStateAnimationProps>,
 ): boolean {
   const { currentState, enemy, update } = props;

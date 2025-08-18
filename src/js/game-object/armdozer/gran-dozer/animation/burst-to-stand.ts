@@ -1,6 +1,9 @@
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
+import {
+  ARMDOZER_SPRITE_FRONT_Z,
+  ARMDOZER_SPRITE_STANDARD_Z,
+} from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
@@ -15,7 +18,7 @@ export function burstToStand(props: GranDozerAnimationProps) {
       .to(
         {
           animation: { frame: 1 },
-          position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
+          position: { z: ARMDOZER_SPRITE_FRONT_Z },
         },
         0,
       )
@@ -29,7 +32,7 @@ export function burstToStand(props: GranDozerAnimationProps) {
       tween(model, (t) =>
         t
           .onStart(() => {
-            model.animation.type = "TACKLE_CHARGE";
+            model.animation.type = "BURST_UP";
           })
           .to({ animation: { frame: 1 } }, 0),
       ),
@@ -50,7 +53,13 @@ export function burstToStand(props: GranDozerAnimationProps) {
           .onStart(() => {
             model.animation.type = "STAND";
           })
-          .to({ animation: { frame: 0 } }, 0),
+          .to(
+            {
+              animation: { frame: 0 },
+              position: { z: ARMDOZER_SPRITE_STANDARD_Z },
+            },
+            0,
+          ),
       ),
     );
 }

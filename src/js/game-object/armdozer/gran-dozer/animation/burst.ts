@@ -1,6 +1,6 @@
 import { delay } from "../../../../animation/delay";
 import { tween } from "../../../../animation/tween";
-import { ARMDOZER_SPRITE_ATTACKER_Z } from "../../../td-position";
+import { ARMDOZER_SPRITE_FRONT_Z } from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 
 /**
@@ -12,7 +12,7 @@ export function burst(props: GranDozerAnimationProps) {
   const { model, sounds, se } = props;
   return tween(model.animation, (t) =>
     t.to({ frame: 0 }, 0).onStart(() => {
-      model.animation.type = "TACKLE_CHARGE";
+      model.animation.type = "BURST_UP";
       se.play(sounds.motor);
     }),
   )
@@ -28,7 +28,7 @@ export function burst(props: GranDozerAnimationProps) {
           .to(
             {
               animation: { frame: 0 },
-              position: { z: ARMDOZER_SPRITE_ATTACKER_Z },
+              position: { z: ARMDOZER_SPRITE_FRONT_Z },
             },
             0,
           ),

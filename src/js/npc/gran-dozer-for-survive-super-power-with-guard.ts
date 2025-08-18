@@ -57,11 +57,7 @@ const defenseRoutine: SimpleRoutine = (data) => {
 export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
   const originArmdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
-  const armdozer = {
-    ...originArmdozer,
-    maxHp: 3300,
-    speed: 3000,
-  };
+  const armdozer = { ...originArmdozer, speed: 3000 };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

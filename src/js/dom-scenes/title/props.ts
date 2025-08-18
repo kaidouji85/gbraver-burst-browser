@@ -5,67 +5,67 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 
 /** タイトル画面プロパティ */
-export type TitleProps = SEPlayerContainer & {
+export type TitleProps = Readonly<SEPlayerContainer> & {
   /** 排他制御 */
-  exclusive: Exclusive;
+  readonly exclusive: Exclusive;
 
   /** ルートHTML要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** ログイン */
-  login: HTMLElement;
+  readonly login: HTMLElement;
   /** アカウントメニュー */
-  accountMenu: HTMLElement;
+  readonly accountMenu: HTMLElement;
   /** アバター */
-  avatar: HTMLImageElement;
+  readonly avatar: HTMLImageElement;
   /** アカウント削除 */
-  deleteAccount: HTMLElement;
+  readonly deleteAccount: HTMLElement;
   /** ログアウト */
-  logout: HTMLElement;
+  readonly logout: HTMLElement;
   /** ヘルプアイコン */
-  helpIcon: HTMLElement;
+  readonly helpIcon: HTMLElement;
   /** ヘルプメニュー */
-  helpMenu: HTMLElement;
+  readonly helpMenu: HTMLElement;
   /** チュートリアル */
-  tutorial: HTMLElement;
+  readonly tutorial: HTMLElement;
   /** ストーリー */
-  story: HTMLElement;
+  readonly story: HTMLElement;
   /** アーケード */
-  arcade: HTMLElement;
+  readonly arcade: HTMLElement;
   /** ネット対戦 */
-  netBattle: HTMLElement;
+  readonly netBattle: HTMLElement;
   /** 設定 */
-  config: HTMLElement;
+  readonly config: HTMLElement;
 
-  /** ネオランドーザ画像を読み込んだら発火するPromise */
-  isNeoLandozerLoaded: Promise<void>;
+  /** グランドーザ画像を読み込んだら発火するPromise */
+  readonly isGranDozerLoaded: Promise<void>;
   /** シンブレイバー画像を読み込んだら発火するPromise */
-  isShinBraverLoaded: Promise<void>;
+  readonly isShinBraverLoaded: Promise<void>;
   /** アバター画像を読み込んだら発火するPromise */
-  isAvatarLoaded: Promise<void>;
+  readonly isAvatarLoaded: Promise<void>;
   /** ロゴ画像を読み込んだら発火するPromise */
-  isLogoLoaded: Promise<void>;
+  readonly isLogoLoaded: Promise<void>;
   /** ヘルプアイコンを読み込んだら発火するPromise */
-  isHelpIconLoaded: Promise<void>;
+  readonly isHelpIconLoaded: Promise<void>;
 
   /** SE 値変更 */
-  changeValue: SoundResource;
+  readonly changeValue: SoundResource;
   /** SE ボタン押下 */
-  pushButton: SoundResource;
+  readonly pushButton: SoundResource;
 
   /** ログイン押下ストリーム */
-  pushLogin: Subject<void>;
+  readonly pushLogin: Subject<void>;
   /** 削除押下ストリーム */
-  pushDeleteAccount: Subject<void>;
+  readonly pushDeleteAccount: Subject<void>;
   /** ログアウト押下ストリーム */
-  pushLogout: Subject<void>;
+  readonly pushLogout: Subject<void>;
   /** チュートリアル押下ストリーム */
-  pushTutorial: Subject<void>;
+  readonly pushTutorial: Subject<void>;
   /** ストーリー押下ストリーム */
-  pushStory: Subject<void>;
+  readonly pushStory: Subject<void>;
   /** アーケード押下ストリーム */
-  pushArcade: Subject<void>;
+  readonly pushArcade: Subject<void>;
   /** ネット対戦押下ストリーム */
-  pushNetBattle: Subject<void>;
+  readonly pushNetBattle: Subject<void>;
   /** 設定押下ストリーム */
-  pushConfig: Subject<void>;
+  readonly pushConfig: Subject<void>;
 };

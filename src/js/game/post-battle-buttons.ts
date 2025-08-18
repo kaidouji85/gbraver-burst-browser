@@ -44,6 +44,11 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
 /** エピソード後（プレイヤーの勝利）のアクションボタン */
 export const PostEpisodeWinButtons: PostBattleButtonConfig[] = [
   {
+    style: "SubButton",
+    action: { type: "GotoEpisodeSelect" },
+    label: "エピソード選択へ",
+  },
+  {
     style: "MainButton",
     action: { type: "NextStage" },
     label: "次のエピソード",

@@ -102,7 +102,9 @@ export const stillImageStub =
   () => {
     const ref = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
-      const renderer = new THREE.WebGLRenderer();
+      const renderer = new THREE.WebGLRenderer({
+        powerPreference: "high-performance",
+      });
       const { pixelRatio, width, height } = params.renderer;
       renderer.setPixelRatio(pixelRatio);
       renderer.setSize(width, height);

@@ -9,8 +9,7 @@ import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** イントロダクション */
-const introduction = `高校生が巨大ロボットで戦う「機動倶楽部」が実現した、少し未来の物語。
-大田高校機動倶楽部の新人パイロットであるシンヤは、ツバサ先輩から操縦レクチャーを受けるのであった。`;
+const introduction = `高校生が巨大ロボットで戦う「機動倶楽部」が実現した、少し未来の物語。大田高校機動倶楽部の新人パイロットであるシンヤは、ツバサ先輩から操縦レクチャーを受けるのであった。`;
 
 /** バッテリーチュートリアル */
 export const batterySystemTutorial: Episode = {

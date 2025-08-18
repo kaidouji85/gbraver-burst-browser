@@ -4,22 +4,21 @@ import { createAbortError } from "../../../abort-controller/abort-error";
 import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { PostBattleFloater } from "../../../dom-floaters/post-battle";
 import { DOMScene } from "../../../dom-scenes/dom-scene";
-import { DOMSceneBinder } from "../../../dom-scenes/dom-scene-binder";
+import { DOMSceneBinderContainer } from "../../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { TDSceneBinder } from "../../../td-scenes/td-scene-binder";
 
 /** シーン切り替えオプション */
-type Options = Readonly<AbortManagerContainer> & {
-  /** DOMシーンバインダ */
-  readonly domSceneBinder: DOMSceneBinder;
-  /** 3Dシーンバインダ */
-  readonly tdSceneBinder: TDSceneBinder;
-  /** 切り替え先のDOMシーン */
-  readonly scene: DOMScene;
-  /** ポストバトルフローター */
-  readonly postBattle: PostBattleFloater;
-  /** バインドするシーンに関連するアンサブスクライバ */
-  readonly unsubscribers: Unsubscribable[];
-};
+type Options = Readonly<AbortManagerContainer> &
+  Readonly<DOMSceneBinderContainer> & {
+    /** 3Dシーンバインダ */
+    readonly tdSceneBinder: TDSceneBinder;
+    /** 切り替え先のDOMシーン */
+    readonly scene: DOMScene;
+    /** ポストバトルフローター */
+    readonly postBattle: PostBattleFloater;
+    /** バインドするシーンに関連するアンサブスクライバ */
+    readonly unsubscribers: Unsubscribable[];
+  };
 
 /**
  * DOMシーンに切り替える

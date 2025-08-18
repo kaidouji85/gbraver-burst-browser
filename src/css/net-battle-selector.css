@@ -60,7 +60,7 @@
   grid-template:
     "casual-match private-match-host" 1fr
     "casual-match private-match-guest" 1fr / 1fr 1fr;
-  grid-gap: calc(var(--responsive-font-size) * 0.6);
+  gap: calc(var(--responsive-font-size) * 0.6);
 }
 
 .net-battle-selector__closer {

@@ -3,6 +3,7 @@ import { AnimationMesh } from "./animation-mesh";
 import { backStep } from "./back-step";
 import { bow } from "./bow";
 import { burstDown } from "./burst-down";
+import { burstUp } from "./burst-up";
 import { down } from "./down";
 import { frontStep } from "./front-step";
 import { guard } from "./guard";
@@ -24,6 +25,7 @@ export function createAllMeshes(resources: Resources): AnimationMesh[] {
     ...tackleCharge(resources),
     ...tackleAttack(resources),
     ...tackleToBackStep(resources),
+    ...burstUp(resources),
     ...burstDown(resources),
     ...frontStep(resources),
     ...backStep(resources),

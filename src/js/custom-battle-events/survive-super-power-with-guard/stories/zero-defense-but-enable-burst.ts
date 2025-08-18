@@ -1,17 +1,20 @@
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
 
 /**
- * 地に落ちたもんやな
+ * バースト出来るのに0防御した
  * @param props イベントプロパティ
  */
-export async function chiniOchita(props: CustomBattleEventProps) {
+export async function zeroDefenseButEnableBurst(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
-    ["ライト", `「なんや もう${wbr}終わり${wbr}かいな`],
-    [`全国２位も${wbr}地に落ちた${wbr}もんやな`],
+    ["ライト", `「なんで${wbr}バーストを${wbr}発動せぇへん${wbr}のや`],
+    [`わいのこと${wbr}バカに${wbr}しとんのか ツバサ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
+
+  invisibleAllMessageWindows(props);
 }
