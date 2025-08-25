@@ -119,7 +119,7 @@
     "lint-fix:storybook": "eslint --fix --max-warnings 0 stories",
     "lint-fix:test": "eslint --fix --max-warnings 0 test",
     "lint:css": "stylelint --max-warnings 0 \"src/**/*.css\"",
-    "lint:hbs": "eslint --max-warnings 0 -c eslint.hbs.config.js src/js",
+    "lint:hbs": "eslint --max-warnings 0 -c eslint.hbs.config.mjs src/js",
     "lint:helper-ts": "eslint --max-warnings 0 *.ts",
     "lint:src": "eslint --max-warnings 0 \"src/**/*.ts\" \"src/**/*.js\"",
     "lint:storybook": "eslint --max-warnings 0 stories",
