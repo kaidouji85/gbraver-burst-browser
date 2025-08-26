@@ -60,6 +60,10 @@
     --right-margin: max(10px, var(--safe-area-right));
 
     right: calc(var(--right-margin) + var(--hud-ui-scale) * 220px);
+    /**
+     * バッテリーセレクタ説明ウインドウは固定幅ではなく、
+     * コンテンツに応じた最小幅で表示する方が見栄えが良い
+     */
     width: auto;
     min-height: var(--window-height);
   }
