@@ -1,2 +1,2 @@
 /** ルート要素のclass属性 */
-export const ROOT = "status-dialog";
+export const ROOT = "status";
