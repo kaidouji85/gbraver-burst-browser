@@ -298,7 +298,7 @@ export const messagesInInnerHTML = domStub((params) => {
 /** バッテリーシステムチュートリアルの攻撃バッテリーキャプション */
 export const attackBatteryCaption = domStub((params) => {
   const { resources } = params;
-  const dom = new MessageWindow(params);
+  const dom = new MessageWindow({ ...params, type: "NearBatterySelector" });
   dom.visible(true);
   dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
   return dom.getRootHTMLElement();
