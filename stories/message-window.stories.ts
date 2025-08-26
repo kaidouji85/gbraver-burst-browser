@@ -313,6 +313,14 @@ export const defenseBatteryCaption = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
+/** バーストボタン説明ウインドウ */
+export const burstCaption = domStub((params) => {
+  const dom = new MessageWindow({ ...params, type: "NearBurstButton" });
+  dom.visible(true);
+  dom.messages(["バーストボタンを押そう"]);
+  return dom.getRootHTMLElement();
+});
+
 /** プレイヤー側の「よろしくお願いします」 */
 export const playerYorosikuOnegaishimasu = domStub((params) => {
   const dom = new MessageWindow({
