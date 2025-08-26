@@ -73,6 +73,7 @@
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px);
+
     /**
      * バースト説明ウインドウは固定幅ではなく、
      * コンテンツに応じた最小幅で表示する方が見栄えが良い
@@ -85,7 +86,12 @@
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 160px);
-    width: var(--window-width);
+
+    /**
+     * パイロット説明ウインドウは固定幅ではなく、
+     * コンテンツに応じた最小幅で表示する方が見栄えが良い
+     */
+    width: auto;
     min-height: var(--window-height);
   }
 
@@ -106,7 +112,8 @@
     overflow: hidden;
   }
 
-  .message-window--near-burst-button .message-window__messages-wrapper {
+  .message-window--near-burst-button .message-window__messages-wrapper,
+  .message-window--near-pilot-button .message-window__messages-wrapper {
     display: flex;
     place-items: center;
   }

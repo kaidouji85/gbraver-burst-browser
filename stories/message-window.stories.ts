@@ -317,7 +317,15 @@ export const defenseBatteryCaption = domStub((params) => {
 export const burstCaption = domStub((params) => {
   const dom = new MessageWindow({ ...params, type: "NearBurstButton" });
   dom.visible(true);
-  dom.messages(["バーストボタンを押そう"]);
+  dom.messages(['"バースト"ボタンを押そう']);
+  return dom.getRootHTMLElement();
+});
+
+/** パイロットボタン説明ウインドウ */
+export const pilotButtonCaption = domStub((params) => {
+  const dom = new MessageWindow({ ...params, type: "NearPilotButton" });
+  dom.visible(true);
+  dom.messages(['"パイロット"ボタンを押そう']);
   return dom.getRootHTMLElement();
 });
 
