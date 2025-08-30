@@ -4,6 +4,7 @@
     --closer-width: 48px;
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
+    --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
 
     display: block;
   }
@@ -61,6 +62,31 @@
 
 .status__armdozer {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.status__armdozer-name {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.status__armdozer-hp,
+.status__armdozer-battery,
+.status__armdozer-power,
+.status__armdozer-speed {
+  flex: 0;
+}
+
+.status__armdozer-battery-label,
+.status__armdozer-hp-label,
+.status__armdozer-power-label,
+.status__armdozer-speed-label {
+  flex: 0;
+  min-width: var(--parameter-label-width);
+  background-color: var(--button-background-color);
+  border: var(--label-border);
+  text-align: center;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
 .status__battery-icon {
