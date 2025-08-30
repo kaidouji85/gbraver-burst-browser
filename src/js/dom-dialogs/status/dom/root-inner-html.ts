@@ -1,12 +1,12 @@
 import { PlayerState } from "gbraver-burst-core";
 
 import { burstDetail } from "../../../game-description/burst-detail";
+import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
-import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 
 /** オプション */
 export type RootInnerHTMLOptions = ResourcesContainer & {
