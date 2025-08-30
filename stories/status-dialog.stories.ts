@@ -16,11 +16,11 @@ export default {
 };
 
 /** ステータスダイアログ */
-export const statusDialog = domStub(() => {
+export const statusDialog = domStub((options) => {
   const armdozer =
     Armdozers.find((a) => a.id === ArmdozerIds.SHIN_BRAVER) ?? EMPTY_ARMDOZER;
   const pilot = Pilots.find((p) => p.id === PilotIds.SHINYA) ?? EMPTY_PILOT;
   const state = createPlayerState({ playerId: "test-player", armdozer, pilot });
-  const dialog = new StatusDialog({ state });
+  const dialog = new StatusDialog({ ...options, state });
   return dialog.getRootHTMLElement();
 });
