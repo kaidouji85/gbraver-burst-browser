@@ -6,6 +6,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
+import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 
 /** オプション */
 export type RootInnerHTMLOptions = ResourcesContainer & {
@@ -29,6 +30,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
   const burstDescription = burstDetail(armdozer.burst).join("");
+  const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
   return template({
     ROOT,
 
@@ -39,5 +41,6 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     armdozer,
     burstDescription,
     pilot,
+    pilotSkillDescription,
   });
 }

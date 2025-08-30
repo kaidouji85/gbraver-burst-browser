@@ -153,7 +153,8 @@
   margin: calc(var(--responsive-font-size) * 0.2) 0;
 }
 
-.status__armdozer-burst-label {
+.status__armdozer-burst-label,
+.status__pilot-skill-label {
   display: inline-block;
   padding: 0 calc(var(--responsive-font-size) * 0.4);
   min-height: calc(var(--responsive-font-size) * 1.5);
