@@ -61,6 +61,11 @@
   left: calc(var(--closer-height) * -0.5);
 }
 
+.status__separator {
+  border-bottom: 1px dashed var(--font-color);
+  margin: calc(var(--responsive-font-size) * 0.5) 0;
+}
+
 .status__armdozer-name {
   grid-area: name;
 }
@@ -68,7 +73,9 @@
 .status__armdozer-basic-status {
   grid-area: basic-status;
   display: grid;
-  grid-template: "hp-label hp battery-label battery power-label power speed-label speed";
+  grid-template:
+    "hp-label hp battery-label battery power-label power speed-label speed"
+    / auto auto auto auto auto auto auto 1fr;
   align-items: center;
   gap: calc(var(--responsive-font-size) * 0.2);
 }
@@ -102,6 +109,7 @@
   background-color: var(--button-background-color);
   border: var(--label-border);
   border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.4);
 }
 
 .status__armdozer-hp-label {
@@ -142,7 +150,7 @@
 }
 
 .status__armdozer-burst {
-  margin-top: calc(var(--responsive-font-size) * 0.2);
+  margin: calc(var(--responsive-font-size) * 0.2) 0;
 }
 
 .status__armdozer-burst-label {
