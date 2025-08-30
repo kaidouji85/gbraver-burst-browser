@@ -5,6 +5,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
+import { burstDetail } from "../../../game-description/burst-detail";
 
 /** オプション */
 export type RootInnerHTMLOptions = ResourcesContainer & {
@@ -27,6 +28,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
+  const burstDescription = burstDetail(armdozer.burst);
   return template({
     ROOT,
 
@@ -35,6 +37,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     batteryIconPath,
 
     armdozer,
+    burstDescription,
     pilot,
   });
 }
