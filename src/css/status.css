@@ -5,7 +5,7 @@
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
     --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
-    --icon-size: calc(var(--responsive-font-size) * 4);
+    --icon-size: calc(var(--responsive-font-size) * 4.5);
 
     display: block;
   }
@@ -64,19 +64,8 @@
 .status__armdozer {
   display: grid;
   grid-template:
-    "icon name "
-    "icon basic-status" / auto 1fr;
-}
-
-.status__armdozer-icon-container {
-  grid-area: icon;
-  display: grid;
-  place-items: center;
-}
-
-.status__armdozer-icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
+    "name "
+    "basic-status" / auto 1fr;
 }
 
 .status__armdozer-name {
@@ -86,9 +75,7 @@
 .status__armdozer-basic-status {
   grid-area: basic-status;
   display: grid;
-  grid-template:
-    "hp-label    hp    battery-label battery"
-    "power-label power speed-label   speed" / auto 1fr auto 1fr;
+  grid-template: "hp-label hp battery-label battery power-label power speed-label speed";
   align-items: center;
   gap: calc(var(--responsive-font-size) * 0.2);
 }
