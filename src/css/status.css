@@ -5,6 +5,7 @@
     --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
     --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+    --icon-size: calc(var(--responsive-font-size) * 4);
 
     display: block;
   }
@@ -61,32 +62,62 @@
 }
 
 .status__armdozer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template:
+    "icon name        name  name          name"
+    "icon hp-label    hp    battery-label battery"
+    "icon power-label power speed-label   speed" / auto auto 1fr auto 1fr;
 }
 
-.status__armdozer-name {
-  flex-grow: 1;
-  flex-shrink: 0;
-}
-
-.status__armdozer-hp,
-.status__armdozer-battery,
-.status__armdozer-power,
-.status__armdozer-speed {
-  flex: 0;
-}
-
-.status__armdozer-battery-label,
 .status__armdozer-hp-label,
+.status__armdozer-battery-label,
 .status__armdozer-power-label,
 .status__armdozer-speed-label {
-  flex: 0;
+  display: grid;
+  place-items: center;
   min-width: var(--parameter-label-width);
   background-color: var(--button-background-color);
   border: var(--label-border);
   text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__armdozer-icon {
+  grid-area: icon;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.status__armdozer-hp-label {
+  grid-area: hp-label;
+}
+
+.status__armdozer-hp {
+  grid-area: hp;
+}
+
+.status__armdozer-battery-label {
+  grid-area: battery-label;
+}
+
+.status__armdozer-battery {
+  grid-area: battery;
+}
+
+.status__armdozer-power-label {
+  grid-area: power-label;
+}
+
+.status__armdozer-power {
+  grid-area: power;
+}
+
+.status__armdozer-speed-label {
+  grid-area: speed-label;
+}
+
+.status__armdozer-speed {
+  grid-area: speed;
 }
 
 .status__battery-icon {
