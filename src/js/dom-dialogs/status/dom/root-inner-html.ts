@@ -21,5 +21,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { armdozer, pilot } = options.state;
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
-  return template({ ROOT, closerPath, armdozer, pilot });
+  const batteryIconPath =
+    resources.paths.find((v) => v.id === PathIds.BATTERY_ICON)?.path ?? "";
+  return template({ ROOT, closerPath, batteryIconPath, armdozer, pilot });
 }

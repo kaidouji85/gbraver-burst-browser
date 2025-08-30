@@ -42,6 +42,13 @@
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  width: min(
+    calc(
+      100vw - var(--safe-area-right) - var(--safe-area-left) -
+        var(--closer-width) * 0.5
+    ),
+    90vw
+  );
 }
 
 .status__closer {
@@ -50,4 +57,13 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.status__armdozer {
+  display: flex;
+}
+
+.status__battery-icon {
+  width: var(--responsive-font-size);
+  height: var(--responsive-font-size);
 }
