@@ -28,7 +28,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
-  const burstDescription = burstDetail(armdozer.burst);
+  const burstDescription = burstDetail(armdozer.burst).join("");
   return template({
     ROOT,
 

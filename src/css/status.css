@@ -61,13 +61,6 @@
   left: calc(var(--closer-height) * -0.5);
 }
 
-.status__armdozer {
-  display: grid;
-  grid-template:
-    "name "
-    "basic-status" / auto 1fr;
-}
-
 .status__armdozer-name {
   grid-area: name;
 }
@@ -108,7 +101,6 @@
   place-items: center;
   background-color: var(--button-background-color);
   border: var(--label-border);
-  text-align: center;
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
@@ -147,4 +139,17 @@
 .status__battery-icon {
   width: var(--responsive-font-size);
   height: var(--responsive-font-size);
+}
+
+.status__armdozer-burst {
+  margin-top: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__armdozer-burst-label {
+  display: inline-block;
+  padding: 0 calc(var(--responsive-font-size) * 0.4);
+  min-height: calc(var(--responsive-font-size) * 1.5);
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
 }
