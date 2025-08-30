@@ -1,5 +1,6 @@
 import { PlayerState } from "gbraver-burst-core";
 
+import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { ROOT } from "./class-name";
@@ -21,7 +22,19 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { armdozer, pilot } = options.state;
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
+  const armdozerIconPathId = getArmdozerIconPathId(armdozer.id);
+  const armdozerIconPath =
+    resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
   const batteryIconPath =
-    resources.paths.find((v) => v.id === PathIds.BATTERY_ICON)?.path ?? "";
-  return template({ ROOT, closerPath, batteryIconPath, armdozer, pilot });
+    resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
+  return template({
+    ROOT,
+
+    closerPath,
+    armdozerIconPath,
+    batteryIconPath,
+
+    armdozer,
+    pilot,
+  });
 }
