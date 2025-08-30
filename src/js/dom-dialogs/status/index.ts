@@ -1,6 +1,12 @@
 import { DOMDialog } from "../dialog";
-import { createStatusDialogProps } from "./procedures/create-status-dialog-props";
+import {
+  createStatusDialogProps,
+  StatusDialogPropsCreatorOptions,
+} from "./procedures/create-status-dialog-props";
 import { StatusDialogProps } from "./props";
+
+/** コンストラクタのオプション */
+export type StatusDialogOptions = StatusDialogPropsCreatorOptions;
 
 /** ステータスダイアログ */
 export class StatusDialog implements DOMDialog {
@@ -10,8 +16,8 @@ export class StatusDialog implements DOMDialog {
   /**
    * コンストラクタ
    */
-  constructor() {
-    this.#props = createStatusDialogProps();
+  constructor(options: StatusDialogOptions) {
+    this.#props = createStatusDialogProps(options);
   }
 
   /** @override */
