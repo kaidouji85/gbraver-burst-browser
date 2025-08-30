@@ -7,7 +7,7 @@ import template from "./root-inner-html.hbs";
 export type RootInnerHTMLOptions = {
   /** ダイアログを表示するステート */
   state: PlayerState;
-}
+};
 
 /**
  * ルート要素のinnerHTMLを生成する
@@ -15,5 +15,6 @@ export type RootInnerHTMLOptions = {
  * @returns 生成結果
  */
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
-  return template({ ROOT });
+  const { armdozer, pilot } = options.state;
+  return template({ ROOT, armdozer, pilot });
 }
