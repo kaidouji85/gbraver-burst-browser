@@ -1,35 +1,33 @@
 <div class="{{ROOT}}__background" data-id="back-ground"></div>
 <div class="{{ROOT}}__dialog">
   <img class="{{ROOT}}__closer" alt="閉じる" src="{{closerPath}}" />
-  <div class="{{ROOT}}__armdozer">
-    <div class="{{ROOT}}__armdozer-basic-status">
-      <div class="{{ROOT}}__armdozer-hp-label">HP</div>
-      <div
-        class="{{ROOT}}__armdozer-hp"
-      >{{armdozer.hp}}/{{armdozer.maxHp}}</div>
-      <div class="{{ROOT}}__armdozer-battery-label">
-        <img
-          class="{{ROOT}}__battery-icon"
-          src="{{batteryIconPath}}"
-          alt="バッテリーアイコン"
-        />
-      </div>
-      <div class="{{ROOT}}__armdozer-battery">
-        {{armdozer.battery}}/{{armdozer.maxBattery}}</div>
-      <div class="{{ROOT}}__armdozer-power-label">攻撃</div>
-      <div class="{{ROOT}}__armdozer-power">{{armdozer.power}}</div>
-      <div class="{{ROOT}}__armdozer-speed-label">機動</div>
-      <div class="{{ROOT}}__armdozer-speed">{{armdozer.speed}}</div>
+  <div class="{{ROOT}}__armdozer-basic-status">
+    <div class="{{ROOT}}__armdozer-hp-label">HP</div>
+    <div class="{{ROOT}}__armdozer-hp">{{armdozer.hp}}/{{armdozer.maxHp}}</div>
+    <div class="{{ROOT}}__armdozer-battery-label">
+      <img
+        class="{{ROOT}}__battery-icon"
+        src="{{batteryIconPath}}"
+        alt="バッテリーアイコン"
+      />
     </div>
-    <div class="{{ROOT}}__armdozer-burst">
-      <span class="{{ROOT}}__armdozer-burst-label">バースト詳細</span>
-      <span class="{{ROOT}}__armdozer-burst-description">{{burstDescription}}</span>
-    </div>
+    <div class="{{ROOT}}__armdozer-battery">
+      {{armdozer.battery}}/{{armdozer.maxBattery}}</div>
+    <div class="{{ROOT}}__armdozer-power-label">攻撃</div>
+    <div class="{{ROOT}}__armdozer-power">{{armdozer.power}}</div>
+    <div class="{{ROOT}}__armdozer-speed-label">機動</div>
+    <div class="{{ROOT}}__armdozer-speed">{{armdozer.speed}}</div>
   </div>
-  <div class="{{ROOT}}__pilot">
-    <div class="{{ROOT}}__pilot-skill">
-      <span class="{{ROOT}}__pilot-skill-label">スキル詳細</span>
-      <span class="{{ROOT}}__pilot-skill-description">{{pilotSkillDescription}}</span>
-    </div>
+  <div class="{{ROOT}}__armdozer-burst">
+    <span class="{{ROOT}}__armdozer-burst-label">バースト詳細</span>
+    <span
+      class="{{ROOT}}__armdozer-burst-description"
+    >{{burstDescription}}</span>
+  </div>
+  <div class="{{ROOT}}__pilot-skill">
+    <span class="{{ROOT}}__pilot-skill-label">スキル詳細</span>
+    <span
+      class="{{ROOT}}__pilot-skill-description"
+    >{{pilotSkillDescription}}</span>
   </div>
 </div>
