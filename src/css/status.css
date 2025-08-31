@@ -76,8 +76,8 @@
  * 共通スタイルが多いので、まとめて記述
  * ============================================================ */
 
-.status__armdozer-icon,
-.status__pilot-icon {
+.status__armdozer-icon-img,
+.status__pilot-icon-img {
   width: var(--icon-size);
   height: var(--icon-size);
 }
