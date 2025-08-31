@@ -57,7 +57,7 @@
   );
   display: grid;
   grid-template:
-    "armdozer       basic-status"
+    "armdozer-icon  armdozer-basic-status"
     "burst          burst"
     "pilot-skill    pilot-skill" / auto 1fr;
   gap: var(--grid-gap);
@@ -71,20 +71,11 @@
   left: calc(var(--closer-height) * -0.5);
 }
 /* ============================================================ 
- * アームドーザ、パイロットアイコン
+ * アームドーザアイコン
  * ============================================================ */
 
-.status__icons {
-  grid-area: icons;
-  display: flex;
-}
-
 .status__armdozer-icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
-}
-
-.status__pilot-icon {
+  grid-area: armdozer-icon;
   width: var(--icon-size);
   height: var(--icon-size);
 }
@@ -94,6 +85,7 @@
  * ============================================================ */
 
 .status__armdozer-basic-status {
+  grid-area: armdozer-basic-status;
   display: flex;
   align-items: end;
   flex-wrap: wrap;
