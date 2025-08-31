@@ -1,4 +1,7 @@
-/** 戦闘シミュレーター */
+/* ============================================================ 
+ * ステータスダイアログ
+ * ============================================================ */
+
 @media (orientation: landscape) {
   .status {
     --closer-width: 48px;
@@ -52,6 +55,9 @@
     ),
     90vw
   );
+  display: grid;
+  grid-template: "basic-status" "burst" "pilot-skill" / 1fr;
+  gap: var(--grid-gap);
 }
 
 .status__closer {
@@ -60,6 +66,14 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+/* ============================================================ 
+ * アームドーザの基本ステータス
+ * ============================================================ */
+
+.status__armdozer-basic-status {
+  grid-area: basic-status;
 }
 
 .status__armdozer-name {
@@ -145,11 +159,20 @@
   height: var(--responsive-font-size);
 }
 
-.status__armdozer-burst {
-  margin: calc(var(--responsive-font-size) * 0.2) 0;
+/* ============================================================ 
+ * バースト、パイロットスキル
+ * 共有スタイルが多いので、まとめて記述
+ * ============================================================ */
+
+.status__burst {
+  grid-area: burst;
 }
 
-.status__armdozer-burst-icon,
+.status__pilot-skill {
+  grid-area: pilot-skill;
+}
+
+.status__burst-icon,
 .status__pilot-skill-icon {
   display: inline-flex;
   align-items: center;
@@ -159,7 +182,7 @@
   padding: calc(var(--responsive-font-size) * 0.3);
 }
 
-.status__armdozer-burst-label,
+.status__burst-label,
 .status__pilot-skill-label {
   border-right: 1px dashed;
   margin-right: calc(var(--responsive-font-size) * 0.5);
