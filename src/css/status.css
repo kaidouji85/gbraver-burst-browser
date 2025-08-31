@@ -120,6 +120,12 @@
   flex-wrap: wrap;
   gap: var(--grid-gap);
 }
+
+.status__armdozer-name,
+.status__pilot-name {
+  font-weight: bold;
+}
+
 .status__armdozer-hp,
 .status__armdozer-battery,
 .status__armdozer-power,
