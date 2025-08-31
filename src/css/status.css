@@ -56,7 +56,10 @@
     90vw
   );
   display: grid;
-  grid-template: "basic-status" "burst" "pilot-skill" / 1fr;
+  grid-template:
+    "icons       basic-status"
+    "burst       burst"
+    "pilot-skill pilot-skill" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -67,23 +70,33 @@
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
 }
+/* ============================================================ 
+ * アームドーザ、パイロットアイコン
+ * ============================================================ */
+
+.status__icons {
+  grid-area: icons;
+  display: flex;
+}
+
+.status__armdozer-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.status__pilot-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
 
 /* ============================================================ 
  * アームドーザの基本ステータス
  * ============================================================ */
 
 .status__armdozer-basic-status {
-  grid-area: basic-status;
-}
-
-.status__armdozer-name {
-  grid-area: name;
-}
-
-.status__armdozer-basic-status {
-  grid-area: basic-status;
   display: flex;
-  align-items: center;
+  align-items: end;
+  flex-wrap: wrap;
   gap: var(--grid-gap);
 }
 .status__armdozer-hp,

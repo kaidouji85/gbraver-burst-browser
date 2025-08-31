@@ -3,6 +3,7 @@ import { PlayerState } from "gbraver-burst-core";
 import { burstDetail } from "../../../game-description/burst-detail";
 import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
+import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
@@ -32,12 +33,19 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const armdozerIconPathId = getArmdozerIconPathId(armdozer.id);
   const armdozerIconPath =
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
+  const pilotIconPathId = getPilotIconPathId(pilot.id);
+  const pilotIconPath =
+    resources.paths.find((p) => p.id === pilotIconPathId)?.path ?? "";
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
 
-  const burstAvailableClassName = armdozer.enableBurst ? AVAILABLE_BOX : DISABLED_BOX;
+  const burstAvailableClassName = armdozer.enableBurst
+    ? AVAILABLE_BOX
+    : DISABLED_BOX;
   const burstAvailableCaption = armdozer.enableBurst ? AVAILABLE : DISABLED;
-  const pilotAvailableClassName = pilot.enableSkill ? AVAILABLE_BOX : DISABLED_BOX;
+  const pilotAvailableClassName = pilot.enableSkill
+    ? AVAILABLE_BOX
+    : DISABLED_BOX;
   const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
 
   const burstDescription = burstDetail(armdozer.burst).join("");
@@ -47,6 +55,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
 
     closerPath,
     armdozerIconPath,
+    pilotIconPath,
     batteryIconPath,
 
     burstAvailableClassName,
