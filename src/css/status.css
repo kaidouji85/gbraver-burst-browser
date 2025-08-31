@@ -149,7 +149,32 @@
   margin: calc(var(--responsive-font-size) * 0.2) 0;
 }
 
-.status__armdozer-burst-label,
+.status__armdozer-burst-icon {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: calc(var(--responsive-font-size) * 0.3);
+}
+
+.status__armdozer-burst-label {
+  border-right: 1px dashed;
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+  padding-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+.status__enable-box {
+  --size: calc(var(--responsive-font-size) * 1.2);
+
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  background-color: #00ff7f;
+}
+
 .status__pilot-skill-label {
   display: inline-block;
   text-align: center;
