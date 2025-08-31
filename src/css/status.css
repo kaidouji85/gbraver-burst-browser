@@ -9,7 +9,7 @@
     --dialog-padding: var(--responsive-font-size);
     --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
     --icon-size: calc(var(--responsive-font-size) * 4.5);
-    --grid-gap: calc(var(--responsive-font-size) * 0.4);
+    --grid-gap: calc(var(--responsive-font-size) * 1);
 
     display: block;
   }
@@ -57,9 +57,9 @@
   );
   display: grid;
   grid-template:
-    "icons       basic-status"
-    "burst       burst"
-    "pilot-skill pilot-skill" / auto 1fr;
+    "armdozer       basic-status"
+    "burst          burst"
+    "pilot-skill    pilot-skill" / auto 1fr;
   gap: var(--grid-gap);
 }
 
