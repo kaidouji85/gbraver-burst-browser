@@ -82,14 +82,6 @@
   overflow: hidden;
 }
 
-.status__armdozer-icon {
-  grid-area: armdozer-icon;
-}
-
-.status__pilot-icon {
-  grid-area: pilot-icon;
-}
-
 .status__armdozer-icon-img {
   width: 100%;
   height: 100%;
@@ -107,6 +99,48 @@
 }
 
 /* ============================================================ 
+ * バースト、パイロットスキル
+ * 共通スタイルが多いので、まとめて記述
+ * ============================================================ */
+
+.status__burst-icon,
+.status__pilot-skill-icon {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: calc(var(--responsive-font-size) * 0.3);
+}
+
+.status__burst-label,
+.status__pilot-skill-label {
+  border-right: 1px dashed;
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+  padding-right: calc(var(--responsive-font-size) * 0.5);
+  min-width: calc(var(--responsive-font-size) * 4);
+}
+
+.status__available-box,
+.status__disabled-box {
+  --size: calc(var(--responsive-font-size) * 1.2);
+
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__available-box {
+  background-color: #00ff7f;
+}
+
+.status__disabled-box {
+  background-color: #ff7f7f;
+}
+
+/* ============================================================ 
  * アームドーザ
  * ============================================================ */
 
@@ -117,6 +151,10 @@
     "armdozer-icon armdozer-basic-status"
     "armdozer-icon burst";
   gap: var(--grid-gap);
+}
+
+.status__armdozer-icon {
+  grid-area: armdozer-icon;
 }
 
 .status__armdozer-basic-status {
@@ -161,62 +199,33 @@
   height: var(--responsive-font-size);
 }
 
+.status__burst {
+  grid-area: burst;
+}
+
 /* ============================================================ 
- * パイロットの基本ステータス
+ * パイロット
  * ============================================================ */
+
+.status__pilot {
+  grid-area: pilot;
+  display: grid;
+  grid-template:
+    "pilot-icon pilot-basic-status"
+    "pilot-icon pilot-skill" / auto 1fr;
+  gap: var(--grid-gap);
+}
+
+.status__pilot-icon {
+  grid-area: pilot-icon;
+}
 
 .status__pilot-basic-status {
   grid-area: pilot-basic-status;
 }
 
-/* ============================================================ 
- * バースト、パイロットスキル
- * 共通スタイルが多いので、まとめて記述
- * ============================================================ */
-
-.status__burst {
-  grid-area: burst;
-}
-
 .status__pilot-skill {
   grid-area: pilot-skill;
-}
-
-.status__burst-icon,
-.status__pilot-skill-icon {
-  display: inline-flex;
-  align-items: center;
-  background-color: var(--sub-button-background-color);
-  border: var(--sub-label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: calc(var(--responsive-font-size) * 0.3);
-}
-
-.status__burst-label,
-.status__pilot-skill-label {
-  border-right: 1px dashed;
-  margin-right: calc(var(--responsive-font-size) * 0.5);
-  padding-right: calc(var(--responsive-font-size) * 0.5);
-  min-width: calc(var(--responsive-font-size) * 4);
-}
-
-.status__available-box,
-.status__disabled-box {
-  --size: calc(var(--responsive-font-size) * 1.2);
-
-  display: inline-block;
-  width: var(--size);
-  height: var(--size);
-  margin-right: calc(var(--responsive-font-size) * 0.2);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-}
-
-.status__available-box {
-  background-color: #00ff7f;
-}
-
-.status__disabled-box {
-  background-color: #ff7f7f;
 }
 
 /* ============================================================ 
