@@ -59,6 +59,7 @@
   grid-template:
     "armdozer-icon  armdozer-basic-status"
     "armdozer-icon  burst"
+    "pilot-icon     pilot-basic-status"
     "pilot-icon     pilot-skill" / auto 1fr;
   gap: var(--grid-gap);
 }
@@ -75,8 +76,8 @@
  * 共通スタイルが多いので、まとめて記述
  * ============================================================ */
 
-
-.status__armdozer-icon , .status__pilot-icon {
+.status__armdozer-icon,
+.status__pilot-icon {
   display: grid;
   align-items: center;
 }
@@ -131,6 +132,14 @@
 .status__battery-icon {
   width: var(--responsive-font-size);
   height: var(--responsive-font-size);
+}
+
+/* ============================================================ 
+ * パイロットの基本ステータス
+ * ============================================================ */
+
+.status__pilot-basic-status {
+  grid-area: pilot-basic-status;
 }
 
 /* ============================================================ 
