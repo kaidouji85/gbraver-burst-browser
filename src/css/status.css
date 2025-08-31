@@ -9,6 +9,7 @@
     --dialog-padding: var(--responsive-font-size);
     --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
     --icon-size: calc(var(--responsive-font-size) * 4.5);
+    --icon-width: calc(var(--responsive-font-size) * 4.5);
     --grid-gap: calc(var(--responsive-font-size) * 0.5);
 
     display: block;
@@ -80,6 +81,8 @@
 .status__pilot-icon {
   display: grid;
   align-items: center;
+  border: 1px solid white;
+  border-radius: calc(var(--responsive-font-size) * 0.4);
 }
 
 .status__armdozer-icon {
