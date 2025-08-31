@@ -55,12 +55,7 @@
     90vw
   );
   display: grid;
-  grid-template:
-    "armdozer-icon  armdozer-basic-status"
-    "armdozer-icon  burst"
-    "pilot-icon     pilot-basic-status"
-    "pilot-icon     pilot-skill"
-    "effects        effects" / auto 1fr;
+  grid-template: "armdozer" "pilot" "effects";
   gap: var(--grid-gap);
 }
 
@@ -71,6 +66,7 @@
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
 }
+
 /* ============================================================ 
  * アームドーザ、パイロットアイコン
  * 共通スタイルが多いので、まとめて記述
@@ -111,8 +107,17 @@
 }
 
 /* ============================================================ 
- * アームドーザの基本ステータス
+ * アームドーザ
  * ============================================================ */
+
+.status__armdozer {
+  grid-area: armdozer;
+  display: grid;
+  grid-template:
+    "armdozer-icon armdozer-basic-status"
+    "armdozer-icon burst";
+  gap: var(--grid-gap);
+}
 
 .status__armdozer-basic-status {
   grid-area: armdozer-basic-status;
