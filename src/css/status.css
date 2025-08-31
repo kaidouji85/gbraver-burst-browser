@@ -59,6 +59,7 @@
   grid-template:
     "armdozer-icon  armdozer-basic-status"
     "burst          burst"
+    "pilot-icon     pilot-icon"
     "pilot-skill    pilot-skill" / auto 1fr;
   gap: var(--grid-gap);
 }
@@ -71,13 +72,22 @@
   left: calc(var(--closer-height) * -0.5);
 }
 /* ============================================================ 
- * アームドーザアイコン
+ * アームドーザ、パイロットアイコン
+ * 共通スタイルが多いので、まとめて記述
  * ============================================================ */
+
+.status__armdozer-icon,
+.status__pilot-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
 
 .status__armdozer-icon {
   grid-area: armdozer-icon;
-  width: var(--icon-size);
-  height: var(--icon-size);
+}
+
+.status__pilot-icon {
+  grid-area: pilot-icon;
 }
 
 /* ============================================================ 
@@ -120,7 +130,7 @@
 
 /* ============================================================ 
  * バースト、パイロットスキル
- * 共有スタイルが多いので、まとめて記述
+ * 共通スタイルが多いので、まとめて記述
  * ============================================================ */
 
 .status__burst {
