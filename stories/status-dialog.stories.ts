@@ -60,3 +60,33 @@ export const shinBraverShinya = story({
     pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
+
+/** ウィングドーザ + ツバサ */
+export const wingDozerTsubasa = story({
+  armdozerId: ArmdozerIds.WING_DOZER,
+  pilotId: PilotIds.TSUBASA,
+});
+
+/** ネオランドーザ + ガイ */
+export const neoLandozerGai = story({
+  armdozerId: ArmdozerIds.NEO_LANDOZER,
+  pilotId: PilotIds.GAI,
+});
+
+/** ライトニングドーザ + ライト */
+export const lightningDozerRaito = story({
+  armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+  pilotId: PilotIds.RAITO,
+});
+
+/** ジェネシスブレイバー + ユウヤ */
+export const genesisBraverYuuya = story({
+  armdozerId: ArmdozerIds.GENESIS_BRAVER,
+  pilotId: PilotIds.YUUYA,
+});
+
+/** グランドーザ + ライト */
+export const granDozerRaito = story({
+  armdozerId: ArmdozerIds.GRAN_DOZER,
+  pilotId: PilotIds.RAITO,
+});
