@@ -8,6 +8,10 @@ import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
+const AVAILABLE = "発動可";
+
+const DISABLED = "発動済";
+
 /** オプション */
 export type RootInnerHTMLOptions = ResourcesContainer & {
   /** ダイアログを表示するステート */
@@ -31,8 +35,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
 
-  const burstBoxClassName = armdozer.enableBurst ? AVAILABLE_BOX : DISABLED_BOX;
-  const pilotBoxClassName = pilot.enableSkill ? AVAILABLE_BOX : DISABLED_BOX;
+  const burstAvailableClassName = armdozer.enableBurst ? AVAILABLE_BOX : DISABLED_BOX;
+  const burstAvailableCaption = armdozer.enableBurst ? AVAILABLE : DISABLED;
+  const pilotAvailableClassName = pilot.enableSkill ? AVAILABLE_BOX : DISABLED_BOX;
+  const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
 
   const burstDescription = burstDetail(armdozer.burst).join("");
   const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
@@ -43,8 +49,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     armdozerIconPath,
     batteryIconPath,
 
-    burstBoxClassName,
-    pilotBoxClassName,
+    burstAvailableClassName,
+    burstAvailableCaption,
+    pilotAvailableClassName,
+    pilotAvailableCaption,
 
     armdozer,
     burstDescription,

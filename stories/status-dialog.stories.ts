@@ -27,7 +27,7 @@ export const statusDialog = domStub((options) => {
   });
   const state = {
     ...origin,
-    armdozer: { ...origin.armdozer, enableBurst: false },
+    armdozer: { ...origin.armdozer, enableBurst: true },
     pilot: { ...origin.pilot, enableSkill: false },
   };
   const dialog = new StatusDialog({ ...options, state });
