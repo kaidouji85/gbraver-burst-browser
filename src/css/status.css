@@ -59,7 +59,8 @@
     "armdozer-icon  armdozer-basic-status"
     "armdozer-icon  burst"
     "pilot-icon     pilot-basic-status"
-    "pilot-icon     pilot-skill" / auto 1fr;
+    "pilot-icon     pilot-skill"
+    "effects        effects" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -211,4 +212,22 @@
 
 .status__disabled-box {
   background-color: #ff7f7f;
+}
+
+/* ============================================================ 
+ * エフェクト
+ * ============================================================ */
+
+.status__effects {
+  grid-area: effects;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: calc(var(--responsive-font-size) * 0.3);
+}
+
+.status__effects-label {
+  font-weight: bold;
 }
