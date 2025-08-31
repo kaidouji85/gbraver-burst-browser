@@ -147,7 +147,7 @@
   display: grid;
   grid-template:
     "armdozer-icon armdozer-basic-status"
-    "armdozer-icon burst";
+    "armdozer-icon burst" / auto 1fr;
   gap: var(--grid-gap);
 }
 
