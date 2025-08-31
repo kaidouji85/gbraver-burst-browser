@@ -2,7 +2,7 @@ import { PlayerState } from "gbraver-burst-core";
 
 import { burstDetail } from "../../../game-description/burst-detail";
 import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
-import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
+import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -30,7 +30,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
 
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
-  const armdozerIconPathId = getArmdozerIconPathId(armdozer.id);
+  const armdozerIconPathId = getArmdozerStandPathId(armdozer.id);
   const armdozerIconPath =
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
   const pilotIconPathId = getPilotIconPathId(pilot.id);
