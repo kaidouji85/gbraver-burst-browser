@@ -8,6 +8,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
+import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 
 const AVAILABLE = "発動可";
 
@@ -33,7 +34,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const armdozerIconPathId = getArmdozerStandPathId(armdozer.id);
   const armdozerIconPath =
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
-  const pilotIconPathId = getPilotIconPathId(pilot.id);
+  const pilotIconPathId = getPilotSkillCutinPathId(pilot.id);
   const pilotIconPath =
     resources.paths.find((p) => p.id === pilotIconPathId)?.path ?? "";
   const batteryIconPath =
