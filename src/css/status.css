@@ -116,7 +116,7 @@
 .status__armdozer-basic-status {
   grid-area: armdozer-basic-status;
   display: flex;
-  align-items: end;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--grid-gap);
 }
@@ -124,7 +124,8 @@
 .status__armdozer-battery,
 .status__armdozer-power,
 .status__armdozer-speed {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   gap: calc(var(--responsive-font-size) * 0.2);
 }
 
@@ -135,6 +136,7 @@
   display: grid;
   place-items: center;
   min-width: calc(var(--responsive-font-size) * 3);
+  min-height: calc(var(--responsive-font-size) * 1.5);
   box-sizing: border-box;
   background-color: var(--button-background-color);
   border: var(--label-border);
