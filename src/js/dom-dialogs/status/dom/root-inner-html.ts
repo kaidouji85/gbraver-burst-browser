@@ -5,7 +5,7 @@ import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ROOT } from "./class-name";
+import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** オプション */
@@ -22,6 +22,7 @@ export type RootInnerHTMLOptions = ResourcesContainer & {
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { resources } = options;
   const { armdozer, pilot } = options.state;
+
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   const armdozerIconPathId = getArmdozerIconPathId(armdozer.id);
@@ -29,6 +30,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
+
+  const burstBoxClassName = armdozer.enableBurst ? AVAILABLE_BOX : DISABLED_BOX;
+  const pilotBoxClassName = pilot.enableSkill ? AVAILABLE_BOX : DISABLED_BOX;
+
   const burstDescription = burstDetail(armdozer.burst).join("");
   const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
   return template({
@@ -37,6 +42,9 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     closerPath,
     armdozerIconPath,
     batteryIconPath,
+
+    burstBoxClassName,
+    pilotBoxClassName,
 
     armdozer,
     burstDescription,

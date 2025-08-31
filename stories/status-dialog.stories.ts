@@ -20,7 +20,16 @@ export const statusDialog = domStub((options) => {
   const armdozer =
     Armdozers.find((a) => a.id === ArmdozerIds.SHIN_BRAVER) ?? EMPTY_ARMDOZER;
   const pilot = Pilots.find((p) => p.id === PilotIds.SHINYA) ?? EMPTY_PILOT;
-  const state = createPlayerState({ playerId: "test-player", armdozer, pilot });
+  const origin = createPlayerState({
+    playerId: "test-player",
+    armdozer,
+    pilot,
+  });
+  const state = {
+    ...origin,
+    armdozer: { ...origin.armdozer, enableBurst: false },
+    pilot: { ...origin.pilot, enableSkill: false },
+  };
   const dialog = new StatusDialog({ ...options, state });
   return dialog.getRootHTMLElement();
 });

@@ -190,7 +190,8 @@
   min-width: calc(var(--responsive-font-size) * 4);
 }
 
-.status__available-box {
+.status__available-box,
+.status__disabled-box {
   --size: calc(var(--responsive-font-size) * 1.2);
 
   display: inline-block;
@@ -198,5 +199,12 @@
   height: var(--size);
   margin-right: calc(var(--responsive-font-size) * 0.2);
   border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__available-box {
   background-color: #00ff7f;
+}
+
+.status__disabled-box {
+  background-color: #ff7f7f;
 }
