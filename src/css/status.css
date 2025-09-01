@@ -78,6 +78,8 @@
   align-items: center;
   width: calc(var(--responsive-font-size) * 4.5);
   overflow: visible;
+  
+  /** 文字要素の下に表示されるようにz-indexを調整 */
   z-index: -1;
 }
 
