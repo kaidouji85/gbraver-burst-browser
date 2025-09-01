@@ -1,13 +1,17 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT } from "../dom/class-name";
 import { extractBackGround, extractCloser } from "../dom/elements";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { StatusDialogProps } from "../props";
 
 /** オプション */
-export type StatusDialogPropsCreatorOptions = RootInnerHTMLOptions;
+export type StatusDialogPropsCreatorOptions = RootInnerHTMLOptions &
+  SEPlayerContainer;
 
 /**
  * ステータスダイアログのプロパティを生成する
@@ -25,7 +29,23 @@ export function createStatusDialogProps(
 
   const exclusive = new Exclusive();
 
+  const changeValueSound =
+    options.resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
+
   const closeNotifier = new Subject<void>();
 
-  return { root, backGround, closer, exclusive, closeNotifier };
+  return {
+    ...options,
+
+    root,
+    backGround,
+    closer,
+
+    exclusive,
+
+    changeValueSound,
+
+    closeNotifier,
+  };
 }
