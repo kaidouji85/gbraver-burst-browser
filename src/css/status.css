@@ -44,6 +44,17 @@
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
+}
+
+.status__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.status__contents {
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
@@ -57,14 +68,7 @@
   display: grid;
   grid-template: "armdozer" "pilot" "effects";
   gap: var(--grid-gap);
-}
-
-.status__closer {
-  width: var(--closer-width);
-  height: var(--closer-height);
-  position: absolute;
-  top: calc(var(--closer-width) * -0.5);
-  left: calc(var(--closer-height) * -0.5);
+  overflow: hidden;
 }
 
 /* ============================================================ 
