@@ -77,7 +77,8 @@
   display: grid;
   align-items: center;
   width: calc(var(--responsive-font-size) * 4.5);
-  overflow: hidden;
+  overflow: visible;
+  z-index: -1;
 }
 
 .status__armdozer-icon-img {
