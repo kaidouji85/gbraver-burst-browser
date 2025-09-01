@@ -47,6 +47,9 @@ const story = (options: {
     });
     const state = fn?.(origin) ?? origin;
     const dialog = new StatusDialog({ ...stubOptions, state });
+    dialog.notifyClose().subscribe(() => {
+      console.log("closed");
+    });
     return dialog.getRootHTMLElement();
   });
 
