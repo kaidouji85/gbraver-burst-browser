@@ -171,7 +171,7 @@
   background: var(--background-color);
   gap: var(--grid-gap);
   border-radius: calc(var(--responsive-font-size) * 0.5);
-  border: var(--sub-label-border);
+  border: var(--dialog-border);
   padding: calc(var(--responsive-font-size) * 0.5);
   box-sizing: border-box;
 }
