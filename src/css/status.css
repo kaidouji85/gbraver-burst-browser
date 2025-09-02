@@ -153,13 +153,27 @@
   grid-area: armdozer;
   display: grid;
   grid-template:
-    "armdozer-icon armdozer-basic-status"
-    "armdozer-icon burst" / auto 1fr;
+    "armdozer-icon armdozer-info"
+    "armdozer-icon armdozer-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
 .status__armdozer-icon {
   grid-area: armdozer-icon;
+}
+
+.status__armdozer-info {
+  grid-area: armdozer-info;
+  display: grid;
+  grid-template:
+    "armdozer-basic-status"
+    "burst";
+  background: var(--background-color);
+  gap: var(--grid-gap);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  border: var(--sub-label-border);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  box-sizing: border-box;
 }
 
 .status__armdozer-basic-status {

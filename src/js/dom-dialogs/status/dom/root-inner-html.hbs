@@ -15,43 +15,49 @@
           alt="アームドーザアイコン"
         />
       </div>
-      <div class="{{ROOT}}__armdozer-basic-status">
-        <span class="{{ROOT}}__armdozer-name">{{armdozer.name}}</span>
-        <span class="{{ROOT}}__armdozer-hp">
-          <span class="{{ROOT}}__armdozer-hp-label">HP</span>
-          <span
-            class="{{ROOT}}__armdozer-hp-value"
-          >{{armdozer.hp}}/{{armdozer.maxHp}}</span>
-        </span>
-        <span class="{{ROOT}}__armdozer-battery">
-          <span class="{{ROOT}}__armdozer-battery-label">
-            <img
-              class="{{ROOT}}__battery-icon"
-              src="{{batteryIconPath}}"
-              alt="バッテリーアイコン"
-            />
+      <div class="{{ROOT}}__armdozer-info">
+        <div class="{{ROOT}}__armdozer-basic-status">
+          <span class="{{ROOT}}__armdozer-name">{{armdozer.name}}</span>
+          <span class="{{ROOT}}__armdozer-hp">
+            <span class="{{ROOT}}__armdozer-hp-label">HP</span>
+            <span
+              class="{{ROOT}}__armdozer-hp-value"
+            >{{armdozer.hp}}/{{armdozer.maxHp}}</span>
           </span>
-          <span class="{{ROOT}}__armdozer-battery-value">
-            {{armdozer.battery}}/{{armdozer.maxBattery}}</span>
-        </span>
-        <span class="{{ROOT}}__armdozer-power">
-          <span class="{{ROOT}}__armdozer-power-label">攻撃</span>
-          <span class="{{ROOT}}__armdozer-power-value">{{armdozer.power}}</span>
-        </span>
-        <span class="{{ROOT}}__armdozer-speed">
-          <span class="{{ROOT}}__armdozer-speed-label">機動</span>
-          <span class="{{ROOT}}__armdozer-speed-value">{{armdozer.speed}}</span>
-        </span>
-      </div>
-      <div class="{{ROOT}}__burst">
-        <span class="{{ROOT}}__burst-icon">
-          <span class="{{ROOT}}__burst-label">バースト</span>
-          <span class="{{burstAvailableClassName}}"></span>
-          <span
-            class="{{ROOT}}__available-caption"
-          >{{burstAvailableCaption}}</span>
-        </span>
-        <span class="{{ROOT}}__burst-description">{{burstDescription}}</span>
+          <span class="{{ROOT}}__armdozer-battery">
+            <span class="{{ROOT}}__armdozer-battery-label">
+              <img
+                class="{{ROOT}}__battery-icon"
+                src="{{batteryIconPath}}"
+                alt="バッテリーアイコン"
+              />
+            </span>
+            <span class="{{ROOT}}__armdozer-battery-value">
+              {{armdozer.battery}}/{{armdozer.maxBattery}}</span>
+          </span>
+          <span class="{{ROOT}}__armdozer-power">
+            <span class="{{ROOT}}__armdozer-power-label">攻撃</span>
+            <span
+              class="{{ROOT}}__armdozer-power-value"
+            >{{armdozer.power}}</span>
+          </span>
+          <span class="{{ROOT}}__armdozer-speed">
+            <span class="{{ROOT}}__armdozer-speed-label">機動</span>
+            <span
+              class="{{ROOT}}__armdozer-speed-value"
+            >{{armdozer.speed}}</span>
+          </span>
+        </div>
+        <div class="{{ROOT}}__burst">
+          <span class="{{ROOT}}__burst-icon">
+            <span class="{{ROOT}}__burst-label">バースト</span>
+            <span class="{{burstAvailableClassName}}"></span>
+            <span
+              class="{{ROOT}}__available-caption"
+            >{{burstAvailableCaption}}</span>
+          </span>
+          <span class="{{ROOT}}__burst-description">{{burstDescription}}</span>
+        </div>
       </div>
     </div>
     <div class="{{ROOT}}__pilot">
