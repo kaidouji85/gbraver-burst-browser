@@ -68,20 +68,22 @@
           alt="パイロットアイコン"
         />
       </div>
-      <div class="{{ROOT}}__pilot-basic-status">
-        <span class="{{ROOT}}__pilot-name">{{pilot.name}}</span>
-      </div>
-      <div class="{{ROOT}}__pilot-skill">
-        <span class="{{ROOT}}__pilot-skill-icon">
-          <span class="{{ROOT}}__pilot-skill-label">スキル</span>
-          <span class="{{pilotAvailableClassName}}"></span>
+      <div class="{{ROOT}}__pilot-info">
+        <div class="{{ROOT}}__pilot-basic-status">
+          <span class="{{ROOT}}__pilot-name">{{pilot.name}}</span>
+        </div>
+        <div class="{{ROOT}}__pilot-skill">
+          <span class="{{ROOT}}__pilot-skill-icon">
+            <span class="{{ROOT}}__pilot-skill-label">スキル</span>
+            <span class="{{pilotAvailableClassName}}"></span>
+            <span
+              class="{{ROOT}}__available-caption"
+            >{{pilotAvailableCaption}}</span>
+          </span>
           <span
-            class="{{ROOT}}__available-caption"
-          >{{pilotAvailableCaption}}</span>
-        </span>
-        <span
-          class="{{ROOT}}__pilot-skill-description"
-        >{{pilotSkillDescription}}</span>
+            class="{{ROOT}}__pilot-skill-description"
+          >{{pilotSkillDescription}}</span>
+        </div>
       </div>
     </div>
     <div class="{{ROOT}}__effects">

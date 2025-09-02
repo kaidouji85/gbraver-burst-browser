@@ -230,13 +230,27 @@
   grid-area: pilot;
   display: grid;
   grid-template:
-    "pilot-icon pilot-basic-status"
-    "pilot-icon pilot-skill" / auto 1fr;
+    "pilot-icon pilot-info"
+    "pilot-icon pilot-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
 .status__pilot-icon {
   grid-area: pilot-icon;
+}
+
+.status__pilot-info {
+  grid-area: pilot-info;
+  display: grid;
+  grid-template:
+    "pilot-basic-status"
+    "pilot-skill";
+  background: var(--background-color);
+  gap: var(--grid-gap);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  border: var(--dialog-border);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  box-sizing: border-box;
 }
 
 .status__pilot-basic-status {
