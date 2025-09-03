@@ -18,7 +18,7 @@ import {
  */
 export const getEffectPeriodOverview = (period: EffectPeriod) => {
   return period.type === "TurnLimit"
-    ? `(残り${period.remainingTurn}ターン)`
+    ? `（残り${period.remainingTurn}ターン）`
     : "";
 };
 
@@ -40,7 +40,7 @@ export const getCorrectPowerOverview = (effect: CorrectPower) => {
  */
 export const getHalveCorrectPowerOverView = (effect: HalveCorrectPower) => {
   const period = getEffectPeriodOverview(effect.period);
-  return `攻撃補正の効果半減${period}`;
+  return `攻撃アップ半減${period}`;
 };
 
 /**
@@ -93,7 +93,7 @@ export const getDamageHalvedOverview = (effect: DamageHalved) => {
  */
 export const getBatteryRecoverSkipOverview = (effect: BatteryRecoverSkip) => {
   const period = getEffectPeriodOverview(effect.period);
-  return `ターン開始時のバッテリー回復スキップ${period}`;
+  return `バッテリー回復スキップ（自分ターン開始時）${period}`;
 };
 
 /**
@@ -105,7 +105,7 @@ export const getTurnStartBatteryCorrectOverview = (
   effect: TurnStartBatteryCorrect,
 ) => {
   const period = getEffectPeriodOverview(effect.period);
-  return `ターン開始時にバッテリー${effect.correctBattery}回復${period}`;
+  return `バッテリー${effect.correctBattery}回復（自分ターン開始時）${period}`;
 };
 
 /**
