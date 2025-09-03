@@ -1,5 +1,6 @@
 import {
   ArmdozerEffect,
+  BatteryCorrection,
   ContinuousActivePlayer,
   CorrectPower,
   EffectPeriod,
@@ -62,6 +63,17 @@ export const getContinuousActivePlayerOverview = (
 };
 
 /**
+ * バッテリー補正の概要を取得する
+ * @param effect バッテリー補正のエフェクト
+ * @returns バッテリー補正の概要
+ */
+export const getBatteryCorrectionOverview = (effect: BatteryCorrection) => {
+  const sign = 0 < effect.batteryCorrection ? "+" : "-";
+  const period = getEffectPeriodOverview(effect.period);
+  return `バッテリー${sign}${effect.batteryCorrection}${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -76,6 +88,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getTryReflectOverview(effect);
     case "ContinuousActivePlayer":
       return getContinuousActivePlayerOverview(effect);
+    case "BatteryCorrection":
+      return getBatteryCorrectionOverview(effect);
     default:
       return "";
   }
