@@ -63,6 +63,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     burstDescription,
     pilot,
     pilotSkillDescription,
+    allEffects,
     effectsCaption,
 
     ROOT,

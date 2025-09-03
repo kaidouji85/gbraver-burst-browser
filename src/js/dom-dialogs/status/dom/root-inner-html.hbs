@@ -86,7 +86,13 @@
     </div>
     <div class="{{ROOT}}__effects">
       <span class="{{ROOT}}__effects-label">適用中の効果：</span>
-      <span class="{{ROOT}}__apply-effects">{{effectsCaption}}</span>
+      {{#if allEffects.length}}
+        {{#each allEffects}}
+          <span class="{{../ROOT}}__effect-item">{{this}}</span>{{#unless @last}}、{{/unless}}
+        {{/each}}
+      {{else}}
+        <span class="{{ROOT}}__no-effects">なし</span>
+      {{/if}}
     </div>
   </div>
 </div>
