@@ -268,7 +268,7 @@
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
-  border: var(--sub-button-border);
+  border: 1px solid #e6e3e1;
   border-radius: calc(var(--responsive-font-size) * 0.2);
   padding: calc(var(--responsive-font-size) * 0.3);
 }

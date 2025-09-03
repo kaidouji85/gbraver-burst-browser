@@ -1,4 +1,4 @@
-import { PlayerState } from "gbraver-burst-core";
+import { correctPower, PlayerState } from "gbraver-burst-core";
 
 import { burstDetail } from "../../../game-description/burst-detail";
 import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
@@ -28,6 +28,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { resources } = options;
   const { armdozer, pilot } = options.state;
 
+  const totalPower = armdozer.power + correctPower(armdozer.effects);
+  const burstDescription = burstDetail(armdozer.burst).join("");
+  const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
+
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   const armdozerIconPathId = getArmdozerStandPathId(armdozer.id);
@@ -48,9 +52,13 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     : DISABLED_BOX;
   const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
 
-  const burstDescription = burstDetail(armdozer.burst).join("");
-  const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
   return template({
+    armdozer,
+    totalPower,
+    burstDescription,
+    pilot,
+    pilotSkillDescription,
+
     ROOT,
 
     closerPath,
@@ -62,10 +70,5 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     burstAvailableCaption,
     pilotAvailableClassName,
     pilotAvailableCaption,
-
-    armdozer,
-    burstDescription,
-    pilot,
-    pilotSkillDescription,
   });
 }
