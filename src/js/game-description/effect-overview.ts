@@ -111,9 +111,9 @@ export const getTurnStartBatteryCorrectOverview = (
 /**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
- * @returns アームドーザエフェクトの概要
+ * @returns アームドーザエフェクトの概要、概要が存在しない場合はnull
  */
-export function getEffectOverView(effect: ArmdozerEffect): string {
+export function getEffectOverView(effect: ArmdozerEffect): string | null {
   switch (effect.type) {
     case "CorrectPower":
       return getCorrectPowerOverview(effect);
@@ -132,6 +132,6 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
     case "TurnStartBatteryCorrect":
       return getTurnStartBatteryCorrectOverview(effect);
     default:
-      return "";
+      return null;
   }
 }

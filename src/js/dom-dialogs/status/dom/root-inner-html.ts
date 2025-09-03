@@ -8,6 +8,7 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
+import { getEffectOverView } from "../../../game-description/effect-overview";
 
 const AVAILABLE = "発動可";
 
@@ -31,6 +32,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const totalPower = armdozer.power + correctPower(armdozer.effects);
   const burstDescription = burstDetail(armdozer.burst).join("");
   const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
+  const allEffects = armdozer.effects
+    .map((e) => getEffectOverView(e))
+    .filter((e) => e !== null);
+  const effectsCaption = 0 < allEffects.length ? allEffects.join("、") : "なし";
 
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
@@ -58,6 +63,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     burstDescription,
     pilot,
     pilotSkillDescription,
+    effectsCaption,
 
     ROOT,
 
