@@ -129,6 +129,24 @@ export const neoLandozerGai = story({
 export const lightningDozerRaito = story({
   armdozerId: ArmdozerIds.LIGHTNING_DOZER,
   pilotId: PilotIds.RAITO,
+  fn: (origin) => ({
+    ...origin,
+    armdozer: {
+      ...origin.armdozer,
+      effects: [
+        {
+          type: "TryReflect",
+          damage: 2000,
+          effect: "Lightning",
+          period: { type: "TurnLimit", remainingTurn: 2 },
+        },
+        {
+          type: "DamageHalved",
+          period: { type: "TurnLimit", remainingTurn: 1 },
+        },
+      ],
+    },
+  }),
 });
 
 /** ジェネシスブレイバー + ユウヤ */
