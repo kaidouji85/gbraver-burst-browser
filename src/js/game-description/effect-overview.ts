@@ -3,6 +3,7 @@ import {
   BatteryCorrection,
   ContinuousActivePlayer,
   CorrectPower,
+  DamageHalved,
   EffectPeriod,
   HalveCorrectPower,
   TryReflect,
@@ -74,6 +75,16 @@ export const getBatteryCorrectionOverview = (effect: BatteryCorrection) => {
 };
 
 /**
+ * ダメージ半減の概要を取得する
+ * @param effect ダメージ半減のエフェクト
+ * @returns ダメージ半減の概要
+ */
+export const getDamageHalvedOverview = (effect: DamageHalved) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `被ダメージ半減${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -90,6 +101,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getContinuousActivePlayerOverview(effect);
     case "BatteryCorrection":
       return getBatteryCorrectionOverview(effect);
+    case "DamageHalved":
+      return getDamageHalvedOverview(effect);
     default:
       return "";
   }
