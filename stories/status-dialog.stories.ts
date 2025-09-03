@@ -59,7 +59,17 @@ export const shinBraverShinya = story({
   pilotId: PilotIds.SHINYA,
   fn: (origin) => ({
     ...origin,
-    armdozer: { ...origin.armdozer, enableBurst: true },
+    armdozer: {
+      ...origin.armdozer,
+      enableBurst: false,
+      effects: [
+        {
+          type: "TurnStartBatteryCorrect",
+          correctBattery: 2,
+          period: { type: "SpecialPeriod" },
+        },
+      ],
+    },
     pilot: { ...origin.pilot, enableSkill: false },
   }),
 });

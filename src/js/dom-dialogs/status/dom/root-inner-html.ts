@@ -1,6 +1,7 @@
 import { correctPower, PlayerState } from "gbraver-burst-core";
 
 import { burstDetail } from "../../../game-description/burst-detail";
+import { getEffectOverView } from "../../../game-description/effect-overview";
 import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
@@ -8,7 +9,6 @@ import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
-import { getEffectOverView } from "../../../game-description/effect-overview";
 
 const AVAILABLE = "発動可";
 
