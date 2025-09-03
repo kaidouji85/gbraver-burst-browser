@@ -1,5 +1,6 @@
 import {
   ArmdozerEffect,
+  ContinuousActivePlayer,
   CorrectPower,
   EffectPeriod,
   HalveCorrectPower,
@@ -49,6 +50,18 @@ export const getTryReflectOverview = (effect: TryReflect) => {
 };
 
 /**
+ * 2回行動の概要を取得する
+ * @param effect 2回行動のエフェクト
+ * @returns 2回行動の概要
+ */
+export const getContinuousActivePlayerOverview = (
+  effect: ContinuousActivePlayer,
+) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `2回行動${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -61,6 +74,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getHalveCorrectPowerOverView(effect);
     case "TryReflect":
       return getTryReflectOverview(effect);
+    case "ContinuousActivePlayer":
+      return getContinuousActivePlayerOverview(effect);
     default:
       return "";
   }
