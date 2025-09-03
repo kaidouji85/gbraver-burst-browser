@@ -1,4 +1,9 @@
-import { ArmdozerEffect, CorrectPower, EffectPeriod } from "gbraver-burst-core";
+import {
+  ArmdozerEffect,
+  CorrectPower,
+  EffectPeriod,
+  HalveCorrectPower,
+} from "gbraver-burst-core";
 
 /**
  * エフェクト有効期間の概要を取得する
@@ -23,6 +28,16 @@ export const getCorrectPowerOverview = (effect: CorrectPower) => {
 };
 
 /**
+ * 攻撃補正半減の概要を取得する
+ * @param effect 攻撃補正半減エフェクト
+ * @returns 攻撃補正半減の概要
+ */
+export const getHalveCorrectPowerOverView = (effect: HalveCorrectPower) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `攻撃補正の効果半減${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -31,6 +46,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
   switch (effect.type) {
     case "CorrectPower":
       return getCorrectPowerOverview(effect);
+    case "HalveCorrectPower":
+      return getHalveCorrectPowerOverView(effect);
     default:
       return "";
   }
