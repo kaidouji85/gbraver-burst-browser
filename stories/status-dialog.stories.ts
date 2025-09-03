@@ -78,6 +78,29 @@ export const shinBraverShinya = story({
 export const wingDozerTsubasa = story({
   armdozerId: ArmdozerIds.WING_DOZER,
   pilotId: PilotIds.TSUBASA,
+  fn: (origin) => ({
+    ...origin,
+    armdozer: {
+      ...origin.armdozer,
+      enableBurst: true,
+      effects: [
+        {
+          type: "ContinuousActivePlayer",
+          period: { type: "SpecialPeriod" },
+        },
+        {
+          type: "BatteryCorrection",
+          batteryCorrection: 2,
+          period: { type: "TurnLimit", remainingTurn: 2 },
+        },
+        {
+          type: "HalveCorrectPower",
+          period: { type: "TurnLimit", remainingTurn: 2 },
+        }
+      ],
+    },
+    pilot: { ...origin.pilot, enableSkill: true },
+  }),
 });
 
 /** ネオランドーザ + ガイ */
