@@ -171,4 +171,16 @@ export const genesisBraverYuuya = story({
 export const granDozerRaito = story({
   armdozerId: ArmdozerIds.GRAN_DOZER,
   pilotId: PilotIds.RAITO,
+  fn: (origin) => ({
+    ...origin,
+    armdozer: {
+      ...origin.armdozer,
+      effects: [
+        {
+          type: "DamageHalved",
+          period: { type: "TurnLimit", remainingTurn: 1 },
+        },
+      ],
+    },
+  }),
 });
