@@ -266,6 +266,7 @@
 .status__effects {
   grid-area: effects;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
   border: 1px solid #e6e3e1;
