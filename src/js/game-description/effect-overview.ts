@@ -8,6 +8,7 @@ import {
   EffectPeriod,
   HalveCorrectPower,
   TryReflect,
+  TurnStartBatteryCorrect,
 } from "gbraver-burst-core";
 
 /**
@@ -96,6 +97,18 @@ export const getBatteryRecoverSkipOverview = (effect: BatteryRecoverSkip) => {
 };
 
 /**
+ * ターン開始時バッテリー回復量補正の概要を取得する
+ * @param effect ターン開始時バッテリー回復量補正のエフェクト
+ * @returns ターン開始時バッテリー回復量補正の概要
+ */
+export const getTurnStartBatteryCorrectOverview = (
+  effect: TurnStartBatteryCorrect,
+) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `ターン開始時にバッテリー${effect.correctBattery}回復${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -116,6 +129,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getDamageHalvedOverview(effect);
     case "BatteryRecoverSkip":
       return getBatteryRecoverSkipOverview(effect);
+    case "TurnStartBatteryCorrect":
+      return getTurnStartBatteryCorrectOverview(effect);
     default:
       return "";
   }
