@@ -1,6 +1,7 @@
 import {
   ArmdozerEffect,
   BatteryCorrection,
+  BatteryRecoverSkip,
   ContinuousActivePlayer,
   CorrectPower,
   DamageHalved,
@@ -85,6 +86,16 @@ export const getDamageHalvedOverview = (effect: DamageHalved) => {
 };
 
 /**
+ * ターン開始時のバッテリー回復スキップの概要を取得する
+ * @param effect ターン開始時のバッテリー回復スキップのエフェクト
+ * @returns ターン開始時のバッテリー回復スキップの概要
+ */
+export const getBatteryRecoverSkipOverview = (effect: BatteryRecoverSkip) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `ターン開始時のバッテリー回復スキップ${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -103,6 +114,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getBatteryCorrectionOverview(effect);
     case "DamageHalved":
       return getDamageHalvedOverview(effect);
+    case "BatteryRecoverSkip":
+      return getBatteryRecoverSkipOverview(effect);
     default:
       return "";
   }
