@@ -3,6 +3,7 @@ import {
   CorrectPower,
   EffectPeriod,
   HalveCorrectPower,
+  TryReflect,
 } from "gbraver-burst-core";
 
 /**
@@ -38,6 +39,16 @@ export const getHalveCorrectPowerOverView = (effect: HalveCorrectPower) => {
 };
 
 /**
+ * カウンターの概要を取得する
+ * @param effect カウンターのエフェクト
+ * @returns カウンターの概要
+ */
+export const getTryReflectOverview = (effect: TryReflect) => {
+  const period = getEffectPeriodOverview(effect.period);
+  return `カウンター${effect.damage}${period}`;
+};
+
+/**
  * アームドーザエフェクトの概要を取得する
  * @param effect アームドーザエフェクト
  * @returns アームドーザエフェクトの概要
@@ -48,6 +59,8 @@ export function getEffectOverView(effect: ArmdozerEffect): string {
       return getCorrectPowerOverview(effect);
     case "HalveCorrectPower":
       return getHalveCorrectPowerOverView(effect);
+    case "TryReflect":
+      return getTryReflectOverview(effect);
     default:
       return "";
   }
