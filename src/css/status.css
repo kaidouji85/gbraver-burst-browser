@@ -169,7 +169,7 @@
     "armdozer-basic-status"
     "burst";
   gap: var(--grid-gap);
-  background: rgb(23, 23, 23, 0.6);
+  background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
@@ -245,7 +245,7 @@
     "pilot-basic-status"
     "pilot-skill";
   gap: var(--grid-gap);
-  background: rgb(23, 23, 23, 0.6);
+  background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
