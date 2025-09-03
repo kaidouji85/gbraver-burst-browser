@@ -153,6 +153,18 @@ export const lightningDozerRaito = story({
 export const genesisBraverYuuya = story({
   armdozerId: ArmdozerIds.GENESIS_BRAVER,
   pilotId: PilotIds.YUUYA,
+  fn: (origin) => ({
+    ...origin,
+    armdozer: {
+      ...origin.armdozer,
+      effects: [
+        {
+          type: "BatteryRecoverSkip",
+          period: { type: "SpecialPeriod" },
+        },
+      ],
+    },
+  }),
 });
 
 /** グランドーザ + ライト */
