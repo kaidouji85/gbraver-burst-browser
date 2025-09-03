@@ -82,7 +82,6 @@ export const wingDozerTsubasa = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
-      enableBurst: true,
       effects: [
         {
           type: "ContinuousActivePlayer",
@@ -96,10 +95,9 @@ export const wingDozerTsubasa = story({
         {
           type: "HalveCorrectPower",
           period: { type: "TurnLimit", remainingTurn: 2 },
-        }
+        },
       ],
     },
-    pilot: { ...origin.pilot, enableSkill: true },
   }),
 });
 
@@ -107,6 +105,24 @@ export const wingDozerTsubasa = story({
 export const neoLandozerGai = story({
   armdozerId: ArmdozerIds.NEO_LANDOZER,
   pilotId: PilotIds.GAI,
+  fn: (origin) => ({
+    ...origin,
+    armdozer: {
+      ...origin.armdozer,
+      effects: [
+        {
+          type: "CorrectPower",
+          power: 1000,
+          period: { type: "TurnLimit", remainingTurn: 2 },
+        },
+        {
+          type: "CorrectPower",
+          power: 600,
+          period: { type: "TurnLimit", remainingTurn: 2 },
+        },
+      ],
+    },
+  }),
 });
 
 /** ライトニングドーザ + ライト */
