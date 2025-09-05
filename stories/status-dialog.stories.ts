@@ -99,7 +99,7 @@ export const shinBraverShinyaEnemy = story({
   isEnemy: true,
 });
 
-/** シンブレイバー + シンヤ（敵） */
+/** シンブレイバー + シンヤ（敵、パイロット非表示） */
 export const shinBraverShinyaWhenPilotHidden = story({
   armdozerId: ArmdozerIds.SHIN_BRAVER,
   pilotId: PilotIds.SHINYA,
