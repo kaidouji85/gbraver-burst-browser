@@ -10,9 +10,17 @@
     <div class="{{ROOT}}__armdozer">
       <div class="{{ROOT}}__armdozer-icon">
         {{#if isEnemy}}
-            <img class="{{ROOT}}__armdozer-icon-img--enemy" src="{{armdozerIconPath}}" alt="アームドーザアイコン" /> 
+          <img
+            class="{{ROOT}}__armdozer-icon-img--enemy"
+            src="{{armdozerIconPath}}"
+            alt="アームドーザアイコン"
+          />
         {{else}}
-            <img class="{{ROOT}}__armdozer-icon-img" src="{{armdozerIconPath}}" alt="アームドーザアイコン" /> 
+          <img
+            class="{{ROOT}}__armdozer-icon-img"
+            src="{{armdozerIconPath}}"
+            alt="アームドーザアイコン"
+          />
         {{/if}}
       </div>
       <div class="{{ROOT}}__armdozer-info">
@@ -63,15 +71,19 @@
         {{#if isPilotHidden}}
           <span class="{{ROOT}}__unknown-pilot">?</span>
         {{else}}
-          <img
-            {{#if isEnemy}}
+          {{#if isEnemy}}
+            <img
               class="{{ROOT}}__pilot-icon-img--enemy"
-            {{else}}
+              src="{{pilotIconPath}}"
+              alt="パイロットアイコン"
+            />
+          {{else}}
+            <img
               class="{{ROOT}}__pilot-icon-img"
-            {{/if}}
-            src="{{pilotIconPath}}"
-            alt="パイロットアイコン"
-          />
+              src="{{pilotIconPath}}"
+              alt="パイロットアイコン"
+            />
+          {{/if}}
         {{/if}}
       </div>
       <div class="{{ROOT}}__pilot-info">
