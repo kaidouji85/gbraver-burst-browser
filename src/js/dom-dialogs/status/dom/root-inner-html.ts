@@ -7,7 +7,15 @@ import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
+import {
+  ARMDOZER_ICON,
+  ARMDOZER_ICON_ENEMY,
+  AVAILABLE_BOX,
+  DISABLED_BOX,
+  PILOT_ICON,
+  PILOT_ICON_ENEMY,
+  ROOT,
+} from "./class-name";
 import template from "./root-inner-html.hbs";
 
 const AVAILABLE = "発動可";
@@ -18,6 +26,8 @@ const DISABLED = "発動済";
 export type RootInnerHTMLOptions = ResourcesContainer & {
   /** ダイアログを表示するステート */
   state: PlayerState;
+  /** 敵かどうか、trueで敵である */
+  isEnemy?: boolean;
 };
 
 /**
@@ -27,6 +37,7 @@ export type RootInnerHTMLOptions = ResourcesContainer & {
  */
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { resources } = options;
+  const isEnemy = options.isEnemy ?? false;
   const { armdozer, pilot } = options.state;
 
   const totalPower = armdozer.power + correctPower(armdozer.effects);
@@ -35,6 +46,9 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const allEffects = armdozer.effects
     .map((e) => getEffectOverView(e))
     .filter((e) => e !== null);
+
+  const armdozerIconClass = isEnemy ? ARMDOZER_ICON_ENEMY : ARMDOZER_ICON;
+  const pilotIconClass = isEnemy ? PILOT_ICON_ENEMY : PILOT_ICON;
 
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
@@ -65,6 +79,8 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     allEffects,
 
     ROOT,
+    armdozerIconClass,
+    pilotIconClass,
 
     closerPath,
     armdozerIconPath,
