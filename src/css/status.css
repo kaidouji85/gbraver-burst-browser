@@ -254,6 +254,15 @@
   grid-area: pilot-icon;
 }
 
+.status__unknown-pilot {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--responsive-font-size) * 3);
+  font-weight: bold;
+}
+
 .status__pilot-info {
   grid-area: pilot-info;
   display: grid;
