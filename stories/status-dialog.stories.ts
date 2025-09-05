@@ -143,6 +143,14 @@ export const wingDozerTsubasaEnemy = story({
   isEnemy: true,
 });
 
+/** ウィングドーザ + ツバサ（敵、パイロット非表示） */
+export const wingDozerTsubasaWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.WING_DOZER,
+  pilotId: PilotIds.TSUBASA,
+  isEnemy: true,
+  isPilotHidden: true,
+});
+
 /** ネオランドーザ + ガイ */
 export const neoLandozerGai = story({
   armdozerId: ArmdozerIds.NEO_LANDOZER,
@@ -174,6 +182,14 @@ export const neoLandozerGaiEnemy = story({
   armdozerId: ArmdozerIds.NEO_LANDOZER,
   pilotId: PilotIds.GAI,
   isEnemy: true,
+});
+
+/** ネオランドーザ + ガイ（敵、パイロット非表示） */
+export const neoLandozerGaiWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.NEO_LANDOZER,
+  pilotId: PilotIds.GAI,
+  isEnemy: true,
+  isPilotHidden: true,
 });
 
 /** ライトニングドーザ + ライト */
@@ -209,6 +225,14 @@ export const lightningDozerRaitoEnemy = story({
   isEnemy: true,
 });
 
+/** ライトニングドーザ + ライト（敵、パイロット非表示） */
+export const lightningDozerRaitoWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+  pilotId: PilotIds.RAITO,
+  isEnemy: true,
+  isPilotHidden: true,
+});
+
 /** ジェネシスブレイバー + ユウヤ */
 export const genesisBraverYuuya = story({
   armdozerId: ArmdozerIds.GENESIS_BRAVER,
@@ -236,6 +260,14 @@ export const genesisBraverYuuyaEnemy = story({
   isEnemy: true,
 });
 
+/** ジェネシスブレイバー + ユウヤ（敵、パイロット非表示） */
+export const genesisBraverYuuyaWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.GENESIS_BRAVER,
+  pilotId: PilotIds.YUUYA,
+  isEnemy: true,
+  isPilotHidden: true,
+});
+
 /** グランドーザ + ライト */
 export const granDozerRaito = story({
   armdozerId: ArmdozerIds.GRAN_DOZER,
@@ -261,4 +293,12 @@ export const granDozerRaitoEnemy = story({
   armdozerId: ArmdozerIds.GRAN_DOZER,
   pilotId: PilotIds.RAITO,
   isEnemy: true,
+});
+
+/** グランドーザ + ライト（敵、パイロット非表示） */
+export const granDozerRaitoWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.GRAN_DOZER,
+  pilotId: PilotIds.RAITO,
+  isEnemy: true,
+  isPilotHidden: true,
 });
