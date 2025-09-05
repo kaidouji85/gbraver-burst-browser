@@ -21,27 +21,28 @@ export function onBattleSceneAction(
   props: BattleSceneProps,
   action: BattleSceneAction,
 ) {
-  if (action.type === "plusBattery") {
-    onPlusBattery(props);
-  } else if (action.type === "minusBattery") {
-    onMinusBattery(props);
-  } else if (action.type === "decideBattery") {
-    onDecideBattery(props, action);
-  } else if (action.type === "doBurst") {
-    onBurst(props, action);
-  } else if (action.type === "doPilotSkill") {
-    onPilotSkill(props, action);
-  } else if (action.type === "toggleTimeScale") {
-    onToggleTimeScale(props, action);
-  } else if (action.type === "decideBatteryByMiniController") {
-    onDecideBatteryByMiniController(props, action);
-  } else if (action.type === "doBurstByMiniController") {
-    onBurstByMiniController(props);
-  } else if (action.type === "doPilotSkillByMiniController") {
-    onPilotSkillByMiniController(props);
-  } else if (action.type === "battleSimulatorStart") {
-    onBattleSimulatorStart(props);
-  } else if (action.type === "battleSimulatorEnd") {
-    onBattleSimulatorEnd(props);
+  switch (action.type) {
+    case "plusBattery":
+      return onPlusBattery(props);
+    case "minusBattery":
+      return onMinusBattery(props);
+    case "decideBattery":
+      return onDecideBattery(props, action);
+    case "doBurst":
+      return onBurst(props, action);
+    case "doPilotSkill":
+      return onPilotSkill(props, action);
+    case "toggleTimeScale":
+      return onToggleTimeScale(props, action);
+    case "decideBatteryByMiniController":
+      return onDecideBatteryByMiniController(props, action);
+    case "doBurstByMiniController":
+      return onBurstByMiniController(props);
+    case "doPilotSkillByMiniController":
+      return onPilotSkillByMiniController(props);
+    case "battleSimulatorStart":
+      return onBattleSimulatorStart(props);
+    case "battleSimulatorEnd":
+      return onBattleSimulatorEnd(props);
   }
 }
