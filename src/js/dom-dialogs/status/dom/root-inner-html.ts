@@ -10,8 +10,10 @@ import { PathIds } from "../../../resource/path/ids";
 import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
+/** 発動可能ラベル */
 const AVAILABLE = "発動可";
 
+/** 発動済ラベル */
 const DISABLED = "発動済";
 
 /** オプション */
