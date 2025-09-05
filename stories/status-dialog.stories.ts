@@ -28,6 +28,8 @@ const story = (options: {
   armdozerId: ArmdozerId;
   /** パイロットID */
   pilotId: PilotId;
+  /** 敵かどうか、trueで敵である */
+  isEnemy?: boolean;
   /**
    * ステート変更関数
    * @param origin オリジナル
@@ -37,6 +39,7 @@ const story = (options: {
 }) =>
   domStub((stubOptions) => {
     const { armdozerId, pilotId, fn } = options;
+    const isEnemy = options.isEnemy ?? false;
     const armdozer =
       Armdozers.find((a) => a.id === armdozerId) ?? EMPTY_ARMDOZER;
     const pilot = Pilots.find((p) => p.id === pilotId) ?? EMPTY_PILOT;
@@ -46,7 +49,7 @@ const story = (options: {
       pilot,
     });
     const state = fn?.(origin) ?? origin;
-    const dialog = new StatusDialog({ ...stubOptions, state });
+    const dialog = new StatusDialog({ ...stubOptions, state, isEnemy });
     dialog.notifyClose().subscribe(() => {
       console.log("closed");
     });
