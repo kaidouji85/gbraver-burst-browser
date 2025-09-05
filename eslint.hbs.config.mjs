@@ -12,7 +12,7 @@ export default defineConfig([
     rules: {
       "html/attrs-newline": "off",
       "html/require-doctype": "off",
-      "html/indent": ["error", 2],
+      "html/indent": "off",
       "html/require-closing-tags": [
         "error",
         {
