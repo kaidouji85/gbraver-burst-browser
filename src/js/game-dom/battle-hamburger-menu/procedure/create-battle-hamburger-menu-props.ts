@@ -70,6 +70,8 @@ export function createBattleHamburgerMenuProps(
   const exclusive = new Exclusive();
 
   const battleSimulatorStartNotifier = new Subject<void>();
+  const playerStatusOpeningNotifier = new Subject<void>();
+  const enemyStatusOpeningNotifier = new Subject<void>();
   const retryNotifier = new Subject<void>();
   const endBattleNotifier = new Subject<void>();
 
@@ -102,6 +104,8 @@ export function createBattleHamburgerMenuProps(
     exclusive,
 
     battleSimulatorStartNotifier,
+    playerStatusOpeningNotifier,
+    enemyStatusOpeningNotifier,
     retryNotifier,
     endBattleNotifier,
   };
