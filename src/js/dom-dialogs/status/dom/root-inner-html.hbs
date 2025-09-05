@@ -60,15 +60,21 @@
     </div>
     <div class="{{ROOT}}__pilot">
       <div class="{{pilotIconClass}}">
-        <img
-          class="{{ROOT}}__pilot-icon-img"
-          src="{{pilotIconPath}}"
-          alt="パイロットアイコン"
-        />
+        {{#if isPilotHidden}}
+          <span class="{{ROOT}}__unknown-pilot">?</span>
+        {{else}}
+          <img
+            class="{{ROOT}}__pilot-icon-img"
+            src="{{pilotIconPath}}"
+            alt="パイロットアイコン"
+          />
+        {{/if}}
       </div>
       <div class="{{ROOT}}__pilot-info">
         <div class="{{ROOT}}__pilot-basic-status">
-          <span class="{{ROOT}}__pilot-name">{{pilot.name}}</span>
+          <span class="{{ROOT}}__pilot-name">
+            {{#if isPilotHidden}}???{{else}}{{pilot.name}}{{/if}}
+          </span>
         </div>
         <div class="{{ROOT}}__pilot-skill">
           <span class="{{ROOT}}__pilot-skill-icon">
@@ -78,9 +84,9 @@
               class="{{ROOT}}__available-caption"
             >{{pilotAvailableCaption}}</span>
           </span>
-          <span
-            class="{{ROOT}}__pilot-skill-description"
-          >{{pilotSkillDescription}}</span>
+          <span class="{{ROOT}}__pilot-skill-description">
+            {{#if isPilotHidden}}???{{else}}{{pilotSkillDescription}}{{/if}}
+          </span>
         </div>
       </div>
     </div>

@@ -26,8 +26,17 @@ const DISABLED = "発動済";
 export type RootInnerHTMLOptions = ResourcesContainer & {
   /** ダイアログを表示するステート */
   state: PlayerState;
-  /** 敵かどうか、trueで敵である */
+  /**
+   * 敵かどうか、trueで敵である
+   * @default false
+   */
   isEnemy?: boolean;
+
+  /**
+   * パイロットを非表示にするかどうか、trueで非表示にする
+   * @default false
+   */
+  isPilotHidden?: boolean;
 };
 
 /**
@@ -38,6 +47,7 @@ export type RootInnerHTMLOptions = ResourcesContainer & {
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { resources } = options;
   const isEnemy = options.isEnemy ?? false;
+  const isPilotHidden = options.isPilotHidden ?? false;
   const { armdozer, pilot } = options.state;
 
   const totalPower = armdozer.power + correctPower(armdozer.effects);
@@ -71,6 +81,8 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
 
   return template({
+    isPilotHidden,
+
     armdozer,
     totalPower,
     burstDescription,
