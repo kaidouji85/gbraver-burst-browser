@@ -111,6 +111,13 @@ export const wingDozerTsubasa = story({
   }),
 });
 
+/** ウィングドーザ + ツバサ（敵） */
+export const wingDozerTsubasaEnemy = story({
+  armdozerId: ArmdozerIds.WING_DOZER,
+  pilotId: PilotIds.TSUBASA,
+  isEnemy: true,
+});
+
 /** ネオランドーザ + ガイ */
 export const neoLandozerGai = story({
   armdozerId: ArmdozerIds.NEO_LANDOZER,

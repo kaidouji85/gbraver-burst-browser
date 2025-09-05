@@ -165,7 +165,8 @@
   gap: var(--grid-gap);
 }
 
-.status__armdozer-icon {
+.status__armdozer-icon,
+.status__armdozer-icon--enemy {
   grid-area: armdozer-icon;
 }
 
@@ -241,7 +242,8 @@
   gap: var(--grid-gap);
 }
 
-.status__pilot-icon {
+.status__pilot-icon,
+.status__pilot-icon--enemy {
   grid-area: pilot-icon;
 }
 
