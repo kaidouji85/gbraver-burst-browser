@@ -9,15 +9,11 @@
   <div class="{{ROOT}}__contents">
     <div class="{{ROOT}}__armdozer">
       <div class="{{ROOT}}__armdozer-icon">
-        <img
-          {{#if isEnemy}}
-            class="{{ROOT}}__armdozer-icon-img--enemy"
-          {{else}}
-            class="{{ROOT}}__armdozer-icon-img"
-          {{/if}}
-          src="{{armdozerIconPath}}"
-          alt="アームドーザアイコン"
-        />
+        {{#if isEnemy}}
+            <img class="{{ROOT}}__armdozer-icon-img--enemy" src="{{armdozerIconPath}}" alt="アームドーザアイコン" /> 
+        {{else}}
+            <img class="{{ROOT}}__armdozer-icon-img" src="{{armdozerIconPath}}" alt="アームドーザアイコン" /> 
+        {{/if}}
       </div>
       <div class="{{ROOT}}__armdozer-info">
         <div class="{{ROOT}}__armdozer-basic-status">
