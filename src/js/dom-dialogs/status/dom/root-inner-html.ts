@@ -18,6 +18,7 @@ const DISABLED = "発動済";
 export type RootInnerHTMLOptions = ResourcesContainer & {
   /** ダイアログを表示するステート */
   state: PlayerState;
+
   /**
    * 敵かどうか、trueで敵である
    * @default false
