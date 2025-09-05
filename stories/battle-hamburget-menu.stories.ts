@@ -22,6 +22,12 @@ const hamburgerMenuStory = (isEnabled: boolean) =>
     menu.notifyBattleSimulatorStart().subscribe(() => {
       console.log("battle simulator start");
     });
+    menu.notifyPlayerStatusOpening().subscribe(() => {
+      console.log("player status opening");
+    });
+    menu.notifyEnemyStatusOpening().subscribe(() => {
+      console.log("enemy status opening");
+    });
     menu.notifyRetry().subscribe(() => {
       console.log("retry");
     });
