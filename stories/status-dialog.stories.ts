@@ -77,6 +77,13 @@ export const shinBraverShinya = story({
   }),
 });
 
+/** シンブレイバー + シンヤ（敵） */
+export const shinBraverShinyaEnemy = story({
+  armdozerId: ArmdozerIds.SHIN_BRAVER,
+  pilotId: PilotIds.SHINYA,
+  isEnemy: true,
+});
+
 /** ウィングドーザ + ツバサ */
 export const wingDozerTsubasa = story({
   armdozerId: ArmdozerIds.WING_DOZER,
