@@ -25,6 +25,24 @@ export const extractBattleSimulator = (root: HTMLElement): HTMLElement =>
   document.createElement("div");
 
 /**
+ * ルート要素からプレイヤーステータスを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractPlayerStatus = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="player-status"]`) ??
+  document.createElement("div");
+
+/**
+ * ルート要素から敵ステータスを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractEnemyStatus = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="enemy-status"]`) ??
+  document.createElement("div");
+
+/**
  * ルート要素からリトライを抽出する
  * @param root ルート要素
  * @returns 抽出結果
