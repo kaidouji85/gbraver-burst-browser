@@ -7,15 +7,7 @@ import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import {
-  ARMDOZER_ICON,
-  ARMDOZER_ICON_ENEMY,
-  AVAILABLE_BOX,
-  DISABLED_BOX,
-  PILOT_ICON,
-  PILOT_ICON_ENEMY,
-  ROOT,
-} from "./class-name";
+import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 const AVAILABLE = "発動可";
@@ -57,9 +49,6 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     .map((e) => getEffectOverView(e))
     .filter((e) => e !== null);
 
-  const armdozerIconClass = isEnemy ? ARMDOZER_ICON_ENEMY : ARMDOZER_ICON;
-  const pilotIconClass = isEnemy ? PILOT_ICON_ENEMY : PILOT_ICON;
-
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   const armdozerIconPathId = getArmdozerStandPathId(armdozer.id);
@@ -81,6 +70,7 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
 
   return template({
+    isEnemy,
     isPilotHidden,
 
     armdozer,
@@ -91,8 +81,6 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     allEffects,
 
     ROOT,
-    armdozerIconClass,
-    pilotIconClass,
 
     closerPath,
     armdozerIconPath,
