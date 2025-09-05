@@ -92,6 +92,7 @@ export const wingDozerTsubasa = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
+      enableBurst: false,
       effects: [
         {
           type: "ContinuousActivePlayer",
@@ -108,6 +109,7 @@ export const wingDozerTsubasa = story({
         },
       ],
     },
+    pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
 
@@ -126,6 +128,7 @@ export const neoLandozerGai = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
+      enableBurst: false,
       effects: [
         {
           type: "CorrectPower",
@@ -139,6 +142,7 @@ export const neoLandozerGai = story({
         },
       ],
     },
+    pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
 
@@ -157,6 +161,7 @@ export const lightningDozerRaito = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
+      enableBurst: false,
       effects: [
         {
           type: "TryReflect",
@@ -170,6 +175,7 @@ export const lightningDozerRaito = story({
         },
       ],
     },
+    pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
 
@@ -188,6 +194,7 @@ export const genesisBraverYuuya = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
+      enableBurst: false,
       effects: [
         {
           type: "BatteryRecoverSkip",
@@ -195,6 +202,7 @@ export const genesisBraverYuuya = story({
         },
       ],
     },
+    pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
 
@@ -213,6 +221,7 @@ export const granDozerRaito = story({
     ...origin,
     armdozer: {
       ...origin.armdozer,
+      enableBurst: false,
       effects: [
         {
           type: "DamageHalved",
@@ -220,6 +229,7 @@ export const granDozerRaito = story({
         },
       ],
     },
+    pilot: { ...origin.pilot, enableSkill: false },
   }),
 });
 
