@@ -142,6 +142,13 @@ export const neoLandozerGai = story({
   }),
 });
 
+/** ネオランドーザ + ガイ（敵） */
+export const neoLandozerGaiEnemy = story({
+  armdozerId: ArmdozerIds.NEO_LANDOZER,
+  pilotId: PilotIds.GAI,
+  isEnemy: true,
+});
+
 /** ライトニングドーザ + ライト */
 export const lightningDozerRaito = story({
   armdozerId: ArmdozerIds.LIGHTNING_DOZER,
@@ -166,6 +173,13 @@ export const lightningDozerRaito = story({
   }),
 });
 
+/** ライトニングドーザ + ライト（敵） */
+export const lightningDozerRaitoEnemy = story({
+  armdozerId: ArmdozerIds.LIGHTNING_DOZER,
+  pilotId: PilotIds.RAITO,
+  isEnemy: true,
+});
+
 /** ジェネシスブレイバー + ユウヤ */
 export const genesisBraverYuuya = story({
   armdozerId: ArmdozerIds.GENESIS_BRAVER,
@@ -184,6 +198,13 @@ export const genesisBraverYuuya = story({
   }),
 });
 
+/** ジェネシスブレイバー + ユウヤ（敵） */
+export const genesisBraverYuuyaEnemy = story({
+  armdozerId: ArmdozerIds.GENESIS_BRAVER,
+  pilotId: PilotIds.YUUYA,
+  isEnemy: true,
+});
+
 /** グランドーザ + ライト */
 export const granDozerRaito = story({
   armdozerId: ArmdozerIds.GRAN_DOZER,
@@ -200,4 +221,11 @@ export const granDozerRaito = story({
       ],
     },
   }),
+});
+
+/** グランドーザ + ライト（敵） */
+export const granDozerRaitoEnemy = story({
+  armdozerId: ArmdozerIds.GRAN_DOZER,
+  pilotId: PilotIds.RAITO,
+  isEnemy: true,
 });
