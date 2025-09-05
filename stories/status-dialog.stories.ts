@@ -28,8 +28,17 @@ const story = (options: {
   armdozerId: ArmdozerId;
   /** パイロットID */
   pilotId: PilotId;
-  /** 敵かどうか、trueで敵である */
+  /**
+   * 敵かどうか、trueで敵である
+   * @default false
+   */
   isEnemy?: boolean;
+  /**
+   * パイロットを非表示にするかどうか、trueで非表示にする
+   * @default false
+   */
+  isPilotHidden?: boolean;
+
   /**
    * ステート変更関数
    * @param origin オリジナル
@@ -40,6 +49,7 @@ const story = (options: {
   domStub((stubOptions) => {
     const { armdozerId, pilotId, fn } = options;
     const isEnemy = options.isEnemy ?? false;
+    const isPilotHidden = options.isPilotHidden ?? false;
     const armdozer =
       Armdozers.find((a) => a.id === armdozerId) ?? EMPTY_ARMDOZER;
     const pilot = Pilots.find((p) => p.id === pilotId) ?? EMPTY_PILOT;
@@ -49,7 +59,12 @@ const story = (options: {
       pilot,
     });
     const state = fn?.(origin) ?? origin;
-    const dialog = new StatusDialog({ ...stubOptions, state, isEnemy });
+    const dialog = new StatusDialog({
+      ...stubOptions,
+      state,
+      isEnemy,
+      isPilotHidden,
+    });
     dialog.notifyClose().subscribe(() => {
       console.log("closed");
     });
@@ -82,6 +97,14 @@ export const shinBraverShinyaEnemy = story({
   armdozerId: ArmdozerIds.SHIN_BRAVER,
   pilotId: PilotIds.SHINYA,
   isEnemy: true,
+});
+
+/** シンブレイバー + シンヤ（敵） */
+export const shinBraverShinyaWhenPilotHidden = story({
+  armdozerId: ArmdozerIds.SHIN_BRAVER,
+  pilotId: PilotIds.SHINYA,
+  isEnemy: true,
+  isPilotHidden: true,
 });
 
 /** ウィングドーザ + ツバサ */
