@@ -9,6 +9,7 @@ import { onDecideBatteryByMiniController } from "./on-decide-battery-by-minicont
 import { onMinusBattery } from "./on-minus-battery";
 import { onPilotSkill } from "./on-pilot-skill";
 import { onPilotSkillByMiniController } from "./on-pilot-skill-by-mini-controller";
+import { onPlayerStatusOpening } from "./on-player-status-opening";
 import { onPlusBattery } from "./on-plus-battery";
 import { onToggleTimeScale } from "./on-toggle-time-scale";
 
@@ -44,5 +45,7 @@ export function onBattleSceneAction(
       return onBattleSimulatorStart(props);
     case "battleSimulatorEnd":
       return onBattleSimulatorEnd(props);
+    case "playerStatusOpening":
+      return onPlayerStatusOpening(props);  
   }
 }
