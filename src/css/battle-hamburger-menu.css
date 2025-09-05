@@ -54,6 +54,8 @@
 }
 
 .battle-hamburger-menu__battle-simulator:hover,
+.battle-hamburger-menu__player-status:hover,
+.battle-hamburger-menu__enemy-status:hover,
 .battle-hamburger-menu__retry:hover,
 .battle-hamburger-menu__end-battle:hover {
   background-color: var(--hovered-back-ground-color);
