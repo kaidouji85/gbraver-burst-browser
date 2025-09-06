@@ -6,8 +6,10 @@ import {
   BattleHamburgerMenuPropsCreatorParams,
   createBattleHamburgerMenuProps,
 } from "./procedure/create-battle-hamburger-menu-props";
+import { disableStatusOpening } from "./procedure/disable-status-opening";
 import { disabledBattleSimulator } from "./procedure/disabled-battle-simulator";
 import { enableBattleSimulator } from "./procedure/enable-battle-simulator";
+import { enableStatusOpening } from "./procedure/enable-status-opening";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { BattleHamburgerMenuProps } from "./props";
@@ -64,6 +66,20 @@ export class BattleHamburgerMenu {
    */
   disableBattleSimulator() {
     disabledBattleSimulator(this.#props);
+  }
+
+  /**
+   * ステータスを開く系の項目を選択可能にする
+   */
+  enableStatusOpening() {
+    enableStatusOpening(this.#props);
+  }
+
+  /**
+   * ステータスを開く系の項目を選択不可にする
+   */
+  disableStatusOpening() {
+    disableStatusOpening(this.#props);
   }
 
   /**

@@ -15,8 +15,10 @@ const hamburgerMenuStory = (isEnabled: boolean) =>
     const menu = new BattleHamburgerMenu({ ...params, canRetry: isEnabled });
     if (isEnabled) {
       menu.enableBattleSimulator();
+      menu.enableStatusOpening();
     } else {
       menu.disableBattleSimulator();
+      menu.disableStatusOpening();
     }
     menu.show();
     menu.notifyBattleSimulatorStart().subscribe(() => {
