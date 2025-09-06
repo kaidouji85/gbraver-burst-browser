@@ -1,4 +1,5 @@
 import { PushDOM } from "../../../dom/push-dom";
+import { MENU_HIDDEN } from "../dom/class-name";
 import { BattleHamburgerMenuProps } from "../props";
 
 /**
@@ -15,6 +16,7 @@ export function onPlayerStatusPush(
 
   props.exclusive.execute(async () => {
     props.se.play(props.changeValueSound);
+    props.menu.className = MENU_HIDDEN;
     props.playerStatusOpeningNotifier.next();
   });
 }
