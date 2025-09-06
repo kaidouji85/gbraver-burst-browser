@@ -23,6 +23,7 @@ export function onPlayerStatusOpening(props: Readonly<BattleSceneProps>): void {
       ...props,
       state: player,
       isEnemy: false,
+      isPilotHidden: false,
     });
     switchStatus(props, dialog);
   });
