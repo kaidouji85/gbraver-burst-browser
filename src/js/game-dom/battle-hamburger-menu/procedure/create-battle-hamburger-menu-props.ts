@@ -12,8 +12,10 @@ import {
   extractEndBattleCancelButton,
   extractEndBattleConfirmDialog,
   extractEndBattleConfirmDialogCloser,
+  extractEnemyStatus,
   extractHamburgerIcon,
   extractMenu,
+  extractPlayerStatus,
   extractRetryButton,
   extractRetryCancelButton,
   extractRetryConfirmDialog,
@@ -44,6 +46,8 @@ export function createBattleHamburgerMenuProps(
   const background = extractBackGround(root);
 
   const battleSimulator = extractBattleSimulator(root);
+  const playerStatus = extractPlayerStatus(root);
+  const enemyStatus = extractEnemyStatus(root);
 
   const retryConfirmDialog = extractRetryConfirmDialog(root);
   const retryConfirmDialogCloser = extractRetryConfirmDialogCloser(root);
@@ -66,6 +70,8 @@ export function createBattleHamburgerMenuProps(
   const exclusive = new Exclusive();
 
   const battleSimulatorStartNotifier = new Subject<void>();
+  const playerStatusOpeningNotifier = new Subject<void>();
+  const enemyStatusOpeningNotifier = new Subject<void>();
   const retryNotifier = new Subject<void>();
   const endBattleNotifier = new Subject<void>();
 
@@ -73,12 +79,15 @@ export function createBattleHamburgerMenuProps(
     ...params,
 
     canBattleSimulatorStart: false,
+    canStatusOpening: false,
 
     root,
     hamburgerIcon,
     menu,
     background,
     battleSimulator,
+    playerStatus,
+    enemyStatus,
 
     retryConfirmDialog,
     retryConfirmDialogCloser,
@@ -96,6 +105,8 @@ export function createBattleHamburgerMenuProps(
     exclusive,
 
     battleSimulatorStartNotifier,
+    playerStatusOpeningNotifier,
+    enemyStatusOpeningNotifier,
     retryNotifier,
     endBattleNotifier,
   };

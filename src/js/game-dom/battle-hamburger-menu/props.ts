@@ -10,11 +10,18 @@ export type BattleHamburgerMenuProps = {
   readonly canRetry: boolean;
   /** バトルシミュレーターが開始できるか否か、trueで可能 */
   canBattleSimulatorStart: boolean;
+  /** ステータスが開けるか否か、trueで可能 */
+  canStatusOpening: boolean;
 
   /** ルート要素 */
   readonly root: HTMLElement;
   /** ハンバーガーアイコン */
   readonly hamburgerIcon: HTMLElement;
+  /** プレイヤーステータス */
+  readonly playerStatus: HTMLElement;
+  /** 敵ステータス */
+  readonly enemyStatus: HTMLElement;
+  /** ハンバーガーアイコン 画像 */
   /** メニュー */
   readonly menu: HTMLElement;
   /** バックグラウンド */
@@ -52,6 +59,10 @@ export type BattleHamburgerMenuProps = {
 
   /** バトルシミュレーター開始通知 */
   readonly battleSimulatorStartNotifier: Subject<void>;
+  /** プレイヤーステータスオープン通知 */
+  readonly playerStatusOpeningNotifier: Subject<void>;
+  /** 敵ステータスオープン通知 */
+  readonly enemyStatusOpeningNotifier: Subject<void>;
   /** リトライ通知 */
   readonly retryNotifier: Subject<void>;
   /** バトル終了通知 */

@@ -24,6 +24,7 @@ export function decisionByPilotButton(
     ),
     onStart(() => {
       view.dom.hamburgerMenu.disableBattleSimulator();
+      view.dom.hamburgerMenu.disableStatusOpening();
     }),
   )
     .chain(delay(500))

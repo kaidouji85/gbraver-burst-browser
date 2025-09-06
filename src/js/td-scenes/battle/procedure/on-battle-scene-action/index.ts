@@ -6,10 +6,13 @@ import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";
 import { onDecideBatteryByMiniController } from "./on-decide-battery-by-minicontroller";
+import { onEnemyStatusOpening } from "./on-enemy-status-opening";
 import { onMinusBattery } from "./on-minus-battery";
 import { onPilotSkill } from "./on-pilot-skill";
 import { onPilotSkillByMiniController } from "./on-pilot-skill-by-mini-controller";
+import { onPlayerStatusOpening } from "./on-player-status-opening";
 import { onPlusBattery } from "./on-plus-battery";
+import { onStatusClosing } from "./on-status-closing";
 import { onToggleTimeScale } from "./on-toggle-time-scale";
 
 /**
@@ -44,5 +47,11 @@ export function onBattleSceneAction(
       return onBattleSimulatorStart(props);
     case "battleSimulatorEnd":
       return onBattleSimulatorEnd(props);
+    case "playerStatusOpening":
+      return onPlayerStatusOpening(props);
+    case "enemyStatusOpening":
+      return onEnemyStatusOpening(props);
+    case "statusClosing":
+      return onStatusClosing(props);
   }
 }
