@@ -10,6 +10,7 @@ export const BATTLE_SIMULATOR = `${ROOT}__battle-simulator`;
 /** バトルシミュレーター(選択不能) */
 export const BATTLE_SIMULATOR_DISABLED = `${BATTLE_SIMULATOR}--disabled`;
 
+/** プレイヤーステータス */
 export const PLAYER_STATUS = `${ROOT}__player-status`;
 
 /** プレイヤーステータス(選択不能) */
