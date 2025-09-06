@@ -10,6 +10,8 @@ export type BattleHamburgerMenuProps = {
   readonly canRetry: boolean;
   /** バトルシミュレーターが開始できるか否か、trueで可能 */
   canBattleSimulatorStart: boolean;
+  /** ステータスが開けるか否か、trueで可能 */
+  canStatusOpening: boolean;
 
   /** ルート要素 */
   readonly root: HTMLElement;

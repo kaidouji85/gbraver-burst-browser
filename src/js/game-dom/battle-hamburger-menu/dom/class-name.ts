@@ -10,6 +10,17 @@ export const BATTLE_SIMULATOR = `${ROOT}__battle-simulator`;
 /** バトルシミュレーター(選択不能) */
 export const BATTLE_SIMULATOR_DISABLED = `${BATTLE_SIMULATOR}--disabled`;
 
+export const PLAYER_STATUS = `${ROOT}__player-status`;
+
+/** プレイヤーステータス(選択不能) */
+export const PLAYER_STATUS_DISABLED = `${PLAYER_STATUS}--disabled`;
+
+/** 敵ステータス */
+export const ENEMY_STATUS = `${ROOT}__enemy-status`;
+
+/** 敵ステータス(選択不能) */
+export const ENEMY_STATUS_DISABLED = `${ENEMY_STATUS}--disabled`;
+
 /** リトライ */
 export const RETRY = `${ROOT}__retry`;
 

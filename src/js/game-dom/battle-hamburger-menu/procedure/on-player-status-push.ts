@@ -15,6 +15,10 @@ export function onPlayerStatusPush(
   action.event.stopPropagation();
 
   props.exclusive.execute(async () => {
+    if (!props.canStatusOpening) {
+      return;
+    }
+
     props.se.play(props.changeValueSound);
     props.menu.className = MENU_HIDDEN;
     props.playerStatusOpeningNotifier.next();
