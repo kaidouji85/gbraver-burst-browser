@@ -1,14 +1,23 @@
 import * as THREE from "three";
 import { Group } from "three";
 
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
+import { StatusIconPosition } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
-import type { WingDozerModel } from "../model/wing-dozer-model";
-import type { WingDozerView } from "./wing-dozer-view";
+import { WingDozerModel } from "../model/wing-dozer-model";
+import { WingDozerView } from "./wing-dozer-view";
 
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
+  /** ステータスアイコンの位置（ワールド座標） */
+  statusIconPosition: StatusIconPosition;
+
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
@@ -20,6 +29,11 @@ export class PlayerWingDozerView implements WingDozerView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this.statusIconPosition = {
+      x: ARMDOZER_EFFECT_STANDARD_X - 75,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 80,
+      z: ARMDOZER_EFFECT_STANDARD_Z,
+    };
     this.#group = new Group();
     this.#meshes = createAllMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
