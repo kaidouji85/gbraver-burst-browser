@@ -1,7 +1,10 @@
 import { correctPower, PlayerState } from "gbraver-burst-core";
 
 import { burstDetail } from "../../../game-description/burst-detail";
-import { getEffectOverView } from "../../../game-description/effect-overview";
+import {
+  getEffectOverView,
+  getEffectPeriodOverview,
+} from "../../../game-description/effect-overview";
 import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
@@ -59,7 +62,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const burstDescription = burstDetail(armdozer.burst).join("");
   const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
   const allEffects = armdozer.effects
-    .map((e) => getEffectOverView(e))
+    .map((e) => ({
+      effect: getEffectOverView(e),
+      period: getEffectPeriodOverview(e.period),
+    }))
     .filter((e) => e !== null);
 
   const closerPath =

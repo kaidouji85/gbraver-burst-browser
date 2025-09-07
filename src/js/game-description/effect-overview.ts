@@ -1,12 +1,8 @@
 import {
   ArmdozerEffect,
   BatteryCorrection,
-  BatteryRecoverSkip,
-  ContinuousActivePlayer,
   CorrectPower,
-  DamageHalved,
   EffectPeriod,
-  HalveCorrectPower,
   TryReflect,
   TurnStartBatteryCorrect,
 } from "gbraver-burst-core";
@@ -29,18 +25,15 @@ export const getEffectPeriodOverview = (period: EffectPeriod) => {
  */
 export const getCorrectPowerOverview = (effect: CorrectPower) => {
   const sign = 0 < effect.power ? "+" : "-";
-  const period = getEffectPeriodOverview(effect.period);
-  return `攻撃${sign}${effect.power}${period}`;
+  return `攻撃${sign}${effect.power}`;
 };
 
 /**
  * 攻撃補正半減の概要を取得する
- * @param effect 攻撃補正半減エフェクト
  * @returns 攻撃補正半減の概要
  */
-export const getHalveCorrectPowerOverView = (effect: HalveCorrectPower) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `攻撃アップ半減${period}`;
+export const getHalveCorrectPowerOverView = () => {
+  return `攻撃アップ半減`;
 };
 
 /**
@@ -49,20 +42,15 @@ export const getHalveCorrectPowerOverView = (effect: HalveCorrectPower) => {
  * @returns カウンターの概要
  */
 export const getTryReflectOverview = (effect: TryReflect) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `カウンター${effect.damage}${period}`;
+  return `カウンター${effect.damage}`;
 };
 
 /**
  * 2回行動の概要を取得する
- * @param effect 2回行動のエフェクト
  * @returns 2回行動の概要
  */
-export const getContinuousActivePlayerOverview = (
-  effect: ContinuousActivePlayer,
-) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `2回行動${period}`;
+export const getContinuousActivePlayerOverview = () => {
+  return `2回行動`;
 };
 
 /**
@@ -72,28 +60,23 @@ export const getContinuousActivePlayerOverview = (
  */
 export const getBatteryCorrectionOverview = (effect: BatteryCorrection) => {
   const sign = 0 < effect.batteryCorrection ? "+" : "-";
-  const period = getEffectPeriodOverview(effect.period);
-  return `バッテリー${sign}${effect.batteryCorrection}${period}`;
+  return `バッテリー${sign}${effect.batteryCorrection}`;
 };
 
 /**
  * ダメージ半減の概要を取得する
- * @param effect ダメージ半減のエフェクト
  * @returns ダメージ半減の概要
  */
-export const getDamageHalvedOverview = (effect: DamageHalved) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `被ダメージ半減${period}`;
+export const getDamageHalvedOverview = () => {
+  return `被ダメージ半減`;
 };
 
 /**
  * ターン開始時のバッテリー回復スキップの概要を取得する
- * @param effect ターン開始時のバッテリー回復スキップのエフェクト
  * @returns ターン開始時のバッテリー回復スキップの概要
  */
-export const getBatteryRecoverSkipOverview = (effect: BatteryRecoverSkip) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `バッテリー回復スキップ（自分ターン開始時）${period}`;
+export const getBatteryRecoverSkipOverview = () => {
+  return `バッテリー回復スキップ（自分ターン開始時）`;
 };
 
 /**
@@ -104,8 +87,7 @@ export const getBatteryRecoverSkipOverview = (effect: BatteryRecoverSkip) => {
 export const getTurnStartBatteryCorrectOverview = (
   effect: TurnStartBatteryCorrect,
 ) => {
-  const period = getEffectPeriodOverview(effect.period);
-  return `バッテリー${effect.correctBattery}回復（自分ターン開始時）${period}`;
+  return `バッテリー${effect.correctBattery}回復（自分ターン開始時）`;
 };
 
 /**
@@ -118,17 +100,17 @@ export function getEffectOverView(effect: ArmdozerEffect): string | null {
     case "CorrectPower":
       return getCorrectPowerOverview(effect);
     case "HalveCorrectPower":
-      return getHalveCorrectPowerOverView(effect);
+      return getHalveCorrectPowerOverView();
     case "TryReflect":
       return getTryReflectOverview(effect);
     case "ContinuousActivePlayer":
-      return getContinuousActivePlayerOverview(effect);
+      return getContinuousActivePlayerOverview();
     case "BatteryCorrection":
       return getBatteryCorrectionOverview(effect);
     case "DamageHalved":
-      return getDamageHalvedOverview(effect);
+      return getDamageHalvedOverview();
     case "BatteryRecoverSkip":
-      return getBatteryRecoverSkipOverview(effect);
+      return getBatteryRecoverSkipOverview();
     case "TurnStartBatteryCorrect":
       return getTurnStartBatteryCorrectOverview(effect);
     default:
