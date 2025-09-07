@@ -1,9 +1,13 @@
 import * as THREE from "three";
 
-import type { ShinBraverModel } from "../model/shin-braver-model";
+import { StatusIconPosition } from "../../armdozer-sprite";
+import { ShinBraverModel } from "../model/shin-braver-model";
 
 /** シンブレイバーのビュー */
 export interface ShinBraverView {
+  /** ステータスアイコンの位置（ワールド座標） */
+  statusIconPosition: StatusIconPosition;
+
   /**
    * デストラクタ相当の処置
    */

@@ -1,13 +1,21 @@
 import * as THREE from "three";
 
-import type { Resources } from "../../../../resource";
+import { Resources } from "../../../../resource";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
+import { StatusIconPosition } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
-import type { ShinBraverModel } from "../model/shin-braver-model";
-import type { ShinBraverView } from "./shin-braver-view";
+import { ShinBraverModel } from "../model/shin-braver-model";
+import { ShinBraverView } from "./shin-braver-view";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
+  /** @override */
+  statusIconPosition: StatusIconPosition;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
@@ -18,6 +26,11 @@ export class PlayerShinBraverView implements ShinBraverView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this.statusIconPosition = {
+      x: ARMDOZER_EFFECT_STANDARD_X - 80,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 80,
+      z: ARMDOZER_EFFECT_STANDARD_Z,
+    };
     this.#group = new THREE.Group();
     this.#meshes = createAllMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {
