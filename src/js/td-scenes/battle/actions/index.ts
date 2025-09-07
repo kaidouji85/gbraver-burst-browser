@@ -7,13 +7,12 @@ import { DoBurstByMiniController } from "./do-burst-by-mini-controller";
 import { DoPilotSkill } from "./do-pilot-skill";
 import { DoPilotSkillByMiniController } from "./do-pilot-skill-by-mini-controller";
 import { EnemyStatusOpening } from "./enemy-status-opening";
-import { EnemyStatusOpeningByIcon } from "./enemy-status-opening-by-icon";
 import { MinusBattery } from "./minus-battery";
 import { PlayerStatusOpening } from "./player-status-opening";
-import { PlayerStatusOpeningByIcon } from "./player-status-opening-by-icon";
 import { PlusBattery } from "./plus-battery";
 import { StartBattleScene } from "./start-battle-scene";
 import { StatusClosing } from "./status-closing";
+import { StatusOpeningByIcon } from "./status-opening-by-icon";
 import { ToggleTimeScale } from "./toggle-time-scale";
 
 /** 戦闘シーンアクション */
@@ -31,7 +30,6 @@ export type BattleSceneAction =
   | BattleSimulatorStart
   | BattleSimulatorEnd
   | PlayerStatusOpening
-  | PlayerStatusOpeningByIcon
   | EnemyStatusOpening
-  | EnemyStatusOpeningByIcon
+  | StatusOpeningByIcon
   | StatusClosing;
