@@ -18,7 +18,7 @@ export const onCloserPush = (options: {
 
   props.exclusive.execute(async () => {
     props.se.play(props.changeValueSound);
-    pop(props.closer);
+    await pop(props.closer);
     props.closeNotifier.next();
   });
 };

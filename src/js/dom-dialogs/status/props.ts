@@ -8,8 +8,6 @@ import { SEPlayerContainer } from "../../se/se-player";
 export type StatusDialogProps = SEPlayerContainer & {
   /** ルート要素 */
   readonly root: HTMLElement;
-  /** バックグラウンド要素 */
-  readonly backGround: HTMLElement;
   /** クローザー要素 */
   readonly closer: HTMLImageElement;
 
