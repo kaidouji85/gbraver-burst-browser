@@ -59,7 +59,6 @@ export class StatusIconView {
     );
     const target = this.#button.getObject3D();
     target.scale.set(devicePerScale, devicePerScale, devicePerScale);
-    target.position.x = model.position.x;
-    target.position.y = model.position.y;
+    this.#button.opacity(model.opacity);
   }
 }

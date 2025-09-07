@@ -1,17 +1,24 @@
+import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createStatusIconProps,
   StatusIconPropsCreatorOptions,
 } from "./props/create-status-icon-props";
 import { StatusIconProps } from "./props/status-icon-props";
 
-export type StatusIconOptions = StatusIconPropsCreatorOptions;
+/** コンストラクタのオプション */
+export type StatusIconOptions = StatusIconPropsCreatorOptions &
+  GameObjectActionContainer;
 
 /** ステータスアイコン */
 export class StatusIcon {
   /** ステータスアイコンプロパティ */
-  #props: StatusIconProps;
+  readonly #props: StatusIconProps;
+  /** アンサブスクライバブル */
+  readonly #unsubscribables: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -19,6 +26,10 @@ export class StatusIcon {
    */
   constructor(options: StatusIconOptions) {
     this.#props = createStatusIconProps(options);
+    this.#unsubscribables = bindEventListeners(
+      this.#props,
+      options.gameObjectAction,
+    );
   }
 
   /**
@@ -26,6 +37,7 @@ export class StatusIcon {
    */
   destructor(): void {
     this.#props.view.destructor();
+    this.#unsubscribables.forEach((u) => u.unsubscribe());
   }
 
   /**

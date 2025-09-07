@@ -1,10 +1,5 @@
 /** ステータスアイコンのモデル */
 export type StatusIconModel = {
-  /** アイコンの位置 */
-  position: {
-    /** X座標 */
-    x: number;
-    /** Y座標 */
-    y: number;
-  };
+  /** 0〜1で指定する不透明度、0が透明、1が不透明*/
+  opacity: number;
 };
