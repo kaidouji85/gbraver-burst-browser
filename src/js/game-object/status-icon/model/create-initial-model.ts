@@ -6,6 +6,7 @@ import { StatusIconModel } from "./status-icon-model";
  */
 export function createInitialModel(): StatusIconModel {
   return {
-    opacity: 1,
+    opacity: 0,
+    scale: 1,
   };
 }

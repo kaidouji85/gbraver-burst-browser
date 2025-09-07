@@ -53,12 +53,13 @@ export class StatusIconView {
    * @param preRender プリレンダー情報
    */
   engage(model: StatusIconModel, preRender: PreRender): void {
+    const target = this.#button.getObject3D();
     const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
-    const target = this.#button.getObject3D();
-    target.scale.set(devicePerScale, devicePerScale, devicePerScale);
+    const scale = model.scale * devicePerScale;
+    target.scale.set(scale, scale, scale);
     this.#button.opacity(model.opacity);
   }
 }
