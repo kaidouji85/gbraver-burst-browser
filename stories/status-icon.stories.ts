@@ -8,5 +8,6 @@ export default {
 /** ステータスアイコンのストーリー */
 export const statusIcon = hudGameObjectStory((options) => {
   const icon = new StatusIcon(options);
+  icon.open().play();
   return [icon.getObject3D()];
 });
