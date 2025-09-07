@@ -101,10 +101,13 @@
         <div class="status__pilot-skill">
           <span class="status__pilot-skill-icon">
             <span class="status__pilot-skill-label">スキル</span>
-            <span class="{{pilotAvailableClassName}}"></span>
-            <span
-              class="status__available-caption"
-            >{{pilotAvailableCaption}}</span>
+            {{#if pilot.enableSkill}}
+              <span class="status__pilot-skill-available-box"></span>
+              <span class="status__pilot-skill-available-caption">発動可</span>
+            {{else}}
+              <span class="status__pilot-skill-disabled-box"></span>
+              <span class="status__pilot-skill-disabled-caption">発動済</span>
+            {{/if}}
           </span>
           <span class="status__pilot-skill-description">
             {{#if isPilotHidden}}

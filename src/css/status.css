@@ -144,7 +144,9 @@
 }
 
 .status__burst-available-box,
-.status__burst-disabled-box {
+.status__burst-disabled-box,
+.status__pilot-skill-available-box,
+.status__pilot-skill-disabled-box {
   --size: calc(var(--responsive-font-size) * 1.2);
 
   display: inline-block;
@@ -154,12 +156,14 @@
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
-.status__burst-available-box {
+.status__burst-available-box,
+.status__pilot-skill-available-box {
   background-color: #00ff7f;
   border: 1px solid #008042;
 }
 
-.status__burst-disabled-box {
+.status__burst-disabled-box,
+.status__pilot-skill-disabled-box {
   background-color: #696969;
   border: 1px solid #333333;
 }
