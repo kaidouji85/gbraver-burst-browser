@@ -77,7 +77,7 @@ export class StatusIconView {
    * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.#button.getObject3D();
+    return this.#group;
   }
 
   /**
@@ -86,13 +86,13 @@ export class StatusIconView {
    * @param preRender プリレンダー情報
    */
   engage(model: StatusIconModel, preRender: PreRender): void {
-    const target = this.#button.getObject3D();
     const devicePerScale = hudUIScale(
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
     const scale = model.scale * devicePerScale;
-    target.scale.set(scale, scale, scale);
+
+    this.#group.scale.set(scale, scale, scale);
     this.#button.opacity(model.opacity);
   }
 
