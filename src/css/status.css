@@ -228,6 +228,11 @@
   padding: 0 calc(var(--responsive-font-size) * 0.4);
 }
 
+.status__armdozer-power-value--buffed {
+  color: #ffa500;
+  font-weight: bold;
+}
+
 .status__battery-icon {
   width: var(--responsive-font-size);
   height: var(--responsive-font-size);
