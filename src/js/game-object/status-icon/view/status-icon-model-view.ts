@@ -1,4 +1,0 @@
-/** ステータスアイコンのモデルビュー */
-export class StatusIconModelView {
-    
-}
