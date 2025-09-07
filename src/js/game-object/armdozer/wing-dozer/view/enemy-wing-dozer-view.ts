@@ -14,7 +14,6 @@ export class EnemyWingDozerView extends PlayerWingDozerView {
   constructor(resources: Resources) {
     super(resources);
     this.statusIconPosition.x *= -1;
-    
   }
 
   /**

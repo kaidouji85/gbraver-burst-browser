@@ -6,7 +6,7 @@ import { GranDozerModel } from "../model/gran-dozer-model";
 /** グランドーザービュー */
 export interface GranDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition
+  statusIconPosition: StatusIconPosition;
 
   /**
    * デストラクタ相当の処理

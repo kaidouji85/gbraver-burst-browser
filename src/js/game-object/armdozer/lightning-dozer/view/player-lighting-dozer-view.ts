@@ -1,7 +1,11 @@
 import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../../td-position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
 import { StatusIconPosition } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
@@ -10,7 +14,7 @@ import { LightningDozerView } from "./lightning-dozer-view";
 
 /** プレイヤー側のライトニングドーザビュー */
 export class PlayerLightingDozerView implements LightningDozerView {
-  /** ステータスアイコンの位置（ワールド座標） */
+  /** @override */
   statusIconPosition: StatusIconPosition;
   /** グループ */
   #group: THREE.Group;
@@ -23,9 +27,9 @@ export class PlayerLightingDozerView implements LightningDozerView {
    */
   constructor(resources: Resources) {
     this.statusIconPosition = {
-    x: ARMDOZER_EFFECT_STANDARD_X - 85,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 80,
-    z: ARMDOZER_EFFECT_STANDARD_Z,
+      x: ARMDOZER_EFFECT_STANDARD_X - 85,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 80,
+      z: ARMDOZER_EFFECT_STANDARD_Z,
     };
     this.#group = new THREE.Group();
     this.#meshes = createAllMeshes(resources);

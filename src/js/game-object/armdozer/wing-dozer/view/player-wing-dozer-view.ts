@@ -15,7 +15,7 @@ import { WingDozerView } from "./wing-dozer-view";
 
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
-  /** ステータスアイコンの位置（ワールド座標） */
+  /** @override */
   statusIconPosition: StatusIconPosition;
 
   /** グループ */

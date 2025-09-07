@@ -10,7 +10,7 @@ export type StatusIconPosition = {
   y: number;
   /** z軸 */
   z: number;
-}
+};
 
 /** アームドーザスプライト */
 export interface ArmdozerSprite {

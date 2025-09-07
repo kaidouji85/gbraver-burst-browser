@@ -1,7 +1,11 @@
 import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
-import { ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z } from "../../../td-position";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
 import { StatusIconPosition } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";

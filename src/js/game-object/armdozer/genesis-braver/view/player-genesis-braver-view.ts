@@ -14,7 +14,7 @@ import { GenesisBraverView } from "./genesis-braver-view";
 
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
-  /** ステータスアイコンの位置情報（ワールド座標） */
+  /** @override */
   statusIconPosition: StatusIconPosition;
   /** グループ */
   #group: THREE.Group;
