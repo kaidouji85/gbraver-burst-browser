@@ -4,7 +4,7 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { StatusIconSounds } from "./status-icon-sounds";
 
 /**
- * タイムスケールサウンドを生成する
+ * ステータスアイコンサウンドを生成する
  * @param resources リソース管理オブジェクト
  * @returns 生成結果
  */
