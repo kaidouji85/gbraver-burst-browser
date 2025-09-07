@@ -43,6 +43,7 @@ export function inputCommandAnimation(
       controllerType,
     }),
     view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
+    ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
     showPredicatedDamage(view.hud.players, players, activePlayerId),
   );
