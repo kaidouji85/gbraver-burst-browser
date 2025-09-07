@@ -59,12 +59,9 @@
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  max-width: min(
-    calc(
-      100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width) * 0.5
-    ),
-    90vw
+  width: calc(
+    100vw - var(--safe-area-right) - var(--safe-area-left) -
+      var(--closer-width) - var(--responsive-font-size) * 2
   );
   display: grid;
   grid-template: "armdozer" "pilot" "effects";
