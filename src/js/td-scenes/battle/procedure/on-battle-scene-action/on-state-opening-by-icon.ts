@@ -13,14 +13,14 @@ export function onStatusOpeningByIcon(
 ) {
   const { playerId } = action;
   props.exclusive.execute(async () => {
-    const hudPlyer = props.view.hud.players.find(
+    const hudPlayer = props.view.hud.players.find(
       (p) => p.playerId === playerId,
     );
-    if (!hudPlyer) {
+    if (!hudPlayer) {
       return;
     }
 
-    await hudPlyer.statusIcon.decide().play();
+    await hudPlayer.statusIcon.decide().play();
     const isPlayer = props.playerId === playerId;
     if (isPlayer) {
       openPlayerStatus(props);
