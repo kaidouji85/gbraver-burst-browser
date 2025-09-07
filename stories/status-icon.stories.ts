@@ -1,3 +1,4 @@
+import { delay } from "../src/js/animation/delay";
 import { StatusIcon } from "../src/js/game-object/status-icon";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
@@ -11,7 +12,13 @@ export const statusIcon = hudGameObjectStory((options) => {
   icon.open().play();
   icon.notifyPushed().subscribe(() => {
     console.log("pushed");
-    icon.decide().play();
+    icon
+      .decide()
+      .chain(delay(1000))
+      .chain(icon.close())
+      .chain(delay(1000))
+      .chain(icon.open())
+      .play();
   });
   return [icon.getObject3D()];
 });

@@ -1,16 +1,13 @@
 import { Animate } from "../../../animation/animate";
-import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import { StatusIconAnimationProps } from "./animation-props";
 
 /**
- * ボタンを開く
+ * ボタンを閉じる
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function open(props: StatusIconAnimationProps): Animate {
+export function close(props: StatusIconAnimationProps): Animate {
   const { model } = props;
-  return onStart(() => {
-    model.opacity = 0;
-  }).chain(tween(model, (t) => t.to({ opacity: 1 }, 200)));
+  return tween(model, (t) => t.to({ opacity: 0 }, 200));
 }
