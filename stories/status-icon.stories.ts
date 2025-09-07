@@ -9,5 +9,9 @@ export default {
 export const statusIcon = hudGameObjectStory((options) => {
   const icon = new StatusIcon(options);
   icon.open().play();
+  icon.notifyPushed().subscribe(() => {
+    console.log("pushed");
+    icon.decide().play();
+  });
   return [icon.getObject3D()];
 });

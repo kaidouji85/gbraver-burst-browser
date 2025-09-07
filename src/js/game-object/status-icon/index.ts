@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
@@ -6,6 +6,7 @@ import { GameObjectActionContainer } from "../action/game-object-action-containe
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
+import { notifyPushed } from "./procedures/notify-pushed";
 import {
   createStatusIconProps,
   StatusIconPropsCreatorOptions,
@@ -65,5 +66,13 @@ export class StatusIcon {
    */
   decide(): Animate {
     return decide(this.#props);
+  }
+
+  /**
+   * ボタン押下通知
+   * @returns 通知ストリーム
+   */
+  notifyPushed(): Observable<void> {
+    return notifyPushed(this.#props);
   }
 }

@@ -1,5 +1,6 @@
 import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { createInitialModel } from "../model/create-initial-model";
 import { createStatusIconSounds } from "../sounds/create-status-icon-sounds";
 import { StatusIconView } from "../view/status-icon-view";
@@ -7,6 +8,7 @@ import { StatusIconProps } from "./status-icon-props";
 
 /** プロパティ生成オプション */
 export type StatusIconPropsCreatorOptions = ResourcesContainer &
+  GameObjectActionContainer &
   SEPlayerContainer;
 
 /**

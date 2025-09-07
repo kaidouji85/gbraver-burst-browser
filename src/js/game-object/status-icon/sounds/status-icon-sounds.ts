@@ -5,5 +5,3 @@ export type StatusIconSounds = {
   /** 値変更 */
   changeValue: SoundResource;
 };
-
-
