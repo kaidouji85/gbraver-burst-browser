@@ -119,7 +119,7 @@
       <span class="{{ROOT}}__effects-label">適用中の効果：</span>
       {{#if allEffects.length}}
         {{#each allEffects}}
-          <span class="{{ROOT}}__effect-description">{{this}}</span>
+          <span class="{{../ROOT}}__effect-description">{{this}}</span>
           {{#unless @last}}、{{/unless}}
         {{/each}}
       {{else}}
