@@ -140,7 +140,7 @@
   border-right: 1px dashed;
   margin-right: calc(var(--responsive-font-size) * 0.5);
   padding-right: calc(var(--responsive-font-size) * 0.5);
-  min-width: calc(var(--responsive-font-size) * 4);
+  width: calc(var(--responsive-font-size) * 4);
 }
 
 .status__burst-available-box,
