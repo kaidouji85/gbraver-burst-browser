@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
@@ -56,5 +57,13 @@ export class StatusIcon {
    */
   open(): Animate {
     return open(this.#props);
+  }
+
+  /**
+   * 決定
+   * @returns アニメーション
+   */
+  decide(): Animate {
+    return decide(this.#props);
   }
 }

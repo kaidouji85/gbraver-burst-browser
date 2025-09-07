@@ -1,10 +1,13 @@
 import { ResourcesContainer } from "../../../resource";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createInitialModel } from "../model/create-initial-model";
+import { createStatusIconSounds } from "../sounds/create-status-icon-sounds";
 import { StatusIconView } from "../view/status-icon-view";
 import { StatusIconProps } from "./status-icon-props";
 
 /** プロパティ生成オプション */
-export type StatusIconPropsCreatorOptions = ResourcesContainer;
+export type StatusIconPropsCreatorOptions = ResourcesContainer &
+  SEPlayerContainer;
 
 /**
  * ステータスアイコンのプロパティを生成する
@@ -16,5 +19,6 @@ export function createStatusIconProps(
 ): StatusIconProps {
   const model = createInitialModel();
   const view = new StatusIconView(options);
-  return { model, view };
+  const sounds = createStatusIconSounds(options.resources);
+  return { ...options, model, view, sounds };
 }
