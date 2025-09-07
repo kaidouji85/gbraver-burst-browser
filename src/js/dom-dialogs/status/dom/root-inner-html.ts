@@ -7,7 +7,12 @@ import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { AVAILABLE_BOX, DISABLED_BOX, ROOT } from "./class-name";
+import {
+  ARMDOZER_POWER_VALUE,
+  ARMDOZER_POWER_VALUE_BUFFED,
+  AVAILABLE_BOX,
+  DISABLED_BOX,
+} from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** 発動可能ラベル */
@@ -46,6 +51,10 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const { armdozer, pilot } = options.state;
 
   const totalPower = armdozer.power + correctPower(armdozer.effects);
+  const isPowerBuffed = armdozer.power < totalPower;
+  const armdozerPowerVlueClassName = isPowerBuffed
+    ? ARMDOZER_POWER_VALUE_BUFFED
+    : ARMDOZER_POWER_VALUE;
   const burstDescription = burstDetail(armdozer.burst).join("");
   const pilotSkillDescription = pilotSkillDetail(pilot.skill).join("");
   const allEffects = armdozer.effects
@@ -78,12 +87,11 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
 
     armdozer,
     totalPower,
+    armdozerPowerVlueClassName,
     burstDescription,
     pilot,
     pilotSkillDescription,
     allEffects,
-
-    ROOT,
 
     closerPath,
     armdozerIconPath,
