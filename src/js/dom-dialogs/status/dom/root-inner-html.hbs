@@ -1,95 +1,93 @@
-<div class="{{ROOT}}__background"></div>
-<div class="{{ROOT}}__dialog">
+<div class="status__background"></div>
+<div class="status__dialog">
   <img
-    class="{{ROOT}}__closer"
+    class="status__closer"
     alt="閉じる"
     src="{{closerPath}}"
     data-id="closer"
   />
-  <div class="{{ROOT}}__contents">
-    <div class="{{ROOT}}__armdozer">
-      <div class="{{ROOT}}__armdozer-icon">
+  <div class="status__contents">
+    <div class="status__armdozer">
+      <div class="status__armdozer-icon">
         {{#if isEnemy}}
           <img
-            class="{{ROOT}}__armdozer-icon-img--enemy"
+            class="status__armdozer-icon-img--enemy"
             src="{{armdozerIconPath}}"
             alt="アームドーザアイコン"
           />
         {{else}}
           <img
-            class="{{ROOT}}__armdozer-icon-img"
+            class="status__armdozer-icon-img"
             src="{{armdozerIconPath}}"
             alt="アームドーザアイコン"
           />
         {{/if}}
       </div>
-      <div class="{{ROOT}}__armdozer-info">
-        <div class="{{ROOT}}__armdozer-basic-status">
-          <span class="{{ROOT}}__armdozer-name">{{armdozer.name}}</span>
-          <span class="{{ROOT}}__armdozer-hp">
-            <span class="{{ROOT}}__armdozer-hp-label">HP</span>
-            <span class="{{ROOT}}__armdozer-hp-value">
+      <div class="status__armdozer-info">
+        <div class="status__armdozer-basic-status">
+          <span class="status__armdozer-name">{{armdozer.name}}</span>
+          <span class="status__armdozer-hp">
+            <span class="status__armdozer-hp-label">HP</span>
+            <span class="status__armdozer-hp-value">
               {{armdozer.hp}}
             </span>
           </span>
-          <span class="{{ROOT}}__armdozer-battery">
-            <span class="{{ROOT}}__armdozer-battery-label">
+          <span class="status__armdozer-battery">
+            <span class="status__armdozer-battery-label">
               <img
-                class="{{ROOT}}__battery-icon"
+                class="status__battery-icon"
                 src="{{batteryIconPath}}"
                 alt="バッテリーアイコン"
               />
             </span>
-            <span class="{{ROOT}}__armdozer-battery-value">
+            <span class="status__armdozer-battery-value">
               {{armdozer.battery}}
             </span>
           </span>
-          <span class="{{ROOT}}__armdozer-power">
-            <span class="{{ROOT}}__armdozer-power-label">攻撃</span>
+          <span class="status__armdozer-power">
+            <span class="status__armdozer-power-label">攻撃</span>
             <span class="{{armdozerPowerVlueClassName}}">{{totalPower}}</span>
           </span>
-          <span class="{{ROOT}}__armdozer-speed">
-            <span class="{{ROOT}}__armdozer-speed-label">機動</span>
-            <span
-              class="{{ROOT}}__armdozer-speed-value"
-            >{{armdozer.speed}}</span>
+          <span class="status__armdozer-speed">
+            <span class="status__armdozer-speed-label">機動</span>
+            <span class="status__armdozer-speed-value">{{armdozer.speed}}</span>
           </span>
         </div>
-        <div class="{{ROOT}}__burst">
-          <span class="{{ROOT}}__burst-icon">
-            <span class="{{ROOT}}__burst-label">バースト</span>
+        <div class="status__burst">
+          <span class="status__burst-icon">
+            <span class="status__burst-label">バースト</span>
             <span class="{{burstAvailableClassName}}"></span>
             <span
-              class="{{ROOT}}__available-caption"
+              class="status__available-caption"
             >{{burstAvailableCaption}}</span>
           </span>
-          <span class="{{ROOT}}__burst-description">{{burstDescription}}</span>
+          <span class="status__burst-description">{{burstDescription}}</span>
         </div>
       </div>
     </div>
-    <div class="{{ROOT}}__pilot">
-      <div class="{{ROOT}}__pilot-icon">
+    <div class="status__pilot">
+      <div class="status__pilot-icon">
         {{#if isPilotHidden}}
-          <span class="{{ROOT}}__unknown-pilot">?</span>
+          <span class="status__unknown-pilot">?</span>
         {{else}}
           {{#if isEnemy}}
             <img
-              class="{{ROOT}}__pilot-icon-img--enemy"
+              class="status__pilot-icon-img--enemy"
               src="{{pilotIconPath}}"
               alt="パイロットアイコン"
             />
           {{else}}
             <img
-              class="{{ROOT}}__pilot-icon-img"
+              class="status__pilot-icon-img"
               src="{{pilotIconPath}}"
               alt="パイロットアイコン"
             />
           {{/if}}
         {{/if}}
       </div>
-      <div class="{{ROOT}}__pilot-info">
-        <div class="{{ROOT}}__pilot-basic-status">
-          <span class="{{ROOT}}__pilot-name">
+      <div class="status__pilot-info">
+        <div class="status__pilot-basic-status">
+          <span class="status__pilot-name">
             {{#if isPilotHidden}}
               ???
             {{else}}
@@ -97,15 +95,15 @@
             {{/if}}
           </span>
         </div>
-        <div class="{{ROOT}}__pilot-skill">
-          <span class="{{ROOT}}__pilot-skill-icon">
-            <span class="{{ROOT}}__pilot-skill-label">スキル</span>
+        <div class="status__pilot-skill">
+          <span class="status__pilot-skill-icon">
+            <span class="status__pilot-skill-label">スキル</span>
             <span class="{{pilotAvailableClassName}}"></span>
             <span
-              class="{{ROOT}}__available-caption"
+              class="status__available-caption"
             >{{pilotAvailableCaption}}</span>
           </span>
-          <span class="{{ROOT}}__pilot-skill-description">
+          <span class="status__pilot-skill-description">
             {{#if isPilotHidden}}
               ???
             {{else}}
@@ -115,15 +113,20 @@
         </div>
       </div>
     </div>
-    <div class="{{ROOT}}__effects">
-      <span class="{{ROOT}}__effects-label">適用中の効果：</span>
+    <div class="status__effects">
+      <span class="status__effects-label">適用中の効果：</span>
       {{#if allEffects.length}}
         {{#each allEffects}}
-          <span class="{{../ROOT}}__effect-description">{{this.effect}}</span>{{this.period}}
+          <span class="status__effect">
+            <span class="status__effect-description">{{this.effect}}</span>
+            <span class="status__effect-annotation">
+              {{this.annotation}}
+            </span>
+          </span>
           {{#unless @last}}、{{/unless}}
         {{/each}}
       {{else}}
-        <span class="{{ROOT}}__no-effects">なし</span>
+        <span class="status__no-effects">なし</span>
       {{/if}}
     </div>
   </div>

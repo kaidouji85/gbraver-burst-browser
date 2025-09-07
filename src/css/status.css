@@ -305,10 +305,6 @@
   padding: calc(var(--responsive-font-size) * 0.3);
 }
 
-.status__effects-label {
-  font-weight: bold;
-}
-
 .status__effect-description {
   color: var(--highlight-color);
   font-weight: bold;
