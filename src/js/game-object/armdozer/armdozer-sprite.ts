@@ -2,17 +2,20 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 
+/** ステータスアイコンの位置（ワールド座標） */
+export type StatusIconPosition = {
+  /** x軸 */
+  x: number;
+  /** y軸 */
+  y: number;
+  /** z軸 */
+  z: number;
+}
+
 /** アームドーザスプライト */
 export interface ArmdozerSprite {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: {
-    /** x軸 */
-    x: number;
-    /** y軸 */
-    y: number;
-    /** z軸 */
-    z: number;
-  };
+  statusIconPosition: StatusIconPosition;
 
   /**
    * デストラクタ相当の処理
