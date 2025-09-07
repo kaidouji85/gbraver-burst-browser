@@ -54,6 +54,7 @@ export class GenesisBraver
     super();
     const { gameObjectAction } = params;
     this.#props = createGenesisBraverProps(params);
+    this.statusIconPosition = this.#props.view.statusIconPosition;
     this.#unsubscribers = bindEventListeners({
       gameObjectAction,
       props: this.#props,
