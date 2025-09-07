@@ -59,12 +59,9 @@
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  width: min(
-    calc(
-      100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width) * 0.5
-    ),
-    90vw
+  width: calc(
+    100vw - var(--safe-area-right) - var(--safe-area-left) -
+      var(--closer-width) - var(--responsive-font-size) * 2
   );
   display: grid;
   grid-template: "armdozer" "pilot" "effects";
@@ -140,11 +137,13 @@
   border-right: 1px dashed;
   margin-right: calc(var(--responsive-font-size) * 0.5);
   padding-right: calc(var(--responsive-font-size) * 0.5);
-  min-width: calc(var(--responsive-font-size) * 4);
+  width: calc(var(--responsive-font-size) * 4);
 }
 
-.status__available-box,
-.status__disabled-box {
+.status__burst-available-box,
+.status__burst-disabled-box,
+.status__pilot-skill-available-box,
+.status__pilot-skill-disabled-box {
   --size: calc(var(--responsive-font-size) * 1.2);
 
   display: inline-block;
@@ -154,12 +153,16 @@
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
-.status__available-box {
+.status__burst-available-box,
+.status__pilot-skill-available-box {
   background-color: #00ff7f;
+  border: 1px solid #008042;
 }
 
-.status__disabled-box {
-  background-color: #ff7f7f;
+.status__burst-disabled-box,
+.status__pilot-skill-disabled-box {
+  background-color: #696969;
+  border: 1px solid #333;
 }
 
 /* ============================================================ 

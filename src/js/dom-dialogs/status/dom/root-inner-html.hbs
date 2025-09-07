@@ -56,10 +56,13 @@
         <div class="status__burst">
           <span class="status__burst-icon">
             <span class="status__burst-label">バースト</span>
-            <span class="{{burstAvailableClassName}}"></span>
-            <span
-              class="status__available-caption"
-            >{{burstAvailableCaption}}</span>
+            {{#if armdozer.enableBurst}}
+              <span class="status__burst-available-box"></span>
+              <span class="status__burst-available-caption">発動可</span>
+            {{else}}
+              <span class="status__burst-disabled-box"></span>
+              <span class="status__burst-disabled-caption">発動済</span>
+            {{/if}}
           </span>
           <span class="status__burst-description">{{burstDescription}}</span>
         </div>
@@ -98,10 +101,13 @@
         <div class="status__pilot-skill">
           <span class="status__pilot-skill-icon">
             <span class="status__pilot-skill-label">スキル</span>
-            <span class="{{pilotAvailableClassName}}"></span>
-            <span
-              class="status__available-caption"
-            >{{pilotAvailableCaption}}</span>
+            {{#if pilot.enableSkill}}
+              <span class="status__pilot-skill-available-box"></span>
+              <span class="status__pilot-skill-available-caption">発動可</span>
+            {{else}}
+              <span class="status__pilot-skill-disabled-box"></span>
+              <span class="status__pilot-skill-disabled-caption">発動済</span>
+            {{/if}}
           </span>
           <span class="status__pilot-skill-description">
             {{#if isPilotHidden}}
