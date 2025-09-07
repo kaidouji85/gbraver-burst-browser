@@ -143,8 +143,8 @@
   min-width: calc(var(--responsive-font-size) * 4);
 }
 
-.status__available-box,
-.status__disabled-box {
+.status__burst-available-box,
+.status__burst-disabled-box {
   --size: calc(var(--responsive-font-size) * 1.2);
 
   display: inline-block;
@@ -154,12 +154,12 @@
   border-radius: calc(var(--responsive-font-size) * 0.2);
 }
 
-.status__available-box {
+.status__burst-available-box {
   background-color: #00ff7f;
 }
 
-.status__disabled-box {
-  background-color: #ff7f7f;
+.status__burst-disabled-box {
+  background-color: #696969;
 }
 
 /* ============================================================ 
