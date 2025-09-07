@@ -59,7 +59,7 @@
   box-sizing: border-box;
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  width: min(
+  max-width: min(
     calc(
       100vw - var(--safe-area-right) - var(--safe-area-left) -
         var(--closer-width) * 0.5

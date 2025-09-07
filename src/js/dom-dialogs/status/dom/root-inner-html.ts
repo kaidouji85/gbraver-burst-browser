@@ -10,16 +10,8 @@ import { PathIds } from "../../../resource/path/ids";
 import {
   ARMDOZER_POWER_VALUE,
   ARMDOZER_POWER_VALUE_BUFFED,
-  AVAILABLE_BOX,
-  DISABLED_BOX,
 } from "./class-name";
 import template from "./root-inner-html.hbs";
-
-/** 発動可能ラベル */
-const AVAILABLE = "発動可";
-
-/** 発動済ラベル */
-const DISABLED = "発動済";
 
 /** オプション */
 export type RootInnerHTMLOptions = ResourcesContainer & {
@@ -72,15 +64,6 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
   const batteryIconPath =
     resources.paths.find((p) => p.id === PathIds.BATTERY_ICON)?.path ?? "";
 
-  const burstAvailableClassName = armdozer.enableBurst
-    ? AVAILABLE_BOX
-    : DISABLED_BOX;
-  const burstAvailableCaption = armdozer.enableBurst ? AVAILABLE : DISABLED;
-  const pilotAvailableClassName = pilot.enableSkill
-    ? AVAILABLE_BOX
-    : DISABLED_BOX;
-  const pilotAvailableCaption = pilot.enableSkill ? AVAILABLE : DISABLED;
-
   return template({
     isEnemy,
     isPilotHidden,
@@ -97,10 +80,5 @@ export function rootInnerHTML(options: RootInnerHTMLOptions): string {
     armdozerIconPath,
     pilotIconPath,
     batteryIconPath,
-
-    burstAvailableClassName,
-    burstAvailableCaption,
-    pilotAvailableClassName,
-    pilotAvailableCaption,
   });
 }
