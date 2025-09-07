@@ -2,10 +2,10 @@ import { PushDOM } from "../../../dom/push-dom";
 import { StatusDialogProps } from "../props";
 
 /**
- * バックグラウンドが押されたときの処理
+ * ルート要素が押されたときの処理
  * @param options オプション
  */
-export function onBackGroundPush(options: {
+export function onRootPush(options: {
   /** ステータスダイアログのプロパティ */
   props: StatusDialogProps;
   /** アクション */
