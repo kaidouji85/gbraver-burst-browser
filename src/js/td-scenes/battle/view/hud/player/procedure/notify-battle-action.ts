@@ -11,10 +11,13 @@ import { HUDPlayerProps } from "../props";
 export function notifyBattleAction(
   props: HUDPlayerProps,
 ): Observable<BattleSceneAction> {
-  const { predicatedDamage } = props;
+  const { predicatedDamage, statusIcon, playerId } = props;
   return merge(
     predicatedDamage
       .notifyPush()
       .pipe(map(() => ({ type: "battleSimulatorStart" }) as const)),
+    statusIcon
+      .notifyPushed()
+      .pipe(map(() => ({ type: "statusOpeningByIcon", playerId }) as const)),
   );
 }

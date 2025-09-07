@@ -12,6 +12,7 @@ import { PlayerStatusOpening } from "./player-status-opening";
 import { PlusBattery } from "./plus-battery";
 import { StartBattleScene } from "./start-battle-scene";
 import { StatusClosing } from "./status-closing";
+import { StatusOpeningByIcon } from "./status-opening-by-icon";
 import { ToggleTimeScale } from "./toggle-time-scale";
 
 /** 戦闘シーンアクション */
@@ -30,4 +31,5 @@ export type BattleSceneAction =
   | BattleSimulatorEnd
   | PlayerStatusOpening
   | EnemyStatusOpening
+  | StatusOpeningByIcon
   | StatusClosing;

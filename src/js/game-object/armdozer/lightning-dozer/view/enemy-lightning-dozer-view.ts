@@ -6,8 +6,13 @@ import { PlayerLightingDozerView } from "./player-lighting-dozer-view";
  * 敵側のライトニングドーザビュー
  */
 export class EnemyLightningDozerView extends PlayerLightingDozerView {
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     super(resources);
+    this.statusIconPosition.x *= -1;
   }
 
   /**

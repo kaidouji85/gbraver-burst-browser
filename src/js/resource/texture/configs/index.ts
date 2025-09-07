@@ -18,6 +18,7 @@ import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShinyaTextureConfigs } from "./shinya";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShotTextureConfigs } from "./shot";
+import { StatusIconConfigs } from "./status-icon";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
@@ -48,4 +49,5 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...PredicatedDamageTextureConfigs,
   ...GranDozerTextureConfigs,
   ...ShotTextureConfigs,
+  ...StatusIconConfigs,
 ];

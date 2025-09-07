@@ -13,5 +13,6 @@ export function getObject3Ds(props: HUDPlayerProps): THREE.Object3D[] {
     props.turnStart.getObject3D(),
     props.resultIndicator.getObject3D(),
     props.predicatedDamage.getObject3D(),
+    props.statusIcon.getObject3D(),
   ];
 }

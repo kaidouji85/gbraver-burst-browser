@@ -1,9 +1,13 @@
 import * as THREE from "three";
 
-import type { GenesisBraverModel } from "../model/genesis-braver-model";
+import { StatusIconPosition } from "../../armdozer-sprite";
+import { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /** ジェネシスブレイバービュー */
 export interface GenesisBraverView {
+  /** ステータスアイコンの位置情報（ワールド座標） */
+  statusIconPosition: StatusIconPosition;
+
   /**
    * デストラクタ相当の処理
    */

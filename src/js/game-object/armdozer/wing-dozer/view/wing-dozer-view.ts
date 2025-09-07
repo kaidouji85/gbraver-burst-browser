@@ -1,9 +1,13 @@
 import * as THREE from "three";
 
-import type { WingDozerModel } from "../model/wing-dozer-model";
+import { StatusIconPosition } from "../../armdozer-sprite";
+import { WingDozerModel } from "../model/wing-dozer-model";
 
 /**ウィングドーザ ビュー */
 export interface WingDozerView {
+  /** ステータスアイコンの位置（ワールド座標） */
+  statusIconPosition: StatusIconPosition;
+
   /**
    * デストラクタ相当の処理
    */
