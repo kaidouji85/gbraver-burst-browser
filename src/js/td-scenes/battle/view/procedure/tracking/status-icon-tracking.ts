@@ -26,8 +26,8 @@ type StatusIconTrackingOptions = {
 function playerStatusIconTracking(options: StatusIconTrackingOptions) {
   const { statusIcon, tdCamera, rendererDOM } = options;
   const origin = {
-    x: ARMDOZER_EFFECT_STANDARD_X - 90,
-    y: ARMDOZER_EFFECT_STANDARD_Y,
+    x: ARMDOZER_EFFECT_STANDARD_X - 80,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 70,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);

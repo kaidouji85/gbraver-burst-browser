@@ -7,6 +7,9 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { hudUIScale } from "../../scale";
 import { StatusIconModel } from "../model/status-icon-model";
 
+/** テクスチャの大きさ */
+const TEXTURE_SIZE = 70;
+
 /** ステータスアイコンのビュー */
 export class StatusIconView {
   /** ボタンのテクスチャ */
@@ -24,8 +27,8 @@ export class StatusIconView {
     this.#button = new HorizontalAnimationMesh({
       texture: buttonTexture,
       maxAnimation: 1,
-      width: 70,
-      height: 70,
+      width: TEXTURE_SIZE,
+      height: TEXTURE_SIZE,
     });
   }
 
