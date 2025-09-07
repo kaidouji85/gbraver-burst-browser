@@ -1,7 +1,9 @@
 import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
+import { Animate } from "../../animation/animate";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { open } from "./animation/open";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createStatusIconProps,
@@ -46,5 +48,13 @@ export class StatusIcon {
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
+  }
+
+  /**
+   * ボタンを表示する
+   * @returns アニメーション
+   */
+  open(): Animate {
+    return open(this.#props);
   }
 }

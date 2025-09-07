@@ -1,10 +1,8 @@
-import { StatusIconModel } from "../model/status-icon-model";
+import { StatusIconAnimationProps } from "../animation/animation-props";
 import { StatusIconView } from "../view/status-icon-view";
 
 /** ステータスアイコンのプロパティ */
-export type StatusIconProps = {
-  /** ステータスアイコンのモデル */
-  model: StatusIconModel;
+export type StatusIconProps = StatusIconAnimationProps & {
   /** ステータスアイコンのビュー */
   view: StatusIconView;
 };
