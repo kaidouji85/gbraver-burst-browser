@@ -27,7 +27,7 @@ function playerStatusIconTracking(options: StatusIconTrackingOptions) {
   const { statusIcon, tdCamera, rendererDOM } = options;
   const origin = {
     x: ARMDOZER_EFFECT_STANDARD_X - 80,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 70,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 80,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
@@ -42,8 +42,8 @@ function playerStatusIconTracking(options: StatusIconTrackingOptions) {
 function enemyStatusIconTracking(options: StatusIconTrackingOptions) {
   const { statusIcon, tdCamera, rendererDOM } = options;
   const origin = {
-    x: -ARMDOZER_EFFECT_STANDARD_X + 60,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 30,
+    x: -ARMDOZER_EFFECT_STANDARD_X + 80,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 80,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
