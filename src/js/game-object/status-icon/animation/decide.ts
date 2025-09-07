@@ -14,6 +14,6 @@ export function decide(props: StatusIconAnimationProps): Animate {
     model.scale = 1;
     se.play(sounds.changeValue);
   })
-    .chain(tween(model, (t) => t.to({ scale: 1.1 }, 100)))
-    .chain(tween(model, (t) => t.to({ scale: 1 }, 100)));
+    .chain(tween(model, (t) => t.to({ scale: 1.18 }, 80)))
+    .chain(tween(model, (t) => t.to({ scale: 1 }, 80)));
 }
