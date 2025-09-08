@@ -5,7 +5,7 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT } from "../dom/class-name";
-import { extractCloser } from "../dom/extract-element";
+import { extractBackGround, extractCloser } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { StatusDialogProps } from "../props";
 
@@ -25,6 +25,7 @@ export function createStatusDialogProps(
   root.className = ROOT;
   root.innerHTML = rootInnerHTML(options);
   const closer = extractCloser(root);
+  const background = extractBackGround(root);
 
   const exclusive = new Exclusive();
 
@@ -39,6 +40,7 @@ export function createStatusDialogProps(
 
     root,
     closer,
+    background,
 
     exclusive,
 
