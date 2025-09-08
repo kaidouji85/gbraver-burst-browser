@@ -10,6 +10,8 @@ export type StatusDialogProps = SEPlayerContainer & {
   readonly root: HTMLElement;
   /** クローザー要素 */
   readonly closer: HTMLImageElement;
+  /** バックグラウンド要素 */
+  readonly background: HTMLElement;
 
   /** 排他制御 */
   readonly exclusive: Exclusive;
