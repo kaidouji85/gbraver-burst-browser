@@ -60,13 +60,23 @@
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   width: calc(
-    100vw - var(--safe-area-right) - var(--safe-area-left) -
-      var(--closer-width) - var(--responsive-font-size) * 2
+    100vw -
+      max(
+        var(--safe-area-right) + var(--safe-area-left),
+        var(--closer-width) + var(--responsive-font-size) * 2
+      )
+  );
+  height: calc(
+    100vh -
+      max(
+        var(--safe-area-top) + var(--safe-area-bottom),
+        var(--closer-height) + var(--responsive-font-size) * 2
+      )
   );
   display: grid;
   grid-template: "armdozer" "pilot" "effects";
   gap: var(--grid-gap);
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* ============================================================ 
