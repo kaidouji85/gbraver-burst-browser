@@ -74,7 +74,7 @@
       )
   );
   display: grid;
-  grid-template: "armdozer" "pilot" "effects";
+  grid-template: "armdozer" "pilot" "effects" / auto auto 1fr;
   gap: var(--grid-gap);
   overflow: auto;
 }
@@ -309,9 +309,10 @@
 
 .status__effects {
   grid-area: effects;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-content: flex-start;
+  gap: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
   border: 1px solid #e6e3e1;
   border-radius: calc(var(--responsive-font-size) * 0.2);
