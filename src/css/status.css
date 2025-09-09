@@ -74,7 +74,7 @@
       )
   );
   display: grid;
-  grid-template: "armdozer" "pilot" "effects" / auto auto 1fr;
+  grid-template: "armdozer" "pilot" "effects";
   gap: var(--grid-gap);
   overflow: auto;
 }
