@@ -88,7 +88,7 @@
 .status__pilot-icon {
   display: grid;
   align-items: center;
-  width: calc(var(--responsive-font-size) * 4.5);
+  width: calc(var(--responsive-font-size) * 7);
   overflow: visible;
 
   /** 文字要素の下に表示されるようにz-indexを調整 */
