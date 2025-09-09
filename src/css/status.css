@@ -196,8 +196,9 @@
   grid-area: armdozer-info;
   display: grid;
   grid-template:
-    "armdozer-basic-status" auto
-    "burst" auto;
+    "armdozer-name"
+    "armdozer-basic-status"
+    "burst";
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
@@ -206,17 +207,17 @@
   align-items: start;
 }
 
+.status__armdozer-name {
+  grid-area: armdozer-name;
+  font-weight: bold;
+}
+
 .status__armdozer-basic-status {
   grid-area: armdozer-basic-status;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--grid-gap);
-}
-
-.status__armdozer-name,
-.status__pilot-name {
-  font-weight: bold;
 }
 
 .status__armdozer-hp,
@@ -298,6 +299,10 @@
 
 .status__pilot-basic-status {
   grid-area: pilot-basic-status;
+}
+
+.status__pilot-name {
+  font-weight: bold;
 }
 
 .status__pilot-skill {
