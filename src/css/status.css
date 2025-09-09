@@ -203,7 +203,7 @@
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
   align-items: start;
-  align-self: start;
+  align-self: end;
 }
 
 .status__armdozer-name {
@@ -292,7 +292,7 @@
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
-  align-self: start;
+  align-self: end;
 }
 
 .status__pilot-name {
