@@ -196,13 +196,14 @@
   grid-area: armdozer-info;
   display: grid;
   grid-template:
-    "armdozer-basic-status"
-    "burst";
+    "armdozer-basic-status" auto
+    "burst" auto;
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
+  align-items: start;
 }
 
 .status__armdozer-basic-status {
