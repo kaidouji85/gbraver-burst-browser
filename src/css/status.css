@@ -182,9 +182,7 @@
 .status__armdozer {
   grid-area: armdozer;
   display: grid;
-  grid-template:
-    "armdozer-icon armdozer-info"
-    "armdozer-icon armdozer-info" / auto 1fr;
+  grid-template: "armdozer-icon armdozer-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -266,9 +264,7 @@
 .status__pilot {
   grid-area: pilot;
   display: grid;
-  grid-template:
-    "pilot-icon pilot-info"
-    "pilot-icon pilot-info" / auto 1fr;
+  grid-template: "pilot-icon pilot-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -296,6 +292,7 @@
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
+  align-self: start;
 }
 
 .status__pilot-basic-status {
