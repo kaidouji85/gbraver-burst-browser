@@ -60,13 +60,23 @@
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   width: calc(
-    100vw - var(--safe-area-right) - var(--safe-area-left) -
-      var(--closer-width) - var(--responsive-font-size) * 2
+    100vw -
+      max(
+        var(--safe-area-right) + var(--safe-area-left),
+        var(--closer-width) + var(--responsive-font-size) * 2
+      )
+  );
+  height: calc(
+    100vh -
+      max(
+        var(--safe-area-top) + var(--safe-area-bottom),
+        var(--closer-height) + var(--responsive-font-size) * 2
+      )
   );
   display: grid;
   grid-template: "armdozer" "pilot" "effects";
   gap: var(--grid-gap);
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* ============================================================ 
@@ -186,13 +196,14 @@
   grid-area: armdozer-info;
   display: grid;
   grid-template:
-    "armdozer-basic-status"
-    "burst";
+    "armdozer-basic-status" auto
+    "burst" auto;
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
+  align-items: start;
 }
 
 .status__armdozer-basic-status {
@@ -299,9 +310,10 @@
 
 .status__effects {
   grid-area: effects;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-content: flex-start;
+  gap: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
   border: 1px solid #e6e3e1;
   border-radius: calc(var(--responsive-font-size) * 0.2);
