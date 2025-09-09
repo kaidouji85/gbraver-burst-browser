@@ -60,14 +60,14 @@
   padding: max(var(--closer-height) / 2, var(--dialog-padding))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   width: calc(
-    100vw -
+    100dvw -
       max(
         var(--safe-area-right) + var(--safe-area-left),
         var(--closer-width) + var(--responsive-font-size) * 2
       )
   );
   height: calc(
-    100vh -
+    100dvh -
       max(
         var(--safe-area-top) + var(--safe-area-bottom),
         var(--closer-height) + var(--responsive-font-size) * 2
