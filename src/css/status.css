@@ -285,7 +285,7 @@
   grid-area: pilot-info;
   display: grid;
   grid-template:
-    "pilot-basic-status"
+    "pilot-name"
     "pilot-skill";
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
@@ -295,11 +295,8 @@
   align-self: start;
 }
 
-.status__pilot-basic-status {
-  grid-area: pilot-basic-status;
-}
-
 .status__pilot-name {
+  grid-area: pilot-name;
   font-weight: bold;
 }
 

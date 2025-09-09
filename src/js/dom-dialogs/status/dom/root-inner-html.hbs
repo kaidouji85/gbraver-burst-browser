@@ -89,15 +89,13 @@
         {{/if}}
       </div>
       <div class="status__pilot-info">
-        <div class="status__pilot-basic-status">
-          <span class="status__pilot-name">
-            {{#if isPilotHidden}}
-              ???
-            {{else}}
-              {{pilot.name}}
-            {{/if}}
-          </span>
-        </div>
+        <span class="status__pilot-name">
+          {{#if isPilotHidden}}
+            ???
+          {{else}}
+            {{pilot.name}}
+          {{/if}}
+        </span>
         <div class="status__pilot-skill">
           <span class="status__pilot-skill-icon">
             <span class="status__pilot-skill-label">スキル</span>
