@@ -24,8 +24,8 @@
         {{/if}}
       </div>
       <div class="status__armdozer-info">
+        <div class="status__armdozer-name">{{armdozer.name}}</div>
         <div class="status__armdozer-basic-status">
-          <span class="status__armdozer-name">{{armdozer.name}}</span>
           <span class="status__armdozer-hp">
             <span class="status__armdozer-hp-label">HP</span>
             <span class="status__armdozer-hp-value">
@@ -89,15 +89,13 @@
         {{/if}}
       </div>
       <div class="status__pilot-info">
-        <div class="status__pilot-basic-status">
-          <span class="status__pilot-name">
-            {{#if isPilotHidden}}
-              ???
-            {{else}}
-              {{pilot.name}}
-            {{/if}}
-          </span>
-        </div>
+        <span class="status__pilot-name">
+          {{#if isPilotHidden}}
+            ???
+          {{else}}
+            {{pilot.name}}
+          {{/if}}
+        </span>
         <div class="status__pilot-skill">
           <span class="status__pilot-skill-icon">
             <span class="status__pilot-skill-label">スキル</span>

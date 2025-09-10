@@ -88,7 +88,7 @@
 .status__pilot-icon {
   display: grid;
   align-items: center;
-  width: calc(var(--responsive-font-size) * 4.5);
+  width: calc(var(--responsive-font-size) * 7);
   overflow: visible;
 
   /** 文字要素の下に表示されるようにz-indexを調整 */
@@ -182,9 +182,7 @@
 .status__armdozer {
   grid-area: armdozer;
   display: grid;
-  grid-template:
-    "armdozer-icon armdozer-info"
-    "armdozer-icon armdozer-info" / auto 1fr;
+  grid-template: "armdozer-icon armdozer-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -196,14 +194,21 @@
   grid-area: armdozer-info;
   display: grid;
   grid-template:
-    "armdozer-basic-status" auto
-    "burst" auto;
+    "armdozer-name"
+    "armdozer-basic-status"
+    "burst";
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
   align-items: start;
+  align-self: end;
+}
+
+.status__armdozer-name {
+  grid-area: armdozer-name;
+  font-weight: bold;
 }
 
 .status__armdozer-basic-status {
@@ -212,11 +217,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--grid-gap);
-}
-
-.status__armdozer-name,
-.status__pilot-name {
-  font-weight: bold;
 }
 
 .status__armdozer-hp,
@@ -264,9 +264,7 @@
 .status__pilot {
   grid-area: pilot;
   display: grid;
-  grid-template:
-    "pilot-icon pilot-info"
-    "pilot-icon pilot-info" / auto 1fr;
+  grid-template: "pilot-icon pilot-info" / auto 1fr;
   gap: var(--grid-gap);
 }
 
@@ -287,17 +285,19 @@
   grid-area: pilot-info;
   display: grid;
   grid-template:
-    "pilot-basic-status"
+    "pilot-name"
     "pilot-skill";
   gap: var(--grid-gap);
   background: rgb(23 23 23 / 60%);
   border-radius: calc(var(--responsive-font-size) * 0.5);
   padding: calc(var(--responsive-font-size) * 0.2);
   box-sizing: border-box;
+  align-self: end;
 }
 
-.status__pilot-basic-status {
-  grid-area: pilot-basic-status;
+.status__pilot-name {
+  grid-area: pilot-name;
+  font-weight: bold;
 }
 
 .status__pilot-skill {
