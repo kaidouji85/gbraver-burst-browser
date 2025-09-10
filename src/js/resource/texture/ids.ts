@@ -1,3 +1,5 @@
+import { BATTLE_SIMULATOR } from "../../game-dom/battle-hamburger-menu/dom/class-name";
+
 /** テクスチャIDをまとめたもの */
 export const TEXTURE_IDS = {
   SHIN_BRAVER_STAND: "SHIN_BRAVER_STAND",
@@ -135,4 +137,5 @@ export const TEXTURE_IDS = {
   PREDICATED_DAMAGE_NUMBER: "PREDICATED_DAMAGE_NUMBER",
   LIGHTNING_SHOT: "LIGHTNING_SHOT",
   STATUS_ICON: "STATUS_ICON",
+  BATTLE_SIMULATOR_ICON: "BATTLE_SIMULATOR_ICON",
 };

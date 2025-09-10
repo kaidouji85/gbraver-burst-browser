@@ -1,6 +1,7 @@
 import { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
+import { BattleSimulatorIconConfigs } from "./battle-simulator-icon";
 import { DamageNumberTextureConfigs } from "./damage-number";
 import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
@@ -50,4 +51,5 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...GranDozerTextureConfigs,
   ...ShotTextureConfigs,
   ...StatusIconConfigs,
+  ...BattleSimulatorIconConfigs,
 ];
