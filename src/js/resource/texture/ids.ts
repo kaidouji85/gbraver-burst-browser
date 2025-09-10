@@ -1,5 +1,3 @@
-import { BATTLE_SIMULATOR } from "../../game-dom/battle-hamburger-menu/dom/class-name";
-
 /** テクスチャIDをまとめたもの */
 export const TEXTURE_IDS = {
   SHIN_BRAVER_STAND: "SHIN_BRAVER_STAND",
