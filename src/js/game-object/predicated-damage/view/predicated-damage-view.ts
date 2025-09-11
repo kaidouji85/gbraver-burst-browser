@@ -1,5 +1,6 @@
 import * as R from "ramda";
-import { Observable } from "rxjs";
+import { merge, Observable } from "rxjs";
+import { throttleTime } from "rxjs/operators";
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
@@ -103,7 +104,7 @@ export class PredicatedDamageView {
       ...params,
       radius: 30,
       segments: 32,
-      visible: true,
+      visible: false,
     });
     this.#group.add(this.#battleSimulatorIconPushDetector.getObject3D());
 
@@ -203,6 +204,9 @@ export class PredicatedDamageView {
    * @returns 通知ストリーム
    */
   notifyPush(): Observable<Event> {
-    return this.#numberPushDetector.notifyPressed();
+    return merge(
+      this.#numberPushDetector.notifyPressed(),
+      this.#battleSimulatorIconPushDetector.notifyPressed(),
+    ).pipe(throttleTime(100));
   }
 }
