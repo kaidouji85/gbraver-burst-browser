@@ -207,6 +207,7 @@ export class PredicatedDamageView {
     return merge(
       this.#numberPushDetector.notifyPressed(),
       this.#battleSimulatorIconPushDetector.notifyPressed(),
-    ).pipe(throttleTime(100));
+    )
+    .pipe(throttleTime(100));
   }
 }
