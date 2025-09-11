@@ -10,7 +10,7 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import { hudScale, hudUIScale } from "../../scale";
+import { hudUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
