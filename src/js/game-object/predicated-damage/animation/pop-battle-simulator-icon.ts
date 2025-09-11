@@ -8,10 +8,13 @@ import { PredicatedDamageAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function popBattleSimulatorIcon(props: PredicatedDamageAnimationProps): Animate {
+export function popBattleSimulatorIcon(
+  props: PredicatedDamageAnimationProps,
+): Animate {
   const { model, sounds, se } = props;
   return onStart(() => {
     model.battleSimulatorIconScale = 1;
+    model.shouldPushNotifierStop = true;
     se.play(sounds.changeValue);
   })
     .chain(tween(model, (t) => t.to({ battleSimulatorIconScale: 1.18 }, 80)))
