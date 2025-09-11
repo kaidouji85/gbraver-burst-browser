@@ -1,6 +1,5 @@
 import * as R from "ramda";
-import { merge, Observable } from "rxjs";
-import { throttleTime } from "rxjs/operators";
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
@@ -11,7 +10,6 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import { planePushDetector } from "../../push-detector/square-push-detector";
 import { hudScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
@@ -26,12 +24,6 @@ const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
 
 /** 数字メッシュ間隔 */
 const NUMBER_MESH_INTERVAL = 72 * NUMBER_SIZE_SCALE;
-
-/** 数字メッシュのプッシュ検出器幅 */
-const NUMBER_PUSH_DETECTOR_WIDTH = 384 * NUMBER_SIZE_SCALE;
-
-/** 数字メッシュのプッシュ検出器高さ */
-const NUMBER_PUSH_DETECTOR_HEIGHT = 128 * NUMBER_SIZE_SCALE;
 
 /** 数字表示に必要な最大文字数（マイナス符号含む） */
 const MAX_NUMBER_CHARACTERS = 5;
@@ -58,8 +50,6 @@ export class PredicatedDamageView {
   #group: THREE.Group;
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
-  /** ボタン押下検知 */
-  #numberPushDetector: PushDetector;
   /** バトルシミュレーターアイコン */
   #battleSimulatorIcon: HorizontalAnimationMesh;
   /** バトルシミュレーターアイコンのプッシュ検出器 */
@@ -92,14 +82,6 @@ export class PredicatedDamageView {
       this.#group.add(n.getObject3D());
     });
 
-    this.#numberPushDetector = planePushDetector({
-      ...params,
-      width: NUMBER_PUSH_DETECTOR_WIDTH,
-      height: NUMBER_PUSH_DETECTOR_HEIGHT,
-      visible: false,
-    });
-    this.#group.add(this.#numberPushDetector.getObject3D());
-
     this.#battleSimulatorIconPushDetector = circlePushDetector({
       ...params,
       radius: 30,
@@ -128,7 +110,6 @@ export class PredicatedDamageView {
     this.#numbers.forEach((n) => {
       n.destructor();
     });
-    this.#numberPushDetector.destructor();
     this.#battleSimulatorIcon.destructor();
     this.#battleSimulatorIconPushDetector.destructor();
   }
@@ -192,10 +173,6 @@ export class PredicatedDamageView {
 
     this.#battleSimulatorIconPushDetector.getObject3D().position.x =
       battleSimulatorIconX;
-
-    const damageDigit = values.length + 1;
-    this.#numberPushDetector.getObject3D().scale.x =
-      damageDigit / MAX_NUMBER_CHARACTERS;
   }
 
   /**
@@ -211,9 +188,6 @@ export class PredicatedDamageView {
    * @returns 通知ストリーム
    */
   notifyPush(): Observable<Event> {
-    return merge(
-      this.#numberPushDetector.notifyPressed(),
-      this.#battleSimulatorIconPushDetector.notifyPressed(),
-    ).pipe(throttleTime(100));
+    return this.#battleSimulatorIconPushDetector.notifyPressed();
   }
 }
