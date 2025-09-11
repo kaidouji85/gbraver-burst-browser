@@ -42,9 +42,15 @@ const createPredicatedDamage = (params: CreatorParams): THREE.Object3D => {
   const { damage } = params;
   const predicatedDamage = new PredicatedDamage(params);
   predicatedDamage.getObject3D().position.y = params.y ?? 0;
-  flash(predicatedDamage, damage);
+  predicatedDamage.show(damage).play();
   predicatedDamage.notifyPush().subscribe(() => {
     console.log("push");
+    predicatedDamage
+      .popBattleSimulatorIcon()
+      .chain(predicatedDamage.hidden())
+      .chain(delay(1000))
+      .chain(predicatedDamage.show(damage))
+      .play();
   });
   return predicatedDamage.getObject3D();
 };

@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { Animate } from "../../animation/animate";
 import { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
+import { popBattleSimulatorIcon } from "./animation/pop-battle-simulator-icon";
 import { show } from "./animation/show";
 import { bindEventListener } from "./procedure/bind-event-listener";
 import { notifyPush } from "./procedure/notify-push";
@@ -72,6 +73,14 @@ export class PredicatedDamage {
    */
   hidden(): Animate {
     return hidden(this.#props);
+  }
+
+  /**
+   * バトルシュミレーターアイコンをポップさせる
+   * @returns アニメーション
+   */
+  popBattleSimulatorIcon(): Animate {
+    return popBattleSimulatorIcon(this.#props);
   }
 
   /**
