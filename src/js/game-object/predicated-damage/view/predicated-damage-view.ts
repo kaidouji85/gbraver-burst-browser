@@ -7,8 +7,9 @@ import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { GameObjectAction } from "../../action/game-object-action";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
+import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { planePushDetector } from "../../push-detector/square-push-detector";
 import { hudScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
@@ -47,10 +48,8 @@ const BATTLE_SIMULATOR_ICON_SIZE = 70;
 const NUMBER_TO_ICON_MARGIN = 2;
 
 /** コンストラクタのパラメータ */
-export type PredicatedDamageViewConstructParams = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+export type PredicatedDamageViewConstructParams = ResourcesContainer &
+  GameObjectActionContainer;
 
 /** ダメージ予想 ビュー */
 export class PredicatedDamageView {
@@ -62,6 +61,8 @@ export class PredicatedDamageView {
   #numberPushDetector: PushDetector;
   /** バトルシミュレーターアイコン */
   #battleSimulatorIcon: HorizontalAnimationMesh;
+  /** バトルシミュレーターアイコンのプッシュ検出器 */
+  #battleSimulatorIconPushDetector: PushDetector;
 
   /**
    * コンストラクタ
@@ -98,6 +99,14 @@ export class PredicatedDamageView {
     });
     this.#group.add(this.#numberPushDetector.getObject3D());
 
+    this.#battleSimulatorIconPushDetector = circlePushDetector({
+      ...params,
+      radius: 30,
+      segments: 32,
+      visible: true,
+    });
+    this.#group.add(this.#battleSimulatorIconPushDetector.getObject3D());
+
     const { texture: battleSimulatorIconTexture } = findTextureOrThrow(
       resources,
       TEXTURE_IDS.BATTLE_SIMULATOR_ICON,
@@ -120,6 +129,7 @@ export class PredicatedDamageView {
     });
     this.#numberPushDetector.destructor();
     this.#battleSimulatorIcon.destructor();
+    this.#battleSimulatorIconPushDetector.destructor();
   }
 
   /**
@@ -165,11 +175,15 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    this.#battleSimulatorIcon.getObject3D().position.x =
+    const battleSimulatorIconX =
       (intervalCount / 2) * NUMBER_MESH_INTERVAL +
       BATTLE_SIMULATOR_ICON_SIZE / 2 +
       NUMBER_TO_ICON_MARGIN;
+    this.#battleSimulatorIcon.getObject3D().position.x = battleSimulatorIconX;
     this.#battleSimulatorIcon.opacity(opacity);
+
+    this.#battleSimulatorIconPushDetector.getObject3D().position.x =
+      battleSimulatorIconX;
 
     const damageDigit = values.length + 1;
     this.#numberPushDetector.getObject3D().scale.x =
