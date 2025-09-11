@@ -10,7 +10,7 @@ import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import { hudScale } from "../../scale";
+import { hudScale, hudUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -123,7 +123,7 @@ export class PredicatedDamageView {
     const { damage, opacity } = model;
     const { safeAreaInset, rendererDOM } = preRender;
 
-    const scale = hudScale(rendererDOM, safeAreaInset);
+    const scale = hudUIScale(rendererDOM, safeAreaInset);
     this.#group.scale.set(scale, scale, scale);
 
     const correctDamage = Math.max(
