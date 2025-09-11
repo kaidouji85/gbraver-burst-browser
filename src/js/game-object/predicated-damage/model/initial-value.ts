@@ -9,5 +9,6 @@ export function initialValue(): PredicatedDamageModel {
     damage: 2000,
     opacity: 0,
     shouldPushNotifierStop: true,
+    battleSimulatorIconScale: 1,
   };
 }

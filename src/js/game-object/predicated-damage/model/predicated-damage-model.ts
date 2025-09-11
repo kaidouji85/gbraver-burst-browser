@@ -10,4 +10,6 @@ export type PredicatedDamageModel = {
    * バーストボタンが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
+  /** バトルシュミレーターアイコンのスケール */
+  battleSimulatorIconScale: number;
 };

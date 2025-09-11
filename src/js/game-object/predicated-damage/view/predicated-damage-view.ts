@@ -181,6 +181,13 @@ export class PredicatedDamageView {
       BATTLE_SIMULATOR_ICON_SIZE / 2 +
       NUMBER_TO_ICON_MARGIN;
     this.#battleSimulatorIcon.getObject3D().position.x = battleSimulatorIconX;
+    this.#battleSimulatorIcon
+      .getObject3D()
+      .scale.set(
+        model.battleSimulatorIconScale,
+        model.battleSimulatorIconScale,
+        1,
+      );
     this.#battleSimulatorIcon.opacity(opacity);
 
     this.#battleSimulatorIconPushDetector.getObject3D().position.x =
@@ -207,7 +214,6 @@ export class PredicatedDamageView {
     return merge(
       this.#numberPushDetector.notifyPressed(),
       this.#battleSimulatorIconPushDetector.notifyPressed(),
-    )
-    .pipe(throttleTime(100));
+    ).pipe(throttleTime(100));
   }
 }
