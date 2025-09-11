@@ -22,11 +22,11 @@ const NUMBER_MESH_SIZE = 128;
 /** 数字メッシュ間隔 */
 const NUMBER_MESH_INTERVAL = 72;
 
-/** プッシュ検出器幅 */
-const PUSH_DETECTOR_WIDTH = 384;
+/** 数字メッシュのプッシュ検出器幅 */
+const NUMBER_PUSH_DETECTOR_WIDTH = 384;
 
-/** プッシュ検出器高さ */
-const PUSH_DETECTOR_HEIGHT = 128;
+/** 数字メッシュのプッシュ検出器高さ */
+const NUMBER_PUSH_DETECTOR_HEIGHT = 128;
 
 /** マイナス符号も含めた数字の最大桁数 */
 const NUMBER_OF_DIGITS = 5;
@@ -39,6 +39,9 @@ const MIN_DAMAGE = 0;
 
 /** 基本拡大率 */
 const BASE_SCALE = 0.3;
+
+/** バトルシミュレーターアイコンのサイズ */
+const BATTLE_SIMULATOR_ICON_SIZE = 70;
 
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer & {
@@ -53,7 +56,9 @@ export class PredicatedDamageView {
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
   /** ボタン押下検知 */
-  #pushDetector: PushDetector;
+  #numberPushDetector: PushDetector;
+  /** バトルシミュレーターアイコン */
+  #battleSimulatorIcon: HorizontalAnimationMesh;
 
   /**
    * コンストラクタ
@@ -64,14 +69,14 @@ export class PredicatedDamageView {
 
     this.#group = new THREE.Group();
 
-    const { texture } = findTextureOrThrow(
+    const { texture: numberTexture } = findTextureOrThrow(
       resources,
       TEXTURE_IDS.PREDICATED_DAMAGE_NUMBER,
     );
     this.#numbers = R.times(
       () =>
         new HorizontalAnimationMesh({
-          texture,
+          texture: numberTexture,
           maxAnimation: MAX_ANIMATION,
           width: NUMBER_MESH_SIZE,
           height: NUMBER_MESH_SIZE,
@@ -82,13 +87,25 @@ export class PredicatedDamageView {
       this.#group.add(n.getObject3D());
     });
 
-    this.#pushDetector = planePushDetector({
+    this.#numberPushDetector = planePushDetector({
       ...params,
-      width: PUSH_DETECTOR_WIDTH,
-      height: PUSH_DETECTOR_HEIGHT,
+      width: NUMBER_PUSH_DETECTOR_WIDTH,
+      height: NUMBER_PUSH_DETECTOR_HEIGHT,
       visible: false,
     });
-    this.#group.add(this.#pushDetector.getObject3D());
+    this.#group.add(this.#numberPushDetector.getObject3D());
+
+    const { texture: battleSimulatorIconTexture } = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.BATTLE_SIMULATOR_ICON,
+    );
+    this.#battleSimulatorIcon = new HorizontalAnimationMesh({
+      texture: battleSimulatorIconTexture,
+      maxAnimation: 1,
+      width: BATTLE_SIMULATOR_ICON_SIZE,
+      height: BATTLE_SIMULATOR_ICON_SIZE,
+    });
+    this.#group.add(this.#battleSimulatorIcon.getObject3D());
   }
 
   /**
@@ -98,7 +115,8 @@ export class PredicatedDamageView {
     this.#numbers.forEach((n) => {
       n.destructor();
     });
-    this.#pushDetector.destructor();
+    this.#numberPushDetector.destructor();
+    this.#battleSimulatorIcon.destructor();
   }
 
   /**
@@ -142,7 +160,8 @@ export class PredicatedDamageView {
     }
 
     const damageDigit = values.length + 1;
-    this.#pushDetector.getObject3D().scale.x = damageDigit / NUMBER_OF_DIGITS;
+    this.#numberPushDetector.getObject3D().scale.x =
+      damageDigit / NUMBER_OF_DIGITS;
   }
 
   /**
@@ -158,6 +177,6 @@ export class PredicatedDamageView {
    * @returns 通知ストリーム
    */
   notifyPush(): Observable<Event> {
-    return this.#pushDetector.notifyPressed();
+    return this.#numberPushDetector.notifyPressed();
   }
 }
