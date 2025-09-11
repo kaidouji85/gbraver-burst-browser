@@ -1,5 +1,5 @@
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
-import { PredicatedDamageView } from "../view/predicated-model-view";
+import { PredicatedDamageView } from "../view/predicated-damage-view";
 
 /** ダメージ予想 プロパティ */
 export type PredicatedDamageProps = {

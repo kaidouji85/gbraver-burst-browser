@@ -2,7 +2,7 @@ import { initialValue } from "../model/initial-value";
 import {
   PredicatedDamageView,
   PredicatedDamageViewConstructParams,
-} from "../view/predicated-model-view";
+} from "../view/predicated-damage-view";
 import { PredicatedDamageProps } from "./predicated-damage-props";
 
 /** 生成パラメータ */
