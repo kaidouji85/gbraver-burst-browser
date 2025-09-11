@@ -16,29 +16,29 @@ import { PredicatedDamageModel } from "../model/predicated-damage-model";
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 16;
 
+/** 数字系メッシュの縮小率、大きさ調整に利用する */
+const NUMBER_SIZE_SCALE = 0.3;
+
 /** 数字メッシュサイズ */
-const NUMBER_MESH_SIZE = 128;
+const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
 
 /** 数字メッシュ間隔 */
-const NUMBER_MESH_INTERVAL = 72;
+const NUMBER_MESH_INTERVAL = 72 * NUMBER_SIZE_SCALE;
 
 /** 数字メッシュのプッシュ検出器幅 */
-const NUMBER_PUSH_DETECTOR_WIDTH = 384;
+const NUMBER_PUSH_DETECTOR_WIDTH = 384 * NUMBER_SIZE_SCALE;
 
 /** 数字メッシュのプッシュ検出器高さ */
-const NUMBER_PUSH_DETECTOR_HEIGHT = 128;
+const NUMBER_PUSH_DETECTOR_HEIGHT = 128 * NUMBER_SIZE_SCALE;
 
-/** マイナス符号も含めた数字の最大桁数 */
-const NUMBER_OF_DIGITS = 5;
+/** 数字表示に必要な最大文字数（マイナス符号含む） */
+const MAX_NUMBER_CHARACTERS = 5;
 
-/** 最大ダメージ */
-const MAX_DAMAGE = 9999;
+/** 表示可能な最大ダメージ */
+const MAX_DISPLAYABLE_DAMAGE = 9999;
 
-/** 最小ダメージ */
-const MIN_DAMAGE = 0;
-
-/** 基本拡大率 */
-const BASE_SCALE = 0.3;
+/** 表示可能な最小ダメージ */
+const MIN_DISPLAYABLE_DAMAGE = 0;
 
 /** バトルシミュレーターアイコンのサイズ */
 const BATTLE_SIMULATOR_ICON_SIZE = 70;
@@ -81,7 +81,7 @@ export class PredicatedDamageView {
           width: NUMBER_MESH_SIZE,
           height: NUMBER_MESH_SIZE,
         }),
-      NUMBER_OF_DIGITS,
+      MAX_NUMBER_CHARACTERS,
     );
     this.#numbers.forEach((n) => {
       this.#group.add(n.getObject3D());
@@ -128,10 +128,13 @@ export class PredicatedDamageView {
     const { damage, opacity } = model;
     const { safeAreaInset, rendererDOM } = preRender;
 
-    const scale = hudScale(rendererDOM, safeAreaInset) * BASE_SCALE;
+    const scale = hudScale(rendererDOM, safeAreaInset);
     this.#group.scale.set(scale, scale, scale);
 
-    const correctDamage = Math.max(MIN_DAMAGE, Math.min(damage, MAX_DAMAGE));
+    const correctDamage = Math.max(
+      MIN_DISPLAYABLE_DAMAGE,
+      Math.min(damage, MAX_DISPLAYABLE_DAMAGE),
+    );
     const values = String(correctDamage)
       .split("")
       .reverse()
@@ -161,7 +164,7 @@ export class PredicatedDamageView {
 
     const damageDigit = values.length + 1;
     this.#numberPushDetector.getObject3D().scale.x =
-      damageDigit / NUMBER_OF_DIGITS;
+      damageDigit / MAX_NUMBER_CHARACTERS;
   }
 
   /**
