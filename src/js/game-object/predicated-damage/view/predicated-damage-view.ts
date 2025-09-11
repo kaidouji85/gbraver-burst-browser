@@ -43,6 +43,9 @@ const MIN_DISPLAYABLE_DAMAGE = 0;
 /** バトルシミュレーターアイコンのサイズ */
 const BATTLE_SIMULATOR_ICON_SIZE = 70;
 
+/** バトルシミュレーターアイコンの左マージン */
+const BATTLE_SIMULATOR_ICON_MARGIN_LEFT = 2;
+
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer & {
   /** ゲームオブジェクトアクション */
@@ -161,6 +164,12 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
+
+    this.#battleSimulatorIcon.getObject3D().position.x =
+      (intervalCount / 2) * NUMBER_MESH_INTERVAL +
+      BATTLE_SIMULATOR_ICON_SIZE / 2 +
+      BATTLE_SIMULATOR_ICON_MARGIN_LEFT;
+    this.#battleSimulatorIcon.opacity(opacity);
 
     const damageDigit = values.length + 1;
     this.#numberPushDetector.getObject3D().scale.x =
