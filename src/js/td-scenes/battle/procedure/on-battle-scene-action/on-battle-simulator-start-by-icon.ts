@@ -1,3 +1,4 @@
+import { BattleSimulatorStartByIcon } from "../../actions/battle-simulator-start-by-icon";
 import { BattleSceneProps } from "../../props";
 import { openBattleSimulator } from "../open-battle-simulator";
 
@@ -7,16 +8,12 @@ import { openBattleSimulator } from "../open-battle-simulator";
  */
 export function onBattleSimulatorStartByIcon(
   props: Readonly<BattleSceneProps>,
+  action: BattleSimulatorStartByIcon,
 ) {
-  const { exclusive, view, stateHistory } = props;
+  const { exclusive, view } = props;
   exclusive.execute(async () => {
-    const lastState = stateHistory.at(-1);
-    if (!lastState) {
-      return;
-    }
-
     const predicatedDamage = view.hud.players.find(
-      (p) => p.playerId !== lastState.activePlayerId,
+      (p) => p.playerId === action.playerId,
     )?.predicatedDamage;
     if (!predicatedDamage) {
       return;

@@ -48,7 +48,7 @@ export function onBattleSceneAction(
     case "battleSimulatorStart":
       return onBattleSimulatorStart(props);
     case "battleSimulatorStartByIcon":
-      return onBattleSimulatorStartByIcon(props);
+      return onBattleSimulatorStartByIcon(props, action);
     case "battleSimulatorEnd":
       return onBattleSimulatorEnd(props);
     case "playerStatusOpening":

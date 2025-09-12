@@ -15,7 +15,9 @@ export function notifyBattleAction(
   return merge(
     predicatedDamage
       .notifyPush()
-      .pipe(map(() => ({ type: "battleSimulatorStartByIcon" }) as const)),
+      .pipe(
+        map(() => ({ type: "battleSimulatorStartByIcon", playerId }) as const),
+      ),
     statusIcon
       .notifyPushed()
       .pipe(map(() => ({ type: "statusOpeningByIcon", playerId }) as const)),
