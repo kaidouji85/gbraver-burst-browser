@@ -1,7 +1,7 @@
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /** 操作不可能、可能が設定できるボタン */
-type OperatableButton = {
+type OperableButton = {
   /**
    * 操作不可能、可能を設定する
    * @param isDisabled trueで操作不可能
@@ -14,9 +14,9 @@ type OperatableButton = {
  * @param props イベントプロパティ
  * @returns 設定対象ボタン
  */
-function getOperatableButtons(
+function getOperableButtons(
   props: Readonly<CustomBattleEventProps>,
-): OperatableButton[] {
+): OperableButton[] {
   const { view } = props;
   return [
     view.hud.gameObjects.batterySelector,
@@ -24,6 +24,7 @@ function getOperatableButtons(
     view.hud.gameObjects.pilotButton,
     view.hud.gameObjects.timeScaleButton,
     ...view.hud.players.map((p) => p.predicatedDamage),
+    ...view.hud.players.map((p) => p.statusIcon),
   ];
 }
 
@@ -34,7 +35,7 @@ function getOperatableButtons(
 export function disabledAllButtons(
   props: Readonly<CustomBattleEventProps>,
 ): void {
-  getOperatableButtons(props).forEach((button) => {
+  getOperableButtons(props).forEach((button) => {
     button.disabled(true);
   });
 }
@@ -46,7 +47,7 @@ export function disabledAllButtons(
 export function enabledAllButtons(
   props: Readonly<CustomBattleEventProps>,
 ): void {
-  getOperatableButtons(props).forEach((button) => {
+  getOperableButtons(props).forEach((button) => {
     button.disabled(false);
   });
 }
