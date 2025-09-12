@@ -29,7 +29,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    */
   constructor(resize: Observable<Resize>) {
     this.#threeJsRender = new THREE.WebGLRenderer({
-      powerPreference: "high-performance",
+      powerPreference: "low-power",
     });
     this.#threeJsRender.outputColorSpace = THREE.LinearSRGBColorSpace;
     this.#threeJsRender.autoClear = false;
