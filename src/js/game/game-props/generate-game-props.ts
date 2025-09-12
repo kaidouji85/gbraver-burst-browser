@@ -56,6 +56,8 @@ export type GamePropsGeneratorParams = {
 
   /** リソースルート */
   resourceRoot: ResourceRoot;
+  /** WebGLのパワープリファレンス */
+  webglPowerPreference: WebGLPowerPreference;
 };
 
 /**
@@ -65,9 +67,10 @@ export type GamePropsGeneratorParams = {
  * @returns 生成結果
  */
 export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
+  const { webglPowerPreference } = params;
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
-  const renderer = new Renderer(resize);
+  const renderer = new Renderer({ webglPowerPreference, resize });
   const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   const abort = new AbortManager();
