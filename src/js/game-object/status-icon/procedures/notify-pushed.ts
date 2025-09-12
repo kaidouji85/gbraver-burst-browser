@@ -8,7 +8,8 @@ import { StatusIconProps } from "../props/status-icon-props";
  * @returns 通知ストリーム
  */
 export function notifyPushed(props: StatusIconProps): Observable<void> {
-  return props.view
-    .notifyPushed()
-    .pipe(filter(() => props.model.opacity === 1));
+  return props.view.notifyPushed().pipe(
+    filter(() => props.model.opacity === 1),
+    filter(() => !props.disabled),
+  );
 }

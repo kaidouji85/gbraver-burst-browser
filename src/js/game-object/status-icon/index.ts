@@ -78,6 +78,22 @@ export class StatusIcon {
   }
 
   /**
+   * 操作不可能、可能を設定する
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this.#props.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能であるか否かを判定する
+   * @returns trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#props.disabled;
+  }
+
+  /**
    * ボタン押下通知
    * @returns 通知ストリーム
    */
