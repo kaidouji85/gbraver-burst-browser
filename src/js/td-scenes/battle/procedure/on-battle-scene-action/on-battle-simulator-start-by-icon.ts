@@ -1,5 +1,7 @@
+import { BattleSimulator } from "../../../../dom-dialogs/battle-simulator";
 import { BattleSceneProps } from "../../props";
-import { openBattleSimulator } from "../open-battle-simulator";
+import { getBattleSimulatorGameState } from "../get-battle-simulator-game-state";
+import { switchBattleSimulator } from "../switch-battle-simulator";
 
 /**
  * アイコン押下によりバトルシミュレーターを開始した時の処理
@@ -8,8 +10,18 @@ import { openBattleSimulator } from "../open-battle-simulator";
 export function onBattleSimulatorStartByIcon(
   props: Readonly<BattleSceneProps>,
 ) {
-  const { exclusive } = props;
+  const { exclusive, se, sounds } = props;
   exclusive.execute(async () => {
-    openBattleSimulator(props);
+    const battleSimulatorGameState = getBattleSimulatorGameState(props);
+    if (!battleSimulatorGameState) {
+      return;
+    }
+
+    se.play(sounds.changeValue);
+    const dialog = new BattleSimulator({
+      ...props,
+      ...battleSimulatorGameState,
+    });
+    switchBattleSimulator(props, dialog);
   });
 }

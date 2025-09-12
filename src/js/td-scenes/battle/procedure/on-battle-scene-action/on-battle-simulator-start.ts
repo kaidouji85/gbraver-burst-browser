@@ -1,5 +1,7 @@
+import { BattleSimulator } from "../../../../dom-dialogs/battle-simulator";
 import { BattleSceneProps } from "../../props";
-import { openBattleSimulator } from "../open-battle-simulator";
+import { getBattleSimulatorGameState } from "../get-battle-simulator-game-state";
+import { switchBattleSimulator } from "../switch-battle-simulator";
 
 /**
  * バトルシミュレータ開始時の処理
@@ -8,7 +10,16 @@ import { openBattleSimulator } from "../open-battle-simulator";
 export function onBattleSimulatorStart(props: BattleSceneProps) {
   const { exclusive, se, sounds } = props;
   exclusive.execute(async () => {
+    const battleSimulatorGameState = getBattleSimulatorGameState(props);
+    if (!battleSimulatorGameState) {
+      return;
+    }
+
     se.play(sounds.changeValue);
-    openBattleSimulator(props);
+    const dialog = new BattleSimulator({
+      ...props,
+      ...battleSimulatorGameState,
+    });
+    switchBattleSimulator(props, dialog);
   });
 }
