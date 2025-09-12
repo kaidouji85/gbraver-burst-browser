@@ -2,6 +2,7 @@ import { BattleSceneAction } from "../../actions";
 import { BattleSceneProps } from "../../props";
 import { onBattleSimulatorEnd } from "./on-battle-simulator-end";
 import { onBattleSimulatorStart } from "./on-battle-simulator-start";
+import { onBattleSimulatorStartByIcon } from "./on-battle-simulator-start-by-icon";
 import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";
@@ -46,6 +47,8 @@ export function onBattleSceneAction(
       return onPilotSkillByMiniController(props);
     case "battleSimulatorStart":
       return onBattleSimulatorStart(props);
+    case "battleSimulatorStartByIcon":
+      return onBattleSimulatorStartByIcon(props, action);
     case "battleSimulatorEnd":
       return onBattleSimulatorEnd(props);
     case "playerStatusOpening":

@@ -1,5 +1,6 @@
 import { BattleSimulatorEnd } from "./battle-simulator-end";
 import { BattleSimulatorStart } from "./battle-simulator-start";
+import { BattleSimulatorStartByIcon } from "./battle-simulator-start-by-icon";
 import { DecideBattery } from "./decide-battery";
 import { DecideBatteryByMiniController } from "./decide-battery-by-mini-controller";
 import { DoBurst } from "./do-burst";
@@ -28,6 +29,7 @@ export type BattleSceneAction =
   | DoBurstByMiniController
   | DoPilotSkillByMiniController
   | BattleSimulatorStart
+  | BattleSimulatorStartByIcon
   | BattleSimulatorEnd
   | PlayerStatusOpening
   | EnemyStatusOpening
