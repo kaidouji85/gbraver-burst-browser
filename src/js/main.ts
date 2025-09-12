@@ -50,8 +50,10 @@ export async function main(): Promise<void> {
   });
   const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
   const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
+  const webglPowerPreference = isMobile() ? "low-power" : "high-performance";
   const game = new Game({
     resourceRoot,
+    webglPowerPreference,
     api: api,
     config: createLocalStorageConfigRepository(),
     howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY_URL,
