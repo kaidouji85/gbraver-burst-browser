@@ -85,7 +85,7 @@ export class TDGameObjectStub {
     this.#gameLoop = createGameLoop();
     this.#update = new Subject();
     this.#preRender = new Subject();
-    this.#renderer = new Renderer(this.#resize);
+    this.#renderer = new Renderer({ resize: this.#resize });
     this.#scene = new THREE.Scene();
     this.#camera = new TDCamera(this.#update, this.#resize);
     this.#overlap = this.#renderer.createOverlapNotifier(

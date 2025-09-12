@@ -25,11 +25,17 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /**
    * コンストラクタ
-   * @param resize リサイズのストリーム
+   * @param options オプション
    */
-  constructor(resize: Observable<Resize>) {
+  constructor(options: {
+    /** リサイズのストリーム */
+    resize: Observable<Resize>;
+    /** WebGLのパワープリファレンス */
+    webglPowerPreference?: WebGLPowerPreference;
+  }) {
+    const { resize, webglPowerPreference } = options;
     this.#threeJsRender = new THREE.WebGLRenderer({
-      powerPreference: "low-power",
+      powerPreference: webglPowerPreference || "default",
     });
     this.#threeJsRender.outputColorSpace = THREE.LinearSRGBColorSpace;
     this.#threeJsRender.autoClear = false;

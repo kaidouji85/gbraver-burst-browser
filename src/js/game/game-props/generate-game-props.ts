@@ -67,7 +67,7 @@ export type GamePropsGeneratorParams = {
 export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
   const resize = resizeStream();
   const pushWindow = pushWindowsStream();
-  const renderer = new Renderer(resize);
+  const renderer = new Renderer({ resize });
   const gameLoop = createGameLoop();
   const hudUIScale = new CssHUDUIScale(renderer.getRendererDOM(), resize);
   const abort = new AbortManager();
