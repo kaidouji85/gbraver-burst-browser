@@ -22,5 +22,5 @@ export function createStatusIconProps(
   const model = createInitialModel();
   const view = new StatusIconView(options);
   const sounds = createStatusIconSounds(options.resources);
-  return { ...options, model, view, sounds };
+  return { ...options, model, view, sounds, disabled: false };
 }
