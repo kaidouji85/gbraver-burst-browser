@@ -40,6 +40,9 @@ const BATTLE_SIMULATOR_ICON_SIZE = 70;
 /** 数字とアイコンの間のマージン */
 const NUMBER_TO_ICON_MARGIN = 2;
 
+/** バトルシミュレーターアイコンのY位置 */
+const BATTLE_SIMULATOR_ICON_Y = 2;
+
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer &
   GameObjectActionContainer;
@@ -161,7 +164,10 @@ export class PredicatedDamageView {
       (intervalCount / 2) * NUMBER_MESH_INTERVAL +
       BATTLE_SIMULATOR_ICON_SIZE / 2 +
       NUMBER_TO_ICON_MARGIN;
+
     this.#battleSimulatorIcon.getObject3D().position.x = battleSimulatorIconX;
+    this.#battleSimulatorIcon.getObject3D().position.y =
+      BATTLE_SIMULATOR_ICON_Y;
     this.#battleSimulatorIcon
       .getObject3D()
       .scale.set(
@@ -173,6 +179,8 @@ export class PredicatedDamageView {
 
     this.#battleSimulatorIconPushDetector.getObject3D().position.x =
       battleSimulatorIconX;
+    this.#battleSimulatorIconPushDetector.getObject3D().position.y =
+      BATTLE_SIMULATOR_ICON_Y;
   }
 
   /**
