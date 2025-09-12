@@ -8,8 +8,21 @@ import { openBattleSimulator } from "../open-battle-simulator";
 export function onBattleSimulatorStartByIcon(
   props: Readonly<BattleSceneProps>,
 ) {
-  const { exclusive } = props;
+  const { exclusive, view, stateHistory } = props;
   exclusive.execute(async () => {
+    const lastState = stateHistory.at(-1);
+    if (!lastState) {
+      return;
+    }
+
+    const predicatedDamage = view.hud.players.find(
+      (p) => p.playerId !== lastState.activePlayerId,
+    )?.predicatedDamage;
+    if (!predicatedDamage) {
+      return;
+    }
+
+    await predicatedDamage.popBattleSimulatorIcon().play();
     openBattleSimulator(props);
   });
 }

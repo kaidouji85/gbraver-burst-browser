@@ -18,5 +18,10 @@ export function popBattleSimulatorIcon(
     se.play(sounds.changeValue);
   })
     .chain(tween(model, (t) => t.to({ battleSimulatorIconScale: 1.18 }, 80)))
-    .chain(tween(model, (t) => t.to({ battleSimulatorIconScale: 1 }, 80)));
+    .chain(tween(model, (t) => t.to({ battleSimulatorIconScale: 1 }, 80)))
+    .chain(
+      onStart(() => {
+        model.shouldPushNotifierStop = false;
+      }),
+    );
 }

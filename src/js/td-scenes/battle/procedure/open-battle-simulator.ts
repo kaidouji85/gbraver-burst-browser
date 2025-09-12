@@ -3,7 +3,6 @@ import { BattleSceneProps } from "../props";
 import { switchBattleSimulator } from "./switch-battle-simulator";
 
 /**
- * @deprecated
  * バトルシミュレータを開く
  * @param props 戦闘シーンプロパティ
  */
