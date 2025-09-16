@@ -19,7 +19,7 @@ export const shinBraverAttackIcon = (resources: Resources) => {
     width: 600,
     height: 600,
   });
-  const position = { x: 0, y: 0 };
+  const position = { x: 0, y: 100 };
   mesh.animate(1);
   return { mesh, position };
 };

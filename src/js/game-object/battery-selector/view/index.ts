@@ -11,13 +11,11 @@ import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 import { BatterySelectorIcon } from "./battery-selector-icon";
+import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
 
 /** コンストラクタのオプション */
 export type BatterySelectorViewOptions = ResourcesContainer &
-  GameObjectActionContainer & {
-    /** 攻撃アイコン */
-    attackIcon?: BatterySelectorIcon;
-  };
+  GameObjectActionContainer;
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
@@ -30,7 +28,7 @@ export class BatterySelectorView {
   /** -ボタン */
   #minus: BatteryMinus;
   /** 攻撃アイコン */
-  #attackIcon: BatterySelectorIcon | null;
+  #attackIcon: BatterySelectorIcon;
   /** グループ */
   #group: THREE.Group;
 
@@ -65,17 +63,15 @@ export class BatterySelectorView {
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
 
-    this.#attackIcon = options.attackIcon ?? null;
-    if (this.#attackIcon) {
-      this.#attackIcon.mesh
-        .getObject3D()
-        .position.set(
-          this.#attackIcon.position.x,
-          this.#attackIcon.position.y,
-          2,
-        );
-      this.#group.add(this.#attackIcon.mesh.getObject3D());
-    }
+    this.#attackIcon = shinBraverAttackIcon(options.resources);
+    this.#attackIcon.mesh
+      .getObject3D()
+      .position.set(
+        this.#attackIcon.position.x,
+        this.#attackIcon.position.y,
+        2,
+      );
+    this.#group.add(this.#attackIcon.mesh.getObject3D());
   }
 
   /**
