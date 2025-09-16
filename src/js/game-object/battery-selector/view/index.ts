@@ -19,10 +19,15 @@ type Param = ResourcesContainer & {
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
+  /** 決定ボタン */
   #button: BatteryButton;
+  /** メーター */
   #meter: BatteryMeter;
+  /** +ボタン */
   #plus: BatteryPlus;
+  /** -ボタン */
   #minus: BatteryMinus;
+  /** グループ */
   #group: THREE.Group;
 
   /**
