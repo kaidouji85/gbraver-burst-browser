@@ -12,6 +12,7 @@ import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
 import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
+import { shinBraverDefenseIcon } from "./battery-selector-icon/shin-braver-defense-icon";
 
 /** コンストラクタのオプション */
 export type BatterySelectorViewOptions = ResourcesContainer &
@@ -29,6 +30,8 @@ export class BatterySelectorView {
   #minus: BatteryMinus;
   /** 攻撃アイコン */
   #attackIcon: BatterySelectorIcon;
+  /** 防御アイコン */
+  #defenseIcon: BatterySelectorIcon;
   /** グループ */
   #group: THREE.Group;
 
@@ -72,6 +75,16 @@ export class BatterySelectorView {
         2,
       );
     this.#group.add(this.#attackIcon.getObject3D());
+
+    this.#defenseIcon = shinBraverDefenseIcon(options.resources);
+    this.#defenseIcon
+      .getObject3D()
+      .position.set(
+        this.#defenseIcon.position.x,
+        this.#defenseIcon.position.y,
+        2,
+      );
+    this.#group.add(this.#defenseIcon.getObject3D());
   }
 
   /**
