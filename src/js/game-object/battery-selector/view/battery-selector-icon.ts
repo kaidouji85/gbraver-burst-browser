@@ -1,9 +1,9 @@
-import * as THREE from "three";
+import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 
 /** バッテリーセレクタのアイコン */
 export type BatterySelectorIcon = {
   /** メッシュ */
-  mesh: THREE.Mesh;
+  mesh: HorizontalAnimationMesh;
   /** アイコ位置（ローカル座標） */
   position: {
     /** x座標 */
