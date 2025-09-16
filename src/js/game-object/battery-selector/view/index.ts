@@ -10,7 +10,7 @@ import { BatteryButton } from "./battery-button";
 import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
-import { BatterySelectorIcon } from "./battery-selector-icon";
+import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
 import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
 
 /** コンストラクタのオプション */
@@ -64,14 +64,14 @@ export class BatterySelectorView {
     this.#group.add(this.#minus.getObject3D());
 
     this.#attackIcon = shinBraverAttackIcon(options.resources);
-    this.#attackIcon.mesh
+    this.#attackIcon
       .getObject3D()
       .position.set(
         this.#attackIcon.position.x,
         this.#attackIcon.position.y,
         2,
       );
-    this.#group.add(this.#attackIcon.mesh.getObject3D());
+    this.#group.add(this.#attackIcon.getObject3D());
   }
 
   /**
@@ -82,7 +82,7 @@ export class BatterySelectorView {
     this.#meter.destructor();
     this.#plus.destructor();
     this.#minus.destructor();
-    this.#attackIcon?.mesh.destructor();
+    this.#attackIcon.destructor();
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -106,7 +106,7 @@ export class BatterySelectorView {
     );
 
     const attackerIconOpacity = model.label === "Attack" ? model.opacity : 0;
-    this.#attackIcon?.mesh.opacity(attackerIconOpacity);
+    this.#attackIcon.opacity(attackerIconOpacity);
 
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
