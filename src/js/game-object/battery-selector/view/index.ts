@@ -1,21 +1,18 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
-import type { ResourcesContainer } from "../../../resource";
-import type { GameObjectAction } from "../../action/game-object-action";
+import { PreRender } from "../../../game-loop/pre-render";
+import { ResourcesContainer } from "../../../resource";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { hudUIScale } from "../../scale";
-import type { BatterySelectorModel } from "../model";
+import { BatterySelectorModel } from "../model";
 import { BatteryButton } from "./battery-button";
 import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
-/** コンストラクタのパラメータ */
-type Param = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+/** コンストラクタのオプション */
+type Options = ResourcesContainer & GameObjectActionContainer;
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
@@ -32,28 +29,28 @@ export class BatterySelectorView {
 
   /**
    * コンストラクタ
-   * @param param パラメータ
+   * @options options オプション
    */
-  constructor(param: Param) {
+  constructor(options: Options) {
     this.#group = new THREE.Group();
-    this.#meter = new BatteryMeter(param.resources);
+    this.#meter = new BatteryMeter(options.resources);
     this.#meter.getObject3D().position.set(0, 288, 0);
     this.#group.add(this.#meter.getObject3D());
     this.#button = new BatteryButton({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
+      resources: options.resources,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
     this.#plus = new BatteryPlus({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
+      resources: options.resources,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
     this.#minus = new BatteryMinus({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
+      resources: options.resources,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
