@@ -29,7 +29,7 @@ export class BatterySelectorView {
 
   /**
    * コンストラクタ
-   * @options options オプション
+   * @params options オプション
    */
   constructor(options: Options) {
     this.#group = new THREE.Group();
