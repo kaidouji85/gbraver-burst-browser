@@ -13,7 +13,7 @@ import { BatteryPlus } from "./battery-plus";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** コンストラクタのオプション */
-type Options = ResourcesContainer &
+export type BatterySelectorViewOptions = ResourcesContainer &
   GameObjectActionContainer & {
     /** 攻撃アイコン */
     attackIcon?: BatterySelectorIcon;
@@ -38,7 +38,7 @@ export class BatterySelectorView {
    * コンストラクタ
    * @params options オプション
    */
-  constructor(options: Options) {
+  constructor(options: BatterySelectorViewOptions) {
     this.#group = new THREE.Group();
     this.#meter = new BatteryMeter(options.resources);
     this.#meter.getObject3D().position.set(0, 288, 0);

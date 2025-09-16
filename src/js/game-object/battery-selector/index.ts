@@ -17,11 +17,11 @@ import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
   createBatterySelectorProps,
-  PropsCreatorParams,
+  PropsCreatorOptions,
 } from "./props/create-battery-selector-props";
 
 /** コンストラクタのパラメータ */
-type BatterySelectorParam = PropsCreatorParams;
+type BatterySelectorParam = PropsCreatorOptions;
 
 /** バッテリーセレクタ */
 export class BatterySelector {
