@@ -1,0 +1,25 @@
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import { Resources } from "../../../../resource";
+import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
+import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+
+/**
+ * シンブレイバー攻撃アイコンを生成する
+ * @param options オプション
+ * @returns 生成結果
+ */
+export const shinBraverAttackIcon = (resources: Resources) => {
+  const texture = findTextureOrThrow(
+    resources,
+    TEXTURE_IDS.SHIN_BRAVER_SP_ATTACK,
+  ).texture;
+  const mesh = new HorizontalAnimationMesh({
+    texture,
+    maxAnimation: 4,
+    width: 600,
+    height: 600,
+  });
+  const position = { x: 0, y: 0 };
+  mesh.animate(1);
+  return { mesh, position };
+};

@@ -10,36 +10,10 @@ import {
 } from "../../../../../../game-object/lead-line";
 import { drawIndicator } from "../../../../../../game-object/result-indicator";
 import { TimeScaleButton } from "../../../../../../game-object/time-scale-button/time-scale-button";
-import { HorizontalAnimationMesh } from "../../../../../../mesh/horizontal-animation";
-import { ResourcesContainer } from "../../../../../../resource";
-import { findTextureOrThrow } from "../../../../../../resource/find-texture-or-throw";
-import { TEXTURE_IDS } from "../../../../../../resource/texture/ids";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 import { HUDGameObjectsProps } from "../props";
 import { createBurstButton } from "./create-burst-button";
 import { createPilotButton } from "./create-pilot-button";
-
-/**
- * シンブレイバー攻撃アイコンを生成する
- * @param options オプション
- * @returns 生成結果
- */
-const shinBraverAttackIcon = (options: ResourcesContainer) => {
-  const { resources } = options;
-  const texture = findTextureOrThrow(
-    resources,
-    TEXTURE_IDS.SHIN_BRAVER_SP_ATTACK,
-  ).texture;
-  const mesh = new HorizontalAnimationMesh({
-    texture,
-    maxAnimation: 4,
-    width: 600,
-    height: 600,
-  });
-  const position = { x: 0, y: 0 };
-  mesh.animate(1);
-  return { mesh, position };
-};
 
 /**
  * HUDGameObjectsPropsを生成する
@@ -50,10 +24,8 @@ export function createHUDGameObjectsProps(
   params: HUDLayerObjectCreatorParams,
 ): HUDGameObjectsProps {
   const { resources, gameObjectAction } = params;
-  // TODO アームドーザごとに出し分ける
-  const attackIcon = shinBraverAttackIcon({ resources });
   return {
-    batterySelector: new BatterySelector({ ...params, attackIcon }),
+    batterySelector: new BatterySelector(params),
     batterySelectorLeadLine: batterySelectorLeadLine(gameObjectAction),
     burstButton: createBurstButton(params),
     burstButtonLeadLine: burstButtonLeadLine(gameObjectAction),

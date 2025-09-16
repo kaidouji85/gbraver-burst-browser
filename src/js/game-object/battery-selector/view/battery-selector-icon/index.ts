@@ -1,4 +1,4 @@
-import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
+import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 
 /** バッテリーセレクタのアイコン */
 export type BatterySelectorIcon = {
