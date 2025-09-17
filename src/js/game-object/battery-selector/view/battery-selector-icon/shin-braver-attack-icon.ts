@@ -7,8 +7,10 @@ import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { createOutlineSilhouetteTexture } from "../../../../texture/create-outline-silhouette-texture";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
+/** メッシュのサイズ */
 const MESH_SIZE = 600;
 
+/** アウトラインメッシュのサイズ */
 const OUTLINE_SIZE = MESH_SIZE + 70;
 
 /**
@@ -31,6 +33,8 @@ export const shinBraverAttackIcon = (
     width: MESH_SIZE,
     height: MESH_SIZE,
   });
+  const colorStrength = 0.8;
+  mesh.color(colorStrength, colorStrength, colorStrength);
   mesh.animate(1);
   group.add(mesh.getObject3D());
 
