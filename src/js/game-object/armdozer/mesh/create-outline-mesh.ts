@@ -1,47 +1,14 @@
 import * as THREE from "three";
 
-import { toSilhouette } from "../../../canvas/to-silhouette";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
-import { CanvasDisposeTexture } from "../../../texture/canvas-dispose-texture";
+import {
+  createOutlineSilhouetteTexture,
+  OutlineColor,
+} from "../../../texture/create-outline-silhouette-texture";
 import { ArmdozerAnimation } from "./armdozer-animation";
-
-/** アウトラインカラー */
-type OutlineColor = {
-  /** アウトライン Red */
-  r: number;
-  /** アウトライン Green */
-  g: number;
-  /** アウトライン Blue */
-  b: number;
-};
-
-/** createOutlineSilhouetteTexture オプション */
-type CreateOutlineSilhouetteTextureOptions = {
-  /** 加工前のテクスチャ */
-  texture: THREE.Texture;
-  /** アウトラインカラー */
-  color: OutlineColor;
-};
-
-/**
- * アウトライン用にシルエット化したテクスチャを生成する
- * @param options オプション
- * @returns シルエット化したテクスチャ
- */
-function createOutlineSilhouetteTexture(
-  options: CreateOutlineSilhouetteTextureOptions,
-): THREE.Texture {
-  const { texture, color } = options;
-  const canvas = toSilhouette({
-    ...color,
-    image: texture.image,
-    scale: 0.5,
-  });
-  return new CanvasDisposeTexture(canvas);
-}
 
 /** createOutlineMesh オプション */
 type CreateOutlineMeshOptions = ResourcesContainer & {
