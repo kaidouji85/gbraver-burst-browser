@@ -11,7 +11,7 @@ import { BatterySelectorIcon } from "./battery-selector-icon";
 const MESH_SIZE = 600;
 
 /** アウトラインメッシュのサイズ */
-const OUTLINE_SIZE = MESH_SIZE + 70;
+const OUTLINE_SIZE = MESH_SIZE + 80;
 
 /**
  * シンブレイバー攻撃アイコンを生成する

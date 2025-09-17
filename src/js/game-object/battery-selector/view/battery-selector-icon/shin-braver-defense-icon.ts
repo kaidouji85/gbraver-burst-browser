@@ -11,7 +11,7 @@ import { BatterySelectorIcon } from "./battery-selector-icon";
 const MESH_SIZE = 600;
 
 /** アウトラインメッシュのサイズ */
-const OUTLINE_SIZE = MESH_SIZE + 70;
+const OUTLINE_SIZE = MESH_SIZE + 50;
 
 /**
  * シンブレイバー防御アイコンを生成する
@@ -33,14 +33,14 @@ export const shinBraverDefenseIcon = (
     width: MESH_SIZE,
     height: MESH_SIZE,
   });
-  const colorStrength = 0.8;
+  const colorStrength = 0.9;
   mesh.color(colorStrength, colorStrength, colorStrength);
   mesh.animate(1);
   group.add(mesh.getObject3D());
 
   const outlineTexture = createOutlineSilhouetteTexture({
     texture,
-    color: { r: 0, g: 255, b: 255 },
+    color: { r: 0, g: 0, b: 0 },
   });
   const outlineMesh = new HorizontalAnimationMesh({
     texture: outlineTexture,
@@ -60,7 +60,7 @@ export const shinBraverDefenseIcon = (
     getObject3D: () => group,
     opacity: (value: number) => {
       mesh.opacity(value);
-      outlineMesh.opacity(value);
+      outlineMesh.opacity(value * 0.8);
     },
     position: { x: -10, y: 100 },
   };
