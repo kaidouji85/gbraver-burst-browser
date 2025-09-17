@@ -22,7 +22,7 @@ export const shinBraverDefenseIcon = (
     width: 600,
     height: 600,
   });
-  const position = { x: 0, y: 100 };
+  const position = { x: -10, y: 100 };
   mesh.animate(1);
 
   return {

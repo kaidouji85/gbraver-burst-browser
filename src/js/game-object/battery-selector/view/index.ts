@@ -96,6 +96,7 @@ export class BatterySelectorView {
     this.#plus.destructor();
     this.#minus.destructor();
     this.#attackIcon.destructor();
+    this.#defenseIcon.destructor();
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -120,6 +121,9 @@ export class BatterySelectorView {
 
     const attackerIconOpacity = model.label === "Attack" ? model.opacity : 0;
     this.#attackIcon.opacity(attackerIconOpacity);
+
+    const defenderIconOpacity = model.label === "Defense" ? model.opacity : 0;
+    this.#defenseIcon.opacity(defenderIconOpacity);
 
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
