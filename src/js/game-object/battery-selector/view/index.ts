@@ -10,9 +10,6 @@ import { BatteryButton } from "./battery-button";
 import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
-import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
-import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
-import { shinBraverDefenseIcon } from "./battery-selector-icon/shin-braver-defense-icon";
 
 /** コンストラクタのオプション */
 export type BatterySelectorViewOptions = ResourcesContainer &
@@ -28,10 +25,6 @@ export class BatterySelectorView {
   #plus: BatteryPlus;
   /** -ボタン */
   #minus: BatteryMinus;
-  /** 攻撃アイコン */
-  #attackIcon: BatterySelectorIcon;
-  /** 防御アイコン */
-  #defenseIcon: BatterySelectorIcon;
   /** グループ */
   #group: THREE.Group;
 
@@ -65,26 +58,6 @@ export class BatterySelectorView {
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
-
-    this.#attackIcon = shinBraverAttackIcon(options.resources);
-    this.#attackIcon
-      .getObject3D()
-      .position.set(
-        this.#attackIcon.position.x,
-        this.#attackIcon.position.y,
-        2,
-      );
-    this.#group.add(this.#attackIcon.getObject3D());
-
-    this.#defenseIcon = shinBraverDefenseIcon(options.resources);
-    this.#defenseIcon
-      .getObject3D()
-      .position.set(
-        this.#defenseIcon.position.x,
-        this.#defenseIcon.position.y,
-        2,
-      );
-    this.#group.add(this.#defenseIcon.getObject3D());
   }
 
   /**
@@ -95,8 +68,6 @@ export class BatterySelectorView {
     this.#meter.destructor();
     this.#plus.destructor();
     this.#minus.destructor();
-    this.#attackIcon.destructor();
-    this.#defenseIcon.destructor();
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -118,12 +89,6 @@ export class BatterySelectorView {
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
-
-    const attackerIconOpacity = model.label === "Attack" ? model.opacity : 0;
-    this.#attackIcon.opacity(attackerIconOpacity);
-
-    const defenderIconOpacity = model.label === "Defense" ? model.opacity : 0;
-    this.#defenseIcon.opacity(defenderIconOpacity);
 
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
