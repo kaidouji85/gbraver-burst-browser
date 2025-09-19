@@ -3,6 +3,7 @@ import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 import { ResourcesContainer } from "../../../../resource";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 import { genesisBraverAttackIcon } from "./genesis-braver-attack-icon";
+import { lightningDozerAttackIcon } from "./lightning-dozer-attack-icon";
 import { neoLandozerAttackIcon } from "./neo-landozer-attack-icon";
 import { shinBraverAttackIcon } from "./shin-braver-attack-icon";
 import { wingDozerAttackIcon } from "./wing-dozer-attack-icon";
@@ -24,9 +25,11 @@ export const createAttackIcon = (
     case ArmdozerIds.WING_DOZER:
       return wingDozerAttackIcon(resources);
     case ArmdozerIds.NEO_LANDOZER:
-      return neoLandozerAttackIcon(resources);  
+      return neoLandozerAttackIcon(resources);
+    case ArmdozerIds.LIGHTNING_DOZER:
+      return lightningDozerAttackIcon(resources);
     case ArmdozerIds.GENESIS_BRAVER:
-      return genesisBraverAttackIcon(resources);  
+      return genesisBraverAttackIcon(resources);
     default:
       return null;
   }

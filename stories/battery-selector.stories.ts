@@ -143,3 +143,15 @@ export const neoLandozerDefense = batterySelectorStory(
   enabled(5, "Defense"),
   ArmdozerIds.NEO_LANDOZER,
 );
+
+/** 攻撃 ライトニングドーザ */
+export const lightningDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.LIGHTNING_DOZER,
+);
+
+/** 防御 ライトニングドーザ */
+export const lightningDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.LIGHTNING_DOZER,
+);
