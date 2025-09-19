@@ -47,7 +47,7 @@ export class BatteryButton {
 
   /**
    * コンストラクタ
-   * @options options オプション
+   * @param options オプション
    */
   constructor(options: Options) {
     this.#group = new THREE.Group();

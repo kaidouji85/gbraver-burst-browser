@@ -12,7 +12,7 @@ export type PropsCreatorOptions = BatterySelectorViewOptions &
 
 /**
  * バッテリーセレクタプロパティを生成する
- * @options options オプション
+ * @param options オプション
  * @returns バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
