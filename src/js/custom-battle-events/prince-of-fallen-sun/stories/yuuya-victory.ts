@@ -26,7 +26,7 @@ export async function yuuyaVictory(props: CustomBattleEventProps) {
       `特に${wbr}攻撃${wbr}・耐久性能は${wbr}Gブレイバーより${wbr}上で 目を${wbr}見張る${wbr}ものが${wbr}ある`,
     ],
     [`だが ロボの${wbr}性能だけで${wbr}試合は${wbr}決まらない`],
-    [`一番大事なのは パイロット同士の${wbr}読み合い${wbr}なんだぜ」`],
+    [`一番大事なのは パイロット同士の${wbr}読み合いだ」`],
   ]);
 
   invisibleAllMessageWindows(props);
