@@ -9,10 +9,10 @@ import {
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
 import { findPilotSkillCommand } from "./find-pilot-skill-command";
+import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
-import { getMinimumSurvivableBattery } from "./get-minimum-survivable-battery";
 
 /** 0バッテリー */
 const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
@@ -63,10 +63,10 @@ const defenseRoutine: SimpleRoutine = (data) => {
       ? Math.max(minimumSurvivalBattery.value, optimalDefenseBattery.value)
       : minimumSurvivalBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
+  } else if (pilot && 0 < enemy.armdozer.battery) {
+    selectedCommand = pilot;
   } else if (burst) {
     selectedCommand = burst;
-  } else if (pilot) {
-    selectedCommand = pilot;
   } else if (battery1) {
     selectedCommand = battery1;
   }
