@@ -8,10 +8,10 @@ import { createOutlineSilhouetteTexture } from "../../../../texture/create-outli
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 540;
+const MESH_SIZE = 500;
 
 /** アウトラインメッシュのサイズ */
-const OUTLINE_SIZE = MESH_SIZE + 50;
+const OUTLINE_SIZE = MESH_SIZE + 35;
 
 /**
  * ウィングドーザ防御アイコンを生成する

@@ -8,7 +8,7 @@ import { createOutlineSilhouetteTexture } from "../../../../texture/create-outli
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 570;
+const MESH_SIZE = 540;
 
 /** アウトラインメッシュのサイズ */
 const OUTLINE_SIZE = MESH_SIZE + 60;
@@ -62,6 +62,6 @@ export const genesisBraverAttackIcon = (
       mesh.opacity(value);
       outlineMesh.opacity(value);
     },
-    position: { x: 40, y: 100 },
+    position: { x: 40, y: 90 },
   };
 };
