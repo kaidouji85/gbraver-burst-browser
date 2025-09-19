@@ -8,7 +8,7 @@ import { createOutlineSilhouetteTexture } from "../../../../texture/create-outli
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 550;
+const MESH_SIZE = 500;
 
 /** アウトラインメッシュのサイズ */
 const OUTLINE_SIZE = MESH_SIZE + 50;
@@ -62,6 +62,6 @@ export const neoLandozerAttackIcon = (
       mesh.opacity(value);
       outlineMesh.opacity(value);
     },
-    position: { x: 40, y: 110 },
+    position: { x: 40, y: 90 },
   };
 };
