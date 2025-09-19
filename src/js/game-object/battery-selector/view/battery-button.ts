@@ -13,8 +13,6 @@ import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { BatterySelectorModel } from "../model";
 import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
-import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
-import { shinBraverDefenseIcon } from "./battery-selector-icon/shin-braver-defense-icon";
 import { createAttackIcon } from "./battery-selector-icon/create-attack-icon";
 import { createDefenseIcon } from "./battery-selector-icon/create-defense-icon";
 
