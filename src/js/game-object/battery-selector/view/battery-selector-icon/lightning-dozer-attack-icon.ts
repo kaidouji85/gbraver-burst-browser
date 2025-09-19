@@ -8,10 +8,10 @@ import { createOutlineSilhouetteTexture } from "../../../../texture/create-outli
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */
-const MESH_SIZE = 550;
+const MESH_SIZE = 500;
 
 /** アウトラインメッシュのサイズ */
-const OUTLINE_SIZE = MESH_SIZE + 50;
+const OUTLINE_SIZE = MESH_SIZE + 35;
 
 /**
  * ライトニングドーザ攻撃アイコンを生成する
@@ -62,6 +62,6 @@ export const lightningDozerAttackIcon = (
       mesh.opacity(value);
       outlineMesh.opacity(value);
     },
-    position: { x: 10, y: 95 },
+    position: { x: 10, y: 90 },
   };
 };
