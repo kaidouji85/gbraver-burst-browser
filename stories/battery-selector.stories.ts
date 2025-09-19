@@ -1,3 +1,5 @@
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+
 import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { ButtonLabel } from "../src/js/game-object/battery-selector/model/button-label";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
@@ -11,9 +13,15 @@ export default {
  * @param fn バッテリーセレクタ操作関数
  * @returns story
  */
-const batterySelectorStory = (fn: (selector: BatterySelector) => void) =>
+const batterySelectorStory = (
+  fn: (selector: BatterySelector) => void,
+  armdozerId: ArmdozerId = ArmdozerIds.SHIN_BRAVER,
+) =>
   hudGameObjectStory((params) => {
-    const selector: BatterySelector = new BatterySelector(params);
+    const selector: BatterySelector = new BatterySelector({
+      ...params,
+      armdozerId,
+    });
     fn(selector);
     return [selector.getObject3D()];
   });

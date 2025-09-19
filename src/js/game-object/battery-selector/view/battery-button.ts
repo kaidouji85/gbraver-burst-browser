@@ -1,3 +1,4 @@
+import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -14,12 +15,18 @@ import { BatterySelectorModel } from "../model";
 import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
 import { shinBraverAttackIcon } from "./battery-selector-icon/shin-braver-attack-icon";
 import { shinBraverDefenseIcon } from "./battery-selector-icon/shin-braver-defense-icon";
+import { createAttackIcon } from "./battery-selector-icon/create-attack-icon";
+import { createDefenseIcon } from "./battery-selector-icon/create-defense-icon";
 
 /** バッテリー現在値 最大フレーム数 */
 const BATTERY_VALUE_MAX_ANIMATION = 16;
 
 /** コンストラクタのオプション */
-type Options = ResourcesContainer & GameObjectActionContainer;
+type Options = ResourcesContainer &
+  GameObjectActionContainer & {
+    /** アームドーザID */
+    armdozerId: ArmdozerId;
+  };
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -32,11 +39,11 @@ export class BatteryButton {
   /** 攻撃ラベル */
   #attackLabel: SimpleImageMesh;
   /** 攻撃アイコン */
-  #attackIcon: BatterySelectorIcon;
+  #attackIcon: BatterySelectorIcon | null;
   /** 防御ラベル */
   #defenseLabel: SimpleImageMesh;
   /** 防御アイコン */
-  #defenseIcon: BatterySelectorIcon;
+  #defenseIcon: BatterySelectorIcon | null;
   /** バッテリー値 */
   #batteryValue: HorizontalAnimationMesh;
 
@@ -67,15 +74,17 @@ export class BatteryButton {
     });
     this.#group.add(this.#pushDetector.getObject3D());
 
-    this.#attackIcon = shinBraverAttackIcon(options.resources);
-    this.#attackIcon
-      .getObject3D()
-      .position.set(
-        this.#attackIcon.position.x,
-        this.#attackIcon.position.y,
-        2,
-      );
-    this.#group.add(this.#attackIcon.getObject3D());
+    this.#attackIcon = createAttackIcon(options);
+    if (this.#attackIcon) {
+      this.#attackIcon
+        .getObject3D()
+        .position.set(
+          this.#attackIcon.position.x,
+          this.#attackIcon.position.y,
+          2,
+        );
+      this.#group.add(this.#attackIcon.getObject3D());
+    }
 
     const attackLabel =
       options.resources.canvasImages.find(
@@ -103,15 +112,17 @@ export class BatteryButton {
     this.#defenseLabel.getObject3D().position.set(32, -96, 0);
     this.#group.add(this.#defenseLabel.getObject3D());
 
-    this.#defenseIcon = shinBraverDefenseIcon(options.resources);
-    this.#defenseIcon
-      .getObject3D()
-      .position.set(
-        this.#defenseIcon.position.x,
-        this.#defenseIcon.position.y,
-        2,
-      );
-    this.#group.add(this.#defenseIcon.getObject3D());
+    this.#defenseIcon = createDefenseIcon(options);
+    if (this.#defenseIcon) {
+      this.#defenseIcon
+        .getObject3D()
+        .position.set(
+          this.#defenseIcon.position.x,
+          this.#defenseIcon.position.y,
+          2,
+        );
+      this.#group.add(this.#defenseIcon.getObject3D());
+    }
 
     const currentBattery = findTextureOrThrow(
       options.resources,
@@ -134,9 +145,9 @@ export class BatteryButton {
     this.#button.destructor();
     this.#pushDetector.destructor();
     this.#attackLabel.destructor();
-    this.#attackIcon.destructor();
+    this.#attackIcon?.destructor();
     this.#defenseLabel.destructor();
-    this.#defenseIcon.destructor();
+    this.#defenseIcon?.destructor();
     this.#batteryValue.destructor();
   }
 
@@ -154,13 +165,13 @@ export class BatteryButton {
     this.#attackLabel.setOpacity(attackLabelOpacity);
 
     const attackerIconOpacity = model.label === "Attack" ? model.opacity : 0;
-    this.#attackIcon.opacity(attackerIconOpacity);
+    this.#attackIcon?.opacity(attackerIconOpacity);
 
     const defenseLabelOpacity = model.label === "Defense" ? model.opacity : 0;
     this.#defenseLabel.setOpacity(defenseLabelOpacity);
 
     const defenderIconOpacity = model.label === "Defense" ? model.opacity : 0;
-    this.#defenseIcon.opacity(defenderIconOpacity);
+    this.#defenseIcon?.opacity(defenderIconOpacity);
 
     this.#button.setOpacity(model.opacity);
     this.#batteryValue.animate(model.battery / BATTERY_VALUE_MAX_ANIMATION);

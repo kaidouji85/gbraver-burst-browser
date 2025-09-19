@@ -1,0 +1,24 @@
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+
+import { ResourcesContainer } from "../../../../resource";
+import { BatterySelectorIcon } from "./battery-selector-icon";
+import { shinBraverAttackIcon } from "./shin-braver-attack-icon";
+
+/**
+ * アームドーザに応じた攻撃アイコンを生成する
+ * @param options オプション
+ * @returns 生成結果、生成できない場合はnull
+ */
+export const createAttackIcon = (
+  options: ResourcesContainer & {
+    armdozerId: ArmdozerId;
+  },
+): BatterySelectorIcon | null => {
+  const { armdozerId, resources } = options;
+  switch (armdozerId) {
+    case ArmdozerIds.SHIN_BRAVER:
+      return shinBraverAttackIcon(resources);
+    default:
+      return null;
+  }
+};

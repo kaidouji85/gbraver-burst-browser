@@ -1,3 +1,4 @@
+import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -13,7 +14,10 @@ import { BatteryPlus } from "./battery-plus";
 
 /** コンストラクタのオプション */
 export type BatterySelectorViewOptions = ResourcesContainer &
-  GameObjectActionContainer;
+  GameObjectActionContainer & {
+    /** アームドーザID */
+    armdozerId: ArmdozerId;
+  };
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
@@ -38,10 +42,7 @@ export class BatterySelectorView {
     this.#meter.getObject3D().position.set(0, 288, 0);
     this.#group.add(this.#meter.getObject3D());
 
-    this.#button = new BatteryButton({
-      resources: options.resources,
-      gameObjectAction: options.gameObjectAction,
-    });
+    this.#button = new BatteryButton(options);
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
 

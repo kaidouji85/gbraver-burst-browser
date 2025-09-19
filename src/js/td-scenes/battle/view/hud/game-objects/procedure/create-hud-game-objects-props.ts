@@ -23,9 +23,12 @@ import { createPilotButton } from "./create-pilot-button";
 export function createHUDGameObjectsProps(
   params: HUDLayerObjectCreatorParams,
 ): HUDGameObjectsProps {
-  const { resources, gameObjectAction } = params;
+  const { resources, gameObjectAction, player } = params;
   return {
-    batterySelector: new BatterySelector(params),
+    batterySelector: new BatterySelector({
+      ...params,
+      armdozerId: player.armdozer.id,
+    }),
     batterySelectorLeadLine: batterySelectorLeadLine(gameObjectAction),
     burstButton: createBurstButton(params),
     burstButtonLeadLine: burstButtonLeadLine(gameObjectAction),
