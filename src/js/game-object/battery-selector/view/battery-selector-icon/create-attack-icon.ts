@@ -4,6 +4,7 @@ import { ResourcesContainer } from "../../../../resource";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 import { genesisBraverAttackIcon } from "./genesis-braver-attack-icon";
 import { shinBraverAttackIcon } from "./shin-braver-attack-icon";
+import { wingDozerAttackIcon } from "./wing-dozer-attack-icon";
 
 /**
  * アームドーザに応じた攻撃アイコンを生成する
@@ -19,6 +20,8 @@ export const createAttackIcon = (
   switch (armdozerId) {
     case ArmdozerIds.SHIN_BRAVER:
       return shinBraverAttackIcon(resources);
+    case ArmdozerIds.WING_DOZER:
+      return wingDozerAttackIcon(resources);
     case ArmdozerIds.GENESIS_BRAVER:
       return genesisBraverAttackIcon(resources);  
     default:

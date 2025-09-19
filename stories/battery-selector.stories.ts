@@ -119,3 +119,15 @@ const toBattery =
 
 /** 5に設定 最大値5 */
 export const attackTo5 = batterySelectorStory(toBattery(5, 5, "Attack"));
+
+/** 攻撃 ウィングドーザ */
+export const wingDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.WING_DOZER,
+);
+
+/** 防御 ウィングドーザ */
+export const wingDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.WING_DOZER,
+);
