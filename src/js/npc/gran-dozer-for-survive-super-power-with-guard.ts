@@ -8,6 +8,7 @@ import {
 
 import { findBatteryCommand } from "./find-battery-command";
 import { findBurstCommand } from "./find-burst-command";
+import { findPilotSkillCommand } from "./find-pilot-skill-command";
 import { getOptimalDefenseBattery } from "./get-optimal-defense-battery";
 import { NPC } from "./npc";
 import { SimpleNPC, SimpleRoutine, SimpleRoutineData } from "./simple-npc";
@@ -32,6 +33,7 @@ const attackRoutine: SimpleRoutine = (data) => {
 const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
   battery1: findBatteryCommand(1, data.commands),
   burst: findBurstCommand(data.commands),
+  pilot: findPilotSkillCommand(data.commands),
   optimalDefenseBattery: getOptimalDefenseBattery(data.enemy),
 });
 
@@ -41,12 +43,14 @@ const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
  */
 const defenseRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const { burst, battery1, optimalDefenseBattery } =
+  const { burst, pilot, battery1, optimalDefenseBattery } =
     getDefenseRoutineCondition(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst && enemy.armdozer.battery <= 0) {
     selectedCommand = burst;
+  } else if (!burst && pilot) {
+    selectedCommand = pilot;
   } else if (optimalDefenseBattery.isExist) {
     const battery = optimalDefenseBattery.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
