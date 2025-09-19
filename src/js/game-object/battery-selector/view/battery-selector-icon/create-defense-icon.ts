@@ -2,6 +2,7 @@ import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
 import { ResourcesContainer } from "../../../../resource";
 import { BatterySelectorIcon } from "./battery-selector-icon";
+import { genesisBraverDefenseIcon } from "./genesis-braver-defense-icon";
 import { shinBraverDefenseIcon } from "./shin-braver-defense-icon";
 
 /**
@@ -18,6 +19,8 @@ export const createDefenseIcon = (
   switch (armdozerId) {
     case ArmdozerIds.SHIN_BRAVER:
       return shinBraverDefenseIcon(resources);
+    case ArmdozerIds.GENESIS_BRAVER:
+      return genesisBraverDefenseIcon(resources);
     default:
       return null;
   }

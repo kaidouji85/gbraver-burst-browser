@@ -64,16 +64,28 @@ export const attack5 = batterySelectorStory(enabled(5, "Attack"));
 export const defense5 = batterySelectorStory(enabled(5, "Defense"));
 
 /** 攻撃 最大値4 */
-export const attack4 = batterySelectorStory(enabled(4, "Attack"));
+export const attack4 = batterySelectorStory(
+  enabled(4, "Attack"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 防御 最大値4 */
-export const defense4 = batterySelectorStory(enabled(4, "Defense"));
+export const defense4 = batterySelectorStory(
+  enabled(4, "Defense"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 攻撃 最大値8 */
-export const attack8 = batterySelectorStory(enabled(8, "Attack"));
+export const attack8 = batterySelectorStory(
+  enabled(8, "Attack"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 防御 最大値8 */
-export const defense8 = batterySelectorStory(enabled(8, "Defense"));
+export const defense8 = batterySelectorStory(
+  enabled(8, "Defense"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /**
  * バッテリーセレクタを操作不可能な状態に設定する
