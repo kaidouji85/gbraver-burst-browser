@@ -1,3 +1,4 @@
+import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -7,37 +8,52 @@ import { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { GameObjectAction } from "../../action/game-object-action";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { BatterySelectorModel } from "../model";
+import { BatterySelectorIcon } from "./battery-selector-icon/battery-selector-icon";
+import { createAttackIcon } from "./battery-selector-icon/create-attack-icon";
+import { createDefenseIcon } from "./battery-selector-icon/create-defense-icon";
 
 /** バッテリー現在値 最大フレーム数 */
 const BATTERY_VALUE_MAX_ANIMATION = 16;
 
-/** コンストラクタのパラメータ */
-type Param = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+/** コンストラクタのオプション */
+type Options = ResourcesContainer &
+  GameObjectActionContainer & {
+    /** アームドーザID */
+    armdozerId: ArmdozerId;
+  };
 
 /** バッテリーボタン */
 export class BatteryButton {
+  /** グループ */
   #group: THREE.Group;
+  /** ボタン */
   #button: SimpleImageMesh;
+  /** 押下検出器 */
   #pushDetector: PushDetector;
+  /** 攻撃ラベル */
   #attackLabel: SimpleImageMesh;
+  /** 攻撃アイコン */
+  #attackIcon: BatterySelectorIcon | null;
+  /** 防御ラベル */
   #defenseLabel: SimpleImageMesh;
+  /** 防御アイコン */
+  #defenseIcon: BatterySelectorIcon | null;
+  /** バッテリー値 */
   #batteryValue: HorizontalAnimationMesh;
 
   /**
    * コンストラクタ
-   * @param param パラメータ
+   * @param options オプション
    */
-  constructor(param: Param) {
+  constructor(options: Options) {
     this.#group = new THREE.Group();
+
     const button =
-      param.resources.canvasImages.find(
+      options.resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON,
       )?.image ?? new Image();
     this.#button = new SimpleImageMesh({
@@ -48,14 +64,28 @@ export class BatteryButton {
     });
     this.#button.getObject3D().position.set(0, 0, -1);
     this.#group.add(this.#button.getObject3D());
+
     this.#pushDetector = circlePushDetector({
       radius: 200,
       segments: 32,
-      gameObjectAction: param.gameObjectAction,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#group.add(this.#pushDetector.getObject3D());
+
+    this.#attackIcon = createAttackIcon(options);
+    if (this.#attackIcon) {
+      this.#attackIcon
+        .getObject3D()
+        .position.set(
+          this.#attackIcon.position.x,
+          this.#attackIcon.position.y,
+          2,
+        );
+      this.#group.add(this.#attackIcon.getObject3D());
+    }
+
     const attackLabel =
-      param.resources.canvasImages.find(
+      options.resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK,
       )?.image ?? new Image();
     this.#attackLabel = new SimpleImageMesh({
@@ -66,8 +96,9 @@ export class BatteryButton {
     });
     this.#attackLabel.getObject3D().position.set(28, -96, 0);
     this.#group.add(this.#attackLabel.getObject3D());
+
     const defenseLabel =
-      param.resources.canvasImages.find(
+      options.resources.canvasImages.find(
         (v) => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE,
       )?.image ?? new Image();
     this.#defenseLabel = new SimpleImageMesh({
@@ -78,8 +109,21 @@ export class BatteryButton {
     });
     this.#defenseLabel.getObject3D().position.set(32, -96, 0);
     this.#group.add(this.#defenseLabel.getObject3D());
+
+    this.#defenseIcon = createDefenseIcon(options);
+    if (this.#defenseIcon) {
+      this.#defenseIcon
+        .getObject3D()
+        .position.set(
+          this.#defenseIcon.position.x,
+          this.#defenseIcon.position.y,
+          2,
+        );
+      this.#group.add(this.#defenseIcon.getObject3D());
+    }
+
     const currentBattery = findTextureOrThrow(
-      param.resources,
+      options.resources,
       TEXTURE_IDS.BATTERY_CURRENT_VALUE,
     ).texture;
     this.#batteryValue = new HorizontalAnimationMesh({
@@ -99,7 +143,9 @@ export class BatteryButton {
     this.#button.destructor();
     this.#pushDetector.destructor();
     this.#attackLabel.destructor();
+    this.#attackIcon?.destructor();
     this.#defenseLabel.destructor();
+    this.#defenseIcon?.destructor();
     this.#batteryValue.destructor();
   }
 
@@ -113,10 +159,18 @@ export class BatteryButton {
       model.batteryButtonScale,
       1,
     );
-    const attackOpacity = model.label === "Attack" ? model.opacity : 0;
-    this.#attackLabel.setOpacity(attackOpacity);
-    const defenseOpacity = model.label === "Defense" ? model.opacity : 0;
-    this.#defenseLabel.setOpacity(defenseOpacity);
+    const attackLabelOpacity = model.label === "Attack" ? model.opacity : 0;
+    this.#attackLabel.setOpacity(attackLabelOpacity);
+
+    const attackerIconOpacity = model.label === "Attack" ? model.opacity : 0;
+    this.#attackIcon?.opacity(attackerIconOpacity);
+
+    const defenseLabelOpacity = model.label === "Defense" ? model.opacity : 0;
+    this.#defenseLabel.setOpacity(defenseLabelOpacity);
+
+    const defenderIconOpacity = model.label === "Defense" ? model.opacity : 0;
+    this.#defenseIcon?.opacity(defenderIconOpacity);
+
     this.#button.setOpacity(model.opacity);
     this.#batteryValue.animate(model.battery / BATTERY_VALUE_MAX_ANIMATION);
     this.#batteryValue.opacity(model.opacity);

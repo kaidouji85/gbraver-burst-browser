@@ -1,3 +1,4 @@
+import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
@@ -12,7 +13,11 @@ import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
 /** コンストラクタのオプション */
-type Options = ResourcesContainer & GameObjectActionContainer;
+export type BatterySelectorViewOptions = ResourcesContainer &
+  GameObjectActionContainer & {
+    /** アームドーザID */
+    armdozerId: ArmdozerId;
+  };
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
@@ -31,23 +36,23 @@ export class BatterySelectorView {
    * コンストラクタ
    * @params options オプション
    */
-  constructor(options: Options) {
+  constructor(options: BatterySelectorViewOptions) {
     this.#group = new THREE.Group();
     this.#meter = new BatteryMeter(options.resources);
     this.#meter.getObject3D().position.set(0, 288, 0);
     this.#group.add(this.#meter.getObject3D());
-    this.#button = new BatteryButton({
-      resources: options.resources,
-      gameObjectAction: options.gameObjectAction,
-    });
+
+    this.#button = new BatteryButton(options);
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
+
     this.#plus = new BatteryPlus({
       resources: options.resources,
       gameObjectAction: options.gameObjectAction,
     });
     this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
+
     this.#minus = new BatteryMinus({
       resources: options.resources,
       gameObjectAction: options.gameObjectAction,
@@ -85,6 +90,7 @@ export class BatterySelectorView {
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
+
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
     const paddingRight = 105;
