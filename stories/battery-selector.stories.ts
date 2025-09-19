@@ -11,6 +11,7 @@ export default {
 /**
  * バッテリーセレクタストーリー
  * @param fn バッテリーセレクタ操作関数
+ * @param armdozerId アームドーザID
  * @returns story
  */
 const batterySelectorStory = (
