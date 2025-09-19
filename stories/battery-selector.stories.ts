@@ -155,3 +155,15 @@ export const lightningDozerDefense = batterySelectorStory(
   enabled(5, "Defense"),
   ArmdozerIds.LIGHTNING_DOZER,
 );
+
+/** 攻撃 グランドーザ */
+export const granDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.GRAN_DOZER,
+);
+
+/** 防御 グランドーザ */
+export const granDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.GRAN_DOZER,
+);
