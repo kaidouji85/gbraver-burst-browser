@@ -18,7 +18,8 @@ export const shouldPlaySurviveSecondTurnWithGuard = (
   const isEnemyAttackGuard =
     lastBattle?.result.name === "Guard" &&
     lastBattle.attacker === enemy.playerId;
+  // このイベントは3ターン目冒頭に実行される想定なので、mainTurnCount===3で判定する
   return (
-    !isSecondTurnEventComplete && mainTurnCount === 2 && isEnemyAttackGuard
+    !isSecondTurnEventComplete && mainTurnCount === 3 && isEnemyAttackGuard
   );
 };
