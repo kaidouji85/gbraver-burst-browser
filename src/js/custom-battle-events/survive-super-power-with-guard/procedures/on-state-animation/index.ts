@@ -19,6 +19,7 @@ import { tsubasaFeintShout } from "../../animation/tsubasa-feint-shout";
 import { tsubasaFinishBlowShout } from "../../animation/tsubasa-finish-blow-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { tsubasaPilotSkillShout } from "../../animation/tsubasa-pilot-skill-shout";
+import { tsubasaSecondAttackShout } from "../../animation/tsubasa-second-attack-shout";
 import { isRaitoAttackWhenAdvantage } from "./is-raito-attack-when-advantage";
 import { isRaitoAttackWhenDisadvantage } from "./is-raito-attack-when-disadvantage";
 import { isRaitoAttackWhenEven } from "./is-raito-attack-when-even";
@@ -36,6 +37,7 @@ import { isTsubasaFeint } from "./is-tsubasa-feint";
 import { isTsubasaFinishBlow } from "./is-tsubasa-finish-blow";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
 import { isTsubasaPilotSkill } from "./is-tsubasa-pilot-skill";
+import { isTsubasaSecondAttack } from "./is-tsubasa-second-attack";
 
 /**
  * アニメーション種別に応じたアニメーションを取得する
@@ -50,6 +52,8 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = tsubasaComboAttackShout(props);
   } else if (isTsubasaFirstAttack(props)) {
     result = tsubasaFirstAttackShout(props);
+  } else if (isTsubasaSecondAttack(props)) {
+    result = tsubasaSecondAttackShout(props);
   } else if (isTsubasaFeint(props)) {
     result = tsubasaFeintShout(props);
   } else if (isTsubasaAttackTurnBurst(props)) {
