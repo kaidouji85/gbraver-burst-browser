@@ -9,10 +9,10 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
 
 /**
- * 1ターン目で負けた
+ * 2ターン目で負けた
  * @param props イベントプロパティ
  */
-export async function firstTurnLose(props: CustomBattleEventProps) {
+export async function secondTurnLose(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「なんや もう${wbr}終わり${wbr}かいな`],
