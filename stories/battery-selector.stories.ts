@@ -1,3 +1,5 @@
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+
 import { BatterySelector } from "../src/js/game-object/battery-selector";
 import { ButtonLabel } from "../src/js/game-object/battery-selector/model/button-label";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
@@ -9,11 +11,18 @@ export default {
 /**
  * バッテリーセレクタストーリー
  * @param fn バッテリーセレクタ操作関数
+ * @param armdozerId アームドーザID
  * @returns story
  */
-const batterySelectorStory = (fn: (selector: BatterySelector) => void) =>
+const batterySelectorStory = (
+  fn: (selector: BatterySelector) => void,
+  armdozerId: ArmdozerId = ArmdozerIds.SHIN_BRAVER,
+) =>
   hudGameObjectStory((params) => {
-    const selector: BatterySelector = new BatterySelector(params);
+    const selector: BatterySelector = new BatterySelector({
+      ...params,
+      armdozerId,
+    });
     fn(selector);
     return [selector.getObject3D()];
   });
@@ -56,16 +65,28 @@ export const attack5 = batterySelectorStory(enabled(5, "Attack"));
 export const defense5 = batterySelectorStory(enabled(5, "Defense"));
 
 /** 攻撃 最大値4 */
-export const attack4 = batterySelectorStory(enabled(4, "Attack"));
+export const attack4 = batterySelectorStory(
+  enabled(4, "Attack"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 防御 最大値4 */
-export const defense4 = batterySelectorStory(enabled(4, "Defense"));
+export const defense4 = batterySelectorStory(
+  enabled(4, "Defense"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 攻撃 最大値8 */
-export const attack8 = batterySelectorStory(enabled(8, "Attack"));
+export const attack8 = batterySelectorStory(
+  enabled(8, "Attack"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /** 防御 最大値8 */
-export const defense8 = batterySelectorStory(enabled(8, "Defense"));
+export const defense8 = batterySelectorStory(
+  enabled(8, "Defense"),
+  ArmdozerIds.GENESIS_BRAVER,
+);
 
 /**
  * バッテリーセレクタを操作不可能な状態に設定する
@@ -99,3 +120,51 @@ const toBattery =
 
 /** 5に設定 最大値5 */
 export const attackTo5 = batterySelectorStory(toBattery(5, 5, "Attack"));
+
+/** 攻撃 ウィングドーザ */
+export const wingDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.WING_DOZER,
+);
+
+/** 防御 ウィングドーザ */
+export const wingDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.WING_DOZER,
+);
+
+/** 攻撃 ネオランドーザ */
+export const neoLandozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.NEO_LANDOZER,
+);
+
+/** 防御 ネオランドーザ */
+export const neoLandozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.NEO_LANDOZER,
+);
+
+/** 攻撃 ライトニングドーザ */
+export const lightningDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.LIGHTNING_DOZER,
+);
+
+/** 防御 ライトニングドーザ */
+export const lightningDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.LIGHTNING_DOZER,
+);
+
+/** 攻撃 グランドーザ */
+export const granDozerAttack = batterySelectorStory(
+  enabled(5, "Attack"),
+  ArmdozerIds.GRAN_DOZER,
+);
+
+/** 防御 グランドーザ */
+export const granDozerDefense = batterySelectorStory(
+  enabled(5, "Defense"),
+  ArmdozerIds.GRAN_DOZER,
+);

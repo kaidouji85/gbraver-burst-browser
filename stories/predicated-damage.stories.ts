@@ -11,20 +11,6 @@ export default {
   title: "predicated-damage",
 };
 
-/**
- * 点滅
- * @param predicatedDamage ダメージ予想
- * @param damage 表示ダメージ
- */
-const flash = (predicatedDamage: PredicatedDamage, damage: number) => {
-  predicatedDamage
-    .show(damage)
-    .chain(delay(6000))
-    .chain(predicatedDamage.hidden())
-    .chain(delay(1000))
-    .loop();
-};
-
 /** 生成関数のパラメータ */
 type CreatorParams = PredicatedDamageConstructParams & {
   /** ダメージ数字 */
@@ -42,9 +28,15 @@ const createPredicatedDamage = (params: CreatorParams): THREE.Object3D => {
   const { damage } = params;
   const predicatedDamage = new PredicatedDamage(params);
   predicatedDamage.getObject3D().position.y = params.y ?? 0;
-  flash(predicatedDamage, damage);
+  predicatedDamage.show(damage).play();
   predicatedDamage.notifyPush().subscribe(() => {
     console.log("push");
+    predicatedDamage
+      .popBattleSimulatorIcon()
+      .chain(predicatedDamage.hidden())
+      .chain(delay(1000))
+      .chain(predicatedDamage.show(damage))
+      .play();
   });
   return predicatedDamage.getObject3D();
 };

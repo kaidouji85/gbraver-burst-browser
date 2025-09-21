@@ -19,11 +19,13 @@ export function decisionByBatterySelector(
     view.hud.gameObjects.pilotButton.close(),
     view.hud.gameObjects.pilotButtonLeadLine.hidden(),
     view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map((p) => p.statusIcon.close()),
     ...view.hud.players.map(({ predicatedDamage }) =>
       predicatedDamage.hidden(),
     ),
     onStart(() => {
       view.dom.hamburgerMenu.disableBattleSimulator();
+      view.dom.hamburgerMenu.disableStatusOpening();
     }),
   )
     .chain(delay(500))

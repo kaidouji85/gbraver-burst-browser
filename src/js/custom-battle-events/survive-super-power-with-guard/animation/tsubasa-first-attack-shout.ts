@@ -15,6 +15,6 @@ export const tsubasaFirstAttackShout = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `さすがライト 攻守${wbr}ともに${wbr}隙がない`,
+      `あの新型 ……なにか${wbr}隠して${wbr}いるな`,
     );
   });

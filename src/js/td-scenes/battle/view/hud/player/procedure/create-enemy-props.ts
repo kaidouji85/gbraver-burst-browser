@@ -1,6 +1,7 @@
 import { enemyGauge } from "../../../../../../game-object/gauge";
 import { PredicatedDamage } from "../../../../../../game-object/predicated-damage";
 import { loseIndicator } from "../../../../../../game-object/result-indicator";
+import { StatusIcon } from "../../../../../../game-object/status-icon";
 import { enemyTurnStart } from "../../../../../../game-object/turn-start";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 import { HUDPlayerProps } from "../props";
@@ -23,10 +24,13 @@ export function createEnemyProps(
 
   const predicatedDamage = new PredicatedDamage(params);
 
+  const statusIcon = new StatusIcon(params);
+
   return {
     playerId: enemy.playerId,
     gauge,
     predicatedDamage,
+    statusIcon,
     turnStart: enemyTurnStart(resources, gameObjectAction),
     resultIndicator: loseIndicator(resources, gameObjectAction),
   };

@@ -1,11 +1,15 @@
 import * as THREE from "three";
 
-import type { LightningDozerModel } from "../model/lightning-dozer-model";
+import { StatusIconPosition } from "../../armdozer-sprite";
+import { LightningDozerModel } from "../model/lightning-dozer-model";
 
 /**
  * ライトニングドーザビュー
  */
 export interface LightningDozerView {
+  /** ステータスアイコンの位置（ワールド座標） */
+  statusIconPosition: StatusIconPosition;
+
   /** デストラクタ相当の処理 */
   destructor(): void;
 

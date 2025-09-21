@@ -20,9 +20,20 @@ module.exports = [
       "simple-import-sort": simpleImportSort,
     },
     rules: {
-      "no-undef": "error",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    rules: {
+      "no-undef": "error",
+    },
+  },
+  {
+    files: ["eslint.config.js"],
+    languageOptions: {
+      sourceType: "commonjs",
     },
   },
   {

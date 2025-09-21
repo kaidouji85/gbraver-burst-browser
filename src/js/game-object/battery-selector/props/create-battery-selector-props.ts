@@ -1,40 +1,31 @@
 import { Group } from "@tweenjs/tween.js";
-import { Observable } from "rxjs";
 
-import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { GameObjectAction } from "../../action/game-object-action";
 import { initialValue } from "../model/initial-value";
 import { createBatterySelectorSounds } from "../sounds/battery-selector-sounds";
-import { BatterySelectorView } from "../view";
+import { BatterySelectorView, BatterySelectorViewOptions } from "../view";
 import { BatterySelectorProps } from "./battery-selector-props";
 
-/** バッテリーセレクタプロパティ生成パラメータ */
-export type PropsCreatorParams = ResourcesContainer &
-  SEPlayerContainer & {
-    /** ゲームオブジェクトアクション */
-    gameObjectAction: Observable<GameObjectAction>;
-  };
+/** バッテリーセレクタプロパティ生成オプション */
+export type PropsCreatorOptions = BatterySelectorViewOptions &
+  SEPlayerContainer;
 
 /**
  * バッテリーセレクタプロパティを生成する
- * @param param パラメータ
+ * @param options オプション
  * @returns バッテリーセレクタプロパティ
  */
 export function createBatterySelectorProps(
-  param: PropsCreatorParams,
+  options: PropsCreatorOptions,
 ): BatterySelectorProps {
   return {
-    ...param,
+    ...options,
     model: initialValue(),
     disabled: false,
     batteryChangeTween: new Group(),
     batteryMinusTween: new Group(),
     batteryPlusTween: new Group(),
-    sounds: createBatterySelectorSounds(param.resources),
-    view: new BatterySelectorView({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
-    }),
+    sounds: createBatterySelectorSounds(options.resources),
+    view: new BatterySelectorView(options),
   };
 }

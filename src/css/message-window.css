@@ -13,6 +13,7 @@
     /** 本カスタムプロパティはJavaScriptから変更される */
     --brightness: brightness(1);
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
+    --window-width: calc(49vw - var(--margin-x));
     --window-height: calc(var(--battle-window-font-size) * 7);
     --shout-window-height: auto;
 
@@ -29,13 +30,13 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--battle-window-font-size) * 1);
-    width: calc(49vw - var(--margin-x));
     filter: var(--brightness);
   }
 
   .message-window {
     left: 50vw;
     transform: translate(-50%, 0);
+    width: var(--window-width);
     min-height: var(--window-height);
   }
 
@@ -45,11 +46,13 @@
 
   .message-window--left {
     left: var(--margin-x);
+    width: var(--window-width);
     min-height: var(--window-height);
   }
 
   .message-window--right {
     right: var(--margin-x);
+    width: var(--window-width);
     min-height: var(--window-height);
   }
 
@@ -57,6 +60,12 @@
     --right-margin: max(10px, var(--safe-area-right));
 
     right: calc(var(--right-margin) + var(--hud-ui-scale) * 220px);
+
+    /**
+     * バッテリーセレクタ説明ウインドウは固定幅ではなく、
+     * コンテンツに応じた最小幅で表示する方が見栄えが良い
+     */
+    width: auto;
     min-height: var(--window-height);
   }
 
@@ -64,6 +73,12 @@
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 250px);
+
+    /**
+     * バースト説明ウインドウは固定幅ではなく、
+     * コンテンツに応じた最小幅で表示する方が見栄えが良い
+     */
+    width: auto;
     min-height: var(--window-height);
   }
 
@@ -71,22 +86,36 @@
     --left-margin: max(10px, var(--safe-area-left));
 
     left: calc(var(--left-margin) + var(--hud-ui-scale) * 160px);
+
+    /**
+     * パイロット説明ウインドウは固定幅ではなく、
+     * コンテンツに応じた最小幅で表示する方が見栄えが良い
+     */
+    width: auto;
     min-height: var(--window-height);
   }
 
   .message-window--player-shout {
     right: var(--margin-x);
+    width: var(--window-width);
     height: var(--shout-window-height);
   }
 
   .message-window--enemy-shout {
     left: var(--margin-x);
+    width: var(--window-width);
     height: var(--shout-window-height);
   }
 
   .message-window__messages-wrapper {
     flex: 1 1;
     overflow: hidden;
+  }
+
+  .message-window--near-burst-button .message-window__messages-wrapper,
+  .message-window--near-pilot-button .message-window__messages-wrapper {
+    display: flex;
+    place-items: center;
   }
 
   .message-window__paragraph,
@@ -131,6 +160,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
+    filter: brightness(0.95);
   }
 
   .message-window__attack-battery,
@@ -140,6 +170,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
+    filter: brightness(0.95);
   }
 
   .message-window__highlight {

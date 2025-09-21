@@ -1,0 +1,326 @@
+/* ============================================================ 
+ * ステータスダイアログ
+ * ============================================================ */
+
+@media (orientation: landscape) {
+  .status {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    --dialog-padding: var(--responsive-font-size);
+    --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
+    --grid-gap: calc(var(--responsive-font-size) * 0.5);
+    --highlight-color: #ffa500;
+
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .status {
+    display: none;
+  }
+}
+
+.status__background {
+  position: absolute;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.status__dialog {
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+}
+
+.status__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.status__contents {
+  box-sizing: border-box;
+  padding: max(var(--closer-height) / 2, var(--dialog-padding))
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  width: calc(
+    100dvw -
+      max(
+        var(--safe-area-right) + var(--safe-area-left),
+        var(--closer-width) + var(--responsive-font-size) * 2
+      )
+  );
+  height: calc(
+    100dvh -
+      max(
+        var(--safe-area-top) + var(--safe-area-bottom),
+        var(--closer-height) + var(--responsive-font-size) * 2
+      )
+  );
+  display: grid;
+  grid-template: "armdozer" "pilot" "effects";
+  gap: var(--grid-gap);
+  overflow: auto;
+}
+
+/* ============================================================ 
+ * アームドーザ、パイロットアイコン
+ * 共通スタイルが多いので、まとめて記述
+ * ============================================================ */
+
+.status__armdozer-icon,
+.status__pilot-icon {
+  display: grid;
+  align-items: center;
+  width: calc(var(--responsive-font-size) * 7);
+  overflow: visible;
+
+  /** 文字要素の下に表示されるようにz-indexを調整 */
+  z-index: -1;
+}
+
+.status__armdozer-icon-img,
+.status__armdozer-icon-img--enemy {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.status__armdozer-icon-img {
+  transform: scale(2);
+}
+
+.status__armdozer-icon-img--enemy {
+  transform: scale(-2, 2);
+}
+
+.status__pilot-icon-img,
+.status__pilot-icon-img--enemy {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.status__pilot-icon-img {
+  transform: scale(1.3);
+}
+
+.status__pilot-icon-img--enemy {
+  transform: scale(-1.3, 1.3);
+}
+
+/* ============================================================ 
+ * バースト、パイロットスキル
+ * 共通スタイルが多いので、まとめて記述
+ * ============================================================ */
+
+.status__burst-icon,
+.status__pilot-skill-icon {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: calc(var(--responsive-font-size) * 0.3);
+}
+
+.status__burst-label,
+.status__pilot-skill-label {
+  border-right: 1px dashed;
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+  padding-right: calc(var(--responsive-font-size) * 0.5);
+  width: calc(var(--responsive-font-size) * 4);
+}
+
+.status__burst-available-box,
+.status__burst-disabled-box,
+.status__pilot-skill-available-box,
+.status__pilot-skill-disabled-box {
+  --size: calc(var(--responsive-font-size) * 1.2);
+
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: calc(var(--responsive-font-size) * 0.2);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__burst-available-box,
+.status__pilot-skill-available-box {
+  background-color: #00ff7f;
+  border: 1px solid #008042;
+}
+
+.status__burst-disabled-box,
+.status__pilot-skill-disabled-box {
+  background-color: #696969;
+  border: 1px solid #333;
+}
+
+/* ============================================================ 
+ * アームドーザ
+ * ============================================================ */
+
+.status__armdozer {
+  grid-area: armdozer;
+  display: grid;
+  grid-template: "armdozer-icon armdozer-info" / auto 1fr;
+  gap: var(--grid-gap);
+}
+
+.status__armdozer-icon {
+  grid-area: armdozer-icon;
+}
+
+.status__armdozer-info {
+  grid-area: armdozer-info;
+  display: grid;
+  grid-template:
+    "armdozer-name"
+    "armdozer-basic-status"
+    "burst";
+  gap: var(--grid-gap);
+  background: rgb(23 23 23 / 60%);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  padding: calc(var(--responsive-font-size) * 0.2);
+  box-sizing: border-box;
+  align-items: start;
+  align-self: end;
+}
+
+.status__armdozer-name {
+  grid-area: armdozer-name;
+  font-weight: bold;
+}
+
+.status__armdozer-basic-status {
+  grid-area: armdozer-basic-status;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--grid-gap);
+}
+
+.status__armdozer-hp,
+.status__armdozer-battery,
+.status__armdozer-power,
+.status__armdozer-speed {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--responsive-font-size) * 0.2);
+}
+
+.status__armdozer-hp-label,
+.status__armdozer-battery-label,
+.status__armdozer-power-label,
+.status__armdozer-speed-label {
+  display: grid;
+  place-items: center;
+  min-width: calc(var(--responsive-font-size) * 3);
+  min-height: calc(var(--responsive-font-size) * 1.5);
+  box-sizing: border-box;
+  background-color: var(--button-background-color);
+  border: var(--label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.4);
+}
+
+.status__armdozer-power-value--buffed {
+  color: var(--highlight-color);
+  font-weight: bold;
+}
+
+.status__battery-icon {
+  width: var(--responsive-font-size);
+  height: var(--responsive-font-size);
+}
+
+.status__burst {
+  grid-area: burst;
+}
+
+/* ============================================================ 
+ * パイロット
+ * ============================================================ */
+
+.status__pilot {
+  grid-area: pilot;
+  display: grid;
+  grid-template: "pilot-icon pilot-info" / auto 1fr;
+  gap: var(--grid-gap);
+}
+
+.status__pilot-icon {
+  grid-area: pilot-icon;
+}
+
+.status__unknown-pilot {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--responsive-font-size) * 3);
+  font-weight: bold;
+}
+
+.status__pilot-info {
+  grid-area: pilot-info;
+  display: grid;
+  grid-template:
+    "pilot-name"
+    "pilot-skill";
+  gap: var(--grid-gap);
+  background: rgb(23 23 23 / 60%);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  padding: calc(var(--responsive-font-size) * 0.2);
+  box-sizing: border-box;
+  align-self: end;
+}
+
+.status__pilot-name {
+  grid-area: pilot-name;
+  font-weight: bold;
+}
+
+.status__pilot-skill {
+  grid-area: pilot-skill;
+}
+
+/* ============================================================ 
+ * エフェクト
+ * ============================================================ */
+
+.status__effects {
+  grid-area: effects;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: calc(var(--responsive-font-size) * 0.2);
+  box-sizing: border-box;
+  border: 1px solid #e6e3e1;
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: calc(var(--responsive-font-size) * 0.3);
+}
+
+.status__effect-description {
+  color: var(--highlight-color);
+  font-weight: bold;
+}

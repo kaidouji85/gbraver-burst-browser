@@ -19,8 +19,10 @@ export function decisionByMiniController(
       .chain(view.dom.miniController.hidden()),
     onStart(() => {
       view.dom.hamburgerMenu.disableBattleSimulator();
+      view.dom.hamburgerMenu.disableStatusOpening();
     }),
     view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map((p) => p.statusIcon.close()),
     ...view.hud.players.map(({ predicatedDamage }) =>
       predicatedDamage.hidden(),
     ),

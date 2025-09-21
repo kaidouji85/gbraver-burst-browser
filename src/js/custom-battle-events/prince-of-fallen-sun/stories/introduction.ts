@@ -58,7 +58,9 @@ export async function introduction(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Raito");
   await scrollRightMessages(props, [
     ["ライト", `「ダメや！！`],
-    [`試合前に${wbr}手の内を${wbr}明かすなんて${wbr}自殺行為や」`],
+    [
+      `公式戦の${wbr}前に 対Gブレイバーの${wbr}秘策を${wbr}明かす${wbr}つもりか」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 

@@ -29,7 +29,7 @@ export async function sunOfNoble(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ユウヤ", `「感激だな`],
     [
-      `まさか${wbr}巨大ロボの${wbr}創業家の${wbr}人間と${wbr}手合わせ${wbr}できる${wbr}とはな」`,
+      `まさか${wbr}巨大ロボの${wbr}創業家と${wbr}手合わせ${wbr}できる${wbr}とはな」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();

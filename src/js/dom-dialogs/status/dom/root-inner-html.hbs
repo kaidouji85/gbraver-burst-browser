@@ -1,0 +1,137 @@
+<div class="status__background" data-id="background"></div>
+<div class="status__dialog">
+  <img
+    class="status__closer"
+    alt="閉じる"
+    src="{{closerPath}}"
+    data-id="closer"
+  />
+  <div class="status__contents">
+    <div class="status__armdozer">
+      <div class="status__armdozer-icon">
+        {{#if isEnemy}}
+          <img
+            class="status__armdozer-icon-img--enemy"
+            src="{{armdozerIconPath}}"
+            alt="アームドーザアイコン"
+          />
+        {{else}}
+          <img
+            class="status__armdozer-icon-img"
+            src="{{armdozerIconPath}}"
+            alt="アームドーザアイコン"
+          />
+        {{/if}}
+      </div>
+      <div class="status__armdozer-info">
+        <div class="status__armdozer-name">{{armdozer.name}}</div>
+        <div class="status__armdozer-basic-status">
+          <span class="status__armdozer-hp">
+            <span class="status__armdozer-hp-label">HP</span>
+            <span class="status__armdozer-hp-value">
+              {{armdozer.hp}}
+            </span>
+          </span>
+          <span class="status__armdozer-battery">
+            <span class="status__armdozer-battery-label">
+              <img
+                class="status__battery-icon"
+                src="{{batteryIconPath}}"
+                alt="バッテリーアイコン"
+              />
+            </span>
+            <span class="status__armdozer-battery-value">
+              {{armdozer.battery}}
+            </span>
+          </span>
+          <span class="status__armdozer-power">
+            <span class="status__armdozer-power-label">攻撃</span>
+            <span class="{{armdozerPowerVlueClassName}}">{{totalPower}}</span>
+          </span>
+          <span class="status__armdozer-speed">
+            <span class="status__armdozer-speed-label">機動</span>
+            <span class="status__armdozer-speed-value">{{armdozer.speed}}</span>
+          </span>
+        </div>
+        <div class="status__burst">
+          <span class="status__burst-icon">
+            <span class="status__burst-label">バースト</span>
+            {{#if armdozer.enableBurst}}
+              <span class="status__burst-available-box"></span>
+              <span class="status__burst-available-caption">発動可</span>
+            {{else}}
+              <span class="status__burst-disabled-box"></span>
+              <span class="status__burst-disabled-caption">発動済</span>
+            {{/if}}
+          </span>
+          <span class="status__burst-description">{{burstDescription}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="status__pilot">
+      <div class="status__pilot-icon">
+        {{#if isPilotHidden}}
+          <span class="status__unknown-pilot">?</span>
+        {{else}}
+          {{#if isEnemy}}
+            <img
+              class="status__pilot-icon-img--enemy"
+              src="{{pilotIconPath}}"
+              alt="パイロットアイコン"
+            />
+          {{else}}
+            <img
+              class="status__pilot-icon-img"
+              src="{{pilotIconPath}}"
+              alt="パイロットアイコン"
+            />
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="status__pilot-info">
+        <span class="status__pilot-name">
+          {{#if isPilotHidden}}
+            ???
+          {{else}}
+            {{pilot.name}}
+          {{/if}}
+        </span>
+        <div class="status__pilot-skill">
+          <span class="status__pilot-skill-icon">
+            <span class="status__pilot-skill-label">スキル</span>
+            {{#if pilot.enableSkill}}
+              <span class="status__pilot-skill-available-box"></span>
+              <span class="status__pilot-skill-available-caption">発動可</span>
+            {{else}}
+              <span class="status__pilot-skill-disabled-box"></span>
+              <span class="status__pilot-skill-disabled-caption">発動済</span>
+            {{/if}}
+          </span>
+          <span class="status__pilot-skill-description">
+            {{#if isPilotHidden}}
+              ???
+            {{else}}
+              {{pilotSkillDescription}}
+            {{/if}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="status__effects">
+      <span class="status__effects-label">適用中の効果：</span>
+      {{#if allEffects.length}}
+        {{#each allEffects}}
+          <span class="status__effect">
+            <span class="status__effect-description">{{this.effect}}</span>
+            <span class="status__effect-annotation">
+              {{this.annotation}}
+            </span>
+          </span>
+          {{#unless @last}}、{{/unless}}
+        {{/each}}
+      {{else}}
+        <span class="status__no-effects">なし</span>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
+
+import { ResourcesContainer } from "../../../../resource";
+import { BatterySelectorIcon } from "./battery-selector-icon";
+import { genesisBraverDefenseIcon } from "./genesis-braver-defense-icon";
+import { granDozerDefenseIcon } from "./gran-dozer-defense-icon";
+import { lightningDozerDefenseIcon } from "./lightning-dozer-defense-icon";
+import { neoLandozerDefenseIcon } from "./neo-landozer-defense-icon";
+import { shinBraverDefenseIcon } from "./shin-braver-defense-icon";
+import { wingDozerDefenseIcon } from "./wing-dozer-defense-icon";
+
+/**
+ * アームドーザに応じた防御アイコンを生成する
+ * @param options オプション
+ * @returns 生成結果、生成できない場合はnull
+ */
+export const createDefenseIcon = (
+  options: ResourcesContainer & {
+    armdozerId: ArmdozerId;
+  },
+): BatterySelectorIcon | null => {
+  const { armdozerId, resources } = options;
+  switch (armdozerId) {
+    case ArmdozerIds.SHIN_BRAVER:
+      return shinBraverDefenseIcon(resources);
+    case ArmdozerIds.WING_DOZER:
+      return wingDozerDefenseIcon(resources);
+    case ArmdozerIds.NEO_LANDOZER:
+      return neoLandozerDefenseIcon(resources);
+    case ArmdozerIds.LIGHTNING_DOZER:
+      return lightningDozerDefenseIcon(resources);
+    case ArmdozerIds.GENESIS_BRAVER:
+      return genesisBraverDefenseIcon(resources);
+    case ArmdozerIds.GRAN_DOZER:
+      return granDozerDefenseIcon(resources);
+    default:
+      return null;
+  }
+};

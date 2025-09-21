@@ -298,7 +298,7 @@ export const messagesInInnerHTML = domStub((params) => {
 /** バッテリーシステムチュートリアルの攻撃バッテリーキャプション */
 export const attackBatteryCaption = domStub((params) => {
   const { resources } = params;
-  const dom = new MessageWindow(params);
+  const dom = new MessageWindow({ ...params, type: "NearBatterySelector" });
   dom.visible(true);
   dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
   return dom.getRootHTMLElement();
@@ -310,6 +310,22 @@ export const defenseBatteryCaption = domStub((params) => {
   const dom = new MessageWindow(params);
   dom.visible(true);
   dom.messagesInInnerHTML(defenseBatteryCaptionInnerHtml(resources));
+  return dom.getRootHTMLElement();
+});
+
+/** バーストボタン説明ウインドウ */
+export const burstCaption = domStub((params) => {
+  const dom = new MessageWindow({ ...params, type: "NearBurstButton" });
+  dom.visible(true);
+  dom.messages(['"バースト"ボタンを押そう']);
+  return dom.getRootHTMLElement();
+});
+
+/** パイロットボタン説明ウインドウ */
+export const pilotButtonCaption = domStub((params) => {
+  const dom = new MessageWindow({ ...params, type: "NearPilotButton" });
+  dom.visible(true);
+  dom.messages(['"パイロット"ボタンを押そう']);
   return dom.getRootHTMLElement();
 });
 

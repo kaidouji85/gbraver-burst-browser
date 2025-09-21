@@ -41,5 +41,11 @@ export function notifyBattleAction(
     hamburgerMenu
       .notifyBattleSimulatorStart()
       .pipe(map(() => ({ type: "battleSimulatorStart" }) as const)),
+    hamburgerMenu
+      .notifyPlayerStatusOpening()
+      .pipe(map(() => ({ type: "playerStatusOpening" }) as const)),
+    hamburgerMenu
+      .notifyEnemyStatusOpening()
+      .pipe(map(() => ({ type: "enemyStatusOpening" }) as const)),
   );
 }

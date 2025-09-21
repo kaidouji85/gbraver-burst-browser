@@ -1,6 +1,12 @@
 import * as THREE from "three";
 
 import { Resources } from "../../../../resource";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z,
+} from "../../../td-position";
+import { StatusIconPosition } from "../../armdozer-sprite";
 import { createAllMeshes } from "../meshes";
 import { AnimationMesh } from "../meshes/animation-mesh";
 import { GranDozerModel } from "../model/gran-dozer-model";
@@ -8,6 +14,8 @@ import { GranDozerView } from "./gran-dozer-view";
 
 /** プレイヤー グランドーザービュー */
 export class PlayerGranDozerView implements GranDozerView {
+  /** @override */
+  statusIconPosition: StatusIconPosition;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
@@ -18,6 +26,11 @@ export class PlayerGranDozerView implements GranDozerView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this.statusIconPosition = {
+      x: ARMDOZER_EFFECT_STANDARD_X - 70,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 80,
+      z: ARMDOZER_EFFECT_STANDARD_Z,
+    };
     this.#group = new THREE.Group();
     this.#meshes = createAllMeshes(resources);
     this.#meshes.forEach(({ mesh }) => {

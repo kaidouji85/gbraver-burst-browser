@@ -18,5 +18,6 @@ export const shouldPlaySurviveSecondTurnWithEvade = (
   const isEnemyAttackMiss =
     lastBattle?.result.name === "Miss" &&
     lastBattle.attacker === enemy.playerId;
-  return !isSecondTurnEventComplete && mainTurnCount === 2 && isEnemyAttackMiss;
+  // このイベントは3ターン目冒頭に実行される想定なので、mainTurnCount===3で判定する
+  return !isSecondTurnEventComplete && mainTurnCount === 3 && isEnemyAttackMiss;
 };

@@ -54,6 +54,7 @@ export class LightningDozer
     super();
     const { gameObjectAction } = params;
     this.#props = createLightningDozerProps(params);
+    this.statusIconPosition = this.#props.view.statusIconPosition;
     this.#unsubscribers = bindEventListeners({
       props: this.#props,
       gameObjectAction,

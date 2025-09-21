@@ -7,8 +7,13 @@ import { PlayerShinBraverView } from "./player-shin-braver-view";
  *  プレイヤー版のものを左右反転させただけである
  */
 export class EnemyShinBraverView extends PlayerShinBraverView {
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     super(resources);
+    this.statusIconPosition.x *= -1;
   }
 
   /** モデルをビューに反映させる */

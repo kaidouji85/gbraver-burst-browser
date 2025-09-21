@@ -1,6 +1,7 @@
 import { TextureConfig } from "../resource";
 import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
+import { BattleSimulatorIconConfigs } from "./battle-simulator-icon";
 import { DamageNumberTextureConfigs } from "./damage-number";
 import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
@@ -18,6 +19,7 @@ import { ShinBraverTextureConfigs } from "./shin-braver";
 import { ShinyaTextureConfigs } from "./shinya";
 import { ShockWaveTextureConfigs } from "./shock-wave";
 import { ShotTextureConfigs } from "./shot";
+import { StatusIconConfigs } from "./status-icon";
 import { TsubasaTextureConfigs } from "./tsubasa";
 import { TurnTexureConfigs } from "./turn";
 import { WingDozerTextureConfigs } from "./wing-dozer";
@@ -48,4 +50,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...PredicatedDamageTextureConfigs,
   ...GranDozerTextureConfigs,
   ...ShotTextureConfigs,
+  ...StatusIconConfigs,
+  ...BattleSimulatorIconConfigs,
 ];

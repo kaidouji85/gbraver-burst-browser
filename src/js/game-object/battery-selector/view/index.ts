@@ -1,54 +1,61 @@
+import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
-import type { ResourcesContainer } from "../../../resource";
-import type { GameObjectAction } from "../../action/game-object-action";
+import { PreRender } from "../../../game-loop/pre-render";
+import { ResourcesContainer } from "../../../resource";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { hudUIScale } from "../../scale";
-import type { BatterySelectorModel } from "../model";
+import { BatterySelectorModel } from "../model";
 import { BatteryButton } from "./battery-button";
 import { BatteryMeter } from "./battery-merter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
-/** コンストラクタのパラメータ */
-type Param = ResourcesContainer & {
-  /** ゲームオブジェクトアクション */
-  gameObjectAction: Observable<GameObjectAction>;
-};
+/** コンストラクタのオプション */
+export type BatterySelectorViewOptions = ResourcesContainer &
+  GameObjectActionContainer & {
+    /** アームドーザID */
+    armdozerId: ArmdozerId;
+  };
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
+  /** 決定ボタン */
   #button: BatteryButton;
+  /** メーター */
   #meter: BatteryMeter;
+  /** +ボタン */
   #plus: BatteryPlus;
+  /** -ボタン */
   #minus: BatteryMinus;
+  /** グループ */
   #group: THREE.Group;
 
   /**
    * コンストラクタ
-   * @param param パラメータ
+   * @params options オプション
    */
-  constructor(param: Param) {
+  constructor(options: BatterySelectorViewOptions) {
     this.#group = new THREE.Group();
-    this.#meter = new BatteryMeter(param.resources);
+    this.#meter = new BatteryMeter(options.resources);
     this.#meter.getObject3D().position.set(0, 288, 0);
     this.#group.add(this.#meter.getObject3D());
-    this.#button = new BatteryButton({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
-    });
+
+    this.#button = new BatteryButton(options);
     this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
+
     this.#plus = new BatteryPlus({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
+      resources: options.resources,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
+
     this.#minus = new BatteryMinus({
-      resources: param.resources,
-      gameObjectAction: param.gameObjectAction,
+      resources: options.resources,
+      gameObjectAction: options.gameObjectAction,
     });
     this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
@@ -83,6 +90,7 @@ export class BatterySelectorView {
       preRender.rendererDOM,
       preRender.safeAreaInset,
     );
+
     const frontScale = devicePerScale * 0.3;
     this.#group.scale.set(frontScale, frontScale, 0.3);
     const paddingRight = 105;
