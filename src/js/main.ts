@@ -22,6 +22,7 @@ declare let GBRAVER_BURST_CONTACT_URL: string;
 declare let GBRAVER_BURST_WEBSOCKET_API_URL: string;
 declare let GBRAVER_BURST_IS_SERVICE_WORKER_USED: string;
 declare let GBRAVER_BURST_IS_API_SERVER_ENABLE: string;
+declare let GBRAVER_BURST_NETWORK_MODE: string;
 declare let GBRAVER_BURST_COGNITO_USER_POOL_ID: string;
 declare let GBRAVER_BURST_COGNITO_CLIENT_ID: string;
 declare let GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: string;
