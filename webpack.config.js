@@ -129,6 +129,7 @@ module.exports = async () => ({
       GBRAVER_BURST_IS_SERVICE_WORKER_USED: JSON.stringify(
         process.env.IS_SERVICE_WORKER_USED,
       ),
+      /** @deprecated NETWORK_MODEに統合 */
       GBRAVER_BURST_IS_API_SERVER_ENABLE: JSON.stringify(
         process.env.IS_API_SERVER_ENABLE,
       ),
