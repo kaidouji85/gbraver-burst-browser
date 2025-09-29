@@ -2,6 +2,7 @@ import { EMPTY, fromEvent, map, merge, Observable } from "rxjs";
 
 import { GameAction } from "../game-actions";
 import { GameProps } from "../game-props";
+import { OfflineLAN } from "../network-context/offline-lan";
 import { Online } from "../network-context/online";
 
 /**
@@ -26,6 +27,18 @@ const createOnlineNetworkError = (
 ): Observable<GameAction> =>
   networkContext.sdk
     .websocketErrorNotifier()
+    .pipe(map((error) => ({ type: "NetworkError", error })));
+
+/**
+ * オフラインLANネットワークエラーの通知ストリームを生成する
+ * @param networkContext ネットワークコンテキスト（オフラインLAN）
+ * @returns ネットワークエラーの通知ストリーム
+ */
+const createOfflineLANNetworkError = (
+  networkContext: OfflineLAN,
+): Observable<GameAction> =>
+  networkContext.sdk
+    .notifyError()
     .pipe(map((error) => ({ type: "NetworkError", error })));
 
 /**
@@ -75,6 +88,9 @@ export const createGameActionNotifier = (
     createSuddenlyBattleEnd(props),
     props.networkContext.type === "online"
       ? createOnlineNetworkError(props.networkContext)
+      : EMPTY,
+    props.networkContext.type === "offline-lan"
+      ? createOfflineLANNetworkError(props.networkContext)
       : EMPTY,
     createVisibilityChange(),
     createUnhandledrejection(),
