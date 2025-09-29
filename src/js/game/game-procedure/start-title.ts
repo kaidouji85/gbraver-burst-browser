@@ -4,26 +4,31 @@ import {
   LoggedInAccount,
   TitleAccount,
 } from "../../dom-scenes/title/title-account";
+import { ResourcesContainer } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
+import { Online } from "../network-context/online";
 import { switchTitle } from "./switch-scene/switch-title";
 
 /**
  * ログイン済みアカウント情報を生成する
- * @param props ゲームプロパティ
+ * @param options 各種オプション
  * @returns 生成結果
  */
 const createLoggedInAccount = async (
-  props: Readonly<GameProps>,
+  options: ResourcesContainer & {
+    /** ネットワークコンテキスト（オンライン） */
+    networkContext: Online;
+  },
 ): Promise<LoggedInAccount> => {
+  const { resources, networkContext } = options;
   const [name, pictureURL] = await Promise.all([
-    props.api.getUserName(),
-    props.api.getUserPictureURL(),
+    networkContext.sdk.getUserName(),
+    networkContext.sdk.getUserPictureURL(),
   ]);
   const defaultUserIcon =
-    props.resources.paths.find((p) => p.id === PathIds.DEFAULT_USER_ICON)
-      ?.path ?? "";
+    resources.paths.find((p) => p.id === PathIds.DEFAULT_USER_ICON)?.path ?? "";
   return {
     type: "LoggedInAccount",
     name,
@@ -39,11 +44,12 @@ const createLoggedInAccount = async (
  * @returns 開始したタイトル画面
  */
 export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
-  const isLogin = await props.api.isLogin();
-  const account: TitleAccount = isLogin
-    ? await createLoggedInAccount(props)
-    : { type: "GuestAccount" };
-  const isAPIServerEnable = props.networkContext.type !== "stand-alone";
+  const { networkContext } = props;
+  const account: TitleAccount =
+    networkContext.type === "online"
+      ? await createLoggedInAccount({ ...props, networkContext })
+      : { type: "GuestAccount" };
+  const isAPIServerEnable = networkContext.type !== "stand-alone";
   const scene = new Title({
     ...props,
     account,
