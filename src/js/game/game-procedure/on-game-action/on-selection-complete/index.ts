@@ -53,7 +53,7 @@ export async function onSelectionComplete(options: Options): Promise<void> {
     inProgress.type === "OfflineLANCasualMatch" &&
     networkContext.type === "offline-lan"
   ) {
-    return await startOfflineLANCasualMatch(
+    props.inProgress = await startOfflineLANCasualMatch(
       {
         ...props,
         inProgress,
@@ -61,5 +61,6 @@ export async function onSelectionComplete(options: Options): Promise<void> {
       },
       action,
     );
+    return;
   }
 }
