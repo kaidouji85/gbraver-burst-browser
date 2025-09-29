@@ -18,9 +18,13 @@ type Options = {
  */
 export async function onDeleteAccount(options: Options): Promise<void> {
   const { props } = options;
+  if (props.networkContext.type !== "online") {
+    return;
+  }
+
   const dialog = new WaitingDialog("アカウント削除中");
   switchWaitingDialog(props, dialog);
-  await props.api.deleteLoggedInUser();
+  await props.networkContext.sdk.deleteLoggedInUser();
   await props.fader.fadeOut();
-  await props.api.logout();
+  await props.networkContext.sdk.logout();
 }
