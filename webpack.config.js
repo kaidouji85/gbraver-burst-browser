@@ -149,6 +149,9 @@ module.exports = async () => ({
       GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: JSON.stringify(
         process.env.COGNITO_HOSTED_UI_DOMAIN,
       ),
+      GBRAVER_BURST_OFFLINE_API_URL: JSON.stringify(
+        process.env.OFFLINE_API_URL,
+      ),
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: JSON.stringify(
         process.env.CAN_PLAY_EPISODE_IN_DEVELOPMENT,
       ),

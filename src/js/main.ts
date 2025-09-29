@@ -9,6 +9,10 @@ import * as THREE from "three";
 import { isMobile } from "./device-ditect/is-mobile";
 import { Game } from "./game";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
+import { NetworkContext } from "./game/network-context";
+import { createOfflineLanContext } from "./game/network-context/offline-lan";
+import * as online from "./game/network-context/online";
+import { createStandAloneContext } from "./game/network-context/stand-alone";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */
 declare let GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: string;
@@ -26,6 +30,7 @@ declare let GBRAVER_BURST_NETWORK_MODE: string;
 declare let GBRAVER_BURST_COGNITO_USER_POOL_ID: string;
 declare let GBRAVER_BURST_COGNITO_CLIENT_ID: string;
 declare let GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: string;
+declare let GBRAVER_BURST_OFFLINE_API_URL: string;
 declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
@@ -40,6 +45,21 @@ const desktopResourceRoot = { get: () => GBRAVER_BURST_DESKTOP_RESOURCE_ROOT };
 THREE.ColorManagement.enabled = false;
 
 /**
+ * ネットワークコンテキストを作成する
+ * @returns ネットワークコンテキスト
+ */
+async function createNetworkContext(): Promise<NetworkContext> {
+  switch (GBRAVER_BURST_NETWORK_MODE) {
+    case "OFFLINE_LAN":
+      return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);
+    case "ONLINE":
+      return await online.createOnlineContext(GBRAVER_BURST_WEBSOCKET_API_URL);
+    default:
+      return createStandAloneContext();
+  }
+}
+
+/**
  * Gブレイバーバーストのエントリポイント
  */
 export async function main(): Promise<void> {
@@ -49,13 +69,14 @@ export async function main(): Promise<void> {
     hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
     ownURL: GBRAVER_BURST_OWN_ROOT_URL,
   });
+  const networkContext = await createNetworkContext();
   const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
   const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
   const webglPowerPreference = isMobile() ? "low-power" : "high-performance";
   const game = new Game({
     resourceRoot,
     webglPowerPreference,
-    api: api,
+    api,
     config: createLocalStorageConfigRepository(),
     howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY_URL,
     characterDescriptionURL: GBRAVER_BURST_CHARACTER_DESCRIPTION_URL,
