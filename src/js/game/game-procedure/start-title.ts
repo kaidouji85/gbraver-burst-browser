@@ -46,7 +46,7 @@ const createLoggedInAccount = async (
 export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   const { networkContext } = props;
   const account: TitleAccount =
-    networkContext.type === "online"
+    networkContext.type === "online" && (await networkContext.sdk.isLogin())
       ? await createLoggedInAccount({ ...props, networkContext })
       : { type: "GuestAccount" };
   const isAPIServerEnable = networkContext.type !== "stand-alone";
