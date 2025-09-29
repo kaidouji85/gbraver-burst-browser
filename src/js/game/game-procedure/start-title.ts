@@ -49,11 +49,14 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     networkContext.type === "online" && (await networkContext.sdk.isLogin())
       ? await createLoggedInAccount({ ...props, networkContext })
       : { type: "GuestAccount" };
-  const isAPIServerEnable = networkContext.type !== "stand-alone";
+  const isNetBattleVisible =
+    networkContext.type === "online" || networkContext.type === "offline-lan";
+  const isLoginVisible = networkContext.type === "online";
   const scene = new Title({
     ...props,
     account,
-    isAPIServerEnable,
+    isNetBattleVisible,
+    isLoginVisible,
   });
   switchTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
