@@ -10,6 +10,7 @@ import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 
 /**
  * ネットバトルを強制終了する
+ * 本関数はすべてのネットワークコンテキストに対応している
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */

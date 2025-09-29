@@ -10,6 +10,7 @@ type PostNetworkBattle = CasualMatch | PrivateMatchHost | PrivateMatchGuest;
 
 /**
  * ネット対戦後処理を実行する
+ * 本関数はすべてのネットワークコンテキストに対応している
  * @param props ゲームプロパティ
  * @returns inProgress更新結果
  */
