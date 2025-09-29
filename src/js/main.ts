@@ -25,7 +25,6 @@ declare let GBRAVER_BURST_PRIVACY_POLICY_URL: string;
 declare let GBRAVER_BURST_CONTACT_URL: string;
 declare let GBRAVER_BURST_WEBSOCKET_API_URL: string;
 declare let GBRAVER_BURST_IS_SERVICE_WORKER_USED: string;
-declare let GBRAVER_BURST_IS_API_SERVER_ENABLE: string;
 declare let GBRAVER_BURST_NETWORK_MODE: string;
 declare let GBRAVER_BURST_COGNITO_USER_POOL_ID: string;
 declare let GBRAVER_BURST_COGNITO_CLIENT_ID: string;
@@ -85,7 +84,6 @@ export async function main(): Promise<void> {
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,
     contactURL: GBRAVER_BURST_CONTACT_URL,
     isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED === "true",
-    isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === "true",
     canPlayEpisodeInDevelopment:
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT === "true",
     canPlayDevelopingArmdozer:

@@ -39,11 +39,6 @@ export interface GameProps
     Readonly<DOMSceneBinderContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
-  /**
-   * @deprecated networkContextに統合
-   * APIサーバ系機能が利用可能か否か、trueで利用可能
-   */
-  readonly isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   readonly canPlayEpisodeInDevelopment: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */

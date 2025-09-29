@@ -168,7 +168,6 @@ shfmt -l -w *.bash
 | /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
 | /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
 | /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/dev/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
 | /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
 
 #### Parameter Store（本番環境）
@@ -187,7 +186,6 @@ shfmt -l -w *.bash
 | /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
 | /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
 | /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
 
 ### IAMポリシー

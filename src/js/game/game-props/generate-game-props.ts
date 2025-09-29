@@ -27,10 +27,6 @@ import { GameProps } from "./index";
 export type GamePropsGeneratorParams = {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
-  /** @deprecated networkContextに統合
-   * APIサーバ系機能が利用可能か否か、trueで利用可能
-   */
-  isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
