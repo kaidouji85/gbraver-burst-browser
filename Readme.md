@@ -27,7 +27,7 @@ npm start
 # ブラウザを起動して<localhost:8080>を開く
 ```
 
-## デプロイする
+## ローカル環境からAWSにデプロイする
 
 本プログラムは静的ファイルのみで構成されているので、
 ビルド生成物をPublicに公開すればデプロイ完了です。
@@ -55,7 +55,11 @@ npm start
 ./clear-cdn.bash <CloudFrontのdistributionId>
 ```
 
-## AWS環境設定
+## AWSでCI/CDを構築する
+
+本リポジトリではAWS Code Buildを利用してCI/CDを構築することができます。
+このリポジトリには開発環境、本番環境用のbuildspecが含まれています。
+以下に環境ごとのCode Build設定、AWS Systems Manager Parameter Storeの項目名を記載します。
 
 ### 開発環境
 
@@ -78,6 +82,17 @@ npm start
 | ---------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
 | ビルド           | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
 | ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                            |
+
+## オフライン用LAN環境で動かす
+
+本ゲームはオフライン用LAN環境でも動作します。
+
+```bash
+npm ci
+npm run clean
+npm run build
+npm run serve
+```
 
 ## storybookを動かす
 
