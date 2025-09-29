@@ -2,6 +2,7 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
+import { startOfflineLANCasualMatch } from "./start-offline-lan-casual-match";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
 import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
 
@@ -21,6 +22,7 @@ type Options = {
  */
 export async function onSelectionComplete(options: Options): Promise<void> {
   const { props, action } = options;
+  const { inProgress, networkContext } = props;
   const isDifficultySelectionStarted = await startDifficultySelectionIfNeeded(
     props,
     action,
@@ -45,5 +47,19 @@ export async function onSelectionComplete(options: Options): Promise<void> {
   if (privateMatchGuest.isStarted) {
     props.inProgress = privateMatchGuest.inProgress;
     return;
+  }
+
+  if (
+    inProgress.type === "OfflineLANCasualMatch" &&
+    networkContext.type === "offline-lan"
+  ) {
+    return await startOfflineLANCasualMatch(
+      {
+        ...props,
+        inProgress,
+        networkContext,
+      },
+      action,
+    );
   }
 }

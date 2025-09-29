@@ -9,7 +9,7 @@ export type Battle = {
 };
 
 /** カジュアルマッチ（オフラインLAN）のサブフロー */
-export type OfflineLanCasualMatchSubFlow = PlayerSelect | Battle;
+export type OfflineLANCasualMatchSubFlow = PlayerSelect | Battle;
 
 /**
  * カジュアルマッチ（オフラインLAN）
@@ -18,5 +18,5 @@ export type OfflineLanCasualMatchSubFlow = PlayerSelect | Battle;
 export type OfflineLANCasualMatch = {
   type: "OfflineLANCasualMatch";
   /** サブフロー */
-  readonly offlineLANCasualMatch: OfflineLanCasualMatchSubFlow;
+  readonly offlineLANCasualMatch: OfflineLANCasualMatchSubFlow;
 };
