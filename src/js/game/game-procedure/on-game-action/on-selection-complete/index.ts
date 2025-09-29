@@ -1,6 +1,6 @@
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
-import { startCasualMatchIfNeeded } from "./start-casual-match-start-if-needed";
+import { startCasualMatchIfNeeded } from "./start-casual-match-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
 import { startOfflineLANCasualMatch } from "./start-offline-lan-casual-match";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
