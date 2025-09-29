@@ -1,6 +1,5 @@
 import "../css/style.css";
 
-import { initializeBrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
@@ -8,7 +7,7 @@ import { Game } from "./game";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
 import { NetworkContext } from "./game/network-context";
 import { createOfflineLanContext } from "./game/network-context/offline-lan";
-import * as online from "./game/network-context/online";
+import { createOnlineContext } from "./game/network-context/online";
 import { createStandAloneContext } from "./game/network-context/stand-alone";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */
@@ -47,7 +46,13 @@ THREE.ColorManagement.enabled = false;
 async function createNetworkContext(): Promise<NetworkContext> {
   switch (GBRAVER_BURST_NETWORK_MODE) {
     case "ONLINE":
-      return await online.createOnlineContext(GBRAVER_BURST_WEBSOCKET_API_URL);
+      return await createOnlineContext({
+        userPoolId: GBRAVER_BURST_COGNITO_USER_POOL_ID,
+        userPoolClientId: GBRAVER_BURST_COGNITO_CLIENT_ID,
+        hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
+        ownURL: GBRAVER_BURST_OWN_ROOT_URL,
+        webSocketAPIURL: GBRAVER_BURST_WEBSOCKET_API_URL,
+      });
     case "OFFLINE_LAN":
       return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);
     default:
@@ -59,12 +64,6 @@ async function createNetworkContext(): Promise<NetworkContext> {
  * Gブレイバーバーストのエントリポイント
  */
 export async function main(): Promise<void> {
-  initializeBrowserSDK({
-    userPoolId: GBRAVER_BURST_COGNITO_USER_POOL_ID,
-    userPoolClientId: GBRAVER_BURST_COGNITO_CLIENT_ID,
-    hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
-    ownURL: GBRAVER_BURST_OWN_ROOT_URL,
-  });
   const networkContext = await createNetworkContext();
   const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
   const webglPowerPreference = isMobile() ? "low-power" : "high-performance";
