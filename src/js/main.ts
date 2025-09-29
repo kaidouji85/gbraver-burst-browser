@@ -1,9 +1,6 @@
 import "../css/style.css";
 
-import {
-  createBrowserSDK,
-  initializeBrowserSDK,
-} from "@gbraver-burst-network/browser-sdk";
+import { initializeBrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import * as THREE from "three";
 
 import { isMobile } from "./device-ditect/is-mobile";
@@ -49,10 +46,10 @@ THREE.ColorManagement.enabled = false;
  */
 async function createNetworkContext(): Promise<NetworkContext> {
   switch (GBRAVER_BURST_NETWORK_MODE) {
-    case "OFFLINE_LAN":
-      return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);
     case "ONLINE":
       return await online.createOnlineContext(GBRAVER_BURST_WEBSOCKET_API_URL);
+    case "OFFLINE_LAN":
+      return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);
     default:
       return createStandAloneContext();
   }
@@ -69,13 +66,11 @@ export async function main(): Promise<void> {
     ownURL: GBRAVER_BURST_OWN_ROOT_URL,
   });
   const networkContext = await createNetworkContext();
-  const api = await createBrowserSDK(GBRAVER_BURST_WEBSOCKET_API_URL);
   const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
   const webglPowerPreference = isMobile() ? "low-power" : "high-performance";
   const game = new Game({
     resourceRoot,
     webglPowerPreference,
-    api,
     networkContext,
     config: createLocalStorageConfigRepository(),
     howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY_URL,

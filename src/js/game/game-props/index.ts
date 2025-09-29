@@ -1,4 +1,3 @@
-import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable } from "rxjs";
 
 import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
@@ -70,11 +69,6 @@ export interface GameProps
   /** 現在進行中のフロー */
   inProgress: InProgress;
 
-  /**
-   * @deprecated networkContextに統合
-   * APIサーバのSDK
-   */
-  readonly api: BrowserSDK;
   /** ネットワークコンテキスト */
   readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */

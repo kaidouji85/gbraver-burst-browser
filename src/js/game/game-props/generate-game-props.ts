@@ -1,5 +1,3 @@
-import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
-
 import { AbortManager } from "../../abort-controller/abort-manager";
 import { createActionManager } from "../../action-manager/action-manager";
 import { createBGMManager } from "../../bgm/bgm-manager";
@@ -50,11 +48,6 @@ export type GamePropsGeneratorParams = {
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
 
-  /**
-   * @deprecated networkContextに統合
-   * APIサーバのSDK
-   */
-  api: BrowserSDK;
   /** ネットワークコンテキスト */
   networkContext: NetworkContext;
 
