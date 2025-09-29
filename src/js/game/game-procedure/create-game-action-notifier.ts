@@ -16,16 +16,16 @@ const createSuddenlyBattleEnd = (
     .pipe(map(() => ({ type: "SuddenlyBattleEnd" })));
 
 /**
- * WebSocketAPIエラーの通知ストリームを生成する
+ * ネットワークエラーの通知ストリームを生成する
  * @param props ゲームプロパティ
- * @returns WebSocketAPIエラーの通知ストリーム
+ * @returns ネットワークエラーの通知ストリーム
  */
-const createWebSocketAPIError = (
+const createNetworkError = (
   props: Readonly<GameProps>,
 ): Observable<GameAction> =>
   props.api
     .websocketErrorNotifier()
-    .pipe(map((error) => ({ type: "WebSocketAPIError", error })));
+    .pipe(map((error) => ({ type: "NetworkError", error })));
 
 /**
  * visibilitychangeイベントの通知ストリームを生成する
@@ -72,7 +72,7 @@ export const createGameActionNotifier = (
     props.gameAction.notify(),
     createPostBattleAction(props),
     createSuddenlyBattleEnd(props),
-    createWebSocketAPIError(props),
+    createNetworkError(props),
     createVisibilityChange(),
     createUnhandledrejection(),
   );

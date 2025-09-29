@@ -35,7 +35,7 @@ import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
-import { WebSocketAPIError } from "./web-socket-api-error";
+import { NetworkError } from "./network-error";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
 /** ゲーム全体で利用するアクション */
@@ -64,7 +64,7 @@ export type GameAction =
   | AccountDeleteConsent
   | DeleteAccount
   | CancelAccountDeletion
-  | WebSocketAPIError
+  | NetworkError
   | EndNetworkError
   | ConfigChangeStart
   | ConfigChangeComplete

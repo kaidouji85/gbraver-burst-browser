@@ -1,5 +1,5 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
-import { WebSocketAPIError } from "../../game-actions/web-socket-api-error";
+import { NetworkError } from "../../game-actions/network-error";
 import { GameProps } from "../../game-props";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
@@ -8,15 +8,14 @@ type Options = {
   /** ゲームプロパティ */
   props: Readonly<GameProps>;
   /** アクション */
-  action: WebSocketAPIError;
+  action: NetworkError;
 };
 
 /**
- * WebSocketAPIエラー時の処理
- *
+ * ネットワークエラー時の処理
  * @param options オプション
  */
-export function onWebSocketAPIError(options: Options): void {
+export function onNetworkError(options: Options): void {
   const { props, action } = options;
   const dialog = new NetworkErrorDialog({
     ...props,
