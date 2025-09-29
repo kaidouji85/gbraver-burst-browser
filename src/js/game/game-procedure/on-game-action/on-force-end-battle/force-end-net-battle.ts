@@ -22,7 +22,13 @@ export async function forceEndNetBattle(
 ) {
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
-  await props.api.disconnectWebsocket();
+
+  if (props.networkContext.type === "online") {
+    await props.networkContext.sdk.disconnectWebsocket();
+  } else if (props.networkContext.type === "offline-lan") {
+    props.networkContext.sdk.closeConnection();
+  }
+
   props.domDialogBinder.hidden();
   await Promise.all([
     (async () => {

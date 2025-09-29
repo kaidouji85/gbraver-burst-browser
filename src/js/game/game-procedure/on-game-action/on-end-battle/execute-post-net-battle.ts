@@ -18,7 +18,13 @@ export async function executePostNetBattle(
 ): Promise<InProgress> {
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
-  await props.api.disconnectWebsocket();
+
+  if (props.networkContext.type === "online") {
+    await props.networkContext.sdk.disconnectWebsocket();
+  } else if (props.networkContext.type === "offline-lan") {
+    props.networkContext.sdk.closeConnection();
+  }
+
   await props.postBattle.show({
     ...props,
     buttons: PostNetworkBattleButtons,

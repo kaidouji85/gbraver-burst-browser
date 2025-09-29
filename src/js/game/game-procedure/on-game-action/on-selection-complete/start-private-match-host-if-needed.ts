@@ -29,12 +29,19 @@ export async function startPrivateMatchHostIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<SelectionComplete>,
 ): Promise<Ret> {
-  if (props.inProgress.type !== "PrivateMatchHost") {
+  const { networkContext } = props;
+  if (
+    props.inProgress.type !== "PrivateMatchHost" ||
+    networkContext.type !== "online"
+  ) {
     return { isStarted: false };
   }
 
-  await props.api.disconnectWebsocket();
-  const battle = await waitUntilPrivateMatchingAsHost(props, action);
+  await networkContext.sdk.disconnectWebsocket();
+  const battle = await waitUntilPrivateMatchingAsHost(
+    { ...props, networkContext },
+    action,
+  );
   await startOnlineBattle(props, battle, "PRIVATE MATCH");
   return {
     isStarted: true,

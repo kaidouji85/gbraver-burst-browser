@@ -18,8 +18,12 @@ type Options = {
  */
 export async function onMatchingCanceled(options: Options): Promise<void> {
   const { props } = options;
+  if (props.networkContext.type !== "online") {
+    return;
+  }
+
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
-  await props.api.disconnectWebsocket();
+  await props.networkContext.sdk.disconnectWebsocket();
   props.domDialogBinder.hidden();
 }
