@@ -1,12 +1,17 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
+import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
 
-/** ネット対戦のサブフロー */
-type PostNetworkBattle = CasualMatch | PrivateMatchHost | PrivateMatchGuest;
+/** ネット対戦のフロー */
+type PostNetworkBattle =
+  | CasualMatch
+  | PrivateMatchHost
+  | PrivateMatchGuest
+  | OfflineLANCasualMatch;
 
 /**
  * ネット対戦後処理を実行する
