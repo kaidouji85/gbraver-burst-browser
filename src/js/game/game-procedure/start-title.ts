@@ -43,9 +43,11 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
   const account: TitleAccount = isLogin
     ? await createLoggedInAccount(props)
     : { type: "GuestAccount" };
+  const isAPIServerEnable = props.networkContext.type !== "stand-alone";
   const scene = new Title({
     ...props,
     account,
+    isAPIServerEnable,
   });
   switchTitle(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
