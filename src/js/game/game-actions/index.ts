@@ -20,6 +20,7 @@ import { MatchingCanceled } from "./matching-canceled";
 import { NetBattleCancel } from "./net-battle-cancel";
 import { NetBattleStart } from "./net-battle-start";
 import { NetworkError } from "./network-error";
+import { OfflineLANCasualMatchStart } from "./offline-lan-casual-match-start";
 import { PostBattleAction } from "./post-battle-action";
 import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
@@ -78,4 +79,5 @@ export type GameAction =
   | VisibilityChange
   | ForceEndBattle
   | ForceRetry
-  | UnhandledRejection;
+  | UnhandledRejection
+  | OfflineLANCasualMatchStart;
