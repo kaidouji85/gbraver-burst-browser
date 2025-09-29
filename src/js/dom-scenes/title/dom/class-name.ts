@@ -34,8 +34,8 @@ export const INVISIBLE_NET_BATTLE_CLASS = `${NET_BATTLE_CLASS}--invisible`;
 /** ゲームメニュー class属性 */
 export const GAME_MENU_CLASS = `${ROOT_CLASS}__game-menu`;
 
-/** ゲームメニュー APIサーバー利用不可時 class属性 */
-export const GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED = `${GAME_MENU_CLASS}--api-server-disabled`;
+/** ゲームメニュー ネットバトル不可能 class属性 */
+export const GAME_MENU_CLASS_WHEN_NET_BATTLE_DISABLED = `${GAME_MENU_CLASS}--net-battle-disabled`;
 
 /** ヘルプアイコン class属性 */
 export const HELP_ICON_CLASS = `${ROOT_CLASS}__help-icon`;

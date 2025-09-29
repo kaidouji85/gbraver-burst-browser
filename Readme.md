@@ -154,41 +154,39 @@ shfmt -l -w *.bash
 
 #### Parameter Store（テスト環境）
 
-| 名前                                      | 種類   | 値                                                    |
-| ----------------------------------------- | ------ | ----------------------------------------------------- |
-| /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI                   |
-| /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID                   |
-| /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名                        |
-| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID             |
-| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名                    |
-| /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                             |
-| /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント              |
-| /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                                   |
-| /GbraverBurst/dev/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL                   |
-| /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
-| /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
-| /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/dev/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
-| /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
+| 名前                                      | 種類   | 値                                        |
+| ----------------------------------------- | ------ | ----------------------------------------- |
+| /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI       |
+| /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID       |
+| /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名            |
+| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
+| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
+| /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                 |
+| /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
+| /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                       |
+| /GbraverBurst/dev/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
+| /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                       |
+| /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
+| /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                     |
+| /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 
 #### Parameter Store（本番環境）
 
-| 名前                                       | 種類   | 値                                                    |
-| ------------------------------------------ | ------ | ----------------------------------------------------- |
-| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI                   |
-| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID                   |
-| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名                        |
-| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID             |
-| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名                    |
-| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                             |
-| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント              |
-| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                                   |
-| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL                   |
-| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
-| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
-| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
-| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
+| 名前                                       | 種類   | 値                                        |
+| ------------------------------------------ | ------ | ----------------------------------------- |
+| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI       |
+| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID       |
+| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名            |
+| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
+| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
+| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                 |
+| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
+| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                       |
+| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
+| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                       |
+| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
+| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                     |
+| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 
 ### IAMポリシー
 

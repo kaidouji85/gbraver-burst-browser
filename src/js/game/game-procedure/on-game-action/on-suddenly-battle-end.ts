@@ -13,6 +13,7 @@ type Options = {
 
 /**
  * バトル強制終了時の処理
+ * 本処理はすべてのネットワークコンテキストに対応している
  * @param options オプション
  * @returns 処理が終了すると発火するPromise
  */
@@ -24,5 +25,9 @@ export async function onSuddenlyBattleEnd(options: Options): Promise<void> {
   });
   switchNetworkErrorDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
-  await props.api.disconnectWebsocket();
+  if (props.networkContext.type === "online") {
+    await props.networkContext.sdk.disconnectWebsocket();
+  } else if (props.networkContext.type === "offline-lan") {
+    props.networkContext.sdk.closeConnection();
+  }
 }

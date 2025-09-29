@@ -19,6 +19,7 @@ import { Logout } from "./logout";
 import { MatchingCanceled } from "./matching-canceled";
 import { NetBattleCancel } from "./net-battle-cancel";
 import { NetBattleStart } from "./net-battle-start";
+import { NetworkError } from "./network-error";
 import { PostBattleAction } from "./post-battle-action";
 import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
@@ -35,7 +36,6 @@ import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
-import { WebSocketAPIError } from "./web-socket-api-error";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
 /** ゲーム全体で利用するアクション */
@@ -64,7 +64,7 @@ export type GameAction =
   | AccountDeleteConsent
   | DeleteAccount
   | CancelAccountDeletion
-  | WebSocketAPIError
+  | NetworkError
   | EndNetworkError
   | ConfigChangeStart
   | ConfigChangeComplete

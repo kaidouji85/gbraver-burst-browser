@@ -28,12 +28,19 @@ export async function startCasualMatchIfNeeded(
   props: Readonly<GameProps>,
   action: Readonly<SelectionComplete>,
 ): Promise<Ret> {
-  if (props.inProgress.type !== "CasualMatch") {
+  const { networkContext } = props;
+  if (
+    props.inProgress.type !== "CasualMatch" ||
+    networkContext.type !== "online"
+  ) {
     return { isStarted: false };
   }
 
-  await props.api.disconnectWebsocket();
-  const battle = await waitUntilCasualMatching(props, action);
+  await networkContext.sdk.disconnectWebsocket();
+  const battle = await waitUntilCasualMatching(
+    { ...props, networkContext },
+    action,
+  );
   await startOnlineBattle(props, battle, "CASUAL MATCH");
   return {
     isStarted: true,

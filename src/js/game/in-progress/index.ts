@@ -1,6 +1,7 @@
 import { CasualMatch } from "./casual-match";
 import { None } from "./none";
 import { NPCBattle } from "./npc-battle";
+import { OfflineLANCasualMatch } from "./offline-lan-casual-match";
 import { PrivateMatchGuest } from "./private-match-guest";
 import { PrivateMatchHost } from "./private-match-host";
 import { Story } from "./story";
@@ -12,4 +13,5 @@ export type InProgress =
   | CasualMatch
   | Story
   | PrivateMatchHost
-  | PrivateMatchGuest;
+  | PrivateMatchGuest
+  | OfflineLANCasualMatch;

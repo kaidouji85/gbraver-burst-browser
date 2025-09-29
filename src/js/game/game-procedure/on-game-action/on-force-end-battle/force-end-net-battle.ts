@@ -10,6 +10,7 @@ import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 
 /**
  * ネットバトルを強制終了する
+ * 本関数はすべてのネットワークコンテキストに対応している
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
@@ -22,7 +23,13 @@ export async function forceEndNetBattle(
 ) {
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
-  await props.api.disconnectWebsocket();
+
+  if (props.networkContext.type === "online") {
+    await props.networkContext.sdk.disconnectWebsocket();
+  } else if (props.networkContext.type === "offline-lan") {
+    props.networkContext.sdk.closeConnection();
+  }
+
   props.domDialogBinder.hidden();
   await Promise.all([
     (async () => {

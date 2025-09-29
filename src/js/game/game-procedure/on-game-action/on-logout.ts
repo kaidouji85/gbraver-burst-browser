@@ -16,6 +16,10 @@ type Options = {
  */
 export async function onLogout(options: Options): Promise<void> {
   const { props } = options;
+  if (props.networkContext.type !== "online") {
+    return;
+  }
+
   await props.fader.fadeOut();
-  await props.api.logout();
+  await props.networkContext.sdk.logout();
 }

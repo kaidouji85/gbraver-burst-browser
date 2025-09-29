@@ -22,15 +22,16 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
   const { props, action } = options;
   if (
     props.inProgress.type !== "PrivateMatchGuest" ||
-    props.inProgress.privateMatchGuest.type !== "Entry"
+    props.inProgress.privateMatchGuest.type !== "Entry" ||
+    props.networkContext.type !== "online"
   ) {
     return;
   }
 
   switchMatchingDialog(props, new MatchingDialog(props));
-  await props.api.disconnectWebsocket();
+  await props.networkContext.sdk.disconnectWebsocket();
   const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
-  const battle = await props.api.enterPrivateMatchRoom(
+  const battle = await props.networkContext.sdk.enterPrivateMatchRoom(
     action.roomID,
     armdozerId,
     pilotId,
