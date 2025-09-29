@@ -1,7 +1,8 @@
-import { fromEvent, map, merge, Observable } from "rxjs";
+import { EMPTY, fromEvent, map, merge, Observable } from "rxjs";
 
 import { GameAction } from "../game-actions";
 import { GameProps } from "../game-props";
+import { Online } from "../network-context/online";
 
 /**
  * バトル強制終了の通知ストリームを生成する
@@ -16,14 +17,14 @@ const createSuddenlyBattleEnd = (
     .pipe(map(() => ({ type: "SuddenlyBattleEnd" })));
 
 /**
- * ネットワークエラーの通知ストリームを生成する
- * @param props ゲームプロパティ
+ * オンラインネットワークエラーの通知ストリームを生成する
+ * @param networkContext ネットワークコンテキスト（オンライン）
  * @returns ネットワークエラーの通知ストリーム
  */
-const createNetworkError = (
-  props: Readonly<GameProps>,
+const createOnlineNetworkError = (
+  networkContext: Online,
 ): Observable<GameAction> =>
-  props.api
+  networkContext.sdk
     .websocketErrorNotifier()
     .pipe(map((error) => ({ type: "NetworkError", error })));
 
@@ -72,7 +73,9 @@ export const createGameActionNotifier = (
     props.gameAction.notify(),
     createPostBattleAction(props),
     createSuddenlyBattleEnd(props),
-    createNetworkError(props),
+    props.networkContext.type === "online"
+      ? createOnlineNetworkError(props.networkContext)
+      : EMPTY,
     createVisibilityChange(),
     createUnhandledrejection(),
   );
