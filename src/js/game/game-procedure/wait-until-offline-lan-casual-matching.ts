@@ -1,4 +1,4 @@
-import { BattleInfo } from "@gbraver-burst-network/offline-browser-sdk/lib/offline-browser-sdk";
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
@@ -17,9 +17,10 @@ import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-d
 export async function waitUntilOfflineLANCasualMatching(
   props: Readonly<GameProps & { networkContext: OfflineLAN }>,
   action: SelectionComplete,
-): Promise<BattleInfo> {
+): Promise<BattleSDK> {
   try {
     switchMatchingDialog(props, new MatchingDialog(props));
+    // OfflineBattleSDKとBattleSDKは互換性があるので、そのまま返す
     return await props.networkContext.sdk.enterRoom(action);
   } catch (e) {
     const dialog = new NetworkErrorDialog({

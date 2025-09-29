@@ -1,4 +1,4 @@
-import type { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import type { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { MatchingDialog } from "../../dom-dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";

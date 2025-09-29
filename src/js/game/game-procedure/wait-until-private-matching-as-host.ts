@@ -1,4 +1,4 @@
-import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
