@@ -77,6 +77,7 @@ export async function main(): Promise<void> {
     resourceRoot,
     webglPowerPreference,
     api,
+    networkContext,
     config: createLocalStorageConfigRepository(),
     howToPlayURL: GBRAVER_BURST_HOW_TO_PLAY_URL,
     characterDescriptionURL: GBRAVER_BURST_CHARACTER_DESCRIPTION_URL,

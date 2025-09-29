@@ -21,6 +21,7 @@ import { GBraverBurstBrowserConfigRepository } from "../config/repository/reposi
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
+import { NetworkContext } from "../network-context";
 import { SharedResourceState } from "../shared-resource-state";
 import { GameActionManageContainer } from "./game-action-manage-container";
 
@@ -38,7 +39,10 @@ export interface GameProps
     Readonly<DOMSceneBinderContainer> {
   /** サービスワーカーを利用するか否か、trueで利用する */
   readonly isServiceWorkerUsed: boolean;
-  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  /**
+   * @deprecated networkContextに統合
+   * APIサーバ系機能が利用可能か否か、trueで利用可能
+   */
   readonly isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   readonly canPlayEpisodeInDevelopment: boolean;
@@ -71,8 +75,13 @@ export interface GameProps
   /** 現在進行中のフロー */
   inProgress: InProgress;
 
-  /** APIサーバのSDK */
+  /**
+   * @deprecated networkContextに統合
+   * APIサーバのSDK
+   */
   readonly api: BrowserSDK;
+  /** ネットワークコンテキスト */
+  readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */
   readonly suddenlyBattleEnd: FutureSuddenlyBattleEnd;
 
