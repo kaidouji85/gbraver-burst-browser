@@ -16,7 +16,7 @@ export type OfflineLanCasualMatchSubFlow = PlayerSelect | Battle;
  * @template X サブフロー
  */
 export type OfflineLANCasualMatch = {
-  type: "CasualMatch";
+  type: "OfflineLANCasualMatch";
   /** サブフロー */
   readonly offlineLANCasualMatch: OfflineLanCasualMatchSubFlow;
 };

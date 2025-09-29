@@ -1,5 +1,6 @@
 import { NetBattleStart } from "../../../game-actions/net-battle-start";
 import { GameProps } from "../../../game-props";
+import { startOfflineLANNetBattle } from "./start-offline-lan-net-battle";
 import { startOnlineNetBattle } from "./start-online-net-battle";
 
 /** onNetBattleStartオプション */
@@ -22,5 +23,7 @@ export async function onNetBattleStart(
   const { networkContext } = props;
   if (networkContext.type === "online") {
     await startOnlineNetBattle({ ...props, networkContext });
+  } else if (networkContext.type === "offline-lan") {
+    await startOfflineLANNetBattle(props);
   }
 }
