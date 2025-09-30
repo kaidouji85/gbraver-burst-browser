@@ -88,6 +88,10 @@ npm start
 本ゲームはオフライン用LAN環境でも動作します。
 
 ```bash
+# オフライン（LAN）用の.envテンプレートをコピーする
+# 展示用マシンのローカルIPなど、環境に応じた各種値を.envに記載する
+cp .env.offline-lan.template .env
+
 # ビルド
 npm run clean
 npm run build:production
