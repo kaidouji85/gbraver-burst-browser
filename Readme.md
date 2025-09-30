@@ -88,9 +88,13 @@ npm start
 本ゲームはオフライン用LAN環境でも動作します。
 
 ```bash
-npm ci
+# ビルド
 npm run clean
-npm run build
+npm run build:production
+npm run generate-icons
+npm run scale-down-mobile-images
+
+# HTTPサーバーを起動する
 npm run serve
 ```
 
