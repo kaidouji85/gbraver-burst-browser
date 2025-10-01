@@ -15,6 +15,22 @@ const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 
+/**
+ * アプリアイコンのパスを取得する
+ * @returns アプリアイコンのパス
+ */
+const getAppIconPath = () => {
+  switch (process.env.APP_ICON_TYPE) {
+    case "PROD":
+      return path.resolve(__dirname, "src/app-icon-512x512.png");
+    case "OFFLINE":
+      return path.resolve(__dirname, "src/app-icon-offline-512x512.png");
+    case "DEV":
+    default:
+      return path.resolve(__dirname, "src/app-icon-dev-512x512.png");
+  }
+};
+
 module.exports = async () => ({
   mode: "development",
   entry: {
@@ -91,10 +107,7 @@ module.exports = async () => ({
           to: path.resolve(__dirname, BUILD_ROOT),
         },
         {
-          from:
-            process.env.IS_APP_ICON_DEV_ENABLE === "true"
-              ? path.resolve(__dirname, "src/app-icon-dev-512x512.png")
-              : path.resolve(__dirname, "src/app-icon-512x512.png"),
+          from: getAppIconPath(),
           to: path.resolve(__dirname, `${BUILD_ROOT}/app-icon-512x512.png`),
         },
         {

@@ -23,7 +23,7 @@ export async function startOfflineLANCasualMatch(
 ): Promise<InProgress> {
   props.networkContext.sdk.closeConnection();
   const battle = await waitUntilOfflineLANCasualMatching(props, action);
-  await startOnlineBattle(props, battle, "OFFLINE LAN CASUAL MATCH");
+  await startOnlineBattle(props, battle, "CASUAL MATCH");
   return {
     ...props.inProgress,
     offlineLANCasualMatch: { type: "Battle" },
