@@ -26,14 +26,8 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(
       all(
         onStart(() => {
-          param.bgm.do(stop);
-        })
-          .chain(delay(100))
-          .chain(
-            onStart(() => {
-              param.bgm.do(play(param.sounds.victory));
-            }),
-          ),
+          param.bgm.do(play(param.sounds.victory));
+        }),
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
