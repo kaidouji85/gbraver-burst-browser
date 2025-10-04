@@ -13,6 +13,7 @@ import { BattleSceneView } from "../../view";
  */
 export type StateAnimationProps = BGMManagerContainer &
   SEPlayerContainer &
+  BGMManagerContainer &
   AnimationTimeScaleContainer & {
     /** 画面を開いているプレイヤーのID */
     readonly playerId: PlayerId;

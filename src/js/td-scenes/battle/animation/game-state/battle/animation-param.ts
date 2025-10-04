@@ -5,6 +5,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
+import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
@@ -23,7 +24,7 @@ import { StateAnimationProps } from "../state-animation-props";
 export type BattleAnimationParamX<
   SPRITE extends ArmdozerSprite,
   RESULT extends BattleResult,
-> = {
+> = BGMManagerContainer & {
   /** 攻撃側プレイヤーステート */
   attackerState: PlayerState;
   /** 攻撃側TDプレイヤー */
@@ -130,6 +131,7 @@ function extractOthers(
     hudCamera: hud.camera,
     isDeath: battle.isDeath,
     result: battle.result,
+    bgm: props.bgm,
   };
 }
 
