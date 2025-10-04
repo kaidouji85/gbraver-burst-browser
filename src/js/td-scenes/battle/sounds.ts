@@ -13,7 +13,7 @@ export type BattleSceneSounds = {
   readonly sendMessage: SoundResource;
   /** 値変更音 */
   readonly changeValue: SoundResource;
-  /** BGM */
+  /** 戦闘BGM */
   readonly bgm: SoundResource;
   /** 勝利BGM */
   readonly victory: SoundResource;
@@ -51,7 +51,7 @@ export function createBattleSceneSounds(
       resources.sounds.find((v) => v.id === playingBGM) ??
       createEmptySoundResource(),
     victory:
-      resources.sounds.find((v) => v.id === SOUND_IDS.NPC_ENDING) ??
+      resources.sounds.find((v) => v.id === SOUND_IDS.VICTORY_BGM) ??
       createEmptySoundResource(),
   };
 }
