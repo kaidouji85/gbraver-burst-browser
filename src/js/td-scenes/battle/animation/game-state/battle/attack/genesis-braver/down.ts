@@ -25,9 +25,7 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        onStart(() => {
-          param.bgm.do(stop);
-        }),
+        delay(300).chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
         delay(1500).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
@@ -35,11 +33,7 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down().chain(
-          onStart(() => {
-            param.bgm.do(play(param.battleEndBGM));
-          }),
-        ),
+        param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
