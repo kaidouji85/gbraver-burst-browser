@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { stop } from "../../../../../../../bgm/bgm-operators";
+import { play, stop } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { ShinBraverBattle } from "./shin-braver-battle";
@@ -29,7 +29,12 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
           param.bgm.do(stop);
         }),
         delay(1500)
-          .chain(param.attackerSprite.punchToStand())
+          .chain(
+            param.attackerSprite.punchToStand(),
+            onStart(() => {
+              param.bgm.do(play(param.sounds.victory));
+            }),
+          )
           .chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()

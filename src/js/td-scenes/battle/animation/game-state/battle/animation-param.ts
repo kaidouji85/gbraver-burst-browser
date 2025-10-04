@@ -9,6 +9,7 @@ import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
+import { BattleSceneSounds } from "../../../sounds";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDGameObjects } from "../../../view/td/game-objects";
@@ -26,36 +27,39 @@ export type BattleAnimationParamX<
   RESULT extends BattleResult,
 > = BGMManagerContainer & {
   /** 攻撃側プレイヤーステート */
-  attackerState: PlayerState;
+  readonly attackerState: PlayerState;
   /** 攻撃側TDプレイヤー */
-  attackerTD: TDPlayer;
+  readonly attackerTD: TDPlayer;
   /** 攻撃側HUDプレイヤー */
-  attackerHUD: HUDPlayer;
+  readonly attackerHUD: HUDPlayer;
   /** 攻撃側スプライト */
-  attackerSprite: SPRITE;
+  readonly attackerSprite: SPRITE;
 
   /** 防御側プレイヤーステート */
-  defenderState: PlayerState;
+  readonly defenderState: PlayerState;
   /** 防御側TDプレイヤー */
-  defenderTD: TDPlayer;
+  readonly defenderTD: TDPlayer;
   /** 防御側HUDプレイヤー */
-  defenderHUD: HUDPlayer;
+  readonly defenderHUD: HUDPlayer;
   /** 防御側スプライト */
-  defenderSprite: ArmdozerSprite;
+  readonly defenderSprite: ArmdozerSprite;
 
   /** TDオブジェクト */
-  tdObjects: TDGameObjects;
+  readonly tdObjects: TDGameObjects;
   /** TDカメラ */
-  tdCamera: TDCamera;
+  readonly tdCamera: TDCamera;
   /** HUDオブジェクト */
-  hudObjects: HUDGameObjects;
+  readonly hudObjects: HUDGameObjects;
   /** HUDカメラ */
-  hudCamera: PlainHUDCamera;
+  readonly hudCamera: PlainHUDCamera;
 
   /** 死亡フラグ */
-  isDeath: boolean;
+  readonly isDeath: boolean;
   /** 戦闘結果 */
-  result: RESULT;
+  readonly result: RESULT;
+
+  /** 戦闘シーン音素材 */
+  readonly sounds: BattleSceneSounds;
 };
 
 /** 戦闘アニメーション共通で使うパラメータ */
@@ -132,6 +136,7 @@ function extractOthers(
     isDeath: battle.isDeath,
     result: battle.result,
     bgm: props.bgm,
+    sounds: props.sounds,
   };
 }
 
