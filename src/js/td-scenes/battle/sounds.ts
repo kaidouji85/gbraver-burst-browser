@@ -17,6 +17,8 @@ export type BattleSceneSounds = {
   readonly bgm: SoundResource;
   /** 勝利BGM */
   readonly victory: SoundResource;
+  /** 敗北BGM */
+  readonly lose: SoundResource;
 };
 
 /** 生成パラメータ */
@@ -52,6 +54,9 @@ export function createBattleSceneSounds(
       createEmptySoundResource(),
     victory:
       resources.sounds.find((v) => v.id === SOUND_IDS.VICTORY_BGM) ??
+      createEmptySoundResource(),
+    lose:
+      resources.sounds.find((v) => v.id === SOUND_IDS.LOSE_BGM) ??
       createEmptySoundResource(),
   };
 }
