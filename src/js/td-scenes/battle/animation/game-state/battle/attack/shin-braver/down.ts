@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { play } from "../../../../../../../bgm/bgm-operators";
+import { play, stop } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { ShinBraverBattle } from "./shin-braver-battle";
@@ -26,7 +26,7 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(
       all(
         onStart(() => {
-          param.bgm.do(play(param.battleEndBGM));
+          param.bgm.do(stop);
         }),
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
@@ -37,7 +37,11 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
+        param.defenderSprite.down().chain(
+          onStart(() => {
+            param.bgm.do(play(param.battleEndBGM));
+          }),
+        ),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
