@@ -1,3 +1,4 @@
+import { fadeOut, stop } from "../../../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../../../dom-scenes/dom-scene-binder/max-loading-time";
 import { NPCEnding } from "../../../../dom-scenes/npc-ending";
 import { waitTime } from "../../../../wait/wait-time";
@@ -21,7 +22,13 @@ type Options = {
  */
 export async function gotoEnding(options: Options) {
   const { props } = options;
-  await props.fader.fadeOut();
+  await Promise.all([
+    props.fader.fadeOut(),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   const scene = new NPCEnding(props);
   switchNpcEnding(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
