@@ -9,7 +9,7 @@ import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
-import { BattleSceneSounds } from "../../../sounds";
+import { SoundResource } from "../../../../../resource/sound/resource";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDGameObjects } from "../../../view/td/game-objects";
@@ -58,8 +58,8 @@ export type BattleAnimationParamX<
   /** 戦闘結果 */
   readonly result: RESULT;
 
-  /** 戦闘シーン音素材 */
-  readonly sounds: BattleSceneSounds;
+  /** バトル終了時のBGM */
+  readonly battleEndBGM: SoundResource;
 };
 
 /** 戦闘アニメーション共通で使うパラメータ */
@@ -128,6 +128,8 @@ function extractOthers(
 ) {
   const battle = gameState.effect;
   const { td, hud } = props.view;
+  const isAttacker = gameState.effect.attacker === props.playerId;
+  const battleEndBGM = isAttacker ? props.sounds.victory : props.sounds.lose;
   return {
     tdObjects: td.gameObjects,
     tdCamera: td.camera,
@@ -137,6 +139,7 @@ function extractOthers(
     result: battle.result,
     bgm: props.bgm,
     sounds: props.sounds,
+    battleEndBGM,
   };
 }
 
