@@ -54,8 +54,6 @@ const onGameEnd = async (
   gameEnd: GameEnd,
 ): Promise<void> => {
   props.view.dom.hamburgerMenu.hidden();
-  //await props.bgm.do(fadeOut);
-  //await props.bgm.do(stop);
   props.endBattle.next({
     gameEnd,
     animationTimeScale: props.animationTimeScale,
