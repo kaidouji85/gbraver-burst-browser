@@ -3,6 +3,8 @@ import { CriticalHit, Guard, NormalHit } from "gbraver-burst-core";
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
+import { onStart } from "../../../../../../../animation/on-start";
+import { play } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { GranDozerBattle } from "./gran-dozer-battle";
@@ -23,6 +25,9 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.tackle())
     .chain(
       all(
+        onStart(() => {
+          param.bgm.do(play(param.battleEndBGM));
+        }),
         delay(1500)
           .chain(param.attackerSprite.tackleToStand())
           .chain(delay(500)),
