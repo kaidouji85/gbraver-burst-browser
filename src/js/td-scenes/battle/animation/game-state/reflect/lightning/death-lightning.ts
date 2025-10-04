@@ -1,6 +1,8 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { delay } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play, stop } from "../../../../../../bgm/bgm-operators";
 import { ReflectAnimationParam } from "../animation-param";
 
 /**
@@ -10,6 +12,9 @@ import { ReflectAnimationParam } from "../animation-param";
  */
 export const deathLightning = (param: ReflectAnimationParam): Animate =>
   all(
+    onStart(() => {
+      param.bgm.do(stop);
+    }),
     param.reflecting.hud.resultIndicator
       .slideIn()
       .chain(delay(700))
@@ -17,7 +22,11 @@ export const deathLightning = (param: ReflectAnimationParam): Animate =>
     param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(
       all(
-        param.damaged.sprite.down(),
+        param.damaged.sprite.down().chain(
+          onStart(() => {
+            param.bgm.do(play(param.battleEndBGM));
+          }),
+        ),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
         param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
       ),
