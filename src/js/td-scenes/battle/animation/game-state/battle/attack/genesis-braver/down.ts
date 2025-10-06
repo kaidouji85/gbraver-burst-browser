@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { play, stop } from "../../../../../../../bgm/bgm-operators";
+import { play } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { GenesisBraverBattle } from "./genesis-braver-battle";

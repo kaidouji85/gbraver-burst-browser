@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { play, stop } from "../../../../../../../bgm/bgm-operators";
+import { play } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { GranDozerBattle } from "./gran-dozer-battle";
@@ -25,9 +25,7 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.tackle())
     .chain(
       all(
-        onStart(() => {
-          param.bgm.do(stop);
-        }),
+        delay(300).chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
         delay(1500)
           .chain(param.attackerSprite.tackleToStand())
           .chain(delay(500)),
@@ -37,11 +35,7 @@ export function down(param: GranDozerBattle<DownResult>): Animate {
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down().chain(
-          onStart(() => {
-            param.bgm.do(play(param.battleEndBGM));
-          }),
-        ),
+        param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
