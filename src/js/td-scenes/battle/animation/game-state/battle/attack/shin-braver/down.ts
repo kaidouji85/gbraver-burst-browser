@@ -3,6 +3,8 @@ import { CriticalHit, Guard, NormalHit } from "gbraver-burst-core";
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
+import { onStart } from "../../../../../../../animation/on-start";
+import { play } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { ShinBraverBattle } from "./shin-braver-battle";
@@ -23,6 +25,7 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
+        delay(300).chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),

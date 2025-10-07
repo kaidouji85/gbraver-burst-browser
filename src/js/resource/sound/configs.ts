@@ -73,6 +73,18 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   },
   {
     type: "Shared",
+    id: SOUND_IDS.VICTORY_BGM,
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/victory-bgm.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    type: "Shared",
+    id: SOUND_IDS.LOSE_BGM,
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/lose-bgm.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    type: "Shared",
     id: SOUND_IDS.TUTORIAL_BGM,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/tutorial-bgm.mp3`,
     volumeScale: 0.3,
