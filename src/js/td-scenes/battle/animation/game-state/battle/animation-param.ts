@@ -138,7 +138,6 @@ function extractOthers(
     isDeath: battle.isDeath,
     result: battle.result,
     bgm: props.bgm,
-    sounds: props.sounds,
     battleEndBGM,
   };
 }
