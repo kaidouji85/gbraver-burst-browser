@@ -26,7 +26,7 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
     .chain(
       all(
         onStart(() => param.bgm.do(stop))
-          .chain(delay(200))
+          .chain(delay(100))
           .chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
         delay(1500).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         param.attackerHUD.resultIndicator

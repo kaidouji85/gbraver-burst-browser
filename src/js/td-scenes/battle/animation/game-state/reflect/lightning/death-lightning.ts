@@ -13,7 +13,7 @@ import { ReflectAnimationParam } from "../animation-param";
 export const deathLightning = (param: ReflectAnimationParam): Animate =>
   all(
     onStart(() => param.bgm.do(stop))
-      .chain(delay(200))
+      .chain(delay(100))
       .chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
     param.reflecting.hud.resultIndicator
       .slideIn()
