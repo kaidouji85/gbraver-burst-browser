@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { play } from "../../../../../../../bgm/bgm-operators";
+import { play, stop } from "../../../../../../../bgm/bgm-operators";
 import { toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { GenesisBraverBattle } from "./genesis-braver-battle";
@@ -25,7 +25,9 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        delay(300).chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
+        onStart(() => param.bgm.do(stop))
+          .chain(delay(100))
+          .chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
         delay(1500).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         param.attackerHUD.resultIndicator
           .slideIn()
