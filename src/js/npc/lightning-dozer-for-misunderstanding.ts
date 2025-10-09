@@ -6,8 +6,12 @@ import {
   Pilots,
 } from "gbraver-burst-core";
 
-import type { NPC } from "./npc";
-import type { SimpleRoutine } from "./simple-npc";
+import { canBeatDown } from "./can-beat-down";
+import { findBatteryCommand } from "./find-battery-command";
+import { findBurstCommand } from "./find-burst-command";
+import { findPilotSkillCommand } from "./find-pilot-skill-command";
+import { NPC } from "./npc";
+import { SimpleRoutine, SimpleRoutineData } from "./simple-npc";
 import { SimpleNPC } from "./simple-npc";
 
 /** 0バッテリー */
@@ -21,53 +25,43 @@ const ZERO_BATTERY: Command = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const battery5 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 5,
-  );
-  const allBatteryMinusOne = data.commands.find(
-    (v) =>
-      v.type === "BATTERY_COMMAND" &&
-      v.battery === data.enemy.armdozer.battery - 1,
-  );
-  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
-
-  if (battery5 && burst) {
-    return battery5;
-  }
-
-  if (allBatteryMinusOne) {
-    return allBatteryMinusOne;
-  }
-
-  return ZERO_BATTERY;
+  return { type: "BATTERY_COMMAND", battery: data.enemy.armdozer.battery };
 };
+
+/**
+ * 防御ルーチンの条件オブジェクトを生成する
+ * @param data ルーチンに渡すデータ
+ * @returns 防御ルーチンの条件オブジェクト
+ */
+const getDefenseRoutineCondition = (data: SimpleRoutineData) => ({
+  battery1: findBatteryCommand(1, data.commands),
+  burst: findBurstCommand(data.commands),
+  pilot: findPilotSkillCommand(data.commands),
+  isDeath: canBeatDown(
+    data.player,
+    data.player.armdozer.battery,
+    data.enemy,
+    1,
+  ),
+});
 
 /**
  * @override
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = (data) => {
-  const burst = data.commands.find((v) => v.type === "BURST_COMMAND");
-  const battery1 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 1,
-  );
-  const battery3 = data.commands.find(
-    (v) => v.type === "BATTERY_COMMAND" && v.battery === 3,
-  );
+  const { battery1, burst, pilot, isDeath } = getDefenseRoutineCondition(data);
 
-  if (data.enemy.armdozer.battery === 5 && burst && battery3) {
-    return battery3;
-  }
-
+  let selectedCommand: Command = ZERO_BATTERY;
   if (burst) {
-    return burst;
+    selectedCommand = burst;
+  } else if (isDeath && pilot && 0 < data.enemy.armdozer.battery) {
+    selectedCommand = pilot;
+  } else if (battery1) {
+    selectedCommand = battery1;
   }
 
-  if (battery1) {
-    return battery1;
-  }
-
-  return ZERO_BATTERY;
+  return selectedCommand;
 };
 
 /**
