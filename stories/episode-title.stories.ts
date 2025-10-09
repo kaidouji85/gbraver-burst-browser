@@ -30,58 +30,30 @@ const episodeTitleStory = (
     return scene.getRootHTMLElement();
   });
 
-/** エピソード1 */
-export const episode1 = episodeTitleStory(
-  "1",
-  "バッテリーシステムの基礎",
+/** シンブレイバーのエピソードタイトル */
+export const shinBraverTitle = episodeTitleStory(
+  "X",
+  "シンブレイバーのエピソードタイトル",
   ArmdozerIds.SHIN_BRAVER,
 );
 
-/** エピソード2 */
-export const episode2 = episodeTitleStory(
-  "2",
-  "ゼロ防御だと即死する",
-  ArmdozerIds.SHIN_BRAVER,
-);
-
-/** エピソード3 */
-export const episode3 = episodeTitleStory(
-  "3",
-  "バーストで一発逆転",
-  ArmdozerIds.SHIN_BRAVER,
-);
-
-/** エピソード4 */
-export const episode4 = episodeTitleStory(
-  "4",
-  "対決、二人のブレイバー！！（負けイベント）",
-  ArmdozerIds.SHIN_BRAVER,
-);
-
-/** エピソード5 */
-export const episode5 = episodeTitleStory(
-  "5",
-  "超火力はガードで凌げ",
+/** ウィングドーザのエピソードタイトル */
+export const wingDozerTitle = episodeTitleStory(
+  "X",
+  "ウィングドーザのエピソードタイトル",
   ArmdozerIds.WING_DOZER,
 );
 
-/** サイドエピソード3.1 */
-export const sideEpisode31 = episodeTitleStory(
-  "3.1",
-  "パイロット次第では詰み（負けイベント）",
-  ArmdozerIds.SHIN_BRAVER,
+/** ネオランドーザのエピソードタイトル */
+export const neoLandozerTitle = episodeTitleStory(
+  "X",
+  "ネオランドーザのエピソードタイトル",
+  ArmdozerIds.NEO_LANDOZER,
 );
 
-/** サイドエピソード3.2 */
-export const sideEpisode32 = episodeTitleStory(
-  "3.2",
-  "パイロットスキルで意表を突け",
-  ArmdozerIds.SHIN_BRAVER,
-);
-
-/** サイドエピソード4.1 */
-export const sideEpisode41 = episodeTitleStory(
-  "4.1",
-  "リベンジ",
+/** ジェネシスブレイバーのエピソードタイトル */
+export const genesisBraverTitle = episodeTitleStory(
+  "X",
+  "ジェネシスブレイバーのエピソードタイトル",
   ArmdozerIds.GENESIS_BRAVER,
 );

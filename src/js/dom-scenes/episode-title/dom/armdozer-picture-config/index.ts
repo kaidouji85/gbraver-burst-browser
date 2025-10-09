@@ -3,6 +3,7 @@ import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 import { Resources } from "../../../../resource";
 import { ArmdozerPictureConfig } from "./armdozer-picture-config";
 import { genesisBraver } from "./genesis-braver";
+import { neoLandozer } from "./neo-landozer";
 import { shinBraver } from "./shin-braver";
 import { wingDozer } from "./wing-dozer";
 
@@ -21,6 +22,8 @@ export function createArmdozerPictureConfig(
       return shinBraver(resources);
     case ArmdozerIds.WING_DOZER:
       return wingDozer(resources);
+    case ArmdozerIds.NEO_LANDOZER:
+      return neoLandozer(resources);
     case ArmdozerIds.GENESIS_BRAVER:
       return genesisBraver(resources);
     default:
