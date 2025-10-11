@@ -91,22 +91,6 @@ export class BattleHamburgerMenu {
   }
 
   /**
-   * プレイヤーステータスを開く通知
-   * @returns 通知ストリーム
-   */
-  notifyPlayerStatusOpening(): Observable<void> {
-    return this.#props.playerStatusOpeningNotifier;
-  }
-
-  /**
-   * 敵ステータスを開く通知
-   * @returns 通知ストリーム
-   */
-  notifyEnemyStatusOpening(): Observable<void> {
-    return this.#props.enemyStatusOpeningNotifier;
-  }
-
-  /**
    * リトライ通知
    * @returns 通知ストリーム
    */

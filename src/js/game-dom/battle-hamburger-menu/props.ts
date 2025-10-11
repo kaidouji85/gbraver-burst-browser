@@ -54,10 +54,6 @@ export type BattleHamburgerMenuProps = {
 
   /** バトルシミュレーター開始通知 */
   readonly battleSimulatorStartNotifier: Subject<void>;
-  /** プレイヤーステータスオープン通知 */
-  readonly playerStatusOpeningNotifier: Subject<void>;
-  /** 敵ステータスオープン通知 */
-  readonly enemyStatusOpeningNotifier: Subject<void>;
   /** リトライ通知 */
   readonly retryNotifier: Subject<void>;
   /** バトル終了通知 */

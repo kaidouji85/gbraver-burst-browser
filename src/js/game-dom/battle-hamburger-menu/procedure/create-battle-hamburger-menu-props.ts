@@ -99,8 +99,6 @@ export function createBattleHamburgerMenuProps(
     exclusive,
 
     battleSimulatorStartNotifier,
-    playerStatusOpeningNotifier,
-    enemyStatusOpeningNotifier,
     retryNotifier,
     endBattleNotifier,
   };
