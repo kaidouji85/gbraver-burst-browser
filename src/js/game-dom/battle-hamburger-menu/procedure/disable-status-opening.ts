@@ -7,6 +7,4 @@ import { BattleHamburgerMenuProps } from "../props";
  */
 export function disableStatusOpening(props: BattleHamburgerMenuProps) {
   props.canStatusOpening = false;
-  props.playerStatus.className = PLAYER_STATUS_DISABLED;
-  props.enemyStatus.className = PLAYER_STATUS_DISABLED;
 }

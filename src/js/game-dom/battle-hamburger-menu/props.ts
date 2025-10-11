@@ -17,11 +17,6 @@ export type BattleHamburgerMenuProps = {
   readonly root: HTMLElement;
   /** ハンバーガーアイコン */
   readonly hamburgerIcon: HTMLElement;
-  /** プレイヤーステータス */
-  readonly playerStatus: HTMLElement;
-  /** 敵ステータス */
-  readonly enemyStatus: HTMLElement;
-  /** ハンバーガーアイコン 画像 */
   /** メニュー */
   readonly menu: HTMLElement;
   /** バックグラウンド */
