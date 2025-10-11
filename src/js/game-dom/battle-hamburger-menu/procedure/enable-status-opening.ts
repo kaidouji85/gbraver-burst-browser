@@ -1,4 +1,3 @@
-import { ENEMY_STATUS, PLAYER_STATUS } from "../dom/class-name";
 import { BattleHamburgerMenuProps } from "../props";
 
 /**

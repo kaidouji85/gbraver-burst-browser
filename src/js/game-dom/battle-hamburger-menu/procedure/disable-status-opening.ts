@@ -1,4 +1,3 @@
-import { PLAYER_STATUS_DISABLED } from "../dom/class-name";
 import { BattleHamburgerMenuProps } from "../props";
 
 /**
