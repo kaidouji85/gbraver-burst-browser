@@ -15,10 +15,8 @@ import { onEndBattleCancelPush } from "./on-end-battle-cancel-push";
 import { onEndBattleConfirmDialogCloserPush } from "./on-end-battle-confirm-dialog-closer-push";
 import { onEndBattleConfirmDialogPush } from "./on-end-battle-confirm-dialog-push";
 import { onEndBattlePush } from "./on-end-battle-push";
-import { onEnemyStatusPush } from "./on-enemy-status-push";
 import { onHamburgerIconPush } from "./on-hamburger-icon-push";
 import { onMenuOutsidePush } from "./on-menu-outside-push";
-import { onPlayerStatusPush } from "./on-player-status-push";
 import { onRetryButtonPush } from "./on-retry-button-push";
 import { onRetryCancelButtonPush } from "./on-retry-cancel-button-push";
 import { onRetryConfirmDialogCloserPush } from "./on-retry-confirm-dialog-closer-push";
@@ -60,12 +58,6 @@ export function bindEventListeners(
     }),
     domPushStream(props.battleSimulator).subscribe((action) => {
       onBattleSimulatorPush(props, action);
-    }),
-    domPushStream(props.playerStatus).subscribe((action) => {
-      onPlayerStatusPush(props, action);
-    }),
-    domPushStream(props.enemyStatus).subscribe((action) => {
-      onEnemyStatusPush(props, action);
     }),
     domPushStream(props.endBattleConfirmDialog).subscribe((action) => {
       onEndBattleConfirmDialogPush(action);
