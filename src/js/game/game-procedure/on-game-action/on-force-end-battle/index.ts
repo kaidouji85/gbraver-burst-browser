@@ -25,7 +25,7 @@ export async function onForceEndBattle(options: ForceEndBattleOptions) {
     case "CasualMatch":
     case "PrivateMatchHost":
     case "PrivateMatchGuest":
-    case "OfflineLANCasualMatch":  
+    case "OfflineLANCasualMatch":
       await forceEndNetBattle({ ...props, inProgress });
       props.inProgress = { type: "None" };
       break;
