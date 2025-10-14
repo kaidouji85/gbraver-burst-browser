@@ -13,7 +13,7 @@
 
   /** フォント */
   --font-color: rgb(240 240 240);
-  --responsive-font-size: max(3vh, 1rem, 12px);
+  --responsive-font-size: max(3vh, 1rem);
 
   /** 戦闘メッセージウインドウ フォントサイズ */
   --battle-window-font-small: calc(var(--responsive-font-size) * 1);
@@ -67,6 +67,17 @@
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+}
+
+/* 
+ * iPhone13Proでstandalone表示した場合の高さより小さい場合
+ * iOS26にてstandalone表示でも画面上に余白ができるようになったので、
+ * デバイスの画面サイズよりも小さい値を設定している
+ */
+@media (height < 373px) {
+  :root {
+    --responsive-font-size: 12px;
+  }
 }
 
 html {
