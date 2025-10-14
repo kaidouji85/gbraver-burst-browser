@@ -70,8 +70,8 @@
 }
 
 /* 
- * iPhone13Proでランドスケープのstandalone表示した場合の高さより小さい場合
- * iOS26にてstandalone表示でも画面上に余白ができるようになったので、
+ * iPhone 13 Proでランドスケープのstandalone表示した場合の高さより小さい場合
+ * iOS 26にてstandalone表示でも画面上に余白ができるようになったので、
  * デバイスの画面サイズよりも小さい値を設定している
  */
 @media (height < 373px) {
