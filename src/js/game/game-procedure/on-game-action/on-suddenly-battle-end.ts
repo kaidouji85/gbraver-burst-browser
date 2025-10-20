@@ -1,6 +1,7 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { SuddenlyBattleEnd } from "../../game-actions/suddenly-battle-end";
 import { GameProps } from "../../game-props";
+import { disconnectConnection } from "../helpers/disconnect-connection";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /** オプション */
@@ -13,7 +14,6 @@ type Options = {
 
 /**
  * バトル強制終了時の処理
- * 本処理はすべてのネットワークコンテキストに対応している
  * @param options オプション
  * @returns 処理が終了すると発火するPromise
  */
@@ -25,9 +25,5 @@ export async function onSuddenlyBattleEnd(options: Options): Promise<void> {
   });
   switchNetworkErrorDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
-  if (props.networkContext.type === "online") {
-    await props.networkContext.sdk.disconnectWebsocket();
-  } else if (props.networkContext.type === "offline-lan") {
-    props.networkContext.sdk.closeConnection();
-  }
+  await disconnectConnection(props);
 }
