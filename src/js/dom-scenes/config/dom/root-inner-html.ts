@@ -29,7 +29,9 @@ export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
   const battleControllerTypes = battleControllerTypeItems(
     config.battleControllerType,
   );
-  const playerPilotVisibilities = playerPilotVisibilityOptions(config.playerPilotVisibility);
+  const playerPilotVisibilities = playerPilotVisibilityOptions(
+    config.playerPilotVisibility,
+  );
   const battleWindowFontSizes = BattleWindowFontSizes.map((value) =>
     battleWindowFontSizeItem({
       value,
