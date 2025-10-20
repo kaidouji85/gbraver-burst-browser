@@ -52,7 +52,7 @@ export type GBraverBurstBrowserConfig = {
   battleAnimationTimeScale: BattleAnimationTimeScale;
   /** 戦闘シーンコントローラータイプ */
   battleControllerType: BattleControllerType;
-  /** プレイヤーパイロット表示設定 */
+  /** 戦闘プレイヤーパイロット表示設定 */
   playerPilotVisibility: PlayerPilotVisibility;
   /** 戦闘ウインドウのフォントサイズ */
   battleWindowFontSize: BattleWindowFontSize;

@@ -7,10 +7,11 @@ test("ブラウザ設定を正しくパースできる", () => {
     playerSelectorType: "open",
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
+    playerPilotVisibility: "visible",
+    battleControllerType: "BigButton",
     battleWindowFontSize: "normal",
     bgmVolume: 1,
     seVolume: 1,
-    battleControllerType: "BigButton",
     performanceStatsVisibility: "visible",
   };
   expect(parseBrowserConfig(data)).toEqual(data);
@@ -22,20 +23,22 @@ test("データ型が異なっても、ある程度はパースできる", () =>
       playerSelectorType: "secret",
       webGLPixelRatio: "2",
       battleAnimationTimeScale: "1",
+      battleControllerType: "BigButton",
+      playerPilotVisibility: "visible",
       battleWindowFontSize: "normal",
       bgmVolume: "1",
       seVolume: "1",
-      battleControllerType: "BigButton",
       performanceStatsVisibility: "hidden",
     }),
   ).toEqual({
     playerSelectorType: "secret",
     webGLPixelRatio: 2,
     battleAnimationTimeScale: 1,
+    battleControllerType: "BigButton",
+    playerPilotVisibility: "visible",
     battleWindowFontSize: "normal",
     bgmVolume: 1,
     seVolume: 1,
-    battleControllerType: "BigButton",
     performanceStatsVisibility: "hidden",
   });
 });

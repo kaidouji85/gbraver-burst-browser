@@ -5,10 +5,11 @@ const origin: GBraverBurstBrowserConfig = {
   playerSelectorType: "open",
   webGLPixelRatio: 2,
   battleAnimationTimeScale: 1,
+  battleControllerType: "BigButton",
+  playerPilotVisibility: "visible",
   battleWindowFontSize: "normal",
   bgmVolume: 1,
   seVolume: 1,
-  battleControllerType: "BigButton",
   performanceStatsVisibility: "hidden",
 };
 
