@@ -1,6 +1,7 @@
 import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
 import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
+import { disconnectConnection } from "../helpers/disconnect-connection";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /** オプション */
@@ -21,10 +22,6 @@ export async function onMatchingCanceled(options: Options): Promise<void> {
   const { props } = options;
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
-  if (props.networkContext.type === "online") {
-    await props.networkContext.sdk.disconnectWebsocket();
-  } else if (props.networkContext.type === "offline-lan") {
-    props.networkContext.sdk.closeConnection();
-  }
+  await disconnectConnection(props);
   props.domDialogBinder.hidden();
 }

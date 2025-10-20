@@ -5,6 +5,7 @@ import { CasualMatch } from "../../../in-progress/casual-match";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
+import { disconnectConnection } from "../../helpers/disconnect-connection";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
@@ -28,13 +29,7 @@ export async function forceEndNetBattle(
 ) {
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
-
-  if (props.networkContext.type === "online") {
-    await props.networkContext.sdk.disconnectWebsocket();
-  } else if (props.networkContext.type === "offline-lan") {
-    props.networkContext.sdk.closeConnection();
-  }
-
+  await disconnectConnection(props);
   props.domDialogBinder.hidden();
   await Promise.all([
     (async () => {

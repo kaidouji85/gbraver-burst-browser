@@ -5,6 +5,7 @@ import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-m
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
+import { disconnectConnection } from "../../helpers/disconnect-connection";
 
 /** ネット対戦のフロー */
 type PostNetworkBattle =
@@ -24,13 +25,7 @@ export async function executePostNetBattle(
 ): Promise<InProgress> {
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
-
-  if (props.networkContext.type === "online") {
-    await props.networkContext.sdk.disconnectWebsocket();
-  } else if (props.networkContext.type === "offline-lan") {
-    props.networkContext.sdk.closeConnection();
-  }
-
+  await disconnectConnection(props);
   await props.postBattle.show({
     ...props,
     buttons: PostNetworkBattleButtons,
