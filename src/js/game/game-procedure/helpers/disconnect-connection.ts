@@ -1,7 +1,7 @@
 import { GameProps } from "../../game-props";
 
 /**
- * 通信接続を切断する
+ * ネットワークコンテキストに応じた通信接続の切断を行う
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
