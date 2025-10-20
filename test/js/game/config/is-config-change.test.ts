@@ -34,7 +34,7 @@ test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
-test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
+test("戦闘シーンコントローラータイプの変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = {
     ...origin,
     battleControllerType: "MiniController",
