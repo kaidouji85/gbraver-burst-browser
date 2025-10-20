@@ -10,10 +10,12 @@ const Keys = {
   WebGLPixelRatio: "WebGLPixelRatio",
   /** 戦闘アニメタイムスケール */
   BattleAnimationTimeScale: "BattleAnimationTimeScale",
-  /** 戦闘ウインドウのフォントサイズ */
-  BattleWindowFontSize: "BattleWindowFontSize",
   /** 戦闘画面コントローラータイプ */
   BattleControllerType: "BattleControllerType",
+  /** プレイヤーパイロットの表示設定 */
+  PlayerPilotVisibility: "PlayerPilotVisibility",
+  /** 戦闘ウインドウのフォントサイズ */
+  BattleWindowFontSize: "BattleWindowFontSize",
   /** BGM音量 */
   BGMVolume: "BGMVolume",
   /** SE音量 */
@@ -35,12 +37,16 @@ class LocalStorageConfigRepository
       `${config.battleAnimationTimeScale}`,
     );
     localStorage.setItem(
-      Keys.BattleWindowFontSize,
-      config.battleWindowFontSize,
-    );
-    localStorage.setItem(
       Keys.BattleControllerType,
       config.battleControllerType,
+    );
+    localStorage.setItem(
+      Keys.PlayerPilotVisibility,
+      config.playerPilotVisibility,
+    );
+    localStorage.setItem(
+      Keys.BattleWindowFontSize,
+      config.battleWindowFontSize,
     );
     localStorage.setItem(Keys.BGMVolume, `${config.bgmVolume}`);
     localStorage.setItem(Keys.SEVolume, `${config.seVolume}`);
@@ -59,6 +65,7 @@ class LocalStorageConfigRepository
         Keys.BattleAnimationTimeScale,
       ),
       battleControllerType: localStorage.getItem(Keys.BattleControllerType),
+      playerPilotVisibility: localStorage.getItem(Keys.PlayerPilotVisibility),
       battleWindowFontSize: localStorage.getItem(Keys.BattleWindowFontSize),
       bgmVolume: localStorage.getItem(Keys.BGMVolume),
       seVolume: localStorage.getItem(Keys.SEVolume),
