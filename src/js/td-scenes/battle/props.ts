@@ -58,7 +58,7 @@ export type BattleSceneProps = Readonly<ResourcesContainer> &
     readonly sounds: BattleSceneSounds;
     /** コントローラータイプ */
     readonly controllerType: BattleControllerType;
-    /** プレイヤー側のパイロット情報を常に表示するべきか */
+    /** プレイヤー側のパイロット情報の表示設定 */
     readonly playerPilotVisibility: PlayerPilotVisibility;
 
     /** バトル終了ストリーム */
