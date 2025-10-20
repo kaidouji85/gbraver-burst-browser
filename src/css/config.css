@@ -93,7 +93,8 @@
 }
 
 .config__player-selector-type-selector,
-.config__battle-controller-type-selector {
+.config__battle-controller-type-selector,
+.config__player-pilot-visibility-selector {
   font-size: var(--font-size);
   display: flex;
   flex-direction: column;
@@ -125,7 +126,8 @@
 
 .config__player-selector-type-detail,
 .config__big-button-detail,
-.config__mini-controller-detail {
+.config__mini-controller-detail,
+.config__player-pilot-visibility-detail {
   padding-left: calc(var(--responsive-font-size) * 1);
 }
 
