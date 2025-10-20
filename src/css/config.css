@@ -111,10 +111,11 @@
 }
 
 .config__player-selector-type-radio,
-.config__battle-animation-time-scale-radio,
-.config__battle-window-font-size-radio,
 .config__webgl-pixel-ratio-selector-radio,
+.config__battle-animation-time-scale-radio,
 .config__battle-controller-type-radio,
+.config__player-pilot-visibility-radio,
+.config__battle-window-font-size-radio,
 .config__performance-stats-visibility-radio {
   margin: 0;
   height: var(--font-size);
