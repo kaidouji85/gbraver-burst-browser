@@ -14,8 +14,9 @@ export function isConfigChanged(
     origin.playerSelectorType !== update.playerSelectorType ||
     origin.webGLPixelRatio !== update.webGLPixelRatio ||
     origin.battleWindowFontSize !== update.battleWindowFontSize ||
-    origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.battleControllerType !== update.battleControllerType ||
+    origin.playerPilotVisibility !== update.playerPilotVisibility ||
+    origin.battleAnimationTimeScale !== update.battleAnimationTimeScale ||
     origin.bgmVolume !== update.bgmVolume ||
     origin.seVolume !== update.seVolume ||
     origin.performanceStatsVisibility !== update.performanceStatsVisibility

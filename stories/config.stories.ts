@@ -13,10 +13,11 @@ export const Scene = domStub((params) => {
       playerSelectorType: "open",
       webGLPixelRatio: 2,
       battleAnimationTimeScale: 1,
+      battleControllerType: "BigButton",
+      playerPilotVisibility: "visible",
+      battleWindowFontSize: "normal",
       bgmVolume: 1,
       seVolume: 1,
-      battleWindowFontSize: "normal",
-      battleControllerType: "BigButton",
       performanceStatsVisibility: "hidden",
     },
   });

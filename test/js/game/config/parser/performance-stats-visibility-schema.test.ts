@@ -1,5 +1,5 @@
 import { PerformanceStatsVisibility } from "../../../../../src/js/game/config/browser-config";
-import { parsePerformanceStatsVisibility } from "../../../../../src/js/game/config/parser/performance-stats-visibility";
+import { PerformanceStatsVisibilitySchema } from "../../../../../src/js/game/config/parser/performance-stats-visibility";
 
 /** パフォーマンス統計表示設定をあつめたもの */
 const performanceStatsVisibilities: PerformanceStatsVisibility[] = [
@@ -9,7 +9,7 @@ const performanceStatsVisibilities: PerformanceStatsVisibility[] = [
 
 test("PerformanceStatsVisibilityはパースできる", () => {
   performanceStatsVisibilities.forEach((statsVisibility) => {
-    expect(parsePerformanceStatsVisibility(statsVisibility)).toBe(
+    expect(PerformanceStatsVisibilitySchema.parse(statsVisibility)).toBe(
       statsVisibility,
     );
   });
@@ -17,15 +17,15 @@ test("PerformanceStatsVisibilityはパースできる", () => {
 
 test("空文字はパースできない", () => {
   const data = "";
-  expect(parsePerformanceStatsVisibility(data)).toBe(null);
+  expect(() => PerformanceStatsVisibilitySchema.parse(data)).toThrow();
 });
 
 test("nullはパースできない", () => {
   const data = null;
-  expect(parsePerformanceStatsVisibility(data)).toBe(null);
+  expect(() => PerformanceStatsVisibilitySchema.parse(data)).toThrow();
 });
 
 test("undefinedはパースできない", () => {
   const data = undefined;
-  expect(parsePerformanceStatsVisibility(data)).toBe(null);
+  expect(() => PerformanceStatsVisibilitySchema.parse(data)).toThrow();
 });

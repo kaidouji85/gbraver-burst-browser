@@ -5,6 +5,7 @@ import { AbortManagerContainer } from "../../abort-controller/abort-manager-cont
 import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../exclusive/exclusive";
+import { PlayerPilotVisibility } from "../../game/config/browser-config";
 import { ResourcesContainer } from "../../resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
@@ -57,6 +58,8 @@ export type BattleSceneProps = Readonly<ResourcesContainer> &
     readonly sounds: BattleSceneSounds;
     /** コントローラータイプ */
     readonly controllerType: BattleControllerType;
+    /** プレイヤー側のパイロット情報の表示設定 */
+    readonly playerPilotVisibility: PlayerPilotVisibility;
 
     /** バトル終了ストリーム */
     readonly endBattle: Subject<BattleEnd>;

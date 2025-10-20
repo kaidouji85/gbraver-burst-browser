@@ -6,6 +6,7 @@ import { createActionManager } from "../../../action-manager/action-manager";
 import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
+import { PlayerPilotVisibility } from "../../../game/config/browser-config";
 import { GameLoopContainer } from "../../../game-loop/game-loop-container";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
 import { RendererDomGetter } from "../../../render/renderer-dom-getter";
@@ -31,8 +32,8 @@ export interface OwnRenderer
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
 export type BattleScenePropsCreatorParams = BGMManagerContainer &
-  ResourcesContainer &
-  SEPlayerContainer &
+  Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
   Readonly<GameLoopContainer> &
   Readonly<AbortManagerContainer> &
   Readonly<{
@@ -53,6 +54,8 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
 
     /** コントローラータイプ */
     controllerType: BattleControllerType;
+    /** プレイヤー側のパイロット情報の表示設定 */
+    playerPilotVisibility: PlayerPilotVisibility;
 
     /** リトライ可能かどうか、trueで可能 */
     canRetry: boolean;

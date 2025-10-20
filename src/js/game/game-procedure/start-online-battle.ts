@@ -95,6 +95,7 @@ export async function startOnlineBattle(
     enemy: battle.enemy,
     initialState: battle.initialState,
     controllerType: config.battleControllerType,
+    playerPilotVisibility: config.playerPilotVisibility,
     emergencyStop: battle.suddenlyBattleEndNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
     canRetry: false,

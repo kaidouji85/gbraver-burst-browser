@@ -18,11 +18,13 @@ export function openPlayerStatus(props: Readonly<BattleSceneProps>): void {
     return;
   }
 
+  const isPilotHidden =
+    props.playerPilotVisibility === "hidden" && player.pilot.enableSkill;
   const dialog = new StatusDialog({
     ...props,
     state: player,
     isEnemy: false,
-    isPilotHidden: false,
+    isPilotHidden,
   });
   switchStatus(props, dialog);
 }
