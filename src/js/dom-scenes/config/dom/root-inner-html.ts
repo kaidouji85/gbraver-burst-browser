@@ -6,6 +6,7 @@ import { battleAnimationTimeScaleOptions } from "./battle-animation-time-scale-o
 import { battleControllerTypeItems } from "./battle-controller-type-items";
 import { battleWindowFontSizeItem } from "./battle-window-font-size-item";
 import { ROOT_CLASS } from "./class-name";
+import { playerPilotVisibilityOptions } from "./player-pilot-visibility-options";
 import { playerSelectorTypeItems } from "./player-selector-types";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";
 import { soundVolumeLabel } from "./sound-volume-label";
@@ -21,13 +22,14 @@ export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
   const playerSelectorTypes = playerSelectorTypeItems(
     config.playerSelectorType,
   );
+  const webGLPixelRatios = webGLPixelRatioOptions(config.webGLPixelRatio);
   const battleAnimationTimeScales = battleAnimationTimeScaleOptions(
     config.battleAnimationTimeScale,
   );
-  const webGLPixelRatios = webGLPixelRatioOptions(config.webGLPixelRatio);
   const battleControllerTypes = battleControllerTypeItems(
     config.battleControllerType,
   );
+  const playerPilotVisibilities = playerPilotVisibilityOptions(config.playerPilotVisibility);
   const battleWindowFontSizes = BattleWindowFontSizes.map((value) =>
     battleWindowFontSizeItem({
       value,
@@ -43,6 +45,7 @@ export function rootInnerHTML(config: GBraverBurstBrowserConfig): string {
     battleAnimationTimeScales,
     webGLPixelRatios,
     battleControllerTypes,
+    playerPilotVisibilities,
     battleWindowFontSizes,
     bgmVolumeLabel,
     seVolumeLabel,
