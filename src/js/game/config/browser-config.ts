@@ -19,6 +19,12 @@ export const BattleAnimationTimeScales = [1, 0.5, 0.25] as const;
 export type BattleAnimationTimeScale =
   (typeof BattleAnimationTimeScales)[number];
 
+/** 有効なプレイヤーパイロット表示設定 */
+export const PlayerPilotVisibilities = ["visible", "hidden"] as const;
+
+/** プレイヤーパイロット表示設定 */
+export type PlayerPilotVisibility = (typeof PlayerPilotVisibilities)[number];
+
 /** 有効な戦闘ウインドウのフォントサイズ */
 export const BattleWindowFontSizes = ["small", "normal", "large"] as const;
 
@@ -44,14 +50,16 @@ export type GBraverBurstBrowserConfig = {
   webGLPixelRatio: WebGLPixelRatio;
   /** 戦闘アニメタイムスケール */
   battleAnimationTimeScale: BattleAnimationTimeScale;
+  /** 戦闘シーンコントローラータイプ */
+  battleControllerType: BattleControllerType;
+  /** プレイヤーパイロット表示設定 */
+  playerPilotVisibility: PlayerPilotVisibility;
   /** 戦闘ウインドウのフォントサイズ */
   battleWindowFontSize: BattleWindowFontSize;
   /** BGM音量 */
   bgmVolume: SoundVolume;
   /** SE音量 */
   seVolume: SoundVolume;
-  /** 戦闘シーンコントローラータイプ */
-  battleControllerType: BattleControllerType;
   /** パフォーマンス統計の表示設定 */
   performanceStatsVisibility: PerformanceStatsVisibility;
 };
