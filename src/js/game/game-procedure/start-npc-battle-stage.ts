@@ -66,6 +66,7 @@ export async function startNPCBattleStage(
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
     controllerType: config.battleControllerType,
+    playerPilotVisibility: config.playerPilotVisibility,
     customBattleEvent: createSeriousMatchEvent(),
     canRetry: true,
   });

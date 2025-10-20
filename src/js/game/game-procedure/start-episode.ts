@@ -63,6 +63,7 @@ export async function startEpisode(options: {
     initialState: npcBattle.stateHistory(),
     customBattleEvent: episode.event(props.resources),
     controllerType: "BigButton",
+    playerPilotVisibility: config.playerPilotVisibility,
     canRetry: true,
   });
   bindBattleScene(props, battleScene);
