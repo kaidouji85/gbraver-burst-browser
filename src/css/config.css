@@ -101,10 +101,11 @@
 }
 
 .config__player-selector-type-label,
-.config__battle-animation-time-scale-label,
-.config__battle-window-font-size-label,
 .config__webgl-pixel-ratio-selector-label,
+.config__battle-animation-time-scale-label,
 .config__battle-controller-type-label,
+.config__player-pilot-visibility-label,
+.config__battle-window-font-size-label,
 .config__performance-stats-visibility-label {
   display: flex;
   align-items: center;

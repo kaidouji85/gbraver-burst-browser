@@ -13,12 +13,12 @@ import template from "./player-pilot-visibility-option.hbs";
 export const playerPilotVisibilityOptions = (selected: PlayerPilotVisibility) =>
   PlayerPilotVisibilities.map((v) => {
     const checked = v === selected ? "checked" : "";
-    const caption = v === "visible" ? "表示する" : "表示しない";
+    const label = v === "visible" ? "表示する" : "表示しない";
     const value = v;
     return template({
       ROOT_CLASS,
       checked,
-      caption,
+      label,
       value,
     });
   }).reduce((a, b) => a + b);
