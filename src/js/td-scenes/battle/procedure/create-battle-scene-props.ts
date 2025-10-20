@@ -54,7 +54,7 @@ export type BattleScenePropsCreatorParams = BGMManagerContainer &
 
     /** コントローラータイプ */
     controllerType: BattleControllerType;
-    /** プレイヤー側のパイロット情報を常に表示するべきか */
+    /** プレイヤー側のパイロット情報の表示設定 */
     playerPilotVisibility: PlayerPilotVisibility;
 
     /** リトライ可能かどうか、trueで可能 */
