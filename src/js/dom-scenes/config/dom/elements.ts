@@ -58,10 +58,10 @@ export const extractBattleWindowFontSizeSelector = (
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
  */
-export const extractPlayerVisibilitySelector = (
+export const extractPlayerPilotVisibilitySelector = (
   root: HTMLElement,
 ): HTMLElement =>
-  root.querySelector(`[data-id="playerVisibilitySelector"]`) ??
+  root.querySelector(`[data-id="playerPilotVisibilitySelector"]`) ??
   document.createElement("select");
 
 /**
