@@ -34,6 +34,22 @@ test("戦闘アニメ再生速度の変更を正しく検知できる", () => {
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
+test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    battleControllerType: "MiniController",
+  };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
+test("プレイヤーパイロットの表示設定の変更を正しく検知できる", () => {
+  const update: GBraverBurstBrowserConfig = {
+    ...origin,
+    playerPilotVisibility: "hidden",
+  };
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
 test("戦闘ウインドウのフォントサイズの変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = {
     ...origin,
@@ -49,14 +65,6 @@ test("BGM音量の変更を正しく検知できる", () => {
 
 test("SE音量の変更を正しく検知できる", () => {
   const update: GBraverBurstBrowserConfig = { ...origin, seVolume: 0.5 };
-  expect(isConfigChanged(origin, update)).toBe(true);
-});
-
-test("戦闘シーンコントトーラータイプの変更を正しく検知できる", () => {
-  const update: GBraverBurstBrowserConfig = {
-    ...origin,
-    battleControllerType: "MiniController",
-  };
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
