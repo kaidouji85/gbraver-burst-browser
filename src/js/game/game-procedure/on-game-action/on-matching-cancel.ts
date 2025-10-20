@@ -14,6 +14,7 @@ type Options = {
 
 /**
  * マッチング中止
+ * 本関数はすべてのネットワークコンテキストに対応している
  * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */

@@ -14,6 +14,7 @@ type Options = {
 
 /**
  * バトル強制終了時の処理
+ * 本関数はすべてのネットワークコンテキストに対応している
  * @param options オプション
  * @returns 処理が終了すると発火するPromise
  */
