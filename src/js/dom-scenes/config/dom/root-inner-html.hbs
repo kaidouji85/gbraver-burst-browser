@@ -1,7 +1,7 @@
 <div class="{{ROOT_CLASS}}__title">設定</div>
 <div class="{{ROOT_CLASS}}__configs">
   <div class="{{ROOT_CLASS}}__player-selector-type">
-    <div class="{{ROOT_CLASS}}__player-selector-type-title">
+    <div class="{{ROOT_CLASS}}__player-selector-type-caption">
       ロボ、パイロット選択タイプ
     </div>
     <div class="{{ROOT_CLASS}}__config-separation"></div>
@@ -55,6 +55,20 @@
       data-id="battleControllerTypeSelector"
     >
       {{{battleControllerTypes}}}
+    </div>
+  </div>
+  <div class="{{ROOT_CLASS}}__player-pilot-visibility">
+    <div class="{{ROOT_CLASS}}__player-pilot-visibility-caption">
+      バトル プレイヤー側のパイロットを表示
+    </div>
+    <div class="{{ROOT_CLASS}}__config-separation"></div>
+    <div class="{{ROOT_CLASS}}__player-pilot-visibility-description">
+      バトル中のステータスダイアログで、スキル未発動時にプレイヤー側のパイロット情報を表示するかを変更します。
+    </div>
+    <div
+      class="{{ROOT_CLASS}}__player-pilot-visibility-selector"
+      data-id="playerPilotVisibilitySelector"
+    >
     </div>
   </div>
   <div class="{{ROOT_CLASS}}__battle-window-font-size">

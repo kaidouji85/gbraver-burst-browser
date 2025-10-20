@@ -58,11 +58,12 @@
   margin: calc(var(--responsive-font-size) * 0.5) 0;
 }
 
-.config__player-selector-type-title,
-.config__battle-animation-time-scale-caption,
-.config__battle-window-font-size-caption,
+.config__player-selector-type-caption,
 .config__webgl-pixel-ratio-caption,
+.config__battle-animation-time-scale-caption,
 .config__battle-controller-type-caption,
+.config__player-pilot-visibility-caption,
+.config__battle-window-font-size-caption,
 .config__bgm-volume-caption,
 .config__se-volume-caption,
 .config__performance-stats-visibility-caption {
@@ -73,10 +74,11 @@
 }
 
 .config__player-selector-type-description,
-.config__battle-animation-time-scale-description,
-.config__battle-window-font-size-description,
 .config__webgl-pixel-ratio-description,
 .config__battle-controller-type-description,
+.config__player-pilot-visibility-description,
+.config__battle-animation-time-scale-description,
+.config__battle-window-font-size-description,
 .config__bgm-volume-description,
 .config__se-volume-description,
 .config__performance-stats-visibility-description {
