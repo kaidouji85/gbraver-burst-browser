@@ -15,6 +15,22 @@ const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
 const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
 const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 
+/**
+ * アプリアイコンのパスを取得する
+ * @returns アプリアイコンのパス
+ */
+const getAppIconPath = () => {
+  switch (process.env.APP_ICON_TYPE) {
+    case "PROD":
+      return path.resolve(__dirname, "src/app-icon-512x512.png");
+    case "OFFLINE":
+      return path.resolve(__dirname, "src/app-icon-offline-512x512.png");
+    case "DEV":
+    default:
+      return path.resolve(__dirname, "src/app-icon-dev-512x512.png");
+  }
+};
+
 module.exports = async () => ({
   mode: "development",
   entry: {
@@ -91,10 +107,7 @@ module.exports = async () => ({
           to: path.resolve(__dirname, BUILD_ROOT),
         },
         {
-          from:
-            process.env.IS_APP_ICON_DEV_ENABLE === "true"
-              ? path.resolve(__dirname, "src/app-icon-dev-512x512.png")
-              : path.resolve(__dirname, "src/app-icon-512x512.png"),
+          from: getAppIconPath(),
           to: path.resolve(__dirname, `${BUILD_ROOT}/app-icon-512x512.png`),
         },
         {
@@ -129,9 +142,8 @@ module.exports = async () => ({
       GBRAVER_BURST_IS_SERVICE_WORKER_USED: JSON.stringify(
         process.env.IS_SERVICE_WORKER_USED,
       ),
-      GBRAVER_BURST_IS_API_SERVER_ENABLE: JSON.stringify(
-        process.env.IS_API_SERVER_ENABLE,
-      ),
+      GBRAVER_BURST_NETWORK_MODE: JSON.stringify(process.env.NETWORK_MODE),
+      GBRAVER_BURST_API_URL: JSON.stringify(process.env.API_URL),
       GBRAVER_BURST_WEBSOCKET_API_URL: JSON.stringify(
         process.env.WEBSOCKET_API_URL,
       ),
@@ -143,6 +155,9 @@ module.exports = async () => ({
       ),
       GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN: JSON.stringify(
         process.env.COGNITO_HOSTED_UI_DOMAIN,
+      ),
+      GBRAVER_BURST_OFFLINE_API_URL: JSON.stringify(
+        process.env.OFFLINE_API_URL,
       ),
       GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: JSON.stringify(
         process.env.CAN_PLAY_EPISODE_IN_DEVELOPMENT,

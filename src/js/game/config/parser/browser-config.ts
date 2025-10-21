@@ -6,6 +6,7 @@ import { BattleAnimationTimeScaleSchema } from "./battle-animation-time-scale";
 import { BattleControllerTypeSchema } from "./battle-controller-type";
 import { BattleWindowFontSizeSchema } from "./battle-window-font-size";
 import { PerformanceStatsVisibilitySchema } from "./performance-stats-visibility";
+import { PlayerPilotVisibilitySchema } from "./player-pilot-visibility";
 import { PlayerSelectorTypeSchema } from "./player-selector-type";
 import { SoundVolumeSchema } from "./sound-volume";
 import { WebGLPixelRatioSchema } from "./web-gl-pixel-ratio";
@@ -19,14 +20,17 @@ export const BrowserConfigSchema = z.object({
   battleAnimationTimeScale: BattleAnimationTimeScaleSchema.catch(
     DefaultConfig.battleAnimationTimeScale,
   ),
-  bgmVolume: SoundVolumeSchema.catch(DefaultConfig.bgmVolume),
-  seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
   battleControllerType: BattleControllerTypeSchema.catch(
     DefaultConfig.battleControllerType,
+  ),
+  playerPilotVisibility: PlayerPilotVisibilitySchema.catch(
+    DefaultConfig.playerPilotVisibility,
   ),
   battleWindowFontSize: BattleWindowFontSizeSchema.catch(
     DefaultConfig.battleWindowFontSize,
   ),
+  bgmVolume: SoundVolumeSchema.catch(DefaultConfig.bgmVolume),
+  seVolume: SoundVolumeSchema.catch(DefaultConfig.seVolume),
   performanceStatsVisibility: PerformanceStatsVisibilitySchema.catch(
     DefaultConfig.performanceStatsVisibility,
   ),

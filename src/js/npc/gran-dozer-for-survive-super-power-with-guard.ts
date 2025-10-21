@@ -1,4 +1,5 @@
 import {
+  Armdozer,
   ArmdozerIds,
   Armdozers,
   Command,
@@ -79,8 +80,12 @@ const defenseRoutine: SimpleRoutine = (data) => {
  * @returns NPC
  */
 export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
-  const armdozer =
+  const originArmdozer =
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
+  const armdozer: Armdozer = {
+    ...originArmdozer,
+    burst: { type: "EffectClear", recoverBattery: 1 },
+  };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

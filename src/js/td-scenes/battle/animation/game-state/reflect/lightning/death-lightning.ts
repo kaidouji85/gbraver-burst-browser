@@ -1,6 +1,8 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { delay } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play, stop } from "../../../../../../bgm/bgm-operators";
 import { ReflectAnimationParam } from "../animation-param";
 
 /**
@@ -10,6 +12,9 @@ import { ReflectAnimationParam } from "../animation-param";
  */
 export const deathLightning = (param: ReflectAnimationParam): Animate =>
   all(
+    onStart(() => param.bgm.do(stop))
+      .chain(delay(100))
+      .chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
     param.reflecting.hud.resultIndicator
       .slideIn()
       .chain(delay(700))

@@ -1,3 +1,4 @@
+import { fadeOut, stop } from "../../../../bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
 import { StorySubFLow } from "../../../in-progress/story";
 import { GotoEpisodeSelect } from "../../../post-battle";
@@ -44,7 +45,13 @@ export async function gotoEpisodeSelect(options: Options) {
 
   const { story } = inProgress;
   const initialEpisodeId = getInitialEpisodeId(story);
-  await startEpisodeSelector(props, initialEpisodeId);
+  await Promise.all([
+    startEpisodeSelector(props, initialEpisodeId),
+    (async () => {
+      await props.bgm.do(fadeOut);
+      await props.bgm.do(stop);
+    })(),
+  ]);
   playTitleBGM(props);
   props.inProgress = { ...inProgress, story: { type: "EpisodeSelect" } };
 }

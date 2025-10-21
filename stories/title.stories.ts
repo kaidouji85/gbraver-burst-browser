@@ -16,7 +16,8 @@ export const guestAccount = domStub((params) => {
   const scene = new Title({
     ...params,
     account,
-    isAPIServerEnable: true,
+    isLoginVisible: true,
+    isNetBattleVisible: true,
     isTitleHelpIconEnable: true,
     howToPlayURL: "how-to-play",
     characterDescriptionURL: "character-description",
@@ -36,7 +37,8 @@ export const loggedInAccount = domStub((params) => {
   const scene = new Title({
     ...params,
     account,
-    isAPIServerEnable: true,
+    isNetBattleVisible: true,
+    isLoginVisible: true,
     isTitleHelpIconEnable: true,
     howToPlayURL: "how-to-play",
     characterDescriptionURL: "character-description",

@@ -2,6 +2,7 @@ import { Episode } from "../episode";
 import { batterySystemTutorial } from "./battery-system-tutorial";
 import { burstTutorial } from "./burst-tutorial";
 import { confrontationTwoBraver } from "./confrontation-two-braver";
+import { misunderstanding } from "./misunderstanding";
 import { pilotSkillTutorial01 } from "./pilot-skill-tutorial-01";
 import { pilotSkillTutorial02 } from "./pilot-skill-tutorial-02";
 import { PrinceOfFallenSun } from "./prince-of-fallen-sun";
@@ -30,4 +31,5 @@ export const Episodes: Episode[] = [...MainEpisodes, ...SideEpisodes];
 export const EpisodesInDevelopment: Episode[] = [
   ...MainEpisodes,
   ...SideEpisodes,
+  misunderstanding,
 ];

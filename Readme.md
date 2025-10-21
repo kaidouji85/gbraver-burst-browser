@@ -27,7 +27,7 @@ npm start
 # ブラウザを起動して<localhost:8080>を開く
 ```
 
-## デプロイする
+## ローカル環境からAWSにデプロイする
 
 本プログラムは静的ファイルのみで構成されているので、
 ビルド生成物をPublicに公開すればデプロイ完了です。
@@ -55,19 +55,11 @@ npm start
 ./clear-cdn.bash <CloudFrontのdistributionId>
 ```
 
-## GitHub Actions設定
+## AWSでCI/CDを構築する
 
-### Secrets設定
-
-[ここ](https://docs.github.com/ja/actions/security-guides/using-secrets-in-github-actions)を参考にGitHub ActionsのSecretsを設定する。
-以下が設定内容である。
-
-**secrets**
-| シークレット名 | 値 |
-|-------|----|
-| SONAR_TOKEN | SonarQube Cloudのトークン |
-
-## AWS環境設定
+本リポジトリではAWS Code Buildを利用してCI/CDを構築することができます。
+このリポジトリには開発環境、本番環境用のbuildspecが含まれています。
+以下に環境ごとのCode Build設定、AWS Systems Manager Parameter Storeの項目名を記載します。
 
 ### 開発環境
 
@@ -90,6 +82,25 @@ npm start
 | ---------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
 | ビルド           | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
 | ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                            |
+
+## オフライン用LAN環境で動かす
+
+本ゲームはオフライン用LAN環境でも動作します。
+
+```bash
+# オフライン（LAN）用の.envテンプレートをコピーする
+# 展示用マシンのローカルIPなど、環境に応じた各種値を.envに記載する
+cp .env.offline-lan.template .env
+
+# ビルド
+npm run clean
+npm run build:production
+npm run generate-icons
+npm run scale-down-mobile-images
+
+# HTTPサーバーを起動する
+npm run serve
+```
 
 ## storybookを動かす
 
@@ -166,41 +177,39 @@ shfmt -l -w *.bash
 
 #### Parameter Store（テスト環境）
 
-| 名前                                      | 種類   | 値                                                    |
-| ----------------------------------------- | ------ | ----------------------------------------------------- |
-| /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI                   |
-| /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID                   |
-| /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名                        |
-| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID             |
-| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名                    |
-| /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                             |
-| /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント              |
-| /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                                   |
-| /GbraverBurst/dev/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL                   |
-| /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
-| /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
-| /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/dev/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
-| /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
+| 名前                                      | 種類   | 値                                        |
+| ----------------------------------------- | ------ | ----------------------------------------- |
+| /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI       |
+| /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID       |
+| /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名            |
+| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
+| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
+| /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                 |
+| /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
+| /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                       |
+| /GbraverBurst/dev/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
+| /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                       |
+| /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
+| /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                     |
+| /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 
 #### Parameter Store（本番環境）
 
-| 名前                                       | 種類   | 値                                                    |
-| ------------------------------------------ | ------ | ----------------------------------------------------- |
-| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI                   |
-| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID                   |
-| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名                        |
-| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID             |
-| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名                    |
-| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                             |
-| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント              |
-| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                                   |
-| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL                   |
-| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                                   |
-| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL                       |
-| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                                 |
-| /GbraverBurst/prod/isAPIServerEnable       | String | APIサーバが利用できるか否かのフラグ、`true`で利用可能 |
-| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン                          |
+| 名前                                       | 種類   | 値                                        |
+| ------------------------------------------ | ------ | ----------------------------------------- |
+| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI       |
+| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID       |
+| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名            |
+| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
+| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
+| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                 |
+| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
+| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                       |
+| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
+| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                       |
+| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
+| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                     |
+| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 
 ### IAMポリシー
 

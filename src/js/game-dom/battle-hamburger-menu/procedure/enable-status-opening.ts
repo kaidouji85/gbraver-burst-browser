@@ -1,4 +1,3 @@
-import { ENEMY_STATUS, PLAYER_STATUS } from "../dom/class-name";
 import { BattleHamburgerMenuProps } from "../props";
 
 /**
@@ -7,6 +6,4 @@ import { BattleHamburgerMenuProps } from "../props";
  */
 export function enableStatusOpening(props: BattleHamburgerMenuProps) {
   props.canStatusOpening = true;
-  props.playerStatus.className = PLAYER_STATUS;
-  props.enemyStatus.className = ENEMY_STATUS;
 }

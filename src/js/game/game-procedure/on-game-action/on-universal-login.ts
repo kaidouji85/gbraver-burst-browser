@@ -16,6 +16,10 @@ type Options = {
  */
 export async function onUniversalLogin(options: Options): Promise<void> {
   const { props } = options;
+  if (props.networkContext.type !== "online") {
+    return;
+  }
+
   await props.fader.fadeOut();
-  await props.api.gotoLoginPage();
+  await props.networkContext.sdk.gotoLoginPage();
 }

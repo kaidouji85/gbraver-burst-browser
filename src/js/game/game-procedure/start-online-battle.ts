@@ -1,4 +1,4 @@
-import { Battle as BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
@@ -95,7 +95,8 @@ export async function startOnlineBattle(
     enemy: battle.enemy,
     initialState: battle.initialState,
     controllerType: config.battleControllerType,
-    emergencyStop: battle.suddenlyBattleNotifier(),
+    playerPilotVisibility: config.playerPilotVisibility,
+    emergencyStop: battle.suddenlyBattleEndNotifier(),
     customBattleEvent: createSeriousMatchEvent(),
     canRetry: false,
   });

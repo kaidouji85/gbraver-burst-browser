@@ -1,5 +1,3 @@
-import { BrowserSDK } from "@gbraver-burst-network/browser-sdk";
-
 import { AbortManager } from "../../abort-controller/abort-manager";
 import { createActionManager } from "../../action-manager/action-manager";
 import { createBGMManager } from "../../bgm/bgm-manager";
@@ -20,14 +18,13 @@ import { GBraverBurstBrowserConfigRepository } from "../config/repository/reposi
 import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
+import { NetworkContext } from "../network-context";
 import { GameProps } from "./index";
 
 /** GamePropsジェネレータパラメータ */
 export type GamePropsGeneratorParams = {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
-  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
-  isAPIServerEnable: boolean;
   /** 開発中のエピソードをプレイできるか否かのフラグ、trueでプレイできる */
   canPlayEpisodeInDevelopment: boolean;
   /** 開発中のアームドーザを選択できるか否かのフラグ、trueで選択できる */
@@ -51,8 +48,8 @@ export type GamePropsGeneratorParams = {
   /** ブラウザ設定リポジトリ */
   config: GBraverBurstBrowserConfigRepository;
 
-  /** APIサーバのSDK */
-  api: BrowserSDK;
+  /** ネットワークコンテキスト */
+  networkContext: NetworkContext;
 
   /** リソースルート */
   resourceRoot: ResourceRoot;

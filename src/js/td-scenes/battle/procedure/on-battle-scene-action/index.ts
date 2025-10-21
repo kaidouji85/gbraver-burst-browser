@@ -7,11 +7,9 @@ import { onBurst } from "./on-burst";
 import { onBurstByMiniController } from "./on-burst-by-mini-controller";
 import { onDecideBattery } from "./on-decide-battery";
 import { onDecideBatteryByMiniController } from "./on-decide-battery-by-minicontroller";
-import { onEnemyStatusOpening } from "./on-enemy-status-opening";
 import { onMinusBattery } from "./on-minus-battery";
 import { onPilotSkill } from "./on-pilot-skill";
 import { onPilotSkillByMiniController } from "./on-pilot-skill-by-mini-controller";
-import { onPlayerStatusOpening } from "./on-player-status-opening";
 import { onPlusBattery } from "./on-plus-battery";
 import { onStatusOpeningByIcon } from "./on-state-opening-by-icon";
 import { onStatusClosing } from "./on-status-closing";
@@ -51,10 +49,6 @@ export function onBattleSceneAction(
       return onBattleSimulatorStartByIcon(props, action);
     case "battleSimulatorEnd":
       return onBattleSimulatorEnd(props);
-    case "playerStatusOpening":
-      return onPlayerStatusOpening(props);
-    case "enemyStatusOpening":
-      return onEnemyStatusOpening(props);
     case "statusOpeningByIcon":
       return onStatusOpeningByIcon(props, action);
     case "statusClosing":

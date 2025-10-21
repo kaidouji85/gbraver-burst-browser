@@ -21,7 +21,7 @@ export async function selfInitiatedPilotSkill(
     [
       `一試合に${wbr}一回だけ${wbr} パイロット${wbr}固有の${wbr}効果を${wbr}得ることが${wbr}できる`,
     ],
-    [`ちなみに${wbr}君のパイロットスキルは${wbr}バッテリー${wbr}２回復だ」`],
+    [`ちなみに${wbr}君のパイロットスキルは${wbr}バッテリー${wbr}3回復だ」`],
   ]);
   invisibleAllMessageWindows(props);
 }

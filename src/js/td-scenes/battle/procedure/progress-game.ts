@@ -1,6 +1,5 @@
 import { Command, GameEnd, GameState } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../../bgm/bgm-operators";
 import { BattleSceneProps } from "../props";
 import { playUpdatedStateHistory } from "./play-updated-state-history";
 
@@ -54,8 +53,6 @@ const onGameEnd = async (
   gameEnd: GameEnd,
 ): Promise<void> => {
   props.view.dom.hamburgerMenu.hidden();
-  await props.bgm.do(fadeOut);
-  await props.bgm.do(stop);
   props.endBattle.next({
     gameEnd,
     animationTimeScale: props.animationTimeScale,

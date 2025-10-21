@@ -4,7 +4,7 @@ import { TitleAccount } from "../title-account";
 import {
   ACCOUNT_CLASS,
   GAME_MENU_CLASS,
-  GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED,
+  GAME_MENU_CLASS_WHEN_NET_BATTLE_DISABLED,
   HELP_ICON_CLASS,
   INVISIBLE__HELP_MENU_CLASS,
   INVISIBLE_ACCOUNT_CLASS,
@@ -23,8 +23,10 @@ import template from "./root-inner-html.hbs";
 export type RootInnerHTMLParams = ResourcesContainer & {
   /** アカウント情報 */
   account: TitleAccount;
-  /** APIサーバが利用可能か否か、trueで利用可能である */
-  isAPIServerEnable: boolean;
+  /** ログインボタンを表示するか否かのフラグ、trueで表示する */
+  isLoginVisible: boolean;
+  /** ネット対戦ボタンを表示するか否かのフラグ、trueで表示する */
+  isNetBattleVisible: boolean;
   /** タイトルヘルプアイコンを表示するか否かのフラグ、trueで表示する */
   isTitleHelpIconEnable: boolean;
   /** 遊び方スライドのURL */
@@ -50,16 +52,16 @@ export function rootInnerHTML(
   params: RootInnerHTMLParams,
 ): string {
   const loginClassName =
-    params.isAPIServerEnable && params.account.type === "GuestAccount"
+    params.isLoginVisible && params.account.type === "GuestAccount"
       ? LOGIN_CLASS
       : INVISIBLE_LOGIN_CLASS;
   const accountName =
     params.account.type === "LoggedInAccount" ? params.account.name : "";
   const accountClassName =
-    params.isAPIServerEnable && params.account.type === "LoggedInAccount"
+    params.isLoginVisible && params.account.type === "LoggedInAccount"
       ? ACCOUNT_CLASS
       : INVISIBLE_ACCOUNT_CLASS;
-  const netBattleClassName = params.isAPIServerEnable
+  const netBattleClassName = params.isNetBattleVisible
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
   const shinBraverPath =
@@ -68,9 +70,9 @@ export function rootInnerHTML(
   const granDozerPath =
     params.resources.paths.find((p) => p.id === PathIds.GRAN_DOZER_BUST_SHOT)
       ?.path ?? "";
-  const gameClassName = params.isAPIServerEnable
+  const gameClassName = params.isNetBattleVisible
     ? GAME_MENU_CLASS
-    : GAME_MENU_CLASS_WHEN_API_SERVER_DISABLED;
+    : GAME_MENU_CLASS_WHEN_NET_BATTLE_DISABLED;
   const helpIconClassName = params.isTitleHelpIconEnable
     ? HELP_ICON_CLASS
     : INVISIBLE_HELP_ICON_CLASS;

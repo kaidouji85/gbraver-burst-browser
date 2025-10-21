@@ -3,11 +3,12 @@ env:
   variables:
     IS_SEARCH_ENGINE_NO_INDEX: true
     IS_SERVICE_WORKER_USED: true
-    IS_APP_ICON_DEV_ENABLE: true
+    APP_ICON_TYPE: "DEV"
     CAN_PLAY_DEVELOPING_ARMDOZER: true
     CAN_PLAY_DEVELOPING_PILOT: true
     CAN_PLAY_EPISODE_IN_DEVELOPMENT: true
     IS_TITLE_HELP_ICON_ENABLE: true
+    NETWORK_MODE: "ONLINE"
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
@@ -21,7 +22,6 @@ env:
     TERMS_OF_SERVICE_URL: /GbraverBurst/dev/termsOfServiceUrl
     PRIVACY_POLICY_URL: /GbraverBurst/dev/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/dev/contactURL
-    IS_API_SERVER_ENABLE: /GbraverBurst/dev/isAPIServerEnable
     COGNITO_USER_POOL_ID: /GbraverBurst/dev/cognitoUserPoolId
     COGNITO_CLIENT_ID: /GbraverBurst/dev/cognitoClientId
     COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/dev/cognitoHostedUIDomain

@@ -21,6 +21,7 @@ import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
+import { onNetworkError } from "./on-network-error";
 import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
@@ -37,7 +38,6 @@ import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
-import { onWebSocketAPIError } from "./on-websocker-api-error";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
@@ -85,8 +85,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onLoginCancel({ props, action });
     case "EndNetworkError":
       return onEndNetworkError({ props, action });
-    case "WebSocketAPIError":
-      return onWebSocketAPIError({ props, action });
+    case "NetworkError":
+      return onNetworkError({ props, action });
     case "ConfigChangeStart":
       return onConfigChangeStart({ props, action });
     case "ConfigChangeCancel":

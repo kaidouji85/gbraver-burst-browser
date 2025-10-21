@@ -5,9 +5,11 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
+import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
+import { SoundResource } from "../../../../../resource/sound/resource";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDGameObjects } from "../../../view/td/game-objects";
@@ -23,38 +25,41 @@ import { StateAnimationProps } from "../state-animation-props";
 export type BattleAnimationParamX<
   SPRITE extends ArmdozerSprite,
   RESULT extends BattleResult,
-> = {
+> = BGMManagerContainer & {
   /** 攻撃側プレイヤーステート */
-  attackerState: PlayerState;
+  readonly attackerState: PlayerState;
   /** 攻撃側TDプレイヤー */
-  attackerTD: TDPlayer;
+  readonly attackerTD: TDPlayer;
   /** 攻撃側HUDプレイヤー */
-  attackerHUD: HUDPlayer;
+  readonly attackerHUD: HUDPlayer;
   /** 攻撃側スプライト */
-  attackerSprite: SPRITE;
+  readonly attackerSprite: SPRITE;
 
   /** 防御側プレイヤーステート */
-  defenderState: PlayerState;
+  readonly defenderState: PlayerState;
   /** 防御側TDプレイヤー */
-  defenderTD: TDPlayer;
+  readonly defenderTD: TDPlayer;
   /** 防御側HUDプレイヤー */
-  defenderHUD: HUDPlayer;
+  readonly defenderHUD: HUDPlayer;
   /** 防御側スプライト */
-  defenderSprite: ArmdozerSprite;
+  readonly defenderSprite: ArmdozerSprite;
 
   /** TDオブジェクト */
-  tdObjects: TDGameObjects;
+  readonly tdObjects: TDGameObjects;
   /** TDカメラ */
-  tdCamera: TDCamera;
+  readonly tdCamera: TDCamera;
   /** HUDオブジェクト */
-  hudObjects: HUDGameObjects;
+  readonly hudObjects: HUDGameObjects;
   /** HUDカメラ */
-  hudCamera: PlainHUDCamera;
+  readonly hudCamera: PlainHUDCamera;
 
   /** 死亡フラグ */
-  isDeath: boolean;
+  readonly isDeath: boolean;
   /** 戦闘結果 */
-  result: RESULT;
+  readonly result: RESULT;
+
+  /** バトル終了時のBGM */
+  readonly battleEndBGM: SoundResource;
 };
 
 /** 戦闘アニメーション共通で使うパラメータ */
@@ -123,6 +128,8 @@ function extractOthers(
 ) {
   const battle = gameState.effect;
   const { td, hud } = props.view;
+  const isAttacker = gameState.effect.attacker === props.playerId;
+  const battleEndBGM = isAttacker ? props.sounds.victory : props.sounds.lose;
   return {
     tdObjects: td.gameObjects,
     tdCamera: td.camera,
@@ -130,6 +137,8 @@ function extractOthers(
     hudCamera: hud.camera,
     isDeath: battle.isDeath,
     result: battle.result,
+    bgm: props.bgm,
+    battleEndBGM,
   };
 }
 

@@ -21,17 +21,6 @@ export const extractBattleAnimationTimeScaleSelector = (
   document.createElement("select");
 
 /**
- * 戦闘ウインドウのフォントサイズセレクタを抽出する
- * @param root 抽出対象となるルート要素
- * @returns 抽出結果
- */
-export const extractBattleWindowFontSizeSelector = (
-  root: HTMLElement,
-): HTMLElement =>
-  root.querySelector(`[data-id="battleWindowFontSizeSelector"]`) ??
-  document.createElement("select");
-
-/**
  * 戦闘画面ピクセルレートセレクタを抽出する
  * @param root 抽出対象となるルート要素
  * @returns 抽出結果
@@ -52,6 +41,28 @@ export const extractBattleControllerTypeSelector = (
 ): HTMLElement =>
   root.querySelector(`[data-id="battleControllerTypeSelector"]`) ??
   document.createElement("div");
+
+/**
+ * 戦闘ウインドウのフォントサイズセレクタを抽出する
+ * @param root 抽出対象となるルート要素
+ * @returns 抽出結果
+ */
+export const extractBattleWindowFontSizeSelector = (
+  root: HTMLElement,
+): HTMLElement =>
+  root.querySelector(`[data-id="battleWindowFontSizeSelector"]`) ??
+  document.createElement("select");
+
+/**
+ * プレイヤー側パイロットの表示設定セレクタを抽出する
+ * @param root 抽出対象となるルート要素
+ * @returns 抽出結果
+ */
+export const extractPlayerPilotVisibilitySelector = (
+  root: HTMLElement,
+): HTMLElement =>
+  root.querySelector(`[data-id="playerPilotVisibilitySelector"]`) ??
+  document.createElement("select");
 
 /**
  * BGM音量セレクタを抽出する

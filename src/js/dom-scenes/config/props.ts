@@ -18,6 +18,7 @@ import {
   extractBgmVolumeValue,
   extractConfigChange,
   extractPerformanceStatsVisibilitySelector,
+  extractPlayerPilotVisibilitySelector,
   extractPlayerSelectorTypeSelector,
   extractPrev,
   extractSeVolumeSelector,
@@ -38,12 +39,14 @@ export type ConfigProps = BGMManagerContainer &
     playerSelectorType: HTMLElement;
     /** 戦闘アニメ速度セレクタ */
     battleAnimationTimeScaleSelector: HTMLElement;
+    /** 戦闘画面コントローラセレクタ */
+    battleControllerTypeSelector: HTMLElement;
+    /** プレイヤー側のパイロットの表示 */
+    playerPilotVisibilitySelector: HTMLElement;
     /** 戦闘ウインドウのフォントサイズセレクタ */
     battleWindowFontSizeSelector: HTMLElement;
     /** webglピクセルレートセレクタ */
     webGLPixelRatioSelector: HTMLElement;
-    /** 戦闘画面コントローラセレクタ */
-    battleControllerTypeSelector: HTMLElement;
     /** bgm音量セレクタ */
     bgmVolumeSelector: HTMLInputElement;
     /** bgm音量値 */
@@ -107,6 +110,7 @@ export function createConfigProps(params: PropsCreatorParams): ConfigProps {
     bgmVolumeSelector: extractBgmVolumeSelector(root),
     battleWindowFontSizeSelector: extractBattleWindowFontSizeSelector(root),
     battleControllerTypeSelector: extractBattleControllerTypeSelector(root),
+    playerPilotVisibilitySelector: extractPlayerPilotVisibilitySelector(root),
     bgmVolumeValue: extractBgmVolumeValue(root),
     seVolumeSelector: extractSeVolumeSelector(root),
     seVolumeValue: extractSeVolumeValue(root),

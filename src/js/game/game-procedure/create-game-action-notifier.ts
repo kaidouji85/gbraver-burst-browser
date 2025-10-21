@@ -1,7 +1,9 @@
-import { fromEvent, map, merge, Observable } from "rxjs";
+import { EMPTY, fromEvent, map, merge, Observable } from "rxjs";
 
 import { GameAction } from "../game-actions";
 import { GameProps } from "../game-props";
+import { OfflineLAN } from "../network-context/offline-lan";
+import { Online } from "../network-context/online";
 
 /**
  * バトル強制終了の通知ストリームを生成する
@@ -16,16 +18,28 @@ const createSuddenlyBattleEnd = (
     .pipe(map(() => ({ type: "SuddenlyBattleEnd" })));
 
 /**
- * WebSocketAPIエラーの通知ストリームを生成する
- * @param props ゲームプロパティ
- * @returns WebSocketAPIエラーの通知ストリーム
+ * オンラインネットワークエラーの通知ストリームを生成する
+ * @param networkContext ネットワークコンテキスト（オンライン）
+ * @returns ネットワークエラーの通知ストリーム
  */
-const createWebSocketAPIError = (
-  props: Readonly<GameProps>,
+const createOnlineNetworkError = (
+  networkContext: Online,
 ): Observable<GameAction> =>
-  props.api
+  networkContext.sdk
     .websocketErrorNotifier()
-    .pipe(map((error) => ({ type: "WebSocketAPIError", error })));
+    .pipe(map((error) => ({ type: "NetworkError", error })));
+
+/**
+ * オフラインLANネットワークエラーの通知ストリームを生成する
+ * @param networkContext ネットワークコンテキスト（オフラインLAN）
+ * @returns ネットワークエラーの通知ストリーム
+ */
+const createOfflineLANNetworkError = (
+  networkContext: OfflineLAN,
+): Observable<GameAction> =>
+  networkContext.sdk
+    .notifyError()
+    .pipe(map((error) => ({ type: "NetworkError", error })));
 
 /**
  * visibilitychangeイベントの通知ストリームを生成する
@@ -72,7 +86,12 @@ export const createGameActionNotifier = (
     props.gameAction.notify(),
     createPostBattleAction(props),
     createSuddenlyBattleEnd(props),
-    createWebSocketAPIError(props),
+    props.networkContext.type === "online"
+      ? createOnlineNetworkError(props.networkContext)
+      : EMPTY,
+    props.networkContext.type === "offline-lan"
+      ? createOfflineLANNetworkError(props.networkContext)
+      : EMPTY,
     createVisibilityChange(),
     createUnhandledrejection(),
   );

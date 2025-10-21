@@ -3,11 +3,12 @@ env:
   variables:
     IS_SEARCH_ENGINE_NO_INDEX: false
     IS_SERVICE_WORKER_USED: true
-    IS_APP_ICON_DEV_ENABLE: false
+    APP_ICON_TYPE: "PROD"
     CAN_PLAY_DEVELOPING_ARMDOZER: false
     CAN_PLAY_DEVELOPING_PILOT: false
     CAN_PLAY_EPISODE_IN_DEVELOPMENT: false
     IS_TITLE_HELP_ICON_ENABLE: true
+    NETWORK_MODE: "ONLINE"
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
@@ -21,7 +22,6 @@ env:
     TERMS_OF_SERVICE_URL: /GbraverBurst/prod/termsOfServiceUrl
     PRIVACY_POLICY_URL: /GbraverBurst/prod/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/prod/contactURL
-    IS_API_SERVER_ENABLE: /GbraverBurst/prod/isAPIServerEnable
     COGNITO_USER_POOL_ID: /GbraverBurst/prod/cognitoUserPoolId
     COGNITO_CLIENT_ID: /GbraverBurst/prod/cognitoClientId
     COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/prod/cognitoHostedUIDomain
