@@ -24,10 +24,7 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  */
 const attackRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  const shouldFullBatteryAttack = enemy.armdozer.enableBurst;
-  const battery = shouldFullBatteryAttack
-    ? enemy.armdozer.battery
-    : enemy.armdozer.battery - 1;
+  const battery = enemy.armdozer.battery;
   return { type: "BATTERY_COMMAND", battery: Math.max(battery, 0) };
 };
 
@@ -88,6 +85,7 @@ export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
   const armdozer: Armdozer = {
     ...originArmdozer,
+    batteryAutoRecovery: 2,
     burst: { type: "EffectClear", recoverBattery: 1 },
   };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];
