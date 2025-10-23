@@ -24,7 +24,11 @@ const ZERO_BATTERY: Command = { type: "BATTERY_COMMAND", battery: 0 };
  */
 const attackRoutine: SimpleRoutine = (data) => {
   const { enemy } = data;
-  return { type: "BATTERY_COMMAND", battery: enemy.armdozer.battery };
+  const shouldFullBatteryAttack = enemy.armdozer.enableBurst;
+  const battery = shouldFullBatteryAttack
+    ? enemy.armdozer.battery
+    : enemy.armdozer.battery - 1;
+  return { type: "BATTERY_COMMAND", battery: Math.max(battery, 0) };
 };
 
 /**
