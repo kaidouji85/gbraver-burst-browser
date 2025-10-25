@@ -5,10 +5,10 @@ import { invisibleAllMessageWindows } from "../../invisible-all-message-windows"
 import { scrollRightMessages } from "../../scroll-messages";
 
 /**
- * バトルシミュレーターでダメージ計算
+ * バトルシミュレーターを使おう
  * @param props イベントプロパティ
  */
-export async function shouldBattleSimulator(props: CustomBattleEventProps) {
+export async function useBattleSimulator(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「嫌な予感がする`],
