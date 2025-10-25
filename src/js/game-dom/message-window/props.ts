@@ -12,13 +12,21 @@ import { WindowType } from "./window-type";
 
 /** メッセージウインドウプロパティ */
 export type MessageWindowProps = {
+  /** ルートHTML要素 */
   root: HTMLElement;
+  /** メッセージ表示用HTML要素 */
   messages: HTMLElement;
+  /** 次メッセージアイコンHTML要素 */
   nextMessageIcon: HTMLElement;
+  /** 左顔画像 */
   leftFaceGraphic: FaceGraphic;
+  /** 右顔画像 */
   rightFaceGraphic: FaceGraphic;
+  /** ウインドウタイプ */
   type: WindowType;
+  /** 顔画像の向き */
   faceOrientation: FaceOrientation;
+  /** 顔画像位置 */
   facePosition: FacePosition;
 };
 

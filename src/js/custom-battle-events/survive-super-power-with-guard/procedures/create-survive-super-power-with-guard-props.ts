@@ -9,5 +9,6 @@ export const createSurviveSuperPowerWithGuardProps =
     state: {
       isIntroductionComplete: false,
       isSecondTurnEventComplete: false,
+      isUseBattleSimulatorComplete: false,
     },
   });

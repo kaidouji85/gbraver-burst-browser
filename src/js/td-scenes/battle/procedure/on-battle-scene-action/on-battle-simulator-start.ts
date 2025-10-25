@@ -9,6 +9,7 @@ export function onBattleSimulatorStart(props: BattleSceneProps) {
   const { exclusive, se, sounds } = props;
   exclusive.execute(async () => {
     se.play(sounds.changeValue);
+    await props.customBattleEvent?.onBattleSimulatorSelected(props);
     openBattleSimulator(props);
   });
 }

@@ -1,6 +1,6 @@
-import type { MessageWindow } from "../game-dom/message-window";
-import type { FaceType } from "../game-dom/message-window/face-graphic/config/face-type";
-import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { MessageWindow } from "../game-dom/message-window";
+import { FaceType } from "../game-dom/message-window/face-graphic/config/face-type";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * メッセージウインドウをアクティブ表示する
@@ -8,7 +8,6 @@ import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-e
  *   - メッセージウインドウを表示する
  *   - 顔画像は非表示
  *   - 標準の明るさ
- *
  * @param messageWindow 設定対象のメッセージウインドウ
  */
 function activeMessageWindow(messageWindow: MessageWindow): void {
@@ -23,7 +22,6 @@ function activeMessageWindow(messageWindow: MessageWindow): void {
  *   - メッセージウインドウを表示する
  *   - 顔画像を表示する
  *   - 標準の明るさ
- *
  * @param messageWindow 設定対象のメッセージウインドウ
  * @param faceType 顔画像タイプ
  */
@@ -39,7 +37,6 @@ function activeMessageWindowWithFace(
 
 /**
  * 左メッセージウインドウをアクティブ表示する
- *
  * @param props イベントプロパティ
  */
 export function activeLeftMessageWindow(props: CustomBattleEventProps): void {
@@ -48,7 +45,6 @@ export function activeLeftMessageWindow(props: CustomBattleEventProps): void {
 
 /**
  * 右メッセージウインドウをアクティブ表示する
- *
  * @param props イベントプロパティ
  */
 export function activeRightMessageWindow(props: CustomBattleEventProps): void {
@@ -57,7 +53,6 @@ export function activeRightMessageWindow(props: CustomBattleEventProps): void {
 
 /**
  * バッテリーセレクタ隣メッセージウインドウをアクティブ表示する
- *
  * @param props イベントプロパティ
  */
 export function activeNearBatterySelectorMessageWindow(
@@ -68,7 +63,6 @@ export function activeNearBatterySelectorMessageWindow(
 
 /**
  * バーストボタン隣メッセージウインドウをアクティブ表示する
- *
  * @param props イベントプロパティ
  */
 export function activeNearBurstButtonMessageWindow(
@@ -79,7 +73,6 @@ export function activeNearBurstButtonMessageWindow(
 
 /**
  * パイロットボタン隣メッセージウインドウをアクティブ表示する
- *
  * @param props イベントプロパティ
  */
 export function activeNearPilotButtonMessageWindow(
@@ -89,8 +82,19 @@ export function activeNearPilotButtonMessageWindow(
 }
 
 /**
+ * 敵バトルシミュレーターボタン隣メッセージウインドウをアクティブ表示する
+ * @param props イベントプロパティ
+ */
+export function activeNearPlayerBattleSimulatorButtonMessageWindow(
+  props: CustomBattleEventProps,
+): void {
+  activeMessageWindow(
+    props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow,
+  );
+}
+
+/**
  * 左メッセージウインドウを顔画像ありアクティブ表示する
- *
  * @param props イベントプロパティ
  * @param faceType 顔画像タイプ
  */
@@ -103,7 +107,6 @@ export function activeLeftMessageWindowWithFace(
 
 /**
  * 右メッセージウインドウを顔画像ありアクティブ表示する
- *
  * @param props イベントプロパティ
  * @param faceType 顔画像タイプ
  */

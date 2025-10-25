@@ -82,13 +82,13 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
 /** 最終ステート系イベントのプロパティ */
 export type LastStateEventProps = CustomBattleEventProps &
   LastStateContainer & {
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
     /** プレイヤーのステート */
     readonly player: PlayerState;
     /** プレイヤーのメインターン数 */
     readonly playerMainTurnCount: number;
-
-    /** メインターン数 */
-    readonly mainTurnCount: number;
 
     /** 敵のステート */
     readonly enemy: PlayerState;
@@ -104,6 +104,19 @@ export type BatteryCommandSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したバッテリーコマンド */
     readonly battery: BatteryCommand;
+
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
   };
 
 /** バーストコマンド選択イベントのプロパティ */
@@ -200,4 +213,11 @@ export interface CustomBattleEvent {
   onPilotSkillCommandSelected(
     props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled>;
+
+  /**
+   * バトルシミュレーターが選択された
+   * @param props イベントプロパティ
+   * @returns 処理が完了したら発火するPromise
+   */
+  onBattleSimulatorSelected(props: CustomBattleEventProps): Promise<void>;
 }

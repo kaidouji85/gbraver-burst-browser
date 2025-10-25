@@ -53,6 +53,14 @@ export function createDOMLayerProps(
   });
   nearPilotButtonMessageWindow.visible(false);
 
+  const nearPlayerBattleSimulatorButtonMessageWindow = new MessageWindow({
+    resources,
+    type: "NearPlayerBattleSimulatorButton",
+    facePosition: "Right",
+    faceOrientation: "Left",
+  });
+  nearPlayerBattleSimulatorButtonMessageWindow.visible(false);
+
   const playerShoutMessageWindow = new MessageWindow({
     resources,
     type: "PlayerShout",
@@ -78,6 +86,7 @@ export function createDOMLayerProps(
     nearBatterySelectorMessageWindow,
     nearBurstButtonMessageWindow,
     nearPilotButtonMessageWindow,
+    nearPlayerBattleSimulatorButtonMessageWindow,
     playerShoutMessageWindow,
     enemyShoutMessageWindow,
 
