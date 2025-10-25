@@ -220,4 +220,11 @@ export interface CustomBattleEvent {
    * @returns 処理が完了したら発火するPromise
    */
   onBattleSimulatorSelected(props: CustomBattleEventProps): Promise<void>;
+
+  /**
+   * バトルシミュレーターが閉じられた後
+   * @param props イベントプロパティ
+   * @returns 処理が完了したら発火するPromise
+   */
+  afterBattleSimulatorClosed(props: CustomBattleEventProps): Promise<void>;
 }

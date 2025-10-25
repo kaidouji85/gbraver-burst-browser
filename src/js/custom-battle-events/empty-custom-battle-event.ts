@@ -100,4 +100,13 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
   }
+
+  /** @override */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  async afterBattleSimulatorClosed(
+    props: CustomBattleEventProps,
+  ): Promise<void> {
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    // NOP
+  }
 }
