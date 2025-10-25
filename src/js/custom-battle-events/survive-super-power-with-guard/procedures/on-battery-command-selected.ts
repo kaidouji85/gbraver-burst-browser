@@ -4,6 +4,21 @@ import {
 } from "../../../td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../props";
 import { SurviveSuperPowerWithGuardState } from "../state";
+import { useBattleSimulator } from "../stories/use-battle-simulator";
+
+/**
+ * 「useBattleSimulator」を再生するか否か
+ * @param props イベントプロパティ
+ * @returns 判定結果、trueで再生
+ */
+function shouldPlayUseBattleSimulator(
+  props: Readonly<
+    BatteryCommandSelectedEventProps & SurviveSuperPowerWithGuardProps
+  >,
+): boolean {
+  const { mainTurnCount } = props;
+  return mainTurnCount === 4;
+}
 
 /**
  * バッテリーコマンド選択イベント
@@ -18,7 +33,11 @@ export async function onBatteryCommandSelected(
   commandCanceled: CommandCanceled;
   state: SurviveSuperPowerWithGuardState;
 }> {
-  const commandCanceled: CommandCanceled = { isCommandCanceled: false };
+  let isCommandCanceled = false;
   const { state } = props;
-  return { commandCanceled, state };
+  if (shouldPlayUseBattleSimulator(props)) {
+    await useBattleSimulator(props);
+    isCommandCanceled = true;
+  }
+  return { commandCanceled: { isCommandCanceled }, state };
 }
