@@ -6,5 +6,6 @@ export type WindowType =
   | "NearBatterySelector"
   | "NearBurstButton"
   | "NearPilotButton"
+  | "NearEnemyBattleSimulatorButton"
   | "PlayerShout"
   | "EnemyShout";

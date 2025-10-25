@@ -19,6 +19,9 @@ export const ROOT_CLASS_NEAR_BURST_BUTTON = `${ROOT_CLASS}--near-burst-button`;
 /** ルート要素がパイロットボタンの隣に表示されている時のclass属性 */
 export const ROOT_CLASS_NEAR_PILOT_BUTTON = `${ROOT_CLASS}--near-pilot-button`;
 
+/** ルート要素が敵バトルシミュレーターボタンの隣に表示されている時のclass属性 */
+export const ROOT_CLASS_NEAR_ENEMY_BATTLE_SIMULATOR_BUTTON = `${ROOT_CLASS}--near-enemy-battle-simulator-button`;
+
 /** ルート要素がプレイヤー側叫びウインドウの場合のclass属性 */
 export const ROOT_CLASS_PLAYER_SHOUT = `${ROOT_CLASS}--player-shout`;
 

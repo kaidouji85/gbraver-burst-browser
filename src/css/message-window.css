@@ -8,6 +8,7 @@
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button,
+  .message-window--near-enemy-battle-simulator-button,
   .message-window--player-shout,
   .message-window--enemy-shout {
     /** 本カスタムプロパティはJavaScriptから変更される */

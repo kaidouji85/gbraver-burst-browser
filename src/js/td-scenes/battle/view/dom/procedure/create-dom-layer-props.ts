@@ -53,6 +53,14 @@ export function createDOMLayerProps(
   });
   nearPilotButtonMessageWindow.visible(false);
 
+  const nearEnemyBattleSimulatorButtonMessageWindow = new MessageWindow({
+    resources,
+    type: "NearEnemyBattleSimulatorButton",
+    facePosition: "Right",
+    faceOrientation: "Left",
+  });
+  nearEnemyBattleSimulatorButtonMessageWindow.visible(true); // TODO 開発が完了したらfalseに変更する
+
   const playerShoutMessageWindow = new MessageWindow({
     resources,
     type: "PlayerShout",
@@ -78,6 +86,7 @@ export function createDOMLayerProps(
     nearBatterySelectorMessageWindow,
     nearBurstButtonMessageWindow,
     nearPilotButtonMessageWindow,
+    nearEnemyBattleSimulatorButtonMessageWindow,
     playerShoutMessageWindow,
     enemyShoutMessageWindow,
 
