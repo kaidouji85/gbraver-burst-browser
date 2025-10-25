@@ -13,7 +13,7 @@ export async function useBattleSimulator(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「……嫌な予感がする`],
-    [`念のために${wbr}バトルシュミレーターを${wbr}起動しよう」`],
+    [`念のために${wbr}バトルシミュレーターを${wbr}起動しよう」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
