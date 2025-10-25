@@ -239,9 +239,8 @@ export const focusOutBattleSimulatorButton = async (
   props: CustomBattleEventProps,
 ) => {
   const playAnimation = createAnimationPlay(props);
-  await playAnimation(
-    props.view.hud.gameObjects.frontmostFader.opacity(0, 0),
-  );
+  props.view.dom.nearEnemyBattleSimulatorButtonMessageWindow.visible(false);
+  await playAnimation(props.view.hud.gameObjects.frontmostFader.opacity(0, 0));
   unattentionBattleSimulatorButton(props);
   enabledAllButtons(props);
 };
