@@ -19,6 +19,16 @@ import { disabledAllButtons, enabledAllButtons } from "./button-disabled";
 import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
 
 /**
+ * すべてのプレイヤーの予測ダメージ表示が無効化されているか判定する
+ * @param props イベントプロパティ
+ * @returns 判定結果、trueですべて無効化されている
+ */
+const isAllPredicatedDamageDisabled = (
+  props: CustomBattleEventProps,
+): boolean =>
+  props.view.hud.players.every((p) => p.predicatedDamage.isDisabled());
+
+/**
  * バッテリーセレクタにフォーカスインする
  * フォーカスインしたもの以外は、操作不可能にする
  * @param props イベントプロパティ
@@ -48,7 +58,8 @@ export const isBatterySelectorFocused = (
   return (
     !props.view.hud.gameObjects.batterySelector.isDisabled() &&
     props.view.hud.gameObjects.burstButton.isDisabled() &&
-    props.view.hud.gameObjects.pilotButton.isDisabled()
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -104,7 +115,8 @@ export const isBurstButtonFocused = (
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&
     !props.view.hud.gameObjects.burstButton.isDisabled() &&
-    props.view.hud.gameObjects.pilotButton.isDisabled()
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -158,7 +170,8 @@ export const isPilotButtonFocused = (
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&
     props.view.hud.gameObjects.burstButton.isDisabled() &&
-    !props.view.hud.gameObjects.pilotButton.isDisabled()
+    !props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -197,3 +210,19 @@ export async function focusBattleSimulatorButton(
     props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
   );
 }
+
+/**
+ * バトルシュミレーターボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @returns 判定結果、trueでフォーカスしている
+ */
+export const isBattleSimulatorButtonFocused = (
+  props: CustomBattleEventProps,
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    !isAllPredicatedDamageDisabled(props)
+  );
+};
