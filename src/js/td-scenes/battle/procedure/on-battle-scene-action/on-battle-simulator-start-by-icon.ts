@@ -1,5 +1,6 @@
 import { BattleSimulatorStartByIcon } from "../../actions/battle-simulator-start-by-icon";
 import { BattleSceneProps } from "../../props";
+import { createBattleSimulatorEventProps } from "../create-battle-simulator-event-props";
 import { openBattleSimulator } from "../open-battle-simulator";
 
 /**
@@ -20,7 +21,12 @@ export function onBattleSimulatorStartByIcon(
     }
 
     await predicatedDamage.popBattleSimulatorIcon().play();
-    await props.customBattleEvent?.onBattleSimulatorSelected(props);
+    const eventProps = createBattleSimulatorEventProps(props);
+    if (eventProps && props.customBattleEvent) {
+      await props.customBattleEvent.onBattleSimulatorSelected(
+        eventProps,
+      );
+    }
     openBattleSimulator(props);
   });
 }

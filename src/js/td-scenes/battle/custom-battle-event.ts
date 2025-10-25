@@ -139,6 +139,23 @@ export type CommandCanceled = {
   readonly isCommandCanceled: boolean;
 };
 
+/** バトルシミュレーター系イベントのプロパティ */
+export type BattleSimulatorEventProps = CustomBattleEventProps &
+  LastStateContainer & {
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
+  };
+
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
   /**
@@ -219,12 +236,12 @@ export interface CustomBattleEvent {
    * @param props イベントプロパティ
    * @returns 処理が完了したら発火するPromise
    */
-  onBattleSimulatorSelected(props: CustomBattleEventProps): Promise<void>;
+  onBattleSimulatorSelected(props: BattleSimulatorEventProps): Promise<void>;
 
   /**
    * バトルシミュレーターが閉じられた後
    * @param props イベントプロパティ
    * @returns 処理が完了したら発火するPromise
    */
-  afterBattleSimulatorClosed(props: CustomBattleEventProps): Promise<void>;
+  afterBattleSimulatorClosed(props: BattleSimulatorEventProps): Promise<void>;
 }

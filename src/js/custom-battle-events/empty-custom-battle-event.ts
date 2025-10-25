@@ -2,10 +2,10 @@ import { Animate } from "../animation/animate";
 import { empty } from "../animation/delay";
 import type {
   BatteryCommandSelectedEventProps,
+  BattleSimulatorEventProps,
   BurstSelectedEventProps,
   CommandCanceled,
   CustomBattleEvent,
-  CustomBattleEventProps,
   CustomStateAnimationProps,
   LastStateEventProps,
   PilotSkillSelectedEventProps,
@@ -95,7 +95,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async onBattleSimulatorSelected(
-    props: CustomBattleEventProps,
+    props: BattleSimulatorEventProps,
   ): Promise<void> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP
@@ -104,7 +104,7 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   async afterBattleSimulatorClosed(
-    props: CustomBattleEventProps,
+    props: BattleSimulatorEventProps,
   ): Promise<void> {
     /* eslint-enable @typescript-eslint/no-unused-vars */
     // NOP

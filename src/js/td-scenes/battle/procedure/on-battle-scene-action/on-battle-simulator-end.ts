@@ -1,4 +1,5 @@
 import { BattleSceneProps } from "../../props";
+import { createBattleSimulatorEventProps } from "../create-battle-simulator-event-props";
 
 /**
  * 戦闘シミュレーション終了時の処理
@@ -7,5 +8,8 @@ import { BattleSceneProps } from "../../props";
 export async function onBattleSimulatorEnd(props: BattleSceneProps) {
   const { domDialogBinder } = props;
   domDialogBinder.hidden();
-  await props.customBattleEvent?.afterBattleSimulatorClosed(props);
+  const eventProps = createBattleSimulatorEventProps(props);
+  if (eventProps && props.customBattleEvent) {
+    await props.customBattleEvent.afterBattleSimulatorClosed(eventProps);
+  }
 }
