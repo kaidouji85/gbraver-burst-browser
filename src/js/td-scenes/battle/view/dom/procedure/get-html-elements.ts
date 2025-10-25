@@ -12,7 +12,7 @@ export function getHTMLElements(props: DOMLayerProps): HTMLElement[] {
     props.nearBatterySelectorMessageWindow.getRootHTMLElement(),
     props.nearBurstButtonMessageWindow.getRootHTMLElement(),
     props.nearPilotButtonMessageWindow.getRootHTMLElement(),
-    props.nearEnemyBattleSimulatorButtonMessageWindow.getRootHTMLElement(),
+    props.nearPlayerBattleSimulatorButtonMessageWindow.getRootHTMLElement(),
     props.playerShoutMessageWindow.getRootHTMLElement(),
     props.enemyShoutMessageWindow.getRootHTMLElement(),
     props.hamburgerMenu.getRootHTMLElement(),

@@ -18,7 +18,7 @@ export async function useBattleSimulator(props: CustomBattleEventProps) {
   props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
   await focusBattleSimulatorButton(props);
-  props.view.dom.nearEnemyBattleSimulatorButtonMessageWindow.messages([
+  props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow.messages([
     `"?"ボタンを押そう`,
   ]);
 }

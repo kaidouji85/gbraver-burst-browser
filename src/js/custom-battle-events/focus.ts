@@ -3,7 +3,7 @@ import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
   activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
-  activeNearEnemyBattleSimulatorButtonMessageWindow,
+  activeNearPlayerBattleSimulatorButtonMessageWindow,
   activeNearPilotButtonMessageWindow,
 } from "./active-message-window";
 import {
@@ -211,7 +211,7 @@ export async function focusBattleSimulatorButton(
   await playAnimation(
     props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
   );
-  activeNearEnemyBattleSimulatorButtonMessageWindow(props);
+  activeNearPlayerBattleSimulatorButtonMessageWindow(props);
 }
 
 /**
@@ -239,7 +239,7 @@ export const focusOutBattleSimulatorButton = async (
   props: CustomBattleEventProps,
 ) => {
   const playAnimation = createAnimationPlay(props);
-  props.view.dom.nearEnemyBattleSimulatorButtonMessageWindow.visible(false);
+  props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow.visible(false);
   await playAnimation(props.view.hud.gameObjects.frontmostFader.opacity(0, 0));
   unattentionBattleSimulatorButton(props);
   enabledAllButtons(props);

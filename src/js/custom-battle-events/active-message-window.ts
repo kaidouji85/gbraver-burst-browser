@@ -85,11 +85,11 @@ export function activeNearPilotButtonMessageWindow(
  * 敵バトルシミュレーターボタン隣メッセージウインドウをアクティブ表示する
  * @param props イベントプロパティ
  */
-export function activeNearEnemyBattleSimulatorButtonMessageWindow(
+export function activeNearPlayerBattleSimulatorButtonMessageWindow(
   props: CustomBattleEventProps,
 ): void {
   activeMessageWindow(
-    props.view.dom.nearEnemyBattleSimulatorButtonMessageWindow,
+    props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow,
   );
 }
 
