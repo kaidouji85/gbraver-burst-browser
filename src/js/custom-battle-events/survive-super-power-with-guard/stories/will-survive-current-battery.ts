@@ -1,24 +1,23 @@
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
-import { focusBattleSimulatorButton } from "../../focus";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
+import { SurviveSuperPowerWithGuardProps } from "../props";
 
 /**
- * バトルシミュレーターを使おう
+ * 現在のバッテリーで生き残れる
  * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
  */
-export async function useBattleSimulator(props: CustomBattleEventProps) {
+export async function willSurviveCurrentBattery(
+  props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
+) {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「……嫌な予感がする`],
-    [`念のために${wbr}バトルシュミレーターを${wbr}起動しよう」`],
+    ["ツバサ", `「これなら安心だ`],
+    [`ライトが${wbr}フルバッテリーで${wbr}攻撃しても こちらのHPは${wbr}残る」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
-  await focusBattleSimulatorButton(props);
-  props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow.messages([
-    `"?"ボタンを押そう`,
-  ]);
 }
