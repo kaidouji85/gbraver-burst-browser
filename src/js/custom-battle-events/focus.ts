@@ -12,6 +12,7 @@ import {
   attentionPilotButton,
   unAttentionAllButtons,
   unattentionBatterySelector,
+  unattentionBattleSimulatorButton,
   unattentionBurstButton,
   unattentionPilotButton,
 } from "./attention";
@@ -225,4 +226,18 @@ export const isBattleSimulatorButtonFocused = (
     props.view.hud.gameObjects.pilotButton.isDisabled() &&
     !isAllPredicatedDamageDisabled(props)
   );
+};
+
+/**
+ * バトルシュミレーターボタンからフォーカスアウトする
+ * @param props イベントプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+export const focusOutBattleSimulatorButton = async (props: CustomBattleEventProps) => {
+  const playAnimation = createAnimationPlay(props);
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
+  );
+  unattentionBattleSimulatorButton(props);
+  enabledAllButtons(props);
 };
