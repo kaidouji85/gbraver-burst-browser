@@ -3,8 +3,8 @@ import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
   activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
-  activeNearPlayerBattleSimulatorButtonMessageWindow,
   activeNearPilotButtonMessageWindow,
+  activeNearPlayerBattleSimulatorButtonMessageWindow,
 } from "./active-message-window";
 import {
   attentionBatterySelector,
