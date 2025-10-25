@@ -233,10 +233,12 @@ export const isBattleSimulatorButtonFocused = (
  * @param props イベントプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-export const focusOutBattleSimulatorButton = async (props: CustomBattleEventProps) => {
+export const focusOutBattleSimulatorButton = async (
+  props: CustomBattleEventProps,
+) => {
   const playAnimation = createAnimationPlay(props);
   await playAnimation(
-    props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
+    props.view.hud.gameObjects.frontmostFader.opacity(0, 0),
   );
   unattentionBattleSimulatorButton(props);
   enabledAllButtons(props);
