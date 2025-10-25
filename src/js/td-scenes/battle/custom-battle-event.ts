@@ -82,13 +82,13 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
 /** 最終ステート系イベントのプロパティ */
 export type LastStateEventProps = CustomBattleEventProps &
   LastStateContainer & {
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
     /** プレイヤーのステート */
     readonly player: PlayerState;
     /** プレイヤーのメインターン数 */
     readonly playerMainTurnCount: number;
-
-    /** メインターン数 */
-    readonly mainTurnCount: number;
 
     /** 敵のステート */
     readonly enemy: PlayerState;
@@ -105,13 +105,13 @@ export type BatteryCommandSelectedEventProps = CustomBattleEventProps &
     /** プレイヤーが選択したバッテリーコマンド */
     readonly battery: BatteryCommand;
 
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
     /** プレイヤーのステート */
     readonly player: PlayerState;
     /** プレイヤーのメインターン数 */
     readonly playerMainTurnCount: number;
-
-    /** メインターン数 */
-    readonly mainTurnCount: number;
 
     /** 敵のステート */
     readonly enemy: PlayerState;
