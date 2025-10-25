@@ -7,6 +7,7 @@ import {
 } from "./active-message-window";
 import {
   attentionBatterySelector,
+  attentionBattleSimulatorButton,
   attentionBurstButton,
   attentionPilotButton,
   unAttentionAllButtons,
@@ -175,3 +176,24 @@ export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
   unattentionPilotButton(props);
   enabledAllButtons(props);
 };
+
+/**
+ * バトルシュミレーターボタンにフォーカスする
+ * @param props イベントプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+export async function focusBattleSimulatorButton(
+  props: CustomBattleEventProps,
+) {
+  const playAnimation = createAnimationPlay(props);
+  unAttentionAllButtons(props);
+  disabledAllButtons(props);
+  attentionBattleSimulatorButton(props);
+  props.view.hud.players.forEach((p) => {
+    p.predicatedDamage.disabled(false);
+  });
+  invisibleAllMessageWindows(props);
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
+  );
+}

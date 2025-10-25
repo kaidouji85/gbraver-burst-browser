@@ -1,6 +1,7 @@
 import { wbr } from "../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
+import { focusBattleSimulatorButton } from "../../focus";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
 
@@ -16,4 +17,5 @@ export async function useBattleSimulator(props: CustomBattleEventProps) {
   ]);
   props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
+  await focusBattleSimulatorButton(props);
 }
