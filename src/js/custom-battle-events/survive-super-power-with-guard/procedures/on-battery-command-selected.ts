@@ -17,7 +17,7 @@ function shouldPlayUseBattleSimulator(
   >,
 ): boolean {
   const { mainTurnCount } = props;
-  return mainTurnCount === 4;
+  return mainTurnCount === 4 && !props.state.isUseBattleSimulatorComplete;
 }
 
 /**
@@ -34,10 +34,11 @@ export async function onBatteryCommandSelected(
   state: SurviveSuperPowerWithGuardState;
 }> {
   let isCommandCanceled = false;
-  const { state } = props;
+  let { state } = props;
   if (shouldPlayUseBattleSimulator(props)) {
     await useBattleSimulator(props);
     isCommandCanceled = true;
+    state = { ...state, isUseBattleSimulatorComplete: true };
   }
   return { commandCanceled: { isCommandCanceled }, state };
 }
