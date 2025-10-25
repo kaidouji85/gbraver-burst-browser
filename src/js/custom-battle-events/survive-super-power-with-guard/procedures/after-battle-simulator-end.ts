@@ -2,30 +2,21 @@ import { canBeatDown } from "../../../npc/can-beat-down";
 import { BattleSimulatorEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../props";
 import { SurviveSuperPowerWithGuardState } from "../state";
+import { willNotSurviveCurrentBattery } from "../stories/will-not-survive-current-battery";
 import { willSurviveCurrentBattery } from "../stories/will-survive-current-battery";
 
 /**
- * 「willSurviveCurrentBattery」を再生するか否かを判定する
+ * 現在のバッテリーで敵が全力攻撃した時にプレイヤーが死亡するか否かを判定する
  * @param props イベントプロパティ
- * @returns 判定結果、trueで再生
+ * @returns 判定結果、trueで死亡
  */
-export function shouldPlayWillSurviveCurrentBattery(
+function isPlayerDeathWithCurrentBattery(
   props: Readonly<BattleSimulatorEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
   const currentBattery =
     props.view.hud.gameObjects.batterySelector.getBattery();
-  const { player, enemy, state } = props;
-  const isPlayerDeath = canBeatDown(
-    enemy,
-    enemy.armdozer.battery,
-    player,
-    currentBattery,
-  );
-  return (
-    state.isUseBattleSimulatorComplete &&
-    !state.isSurviveCheckComplete &&
-    !isPlayerDeath
-  );
+  const { player, enemy } = props;
+  return canBeatDown(enemy, enemy.armdozer.battery, player, currentBattery);
 }
 
 /**
@@ -37,9 +28,17 @@ export async function afterBattleSimulatorEnd(
   props: Readonly<BattleSimulatorEventProps & SurviveSuperPowerWithGuardProps>,
 ): Promise<SurviveSuperPowerWithGuardState> {
   let { state } = props;
-  if (shouldPlayWillSurviveCurrentBattery(props)) {
+
+  const shouldPlaySurviveEvent =
+    state.isUseBattleSimulatorComplete && !state.isSurviveCheckComplete;
+  const isPlayerDeath = isPlayerDeathWithCurrentBattery(props);
+  if (shouldPlaySurviveEvent && !isPlayerDeath) {
     await willSurviveCurrentBattery(props);
     state = { ...state, isSurviveCheckComplete: true };
+  } else if (shouldPlaySurviveEvent && isPlayerDeath) {
+    await willNotSurviveCurrentBattery(props);
+    state = { ...state, isSurviveCheckComplete: true };
   }
+
   return state;
 }
