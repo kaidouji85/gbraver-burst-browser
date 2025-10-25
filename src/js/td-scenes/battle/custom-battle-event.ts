@@ -213,4 +213,11 @@ export interface CustomBattleEvent {
   onPilotSkillCommandSelected(
     props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled>;
+
+  /**
+   * バトルシミュレーターが選択された
+   * @param props イベントプロパティ
+   * @returns 処理が完了したら発火するPromise
+   */
+  onBattleSimulatorSelected(props: CustomBattleEventProps): Promise<void>;
 }

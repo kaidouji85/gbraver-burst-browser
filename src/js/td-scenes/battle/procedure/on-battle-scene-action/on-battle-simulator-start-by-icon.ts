@@ -20,6 +20,7 @@ export function onBattleSimulatorStartByIcon(
     }
 
     await predicatedDamage.popBattleSimulatorIcon().play();
+    await props.customBattleEvent?.onBattleSimulatorSelected(props);
     openBattleSimulator(props);
   });
 }

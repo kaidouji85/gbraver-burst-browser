@@ -5,6 +5,7 @@ import type {
   BurstSelectedEventProps,
   CommandCanceled,
   CustomBattleEvent,
+  CustomBattleEventProps,
   CustomStateAnimationProps,
   LastStateEventProps,
   PilotSkillSelectedEventProps,
@@ -89,5 +90,14 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
     return {
       isCommandCanceled: false,
     };
+  }
+
+  /** @override */
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  async onBattleSimulatorSelected(
+    props: CustomBattleEventProps,
+  ): Promise<void> {
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    // NOP
   }
 }
