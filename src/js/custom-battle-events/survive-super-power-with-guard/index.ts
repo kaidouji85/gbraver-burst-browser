@@ -69,7 +69,10 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
   async afterBattleSimulatorClosed(
     props: BattleSimulatorEventProps,
   ): Promise<void> {
-    await afterBattleSimulatorEnd({ ...props, ...this.#props });
+    this.#props.state = await afterBattleSimulatorEnd({
+      ...props,
+      ...this.#props,
+    });
   }
 }
 
