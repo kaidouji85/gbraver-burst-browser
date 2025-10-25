@@ -3,6 +3,7 @@ import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
   activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
+  activeNearEnemyBattleSimulatorButtonMessageWindow,
   activeNearPilotButtonMessageWindow,
 } from "./active-message-window";
 import {
@@ -210,6 +211,7 @@ export async function focusBattleSimulatorButton(
   await playAnimation(
     props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
   );
+  activeNearEnemyBattleSimulatorButtonMessageWindow(props);
 }
 
 /**

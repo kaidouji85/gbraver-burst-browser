@@ -59,7 +59,7 @@ export function createDOMLayerProps(
     facePosition: "Right",
     faceOrientation: "Left",
   });
-  nearEnemyBattleSimulatorButtonMessageWindow.visible(true); // TODO 開発が完了したらfalseに変更する
+  nearEnemyBattleSimulatorButtonMessageWindow.visible(false);
 
   const playerShoutMessageWindow = new MessageWindow({
     resources,
