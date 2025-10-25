@@ -104,6 +104,19 @@ export type BatteryCommandSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したバッテリーコマンド */
     readonly battery: BatteryCommand;
+
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
   };
 
 /** バーストコマンド選択イベントのプロパティ */
