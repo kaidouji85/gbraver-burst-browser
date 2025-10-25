@@ -4,6 +4,6 @@ export type SurviveSuperPowerWithGuardState = {
   readonly isIntroductionComplete: boolean;
   /** 2ターン目開始時のイベントが完了したか否か、trueで完了 */
   readonly isSecondTurnEventComplete: boolean;
-  /** バトルシュミレーターを支え、が完了したか否か、trueで完了 */
+  /** バトルシミュレーターを使うが完了したか否か、trueで完了 */
   readonly isUseBattleSimulatorComplete: boolean;
 };
