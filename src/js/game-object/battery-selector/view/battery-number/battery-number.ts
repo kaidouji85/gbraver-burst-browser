@@ -10,7 +10,7 @@ import { getBatteryNumberPosition } from "./get-battery-number-position";
 import { getBatteryNumberScale } from "./get-battery-number-scale";
 
 /** バッテリーセレクタ数字 */
-export class ActiveBatteryNumber {
+export class BatteryNumber {
   /** 値 */
   readonly value: number;
 
