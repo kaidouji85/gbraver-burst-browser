@@ -10,5 +10,6 @@ export const createSurviveSuperPowerWithGuardProps =
       isIntroductionComplete: false,
       isSecondTurnEventComplete: false,
       isUseBattleSimulatorComplete: false,
+      isSurviveCheckComplete: false,
     },
   });

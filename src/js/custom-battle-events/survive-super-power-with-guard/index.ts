@@ -1,6 +1,7 @@
 import { Animate } from "../../animation/animate";
 import {
   BatteryCommandSelectedEventProps,
+  BattleSimulatorEventProps,
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
@@ -8,6 +9,7 @@ import {
   LastStateEventProps,
 } from "../../td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
+import { afterBattleSimulatorEnd } from "./procedures/after-battle-simulator-end";
 import { afterLastState } from "./procedures/after-last-state";
 import { beforeLastState } from "./procedures/before-last-state";
 import { createSurviveSuperPowerWithGuardProps } from "./procedures/create-survive-super-power-with-guard-props";
@@ -61,6 +63,16 @@ class SurviveSuperPowerWithGuard extends EmptyCustomBattleEvent {
     props: CustomBattleEventProps,
   ): Promise<void> {
     await onBattleSimulatorSelected(props);
+  }
+
+  /** @override */
+  async afterBattleSimulatorClosed(
+    props: BattleSimulatorEventProps,
+  ): Promise<void> {
+    this.#props.state = await afterBattleSimulatorEnd({
+      ...props,
+      ...this.#props,
+    });
   }
 }
 

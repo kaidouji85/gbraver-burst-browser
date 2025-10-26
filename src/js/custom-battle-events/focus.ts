@@ -193,7 +193,7 @@ export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
 };
 
 /**
- * バトルシュミレーターボタンにフォーカスする
+ * バトルシミュレーターボタンにフォーカスする
  * @param props イベントプロパティ
  * @returns 処理が完了したら発火するPromise
  */
@@ -215,7 +215,7 @@ export async function focusBattleSimulatorButton(
 }
 
 /**
- * バトルシュミレーターボタンにフォーカスしているか判定する
+ * バトルシミュレーターボタンにフォーカスしているか判定する
  * @param props イベントプロパティ
  * @returns 判定結果、trueでフォーカスしている
  */
@@ -231,7 +231,7 @@ export const isBattleSimulatorButtonFocused = (
 };
 
 /**
- * バトルシュミレーターボタンからフォーカスアウトする
+ * バトルシミュレーターボタンからフォーカスアウトする
  * @param props イベントプロパティ
  * @returns 処理が完了したら発火するPromise
  */

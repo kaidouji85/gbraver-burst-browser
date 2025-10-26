@@ -6,7 +6,7 @@ import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayer } from "../../se/se-player";
 import { PlayerElements } from "./dom/player-elements";
 
-/** 戦闘シミュレータのプロパティ */
+/** バトルシミュレーターのプロパティ */
 export type BattleSimulatorProps = {
   /** ルートのHTML要素 */
   root: HTMLElement;

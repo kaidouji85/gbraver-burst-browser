@@ -76,7 +76,7 @@ export class PredicatedDamage {
   }
 
   /**
-   * バトルシュミレーターアイコンをポップさせる
+   * バトルシミュレーターアイコンをポップさせる
    * @returns アニメーション
    */
   popBattleSimulatorIcon(): Animate {

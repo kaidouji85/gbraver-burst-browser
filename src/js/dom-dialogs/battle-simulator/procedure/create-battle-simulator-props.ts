@@ -29,7 +29,7 @@ export type BattleSimulatorPropsCreatorParams = ResourcesContainer &
   };
 
 /**
- * 戦闘シミュレータのプロパティを生成する
+ * バトルシミュレーターのプロパティを生成する
  * @returns 生成結果
  */
 export function createBattleSimulatorProps(
