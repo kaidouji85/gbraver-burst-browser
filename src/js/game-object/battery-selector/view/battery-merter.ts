@@ -135,7 +135,7 @@ export class BatteryMeter {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(value, model.maxBattery);
+      const scale = batteryNumberScale(model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       const opacity = value <= model.enableMaxBattery ? model.opacity : 0;
       numberMesh.opacity(opacity);
@@ -144,7 +144,7 @@ export class BatteryMeter {
       const { x, y } = batteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(value, model.maxBattery);
+      const scale = batteryNumberScale(model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       const opacity =
         model.enableMaxBattery < value && value <= model.maxBattery

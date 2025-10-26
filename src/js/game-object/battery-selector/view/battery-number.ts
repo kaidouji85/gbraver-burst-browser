@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 
 /**
+ * @deprecated
  * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
  * @param value 数字の値
  * @param texture テクスチャ
@@ -49,12 +50,10 @@ export function batteryNumberPosition(
 
 /**
  * バッテリーセレクタ数字のスケールを計算する
- * @param battery
  * @param maxBattery
  * @returns 計算結果
  */
 export function batteryNumberScale(
-  battery: number,
   maxBattery: number,
 ): number {
   return maxBattery <= 5 ? 1 : 0.8;
