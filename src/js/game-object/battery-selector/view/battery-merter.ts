@@ -8,9 +8,9 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { BatterySelectorModel } from "../model";
-import { batteryNumberPosition } from "./battery-number/battery-number-position";
-import { batteryNumberScale } from "./battery-number/battery-number-scale";
 import { createBatteryNumberMesh } from "./battery-number/create-battery-number-mesh";
+import { getBatteryNumberPosition } from "./battery-number/get-battery-number-position";
+import { getBatteryNumberScale } from "./battery-number/get-battery-number-scale";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 8;
@@ -130,19 +130,19 @@ export class BatteryMeter {
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
     this.#numbers.forEach((numberMesh, value) => {
-      const { x, y } = batteryNumberPosition(value, model.maxBattery);
+      const { x, y } = getBatteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(model.maxBattery);
+      const scale = getBatteryNumberScale(model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       const opacity = value <= model.enableMaxBattery ? model.opacity : 0;
       numberMesh.opacity(opacity);
     });
     this.#disActiveNumbers.forEach((numberMesh, value) => {
-      const { x, y } = batteryNumberPosition(value, model.maxBattery);
+      const { x, y } = getBatteryNumberPosition(value, model.maxBattery);
       numberMesh.getObject3D().position.x = x;
       numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(model.maxBattery);
+      const scale = getBatteryNumberScale(model.maxBattery);
       numberMesh.getObject3D().scale.set(scale, scale, 1);
       const opacity =
         model.enableMaxBattery < value && value <= model.maxBattery

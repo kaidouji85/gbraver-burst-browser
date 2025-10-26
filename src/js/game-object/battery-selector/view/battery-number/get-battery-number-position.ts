@@ -10,7 +10,7 @@ type Position = {
  * @param maxBattery 最大バッテリー
  * @returns 計算結果
  */
-export function batteryNumberPosition(
+export function getBatteryNumberPosition(
   battery: number,
   maxBattery: number,
 ): Position {
