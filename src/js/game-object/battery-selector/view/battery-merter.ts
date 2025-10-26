@@ -17,12 +17,19 @@ export const MAX_VALUE = 8;
 
 /** バッテリーメーター */
 export class BatteryMeter {
+  /** グループ */
   #group: THREE.Group;
+  /** ディスク（5バッテリー） */
   #disk: SimpleImageMesh;
+  /** ディスク（4バッテリー） */
   #disk4: HorizontalAnimationMesh;
+  /** ディスク（8バッテリー） */
   #disk8: HorizontalAnimationMesh;
+  /** 針 */
   #needle: SimpleImageMesh;
+  /** バッテリーセレクタ数字 */
   #numbers: HorizontalAnimationMesh[];
+  /** ディスアクティブバッテリーセレクタ数字 */
   #disActiveNumbers: HorizontalAnimationMesh[];
 
   /**
