@@ -8,9 +8,8 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { BatterySelectorModel } from "../model";
-import { createBatteryNumberMesh } from "./battery-number/create-battery-number-mesh";
-import { getBatteryNumberPosition } from "./battery-number/get-battery-number-position";
-import { getBatteryNumberScale } from "./battery-number/get-battery-number-scale";
+import { BatteryNumber } from "./battery-number/battery-number";
+import { DisActiveBatteryNumber } from "./battery-number/dis-active-battery-number";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 8;
@@ -28,9 +27,9 @@ export class BatteryMeter {
   /** 針 */
   #needle: SimpleImageMesh;
   /** バッテリーセレクタ数字 */
-  #numbers: HorizontalAnimationMesh[];
+  #numbers: BatteryNumber[];
   /** ディスアクティブバッテリーセレクタ数字 */
-  #disActiveNumbers: HorizontalAnimationMesh[];
+  #disActiveNumbers: DisActiveBatteryNumber[];
 
   /**
    * コンストラクタ
@@ -75,21 +74,13 @@ export class BatteryMeter {
     });
     this.#group.add(this.#disk8.getObject3D());
 
-    const disActiveNumber = findTextureOrThrow(
-      resources,
-      TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
-    ).texture;
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => createBatteryNumberMesh(value, disActiveNumber),
+      (value: number) => new DisActiveBatteryNumber({ resources, value }),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
-    const activeNumber = findTextureOrThrow(
-      resources,
-      TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
-    ).texture;
-    this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
-      createBatteryNumberMesh(value, activeNumber),
+    this.#numbers = R.times(R.identity, MAX_VALUE + 1).map(
+      (value: number) => new BatteryNumber({ resources, value }),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
@@ -136,27 +127,10 @@ export class BatteryMeter {
     const diskOpacity = [4, 8].includes(model.maxBattery) ? 0 : model.opacity;
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
-    this.#numbers.forEach((numberMesh, value) => {
-      const { x, y } = getBatteryNumberPosition(value, model.maxBattery);
-      numberMesh.getObject3D().position.x = x;
-      numberMesh.getObject3D().position.y = y;
-      const scale = getBatteryNumberScale(model.maxBattery);
-      numberMesh.getObject3D().scale.set(scale, scale, 1);
-      const opacity = value <= model.enableMaxBattery ? model.opacity : 0;
-      numberMesh.opacity(opacity);
-    });
-    this.#disActiveNumbers.forEach((numberMesh, value) => {
-      const { x, y } = getBatteryNumberPosition(value, model.maxBattery);
-      numberMesh.getObject3D().position.x = x;
-      numberMesh.getObject3D().position.y = y;
-      const scale = getBatteryNumberScale(model.maxBattery);
-      numberMesh.getObject3D().scale.set(scale, scale, 1);
-      const opacity =
-        model.enableMaxBattery < value && value <= model.maxBattery
-          ? model.opacity
-          : 0;
-      numberMesh.opacity(opacity);
-    });
+    this.#numbers.forEach((numberMesh) => numberMesh.update(model));
+    this.#disActiveNumbers.forEach((disActiveNumberMesh) =>
+      disActiveNumberMesh.update(model),
+    );
   }
 
   /**
