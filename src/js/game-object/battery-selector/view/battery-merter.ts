@@ -8,11 +8,9 @@ import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import { BatterySelectorModel } from "../model";
-import {
-  batteryNumber,
-  batteryNumberPosition,
-  batteryNumberScale,
-} from "./battery-number";
+import { batteryNumberPosition } from "./battery-number/battery-number-position";
+import { batteryNumberScale } from "./battery-number/battery-number-scale";
+import { createBatteryNumberMesh } from "./battery-number/create-battery-number-mesh";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 8;
@@ -75,7 +73,7 @@ export class BatteryMeter {
       TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
     ).texture;
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => batteryNumber(value, disActiveNumber),
+      (value: number) => createBatteryNumberMesh(value, disActiveNumber),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
@@ -84,7 +82,7 @@ export class BatteryMeter {
       TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
     ).texture;
     this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
-      batteryNumber(value, activeNumber),
+      createBatteryNumberMesh(value, activeNumber),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
