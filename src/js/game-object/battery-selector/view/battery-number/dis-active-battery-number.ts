@@ -9,8 +9,8 @@ import { createBatteryNumberMesh } from "./create-battery-number-mesh";
 import { getBatteryNumberPosition } from "./get-battery-number-position";
 import { getBatteryNumberScale } from "./get-battery-number-scale";
 
-/** バッテリーセレクタ数字 */
-export class BatteryNumber {
+/** ディスアクティブバッテリーセレクタ数字 */
+export class DisActiveBatteryNumber {
   /** 値 */
   readonly value: number;
 
@@ -29,7 +29,7 @@ export class BatteryNumber {
 
     const { texture } = findTextureOrThrow(
       resources,
-      TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
+      TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
     );
     this.#numberMesh = createBatteryNumberMesh(value, texture);
   }
@@ -59,7 +59,10 @@ export class BatteryNumber {
     this.#numberMesh.getObject3D().position.y = y;
     const scale = getBatteryNumberScale(model.maxBattery);
     this.#numberMesh.getObject3D().scale.set(scale, scale, 1);
-    const opacity = this.value <= model.enableMaxBattery ? model.opacity : 0;
+    const opacity =
+      model.enableMaxBattery < this.value && this.value <= model.maxBattery
+        ? model.opacity
+        : 0;
     this.#numberMesh.opacity(opacity);
   }
 }
