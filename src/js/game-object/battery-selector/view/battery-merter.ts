@@ -3,10 +3,11 @@ import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { BatterySelectorModel } from "../model";
 import { BatteryNumber } from "./battery-number/battery-number";
 import { DisActiveBatteryNumber } from "./battery-number/dis-active-battery-number";
@@ -33,9 +34,11 @@ export class BatteryMeter {
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param options 生成オプション
    */
-  constructor(resources: Resources) {
+  constructor(options: ResourcesContainer & GameObjectActionContainer) {
+    const { resources, gameObjectAction } = options;
+
     this.#group = new THREE.Group();
 
     const disk =
@@ -80,7 +83,8 @@ export class BatteryMeter {
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
     this.#numbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => new BatteryNumber({ resources, value }),
+      (value: number) =>
+        new BatteryNumber({ resources, gameObjectAction, value }),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
