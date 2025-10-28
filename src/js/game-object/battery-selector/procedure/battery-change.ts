@@ -15,7 +15,7 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
 export function batteryChange(
   props: BatterySelectorProps,
   battery: number,
-  options?: Partial<SignalContainer>,
+  options?: Partial<SignalContainer & { timeScale: number }>,
 ): Promise<void> {
   const { batteryChangeTween, model } = props;
   const signal = options?.signal;
@@ -26,6 +26,6 @@ export function batteryChange(
     onStart(() => {
       model.battery = battery;
     }),
-    changeNeedle(props, needle),
+    changeNeedle(props, needle, options?.timeScale),
   ).play({ group: batteryChangeTween, signal });
 }
