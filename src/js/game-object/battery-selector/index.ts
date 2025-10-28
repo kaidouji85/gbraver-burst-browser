@@ -14,6 +14,7 @@ import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
 import { notifyNumberPushed } from "./procedure/notify-number-pushed";
+import { toBattery } from "./procedure/to-battery";
 import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -96,6 +97,19 @@ export class BatterySelector {
    */
   async batteryMinus(options?: Partial<SignalContainer>): Promise<void> {
     await batteryMinus(this.#props, options);
+  }
+
+  /**
+   * 指定されたバッテリー値に変更する
+   * @param value バッテリー値
+   * @param options オプション
+   * @returns 処理が完了したら発火するPromise
+   */
+  async toBattery(
+    value: number,
+    options?: Partial<SignalContainer>,
+  ): Promise<void> {
+    await toBattery(this.#props, value, options);
   }
 
   /**

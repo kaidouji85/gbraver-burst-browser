@@ -48,6 +48,9 @@ const enabled =
     selector.notifyBatteryMinus().subscribe(() => {
       selector.batteryMinus();
     });
+    selector.notifyNumberPushed().subscribe((value) => {
+      selector.toBattery(value);
+    });
     await selector
       .open({
         initialValue: 1,
