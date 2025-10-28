@@ -1,4 +1,5 @@
 import * as R from "ramda";
+import { map, merge, Observable } from "rxjs";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
@@ -143,5 +144,17 @@ export class BatteryMeter {
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return merge(
+      ...this.#numbers.map((numberMesh) =>
+        numberMesh.notifyPushed().pipe(map(() => numberMesh.value)),
+      ),
+    );
   }
 }

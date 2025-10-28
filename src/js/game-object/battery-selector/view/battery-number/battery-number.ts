@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
@@ -11,7 +12,6 @@ import { BatterySelectorModel } from "../../model";
 import { createBatteryNumberMesh } from "./create-battery-number-mesh";
 import { getBatteryNumberPosition } from "./get-battery-number-position";
 import { getBatteryNumberScale } from "./get-battery-number-scale";
-import { Observable, pipe } from "rxjs";
 
 /** バッテリーセレクタ数字 */
 export class BatteryNumber {
