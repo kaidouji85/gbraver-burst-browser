@@ -20,5 +20,5 @@ export async function toBattery(
     return;
   }
 
-  await batteryChange(props, value, { ...options, timeScale: 0.5 });
+  await batteryChange(props, value, { ...options, timeScale: 0.5, shouldPlaySound: true });
 }
