@@ -13,6 +13,7 @@ import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
+import { notifyNumberPushed } from "./procedure/notify-number-pushed";
 import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -166,5 +167,13 @@ export class BatterySelector {
    */
   notifyBatteryMinus(): Observable<unknown> {
     return notifyBatteryMinus(this.#props);
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return notifyNumberPushed(this.#props);
   }
 }
