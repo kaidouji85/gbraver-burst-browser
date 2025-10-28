@@ -11,6 +11,7 @@ import { BatterySelectorModel } from "../../model";
 import { createBatteryNumberMesh } from "./create-battery-number-mesh";
 import { getBatteryNumberPosition } from "./get-battery-number-position";
 import { getBatteryNumberScale } from "./get-battery-number-scale";
+import { Observable, pipe } from "rxjs";
 
 /** バッテリーセレクタ数字 */
 export class BatteryNumber {
@@ -51,7 +52,7 @@ export class BatteryNumber {
       gameObjectAction,
       visible: true, // TODO 開発がおわったら消す
     });
-    this.#pushDetector.getObject3D().position.z = 1; // TODO 開発がおわったら消す
+    this.#pushDetector.getObject3D().position.z = 0.1; // TODO 開発がおわったら消す
     this.#group.add(this.#pushDetector.getObject3D());
   }
 
@@ -84,5 +85,13 @@ export class BatteryNumber {
 
     const opacity = this.value <= model.enableMaxBattery ? model.opacity : 0;
     this.#numberMesh.opacity(opacity);
+  }
+
+  /**
+   * プッシュ通知を受け取る
+   * @returns プッシュ通知のObservable
+   */
+  notifyPushed(): Observable<unknown> {
+    return this.#pushDetector.notifyPressed();
   }
 }
