@@ -12,7 +12,7 @@ export function notifyBatteryPlus(
   props: BatterySelectorProps,
 ): Observable<unknown> {
   const { view, model } = props;
-  return view.plusButtonPushNotifier().pipe(
+  return view.notifyPlusButtonPushed().pipe(
     filter(() => !model.shouldPushNotifierStop),
     filter(() => !props.disabled),
     filter(() => canBatteryPlus(model)),

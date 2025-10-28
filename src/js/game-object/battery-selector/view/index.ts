@@ -118,17 +118,25 @@ export class BatterySelectorView {
 
   /**
    * +ボタン押下通知
-   * @returns 通知ストリーム
+   * @returns 通知のObservable
    */
-  plusButtonPushNotifier(): Observable<unknown> {
+  notifyPlusButtonPushed(): Observable<unknown> {
     return this.#plus.pushNotifier();
   }
 
   /**
    * -ボタン押下通知
-   * @returns 通知ストリーム
+   * @returns 通知のObservable
    */
-  minusButtonPushNotifier(): Observable<unknown> {
+  notifyMinusButtonPushed(): Observable<unknown> {
     return this.#minus.pushNotifier();
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return this.#meter.notifyNumberPushed();
   }
 }
