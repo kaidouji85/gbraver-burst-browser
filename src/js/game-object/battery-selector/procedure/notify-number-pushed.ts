@@ -1,5 +1,6 @@
 import { filter, Observable } from "rxjs";
 
+import { canNumberChanged } from "../model/can-number-change";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
@@ -14,5 +15,6 @@ export function notifyNumberPushed(
   return view.notifyNumberPushed().pipe(
     filter(() => !model.shouldPushNotifierStop),
     filter(() => !props.disabled),
+    filter((value) => canNumberChanged(model, value)),
   );
 }
