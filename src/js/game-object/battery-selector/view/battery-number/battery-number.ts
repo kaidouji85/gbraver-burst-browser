@@ -47,8 +47,8 @@ export class BatteryNumber {
     this.#group.add(this.#numberMesh.getObject3D());
 
     this.#pushDetector = planePushDetector({
-      width: 32,
-      height: 64,
+      width: 64,
+      height: 80,
       gameObjectAction,
       visible: true, // TODO 開発がおわったら消す
     });
