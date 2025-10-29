@@ -7,7 +7,7 @@ import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { GameObjectActionContainer } from "../../../action/game-object-action-container";
 import { PushDetector } from "../../../push-detector";
-import { planePushDetector } from "../../../push-detector/plane-push-detector";
+import { circlePushDetector } from "../../../push-detector/circle-push-detector";
 import { BatterySelectorModel } from "../../model";
 import { createBatteryNumberMesh } from "./create-battery-number-mesh";
 import { getBatteryNumberPosition } from "./get-battery-number-position";
@@ -46,9 +46,9 @@ export class BatteryNumber {
     this.#numberMesh = createBatteryNumberMesh(value, texture);
     this.#group.add(this.#numberMesh.getObject3D());
 
-    this.#pushDetector = planePushDetector({
-      width: 64,
-      height: 80,
+    this.#pushDetector = circlePushDetector({
+      radius: 80,
+      segments: 16,
       gameObjectAction,
       visible: false,
     });
