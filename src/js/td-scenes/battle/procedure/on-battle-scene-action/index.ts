@@ -31,7 +31,7 @@ export function onBattleSceneAction(
     case "minusBattery":
       return onMinusBattery(props);
     case "batteryNumberPushed":
-      return onBatteryNumberPushed(props, action);  
+      return onBatteryNumberPushed(props, action);
     case "decideBattery":
       return onDecideBattery(props, action);
     case "doBurst":
