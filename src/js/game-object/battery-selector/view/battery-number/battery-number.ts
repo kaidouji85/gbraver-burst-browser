@@ -50,9 +50,8 @@ export class BatteryNumber {
       width: 64,
       height: 80,
       gameObjectAction,
-      visible: true, // TODO 開発がおわったら消す
+      visible: false,
     });
-    this.#pushDetector.getObject3D().position.z = 0.1; // TODO 開発がおわったら消す
     this.#group.add(this.#pushDetector.getObject3D());
   }
 
