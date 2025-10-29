@@ -39,7 +39,7 @@ export class BatterySelectorView {
   constructor(options: BatterySelectorViewOptions) {
     this.#group = new THREE.Group();
     this.#meter = new BatteryMeter(options);
-    this.#meter.getObject3D().position.set(0, 288, 0);
+    this.#meter.getObject3D().position.set(0, 340, 0);
     this.#group.add(this.#meter.getObject3D());
 
     this.#button = new BatteryButton(options);
