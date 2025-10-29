@@ -1,5 +1,6 @@
 import { BattleSceneAction } from "../../actions";
 import { BattleSceneProps } from "../../props";
+import { onBatteryNumberPushed } from "./on-battery-number-pushed";
 import { onBattleSimulatorEnd } from "./on-battle-simulator-end";
 import { onBattleSimulatorStart } from "./on-battle-simulator-start";
 import { onBattleSimulatorStartByIcon } from "./on-battle-simulator-start-by-icon";
@@ -29,6 +30,8 @@ export function onBattleSceneAction(
       return onPlusBattery(props);
     case "minusBattery":
       return onMinusBattery(props);
+    case "batteryNumberPushed":
+      return onBatteryNumberPushed(props, action);  
     case "decideBattery":
       return onDecideBattery(props, action);
     case "doBurst":
