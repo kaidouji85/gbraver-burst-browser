@@ -8,7 +8,7 @@ import { GameObjectActionContainer } from "../../action/game-object-action-conta
 import { hudUIScale } from "../../scale";
 import { BatterySelectorModel } from "../model";
 import { BatteryButton } from "./battery-button";
-import { BatteryMeter } from "./battery-merter";
+import { BatteryMeter } from "./battery-meter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
