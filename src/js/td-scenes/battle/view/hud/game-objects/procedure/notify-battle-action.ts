@@ -19,6 +19,9 @@ export function notifyBattleAction(
     batterySelector
       .notifyBatteryMinus()
       .pipe(map(() => ({ type: "minusBattery" }) as const)),
+    batterySelector
+      .notifyNumberPushed()
+      .pipe(map((value) => ({ type: "batteryNumberPushed", value }) as const)),
     batterySelector.notifyDecision().pipe(
       map(
         (event) =>

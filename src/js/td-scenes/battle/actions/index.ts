@@ -1,3 +1,4 @@
+import { BatteryNumberPushed } from "./battery-number-pushed";
 import { BattleSimulatorEnd } from "./battle-simulator-end";
 import { BattleSimulatorStart } from "./battle-simulator-start";
 import { BattleSimulatorStartByIcon } from "./battle-simulator-start-by-icon";
@@ -19,6 +20,7 @@ export type BattleSceneAction =
   | StartBattleScene
   | PlusBattery
   | MinusBattery
+  | BatteryNumberPushed
   | DecideBattery
   | DoBurst
   | DoPilotSkill

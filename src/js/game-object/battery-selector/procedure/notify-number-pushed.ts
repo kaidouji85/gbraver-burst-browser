@@ -1,20 +1,20 @@
 import { filter, Observable } from "rxjs";
 
-import { canBatteryMinus } from "../model/can-battery-minus";
+import { canNumberChanged } from "../model/can-number-change";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
- * バッテリーマイナスボタン押下通知
+ * 数字が押されたことを通知する
  * @param props プロパティ
- * @returns 通知ストリーム
+ * @returns 通知のObservable
  */
-export function notifyBatteryMinus(
+export function notifyNumberPushed(
   props: BatterySelectorProps,
-): Observable<unknown> {
+): Observable<number> {
   const { view, model } = props;
-  return view.notifyMinusButtonPushed().pipe(
+  return view.notifyNumberPushed().pipe(
     filter(() => !model.shouldPushNotifierStop),
     filter(() => !props.disabled),
-    filter(() => canBatteryMinus(model)),
+    filter((value) => canNumberChanged(model, value)),
   );
 }

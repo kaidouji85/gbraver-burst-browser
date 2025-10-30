@@ -13,6 +13,8 @@ import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
+import { notifyNumberPushed } from "./procedure/notify-number-pushed";
+import { toBattery } from "./procedure/to-battery";
 import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -98,6 +100,19 @@ export class BatterySelector {
   }
 
   /**
+   * 指定されたバッテリー値に変更する
+   * @param value バッテリー値
+   * @param options オプション
+   * @returns 処理が完了したら発火するPromise
+   */
+  async toBattery(
+    value: number,
+    options?: Partial<SignalContainer>,
+  ): Promise<void> {
+    await toBattery(this.#props, value, options);
+  }
+
+  /**
    * 無音でバッテリー値を設定する
    * @param battery バッテリー設定値
    * @param duration ボタンを押す間隔（ミリ秒）
@@ -166,5 +181,13 @@ export class BatterySelector {
    */
   notifyBatteryMinus(): Observable<unknown> {
     return notifyBatteryMinus(this.#props);
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return notifyNumberPushed(this.#props);
   }
 }
