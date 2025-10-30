@@ -107,6 +107,10 @@
   display: none;
 }
 
+.episode-selector__episode-introduction {
+  padding-bottom: calc(var(--responsive-font-size) * 3);
+}
+
 .episode-selector__prev,
 .episode-selector__play-episode {
   min-height: calc(var(--responsive-font-size) * 3);
