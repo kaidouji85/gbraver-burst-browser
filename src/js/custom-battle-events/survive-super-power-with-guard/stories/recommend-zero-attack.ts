@@ -1,7 +1,6 @@
 import { wbr } from "../../../dom/wbr";
 import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../wait/wait-time";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
@@ -15,10 +14,13 @@ import { SurviveSuperPowerWithGuardProps } from "../props";
 export async function recommendZeroAttack(
   props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
-  await waitTime(200);
+  props.view.hud.gameObjects.batterySelector.toBatterySilently(0);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
-    ["ツバサ", `「あの図体${wbr}での攻撃 まともに${wbr}くらえば${wbr}即死だな`],
+    [
+      "ツバサ",
+      `「あの図体${wbr}での${wbr}攻撃 まともに${wbr}くらえば${wbr}恐らく${wbr}即死だ`,
+    ],
     [
       `ならば${wbr}${highlight("0攻撃")}${wbr}して 次のターンの${wbr}防御バッテリーを${wbr}確保しよう」`,
     ],
