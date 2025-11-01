@@ -4,7 +4,9 @@ import {
 } from "../../../../td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
+import { recommendZeroAttack } from "../../stories/recommend-zero-attack";
 import { useBattleSimulator } from "../../stories/use-battle-simulator";
+import { shouldPlayRecommendZeroAttack } from "./should-play-recommend-zero-attack";
 import { shouldPlayUseBattleSimulator } from "./should-play-use-battle-simulator";
 
 /**
@@ -22,7 +24,11 @@ export async function onBatteryCommandSelected(
 }> {
   let isCommandCanceled = false;
   let { state } = props;
-  if (shouldPlayUseBattleSimulator(props)) {
+  if (shouldPlayRecommendZeroAttack(props)) {
+    await recommendZeroAttack(props);
+    isCommandCanceled = true;
+    state = { ...state, isRecommendZeroAttackComplete: true };
+  }else if (shouldPlayUseBattleSimulator(props)) {
     await useBattleSimulator(props);
     isCommandCanceled = true;
     state = { ...state, isUseBattleSimulatorComplete: true };
