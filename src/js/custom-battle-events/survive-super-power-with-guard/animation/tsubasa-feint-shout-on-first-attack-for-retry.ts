@@ -8,7 +8,7 @@ import { playerPilotOnlyShout } from "../../pilot-shout";
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaZeroAttackOnFirstAttackForRetry = (
+export const tsubasaFeintShoutOnFirstAttackForRetry = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {

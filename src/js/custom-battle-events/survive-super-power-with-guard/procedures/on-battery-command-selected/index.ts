@@ -28,7 +28,7 @@ export async function onBatteryCommandSelected(
     await recommendZeroAttack(props);
     isCommandCanceled = true;
     state = { ...state, isRecommendZeroAttackComplete: true };
-  }else if (shouldPlayUseBattleSimulator(props)) {
+  } else if (shouldPlayUseBattleSimulator(props)) {
     await useBattleSimulator(props);
     isCommandCanceled = true;
     state = { ...state, isUseBattleSimulatorComplete: true };

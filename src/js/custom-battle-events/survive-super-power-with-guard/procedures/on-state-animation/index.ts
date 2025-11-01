@@ -17,6 +17,7 @@ import { tsubasaAttackTurnBurstShout } from "../../animation/tsubasa-attack-turn
 import { tsubasaComboAttackShout } from "../../animation/tsubasa-combo-attack-shout";
 import { tsubasaDefenseTurnBurstShout } from "../../animation/tsubasa-defense-turn-burst-shout";
 import { tsubasaFeintShout } from "../../animation/tsubasa-feint-shout";
+import { tsubasaFeintShoutOnFirstAttackForRetry } from "../../animation/tsubasa-feint-shout-on-first-attack-for-retry";
 import { tsubasaFinishBlowShout } from "../../animation/tsubasa-finish-blow-shout";
 import { tsubasaFirstAttackShout } from "../../animation/tsubasa-first-attack-shout";
 import { tsubasaFirstAttackShoutForRetry } from "../../animation/tsubasa-first-attack-shout-for-retry";
@@ -37,6 +38,7 @@ import { isTsubasaAttackTurnBurst } from "./is-tsubasa-attack-turn-burst";
 import { isTsubasaComboAttack } from "./is-tsubasa-combo-attack";
 import { isTsubasaDefenseTurnBurst } from "./is-tsubasa-defense-turn-burst";
 import { isTsubasaFeint } from "./is-tsubasa-feint";
+import { isTsubasaFeintOnFirstAttackForRetry } from "./is-tsubasa-feint-on-first-attack-for-retry";
 import { isTsubasaFinishBlow } from "./is-tsubasa-finish-blow";
 import { isTsubasaFirstAttack } from "./is-tsubasa-first-attack";
 import { isTsubasaFirstAttackForRetry } from "./is-tsubasa-first-attack-for-retry";
@@ -54,9 +56,11 @@ function getAnimate(props: Readonly<CustomStateAnimationProps>) {
     result = tsubasaFinishBlowShout(props);
   } else if (isTsubasaComboAttack(props)) {
     result = tsubasaComboAttackShout(props);
+  } else if (isTsubasaFeintOnFirstAttackForRetry(props)) {
+    result = tsubasaFeintShoutOnFirstAttackForRetry(props);
   } else if (isTsubasaFirstAttackForRetry(props)) {
     result = tsubasaFirstAttackShoutForRetry(props);
-  }else if (isTsubasaFirstAttack(props)) {
+  } else if (isTsubasaFirstAttack(props)) {
     result = tsubasaFirstAttackShout(props);
   } else if (isTsubasaSecondAttack(props)) {
     result = tsubasaSecondAttackShout(props);
