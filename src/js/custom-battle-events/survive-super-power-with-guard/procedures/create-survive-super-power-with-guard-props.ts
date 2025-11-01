@@ -8,6 +8,7 @@ export const createSurviveSuperPowerWithGuardProps =
   (): SurviveSuperPowerWithGuardProps => ({
     state: {
       isIntroductionComplete: false,
+      isZeroAttackRecommendationComplete: false,
       isSecondTurnEventComplete: false,
       isUseBattleSimulatorComplete: false,
       isSurviveCheckComplete: false,
