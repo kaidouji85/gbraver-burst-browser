@@ -18,7 +18,9 @@ export async function willSurviveCurrentBattery(
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「これなら安心だ`],
-    [`ライトが${wbr}フルバッテリーで${wbr}攻撃しても こちらのHPは${wbr}残る」`],
+    [
+      `ライトが${wbr}全力攻撃しても この${wbr}バッテリーなら${wbr}死ぬ${wbr}ことはない」`,
+    ],
   ]);
   props.view.dom.rightMessageWindow.darken();
   invisibleAllMessageWindows(props);
