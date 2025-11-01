@@ -4,13 +4,13 @@ import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-
 import { playerPilotOnlyShout } from "../../pilot-shout";
 
 /**
- * ツバサ ファーストアタック 叫び
+ * ツバサ 先攻時に0攻撃 叫び（リトライ用）
  * @param props イベントプロパティ
  * @returns アニメーション
  */
-export const tsubasaFirstAttackShout = (
+export const tsubasaFeintShoutOnFirstAttackForRetry = (
   props: Readonly<CustomBattleEventProps>,
 ) =>
   onStart(() => {
-    playerPilotOnlyShout(props, "Tsubasa", `あの新型 ……なんて${wbr}図体だ`);
+    playerPilotOnlyShout(props, "Tsubasa", `今は${wbr}守りに${wbr}集中だ`);
   });

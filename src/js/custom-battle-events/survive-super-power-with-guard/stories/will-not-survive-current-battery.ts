@@ -19,7 +19,7 @@ export async function willNotSurviveCurrentBattery(
   await scrollRightMessages(props, [
     ["ツバサ", `「危ないところだった`],
     [
-      `ライトが${wbr}フルバッテリーで${wbr}攻撃した${wbr}場合 このバッテリー${wbr}では負ける」`,
+      `ライトが${wbr}全力攻撃した${wbr}場合 もっと${wbr}バッテリーを${wbr}出さない${wbr}と負ける」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
