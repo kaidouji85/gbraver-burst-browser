@@ -20,7 +20,7 @@ export async function recommendZeroAttack(
   await scrollRightMessages(props, [
     ["ツバサ", `「あの図体${wbr}での攻撃 まともに${wbr}くらえば${wbr}即死だな`],
     [
-      `ならば${wbr}${highlight("0攻撃")}${wbr}して 次のターンの${wbr}${highlight(`防御バッテリーを${wbr}確保しよう`)}」`,
+      `ならば${wbr}${highlight("0攻撃")}${wbr}して 次のターンの${wbr}防御バッテリーを${wbr}確保しよう」`,
     ],
   ]);
   props.view.dom.rightMessageWindow.darken();
