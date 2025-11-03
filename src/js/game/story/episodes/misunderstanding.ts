@@ -19,6 +19,7 @@ export const misunderstanding: Episode = {
   type: "Side Episode",
   number: "X",
   title: "すれちがい",
+  isTutorial: false,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
   player: {

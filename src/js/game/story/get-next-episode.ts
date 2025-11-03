@@ -15,6 +15,8 @@ export const getNextEpisode = (options: {
   const sameTypeEpisodes = episodes.filter(
     (e) => e.type === currentEpisode.type,
   );
-  const currentEpisodeIndex = sameTypeEpisodes.indexOf(currentEpisode);
+  const currentEpisodeIndex = sameTypeEpisodes.findIndex(
+    (e) => e.id === currentEpisode.id,
+  );
   return sameTypeEpisodes.at(currentEpisodeIndex + 1) ?? null;
 };

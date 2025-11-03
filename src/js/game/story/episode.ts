@@ -31,6 +31,8 @@ export type Episode = {
   id: EpisodeID;
   /** エピソードタイプ */
   type: EpisodeType;
+  /** チュートリアルであるか否か、trueでチュートリアル */
+  isTutorial: boolean;
   /** エピソード番号 */
   number: EpisodeNumber;
   /** タイトル */

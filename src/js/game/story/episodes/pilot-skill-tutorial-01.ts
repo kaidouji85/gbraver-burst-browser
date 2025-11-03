@@ -17,6 +17,7 @@ export const pilotSkillTutorial01: Episode = {
   type: "Episode",
   number: "4",
   title: "パイロット次第では詰み （負けイベント）",
+  isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_01,
   player: {
