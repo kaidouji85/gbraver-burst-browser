@@ -13,6 +13,8 @@ export const getNextTutorial = (options: {
 }) => {
   const { currentEpisode, episodes } = options;
   const tutorials = episodes.filter((e) => e.isTutorial);
-  const currentEpisodeIndex = tutorials.indexOf(currentEpisode);
+  const currentEpisodeIndex = tutorials.findIndex(
+    (e) => e.id === currentEpisode.id,
+  );
   return tutorials.at(currentEpisodeIndex + 1) ?? null;
 };
