@@ -22,6 +22,7 @@ const currentEpisode: Episode = {
   id: "test-episode",
   type: "Episode",
   number: "1.0",
+  isTutorial: true,
   title: "Test Episode",
   introduction: "This is a test episode.",
   imageCutPathId: "test-path",

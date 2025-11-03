@@ -17,6 +17,7 @@ export const pilotSkillTutorial02: Episode = {
   type: "Episode",
   number: "5",
   title: "パイロットスキルで意表を突け",
+  isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_PILOT_SKILL_02,
   player: {

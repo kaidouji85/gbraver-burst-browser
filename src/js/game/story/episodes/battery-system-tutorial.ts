@@ -17,6 +17,7 @@ export const batterySystemTutorial: Episode = {
   type: "Episode",
   number: "1",
   title: "バッテリーシステムの基本",
+  isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BATTERY_SYSTEM,
   player: {

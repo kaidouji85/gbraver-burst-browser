@@ -17,6 +17,7 @@ export const zeroDefenseTutorial: Episode = {
   type: "Episode",
   number: "2",
   title: "ゼロ防御だと即死する",
+  isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,
   player: {

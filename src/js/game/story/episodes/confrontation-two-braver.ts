@@ -17,6 +17,7 @@ export const confrontationTwoBraver: Episode = {
   type: "Episode",
   number: "6",
   title: "対決、二人のブレイバー！！ （負けイベント）",
+  isTutorial: false,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_CONFRONTATION_TWO_BRAVER,
   player: {
