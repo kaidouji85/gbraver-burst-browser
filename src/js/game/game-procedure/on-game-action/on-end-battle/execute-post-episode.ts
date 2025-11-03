@@ -19,8 +19,9 @@ import {
 } from "../../../post-battle-buttons";
 import { Episode } from "../../../story/episode";
 import { getNextEpisode } from "../../../story/get-next-episode";
+import { getNextTutorial } from "../../../story/get-next-tutorial";
 import { isPlayerWin } from "../../../story/is-player-win";
-import { isTutorialEnd } from "../../../story/is-tutorial-end";
+import { isLastTutorial } from "../../../story/is-tutorial-end";
 import { getEpisodes } from "../../get-episodes";
 
 /** エピソード終了後の結果 */
@@ -79,8 +80,8 @@ const createPostEpisodeResultWhenTutorial = (options: {
   const { story } = inProgress;
   const { episode: currentEpisode } = story;
   const isPlayerWon = isPlayerWin({ currentEpisode, gameEnd });
-  const isFinalTutorial = isTutorialEnd(currentEpisode);
-  const nextEpisode = getNextEpisode({ currentEpisode, episodes });
+  const isFinalTutorial = isLastTutorial(currentEpisode, episodes);
+  const nextEpisode = getNextTutorial({ currentEpisode, episodes });
 
   let ret: PostEpisodeResult = { buttons: PostTutorialButtons, story };
   if (
