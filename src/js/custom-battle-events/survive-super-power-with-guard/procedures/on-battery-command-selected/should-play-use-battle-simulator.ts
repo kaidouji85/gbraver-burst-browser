@@ -11,6 +11,8 @@ export function shouldPlayUseBattleSimulator(
     BatteryCommandSelectedEventProps & SurviveSuperPowerWithGuardProps
   >,
 ): boolean {
-  const { mainTurnCount } = props;
-  return mainTurnCount === 4 && !props.state.isUseBattleSimulatorComplete;
+  const { mainTurnCount, isRetry } = props;
+  return (
+    isRetry && mainTurnCount === 2 && !props.state.isUseBattleSimulatorComplete
+  );
 }
