@@ -1,6 +1,7 @@
 import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
 import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
+import { getEpisodes } from "../get-episodes";
 import { startEpisode } from "../start-episode";
 import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 
@@ -24,7 +25,9 @@ export async function onTutorialStart(options: Options): Promise<void> {
   props.domDialogBinder.hidden();
   await waitUntilSharedResourcesLoaded(props);
 
-  const episode = batterySystemTutorial;
+  const episodes = getEpisodes(props);
+  const episode =
+    episodes.filter((e) => e.isTutorial).at(0) ?? batterySystemTutorial;
   props.inProgress = {
     type: "Story",
     isTutorial: true,
