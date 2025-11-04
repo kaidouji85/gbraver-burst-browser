@@ -15,6 +15,7 @@ export async function willNotSurviveCurrentBattery(
   props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
   await waitTime(200);
+  props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「危ないところだった`],
