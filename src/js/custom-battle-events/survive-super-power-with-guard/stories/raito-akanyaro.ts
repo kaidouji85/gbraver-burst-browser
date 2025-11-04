@@ -4,7 +4,7 @@ import { wbr } from "../../../dom/wbr";
 export const RAITO_AKANYARO = [
   [
     "ライト",
-    `(ガイ こっちの${wbr}情報を${wbr}ペラペラ${wbr}しゃべったら${wbr}あかんやろ`,
+    `(あかんやろ${wbr}ガイ こっちの${wbr}情報を${wbr}ペラペラ${wbr}しゃべったら`,
   ],
   [
     `せやけど${wbr}相手は${wbr}オーナーの${wbr}息子 機嫌を${wbr}損ねたら${wbr}ワイの${wbr}立場が……)`,
