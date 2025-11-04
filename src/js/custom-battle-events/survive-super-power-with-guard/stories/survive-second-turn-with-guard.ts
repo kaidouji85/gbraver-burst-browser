@@ -10,7 +10,7 @@ import {
   refreshConversation,
 } from "../../invisible-all-message-windows";
 import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
-import { RAITO_SHIBAKI } from "./raito-shibaki";
+import { RAITO_AKANYARO } from "./raito-akanyaro";
 
 /**
  * 2ターン目でガードして生き残った
@@ -38,7 +38,7 @@ export async function surviveSecondTurnWithGuard(
   await refreshConversation(props);
 
   activeLeftMessageWindowWithFace(props, "Raito");
-  await scrollLeftMessages(props, RAITO_SHIBAKI);
+  await scrollLeftMessages(props, RAITO_AKANYARO);
   props.view.dom.leftMessageWindow.darken();
 
   invisibleAllMessageWindows(props);
