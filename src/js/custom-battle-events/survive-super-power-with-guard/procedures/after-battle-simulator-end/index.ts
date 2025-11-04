@@ -3,7 +3,7 @@ import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { willNotSurviveCurrentBattery } from "../../stories/will-not-survive-current-battery";
 import { willSurviveCurrentBattery } from "../../stories/will-survive-current-battery";
-import { willPlayerDieWithCurrentBattery } from "./will-player-die-with-current-battery";
+import { willPlayerDieWithCurrentBattery } from "../will-player-die-with-current-battery";
 
 /**
  * バトルシミュレーターが閉じられた後のイベント処理
