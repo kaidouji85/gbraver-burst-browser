@@ -2,8 +2,7 @@ import { BattleSimulatorEventProps } from "../../../../td-scenes/battle/custom-b
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { willNotSurviveCurrentBattery } from "../../stories/will-not-survive-current-battery";
-import { willSurviveCurrentBattery } from "../../stories/will-survive-current-battery";
-import { willPlayerDieWithCurrentBattery } from "../will-player-die-with-current-battery";
+import { shouldPlaySurviveEvent } from "./should-play-survive-event";
 
 /**
  * バトルシミュレーターが閉じられた後のイベント処理
@@ -15,13 +14,7 @@ export async function afterBattleSimulatorEnd(
 ): Promise<SurviveSuperPowerWithGuardState> {
   let { state } = props;
 
-  const shouldPlaySurviveEvent =
-    state.isUseBattleSimulatorComplete && !state.isSurviveCheckComplete;
-  const willPlayerDie = willPlayerDieWithCurrentBattery(props);
-  if (shouldPlaySurviveEvent && !willPlayerDie) {
-    await willSurviveCurrentBattery(props);
-    state = { ...state, isSurviveCheckComplete: true };
-  } else if (shouldPlaySurviveEvent && willPlayerDie) {
+  if (shouldPlaySurviveEvent(state)) {
     await willNotSurviveCurrentBattery(props);
     state = { ...state, isSurviveCheckComplete: true };
   }
