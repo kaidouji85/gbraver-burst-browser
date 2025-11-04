@@ -1,6 +1,6 @@
-import { canBeatDown } from "../../../../npc/can-beat-down";
-import { BattleSimulatorEventProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { SurviveSuperPowerWithGuardProps } from "../../props";
+import { canBeatDown } from "../../../npc/can-beat-down";
+import { BattleSimulatorEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { SurviveSuperPowerWithGuardProps } from "../props";
 
 /**
  * 現在のバッテリーで敵が全力攻撃した時にプレイヤーが死亡するか否かを判定する
