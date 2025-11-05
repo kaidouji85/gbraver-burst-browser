@@ -1,10 +1,32 @@
 import { wbr } from "../../../dom/wbr";
+import { getMinimumSurvivableBattery } from "../../../npc/get-minimum-survivable-battery";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
+import { separatePlayers } from "../../separate-players";
 import { SurviveSuperPowerWithGuardProps } from "../props";
+
+const getDefenseBattery = (props: Readonly<CustomBattleEventProps>) => {
+  const lastState = props.stateHistory.at(-1);
+  if (!lastState) {
+    return null;
+  }
+
+  const players = separatePlayers(props, lastState);
+  if (!players) {
+    return null;
+  }
+
+  const result = getMinimumSurvivableBattery(
+    players.player,
+    players.enemy,
+    players.enemy.armdozer.battery,
+  );
+
+  return result.isExist ? result.value : null;
+};
 
 /**
  * 現在のバッテリーだと負ける
@@ -15,7 +37,12 @@ export async function willNotSurviveCurrentBattery(
   props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
   await waitTime(200);
-  props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
+  const defenseBattery = getDefenseBattery(props);
+  if (defenseBattery !== null) {
+    props.view.hud.gameObjects.batterySelector.toBatterySilently(
+      defenseBattery,
+    );
+  }
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「危ないところだった`],
