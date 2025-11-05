@@ -15,6 +15,6 @@ export const tsubasaFirstAttackShoutForRetry = (
     playerPilotOnlyShout(
       props,
       "Tsubasa",
-      `と思ったが 攻撃こそ${wbr}最大の${wbr}防御だ`,
+      `……と思ったが 攻撃こそ${wbr}最大の${wbr}防御だ`,
     );
   });
