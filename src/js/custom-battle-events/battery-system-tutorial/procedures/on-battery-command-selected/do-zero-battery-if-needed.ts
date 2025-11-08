@@ -90,7 +90,9 @@ export async function doZeroBatteryIdNeeded(
     };
   }
 
-  props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
+  props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+    1,
+  );
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {

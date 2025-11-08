@@ -72,7 +72,9 @@ export async function onBatteryCommandSelected(
       cancel: { isCommandCanceled: true },
     };
   } else if (willPlayerDeath && isPlayerFullBattery) {
-    props.view.hud.gameObjects.batterySelector.toBatterySilently(5);
+    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+      5,
+    );
     await defense5(props);
     if (result.eventState.isLoseIfNoDefense5Complete) {
       await notDefense5Carelessly(props);

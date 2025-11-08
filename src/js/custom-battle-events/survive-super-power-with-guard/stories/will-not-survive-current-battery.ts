@@ -24,8 +24,9 @@ export async function willNotSurviveCurrentBattery(
     enemy.armdozer.battery,
   );
   if (minimumSurvivableBattery.isExist) {
-    props.view.hud.gameObjects.batterySelector.toBatterySilently(
+    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
       minimumSurvivableBattery.value,
+      { interval: 50, timeScale: 0.5 },
     );
   }
   activeRightMessageWindowWithFace(props, "Tsubasa");

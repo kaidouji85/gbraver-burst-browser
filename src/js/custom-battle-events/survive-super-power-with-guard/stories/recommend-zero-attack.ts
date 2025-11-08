@@ -14,7 +14,10 @@ import { SurviveSuperPowerWithGuardProps } from "../props";
 export async function recommendZeroAttack(
   props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
-  props.view.hud.gameObjects.batterySelector.toBatterySilently(0);
+  props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+    0,
+    { interval: 50, timeScale: 0.5 },
+  );
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     [

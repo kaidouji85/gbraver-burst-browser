@@ -118,7 +118,7 @@ const toBattery =
   (battery: number, maxBattery: number, label: ButtonLabel) =>
   async (selector: BatterySelector) => {
     await enabled(maxBattery, label)(selector);
-    selector.toBatterySilently(battery);
+    selector.pushBatteryAdjustButtonsSilently(battery);
   };
 
 /** 5に設定 最大値5 */

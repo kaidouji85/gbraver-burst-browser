@@ -14,8 +14,11 @@ import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
 import { notifyNumberPushed } from "./procedure/notify-number-pushed";
+import {
+  pushBatteryAdjustButtonsSilently,
+  SilentlyBatteryAdjustOptions,
+} from "./procedure/push-battery-adjust-buttons-silently";
 import { toBattery } from "./procedure/to-battery";
-import { toBatterySilently } from "./procedure/to-battery-silently";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
   createBatterySelectorProps,
@@ -113,18 +116,16 @@ export class BatterySelector {
   }
 
   /**
-   * 無音でバッテリー値を設定する
+   * バッテリー調整ボタンを無音で押す
    * @param battery バッテリー設定値
-   * @param duration ボタンを押す間隔（ミリ秒）
    * @param options オプション
    * @returns 処理が完了したら発火するPromise
    */
-  async toBatterySilently(
+  async pushBatteryAdjustButtonsSilently(
     battery: number,
-    duration = 200,
-    options?: Partial<SignalContainer>,
+    options?: SilentlyBatteryAdjustOptions,
   ): Promise<void> {
-    await toBatterySilently(this.#props, battery, duration, options);
+    await pushBatteryAdjustButtonsSilently(this.#props, battery, options);
   }
 
   /**

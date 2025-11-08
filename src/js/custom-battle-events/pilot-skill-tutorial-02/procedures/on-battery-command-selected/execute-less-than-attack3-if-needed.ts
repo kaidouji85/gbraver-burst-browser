@@ -23,7 +23,9 @@ export async function executeLessThanAttack3IfNeeded(
     props.eventState.isShouldAttack3OrMoreComplete &&
     props.battery.battery < 3
   ) {
-    props.view.hud.gameObjects.batterySelector.toBatterySilently(3);
+    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+      3,
+    );
     await lessThanAttack3(props);
     return true;
   }

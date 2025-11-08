@@ -58,7 +58,9 @@ export async function onBatteryCommandSelected(
 
   const isZeroBattery = player.armdozer.battery === 0;
   if (!isZeroBattery) {
-    props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
+    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+      1,
+    );
     await cancelZeroBatteryDefense(props);
     return {
       eventState: props.eventState,
