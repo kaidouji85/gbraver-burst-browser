@@ -26,6 +26,7 @@ export async function willNotSurviveCurrentBattery(
   if (minimumSurvivableBattery.isExist) {
     props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
       minimumSurvivableBattery.value,
+      50,
     );
   }
   activeRightMessageWindowWithFace(props, "Tsubasa");
