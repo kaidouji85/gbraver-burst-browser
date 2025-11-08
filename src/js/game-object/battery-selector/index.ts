@@ -14,7 +14,10 @@ import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
 import { notifyNumberPushed } from "./procedure/notify-number-pushed";
-import { pushBatteryAdjustButtonsSilently } from "./procedure/push-battery-adjust-buttons-silently";
+import {
+  pushBatteryAdjustButtonsSilently,
+  SilentlyBatteryAdjustOptions,
+} from "./procedure/push-battery-adjust-buttons-silently";
 import { toBattery } from "./procedure/to-battery";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -121,15 +124,9 @@ export class BatterySelector {
    */
   async pushBatteryAdjustButtonsSilently(
     battery: number,
-    interval = 200,
-    options?: Partial<SignalContainer>,
+    options?: SilentlyBatteryAdjustOptions,
   ): Promise<void> {
-    await pushBatteryAdjustButtonsSilently(
-      this.#props,
-      battery,
-      interval,
-      options,
-    );
+    await pushBatteryAdjustButtonsSilently(this.#props, battery, options);
   }
 
   /**

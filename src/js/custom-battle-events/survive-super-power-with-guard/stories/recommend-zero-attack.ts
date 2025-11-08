@@ -16,7 +16,7 @@ export async function recommendZeroAttack(
 ) {
   props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
     0,
-    50,
+    { interval: 50, timeScale: 0.5 },
   );
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
