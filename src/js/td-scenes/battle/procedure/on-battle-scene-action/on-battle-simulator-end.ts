@@ -7,11 +7,13 @@ import { createBattleSimulatorEventProps } from "../create-battle-simulator-even
  * @param props プロパティ
  */
 export async function onBattleSimulatorEnd(props: BattleSceneProps) {
-  const { domDialogBinder } = props;
-  domDialogBinder.hidden();
-  const eventProps = createBattleSimulatorEventProps(props);
-  if (eventProps && props.customBattleEvent) {
-    await waitAnimationFrame(); // ダイアログが確実に隠れるようにするため、1フレーム待機
-    await props.customBattleEvent.afterBattleSimulatorClosed(eventProps);
-  }
+  const { domDialogBinder, exclusive } = props;
+  await exclusive.execute(async () => {
+    domDialogBinder.hidden();
+    const eventProps = createBattleSimulatorEventProps(props);
+    if (eventProps && props.customBattleEvent) {
+      await waitAnimationFrame(); // ダイアログが確実に隠れるようにするため、1フレーム待機
+      await props.customBattleEvent.afterBattleSimulatorClosed(eventProps);
+    }
+  });
 }
