@@ -40,14 +40,14 @@ async function minusButton(
 }
 
 /**
- * バッテリー値を設定する(無音）
+ * バッテリー調整ボタンを無音で押す
  * @param props ゲームオブジェクトプロパティ
  * @param battery バッテリー設定値
  * @param duration ボタンを押す間隔（ミリ秒）
  * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-export async function toBatterySilently(
+export async function pushBatteryAdjustButtonsSilently(
   props: BatterySelectorProps,
   battery: number,
   duration: number,
