@@ -115,19 +115,19 @@ export class BatterySelector {
   /**
    * バッテリー調整ボタンを無音で押す
    * @param battery バッテリー設定値
-   * @param duration ボタンを押す間隔（ミリ秒）
+   * @param interval ボタンを押す間隔（ミリ秒）
    * @param options オプション
    * @returns 処理が完了したら発火するPromise
    */
   async pushBatteryAdjustButtonsSilently(
     battery: number,
-    duration = 200,
+    interval = 200,
     options?: Partial<SignalContainer>,
   ): Promise<void> {
     await pushBatteryAdjustButtonsSilently(
       this.#props,
       battery,
-      duration,
+      interval,
       options,
     );
   }
