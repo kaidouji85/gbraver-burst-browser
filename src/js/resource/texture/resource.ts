@@ -14,5 +14,5 @@ export type TextureConfig = ResourceType & {
 /** テクスチャリソース */
 export type TextureResource = ResourceType & {
   id: TextureId;
-  texture: THREE.Texture;
+  texture: THREE.Texture<HTMLImageElement>;
 };
