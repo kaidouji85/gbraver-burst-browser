@@ -16,7 +16,7 @@ export type OutlineColor = {
 /** createOutlineSilhouetteTexture オプション */
 type CreateOutlineSilhouetteTextureOptions = {
   /** 加工前のテクスチャ */
-  texture: THREE.Texture;
+  texture: THREE.Texture<HTMLImageElement>;
   /** アウトラインカラー */
   color: OutlineColor;
 };

@@ -94,7 +94,6 @@ export class PlayerHpBar {
   destructor(): void {
     this.#mesh.material.dispose();
     this.#mesh.geometry.dispose();
-    this.#texture.image = null;
     this.#texture.dispose();
     this.#back.destructor();
   }
