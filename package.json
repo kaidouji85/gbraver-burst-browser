@@ -31,8 +31,7 @@
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.47.0",
     "@html-eslint/parser": "^0.47.0",
-    "@storybook/react": "^9.1.13",
-    "@storybook/react-webpack5": "^9.1.13",
+    "@storybook/react-webpack5": "^10.0.6",
     "@types/howler": "^2.2.12",
     "@types/jest": "^30.0.0",
     "@types/qrcode": "^1.5.5",
@@ -69,7 +68,7 @@
     "react-dom": "^19.2.0",
     "rimraf": "^6.0.1",
     "sharp": "^0.34.4",
-    "storybook": "^9.1.13",
+    "storybook": "^10.0.6",
     "style-loader": "^4.0.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
@@ -128,8 +127,8 @@
     "serve": "http-server build/production -p 3000 -c-1",
     "serve-storybook": "http-server build/storybook -c-1",
     "start": "webpack serve",
-    "start-storybook": "storybook dev -p 6006",
     "start-electron": "electron electron-main.js",
+    "start-storybook": "storybook dev -p 6006",
     "test": "jest",
     "type-check": "tsc --noEmit"
   }
