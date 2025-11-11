@@ -13,6 +13,5 @@ export class CanvasDisposeTexture extends THREE.Texture {
   /** @override */
   dispose() {
     super.dispose();
-    this.image = null;
   }
 }
