@@ -89,9 +89,7 @@ module.exports = {
       from: {},
       to: {
         dependencyTypes: ["npm-no-pkg", "npm-unknown"],
-        pathNot: [
-          "node_modules/@storybook/react/dist/index\\.d\\.ts$",
-        ],
+        pathNot: ["node_modules/@storybook/react/dist/index\\.d\\.ts$"],
       },
     },
     {

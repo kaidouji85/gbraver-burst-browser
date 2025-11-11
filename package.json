@@ -127,8 +127,8 @@
     "serve": "http-server build/production -p 3000 -c-1",
     "serve-storybook": "http-server build/storybook -c-1",
     "start": "webpack serve",
-    "start-storybook": "storybook dev -p 6006",
     "start-electron": "electron electron-main.js",
+    "start-storybook": "storybook dev -p 6006",
     "test": "jest",
     "type-check": "tsc --noEmit"
   }
