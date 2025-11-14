@@ -194,7 +194,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
-    filter: brightness(0.95);
+    filter: brightness(0.7);
   }
 
   .message-window__attack-battery,
@@ -204,7 +204,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
-    filter: brightness(0.95);
+    filter: brightness(0.7);
   }
 
   .message-window__highlight {
