@@ -16,7 +16,7 @@ export const surviveSuperPowerWithGuard: Episode = {
   id: EpisodeIDs.SURVIVE_SUPER_POWER,
   type: "Episode",
   number: "7",
-  title: "攻撃、防御が同じならダメージ半減",
+  title: "ゼロ攻撃で防御バッテリーを確保しろ",
   isTutorial: false,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
