@@ -13,6 +13,6 @@ export const gaiBurst = (props: Readonly<CustomBattleEventProps>) =>
     playerPilotOnlyShout(
       props,
       "Gai",
-      `これが${wbr}シンブレイバーの${wbr}バースト${wbr}か`,
+      `これが${wbr}シンブレイバーの${wbr}バースト${wbr}……`,
     );
   });
