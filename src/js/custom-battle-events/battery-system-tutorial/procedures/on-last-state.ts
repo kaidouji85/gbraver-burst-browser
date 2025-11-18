@@ -1,4 +1,5 @@
 import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
+import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
 import { BatterySystemTutorialState } from "../state";
@@ -26,6 +27,7 @@ export async function onLastState(
     await attackDescription(props, props.attackBatteryCaption);
   } else {
     await focusInBatterySelector(props);
+    activeNearBatterySelectorMessageWindow(props);
     props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
       props.defenseBatteryCaption,
     );

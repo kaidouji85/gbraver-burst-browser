@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
 import {
   focusInBatterySelector,
@@ -97,6 +98,7 @@ export async function doZeroBatteryIdNeeded(
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {
     await focusInBatterySelector(props);
+    activeNearBatterySelectorMessageWindow(props);
     props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
       props.defenseBatteryCaption,
     );

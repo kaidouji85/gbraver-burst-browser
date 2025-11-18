@@ -1,7 +1,6 @@
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
-  activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
   activeNearPilotButtonMessageWindow,
   activeNearPlayerBattleSimulatorButtonMessageWindow,
@@ -46,7 +45,6 @@ export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
   await playAnimation(
     props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
   );
-  activeNearBatterySelectorMessageWindow(props);
 };
 
 /**
