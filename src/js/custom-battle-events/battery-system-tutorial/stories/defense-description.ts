@@ -12,8 +12,5 @@ export async function defenseDescription(
   props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<void> {
   await focusInBatterySelector(props);
-  activeNearBatterySelectorMessageWindow(props);
-  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-    props.defenseBatteryCaption,
-  );
+  activeNearBatterySelectorMessageWindow(props, props.defenseBatteryCaption);
 }

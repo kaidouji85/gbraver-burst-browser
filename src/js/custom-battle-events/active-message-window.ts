@@ -54,11 +54,16 @@ export function activeRightMessageWindow(props: CustomBattleEventProps): void {
 /**
  * バッテリーセレクタ隣メッセージウインドウをアクティブ表示する
  * @param props イベントプロパティ
+ * @param innerHTML メッセージのinnerHTML
  */
 export function activeNearBatterySelectorMessageWindow(
   props: CustomBattleEventProps,
+  innerHTML: string,
 ): void {
   activeMessageWindow(props.view.dom.nearBatterySelectorMessageWindow);
+  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+    innerHTML,
+  );
 }
 
 /**

@@ -21,8 +21,5 @@ export async function attackDescription(
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
-  activeNearBatterySelectorMessageWindow(props);
-  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-    props.attackBatteryCaption,
-  );
+  activeNearBatterySelectorMessageWindow(props, props.attackBatteryCaption);
 }
