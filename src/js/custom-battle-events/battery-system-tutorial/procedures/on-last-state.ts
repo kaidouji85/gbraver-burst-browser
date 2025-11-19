@@ -23,9 +23,9 @@ export async function onLastState(
 
   const isMyTurn = lastState.activePlayerId === props.playerId;
   if (isMyTurn) {
-    await attackDescription(props, props.attackBatteryCaption);
+    await attackDescription(props);
   } else {
-    await defenseDescription(props, props.defenseBatteryCaption);
+    await defenseDescription(props);
   }
 
   return props.eventState;
