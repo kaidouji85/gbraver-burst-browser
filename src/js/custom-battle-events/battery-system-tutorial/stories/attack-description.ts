@@ -13,6 +13,7 @@ export async function attackDescription(
   props: Readonly<LastStateEventProps & BatterySystemTutorialProps>,
 ): Promise<void> {
   await focusInBatterySelector(props);
+  activeNearBatterySelectorMessageWindow(props, props.attackBatteryCaption);
   const signal = props.abort.getAbortController().signal;
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
@@ -21,5 +22,4 @@ export async function attackDescription(
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
-  activeNearBatterySelectorMessageWindow(props, props.attackBatteryCaption);
 }
