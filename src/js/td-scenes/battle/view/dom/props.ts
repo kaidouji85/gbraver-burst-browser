@@ -14,6 +14,8 @@ export type DOMLayerProps = {
   nearBurstButtonMessageWindow: MessageWindow;
   /** メッセージウインドウ パイロットボタン隣 */
   nearPilotButtonMessageWindow: MessageWindow;
+  /** メッセージウインドウ プレイヤーバトルシミュレーターボタン隣 */
+  nearPlayerBattleSimulatorButtonMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ プレイヤー */
   playerShoutMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ 敵 */

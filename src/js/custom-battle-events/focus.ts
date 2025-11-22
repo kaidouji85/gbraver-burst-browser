@@ -1,21 +1,33 @@
 import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 import { createAnimationPlay } from "../td-scenes/battle/play-animation";
 import {
-  activeNearBatterySelectorMessageWindow,
   activeNearBurstButtonMessageWindow,
   activeNearPilotButtonMessageWindow,
+  activeNearPlayerBattleSimulatorButtonMessageWindow,
 } from "./active-message-window";
 import {
   attentionBatterySelector,
+  attentionBattleSimulatorButton,
   attentionBurstButton,
   attentionPilotButton,
   unAttentionAllButtons,
   unattentionBatterySelector,
+  unattentionBattleSimulatorButton,
   unattentionBurstButton,
   unattentionPilotButton,
 } from "./attention";
 import { disabledAllButtons, enabledAllButtons } from "./button-disabled";
 import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
+
+/**
+ * すべてのプレイヤーの予測ダメージ表示が無効化されているか判定する
+ * @param props イベントプロパティ
+ * @returns 判定結果、trueですべて無効化されている
+ */
+const isAllPredicatedDamageDisabled = (
+  props: CustomBattleEventProps,
+): boolean =>
+  props.view.hud.players.every((p) => p.predicatedDamage.isDisabled());
 
 /**
  * バッテリーセレクタにフォーカスインする
@@ -33,7 +45,6 @@ export const focusInBatterySelector = async (props: CustomBattleEventProps) => {
   await playAnimation(
     props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
   );
-  activeNearBatterySelectorMessageWindow(props);
 };
 
 /**
@@ -47,7 +58,8 @@ export const isBatterySelectorFocused = (
   return (
     !props.view.hud.gameObjects.batterySelector.isDisabled() &&
     props.view.hud.gameObjects.burstButton.isDisabled() &&
-    props.view.hud.gameObjects.pilotButton.isDisabled()
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -103,7 +115,8 @@ export const isBurstButtonFocused = (
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&
     !props.view.hud.gameObjects.burstButton.isDisabled() &&
-    props.view.hud.gameObjects.pilotButton.isDisabled()
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -157,7 +170,8 @@ export const isPilotButtonFocused = (
   return (
     props.view.hud.gameObjects.batterySelector.isDisabled() &&
     props.view.hud.gameObjects.burstButton.isDisabled() &&
-    !props.view.hud.gameObjects.pilotButton.isDisabled()
+    !props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    isAllPredicatedDamageDisabled(props)
   );
 };
 
@@ -173,5 +187,58 @@ export const focusOutPilotButton = async (props: CustomBattleEventProps) => {
     props.view.hud.gameObjects.frontmostFader.opacity(0, 200),
   );
   unattentionPilotButton(props);
+  enabledAllButtons(props);
+};
+
+/**
+ * バトルシミュレーターボタンにフォーカスする
+ * @param props イベントプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+export async function focusBattleSimulatorButton(
+  props: CustomBattleEventProps,
+) {
+  const playAnimation = createAnimationPlay(props);
+  unAttentionAllButtons(props);
+  disabledAllButtons(props);
+  attentionBattleSimulatorButton(props);
+  props.view.hud.players.forEach((p) => {
+    p.predicatedDamage.disabled(false);
+  });
+  invisibleAllMessageWindows(props);
+  await playAnimation(
+    props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200),
+  );
+  activeNearPlayerBattleSimulatorButtonMessageWindow(props);
+}
+
+/**
+ * バトルシミュレーターボタンにフォーカスしているか判定する
+ * @param props イベントプロパティ
+ * @returns 判定結果、trueでフォーカスしている
+ */
+export const isBattleSimulatorButtonFocused = (
+  props: CustomBattleEventProps,
+): boolean => {
+  return (
+    props.view.hud.gameObjects.batterySelector.isDisabled() &&
+    props.view.hud.gameObjects.burstButton.isDisabled() &&
+    props.view.hud.gameObjects.pilotButton.isDisabled() &&
+    !isAllPredicatedDamageDisabled(props)
+  );
+};
+
+/**
+ * バトルシミュレーターボタンからフォーカスアウトする
+ * @param props イベントプロパティ
+ * @returns 処理が完了したら発火するPromise
+ */
+export const focusOutBattleSimulatorButton = async (
+  props: CustomBattleEventProps,
+) => {
+  const playAnimation = createAnimationPlay(props);
+  props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow.visible(false);
+  await playAnimation(props.view.hud.gameObjects.frontmostFader.opacity(0, 0));
+  unattentionBattleSimulatorButton(props);
   enabledAllButtons(props);
 };

@@ -3,8 +3,9 @@ import { BattleSceneProps } from "../props";
 import { switchBattleSimulator } from "./switch-battle-simulator";
 
 /**
- * バトルシミュレータを開く
+ * バトルシミュレーターを開く
  * @param props 戦闘シーンプロパティ
+ * @returns 処理が完了したら発火するPromise
  */
 export function openBattleSimulator(props: Readonly<BattleSceneProps>): void {
   const { view, playerId, stateHistory } = props;

@@ -82,13 +82,13 @@ export type CustomStateAnimationProps = CustomBattleEventProps & {
 /** 最終ステート系イベントのプロパティ */
 export type LastStateEventProps = CustomBattleEventProps &
   LastStateContainer & {
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
     /** プレイヤーのステート */
     readonly player: PlayerState;
     /** プレイヤーのメインターン数 */
     readonly playerMainTurnCount: number;
-
-    /** メインターン数 */
-    readonly mainTurnCount: number;
 
     /** 敵のステート */
     readonly enemy: PlayerState;
@@ -104,6 +104,19 @@ export type BatteryCommandSelectedEventProps = CustomBattleEventProps &
   LastStateContainer & {
     /** プレイヤーが選択したバッテリーコマンド */
     readonly battery: BatteryCommand;
+
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
   };
 
 /** バーストコマンド選択イベントのプロパティ */
@@ -125,6 +138,23 @@ export type CommandCanceled = {
   /** プレイヤーが決定したコマンドをキャンセルするか、trueでキャンセルする */
   readonly isCommandCanceled: boolean;
 };
+
+/** バトルシミュレーター系イベントのプロパティ */
+export type BattleSimulatorEventProps = CustomBattleEventProps &
+  LastStateContainer & {
+    /** メインターン数 */
+    readonly mainTurnCount: number;
+
+    /** プレイヤーのステート */
+    readonly player: PlayerState;
+    /** プレイヤーのメインターン数 */
+    readonly playerMainTurnCount: number;
+
+    /** 敵のステート */
+    readonly enemy: PlayerState;
+    /** 敵のメインターン数 */
+    readonly enemyMainTurnCount: number;
+  };
 
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
@@ -200,4 +230,18 @@ export interface CustomBattleEvent {
   onPilotSkillCommandSelected(
     props: PilotSkillSelectedEventProps,
   ): Promise<CommandCanceled>;
+
+  /**
+   * バトルシミュレーターが選択された
+   * @param props イベントプロパティ
+   * @returns 処理が完了したら発火するPromise
+   */
+  onBattleSimulatorSelected(props: BattleSimulatorEventProps): Promise<void>;
+
+  /**
+   * バトルシミュレーターが閉じられた後
+   * @param props イベントプロパティ
+   * @returns 処理が完了したら発火するPromise
+   */
+  afterBattleSimulatorClosed(props: BattleSimulatorEventProps): Promise<void>;
 }

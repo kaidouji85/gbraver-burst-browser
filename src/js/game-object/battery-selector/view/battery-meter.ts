@@ -1,37 +1,45 @@
 import * as R from "ramda";
+import { map, merge, Observable } from "rxjs";
 import * as THREE from "three";
 
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { SimpleImageMesh } from "../../../mesh/simple-image-mesh";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { BatterySelectorModel } from "../model";
-import {
-  batteryNumber,
-  batteryNumberPosition,
-  batteryNumberScale,
-} from "./battery-number";
+import { BatteryNumber } from "./battery-number/battery-number";
+import { DisActiveBatteryNumber } from "./battery-number/dis-active-battery-number";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 8;
 
 /** バッテリーメーター */
 export class BatteryMeter {
+  /** グループ */
   #group: THREE.Group;
+  /** ディスク（5バッテリー） */
   #disk: SimpleImageMesh;
+  /** ディスク（4バッテリー） */
   #disk4: HorizontalAnimationMesh;
+  /** ディスク（8バッテリー） */
   #disk8: HorizontalAnimationMesh;
+  /** 針 */
   #needle: SimpleImageMesh;
-  #numbers: HorizontalAnimationMesh[];
-  #disActiveNumbers: HorizontalAnimationMesh[];
+  /** バッテリーセレクタ数字 */
+  #numbers: BatteryNumber[];
+  /** ディスアクティブバッテリーセレクタ数字 */
+  #disActiveNumbers: DisActiveBatteryNumber[];
 
   /**
    * コンストラクタ
-   * @param resources リソース管理オブジェクト
+   * @param options 生成オプション
    */
-  constructor(resources: Resources) {
+  constructor(options: ResourcesContainer & GameObjectActionContainer) {
+    const { resources, gameObjectAction } = options;
+
     this.#group = new THREE.Group();
 
     const disk =
@@ -70,21 +78,14 @@ export class BatteryMeter {
     });
     this.#group.add(this.#disk8.getObject3D());
 
-    const disActiveNumber = findTextureOrThrow(
-      resources,
-      TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
-    ).texture;
     this.#disActiveNumbers = R.times(R.identity, MAX_VALUE + 1).map(
-      (value: number) => batteryNumber(value, disActiveNumber),
+      (value: number) => new DisActiveBatteryNumber({ resources, value }),
     );
     this.#disActiveNumbers.forEach((v) => this.#group.add(v.getObject3D()));
 
-    const activeNumber = findTextureOrThrow(
-      resources,
-      TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
-    ).texture;
-    this.#numbers = R.times(R.identity, MAX_VALUE + 1).map((value: number) =>
-      batteryNumber(value, activeNumber),
+    this.#numbers = R.times(R.identity, MAX_VALUE + 1).map(
+      (value: number) =>
+        new BatteryNumber({ resources, gameObjectAction, value }),
     );
     this.#numbers.forEach((v) => this.#group.add(v.getObject3D()));
 
@@ -131,27 +132,10 @@ export class BatteryMeter {
     const diskOpacity = [4, 8].includes(model.maxBattery) ? 0 : model.opacity;
     this.#disk.setOpacity(diskOpacity);
     this.#needle.setOpacity(model.opacity);
-    this.#numbers.forEach((numberMesh, value) => {
-      const { x, y } = batteryNumberPosition(value, model.maxBattery);
-      numberMesh.getObject3D().position.x = x;
-      numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(value, model.maxBattery);
-      numberMesh.getObject3D().scale.set(scale, scale, 1);
-      const opacity = value <= model.enableMaxBattery ? model.opacity : 0;
-      numberMesh.opacity(opacity);
-    });
-    this.#disActiveNumbers.forEach((numberMesh, value) => {
-      const { x, y } = batteryNumberPosition(value, model.maxBattery);
-      numberMesh.getObject3D().position.x = x;
-      numberMesh.getObject3D().position.y = y;
-      const scale = batteryNumberScale(value, model.maxBattery);
-      numberMesh.getObject3D().scale.set(scale, scale, 1);
-      const opacity =
-        model.enableMaxBattery < value && value <= model.maxBattery
-          ? model.opacity
-          : 0;
-      numberMesh.opacity(opacity);
-    });
+    this.#numbers.forEach((numberMesh) => numberMesh.update(model));
+    this.#disActiveNumbers.forEach((disActiveNumberMesh) =>
+      disActiveNumberMesh.update(model),
+    );
   }
 
   /**
@@ -160,5 +144,17 @@ export class BatteryMeter {
    */
   getObject3D(): THREE.Object3D {
     return this.#group;
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return merge(
+      ...this.#numbers.map((numberMesh) =>
+        numberMesh.notifyPushed().pipe(map(() => numberMesh.value)),
+      ),
+    );
   }
 }

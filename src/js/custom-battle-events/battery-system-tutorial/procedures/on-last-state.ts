@@ -1,8 +1,8 @@
 import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
 import { BatterySystemTutorialState } from "../state";
 import { attackDescription } from "../stories/attack-description";
+import { defenseDescription } from "../stories/defense-description";
 
 /**
  * 最終ステートイベント
@@ -23,12 +23,9 @@ export async function onLastState(
 
   const isMyTurn = lastState.activePlayerId === props.playerId;
   if (isMyTurn) {
-    await attackDescription(props, props.attackBatteryCaption);
+    await attackDescription(props);
   } else {
-    await focusInBatterySelector(props);
-    props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-      props.defenseBatteryCaption,
-    );
+    await defenseDescription(props);
   }
 
   return props.eventState;

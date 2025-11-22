@@ -7,6 +7,7 @@ import {
   ROOT_CLASS_NEAR_BATTERY_SELECTOR,
   ROOT_CLASS_NEAR_BURST_BUTTON,
   ROOT_CLASS_NEAR_PILOT_BUTTON,
+  ROOT_CLASS_NEAR_PLAYER_BATTLE_SIMULATOR_BUTTON,
   ROOT_CLASS_PLAYER_SHOUT,
   ROOT_CLASS_RIGHT,
 } from "./class-name";
@@ -30,6 +31,8 @@ export function toRootClass(type: WindowType): string {
       return ROOT_CLASS_NEAR_BURST_BUTTON;
     case "NearPilotButton":
       return ROOT_CLASS_NEAR_PILOT_BUTTON;
+    case "NearPlayerBattleSimulatorButton":
+      return ROOT_CLASS_NEAR_PLAYER_BATTLE_SIMULATOR_BUTTON;
     case "PlayerShout":
       return ROOT_CLASS_PLAYER_SHOUT;
     case "EnemyShout":

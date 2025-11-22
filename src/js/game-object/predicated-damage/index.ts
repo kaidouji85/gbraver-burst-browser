@@ -76,7 +76,7 @@ export class PredicatedDamage {
   }
 
   /**
-   * バトルシュミレーターアイコンをポップさせる
+   * バトルシミュレーターアイコンをポップさせる
    * @returns アニメーション
    */
   popBattleSimulatorIcon(): Animate {
@@ -97,5 +97,13 @@ export class PredicatedDamage {
    */
   disabled(isDisabled: boolean): void {
     this.#props.disabled = isDisabled;
+  }
+
+  /**
+   * 操作不可能か否かを取得する
+   * @returns 判定結果、trueで操作不可能
+   */
+  isDisabled(): boolean {
+    return this.#props.disabled;
   }
 }

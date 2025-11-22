@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
 import {
   focusInBatterySelector,
@@ -90,14 +91,14 @@ export async function doZeroBatteryIdNeeded(
     };
   }
 
-  props.view.hud.gameObjects.batterySelector.toBatterySilently(1);
+  props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+    1,
+  );
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {
     await focusInBatterySelector(props);
-    props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-      props.defenseBatteryCaption,
-    );
+    activeNearBatterySelectorMessageWindow(props, props.defenseBatteryCaption);
   }
 
   return {

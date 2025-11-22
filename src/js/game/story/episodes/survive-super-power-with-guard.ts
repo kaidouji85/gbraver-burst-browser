@@ -16,7 +16,8 @@ export const surviveSuperPowerWithGuard: Episode = {
   id: EpisodeIDs.SURVIVE_SUPER_POWER,
   type: "Episode",
   number: "7",
-  title: "防御に専念して、相手のバッテリー切れを狙え",
+  title: "ゼロ攻撃で防御バッテリーを確保しろ",
+  isTutorial: false,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_SURVIVE_SUPER_POWER_WITH_GUARD,
   player: {

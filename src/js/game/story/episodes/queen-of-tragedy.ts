@@ -18,6 +18,7 @@ export const QueenOfTragedy: Episode = {
   type: "Side Episode",
   number: "6.1",
   title: "悲劇の女王",
+  isTutorial: false,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_QUEEN_OF_TRAGEDY,
   player: {

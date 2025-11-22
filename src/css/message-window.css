@@ -8,6 +8,7 @@
   .message-window--near-battery-selector,
   .message-window--near-burst-button,
   .message-window--near-pilot-button,
+  .message-window--near-player-battle-simulator-button,
   .message-window--player-shout,
   .message-window--enemy-shout {
     /** 本カスタムプロパティはJavaScriptから変更される */
@@ -20,10 +21,6 @@
     box-sizing: border-box;
     display: flex;
     position: fixed;
-    bottom: max(
-      calc(var(--battle-window-font-size) * 1),
-      var(--safe-area-bottom)
-    );
     color: var(--font-color);
     font-size: var(--battle-window-font-size);
     background-color: #2b2b2b;
@@ -38,6 +35,10 @@
     transform: translate(-50%, 0);
     width: var(--window-width);
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--invisible {
@@ -48,12 +49,20 @@
     left: var(--margin-x);
     width: var(--window-width);
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--right {
     right: var(--margin-x);
     width: var(--window-width);
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--near-battery-selector {
@@ -67,6 +76,10 @@
      */
     width: auto;
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--near-burst-button {
@@ -80,6 +93,10 @@
      */
     width: auto;
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--near-pilot-button {
@@ -93,18 +110,35 @@
      */
     width: auto;
     min-height: var(--window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
+  }
+
+  .message-window--near-player-battle-simulator-button {
+    right: 30vw;
+    bottom: max(15vh, var(--safe-area-bottom));
   }
 
   .message-window--player-shout {
     right: var(--margin-x);
     width: var(--window-width);
     height: var(--shout-window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window--enemy-shout {
     left: var(--margin-x);
     width: var(--window-width);
     height: var(--shout-window-height);
+    bottom: max(
+      calc(var(--battle-window-font-size) * 1),
+      var(--safe-area-bottom)
+    );
   }
 
   .message-window__messages-wrapper {
@@ -160,7 +194,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
-    filter: brightness(0.95);
+    filter: brightness(0.9);
   }
 
   .message-window__attack-battery,
@@ -170,7 +204,7 @@
     width: var(--size);
     height: var(--size);
     margin: calc(var(--battle-window-font-size) * 0.2);
-    filter: brightness(0.95);
+    filter: brightness(0.9);
   }
 
   .message-window__highlight {

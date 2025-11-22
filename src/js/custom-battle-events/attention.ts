@@ -1,9 +1,8 @@
 import { HUD_ATTENTION_Z } from "../game-object/hud-position";
-import type { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーセレクタに注目する
- *
  * @param props イベントプロパティ
  */
 export function attentionBatterySelector(props: CustomBattleEventProps): void {
@@ -13,7 +12,6 @@ export function attentionBatterySelector(props: CustomBattleEventProps): void {
 
 /**
  * バッテリーセレクタの注目を解除する
- *
  * @param props イベントプロパティ
  */
 export function unattentionBatterySelector(
@@ -24,7 +22,6 @@ export function unattentionBatterySelector(
 
 /**
  * バーストボタンに注目する
- *
  * @param props イベントプロパティ
  */
 export function attentionBurstButton(props: CustomBattleEventProps): void {
@@ -34,7 +31,6 @@ export function attentionBurstButton(props: CustomBattleEventProps): void {
 
 /**
  * バーストボタンの注目を解除する
- *
  * @param props イベントプロパティ
  */
 export function unattentionBurstButton(props: CustomBattleEventProps): void {
@@ -43,7 +39,6 @@ export function unattentionBurstButton(props: CustomBattleEventProps): void {
 
 /**
  * パイロットボタンに注目する
- *
  * @param props イベントプロパティ
  */
 export function attentionPilotButton(props: CustomBattleEventProps): void {
@@ -53,11 +48,34 @@ export function attentionPilotButton(props: CustomBattleEventProps): void {
 
 /**
  * パイロットボタンの注目を解除する
- *
  * @param props イベントプロパティ
  */
 export function unattentionPilotButton(props: CustomBattleEventProps): void {
   props.view.hud.gameObjects.pilotButton.getObject3D().position.z = 0;
+}
+
+/**
+ * バトルシミュレーターボタンに注目する
+ * @param props イベントプロパティ
+ */
+export function attentionBattleSimulatorButton(
+  props: CustomBattleEventProps,
+): void {
+  props.view.hud.players.forEach((p) => {
+    p.predicatedDamage.getObject3D().position.z = HUD_ATTENTION_Z;
+  });
+}
+
+/**
+ * バトルシミュレーターボタンの注目を解除する
+ * @param props イベントプロパティ
+ */
+export function unattentionBattleSimulatorButton(
+  props: CustomBattleEventProps,
+): void {
+  props.view.hud.players.forEach((p) => {
+    p.predicatedDamage.getObject3D().position.z = 0;
+  });
 }
 
 /**
@@ -69,4 +87,5 @@ export function unAttentionAllButtons(props: CustomBattleEventProps): void {
   unattentionBatterySelector(props);
   unattentionBurstButton(props);
   unattentionPilotButton(props);
+  unattentionBattleSimulatorButton(props);
 }

@@ -84,6 +84,7 @@ export function granDozerForSurviveSuperPowerWithGuardNPC(): NPC {
     Armdozers.find((v) => v.id === ArmdozerIds.GRAN_DOZER) ?? Armdozers[0];
   const armdozer: Armdozer = {
     ...originArmdozer,
+    batteryAutoRecovery: 2,
     burst: { type: "EffectClear", recoverBattery: 1 },
   };
   const pilot = Pilots.find((v) => v.id === PilotIds.RAITO) ?? Pilots[0];

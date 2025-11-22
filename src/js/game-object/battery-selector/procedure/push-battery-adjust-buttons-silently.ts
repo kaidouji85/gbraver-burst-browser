@@ -9,11 +9,12 @@ import { playSilentlyBatteryPlusPop } from "./play-silently-battery-plus-pop";
  * プラスボタンアニメーション
  * @param props ゲームオブジェクトプロパティ
  * @param options オプション
+ * @param options.timeScale アニメーション時間倍率
  * @returns 処理が完了したら発火するPromise
  */
 async function plusButton(
   props: BatterySelectorProps,
-  options?: Partial<SignalContainer>,
+  options?: Partial<SignalContainer & { timeScale: number }>,
 ): Promise<void> {
   const { model } = props;
   await Promise.all([
@@ -26,11 +27,12 @@ async function plusButton(
  * マイナスボタンアニメーション
  * @param props ゲームオブジェクトプロパティ
  * @param options オプション
+ * @param options.timeScale アニメーション時間倍率
  * @returns 処理が完了したら発火するPromise
  */
 async function minusButton(
   props: BatterySelectorProps,
-  options?: Partial<SignalContainer>,
+  options?: Partial<SignalContainer & { timeScale: number }>,
 ): Promise<void> {
   const { model } = props;
   await Promise.all([
@@ -39,27 +41,36 @@ async function minusButton(
   ]);
 }
 
+/** バッテリー調整ボタンを無音で押す際のオプション */
+export type SilentlyBatteryAdjustOptions = Partial<
+  SignalContainer & {
+    /** ボタンを押す間隔（ミリ秒） */
+    interval: number;
+    /** アニメーション時間倍率 */
+    timeScale: number;
+  }
+>;
+
 /**
- * バッテリー値を設定する(無音）
+ * バッテリー調整ボタンを無音で押す
  * @param props ゲームオブジェクトプロパティ
  * @param battery バッテリー設定値
- * @param duration ボタンを押す間隔（ミリ秒）
  * @param options オプション
  * @returns 処理が完了したら発火するPromise
  */
-export async function toBatterySilently(
+export async function pushBatteryAdjustButtonsSilently(
   props: BatterySelectorProps,
   battery: number,
-  duration: number,
-  options?: Partial<SignalContainer>,
+  options?: SilentlyBatteryAdjustOptions,
 ): Promise<void> {
   const { model } = props;
+  const { interval = 200 } = options || {};
   const diff = battery - model.battery;
   const count = Math.abs(diff);
   const pushButton = () =>
     0 < diff ? plusButton(props, options) : minusButton(props, options);
   for (let i = 0; i < count; i++) {
     pushButton();
-    await waitTime(duration);
+    await waitTime(interval);
   }
 }

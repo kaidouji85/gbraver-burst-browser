@@ -10,20 +10,15 @@ const MAX_DURATION = 500;
  *
  * @param props アニメーションプロパティ
  * @param needle メーター針の値
+ * @param timeScale 時間倍率
  * @returns アニメーション
  */
 export function changeNeedle(
   props: BatterySelectorAnimationProps,
   needle: number,
+  timeScale: number = 1,
 ): Animate {
   const { model } = props;
-  const duration = Math.abs(model.needle - needle) * MAX_DURATION;
-  return tween(model, (t) =>
-    t.to(
-      {
-        needle: needle,
-      },
-      duration,
-    ),
-  );
+  const duration = Math.abs(model.needle - needle) * MAX_DURATION * timeScale;
+  return tween(model, (t) => t.to({ needle: needle }, duration));
 }

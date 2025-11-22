@@ -8,7 +8,7 @@ import { GameObjectActionContainer } from "../../action/game-object-action-conta
 import { hudUIScale } from "../../scale";
 import { BatterySelectorModel } from "../model";
 import { BatteryButton } from "./battery-button";
-import { BatteryMeter } from "./battery-merter";
+import { BatteryMeter } from "./battery-meter";
 import { BatteryMinus } from "./battery-minus";
 import { BatteryPlus } from "./battery-plus";
 
@@ -38,8 +38,8 @@ export class BatterySelectorView {
    */
   constructor(options: BatterySelectorViewOptions) {
     this.#group = new THREE.Group();
-    this.#meter = new BatteryMeter(options.resources);
-    this.#meter.getObject3D().position.set(0, 288, 0);
+    this.#meter = new BatteryMeter(options);
+    this.#meter.getObject3D().position.set(0, 340, 0);
     this.#group.add(this.#meter.getObject3D());
 
     this.#button = new BatteryButton(options);
@@ -118,17 +118,25 @@ export class BatterySelectorView {
 
   /**
    * +ボタン押下通知
-   * @returns 通知ストリーム
+   * @returns 通知のObservable
    */
-  plusButtonPushNotifier(): Observable<unknown> {
+  notifyPlusButtonPushed(): Observable<unknown> {
     return this.#plus.pushNotifier();
   }
 
   /**
    * -ボタン押下通知
-   * @returns 通知ストリーム
+   * @returns 通知のObservable
    */
-  minusButtonPushNotifier(): Observable<unknown> {
+  notifyMinusButtonPushed(): Observable<unknown> {
     return this.#minus.pushNotifier();
+  }
+
+  /**
+   * 数字が押されたことを通知する
+   * @returns 通知のObservable
+   */
+  notifyNumberPushed(): Observable<number> {
+    return this.#meter.notifyNumberPushed();
   }
 }
