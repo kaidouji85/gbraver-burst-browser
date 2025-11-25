@@ -36,5 +36,5 @@ phases:
   build:
     commands:
       - export WEBSOCKET_API_URL="wss://${WS_API_DOMAIN_NAME}/${STAGE}"
-      - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${WEBSOCKET_API_URL}"
+      - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"
