@@ -44,7 +44,7 @@ npm start
 
 ```shell script
 # デプロイ
-./deploy.bash <アップロードするS3バケット名> <ステージ名> <Assetlinks.jsonのS3 URI>
+./deploy.bash <アップロードするS3バケット名> <ステージ名> <aseetlinks.jsonのS3 URI>
 
 # ステージ切り替え
 # 内部的にはCloudFrontのオリジンパスを切り替えている
