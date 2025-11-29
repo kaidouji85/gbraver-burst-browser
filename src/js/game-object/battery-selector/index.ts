@@ -3,9 +3,10 @@ import * as THREE from "three";
 
 import { SignalContainer } from "../../abort-controller/signal-container";
 import { Animate } from "../../animation/animate";
+import { onStart } from "../../animation/on-start";
 import { close } from "./animation/close";
-import { decide } from "./animation/decide";
 import { open } from "./animation/open";
+import { popBatteryButton } from "./animation/pop-battery-button";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
 import { attention } from "./procedure/attention";
 import { batteryMinus } from "./procedure/battery-minus";
@@ -19,6 +20,7 @@ import {
   pushBatteryAdjustButtonsSilently,
   SilentlyBatteryAdjustOptions,
 } from "./procedure/push-battery-adjust-buttons-silently";
+import { stopAttention } from "./procedure/stop-attention";
 import { toBattery } from "./procedure/to-battery";
 import { BatterySelectorProps } from "./props/battery-selector-props";
 import {
@@ -64,7 +66,9 @@ export class BatterySelector {
    * @returns アニメーション
    */
   open(param: BatterySelectorOpenParam): Animate {
-    return open(this.#props, param);
+    return onStart(() => {
+      stopAttention(this.#props);
+    }).chain(open(this.#props, param));
   }
 
   /**
@@ -72,7 +76,7 @@ export class BatterySelector {
    * @returns アニメーション
    */
   decide(): Animate {
-    return decide(this.#props);
+    return popBatteryButton(this.#props);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { SignalContainer } from "../../../abort-controller/signal-container";
-import { batteryMinusPop } from "../animation/battery-minus-pop";
+import { popBatteryMinus } from "../animation/pop-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 
 /**
@@ -16,5 +16,5 @@ export async function playBatteryMinusPop(
   batteryMinusTween.update();
   batteryMinusTween.removeAll();
   const signal = options?.signal;
-  await batteryMinusPop(props).play({ group: batteryMinusTween, signal });
+  await popBatteryMinus(props).play({ group: batteryMinusTween, signal });
 }

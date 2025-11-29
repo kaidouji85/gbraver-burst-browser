@@ -8,7 +8,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function silentlyBatteryMinusPop(
+export function popBatteryMinusSilently(
   props: BatterySelectorAnimationProps,
 ): Animate {
   const { model } = props;
@@ -22,9 +22,9 @@ export function silentlyBatteryMinusPop(
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function batteryMinusPop(props: BatterySelectorAnimationProps): Animate {
+export function popBatteryMinus(props: BatterySelectorAnimationProps): Animate {
   const { sounds, se } = props;
   return onStart(() => {
     se.play(sounds.batteryChangeSound);
-  }).chain(silentlyBatteryMinusPop(props));
+  }).chain(popBatteryMinusSilently(props));
 }
