@@ -53,6 +53,10 @@ export class BatterySelector {
    */
   destructor(): void {
     this.#props.view.destructor();
+    this.#props.batteryChangeTween.removeAll();
+    this.#props.batteryMinusTween.removeAll();
+    this.#props.batteryPlusTween.removeAll();
+    this.#props.attentionTween.removeAll();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
