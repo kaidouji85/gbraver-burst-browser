@@ -13,4 +13,5 @@ export async function defenseDescription(
 ): Promise<void> {
   await focusInBatterySelector(props);
   activeNearBatterySelectorMessageWindow(props, props.defenseBatteryCaption);
+  props.view.hud.gameObjects.batterySelector.attention();
 }
