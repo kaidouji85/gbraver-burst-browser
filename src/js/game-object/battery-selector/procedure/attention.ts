@@ -15,6 +15,6 @@ export function attention(props: Readonly<BatterySelectorProps>): void {
     popBatteryMinusSilently(props),
     popBatteryButtonSilently(props, 1.05),
   )
-    .chain(delay(1000))
+    .chain(delay(1500))
     .loop(props.attentionTween);
 }
