@@ -4,41 +4,31 @@ import { tween } from "../../../animation/tween";
 import { BatterySelectorAnimationProps } from "./animation-props";
 
 /**
- * マイナスボタン ポップ 無音
+ * バッテリーボタンのポップ（音なし）
  * @param props アニメーションプロパティ
+ * @param maxScale ボタンの最大スケール
  * @returns アニメーション
  */
-export function silentlyBatteryMinusPop(
+export function popBatteryButtonSilently(
   props: BatterySelectorAnimationProps,
+  maxScale = 1.1,
 ): Animate {
   const { model } = props;
-  return tween(model, (t) =>
-    t.to(
-      {
-        minusButtonScale: 1.1,
-      },
-      100,
-    ),
-  ).chain(
-    tween(model, (t) =>
-      t.to(
-        {
-          minusButtonScale: 1,
-        },
-        100,
-      ),
-    ),
+  return tween(model, (t) => t.to({ batteryButtonScale: maxScale }, 100)).chain(
+    tween(model, (t) => t.to({ batteryButtonScale: 1 }, 100)),
   );
 }
 
 /**
- * マイナスボタン ポップ
+ * バッテリーボタンのポップ
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function batteryMinusPop(props: BatterySelectorAnimationProps): Animate {
+export function popBatteryButton(
+  props: BatterySelectorAnimationProps,
+): Animate {
   const { sounds, se } = props;
   return onStart(() => {
-    se.play(sounds.batteryChangeSound);
-  }).chain(silentlyBatteryMinusPop(props));
+    se.play(sounds.pushButtonSound);
+  }).chain(popBatteryButtonSilently(props));
 }
