@@ -9,28 +9,20 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * @returns アニメーション
  */
 export function decide(props: BatterySelectorAnimationProps): Animate {
-  const { model, sounds, se } = props;
+  const { sounds, se } = props;
   return onStart(() => {
     se.play(sounds.pushButtonSound);
-  })
-    .chain(
-      tween(model, (t) =>
-        t.to(
-          {
-            batteryButtonScale: 1.1,
-          },
-          100,
-        ),
-      ),
-    )
-    .chain(
-      tween(model, (t) =>
-        t.to(
-          {
-            batteryButtonScale: 1,
-          },
-          100,
-        ),
-      ),
-    );
+  }).chain(silentlyDecide(props));
+}
+
+/**
+ * バッテリー決定アニメーション（音なし）
+ * @param props アニメーションプロパティ
+ * @returns アニメーション
+ */
+export function silentlyDecide(props: BatterySelectorAnimationProps): Animate {
+  const { model } = props;
+  return tween(model, (t) => t.to({ batteryButtonScale: 1.1 }, 100)).chain(
+    tween(model, (t) => t.to({ batteryButtonScale: 1 }, 100)),
+  );
 }
