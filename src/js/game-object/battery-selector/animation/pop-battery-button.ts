@@ -6,6 +6,7 @@ import { BatterySelectorAnimationProps } from "./animation-props";
 /**
  * バッテリーボタンのポップ（音なし）
  * @param props アニメーションプロパティ
+ * @param maxScale ボタンの最大スケール
  * @returns アニメーション
  */
 export function popBatteryButtonSilently(
