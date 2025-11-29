@@ -8,9 +8,12 @@ import { BatterySelectorAnimationProps } from "./animation-props";
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function silentlyDecide(props: BatterySelectorAnimationProps): Animate {
+export function silentlyDecide(
+  props: BatterySelectorAnimationProps,
+  maxScale = 1.1,
+): Animate {
   const { model } = props;
-  return tween(model, (t) => t.to({ batteryButtonScale: 1.1 }, 100)).chain(
+  return tween(model, (t) => t.to({ batteryButtonScale: maxScale }, 100)).chain(
     tween(model, (t) => t.to({ batteryButtonScale: 1 }, 100)),
   );
 }
