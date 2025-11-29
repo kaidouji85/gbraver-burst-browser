@@ -7,6 +7,7 @@ import { close } from "./animation/close";
 import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
+import { attention } from "./procedure/attention";
 import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
@@ -126,6 +127,13 @@ export class BatterySelector {
     options?: SilentlyBatteryAdjustOptions,
   ): Promise<void> {
     await pushBatteryAdjustButtonsSilently(this.#props, battery, options);
+  }
+
+  /**
+   * 注目アニメーションを実行する
+   */
+  attention(): void {
+    attention(this.#props);
   }
 
   /**
