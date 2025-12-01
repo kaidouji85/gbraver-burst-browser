@@ -10,11 +10,14 @@ import { BatterySelectorProps } from "../props/battery-selector-props";
  * @param props プロパティ
  */
 export function attention(props: Readonly<BatterySelectorProps>): void {
-  all(
-    popBatteryPlusSilently(props),
-    popBatteryMinusSilently(props),
-    popBatteryButtonSilently(props, 1.05),
-  )
-    .chain(delay(1500))
+  delay(200)
+    .chain(
+      all(
+        popBatteryPlusSilently(props),
+        popBatteryMinusSilently(props),
+        popBatteryButtonSilently(props, 1.05),
+      ),
+    )
+    .chain(delay(1200))
     .loop(props.attentionTween);
 }
