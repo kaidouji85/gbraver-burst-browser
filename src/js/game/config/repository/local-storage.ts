@@ -25,9 +25,7 @@ const Keys = {
 };
 
 /** ブラウザ設定リポジトリのLocalStorage実装 */
-class LocalStorageConfigRepository
-  implements GBraverBurstBrowserConfigRepository
-{
+class LocalStorageConfigRepository implements GBraverBurstBrowserConfigRepository {
   /** @override */
   async save(config: GBraverBurstBrowserConfig): Promise<void> {
     localStorage.setItem(Keys.PlayerSelectorType, config.playerSelectorType);

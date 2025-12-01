@@ -26,9 +26,7 @@ import { createBattleSceneView } from "../view";
 
 /** 戦闘シーンで利用するレンダラ */
 export interface OwnRenderer
-  extends OverlapNotifier,
-    RendererDomGetter,
-    Rendering {}
+  extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** 戦闘シーンプロパティ生成関数のパラメータ */
 export type BattleScenePropsCreatorParams = BGMManagerContainer &
