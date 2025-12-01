@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 env:
-  NODE_JS_VERSION: 20.x
+  NODE_JS_VERSION: 24.x
 jobs:
   test:
     runs-on: ubuntu-latest
