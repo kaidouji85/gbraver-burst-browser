@@ -1,5 +1,4 @@
 import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../wait/wait-time";
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
@@ -14,7 +13,5 @@ export async function defenseDescription(
 ): Promise<void> {
   await focusInBatterySelector(props);
   activeNearBatterySelectorMessageWindow(props, props.defenseBatteryCaption);
-  const signal = props.abort.getAbortController().signal;
-  await waitTime(200, { signal });
   props.view.hud.gameObjects.batterySelector.attention();
 }
