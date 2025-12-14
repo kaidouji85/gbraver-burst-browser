@@ -25,6 +25,7 @@ export function createBatterySelectorProps(
     batteryChangeTween: new Group(),
     batteryMinusTween: new Group(),
     batteryPlusTween: new Group(),
+    attentionTween: new Group(),
     sounds: createBatterySelectorSounds(options.resources),
     view: new BatterySelectorView(options),
   };

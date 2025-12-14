@@ -29,7 +29,8 @@ import { GameActionManageContainer } from "./game-action-manage-container";
  * 本オブジェクトはゲーム管理オブジェクト内部、各種ヘルパーで利用することを想定している
  */
 export interface GameProps
-  extends BGMManagerContainer,
+  extends
+    BGMManagerContainer,
     ResourcesContainer,
     SEPlayerContainer,
     GameActionManageContainer,

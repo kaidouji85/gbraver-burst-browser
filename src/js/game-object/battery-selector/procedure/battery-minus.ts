@@ -3,6 +3,7 @@ import { canBatteryMinus } from "../model/can-battery-minus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 import { playBatteryMinusPop } from "./play-battery-minus-pop";
+import { stopAttention } from "./stop-attention";
 
 /**
  * バッテリーマイナス
@@ -20,6 +21,7 @@ export async function batteryMinus(
     return;
   }
 
+  stopAttention(props);
   await Promise.all([
     playBatteryMinusPop(props, options),
     batteryChange(props, model.battery - 1, options),

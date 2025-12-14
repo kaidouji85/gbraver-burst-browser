@@ -15,4 +15,6 @@ export type BatterySelectorProps = BatterySelectorAnimationProps & {
   batteryMinusTween: Group;
   /** +ボタンTweenGroup */
   batteryPlusTween: Group;
+  /** 注目アニメーションTweenGroup */
+  attentionTween: Group;
 };

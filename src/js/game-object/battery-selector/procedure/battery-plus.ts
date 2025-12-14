@@ -3,6 +3,7 @@ import { canBatteryPlus } from "../model/can-battery-plus";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 import { playBatteryPlusPop } from "./play-battery-plus-pop";
+import { stopAttention } from "./stop-attention";
 
 /**
  * バッテリープラス
@@ -20,6 +21,7 @@ export async function batteryPlus(
     return;
   }
 
+  stopAttention(props);
   await Promise.all([
     playBatteryPlusPop(props, options),
     batteryChange(props, model.battery + 1, options),

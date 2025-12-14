@@ -13,9 +13,7 @@ import { TDLayer } from "./td";
 
 /** 戦闘シーンビューで利用するレンダラ */
 export interface BattleSceneRender
-  extends OverlapNotifier,
-    RendererDomGetter,
-    Rendering {}
+  extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** 戦闘シーンビュー レイヤー関連プロパティ */
 export type BattleSceneLayers = {

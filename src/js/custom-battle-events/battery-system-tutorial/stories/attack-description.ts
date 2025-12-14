@@ -22,4 +22,5 @@ export async function attackDescription(
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
+  props.view.hud.gameObjects.batterySelector.attention();
 }

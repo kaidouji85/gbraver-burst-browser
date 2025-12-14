@@ -4,12 +4,13 @@ import * as THREE from "three";
 import { SignalContainer } from "../../abort-controller/signal-container";
 import { Animate } from "../../animation/animate";
 import { close } from "./animation/close";
-import { decide } from "./animation/decide";
 import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";
+import { attention } from "./procedure/attention";
 import { batteryMinus } from "./procedure/battery-minus";
 import { batteryPlus } from "./procedure/battery-plus";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { decide } from "./procedure/decide";
 import { notifyBatteryMinus } from "./procedure/notify-battery-minus";
 import { notifyBatteryPlus } from "./procedure/notify-battery-plus";
 import { notifyDecision } from "./procedure/notify-decision";
@@ -52,6 +53,10 @@ export class BatterySelector {
    */
   destructor(): void {
     this.#props.view.destructor();
+    this.#props.batteryChangeTween.removeAll();
+    this.#props.batteryMinusTween.removeAll();
+    this.#props.batteryPlusTween.removeAll();
+    this.#props.attentionTween.removeAll();
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
@@ -126,6 +131,13 @@ export class BatterySelector {
     options?: SilentlyBatteryAdjustOptions,
   ): Promise<void> {
     await pushBatteryAdjustButtonsSilently(this.#props, battery, options);
+  }
+
+  /**
+   * 注目アニメーションを実行する
+   */
+  attention(): void {
+    attention(this.#props);
   }
 
   /**

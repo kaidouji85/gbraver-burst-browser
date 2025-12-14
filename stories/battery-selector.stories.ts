@@ -59,6 +59,7 @@ const enabled =
         label,
       })
       .play();
+    selector.attention();
   };
 
 /** 攻撃 最大値5 */

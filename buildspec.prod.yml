@@ -12,6 +12,7 @@ env:
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
+    WS_API_DOMAIN_NAME: /GbraverBurst/prod/wsApiDomainName
     ASSETLINKS_JSON_URI: /GbraverBurst/prod/assetlinksJsonURI
     S3_BUCKET: /GbraverBurst/prod/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/prod/distributionId
@@ -34,6 +35,6 @@ phases:
       - npm ci
   build:
     commands:
-      - . ./buildspec-env
+      - export WEBSOCKET_API_URL="wss://${WS_API_DOMAIN_NAME}/${STAGE}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"
