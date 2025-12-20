@@ -73,7 +73,7 @@ export const changeMasterVolume =
 
 /**
  * ゲイン音量を変更する
- * @param gainVolume ゲイン音量
+ * @param gainVolume ゲイン音量、0〜1の範囲
  * @returns BGMオペレータ
  */
 export const changeGainVolume =
