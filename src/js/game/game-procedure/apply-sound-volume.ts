@@ -1,4 +1,4 @@
-import { changeVolume } from "../../bgm/bgm-operators";
+import { changeMasterVolume } from "../../bgm/bgm-operators";
 import { GBraverBurstBrowserConfig } from "../config/browser-config";
 import { GameProps } from "../game-props";
 
@@ -13,5 +13,5 @@ export async function applySoundVolume(
   config: GBraverBurstBrowserConfig,
 ): Promise<void> {
   props.se.volume = config.seVolume;
-  await props.bgm.do(changeVolume(config.bgmVolume));
+  await props.bgm.do(changeMasterVolume(config.bgmVolume));
 }
