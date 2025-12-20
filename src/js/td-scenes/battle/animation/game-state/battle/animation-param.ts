@@ -10,6 +10,7 @@ import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-spr
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import { TDCamera } from "../../../../../game-object/camera/td";
 import { SoundResource } from "../../../../../resource/sound/resource";
+import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDGameObjects } from "../../../view/td/game-objects";
@@ -25,7 +26,7 @@ import { StateAnimationProps } from "../state-animation-props";
 export type BattleAnimationParamX<
   SPRITE extends ArmdozerSprite,
   RESULT extends BattleResult,
-> = BGMManagerContainer & {
+> = BGMManagerContainer & SEPlayerContainer & {
   /** 攻撃側プレイヤーステート */
   readonly attackerState: PlayerState;
   /** 攻撃側TDプレイヤー */
@@ -140,6 +141,7 @@ function extractOthers(
     isDeath: battle.isDeath,
     result: battle.result,
     bgm: props.bgm,
+    se: props.se,
     battleEndBGM,
     bigExplosion: props.sounds.bigExplosion,
   };

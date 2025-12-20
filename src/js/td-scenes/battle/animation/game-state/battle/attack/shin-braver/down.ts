@@ -37,7 +37,8 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
           .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
+        param.defenderSprite.down()
+          .chain(onStart(() => param.se.play(param.bigExplosion))),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
