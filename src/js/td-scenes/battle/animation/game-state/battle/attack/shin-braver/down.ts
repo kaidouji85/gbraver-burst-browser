@@ -5,7 +5,7 @@ import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
 import { play, stop } from "../../../../../../../bgm/bgm-operators";
-import { toInitial } from "../../../../td-camera";
+import { shakeY, toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { ShinBraverBattle } from "./shin-braver-battle";
 
@@ -37,13 +37,8 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
         delay(700)
           .chain(all(
             onStart(() => param.se.play(param.bigExplosion)),
-            all(
-              param.tdCamera.move({ y: "-20" }, 200),
-              param.tdCamera.lookAt({ y: "-20" }, 200)
-            ).chain(all(
-              param.tdCamera.move({ y: "+10" }, 300),
-              param.tdCamera.lookAt({ y: "+10" }, 300)
-            )))),
+            shakeY(param.tdCamera),
+          )),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ));
