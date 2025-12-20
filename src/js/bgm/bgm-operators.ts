@@ -14,7 +14,7 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === "NowPlayingBGM") {
     const duration = 500;
     bgm.resource.sound.fade(
-      bgm.masterVolume * bgm.resource.volumeScale,
+      bgm.masterVolume * bgm.gainVolume * bgm.resource.volumeScale,
       0,
       duration,
     );
@@ -30,7 +30,7 @@ export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
     const duration = 500;
     bgm.resource.sound.fade(
       0,
-      bgm.masterVolume * bgm.resource.volumeScale,
+      bgm.masterVolume * bgm.gainVolume * bgm.resource.volumeScale,
       duration,
     );
     await waitTime(duration);
@@ -60,12 +60,34 @@ export const changeMasterVolume =
   (masterVolume: number) =>
   async (bgm: BGM): Promise<BGM> => {
     if (bgm.type === "NowPlayingBGM") {
-      bgm.resource.sound.volume(masterVolume * bgm.resource.volumeScale);
+      bgm.resource.sound.volume(
+        masterVolume * bgm.gainVolume * bgm.resource.volumeScale,
+      );
     }
 
     return {
       ...bgm,
       masterVolume,
+    };
+  };
+
+/**
+ * ゲイン音量を変更する
+ * @param gainVolume ゲイン音量
+ * @returns BGMオペレータ
+ */
+export const changeGainVolume =
+  (gainVolume: number) =>
+  async (bgm: BGM): Promise<BGM> => {
+    if (bgm.type === "NowPlayingBGM") {
+      bgm.resource.sound.volume(
+        bgm.masterVolume * gainVolume * bgm.resource.volumeScale,
+      );
+    }
+
+    return {
+      ...bgm,
+      gainVolume,
     };
   };
 
