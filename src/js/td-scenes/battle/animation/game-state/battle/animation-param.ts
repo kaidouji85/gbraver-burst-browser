@@ -58,6 +58,8 @@ export type BattleAnimationParamX<
   /** 戦闘結果 */
   readonly result: RESULT;
 
+  /** 大爆発音 */
+  readonly bigExplosion: SoundResource;
   /** バトル終了時のBGM */
   readonly battleEndBGM: SoundResource;
 };
@@ -139,6 +141,7 @@ function extractOthers(
     result: battle.result,
     bgm: props.bgm,
     battleEndBGM,
+    bigExplosion: props.sounds.bigExplosion,
   };
 }
 
