@@ -24,7 +24,7 @@ class SimpleBGMManager implements BGMManager {
   constructor() {
     this.#bgm = {
       type: "NoBGM",
-      bgmVolume: 1,
+      masterVolume: 1,
     };
     this.#lastOperation = Promise.resolve(this.#bgm);
   }

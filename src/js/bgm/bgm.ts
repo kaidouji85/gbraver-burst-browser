@@ -6,7 +6,7 @@ export type BGM = NowPlayingBGM | NoBGM;
 /** すべてのBGM状態で共通するプロパティ */
 type BGMStateProps = {
   /** 設定画面のBGM音量レベルをセットする */
-  readonly bgmVolume: number;
+  readonly masterVolume: number;
 };
 
 /** BGM再生中 */
