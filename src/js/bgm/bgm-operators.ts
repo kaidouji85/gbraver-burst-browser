@@ -1,6 +1,6 @@
-import type { SoundResource } from "../resource/sound/resource";
+import { SoundResource } from "../resource/sound/resource";
 import { waitTime } from "../wait/wait-time";
-import type { BGM } from "./bgm";
+import { BGM } from "./bgm";
 
 /**
  * BGMオペレータ
@@ -105,7 +105,9 @@ export const play =
     }
     resource.sound.play();
     resource.sound.loop(true);
-    resource.sound.volume(bgm.masterVolume * resource.volumeScale);
+    resource.sound.volume(
+      bgm.masterVolume * bgm.gainVolume * resource.volumeScale,
+    );
     return {
       ...bgm,
       type: "NowPlayingBGM",
