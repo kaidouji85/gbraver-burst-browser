@@ -31,13 +31,14 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
-        param.attackerHUD.resultIndicator
-          .slideIn()
-          .chain(delay(500))
-          .chain(param.attackerHUD.resultIndicator.moveToEdge()),
+        // param.attackerHUD.resultIndicator
+        //   .slideIn()
+        //   .chain(delay(500))
+        //   .chain(param.attackerHUD.resultIndicator.moveToEdge()),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down()
+        param.defenderSprite.down(),
+        delay(700)
           .chain(onStart(() => param.se.play(param.bigExplosion))),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
