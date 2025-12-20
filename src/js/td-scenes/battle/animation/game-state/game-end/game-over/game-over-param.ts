@@ -2,6 +2,7 @@ import { GameOver } from "gbraver-burst-core";
 
 import { BGMManagerContainer } from "../../../../../../bgm/bgm-manager";
 import { TDCamera } from "../../../../../../game-object/camera/td";
+import { SoundResource } from "../../../../../../resource/sound/resource";
 import { HUDPlayer } from "../../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../../view/td/game-objects";
@@ -20,6 +21,8 @@ export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> = Readonly<BGM
   readonly tdCamera: TDCamera;
   /** 3Dゲームオブジェクト */
   readonly tdGameObjects: TDGameObjects;
+  /** 戦闘終了BGM */
+  readonly battleEndBGM: SoundResource;
 };
 
 /** ゲームオーバー アニメーションパラメータ */
@@ -46,11 +49,16 @@ export function toGameOverParam(
     return null
   }
 
+  const isWinner = gameOver.winner === props.playerId;
+  const battleEndBGM = isWinner
+    ? props.sounds.victory
+    : props.sounds.lose;
   return {
     winnerTdArmdozer,
     winnerHUD,
     tdCamera: props.view.td.camera,
     tdGameObjects: props.view.td.gameObjects,
-    bgm: props.bgm
+    bgm: props.bgm,
+    battleEndBGM,
   };
 }
