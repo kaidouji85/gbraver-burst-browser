@@ -43,6 +43,7 @@ export class GenesisBraver
 {
   /** @override */
   downImpactDelay = 700;
+
   /** プロパティ */
   #props: GenesisBraverProps;
   /** アンサブスクライバ */
