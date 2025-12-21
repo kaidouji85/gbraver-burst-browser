@@ -54,14 +54,15 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  * @returns アニメーション
  */
 export function shakeY(camera: TDCamera): Animate {
-  const size = 20;
+  const amount = 20;
+  const duration = 200;
   return all(
-    camera.move({ y: `+${size}` }, 200),
-    camera.lookAt({ y: `+${size}` }, 200),
+    camera.move({ y: `+${amount}` }, duration),
+    camera.lookAt({ y: `+${amount}` }, duration),
   ).chain(
     all(
-      camera.move({ y: `-${size}` }, 200),
-      camera.lookAt({ y: `-${size}` }, 200),
+      camera.move({ y: `-${amount}` }, duration),
+      camera.lookAt({ y: `-${amount}` }, duration),
     ),
   );
 }
