@@ -16,7 +16,8 @@ export type StatusIconPosition = {
 export interface ArmdozerSprite {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: StatusIconPosition;
-
+  /** ダウンアニメーション開始から衝撃演出までの遅延時間(ミリ秒) */
+  readonly downImpactDelay: number;
   /**
    * デストラクタ相当の処理
    */
