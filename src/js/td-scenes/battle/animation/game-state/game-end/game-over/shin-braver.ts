@@ -30,9 +30,12 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
   return all(
     param.winnerTdArmdozer.shinBraver.guts(),
     focusToShinBraver(param),
-    delay(100).chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
-    param.winnerHUD.resultIndicator.slideIn()
-      .chain(delay(500))
+    param.winnerHUD.resultIndicator
+      .slideIn()
+      .chain(
+        delay(500),
+        onStart(() => param.bgm.do(play(param.battleEndBGM))),
+      )
       .chain(param.winnerHUD.resultIndicator.moveToEdge()),
   );
 }
