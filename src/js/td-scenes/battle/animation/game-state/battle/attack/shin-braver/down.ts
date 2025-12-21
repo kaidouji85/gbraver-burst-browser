@@ -25,12 +25,11 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        onStart(() => param.bgm.do(changeGainVolume(0.5))),
+        onStart(() => param.bgm.do(changeGainVolume(0.3)))
+          .chain(delay(100))
+          .chain(onStart(() => param.bgm.do(changeGainVolume(1)))),
         delay(1500)
-          .chain(
-            param.attackerSprite.punchToStand(),
-            onStart(() => param.bgm.do(changeGainVolume(1))),
-          )
+          .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
