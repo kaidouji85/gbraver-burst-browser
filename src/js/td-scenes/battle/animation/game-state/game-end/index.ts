@@ -12,7 +12,7 @@ import { gameOverAnimation } from "./game-over";
  * @param gameState ゲームの状態
  * @returns アニメーション
  */
-export default function gameEndAnimation(
+export function gameEndAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<GameEnd>,
 ): Animate {
