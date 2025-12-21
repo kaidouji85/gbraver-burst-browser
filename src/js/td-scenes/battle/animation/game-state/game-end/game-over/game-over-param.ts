@@ -12,18 +12,19 @@ import { StateAnimationProps } from "../../state-animation-props";
  * ゲームオーバー アニメーションパラメータ
  * @template TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
  */
-export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> = Readonly<BGMManagerContainer> & {
-  /** 勝利したアームドーザのTDオブジェクト */
-  readonly winnerTdArmdozer: TD_ARMDOZER;
-  /** 勝利したHUDプレイヤー */
-  readonly winnerHUD: HUDPlayer;
-  /** 3Dカメラ */
-  readonly tdCamera: TDCamera;
-  /** 3Dゲームオブジェクト */
-  readonly tdGameObjects: TDGameObjects;
-  /** 戦闘終了BGM */
-  readonly battleEndBGM: SoundResource;
-};
+export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> =
+  Readonly<BGMManagerContainer> & {
+    /** 勝利したアームドーザのTDオブジェクト */
+    readonly winnerTdArmdozer: TD_ARMDOZER;
+    /** 勝利したHUDプレイヤー */
+    readonly winnerHUD: HUDPlayer;
+    /** 3Dカメラ */
+    readonly tdCamera: TDCamera;
+    /** 3Dゲームオブジェクト */
+    readonly tdGameObjects: TDGameObjects;
+    /** 戦闘終了BGM */
+    readonly battleEndBGM: SoundResource;
+  };
 
 /** ゲームオーバー アニメーションパラメータ */
 export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
@@ -46,13 +47,11 @@ export function toGameOverParam(
     (v) => v.playerId === gameOver.winner,
   );
   if (winnerTdArmdozer == null || winnerHUD == null) {
-    return null
+    return null;
   }
 
   const isWinner = gameOver.winner === props.playerId;
-  const battleEndBGM = isWinner
-    ? props.sounds.victory
-    : props.sounds.lose;
+  const battleEndBGM = isWinner ? props.sounds.victory : props.sounds.lose;
   return {
     winnerTdArmdozer,
     winnerHUD,

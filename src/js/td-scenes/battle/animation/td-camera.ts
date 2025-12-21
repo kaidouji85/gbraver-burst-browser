@@ -50,16 +50,18 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 
 /**
  * カメラをY軸方向に揺らす
- * @param camera 
- * @returns 
+ * @param camera
+ * @returns
  */
 export function shakeY(camera: TDCamera): Animate {
   const size = 20;
   return all(
     camera.move({ y: `+${size}` }, 200),
-    camera.lookAt({ y: `+${size}` }, 200)
-  ).chain(all(
-    camera.move({ y: `-${size}` }, 200),
-    camera.lookAt({ y: `-${size}` }, 200)
-  ));
+    camera.lookAt({ y: `+${size}` }, 200),
+  ).chain(
+    all(
+      camera.move({ y: `-${size}` }, 200),
+      camera.lookAt({ y: `-${size}` }, 200),
+    ),
+  );
 }

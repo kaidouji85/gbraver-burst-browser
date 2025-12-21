@@ -10,33 +10,34 @@ import { HUDPlayer } from "../../../view/hud/player";
 import { TDPlayer } from "../../../view/td/player";
 
 /** ダメージ反射アニメーション パラメータ */
-export type ReflectAnimationParam = BGMManagerContainer & SEPlayerContainer & {
-  /** ダメージ反射効果 */
-  readonly effect: Reflect;
-  /** 引き分けのリザルトインジケーター */
-  readonly drawIndicator: ResultIndicator;
-  /** ダメージを受けた側 */
-  readonly damaged: {
-    /** ダメージ反射後のステート */
-    readonly state: PlayerState;
-    /** スプライト */
-    readonly sprite: ArmdozerSprite;
-    /** 3Dプレイヤーオブジェクト */
-    readonly td: TDPlayer;
-    /** HUDプレイヤーオブジェクト */
-    readonly hud: HUDPlayer;
-  };
-  /** ダメージ反射をした側 */
-  readonly reflecting: {
-    /** ダメージ反射後のステート */
-    readonly state: PlayerState;
-    /** HUDプレイヤーオブジェクト */
-    readonly hud: HUDPlayer;
-  };
+export type ReflectAnimationParam = BGMManagerContainer &
+  SEPlayerContainer & {
+    /** ダメージ反射効果 */
+    readonly effect: Reflect;
+    /** 引き分けのリザルトインジケーター */
+    readonly drawIndicator: ResultIndicator;
+    /** ダメージを受けた側 */
+    readonly damaged: {
+      /** ダメージ反射後のステート */
+      readonly state: PlayerState;
+      /** スプライト */
+      readonly sprite: ArmdozerSprite;
+      /** 3Dプレイヤーオブジェクト */
+      readonly td: TDPlayer;
+      /** HUDプレイヤーオブジェクト */
+      readonly hud: HUDPlayer;
+    };
+    /** ダメージ反射をした側 */
+    readonly reflecting: {
+      /** ダメージ反射後のステート */
+      readonly state: PlayerState;
+      /** HUDプレイヤーオブジェクト */
+      readonly hud: HUDPlayer;
+    };
 
-  /** 3Dカメラ */
-  readonly tdCamera: TDCamera;
+    /** 3Dカメラ */
+    readonly tdCamera: TDCamera;
 
-  /** 大爆発SE */
-  readonly bigExplosion: SoundResource;
-};
+    /** 大爆発SE */
+    readonly bigExplosion: SoundResource;
+  };

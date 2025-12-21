@@ -26,44 +26,45 @@ import { StateAnimationProps } from "../state-animation-props";
 export type BattleAnimationParamX<
   SPRITE extends ArmdozerSprite,
   RESULT extends BattleResult,
-> = BGMManagerContainer & SEPlayerContainer & {
-  /** 攻撃側プレイヤーステート */
-  readonly attackerState: PlayerState;
-  /** 攻撃側TDプレイヤー */
-  readonly attackerTD: TDPlayer;
-  /** 攻撃側HUDプレイヤー */
-  readonly attackerHUD: HUDPlayer;
-  /** 攻撃側スプライト */
-  readonly attackerSprite: SPRITE;
+> = BGMManagerContainer &
+  SEPlayerContainer & {
+    /** 攻撃側プレイヤーステート */
+    readonly attackerState: PlayerState;
+    /** 攻撃側TDプレイヤー */
+    readonly attackerTD: TDPlayer;
+    /** 攻撃側HUDプレイヤー */
+    readonly attackerHUD: HUDPlayer;
+    /** 攻撃側スプライト */
+    readonly attackerSprite: SPRITE;
 
-  /** 防御側プレイヤーステート */
-  readonly defenderState: PlayerState;
-  /** 防御側TDプレイヤー */
-  readonly defenderTD: TDPlayer;
-  /** 防御側HUDプレイヤー */
-  readonly defenderHUD: HUDPlayer;
-  /** 防御側スプライト */
-  readonly defenderSprite: ArmdozerSprite;
+    /** 防御側プレイヤーステート */
+    readonly defenderState: PlayerState;
+    /** 防御側TDプレイヤー */
+    readonly defenderTD: TDPlayer;
+    /** 防御側HUDプレイヤー */
+    readonly defenderHUD: HUDPlayer;
+    /** 防御側スプライト */
+    readonly defenderSprite: ArmdozerSprite;
 
-  /** TDオブジェクト */
-  readonly tdObjects: TDGameObjects;
-  /** TDカメラ */
-  readonly tdCamera: TDCamera;
-  /** HUDオブジェクト */
-  readonly hudObjects: HUDGameObjects;
-  /** HUDカメラ */
-  readonly hudCamera: PlainHUDCamera;
+    /** TDオブジェクト */
+    readonly tdObjects: TDGameObjects;
+    /** TDカメラ */
+    readonly tdCamera: TDCamera;
+    /** HUDオブジェクト */
+    readonly hudObjects: HUDGameObjects;
+    /** HUDカメラ */
+    readonly hudCamera: PlainHUDCamera;
 
-  /** 死亡フラグ */
-  readonly isDeath: boolean;
-  /** 戦闘結果 */
-  readonly result: RESULT;
+    /** 死亡フラグ */
+    readonly isDeath: boolean;
+    /** 戦闘結果 */
+    readonly result: RESULT;
 
-  /** 大爆発音 */
-  readonly bigExplosion: SoundResource;
-  /** バトル終了時のBGM */
-  readonly battleEndBGM: SoundResource;
-};
+    /** 大爆発音 */
+    readonly bigExplosion: SoundResource;
+    /** バトル終了時のBGM */
+    readonly battleEndBGM: SoundResource;
+  };
 
 /** 戦闘アニメーション共通で使うパラメータ */
 export type BattleAnimationParam = BattleAnimationParamX<

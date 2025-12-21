@@ -41,6 +41,9 @@ export class LightningDozer
   extends EmptyArmdozerSprite
   implements ArmdozerSprite
 {
+  /** @override */
+  downImpactDelay = 700;
+
   /** プロパティ */
   #props: LightningDozerProps;
   /** アンサブスクライバ */
