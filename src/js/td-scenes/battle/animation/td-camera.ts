@@ -50,7 +50,7 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 
 /**
  * カメラをY軸方向に揺らす
- * @param camera
+ * @param camera カメラ
  * @returns アニメーション
  */
 export function shakeY(camera: TDCamera): Animate {
