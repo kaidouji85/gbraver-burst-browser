@@ -24,7 +24,7 @@ import { pilotSkillAnimation } from "./pilot-skill";
 import { reflectAnimation } from "./reflect";
 import { rightItselfAnimation } from "./right-itself";
 import { startGameAnimation } from "./start-game";
-import type { StateAnimationProps } from "./state-animation-props";
+import { StateAnimationProps } from "./state-animation-props";
 import { turnChangeAnimation } from "./turn-change";
 import { updateRemainingTurnAnimation } from "./update-remaining-turn";
 

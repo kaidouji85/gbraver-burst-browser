@@ -1,7 +1,10 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
+import { delay } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play } from "../../../../../../bgm/bgm-operators";
 import { WingDozerTD } from "../../../../view/td/armdozer-objects/wing-dozer";
-import type { GameOverParamX } from "./game-over-param";
+import { GameOverParamX } from "./game-over-param";
 
 /**
  * ウィングドーザにフォーカスを合わせる
@@ -24,5 +27,15 @@ function focusToWingDozer(param: GameOverParamX<WingDozerTD>): Animate {
  * @returns アニメーション
  */
 export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
-  return all(param.winnerTdArmdozer.wingDozer.dash(), focusToWingDozer(param));
+  return all(
+    param.winnerTdArmdozer.wingDozer.dash(),
+    focusToWingDozer(param),
+    param.winnerHUD.resultIndicator
+      .slideIn()
+      .chain(
+        delay(500),
+        onStart(() => param.bgm.do(play(param.battleEndBGM))),
+      )
+      .chain(param.winnerHUD.resultIndicator.moveToEdge()),
+  );
 }

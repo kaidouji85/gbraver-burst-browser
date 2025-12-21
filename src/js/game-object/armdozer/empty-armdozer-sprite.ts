@@ -22,6 +22,9 @@ export class EmptyArmdozerSprite implements ArmdozerSprite {
   };
 
   /** @override */
+  downImpactDelay = 700;
+
+  /** @override */
   destructor(): void {
     // NOP
   }

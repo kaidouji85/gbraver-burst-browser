@@ -1,7 +1,10 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
+import { delay } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play } from "../../../../../../bgm/bgm-operators";
 import { ShinBraverTD } from "../../../../view/td/armdozer-objects/shin-braver";
-import type { GameOverParamX } from "./game-over-param";
+import { GameOverParamX } from "./game-over-param";
 
 /**
  * シンブレイバーにフォーカスを合わせる
@@ -27,5 +30,12 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
   return all(
     param.winnerTdArmdozer.shinBraver.guts(),
     focusToShinBraver(param),
+    param.winnerHUD.resultIndicator
+      .slideIn()
+      .chain(
+        delay(500),
+        onStart(() => param.bgm.do(play(param.battleEndBGM))),
+      )
+      .chain(param.winnerHUD.resultIndicator.moveToEdge()),
   );
 }
