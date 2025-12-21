@@ -25,9 +25,6 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        onStart(() => param.bgm.do(changeGainVolume(0.3)))
-          .chain(delay(100))
-          .chain(onStart(() => param.bgm.do(changeGainVolume(1)))),
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
           .chain(delay(500)),
@@ -36,6 +33,7 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
         param.defenderSprite.down(),
         delay(param.defenderSprite.downImpactDelay).chain(
           all(
+            onStart(() => param.bgm.do(changeGainVolume(0))),
             onStart(() => param.se.play(param.bigExplosion)),
             shakeY(param.tdCamera),
           ),
@@ -43,5 +41,6 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ),
-    );
+    )
+    .chain(onStart(() => param.bgm.do(changeGainVolume(1))));
 }
