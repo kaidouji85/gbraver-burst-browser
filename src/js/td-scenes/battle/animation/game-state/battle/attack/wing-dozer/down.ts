@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { changeGainVolume, play } from "../../../../../../../bgm/bgm-operators";
+import { changeGainVolume } from "../../../../../../../bgm/bgm-operators";
 import { shakeY, toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { WingDozerBattle } from "./wing-dozer-battle";
