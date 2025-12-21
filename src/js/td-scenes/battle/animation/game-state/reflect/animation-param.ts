@@ -2,13 +2,15 @@ import { PlayerState, Reflect } from "gbraver-burst-core";
 
 import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
 import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { TDCamera } from "../../../../../game-object/camera/td";
 import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
 import { SoundResource } from "../../../../../resource/sound/resource";
+import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDPlayer } from "../../../view/td/player";
 
 /** ダメージ反射アニメーション パラメータ */
-export type ReflectAnimationParam = BGMManagerContainer & {
+export type ReflectAnimationParam = BGMManagerContainer & SEPlayerContainer & {
   /** ダメージ反射効果 */
   readonly effect: Reflect;
   /** 引き分けのリザルトインジケーター */
@@ -31,6 +33,10 @@ export type ReflectAnimationParam = BGMManagerContainer & {
     /** HUDプレイヤーオブジェクト */
     readonly hud: HUDPlayer;
   };
-  /** バトル終了BGM */
-  readonly battleEndBGM: SoundResource;
+
+  /** 3Dカメラ */
+  readonly tdCamera: TDCamera;
+
+  /** 大爆発SE */
+  readonly bigExplosion: SoundResource;
 };

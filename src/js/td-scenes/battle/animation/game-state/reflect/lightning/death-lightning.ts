@@ -2,7 +2,8 @@ import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { delay } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
-import { play, stop } from "../../../../../../bgm/bgm-operators";
+import { changeGainVolume } from "../../../../../../bgm/bgm-operators";
+import { shakeY } from "../../../td-camera";
 import { ReflectAnimationParam } from "../animation-param";
 
 /**
@@ -12,19 +13,21 @@ import { ReflectAnimationParam } from "../animation-param";
  */
 export const deathLightning = (param: ReflectAnimationParam): Animate =>
   all(
-    onStart(() => param.bgm.do(stop))
-      .chain(delay(100))
-      .chain(onStart(() => param.bgm.do(play(param.battleEndBGM)))),
-    param.reflecting.hud.resultIndicator
-      .slideIn()
-      .chain(delay(700))
-      .chain(param.reflecting.hud.resultIndicator.moveToEdge()),
+    onStart(() => param.bgm.do(changeGainVolume(0.5))),
     param.damaged.td.hitMark.lightning.popUp(),
-    delay(100).chain(
-      all(
-        param.damaged.sprite.down(),
-        param.damaged.td.damageIndicator.popUp(param.effect.damage),
-        param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
-      ),
-    ),
+    delay(100)
+      .chain(
+        all(
+          param.damaged.sprite.down(),
+          delay(param.damaged.sprite.downImpactDelay).chain(
+            all(
+              onStart(() => param.se.play(param.bigExplosion)),
+              shakeY(param.tdCamera),
+            ),
+          ),
+          param.damaged.td.damageIndicator.popUp(param.effect.damage),
+          param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
+        ),
+      )
+      .chain(onStart(() => param.bgm.do(changeGainVolume(1)))),
   );
