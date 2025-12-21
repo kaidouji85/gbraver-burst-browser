@@ -3,6 +3,7 @@ import { GameEnd, GameStateX } from "gbraver-burst-core";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
+import { evenMatchAnimation } from "./even-match";
 import { gameOverAnimation } from "./game-over";
 
 /**
@@ -11,7 +12,7 @@ import { gameOverAnimation } from "./game-over";
  * @param gameState ゲームの状態
  * @returns アニメーション
  */
-export function gameEndAnimation(
+export default function gameEndAnimation(
   props: StateAnimationProps,
   gameState: GameStateX<GameEnd>,
 ): Animate {
@@ -22,6 +23,8 @@ export function gameEndAnimation(
         ...gameState,
         effect: { ...gameState.effect, result },
       });
+    case "EvenMatch":
+      return evenMatchAnimation(props);
     default:
       return empty();
   }

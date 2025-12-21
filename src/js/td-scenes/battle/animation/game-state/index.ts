@@ -18,7 +18,7 @@ import { empty } from "../../../../animation/delay";
 import { batteryDeclarationAnimation } from "./battery-declaration";
 import { battleAnimation } from "./battle";
 import { burstAnimation } from "./burst";
-import { gameEndAnimation } from "./game-end";
+import gameEndAnimation from "./game-end";
 import { inputCommandAnimation } from "./input-command";
 import { pilotSkillAnimation } from "./pilot-skill";
 import { reflectAnimation } from "./reflect";
