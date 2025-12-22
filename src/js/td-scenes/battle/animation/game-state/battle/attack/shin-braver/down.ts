@@ -27,7 +27,7 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
       all(
         delay(1500)
           .chain(param.attackerSprite.punchToStand())
-          .chain(delay(500)),
+          .chain(delay(600)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),

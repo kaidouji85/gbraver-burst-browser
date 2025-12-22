@@ -39,7 +39,7 @@ type NeoLandozerParams = PropsCreatorParams & {
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
-  downImpactDelay = 700;
+  downImpactDelay = 800;
 
   /** プロパティ */
   #props: NeoLandozerProps;

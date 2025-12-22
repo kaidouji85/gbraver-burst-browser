@@ -41,7 +41,7 @@ type ShinBraverParams = PropsCreatorParams & {
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
-  downImpactDelay = 700;
+  downImpactDelay = 800;
 
   /** プロパティ */
   #props: ShinBraverProps;
