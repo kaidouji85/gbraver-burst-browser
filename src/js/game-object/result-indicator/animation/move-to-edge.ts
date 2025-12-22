@@ -2,9 +2,9 @@ import { Easing } from "@tweenjs/tween.js";
 
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
-import { tween } from "../../../animation/tween";
-import type { ResultIndicatorModel } from "../model/result-indicator-model";
 import { onStart } from "../../../animation/on-start";
+import { tween } from "../../../animation/tween";
+import { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
  * 画面端に移動する
