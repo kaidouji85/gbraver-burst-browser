@@ -8,7 +8,6 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
  * スライドイン表示
- *
  * @param model モデル
  * @returns アニメーション
  */

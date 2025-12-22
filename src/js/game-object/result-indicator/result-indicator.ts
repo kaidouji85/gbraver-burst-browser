@@ -2,14 +2,14 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
-import type { PreRender } from "../../game-loop/pre-render";
-import type { GameObjectAction } from "../action/game-object-action";
+import { PreRender } from "../../game-loop/pre-render";
+import { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { moveToEdge } from "./animation/move-to-edge";
 import { slideIn } from "./animation/slide-in";
 import { createInitialValue } from "./model/initial-value";
-import type { ResultIndicatorModel } from "./model/result-indicator-model";
-import type { ResultIndicatorView } from "./view/result-indicator-view";
+import { ResultIndicatorModel } from "./model/result-indicator-model";
+import { ResultIndicatorView } from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -19,7 +19,6 @@ export class ResultIndicator {
 
   /**
    * コンストラクタ
-   *
    * @param view ビュー
    * @param gameObjectAction ゲームオブジェクトアクション
    */
@@ -46,7 +45,6 @@ export class ResultIndicator {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @returns 取得結果
    */
   getObject3D(): THREE.Object3D {
@@ -71,7 +69,6 @@ export class ResultIndicator {
 
   /**
    * 非表示
-   *
    * @returns アニメーション
    */
   hidden(): Animate {
@@ -80,7 +77,6 @@ export class ResultIndicator {
 
   /**
    * PreRender時の処理
-   *
    * @param action PreRender情報
    */
   #onPreRender(action: PreRender): void {
