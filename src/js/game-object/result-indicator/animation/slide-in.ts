@@ -25,24 +25,10 @@ export function slideIn(model: ResultIndicatorModel): Animate {
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
-        t
-          .to(
-            {
-              x: `+${distance}`,
-            },
-            duration,
-          )
-          .easing(Easing.Quadratic.Out),
+        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.Out),
       ),
       tween(model, (t) =>
-        t
-          .to(
-            {
-              opacity: 1,
-            },
-            duration,
-          )
-          .easing(Easing.Quadratic.Out),
+        t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.Out),
       ),
     ),
   );

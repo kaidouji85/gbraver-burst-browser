@@ -55,7 +55,6 @@ export class ResultIndicator {
 
   /**
    * スライドイン表示
-   *
    * @returns アニメーション
    */
   slideIn(): Animate {
@@ -64,7 +63,6 @@ export class ResultIndicator {
 
   /**
    * 画面端に移動する
-   *
    * @returns アニメーション
    */
   moveToEdge(): Animate {
