@@ -35,8 +35,8 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
       .chain(delay(500))
       .chain(
         all(
-          onStart(() => param.bgm.do(play(param.battleEndBGM))),
           param.winnerHUD.resultIndicator.moveToEdge(),
+          onStart(() => param.bgm.do(play(param.battleEndBGM))),
         ),
       ),
   );
