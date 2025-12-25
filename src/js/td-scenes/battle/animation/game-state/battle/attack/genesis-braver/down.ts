@@ -25,9 +25,7 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(
       all(
-        delay(1800)
-          .chain(param.attackerSprite.spToStand())
-          .chain(delay(500)),
+        delay(1800).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
