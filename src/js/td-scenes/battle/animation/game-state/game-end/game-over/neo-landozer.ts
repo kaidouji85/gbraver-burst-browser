@@ -32,10 +32,12 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
     focusToNeoLandozer(param),
     param.winnerHUD.resultIndicator
       .slideIn()
+      .chain(delay(500))
       .chain(
-        delay(500),
-        onStart(() => param.bgm.do(play(param.battleEndBGM))),
-      )
-      .chain(param.winnerHUD.resultIndicator.moveToEdge()),
+        all(
+          param.winnerHUD.resultIndicator.moveToEdge(),
+          onStart(() => param.bgm.do(play(param.battleEndBGM))),
+        ),
+      ),
   );
 }
