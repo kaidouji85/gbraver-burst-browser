@@ -42,7 +42,7 @@ export class LightningDozer
   implements ArmdozerSprite
 {
   /** @override */
-  downImpactDelay = 700;
+  downImpactDelay = 800;
 
   /** プロパティ */
   #props: LightningDozerProps;

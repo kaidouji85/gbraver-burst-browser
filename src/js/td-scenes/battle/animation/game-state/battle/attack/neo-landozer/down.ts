@@ -4,7 +4,7 @@ import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
 import { delay } from "../../../../../../../animation/delay";
 import { onStart } from "../../../../../../../animation/on-start";
-import { changeGainVolume } from "../../../../../../../bgm/bgm-operators";
+import { stop } from "../../../../../../../bgm/bgm-operators";
 import { shakeY, toInitial } from "../../../../td-camera";
 import { focusToAttacker } from "./focus-to-attacker";
 import { NeoLandozerBattle } from "./neo-landozer-battle";
@@ -25,18 +25,13 @@ export function down(param: NeoLandozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(
       all(
-        onStart(() => param.bgm.do(changeGainVolume(0.5))),
-        delay(1500)
-          .chain(
-            param.attackerSprite.hmToStand(),
-            onStart(() => param.bgm.do(changeGainVolume(1))),
-          )
-          .chain(delay(500)),
+        delay(1800).chain(param.attackerSprite.hmToStand()).chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         delay(param.defenderSprite.downImpactDelay).chain(
           all(
+            onStart(() => param.bgm.do(stop)),
             onStart(() => param.se.play(param.bigExplosion)),
             shakeY(param.tdCamera),
           ),

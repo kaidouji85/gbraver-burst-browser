@@ -12,12 +12,10 @@ import { StateAnimationProps } from "../state-animation-props";
  */
 export function evenMatchAnimation(props: StateAnimationProps): Animate {
   return all(
+    onStart(() => props.bgm.do(play(props.sounds.lose))),
     props.view.hud.gameObjects.drawIndicator
       .slideIn()
-      .chain(
-        delay(500),
-        onStart(() => props.bgm.do(play(props.sounds.lose))),
-      )
+      .chain(delay(500))
       .chain(props.view.hud.gameObjects.drawIndicator.moveToEdge()),
   );
 }

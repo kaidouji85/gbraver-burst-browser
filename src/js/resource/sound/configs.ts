@@ -69,7 +69,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     type: "Shared",
     id: SOUND_IDS.BIG_EXPLOSION,
     path: (resourceRoot) => `${resourceRoot.get()}/sounds/big-explosion.mp3`,
-    volumeScale: 0.3,
+    volumeScale: 0.4,
   },
   {
     type: "Boot",
