@@ -36,7 +36,7 @@ export function lightningDozerWin(
     focusToLightningDozer(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(600))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),

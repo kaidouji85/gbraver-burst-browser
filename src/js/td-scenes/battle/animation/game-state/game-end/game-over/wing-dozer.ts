@@ -32,7 +32,7 @@ export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
     focusToWingDozer(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(600))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),
