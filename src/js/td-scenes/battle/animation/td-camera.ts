@@ -58,17 +58,17 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  */
 export function shakeY(camera: TDCamera): Animate {
   const amount = 70;
-  const inDuration = 120;
-  const outDuration = 120;
+  const upDuration = 120;
+  const downDuration = 120;
   return all(
-    camera.move({ y: `+${amount}` }, inDuration, Easing.Quadratic.In),
-    camera.lookAt({ y: `+${amount}` }, inDuration, Easing.Quadratic.In),
+    camera.move({ y: `+${amount}` }, upDuration, Easing.Quadratic.In),
+    camera.lookAt({ y: `+${amount}` }, upDuration, Easing.Quadratic.In),
   )
     .chain(delay(50))
     .chain(
       all(
-        camera.move({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
-        camera.lookAt({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
+        camera.move({ y: `-${amount}` }, downDuration, Easing.Quadratic.Out),
+        camera.lookAt({ y: `-${amount}` }, downDuration, Easing.Quadratic.Out),
       ),
     );
 }
