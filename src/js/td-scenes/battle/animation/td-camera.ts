@@ -63,11 +63,12 @@ export function shakeY(camera: TDCamera): Animate {
   return all(
     camera.move({ y: `+${amount}` }, inDuration, Easing.Quadratic.In),
     camera.lookAt({ y: `+${amount}` }, inDuration, Easing.Quadratic.In),
-  ).chain(delay(50))
-  .chain(
-    all(
-      camera.move({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
-      camera.lookAt({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
-    ),
-  );
+  )
+    .chain(delay(50))
+    .chain(
+      all(
+        camera.move({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
+        camera.lookAt({ y: `-${amount}` }, outDuration, Easing.Quadratic.Out),
+      ),
+    );
 }
