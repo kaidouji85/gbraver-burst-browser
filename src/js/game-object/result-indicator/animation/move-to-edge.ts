@@ -11,7 +11,7 @@ import { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 500;
+  const duration = 350;
   return all(
     tween(model.worldCoordinate, (t) =>
       t.to({ x: -1, y: 1 }, duration).easing(Easing.Quadratic.InOut),
