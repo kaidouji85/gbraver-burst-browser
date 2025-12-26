@@ -14,10 +14,10 @@ export function moveToEdge(model: ResultIndicatorModel): Animate {
   const duration = 400;
   return all(
     tween(model.worldCoordinate, (t) =>
-      t.to({ x: -1, y: 1 }, duration).easing(Easing.Quadratic.InOut),
+      t.to({ x: -1, y: 1 }, duration).easing(Easing.Quadratic.Out),
     ),
     tween(model, (t) =>
-      t.to({ scale: 1 }, duration).easing(Easing.Quadratic.InOut),
+      t.to({ scale: 1 }, duration).easing(Easing.Quadratic.Out),
     ),
   );
 }
