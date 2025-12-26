@@ -3,29 +3,31 @@ import * as THREE from "three";
 
 import { Animate } from "../../../animation/animate";
 import { onResizePerspectiveCamera } from "../../../camera/resize";
-import type { Update } from "../../../game-loop/update";
+import { Update } from "../../../game-loop/update";
 import {
   getViewPortHeight,
   getViewPortWidth,
 } from "../../../view-port/view-port-size";
-import type { Resize } from "../../../window/resize";
+import { Resize } from "../../../window/resize";
 import { lookAt } from "./animation/look-at";
 import { move } from "./animation/move";
 import { engage } from "./engauge";
 import { createInitialValue } from "./model/initial-value";
-import type { Battle3DCameraModel } from "./model/model";
-import type { Position } from "./position";
+import { Battle3DCameraModel } from "./model/model";
+import { Position } from "./position";
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
+  /** モデル */
   #model: Battle3DCameraModel;
+  /** カメラ */
   #camera: THREE.PerspectiveCamera;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable[];
 
   /**
    * コンストラクタ
-   *
    * @param update Updateストリーム
    * @param resize リサイズストリーム
    */
@@ -54,29 +56,36 @@ export class TDCamera {
 
   /**
    * カメラ視点を移動する
-   *
    * @param position 移動先座標
    * @param duration 移動時間
+   * @param easing イージング関数
    * @returns アニメーション
    */
-  lookAt(position: Position, duration: number): Animate {
-    return lookAt(this.#model, position, duration);
+  lookAt(
+    position: Position,
+    duration: number,
+    easing?: (amount: number) => number,
+  ): Animate {
+    return lookAt(this.#model, position, duration, easing);
   }
 
   /**
    *カメラを移動する
-   *
    * @param position 移動先座標
    * @param duration 移動時間
+   * @param easing イージング関数
    * @returns アニメーション
    */
-  move(position: Position, duration: number): Animate {
-    return move(this.#model, position, duration);
+  move(
+    position: Position,
+    duration: number,
+    easing?: (amount: number) => number,
+  ): Animate {
+    return move(this.#model, position, duration, easing);
   }
 
   /**
    * カメラを取得する
-   *
    * @returns カメラ
    */
   getCamera(): THREE.PerspectiveCamera {
@@ -85,7 +94,6 @@ export class TDCamera {
 
   /**
    * リサイズ時の処理
-   *
    * @param action アクション
    */
   #resize(action: Resize): void {
