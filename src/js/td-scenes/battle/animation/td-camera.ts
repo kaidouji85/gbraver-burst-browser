@@ -1,3 +1,5 @@
+import { Easing } from "@tweenjs/tween.js";
+
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { TDCamera } from "../../../game-object/camera/td";
@@ -55,14 +57,14 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  */
 export function shakeY(camera: TDCamera): Animate {
   const amount = 70;
-  const duration = 150;
+  const duration = 160;
   return all(
-    camera.move({ y: `+${amount}` }, duration),
-    camera.lookAt({ y: `+${amount}` }, duration),
+    camera.move({ y: `+${amount}` }, duration, Easing.Quadratic.Out),
+    camera.lookAt({ y: `+${amount}` }, duration, Easing.Quadratic.Out),
   ).chain(
     all(
-      camera.move({ y: `-${amount}` }, duration),
-      camera.lookAt({ y: `-${amount}` }, duration),
+      camera.move({ y: `-${amount}` }, duration, Easing.Quadratic.In),
+      camera.lookAt({ y: `-${amount}` }, duration, Easing.Quadratic.In),
     ),
   );
 }
