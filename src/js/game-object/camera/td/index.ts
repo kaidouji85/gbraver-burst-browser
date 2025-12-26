@@ -70,7 +70,7 @@ export class TDCamera {
   }
 
   /**
-   *カメラを移動する
+   * カメラを移動する
    * @param position 移動先座標
    * @param duration 移動時間
    * @param easing イージング関数

@@ -7,8 +7,8 @@ import { Position } from "../position";
  * カメラ視点を移動させる
  *
  * @param model モデル
- * @param duration 移動時間
  * @param position 移動先座標
+ * @param duration 移動時間
  * @param easing イージング関数
  * @returns アニメーション
  */
