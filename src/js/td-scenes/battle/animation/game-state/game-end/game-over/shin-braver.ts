@@ -32,7 +32,7 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
     focusToShinBraver(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(300))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),

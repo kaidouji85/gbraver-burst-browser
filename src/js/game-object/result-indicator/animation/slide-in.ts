@@ -12,7 +12,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function slideIn(model: ResultIndicatorModel): Animate {
-  const duration = 100;
+  const duration = 300;
   const distance = 50;
   return onStart(() => {
     model.opacity = 0;
@@ -24,10 +24,10 @@ export function slideIn(model: ResultIndicatorModel): Animate {
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
-        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.In),
+        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.InOut),
       ),
       tween(model, (t) =>
-        t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.In),
+        t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.InOut),
       ),
     ),
   );
