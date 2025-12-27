@@ -32,7 +32,7 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
     focusToNeoLandozer(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(300))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),
