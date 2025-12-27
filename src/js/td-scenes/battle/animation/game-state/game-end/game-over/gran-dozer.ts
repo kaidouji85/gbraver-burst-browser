@@ -32,7 +32,7 @@ export function granDozerWin(param: GameOverParamX<GranDozerTD>): Animate {
     focusToGranDozer(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(450))
+      .chain(delay(200))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),
