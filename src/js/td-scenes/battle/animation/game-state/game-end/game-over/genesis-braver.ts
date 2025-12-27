@@ -34,7 +34,7 @@ export function genesisBraverWin(
     focusToGenesisBraver(param),
     param.winnerHUD.resultIndicator
       .slideIn()
-      .chain(delay(500))
+      .chain(delay(200))
       .chain(
         all(
           param.winnerHUD.resultIndicator.moveToEdge(),

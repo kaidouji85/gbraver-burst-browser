@@ -11,13 +11,13 @@ import { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 400;
+  const duration = 500;
   return all(
     tween(model.worldCoordinate, (t) =>
-      t.to({ x: -1, y: 1 }, duration).easing(Easing.Quadratic.Out),
+      t.to({ x: -1, y: 1 }, duration).easing(Easing.Quadratic.InOut),
     ),
     tween(model, (t) =>
-      t.to({ scale: 1 }, duration).easing(Easing.Quadratic.Out),
+      t.to({ scale: 1 }, duration).easing(Easing.Quadratic.InOut),
     ),
   );
 }
