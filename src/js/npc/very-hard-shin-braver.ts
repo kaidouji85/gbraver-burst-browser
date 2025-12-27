@@ -1,7 +1,9 @@
 import {
   ArmdozerIds,
   Armdozers,
+  burst,
   Command,
+  invokeBurst,
   PilotIds,
   Pilots,
 } from "gbraver-burst-core";
@@ -25,34 +27,55 @@ const ZERO_BATTERY: Command = {
  * @param data ルーチンに渡されるデータ
  * @returns 攻撃ルーチンの条件判断オブジェクト
  */
-const getAttackRoutineConditions = (data: SimpleRoutineData) => ({
-  burst: data.commands.find((v) => v.type === "BURST_COMMAND"),
-  isBuffedPower: data.enemy.armdozer.effects.some(
-    (e) => e.type === "CorrectPower",
-  ),
-  minimumBeatDownBattery: getMinimumBeatDownBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  ),
-  minimumGuardBattery: getMinimumGuardBattery(
-    data.enemy,
-    data.player,
-    data.player.armdozer.battery,
-  ),
-});
+const getAttackRoutineConditions = (data: SimpleRoutineData) => {
+  const playerStatusIfBurst = data.player.armdozer.enableBurst
+    ? invokeBurst({
+        burst: data.player.armdozer.burst,
+        invoker: data.player,
+        other: data.enemy,
+      }).invoker
+    : data.enemy;
+  return {
+    burst: data.commands.find((v) => v.type === "BURST_COMMAND"),
+    isBuffedPower: data.enemy.armdozer.effects.some(
+      (e) => e.type === "CorrectPower",
+    ),
+    minimumBeatDownBatteryAfterPlayerBurst: getMinimumBeatDownBattery(
+      data.enemy,
+      playerStatusIfBurst,
+      playerStatusIfBurst.armdozer.battery,
+    ),
+    minimumBeatDownBattery: getMinimumBeatDownBattery(
+      data.enemy,
+      data.player,
+      data.player.armdozer.battery,
+    ),
+    minimumGuardBattery: getMinimumGuardBattery(
+      data.enemy,
+      data.player,
+      data.player.armdozer.battery,
+    ),
+  };
+};
 
 /**
  * @override
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = (data) => {
-  const { burst, minimumBeatDownBattery, minimumGuardBattery } =
-    getAttackRoutineConditions(data);
+  const {
+    burst,
+    minimumBeatDownBatteryAfterPlayerBurst,
+    minimumBeatDownBattery,
+    minimumGuardBattery,
+  } = getAttackRoutineConditions(data);
   let selectedCommand: Command = ZERO_BATTERY;
 
   if (burst) {
     const battery = data.enemy.armdozer.battery;
+    selectedCommand = { type: "BATTERY_COMMAND", battery };
+  } else if (minimumBeatDownBatteryAfterPlayerBurst.isExist) {
+    const battery = minimumBeatDownBatteryAfterPlayerBurst.value;
     selectedCommand = { type: "BATTERY_COMMAND", battery };
   } else if (minimumBeatDownBattery.isExist) {
     const battery = minimumBeatDownBattery.value;
