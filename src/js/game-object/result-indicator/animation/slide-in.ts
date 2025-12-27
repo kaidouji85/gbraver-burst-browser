@@ -20,7 +20,7 @@ export function slideIn(model: ResultIndicatorModel): Animate {
     model.worldCoordinate.y = 0;
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
-    model.scale = 1.3;
+    model.scale = 1.8;
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
