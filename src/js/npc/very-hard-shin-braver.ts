@@ -1,7 +1,6 @@
 import {
   ArmdozerIds,
   Armdozers,
-  burst,
   Command,
   invokeBurst,
   PilotIds,
