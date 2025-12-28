@@ -4,7 +4,7 @@ import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
-import type { ResultIndicatorModel } from "../model/result-indicator-model";
+import { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
  * 画面左上にスライドイン表示
