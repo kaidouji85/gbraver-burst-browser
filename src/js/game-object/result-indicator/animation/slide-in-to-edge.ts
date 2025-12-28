@@ -13,18 +13,17 @@ import { ResultIndicatorModel } from "../model/result-indicator-model";
  */
 export function slideInToEdge(model: ResultIndicatorModel): Animate {
   const duration = 600;
-  const distance = 50;
   return onStart(() => {
     model.opacity = 0;
     model.worldCoordinate.x = -1;
     model.worldCoordinate.y = 1;
-    model.localCoordinate.x = -distance;
+    model.localCoordinate.x = -50;
     model.localCoordinate.y = 0;
     model.scale = 1;
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
-        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.InOut),
+        t.to({ x: 0 }, duration).easing(Easing.Quadratic.InOut),
       ),
       tween(model, (t) =>
         t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.InOut),

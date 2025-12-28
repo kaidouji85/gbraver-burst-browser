@@ -1,16 +1,30 @@
+import { PreRender } from "../../../game-loop/pre-render";
 import { Resources } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import { ResultIndicatorView } from "./result-indicator-view";
+import { ResultIndicatorModel } from "../model/result-indicator-model";
 import { SimpleIndicatorView } from "./simple-result-indicator";
 
-/**
- * LOSEビューを生成する
- *
- * @param resources リソース管理オブジェクト
- * @returns 生成結果
- */
-export function loseIndicatorView(resources: Resources): ResultIndicatorView {
-  const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.LOSE);
-  return new SimpleIndicatorView(texture, 150, 60);
+/** Lose インジケータービュー */
+export class LoseIndicatorView extends SimpleIndicatorView {
+  /**
+   * コンストラクタ
+   * @param resources リソース管理オブジェクト
+   */
+  constructor(resources: Resources) {
+    const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.LOSE);
+    super(texture, 150, 60);
+  }
+
+  /** @override */
+  engage(model: ResultIndicatorModel, preRender: PreRender): void {
+    const updatedModel = {
+      ...model,
+      localCoordinate: {
+        ...model.localCoordinate,
+        x: -model.localCoordinate.x,
+      },
+    };
+    super.engage(updatedModel, preRender);
+  }
 }
