@@ -1,7 +1,5 @@
-import { de } from "zod/locales";
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
-import { delay } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { ShinBraverTD } from "../../../../view/td/armdozer-objects/shin-braver";

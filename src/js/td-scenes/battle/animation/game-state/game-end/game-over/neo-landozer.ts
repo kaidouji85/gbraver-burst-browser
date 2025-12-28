@@ -1,6 +1,5 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
-import { delay } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { NeoLandozerTD } from "../../../../view/td/armdozer-objects/neo-landozer";
@@ -30,14 +29,7 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
   return all(
     param.winnerTdArmdozer.neoLandozer.guts(),
     focusToNeoLandozer(param),
-    param.winnerHUD.resultIndicator
-      .slideInToCenter()
-      .chain(delay(200))
-      .chain(
-        all(
-          param.winnerHUD.resultIndicator.moveToEdge(),
-          onStart(() => param.bgm.do(play(param.battleEndBGM))),
-        ),
-      ),
+    onStart(() => param.bgm.do(play(param.battleEndBGM))),
+    param.winnerHUD.resultIndicator.slideInToEdge(),
   );
 }
