@@ -1,3 +1,4 @@
+import { de } from "zod/locales";
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { delay } from "../../../../../../animation/delay";
@@ -30,14 +31,7 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
   return all(
     param.winnerTdArmdozer.shinBraver.guts(),
     focusToShinBraver(param),
-    param.winnerHUD.resultIndicator
-      .slideInToCenter()
-      .chain(delay(200))
-      .chain(
-        all(
-          param.winnerHUD.resultIndicator.moveToEdge(),
-          onStart(() => param.bgm.do(play(param.battleEndBGM))),
-        ),
-      ),
+    onStart(() => param.bgm.do(play(param.battleEndBGM))),
+    param.winnerHUD.resultIndicator.slideInToEdge(),
   );
 }

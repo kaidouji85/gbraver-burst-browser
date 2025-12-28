@@ -12,7 +12,7 @@ import { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function slideInToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 300;
+  const duration = 600;
   const distance = 50;
   return onStart(() => {
     model.opacity = 0;
