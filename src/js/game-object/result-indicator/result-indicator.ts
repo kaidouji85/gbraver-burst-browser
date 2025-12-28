@@ -6,7 +6,8 @@ import { PreRender } from "../../game-loop/pre-render";
 import { GameObjectAction } from "../action/game-object-action";
 import { hidden } from "./animation/hidden";
 import { moveToEdge } from "./animation/move-to-edge";
-import { slideIn } from "./animation/slide-in";
+import { slideInToCenter } from "./animation/slide-in-to-center";
+import { slideInToEdge } from "./animation/slide-in-to-edge";
 import { createInitialValue } from "./model/initial-value";
 import { ResultIndicatorModel } from "./model/result-indicator-model";
 import { ResultIndicatorView } from "./view/result-indicator-view";
@@ -52,15 +53,23 @@ export class ResultIndicator {
   }
 
   /**
-   * スライドイン表示
+   * 画面中央にスライドイン表示
    * @returns アニメーション
    */
-  slideIn(): Animate {
-    return slideIn(this.#model);
+  slideInToCenter(): Animate {
+    return slideInToCenter(this.#model);
   }
 
   /**
-   * 画面端に移動する
+   * 画面左上にスライドイン表示
+   * @returns アニメーション
+   */
+  slideInToEdge(): Animate {
+    return slideInToEdge(this.#model);
+  }
+
+  /**
+   * 画面左上に移動する
    * @returns アニメーション
    */
   moveToEdge(): Animate {

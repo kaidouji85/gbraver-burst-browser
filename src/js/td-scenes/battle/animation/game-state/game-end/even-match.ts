@@ -14,7 +14,7 @@ export function evenMatchAnimation(props: StateAnimationProps): Animate {
   return all(
     onStart(() => props.bgm.do(play(props.sounds.lose))),
     props.view.hud.gameObjects.drawIndicator
-      .slideIn()
+      .slideInToCenter()
       .chain(delay(500))
       .chain(props.view.hud.gameObjects.drawIndicator.moveToEdge()),
   );
