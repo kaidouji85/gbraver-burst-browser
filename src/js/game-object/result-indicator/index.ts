@@ -4,7 +4,7 @@ import type { Resources } from "../../resource";
 import type { GameObjectAction } from "../action/game-object-action";
 import { ResultIndicator } from "./result-indicator";
 import { drawIndicatorView } from "./view/draw-indicator-view";
-import { loseIndicatorView } from "./view/lose-indicator-view";
+import { LoseIndicatorView } from "./view/lose-indicator-view";
 import { winIndicatorView } from "./view/win-indicator-view";
 
 /**
@@ -33,7 +33,7 @@ export function loseIndicator(
   resources: Resources,
   gameObjectAction: Observable<GameObjectAction>,
 ): ResultIndicator {
-  const view = loseIndicatorView(resources);
+  const view = new LoseIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }
 

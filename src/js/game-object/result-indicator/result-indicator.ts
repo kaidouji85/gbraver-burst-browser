@@ -14,8 +14,11 @@ import { ResultIndicatorView } from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
+  /** モデル */
   #model: ResultIndicatorModel;
+  /** ビュー */
   #view: ResultIndicatorView;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
