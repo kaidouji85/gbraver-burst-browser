@@ -31,7 +31,7 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
     param.winnerTdArmdozer.shinBraver.guts(),
     focusToShinBraver(param),
     param.winnerHUD.resultIndicator
-      .slideIn()
+      .slideInToCenter()
       .chain(delay(200))
       .chain(
         all(

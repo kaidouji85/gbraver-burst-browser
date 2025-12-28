@@ -33,7 +33,7 @@ export function genesisBraverWin(
     param.winnerTdArmdozer.genesisBraver.burst(),
     focusToGenesisBraver(param),
     param.winnerHUD.resultIndicator
-      .slideIn()
+      .slideInToCenter()
       .chain(delay(200))
       .chain(
         all(

@@ -40,7 +40,7 @@ const resultIndicatorStory = (
  */
 const visible = (indicator: ResultIndicator) => {
   delay(1000)
-    .chain(indicator.slideIn())
+    .chain(indicator.slideInToCenter())
     .chain(delay(1000))
     .chain(indicator.moveToEdge())
     .chain(delay(1000))

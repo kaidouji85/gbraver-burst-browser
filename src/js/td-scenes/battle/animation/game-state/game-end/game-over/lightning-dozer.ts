@@ -35,7 +35,7 @@ export function lightningDozerWin(
     param.winnerTdArmdozer.lightningDozer.guts(),
     focusToLightningDozer(param),
     param.winnerHUD.resultIndicator
-      .slideIn()
+      .slideInToCenter()
       .chain(delay(400))
       .chain(
         all(

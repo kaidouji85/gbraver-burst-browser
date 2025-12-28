@@ -31,7 +31,7 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
     param.winnerTdArmdozer.neoLandozer.guts(),
     focusToNeoLandozer(param),
     param.winnerHUD.resultIndicator
-      .slideIn()
+      .slideInToCenter()
       .chain(delay(200))
       .chain(
         all(
