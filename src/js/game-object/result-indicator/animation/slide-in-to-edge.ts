@@ -24,7 +24,7 @@ export function slideInToEdge(model: ResultIndicatorModel): Animate {
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
-        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.InOut),
+        t.to({ x: 0 }, duration).easing(Easing.Quadratic.InOut),
       ),
       tween(model, (t) =>
         t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.InOut),
