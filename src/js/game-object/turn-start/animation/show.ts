@@ -9,6 +9,6 @@ import { TurnStartModel } from "../model/turn-start-model";
  */
 export function show(model: TurnStartModel): Animate {
   return tween(model, (t) =>
-    t.to({ opacity: 1, position: { x: 150 } }, 0),
-  ).chain(tween(model.position, (t) => t.to({ x: 0 }, 400)));
+    t.to({ opacity: 0, position: { x: 60 } }, 0),
+  ).chain(tween(model, (t) => t.to({ opacity: 1, position: { x: 0 } }, 200)));
 }
