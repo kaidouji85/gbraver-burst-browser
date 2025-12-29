@@ -34,7 +34,7 @@ export function startGameAnimation(
     }),
     activeHUDPlayer.turnStart
       .show()
-      .chain(delay(400))
+      .chain(delay(600))
       .chain(activeHUDPlayer.turnStart.hidden()),
     activeTDArmdozer.sprite().startActive(),
   );

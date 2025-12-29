@@ -14,7 +14,7 @@ export function slideInToEdge(model: ResultIndicatorModel): Animate {
     model.opacity = 0;
     model.worldCoordinate.x = -1;
     model.worldCoordinate.y = 1;
-    model.localCoordinate.x = -60;
+    model.localCoordinate.x = -30;
     model.localCoordinate.y = 0;
     model.scale = 1;
   }).chain(

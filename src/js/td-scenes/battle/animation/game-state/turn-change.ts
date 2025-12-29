@@ -41,7 +41,7 @@ export function turnChangeAnimation(
   const isTurnChange = 0 < turnChange.recoverBattery;
   const turnStart = activeHUDPlayer.turnStart
     .show()
-    .chain(delay(400))
+    .chain(delay(600))
     .chain(activeHUDPlayer.turnStart.hidden());
   const forTurnChange = empty().chain(
     delay(800),
