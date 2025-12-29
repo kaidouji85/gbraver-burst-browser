@@ -9,10 +9,10 @@ export const ResultTextureConfigs: TextureConfig[] = [
   },
   {
     id: TEXTURE_IDS.LOSE,
-    path: "result/lose.png",
+    path: "result/lose.webp",
   },
   {
     id: TEXTURE_IDS.DRAW,
-    path: "result/draw.png",
+    path: "result/draw.webp",
   },
 ].map((t) => ({ ...t, type: "Shared" }));
