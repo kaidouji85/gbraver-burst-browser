@@ -5,7 +5,7 @@ import { TextureConfig } from "../resource";
 export const ResultTextureConfigs: TextureConfig[] = [
   {
     id: TEXTURE_IDS.WIN,
-    path: "result/win.png",
+    path: "result/win.webp",
   },
   {
     id: TEXTURE_IDS.LOSE,

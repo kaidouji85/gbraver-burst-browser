@@ -8,7 +8,7 @@ import type { ResultIndicatorModel } from "../model/result-indicator-model";
 import type { ResultIndicatorView } from "./result-indicator-view";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 400;
+const MESH_SIZE = 200;
 
 /** シンプルなビュー実装 */
 export class SimpleIndicatorView implements ResultIndicatorView {
