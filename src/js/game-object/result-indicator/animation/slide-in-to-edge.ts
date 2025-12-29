@@ -1,5 +1,3 @@
-import { Easing } from "@tweenjs/tween.js";
-
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { onStart } from "../../../animation/on-start";
@@ -12,22 +10,17 @@ import { ResultIndicatorModel } from "../model/result-indicator-model";
  * @returns アニメーション
  */
 export function slideInToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 600;
   return onStart(() => {
     model.opacity = 0;
     model.worldCoordinate.x = -1;
     model.worldCoordinate.y = 1;
-    model.localCoordinate.x = -50;
+    model.localCoordinate.x = -30;
     model.localCoordinate.y = 0;
     model.scale = 1;
   }).chain(
     all(
-      tween(model.localCoordinate, (t) =>
-        t.to({ x: 0 }, duration).easing(Easing.Quadratic.InOut),
-      ),
-      tween(model, (t) =>
-        t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.InOut),
-      ),
+      tween(model.localCoordinate, (t) => t.to({ x: 0 }, 200)),
+      tween(model, (t) => t.to({ opacity: 1 }, 200)),
     ),
   );
 }
