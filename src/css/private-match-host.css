@@ -2,9 +2,6 @@
 
 @media (orientation: landscape) {
   .private-match-host {
-    --closer-width: 48px;
-    --closer-height: 48px;
-
     display: block;
   }
 }

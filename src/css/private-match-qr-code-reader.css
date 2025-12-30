@@ -1,8 +1,5 @@
 @media (orientation: landscape) {
   .private-match-qr-code-reader {
-    --closer-width: 48px;
-    --closer-height: 48px;
-
     position: absolute;
     z-index: var(--zindex-qr-code-reader);
   }

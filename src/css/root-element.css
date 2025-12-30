@@ -67,6 +67,10 @@
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+
+  /** 閉じるボタン */
+  --closer-width: max(48px, calc(var(--responsive-font-size) * 3));
+  --closer-height: max(48px, calc(var(--responsive-font-size) * 3));
 }
 
 /* 

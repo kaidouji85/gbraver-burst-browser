@@ -3,9 +3,6 @@
  */
 @media (orientation: landscape) {
   .difficulty {
-    --closer-width: 48px;
-    --closer-height: 48px;
-
     display: block;
   }
 }

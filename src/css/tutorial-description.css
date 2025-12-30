@@ -1,8 +1,6 @@
 /** チュートリアル説明 */
 @media (orientation: landscape) {
   .tutorial-description {
-    --closer-width: 48px;
-    --closer-height: 48px;
     --control-button-height: calc(var(--responsive-font-size) * 3);
 
     display: block;

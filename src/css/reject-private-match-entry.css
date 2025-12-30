@@ -2,9 +2,6 @@
 
 @media (orientation: landscape) {
   .reject-private-match-entry {
-    --closer-width: 48px;
-    --closer-height: 48px;
-
     display: block;
   }
 }

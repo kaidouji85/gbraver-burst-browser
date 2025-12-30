@@ -2,8 +2,6 @@
 
 @media (orientation: landscape) {
   .net-battle-selector {
-    --closer-width: 48px;
-    --closer-height: 48px;
     --casual-match-background-color: #001a06;
     --casual-match-border: 2px solid #00cc30;
     --casual-match-box-shadow: 0 0 0.5em #00b32a;

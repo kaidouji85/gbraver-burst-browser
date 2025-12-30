@@ -49,17 +49,14 @@
 }
 
 .how-to-play__closer {
-  --icon-width: 48px;
-  --icon-height: 48px;
-
   position: fixed;
   top: calc(
     var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2 -
-      var(--icon-width) / 2
+      var(--closer-width) / 2
   );
   left: calc(
     var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2 -
-      var(--icon-height) / 2
+      var(--closer-height) / 2
   );
   width: var(--icon-width);
   height: var(--icon-height);

@@ -1,8 +1,6 @@
 /** 設定変更通知ダイアログ */
 .config-changed {
   --dialog-button-height: calc(var(--responsive-font-size) * 3);
-  --closer-width: 48px;
-  --closer-height: 48px;
 
   position: fixed;
 }
