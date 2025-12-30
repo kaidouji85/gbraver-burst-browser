@@ -58,8 +58,8 @@
     var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2 -
       var(--closer-height) / 2
   );
-  width: var(--icon-width);
-  height: var(--icon-height);
+  width: var(--closer-width);
+  height: var(--closer-height);
   display: flex;
   align-items: center;
   justify-content: center;
