@@ -1,5 +1,6 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
+import { empty } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { GenesisBraverTD } from "../../../../view/td/armdozer-objects/genesis-braver";
@@ -32,6 +33,5 @@ export function genesisBraverWin(
     param.winnerTdArmdozer.genesisBraver.burst(),
     focusToGenesisBraver(param),
     onStart(() => param.bgm.do(play(param.battleEndBGM))),
-    param.winnerHUD.resultIndicator.slideInToEdge(),
-  );
+  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
 }
