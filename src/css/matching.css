@@ -3,8 +3,6 @@
   .matching {
     --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50vw));
     --dialog-height: calc(var(--responsive-font-size) * 10);
-    --closer-width: 48px;
-    --closer-height: 48px;
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
 

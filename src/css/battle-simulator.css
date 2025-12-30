@@ -1,8 +1,6 @@
 /** 戦闘シミュレーター */
 @media (orientation: landscape) {
   .battle-simulator {
-    --closer-width: 48px;
-    --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
     --player-area-width: calc(var(--responsive-font-size) * 15);
     --player-area-height: calc(var(--responsive-font-size) * 10);
