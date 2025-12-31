@@ -13,7 +13,7 @@ import { TurnStartView } from "./turn-start-view";
 export const MESH_WIDTH = 400;
 
 /** メッシュ高さ */
-export const MESH_HEIGHT = 200;
+export const MESH_HEIGHT = 100;
 
 /** プレイヤーターンスタートビュー */
 export class PlayerTurnStartView implements TurnStartView {
