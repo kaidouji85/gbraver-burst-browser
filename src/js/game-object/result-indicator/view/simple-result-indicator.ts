@@ -7,6 +7,11 @@ import { hudScale } from "../../scale";
 import { ResultIndicatorModel } from "../model/result-indicator-model";
 import { ResultIndicatorView } from "./result-indicator-view";
 
+/** メッシュの幅 */
+const MESH_WIDTH = 400;
+/** メッシュの高さ */
+const MESH_HEIGHT = 100;
+
 /** シンプルなビュー実装 */
 export class SimpleIndicatorView implements ResultIndicatorView {
   /** メッシュ */
@@ -26,8 +31,8 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
-      width: 400,
-      height: 100,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
     this.#paddingX = paddingX;
     this.#paddingY = paddingY;
