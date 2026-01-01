@@ -1,24 +1,28 @@
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
+import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { HUD_RESULT_INDICATOR_Z } from "../../hud-position";
 import { hudScale } from "../../scale";
-import type { ResultIndicatorModel } from "../model/result-indicator-model";
-import type { ResultIndicatorView } from "./result-indicator-view";
+import { ResultIndicatorModel } from "../model/result-indicator-model";
+import { ResultIndicatorView } from "./result-indicator-view";
 
-/** メッシュの大きさ */
-const MESH_SIZE = 400;
+/** メッシュの幅 */
+const MESH_WIDTH = 400;
+/** メッシュの高さ */
+const MESH_HEIGHT = 100;
 
 /** シンプルなビュー実装 */
 export class SimpleIndicatorView implements ResultIndicatorView {
+  /** メッシュ */
   #mesh: HorizontalAnimationMesh;
+  /** X方向のパディング */
   #paddingX: number;
+  /** Y方向のパディング */
   #paddingY: number;
 
   /**
    * コンストラクタ
-   *
    * @param texture 文言テクスチャ
    * @param paddingX X方向のパディング
    * @param paddingY Y方向のパディング
@@ -27,8 +31,8 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
     this.#paddingX = paddingX;
     this.#paddingY = paddingY;
