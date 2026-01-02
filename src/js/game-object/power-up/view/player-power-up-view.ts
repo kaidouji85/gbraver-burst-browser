@@ -12,8 +12,11 @@ import {
 import { PowerUpModel } from "../model/power-up-model";
 import { PowerUpView } from "./power-up-view";
 
-/** メッシュのサイズ */
-export const MESH_SIZE = 300;
+/** メッシュの幅 */
+export const MESH_WIDTH = 300;
+
+/** メッシュの高さ */
+export const MESH_HEIGHT = 75;
 
 /** プレイヤー 攻撃アップ ビュー */
 export class PlayerPowerUpView implements PowerUpView {
@@ -29,8 +32,8 @@ export class PlayerPowerUpView implements PowerUpView {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
