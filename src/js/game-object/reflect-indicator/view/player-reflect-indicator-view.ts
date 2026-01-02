@@ -12,7 +12,11 @@ import {
 import { ReflectIndocatorModel } from "../model/reflect-indocator-model";
 import { ReflectIndicatorView } from "./reflect-indicator-view";
 
-export const MESH_SIZE = 300;
+/** メッシュの幅 */
+export const MESH_WIDTH = 300;
+
+/** メッシュの高さ */
+export const MESH_HEIGHT = 75;
 
 /**
  * プレイヤー ダメージ反射 ビュー
@@ -28,8 +32,8 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
