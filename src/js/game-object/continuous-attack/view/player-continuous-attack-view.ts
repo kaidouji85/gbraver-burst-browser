@@ -12,8 +12,11 @@ import {
 import { ContinuousAttackModel } from "../model/continuous-attack-model";
 import { ContinuousAttackView } from "./continuous-attack-view";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 300;
+/** メッシュ幅 */
+export const MESH_WIDTH = 300;
+
+/** メッシュ高さ */
+export const MESH_HEIGHT = 93.75;
 
 /**プレイヤー 連続攻撃 ビュー */
 export class PlayerContinuousAttackView implements ContinuousAttackView {
@@ -27,8 +30,8 @@ export class PlayerContinuousAttackView implements ContinuousAttackView {
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
