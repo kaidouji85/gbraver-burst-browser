@@ -12,11 +12,17 @@ import {
 import { RecoverBatteryModel } from "../model/recover-battery-model";
 import { RecoverBatteryView } from "./recover-battery-view";
 
+/** メッシュのサイズ */
 export const MESH_SIZE = 100;
-export const MAX_ANIMATION = 16;
+/** 最大アニメーション数 */
+export const MAX_ANIMATION = 12;
+/** 符号のフレーム */
 export const SIGN_FRAME = 10 / MAX_ANIMATION;
+/** 最大バッテリー値 */
 export const MAX_BATTERY = 9;
+/** 符号のパディング */
 export const SIGN_PADDING = 70;
+/** グループ間のパディング */
 export const GROUP_PADDING = 30;
 
 /** プレイヤーのバッテリー回復*/

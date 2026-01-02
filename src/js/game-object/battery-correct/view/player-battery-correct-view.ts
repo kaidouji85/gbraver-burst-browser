@@ -13,7 +13,7 @@ import { BatteryCorrectView } from "./battery-correct-view";
 const MESH_SIZE = 50;
 
 /** 最大アニメ数 */
-const MAX_BATTERY_ANIMATION = 16;
+const MAX_BATTERY_ANIMATION = 12;
 
 /** 絶対価の最大値 */
 const MAX_ABSOLUTE_VALUE = 9;
