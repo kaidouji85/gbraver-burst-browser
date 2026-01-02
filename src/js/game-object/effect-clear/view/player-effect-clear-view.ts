@@ -12,8 +12,11 @@ import {
 import { EffectClearModel } from "../model/effect-clear-model";
 import { EffectClearView } from "./effect-clear-view";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 300;
+/** メッシュ幅 */
+export const MESH_WIDTH = 300;
+
+/** メッシュ高さ */
+export const MESH_HEIGHT = 75;
 
 /** プレイヤー 効果消去 ビュー */
 export class PlayerEffectClearView implements EffectClearView {
@@ -29,8 +32,8 @@ export class PlayerEffectClearView implements EffectClearView {
     this.#mesh = new HorizontalAnimationMesh({
       texture,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
@@ -49,7 +52,7 @@ export class PlayerEffectClearView implements EffectClearView {
     const target = this.#mesh.getObject3D();
     this.#mesh.opacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X - 30;
-    target.position.y = ARMDOZER_EFFECT_STANDARD_Y - 30;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y - 20;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
     target.scale.x = model.scale;
     target.scale.y = model.scale;
