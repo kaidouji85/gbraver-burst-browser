@@ -5,7 +5,7 @@ import { LeadLine } from "./lead-line";
 import { LeadLineView } from "./view/lead-line-view";
 
 /** 色 */
-const COLOR = 0xf5f5f5;
+const COLOR = 0xe6e6e6;
 /** 不透明度 */
 const OPACITY = 0.8;
 
