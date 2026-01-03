@@ -12,7 +12,11 @@ import {
 import { DamageHalvedModel } from "../model/damage-halved-model";
 import { DamageHalvedView } from "./damage-halved-view";
 
-export const MESH_SIZE = 300;
+/** メッシュ幅 */
+export const MESH_WIDTH = 300;
+
+/** メッシュ高さ */
+export const MESH_HEIGHT = 75;
 
 /**プレイヤー ダメージ半減 ビュー*/
 export class PlayerDamageHalvedView implements DamageHalvedView {
@@ -31,8 +35,8 @@ export class PlayerDamageHalvedView implements DamageHalvedView {
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
