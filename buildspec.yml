@@ -13,7 +13,6 @@ env:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
     WS_API_DOMAIN_NAME: /GbraverBurst/dev/wsApiDomainName
-    WS_API_CERT_ARN: /GbraverBurst/dev/wsApiCertArn
     ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
     S3_BUCKET: /GbraverBurst/dev/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/dev/distributionId
