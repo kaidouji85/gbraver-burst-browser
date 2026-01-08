@@ -7,13 +7,12 @@ import { tween } from "../../../animation/tween";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**
- * スライドイン表示
- *
+ * 画面中央にスライドイン表示
  * @param model モデル
  * @returns アニメーション
  */
-export function slideIn(model: ResultIndicatorModel): Animate {
-  const duration = 100;
+export function slideInToCenter(model: ResultIndicatorModel): Animate {
+  const duration = 300;
   const distance = 50;
   return onStart(() => {
     model.opacity = 0;
@@ -25,24 +24,10 @@ export function slideIn(model: ResultIndicatorModel): Animate {
   }).chain(
     all(
       tween(model.localCoordinate, (t) =>
-        t
-          .to(
-            {
-              x: `+${distance}`,
-            },
-            duration,
-          )
-          .easing(Easing.Quadratic.Out),
+        t.to({ x: `+${distance}` }, duration).easing(Easing.Quadratic.InOut),
       ),
       tween(model, (t) =>
-        t
-          .to(
-            {
-              opacity: 1,
-            },
-            duration,
-          )
-          .easing(Easing.Quadratic.Out),
+        t.to({ opacity: 1 }, duration).easing(Easing.Quadratic.InOut),
       ),
     ),
   );

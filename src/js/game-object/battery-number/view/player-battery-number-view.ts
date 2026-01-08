@@ -12,8 +12,13 @@ import {
 import { BatteryNumberModel } from "../model/battery-number-model";
 import { BatteryNumberView } from "./battery-number-view";
 
+/** メッシュのサイズ */
 export const MESH_SIZE = 100;
-export const MAX_BATTERY_ANIMATION = 16;
+
+/** バッテリーの最大アニメーション数 */
+export const MAX_BATTERY_ANIMATION = 12;
+
+/** バッテリーの最大値 */
 export const MAX_BATTERY_VALUE = 9;
 
 /** プレイヤーのバッテリー数字ビュー */

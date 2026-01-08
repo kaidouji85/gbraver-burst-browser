@@ -1,7 +1,10 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
+import { empty } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play } from "../../../../../../bgm/bgm-operators";
 import { NeoLandozerTD } from "../../../../view/td/armdozer-objects/neo-landozer";
-import type { GameOverParamX } from "./game-over-param";
+import { GameOverParamX } from "./game-over-param";
 
 /**
  * ネオランドーザにフォーカスを合わせる
@@ -27,5 +30,6 @@ export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
   return all(
     param.winnerTdArmdozer.neoLandozer.guts(),
     focusToNeoLandozer(param),
-  );
+    onStart(() => param.bgm.do(play(param.battleEndBGM))),
+  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
 }

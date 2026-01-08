@@ -14,7 +14,7 @@ import { hudUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
-const MAX_ANIMATION = 16;
+const MAX_ANIMATION = 11;
 
 /** 数字系メッシュの縮小率、大きさ調整に利用する */
 const NUMBER_SIZE_SCALE = 0.3;

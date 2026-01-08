@@ -11,6 +11,8 @@ export type BattleSceneSounds = {
   readonly batteryRecover: SoundResource;
   /** メッセージ送り音 */
   readonly sendMessage: SoundResource;
+  /** 大爆発音 */
+  readonly bigExplosion: SoundResource;
   /** 値変更音 */
   readonly changeValue: SoundResource;
   /** 戦闘BGM */
@@ -45,6 +47,9 @@ export function createBattleSceneSounds(
       createEmptySoundResource(),
     sendMessage:
       resources.sounds.find((v) => v.id === SOUND_IDS.SEND_MESSAGE) ??
+      createEmptySoundResource(),
+    bigExplosion:
+      resources.sounds.find((v) => v.id === SOUND_IDS.BIG_EXPLOSION) ??
       createEmptySoundResource(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??

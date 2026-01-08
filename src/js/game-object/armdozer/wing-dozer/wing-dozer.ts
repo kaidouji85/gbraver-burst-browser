@@ -38,6 +38,9 @@ type WingDozerParams = PropsCreatorParams & {
 
 /** ウィングドーザ */
 export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
+  /** @override */
+  downImpactDelay = 800;
+
   /** プロパティ */
   #props: WingDozerProps;
   /** アンサブスクライバ */

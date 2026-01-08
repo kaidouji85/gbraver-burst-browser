@@ -9,8 +9,11 @@ import { hudScale } from "../../scale";
 import { TurnStartModel } from "../model/turn-start-model";
 import { TurnStartView } from "./turn-start-view";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 400;
+/** メッシュ幅 */
+export const MESH_WIDTH = 400;
+
+/** メッシュ高さ */
+export const MESH_HEIGHT = 100;
 
 /** 敵ターンスタートビュー */
 export class EnemyTurnStartView implements TurnStartView {
@@ -24,8 +27,8 @@ export class EnemyTurnStartView implements TurnStartView {
     this.#mesh = new HorizontalAnimationMesh({
       texture: enemyTurn,
       maxAnimation: 1,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
+      width: MESH_WIDTH,
+      height: MESH_HEIGHT,
     });
   }
 
@@ -58,7 +61,7 @@ export class EnemyTurnStartView implements TurnStartView {
     target.position.x =
       -preRender.rendererDOM.clientWidth / 2 +
       preRender.safeAreaInset.left +
-      (MESH_SIZE / 2 - model.position.x) * devicePerScale;
+      (MESH_WIDTH / 2 - model.position.x) * devicePerScale;
     target.position.y =
       -preRender.rendererDOM.clientHeight / 2 +
       preRender.safeAreaInset.bottom +

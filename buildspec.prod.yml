@@ -35,6 +35,6 @@ phases:
       - npm ci
   build:
     commands:
-      - export WEBSOCKET_API_URL="wss://${WS_API_DOMAIN_NAME}/${STAGE}"
+      - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"

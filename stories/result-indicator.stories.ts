@@ -34,25 +34,23 @@ const resultIndicatorStory = (
     return [indicator.getObject3D()];
   });
 
-/**
- * 表示
- * @param indicator リザルトインジケータ
- */
-const visible = (indicator: ResultIndicator) => {
+/** win 表示 */
+export const winVisible = resultIndicatorStory(winIndicator, (indicator) => {
+  delay(1000).chain(indicator.slideInToEdge()).chain(delay(1000)).loop();
+});
+
+/** lose 表示 */
+export const loseVisible = resultIndicatorStory(loseIndicator, (indicator) => {
+  delay(1000).chain(indicator.slideInToEdge()).chain(delay(1000)).loop();
+});
+
+/** draw 表示 */
+export const drawVisible = resultIndicatorStory(drawIndicator, (indicator) => {
   delay(1000)
-    .chain(indicator.slideIn())
+    .chain(indicator.slideInToCenter())
     .chain(delay(1000))
     .chain(indicator.moveToEdge())
     .chain(delay(1000))
     .chain(indicator.hidden())
     .loop();
-};
-
-/** win 表示 */
-export const winVisible = resultIndicatorStory(winIndicator, visible);
-
-/** lose 表示 */
-export const loseVisible = resultIndicatorStory(loseIndicator, visible);
-
-/** draw 表示 */
-export const drawVisible = resultIndicatorStory(drawIndicator, visible);
+});

@@ -39,7 +39,7 @@ export class HorizontalAnimationMesh {
     animatedTexture(this.#texture, param.maxAnimation, 1);
     this.#texture.needsUpdate = true;
     this.#maxAnimation = param.maxAnimation;
-    const geometry = new THREE.PlaneGeometry(param.height, param.width, 1, 1);
+    const geometry = new THREE.PlaneGeometry(param.width, param.height, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,

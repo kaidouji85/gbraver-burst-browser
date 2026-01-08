@@ -1,5 +1,8 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
+import { empty } from "../../../../../../animation/delay";
+import { onStart } from "../../../../../../animation/on-start";
+import { play } from "../../../../../../bgm/bgm-operators";
 import { GranDozerTD } from "../../../../view/td/armdozer-objects/gran-dozer";
 import { GameOverParamX } from "./game-over-param";
 
@@ -24,5 +27,9 @@ function focusToGranDozer(param: GameOverParamX<GranDozerTD>): Animate {
  * @returns アニメーション
  */
 export function granDozerWin(param: GameOverParamX<GranDozerTD>): Animate {
-  return all(param.winnerTdArmdozer.granDozer.burst(), focusToGranDozer(param));
+  return all(
+    param.winnerTdArmdozer.granDozer.burst(),
+    focusToGranDozer(param),
+    onStart(() => param.bgm.do(play(param.battleEndBGM))),
+  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
 }

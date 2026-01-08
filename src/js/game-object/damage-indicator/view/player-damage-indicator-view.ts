@@ -12,9 +12,16 @@ import {
 import { DamageIndicatorModel } from "../model/damage-indicator-model";
 import { DamageIndicatorView } from "./damage-indicator-view";
 
+/** メッシュのサイズ */
 export const MESH_SIZE = 50;
+
+/** 最大メッシュ数 */
 export const MAX_NUMBER_SIZE = 4;
-export const MAX_ANIMATION = 16;
+
+/** 最大アニメーション数 */
+export const MAX_ANIMATION = 12;
+
+/** グループ間のパディング */
 export const GROUP_PADDING = 30;
 
 /** プレイヤーのダメージインジケータビュー */

@@ -4,8 +4,6 @@
 
 @media (orientation: landscape) {
   .status {
-    --closer-width: 48px;
-    --closer-height: 48px;
     --dialog-padding: var(--responsive-font-size);
     --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
     --grid-gap: calc(var(--responsive-font-size) * 0.5);

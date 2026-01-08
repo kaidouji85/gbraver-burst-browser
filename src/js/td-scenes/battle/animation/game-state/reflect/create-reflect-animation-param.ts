@@ -56,10 +56,17 @@ export function createReflectAnimationParam(
     hud: hudPlayerOfReflecting,
   };
 
-  const { bgm } = props;
-  const isPlayerDamaged = effect.damagedPlayer === props.playerId;
-  const battleEndBGM = isPlayerDamaged
-    ? props.sounds.lose
-    : props.sounds.victory;
-  return { effect, drawIndicator, damaged, reflecting, bgm, battleEndBGM };
+  const { bgm, se } = props;
+  const { bigExplosion } = props.sounds;
+  return {
+    effect,
+    drawIndicator,
+    damaged,
+    reflecting,
+
+    bgm,
+    se,
+    bigExplosion,
+    tdCamera: view.td.camera,
+  };
 }

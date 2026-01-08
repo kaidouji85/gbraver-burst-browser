@@ -1,17 +1,30 @@
 import { GameOver } from "gbraver-burst-core";
 
+import { BGMManagerContainer } from "../../../../../../bgm/bgm-manager";
 import { TDCamera } from "../../../../../../game-object/camera/td";
+import { SoundResource } from "../../../../../../resource/sound/resource";
+import { HUDPlayer } from "../../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
+import { TDGameObjects } from "../../../../view/td/game-objects";
 import { StateAnimationProps } from "../../state-animation-props";
 
 /**
  * ゲームオーバー アニメーションパラメータ
  * @template TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
  */
-export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> = {
-  winnerTdArmdozer: TD_ARMDOZER;
-  tdCamera: TDCamera;
-};
+export type GameOverParamX<TD_ARMDOZER extends TDArmdozerObjects> =
+  Readonly<BGMManagerContainer> & {
+    /** 勝利したアームドーザのTDオブジェクト */
+    readonly winnerTdArmdozer: TD_ARMDOZER;
+    /** 勝利したHUDプレイヤー */
+    readonly winnerHUD: HUDPlayer;
+    /** 3Dカメラ */
+    readonly tdCamera: TDCamera;
+    /** 3Dゲームオブジェクト */
+    readonly tdGameObjects: TDGameObjects;
+    /** 戦闘終了BGM */
+    readonly battleEndBGM: SoundResource;
+  };
 
 /** ゲームオーバー アニメーションパラメータ */
 export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
@@ -30,7 +43,21 @@ export function toGameOverParam(
   const winnerTdArmdozer = props.view.td.armdozers.find(
     (v) => v.playerId === gameOver.winner,
   );
-  return winnerTdArmdozer
-    ? { winnerTdArmdozer, tdCamera: props.view.td.camera }
-    : null;
+  const winnerHUD = props.view.hud.players.find(
+    (v) => v.playerId === gameOver.winner,
+  );
+  if (winnerTdArmdozer == null || winnerHUD == null) {
+    return null;
+  }
+
+  const isWinner = gameOver.winner === props.playerId;
+  const battleEndBGM = isWinner ? props.sounds.victory : props.sounds.lose;
+  return {
+    winnerTdArmdozer,
+    winnerHUD,
+    tdCamera: props.view.td.camera,
+    tdGameObjects: props.view.td.gameObjects,
+    bgm: props.bgm,
+    battleEndBGM,
+  };
 }

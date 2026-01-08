@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
-import type { Resources } from "../../resource";
-import type { GameObjectAction } from "../action/game-object-action";
+import { Resources } from "../../resource";
+import { GameObjectAction } from "../action/game-object-action";
 import { ResultIndicator } from "./result-indicator";
 import { drawIndicatorView } from "./view/draw-indicator-view";
 import { loseIndicatorView } from "./view/lose-indicator-view";

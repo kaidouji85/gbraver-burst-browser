@@ -1,0 +1,21 @@
+import { all } from "../../../../../animation/all";
+import { Animate } from "../../../../../animation/animate";
+import { delay } from "../../../../../animation/delay";
+import { onStart } from "../../../../../animation/on-start";
+import { play } from "../../../../../bgm/bgm-operators";
+import { StateAnimationProps } from "../state-animation-props";
+
+/**
+ * 引き分け
+ * @param props 戦闘シーンプロパティ
+ * @returns アニメーション
+ */
+export function evenMatchAnimation(props: StateAnimationProps): Animate {
+  return all(
+    onStart(() => props.bgm.do(play(props.sounds.lose))),
+    props.view.hud.gameObjects.drawIndicator
+      .slideInToCenter()
+      .chain(delay(500))
+      .chain(props.view.hud.gameObjects.drawIndicator.moveToEdge()),
+  );
+}

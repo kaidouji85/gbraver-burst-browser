@@ -41,6 +41,9 @@ export class GenesisBraver
   extends EmptyArmdozerSprite
   implements ArmdozerSprite
 {
+  /** @override */
+  downImpactDelay = 800;
+
   /** プロパティ */
   #props: GenesisBraverProps;
   /** アンサブスクライバ */
