@@ -48,6 +48,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   root.className = ROOT_CLASS;
   const elements = extractElements(root, dataIDs);
   const avatar = elements.avatar;
+
   const isAvatarLoaded =
     params.account.type === "LoggedInAccount"
       ? waitElementLoaded(avatar)
@@ -62,17 +63,20 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
   const isGranDozerLoaded = waitElementLoaded(elements.granDozer);
   const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
+  const isImgLoaded = Promise.all([
+    isLogoLoaded,
+    isHelpIconLoaded,
+    isGranDozerLoaded,
+    isShinBraverLoaded,
+    isAvatarLoaded,
+  ]);
   return {
     ...params,
     ...elements,
     exclusive: new Exclusive(),
     root,
     avatar,
-    isLogoLoaded,
-    isAvatarLoaded,
-    isHelpIconLoaded,
-    isGranDozerLoaded,
-    isShinBraverLoaded,
+    isImgLoaded,
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
