@@ -33,4 +33,6 @@ export type DataIDs = {
   shinBraver: string;
   /** ジェネシスブレイバー画像 */
   genesisBraver: string;
+  /** ウィングドーザ画像 */
+  wingDozer: string;
 };

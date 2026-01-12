@@ -40,8 +40,11 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     arcade: domUuid(),
     netBattle: domUuid(),
     config: domUuid(),
-    granDozer: domUuid(),
+
+    genesisBraver: domUuid(),
     shinBraver: domUuid(),
+    granDozer: domUuid(),
+    wingDozer: domUuid(),
   };
   const root = document.createElement("div");
   root.innerHTML = rootInnerHTML(dataIDs, params);
