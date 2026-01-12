@@ -104,6 +104,11 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     netBattle: extractNetBattle(root),
     config: extractConfig(root),
 
+    genesisBraver,
+    shinBraver,
+    granDozer,
+    wingDozer,
+
     isImgLoaded,
 
     pushButton:
