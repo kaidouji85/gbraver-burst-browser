@@ -16,7 +16,6 @@ import {
   NET_BATTLE_CLASS,
   ROOT_CLASS,
 } from "./class-name";
-import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
@@ -43,14 +42,10 @@ export type RootInnerHTMLParams = ResourcesContainer & {
 
 /**
  * ルート要素のinnerHTML
- * @param ids data-idを集めたもの
  * @param params ids以外のパラメータ
  * @returns innerHTML
  */
-export function rootInnerHTML(
-  ids: DataIDs,
-  params: RootInnerHTMLParams,
-): string {
+export function rootInnerHTML(params: RootInnerHTMLParams): string {
   const loginClassName =
     params.isLoginVisible && params.account.type === "GuestAccount"
       ? LOGIN_CLASS
@@ -91,7 +86,6 @@ export function rootInnerHTML(
     INVISIBLE__HELP_MENU_CLASS,
     INVISIBLE_ACCOUNT_MENU_CLASS,
     params,
-    ids,
     loginClassName,
     accountName,
     accountClassName,

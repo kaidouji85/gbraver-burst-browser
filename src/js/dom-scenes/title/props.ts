@@ -36,16 +36,8 @@ export type TitleProps = Readonly<SEPlayerContainer> & {
   /** 設定 */
   readonly config: HTMLElement;
 
-  /** グランドーザ画像を読み込んだら発火するPromise */
-  readonly isGranDozerLoaded: Promise<void>;
-  /** シンブレイバー画像を読み込んだら発火するPromise */
-  readonly isShinBraverLoaded: Promise<void>;
-  /** アバター画像を読み込んだら発火するPromise */
-  readonly isAvatarLoaded: Promise<void>;
-  /** ロゴ画像を読み込んだら発火するPromise */
-  readonly isLogoLoaded: Promise<void>;
-  /** ヘルプアイコンを読み込んだら発火するPromise */
-  readonly isHelpIconLoaded: Promise<void>;
+  /** Img系リソースを読み込んだら発火するPromise */
+  readonly isImgLoaded: Promise<unknown>;
 
   /** SE 値変更 */
   readonly changeValue: SoundResource;

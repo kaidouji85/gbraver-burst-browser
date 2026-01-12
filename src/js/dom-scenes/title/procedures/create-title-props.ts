@@ -6,11 +6,27 @@ import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
-import { DataIDs } from "../dom/data-ids";
-import { extractElements } from "../dom/elements";
+import {
+  extractAccountMenu,
+  extractArcade,
+  extractAvatar,
+  extractConfig,
+  extractDeleteAccount,
+  extractGenesisBraver,
+  extractGranDozer,
+  extractHelpIcon,
+  extractHelpMenu,
+  extractLogin,
+  extractLogo,
+  extractLogout,
+  extractNetBattle,
+  extractShinBraver,
+  extractStory,
+  extractTutorial,
+  extractWingDozer,
+} from "../dom/extract-elements";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { TitleProps } from "../props";
 
@@ -26,56 +42,70 @@ export type CreateTitlePropsParams = RootInnerHTMLParams &
  * @returns 生成結果
  */
 export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
-  const dataIDs: DataIDs = {
-    login: domUuid(),
-    accountMenu: domUuid(),
-    avatar: domUuid(),
-    helpIcon: domUuid(),
-    helpMenu: domUuid(),
-    deleteAccount: domUuid(),
-    logout: domUuid(),
-    logo: domUuid(),
-    story: domUuid(),
-    tutorial: domUuid(),
-    arcade: domUuid(),
-    netBattle: domUuid(),
-    config: domUuid(),
-
-    genesisBraver: domUuid(),
-    shinBraver: domUuid(),
-    granDozer: domUuid(),
-    wingDozer: domUuid(),
-  };
   const root = document.createElement("div");
-  root.innerHTML = rootInnerHTML(dataIDs, params);
+  root.innerHTML = rootInnerHTML(params);
   root.className = ROOT_CLASS;
-  const elements = extractElements(root, dataIDs);
-  const avatar = elements.avatar;
+
+  const avatar = extractAvatar(root);
+
   const isAvatarLoaded =
     params.account.type === "LoggedInAccount"
       ? waitElementLoaded(avatar)
       : Promise.resolve();
   avatar.src =
     params.account.type === "LoggedInAccount" ? params.account.pictureURL : "";
-  const isLogoLoaded = waitElementLoaded(elements.logo);
-  elements.logo.src =
+
+  const logo = extractLogo(root);
+  const isLogoLoaded = waitElementLoaded(logo);
+  logo.src =
     params.resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
-  const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
-  elements.helpIcon.src =
+
+  const helpIcon = extractHelpIcon(root);
+  const isHelpIconLoaded = waitElementLoaded(helpIcon);
+  helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
-  const isGranDozerLoaded = waitElementLoaded(elements.granDozer);
-  const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
+
+  const genesisBraver = extractGenesisBraver(root);
+  const isGenesisBraverLoaded = waitElementLoaded(genesisBraver);
+
+  const shinBraver = extractShinBraver(root);
+  const isShinBraverLoaded = waitElementLoaded(shinBraver);
+
+  const granDozer = extractGranDozer(root);
+  const isGranDozerLoaded = waitElementLoaded(granDozer);
+
+  const wingDozer = extractWingDozer(root);
+  const isWingDozerLoaded = waitElementLoaded(wingDozer);
+
+  const isImgLoaded = Promise.all([
+    isLogoLoaded,
+    isHelpIconLoaded,
+    isAvatarLoaded,
+    isGenesisBraverLoaded,
+    isShinBraverLoaded,
+    isGranDozerLoaded,
+    isWingDozerLoaded,
+  ]);
   return {
     ...params,
-    ...elements,
     exclusive: new Exclusive(),
+
     root,
+    login: extractLogin(root),
+    accountMenu: extractAccountMenu(root),
     avatar,
-    isLogoLoaded,
-    isAvatarLoaded,
-    isHelpIconLoaded,
-    isGranDozerLoaded,
-    isShinBraverLoaded,
+    deleteAccount: extractDeleteAccount(root),
+    logout: extractLogout(root),
+    helpIcon,
+    helpMenu: extractHelpMenu(root),
+    tutorial: extractTutorial(root),
+    story: extractStory(root),
+    arcade: extractArcade(root),
+    netBattle: extractNetBattle(root),
+    config: extractConfig(root),
+
+    isImgLoaded,
+
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),
