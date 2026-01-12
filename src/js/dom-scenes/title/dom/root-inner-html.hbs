@@ -1,12 +1,12 @@
 <div class="{{ROOT_CLASS}}__account-controller">
-  <button data-id="{{ids.login}}" class="{{loginClassName}}">ログイン</button>
+  <button data-id="login" class="{{loginClassName}}">ログイン</button>
   <div class="{{accountClassName}}">
     <img
       class="{{ROOT_CLASS}}__avatar"
       alt="アカウントのアバター画像"
-      data-id="{{ids.avatar}}"
+      data-id="avatar"
     />
-    <div class="{{INVISIBLE_ACCOUNT_MENU_CLASS}}" data-id="{{ids.accountMenu}}">
+    <div class="{{INVISIBLE_ACCOUNT_MENU_CLASS}}" data-id="accountMenu">
       <div class="{{ROOT_CLASS}}__account-name">
         <div class="{{ROOT_CLASS}}__account-name-prefix">アカウント名</div>
         <div class="{{ROOT_CLASS}}__account-name-value">{{accountName}}</div>
@@ -14,22 +14,15 @@
       <div class="{{ROOT_CLASS}}__account-menu-separation"></div>
       <div
         class="{{ROOT_CLASS}}__delete-account"
-        data-id="{{ids.deleteAccount}}"
+        data-id="deleteAccount"
       >アカウント削除</div>
-      <div
-        class="{{ROOT_CLASS}}__logout"
-        data-id="{{ids.logout}}"
-      >ログアウト</div>
+      <div class="{{ROOT_CLASS}}__logout" data-id="logout">ログアウト</div>
     </div>
   </div>
 </div>
 <div class="{{ROOT_CLASS}}__help">
-  <img
-    class="{{helpIconClassName}}"
-    alt="ヘルプアイコン"
-    data-id="{{ids.helpIcon}}"
-  />
-  <div class="{{INVISIBLE__HELP_MENU_CLASS}}" data-id="{{ids.helpMenu}}">
+  <img class="{{helpIconClassName}}" alt="ヘルプアイコン" data-id="helpIcon" />
+  <div class="{{INVISIBLE__HELP_MENU_CLASS}}" data-id="helpMenu">
     <a
       class="{{ROOT_CLASS}}__how-to-play"
       href="{{params.howToPlayURL}}"
@@ -68,22 +61,18 @@
     class="{{ROOT_CLASS}}__gran-dozer"
     alt="グランドーザ"
     src="{{granDozerPath}}"
-    data-id="{{ids.granDozer}}"
+    data-id="granDozer"
   />
   <img
     class="{{ROOT_CLASS}}__shin-braver"
     alt="シンブレイバー"
     src="{{shinBraverPath}}"
-    data-id="{{ids.shinBraver}}"
+    data-id="shinBraver"
   />
 </div>
 <div class="{{ROOT_CLASS}}__contents">
   <div class="{{ROOT_CLASS}}__title">
-    <img
-      class="{{ROOT_CLASS}}__title-logo"
-      alt="タイトルロゴ"
-      data-id="{{ids.logo}}"
-    />
+    <img class="{{ROOT_CLASS}}__title-logo" alt="タイトルロゴ" data-id="logo" />
     <small class="{{ROOT_CLASS}}__copy-rights">
       <span class="{{ROOT_CLASS}}__copy-rights-symbol">&copy;</span>
       <span class="{{ROOT_CLASS}}__copy-rights-year">2022</span>
@@ -92,35 +81,35 @@
     <small class="{{ROOT_CLASS}}__music">音楽 魔王魂</small>
   </div>
   <div class="{{gameClassName}}">
-    <button class="{{ROOT_CLASS}}__config" data-id="{{ids.config}}">
+    <button class="{{ROOT_CLASS}}__config" data-id="config">
       <span
         class="{{ROOT_CLASS}}__menu-button-icon"
         aria-hidden="true"
       >⚙️</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">設定</span>
     </button>
-    <button class="{{netBattleClassName}}" data-id="{{ids.netBattle}}">
+    <button class="{{netBattleClassName}}" data-id="netBattle">
       <span
         class="{{ROOT_CLASS}}__menu-button-icon"
         aria-hidden="true"
       >🌐</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">ネット対戦</span>
     </button>
-    <button class="{{ROOT_CLASS}}__arcade" data-id="{{ids.arcade}}">
+    <button class="{{ROOT_CLASS}}__arcade" data-id="arcade">
       <span
         class="{{ROOT_CLASS}}__menu-button-icon"
         aria-hidden="true"
       >🕹</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">アーケード</span>
     </button>
-    <button class="{{ROOT_CLASS}}__story" data-id="{{ids.story}}">
+    <button class="{{ROOT_CLASS}}__story" data-id="story">
       <span
         class="{{ROOT_CLASS}}__menu-button-icon"
         aria-hidden="true"
       >📖</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">ストーリー</span>
     </button>
-    <button class="{{ROOT_CLASS}}__tutorial" data-id="{{ids.tutorial}}">
+    <button class="{{ROOT_CLASS}}__tutorial" data-id="tutorial">
       <span class="{{ROOT_CLASS}}__tutorial-icon" aria-hidden="true">🔰</span>
       <span class="{{ROOT_CLASS}}__tutorial-label">チュートリアル</span>
     </button>
