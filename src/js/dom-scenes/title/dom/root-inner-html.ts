@@ -67,6 +67,8 @@ export function rootInnerHTML(
   const shinBraverPath =
     params.resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? "";
+  const genesisBraverPath = params.resources.paths.find((p) => p.id === PathIds.GENESIS_BRAVER_BUST_SHOT)
+      ?.path ?? "";
   const granDozerPath =
     params.resources.paths.find((p) => p.id === PathIds.GRAN_DOZER_BUST_SHOT)
       ?.path ?? "";
@@ -86,8 +88,11 @@ export function rootInnerHTML(
     accountName,
     accountClassName,
     netBattleClassName,
+
     shinBraverPath,
+    genesisBraverPath,
     granDozerPath,
+
     gameClassName,
     helpIconClassName,
   });

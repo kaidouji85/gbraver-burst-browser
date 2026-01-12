@@ -191,9 +191,20 @@
 .title__gran-dozer {
   --size: calc(min(150vh, 90vw) * 1.5);
 
+  display: none; /** 開発が終わったら戻す **/
   position: fixed;
   top: calc(var(--size) * -0.14);
   right: calc(50vw - var(--size) * 0.4);
+  width: var(--size);
+  height: var(--size);
+}
+
+.title__genesis-braver {
+  --size: calc(min(150vh, 90vw));
+
+  position: fixed;
+  top: 0;
+  right: calc(50vw - 30vh);
   width: var(--size);
   height: var(--size);
 }
