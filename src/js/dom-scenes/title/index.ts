@@ -7,6 +7,7 @@ import {
   CreateTitlePropsParams,
 } from "./procedures/create-title-props";
 import { TitleProps } from "./props";
+import { loopTitleAnimation } from "./procedures/loop-title-animation";
 
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = CreateTitlePropsParams;
@@ -32,6 +33,13 @@ export class Title implements DOMScene {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * タイトルアニメーションをループ再生する
+   */
+  loopTitleAnimation(): void {
+    loopTitleAnimation(this.#props);
   }
 
   /**

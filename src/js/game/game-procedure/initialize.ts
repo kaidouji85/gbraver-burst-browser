@@ -29,7 +29,7 @@ export async function initialize(props: GameProps): Promise<void> {
   applyPerformanceStatsVisibility(props, config.performanceStatsVisibility);
   applyBattleWindowFontSize(config.battleWindowFontSize);
   await applySoundVolume(props, config);
-  await startTitle(props);
+  const title = await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;
   await waitTime(500 - latency);
@@ -37,6 +37,7 @@ export async function initialize(props: GameProps): Promise<void> {
   invisibleFirstView();
   await props.fader.fadeIn();
   playTitleBGM(props);
+  title.loopTitleAnimation();
   props.sharedResourceState = {
     type: "Loading",
     resourceLoading: loadSharedResources(props),
