@@ -2,6 +2,9 @@ import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
 import { ArmdozerImages, TitleProps } from "../props";
 
+/** アームドーザを表示するまでの時間 */
+const showDuration = 400;
+
 /**
  * アームドーザを非表示にする
  * @param img アームドーザ画像
@@ -18,12 +21,13 @@ const hidden = (img: HTMLImageElement) =>
 const showRight = (img: HTMLImageElement) =>
   img.animate(
     [
-      { opacity: 1, left: "var(--offset-x)", transform: "scaleX(-1) translateX(-10vh)" },
+      { opacity: 1, left: "var(--offset-x)", transform: "scaleX(-1) translateX(10vh)" },
       { opacity: 1, left: "var(--offset-x)", transform: "scaleX(-1) translateX(0vh)" },
     ],
     {
-      duration: 200,
+      duration: showDuration,
       fill: "forwards",
+      easing: "ease",
     },
   );
 
@@ -35,12 +39,13 @@ const showRight = (img: HTMLImageElement) =>
 const showLeft = (img: HTMLImageElement) =>
   img.animate(
     [
-      { opacity: 1, right: "var(--offset-x)", transform: "translateX(-10vh)" },
+      { opacity: 1, right: "var(--offset-x)", transform: "translateX(10vh)" },
       { opacity: 1, right: "var(--offset-x)", transform: "translateX(0vh)" },
     ],
     {
-      duration: 200,
+      duration: showDuration,
       fill: "forwards",
+      easing: "ease",
     },
   );
 
@@ -73,10 +78,11 @@ const switchArmdozer = (
 export async function loopTitleAnimation(props: Readonly<TitleProps>) {
   const { armdozerImages } = props;
   const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
+  const interval = 15000;
   while (true) {
     await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
-    await waitTime(5000);
+    await waitTime(interval);
     await switchArmdozer(granDozer, wingDozer, armdozerImages);
-    await waitTime(5000);
+    await waitTime(interval);
   }
 }
