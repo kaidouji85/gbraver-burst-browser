@@ -18,7 +18,7 @@ const hidden = (img: HTMLImageElement) =>
 const showRight = (img: HTMLImageElement) =>
   img.animate(
     [
-      { opacity: 1, transform: "scaleX(-1) translateX(10vh)" },
+      { opacity: 1, transform: "scaleX(-1) translateX(-10vh)" },
       { opacity: 1, transform: "scaleX(-1) translateX(0vh)" },
     ],
     {
