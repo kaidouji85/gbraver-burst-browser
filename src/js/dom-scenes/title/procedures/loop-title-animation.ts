@@ -18,8 +18,8 @@ const hidden = (img: HTMLImageElement) =>
 const showRight = (img: HTMLImageElement) =>
   img.animate(
     [
-      { opacity: 1, transform: "scaleX(-1) translateX(-10vh)" },
-      { opacity: 1, transform: "scaleX(-1) translateX(0vh)" },
+      { opacity: 1, left: "var(--offset-x)", transform: "scaleX(-1) translateX(-10vh)" },
+      { opacity: 1, left: "var(--offset-x)", transform: "scaleX(-1) translateX(0vh)" },
     ],
     {
       duration: 200,
@@ -35,8 +35,8 @@ const showRight = (img: HTMLImageElement) =>
 const showLeft = (img: HTMLImageElement) =>
   img.animate(
     [
-      { opacity: 1, transform: "translateX(-10vh)" },
-      { opacity: 1, transform: "translateX(0vh)" },
+      { opacity: 1, right: "var(--offset-x)", transform: "translateX(-10vh)" },
+      { opacity: 1, right: "var(--offset-x)", transform: "translateX(0vh)" },
     ],
     {
       duration: 200,
@@ -74,9 +74,9 @@ export async function loopTitleAnimation(props: Readonly<TitleProps>) {
   const { armdozerImages } = props;
   const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
   while (true) {
+    await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
     await waitTime(5000);
     await switchArmdozer(granDozer, wingDozer, armdozerImages);
     await waitTime(5000);
-    await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
   }
 }
