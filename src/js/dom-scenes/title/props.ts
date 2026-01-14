@@ -4,6 +4,18 @@ import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 
+/** アームドーザ画像をあつめたもの */
+export type ArmdozerImages = {
+  /** ジェネシスブレイバー画像 */
+  readonly genesisBraver: HTMLImageElement;
+  /** シンブレイバー画像 */
+  readonly shinBraver: HTMLImageElement;
+  /** グランドーザ画像 */
+  readonly granDozer: HTMLImageElement;
+  /** ウィングドーザ画像 */
+  readonly wingDozer: HTMLImageElement;
+};
+
 /** タイトル画面プロパティ */
 export type TitleProps = Readonly<SEPlayerContainer> & {
   /** 排他制御 */
@@ -36,14 +48,8 @@ export type TitleProps = Readonly<SEPlayerContainer> & {
   /** 設定 */
   readonly config: HTMLElement;
 
-  /** ジェネシスブレイバー画像 */
-  readonly genesisBraver: HTMLImageElement;
-  /** シンブレイバー画像 */
-  readonly shinBraver: HTMLImageElement;
-  /** グランドーザ画像 */
-  readonly granDozer: HTMLImageElement;
-  /** ウィングドーザ画像 */
-  readonly wingDozer: HTMLImageElement;
+  /** アームドーザ画像をあつめたもの */
+  readonly armdozerImages: ArmdozerImages;
 
   /** Img系リソースを読み込んだら発火するPromise */
   readonly isImgLoaded: Promise<unknown>;

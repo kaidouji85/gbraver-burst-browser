@@ -104,10 +104,12 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     netBattle: extractNetBattle(root),
     config: extractConfig(root),
 
-    genesisBraver,
-    shinBraver,
-    granDozer,
-    wingDozer,
+    armdozerImages: {
+      genesisBraver,
+      shinBraver,
+      granDozer,
+      wingDozer,
+    },
 
     isImgLoaded,
 

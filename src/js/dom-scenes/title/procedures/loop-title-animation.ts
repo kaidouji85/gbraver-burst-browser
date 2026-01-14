@@ -1,7 +1,6 @@
-import { pop } from "../../../dom/pop";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
-import { TitleProps } from "../props";
+import { ArmdozerImages, TitleProps } from "../props";
 
 /**
  * アームドーザを非表示にする
@@ -46,26 +45,38 @@ const showLeft = (img: HTMLImageElement) =>
   );
 
 /**
+ * アームドーザ画像を切り替える
+ * @param left 左側に表示するアームドーザ画像
+ * @param right 右側に表示するアームドーザ画像
+ * @param armdozerImages アームドーザ画像をあつめたもの
+ * @returns アニメーションが完了したら発火するPromise
+ */
+const switchArmdozer = (
+  left: HTMLImageElement,
+  right: HTMLImageElement,
+  armdozerImages: ArmdozerImages,
+) => {
+  const otherArmdozerImages = Object.values(armdozerImages).filter(
+    (img) => img !== left && img !== right,
+  );
+  return Promise.all([
+    waitFinishAnimation(showLeft(left)),
+    waitFinishAnimation(showRight(right)),
+    ...otherArmdozerImages.map((img) => waitFinishAnimation(hidden(img))),
+  ]);
+};
+
+/**
  * タイトルアニメーションをループ再生する
  * @param props タイトルプロパティ
  */
 export async function loopTitleAnimation(props: Readonly<TitleProps>) {
-  Promise.all([
-    waitFinishAnimation(
-      props.genesisBraver.animate([{ opacity: 0.5 }], {
-        duration: 0,
-        fill: "forwards",
-      }),
-    ),
-    waitFinishAnimation(
-      props.shinBraver.animate([{ opacity: 0.5 }], {
-        duration: 0,
-        fill: "forwards",
-      }),
-    ),
-  ]);
-  // while(true) {
-  //   await pop(props.genesisBraver);
-  //   await waitTime(1000);
-  // }
+  const { armdozerImages } = props;
+  const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
+  while (true) {
+    await waitTime(5000);
+    await switchArmdozer(granDozer, wingDozer, armdozerImages);
+    await waitTime(5000);
+    await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
+  }
 }
