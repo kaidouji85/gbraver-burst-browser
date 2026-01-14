@@ -6,8 +6,8 @@ import {
   createTitleProps,
   CreateTitlePropsParams,
 } from "./procedures/create-title-props";
-import { TitleProps } from "./props";
 import { loopTitleAnimation } from "./procedures/loop-title-animation";
+import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = CreateTitlePropsParams;
