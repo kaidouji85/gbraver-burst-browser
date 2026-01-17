@@ -3,11 +3,14 @@ import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
 import { ArmdozerImages, TitleProps } from "../props";
 
-/** アームドーザを表示するまでの時間 */
-const showDuration = 600;
+/** アームドーザが出現するまでの時間 */
+const appearDuration = 1000;
 
-/** アームドーザが消えるまでの時間 */
-const hiddenDuration = 600;
+/** アームドーザが表示されている時間 */
+const displayDuration = 3000;
+
+/** アームドーザが消失するまでの時間 */
+const disappearDuration = 1000;
 
 /** x方向の移動量 */
 const deltaX = "4vh";
@@ -21,11 +24,11 @@ const hidden = (img: HTMLImageElement) =>
   img.animate([{ opacity: 0 }], { duration: 0, fill: "forwards" });
 
 /**
- * 右側のアームドーザを表示する
+ * 右側のアームドーザを出現させる
  * @param img アームドーザ画像
  * @returns アニメーション
  */
-const showRight = (img: HTMLImageElement) =>
+const appearRight = (img: HTMLImageElement) =>
   img.animate(
     [
       {
@@ -40,18 +43,18 @@ const showRight = (img: HTMLImageElement) =>
       },
     ],
     {
-      duration: showDuration,
+      duration: appearDuration,
       fill: "forwards",
       easing: "ease",
     },
   );
 
 /**
- * 右側のアームドーザを非表示にする
+ * 右側のアームドーザを消失させる
  * @param img アームドーザ画像
  * @returns アニメーション
  */
-const hiddenRight = (img: HTMLImageElement) =>
+const disappearRight = (img: HTMLImageElement) =>
   img.animate(
     [
       {
@@ -61,18 +64,18 @@ const hiddenRight = (img: HTMLImageElement) =>
       },
     ],
     {
-      duration: hiddenDuration,
+      duration: disappearDuration,
       fill: "forwards",
       easing: "ease",
     },
   );
 
 /**
- * 左側のアームドーザを表示する
+ * 左側のアームドーザを出現させる
  * @param img アームドーザ画像
  * @returns アニメーション
  */
-const showLeft = (img: HTMLImageElement) =>
+const appearLeft = (img: HTMLImageElement) =>
   img.animate(
     [
       {
@@ -83,18 +86,18 @@ const showLeft = (img: HTMLImageElement) =>
       { opacity: 1, right: "var(--offset-x)", transform: "translateX(0vh)" },
     ],
     {
-      duration: showDuration,
+      duration: appearDuration,
       fill: "forwards",
       easing: "ease",
     },
   );
 
 /**
- * 左側のアームドーザを非表示にする
+ * 左側のアームドーザを消失させる
  * @param img アームドーザ画像
  * @returns アニメーション
  */
-const hiddenLeft = (img: HTMLImageElement) =>
+const disappearLeft = (img: HTMLImageElement) =>
   img.animate(
     [
       {
@@ -104,7 +107,7 @@ const hiddenLeft = (img: HTMLImageElement) =>
       },
     ],
     {
-      duration: hiddenDuration,
+      duration: disappearDuration,
       fill: "forwards",
       easing: "ease",
     },
@@ -130,16 +133,16 @@ const animateArmdozerPair = async (
     (img) => img !== left && img !== right,
   );
   await Promise.all([
-    waitFinishAnimation(showLeft(left), { signal }),
-    waitFinishAnimation(showRight(right), { signal }),
+    waitFinishAnimation(appearLeft(left), { signal }),
+    waitFinishAnimation(appearRight(right), { signal }),
     ...otherArmdozerImages.map((img) =>
       waitFinishAnimation(hidden(img), { signal }),
     ),
   ]);
-  await waitTime(3000, { signal });
+  await waitTime(displayDuration, { signal });
   await Promise.all([
-    waitFinishAnimation(hiddenLeft(left), { signal }),
-    waitFinishAnimation(hiddenRight(right), { signal }),
+    waitFinishAnimation(disappearLeft(left), { signal }),
+    waitFinishAnimation(disappearRight(right), { signal }),
   ]);
 };
 
