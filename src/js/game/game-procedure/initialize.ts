@@ -35,9 +35,9 @@ export async function initialize(props: GameProps): Promise<void> {
   await waitTime(500 - latency);
   await props.fader.fadeOut();
   invisibleFirstView();
+  title.loopTitleAnimation();
   await props.fader.fadeIn();
   playTitleBGM(props);
-  title.loopTitleAnimation();
   props.sharedResourceState = {
     type: "Loading",
     resourceLoading: loadSharedResources(props),
