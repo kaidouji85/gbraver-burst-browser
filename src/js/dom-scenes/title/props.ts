@@ -1,5 +1,6 @@
 import { Subject } from "rxjs";
 
+import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
@@ -21,62 +22,63 @@ export type ArmdozerImages = {
 };
 
 /** タイトル画面プロパティ */
-export type TitleProps = Readonly<SEPlayerContainer> & {
-  /** 排他制御 */
-  readonly exclusive: Exclusive;
+export type TitleProps = Readonly<SEPlayerContainer> &
+  Readonly<AbortManagerContainer> & {
+    /** 排他制御 */
+    readonly exclusive: Exclusive;
 
-  /** ルートHTML要素 */
-  readonly root: HTMLElement;
-  /** ログイン */
-  readonly login: HTMLElement;
-  /** アカウントメニュー */
-  readonly accountMenu: HTMLElement;
-  /** アバター */
-  readonly avatar: HTMLImageElement;
-  /** アカウント削除 */
-  readonly deleteAccount: HTMLElement;
-  /** ログアウト */
-  readonly logout: HTMLElement;
-  /** ヘルプアイコン */
-  readonly helpIcon: HTMLElement;
-  /** ヘルプメニュー */
-  readonly helpMenu: HTMLElement;
-  /** チュートリアル */
-  readonly tutorial: HTMLElement;
-  /** ストーリー */
-  readonly story: HTMLElement;
-  /** アーケード */
-  readonly arcade: HTMLElement;
-  /** ネット対戦 */
-  readonly netBattle: HTMLElement;
-  /** 設定 */
-  readonly config: HTMLElement;
+    /** ルートHTML要素 */
+    readonly root: HTMLElement;
+    /** ログイン */
+    readonly login: HTMLElement;
+    /** アカウントメニュー */
+    readonly accountMenu: HTMLElement;
+    /** アバター */
+    readonly avatar: HTMLImageElement;
+    /** アカウント削除 */
+    readonly deleteAccount: HTMLElement;
+    /** ログアウト */
+    readonly logout: HTMLElement;
+    /** ヘルプアイコン */
+    readonly helpIcon: HTMLElement;
+    /** ヘルプメニュー */
+    readonly helpMenu: HTMLElement;
+    /** チュートリアル */
+    readonly tutorial: HTMLElement;
+    /** ストーリー */
+    readonly story: HTMLElement;
+    /** アーケード */
+    readonly arcade: HTMLElement;
+    /** ネット対戦 */
+    readonly netBattle: HTMLElement;
+    /** 設定 */
+    readonly config: HTMLElement;
 
-  /** アームドーザ画像をあつめたもの */
-  readonly armdozerImages: ArmdozerImages;
+    /** アームドーザ画像をあつめたもの */
+    readonly armdozerImages: ArmdozerImages;
 
-  /** Img系リソースを読み込んだら発火するPromise */
-  readonly isImgLoaded: Promise<unknown>;
+    /** Img系リソースを読み込んだら発火するPromise */
+    readonly isImgLoaded: Promise<unknown>;
 
-  /** SE 値変更 */
-  readonly changeValue: SoundResource;
-  /** SE ボタン押下 */
-  readonly pushButton: SoundResource;
+    /** SE 値変更 */
+    readonly changeValue: SoundResource;
+    /** SE ボタン押下 */
+    readonly pushButton: SoundResource;
 
-  /** ログイン押下ストリーム */
-  readonly pushLogin: Subject<void>;
-  /** 削除押下ストリーム */
-  readonly pushDeleteAccount: Subject<void>;
-  /** ログアウト押下ストリーム */
-  readonly pushLogout: Subject<void>;
-  /** チュートリアル押下ストリーム */
-  readonly pushTutorial: Subject<void>;
-  /** ストーリー押下ストリーム */
-  readonly pushStory: Subject<void>;
-  /** アーケード押下ストリーム */
-  readonly pushArcade: Subject<void>;
-  /** ネット対戦押下ストリーム */
-  readonly pushNetBattle: Subject<void>;
-  /** 設定押下ストリーム */
-  readonly pushConfig: Subject<void>;
-};
+    /** ログイン押下ストリーム */
+    readonly pushLogin: Subject<void>;
+    /** 削除押下ストリーム */
+    readonly pushDeleteAccount: Subject<void>;
+    /** ログアウト押下ストリーム */
+    readonly pushLogout: Subject<void>;
+    /** チュートリアル押下ストリーム */
+    readonly pushTutorial: Subject<void>;
+    /** ストーリー押下ストリーム */
+    readonly pushStory: Subject<void>;
+    /** アーケード押下ストリーム */
+    readonly pushArcade: Subject<void>;
+    /** ネット対戦押下ストリーム */
+    readonly pushNetBattle: Subject<void>;
+    /** 設定押下ストリーム */
+    readonly pushConfig: Subject<void>;
+  };
