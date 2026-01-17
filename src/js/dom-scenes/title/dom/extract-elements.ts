@@ -161,3 +161,19 @@ export const extractGranDozer = (root: HTMLElement) =>
  */
 export const extractWingDozer = (root: HTMLElement) =>
   extractHTMLImageElementByDataID(root, "wingDozer");
+
+/**
+ * ネオランドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractNeoLandozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "neoLandozer");
+
+/**
+ * ライトニングランドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractLightningLandozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "lightningLandozer");

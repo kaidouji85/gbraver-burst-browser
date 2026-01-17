@@ -18,9 +18,11 @@ import {
   extractGranDozer,
   extractHelpIcon,
   extractHelpMenu,
+  extractLightningLandozer,
   extractLogin,
   extractLogo,
   extractLogout,
+  extractNeoLandozer,
   extractNetBattle,
   extractShinBraver,
   extractStory,
@@ -77,6 +79,12 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const wingDozer = extractWingDozer(root);
   const isWingDozerLoaded = waitElementLoaded(wingDozer);
 
+  const neoLandozer = extractNeoLandozer(root);
+  const isNeoLandozerLoaded = waitElementLoaded(neoLandozer);
+
+  const lightningDozer = extractLightningLandozer(root);
+  const isLightningDozerLoaded = waitElementLoaded(lightningDozer);
+
   const isImgLoaded = Promise.all([
     isLogoLoaded,
     isHelpIconLoaded,
@@ -85,6 +93,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isShinBraverLoaded,
     isGranDozerLoaded,
     isWingDozerLoaded,
+    isNeoLandozerLoaded,
+    isLightningDozerLoaded,
   ]);
   return {
     ...params,
@@ -109,6 +119,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
       shinBraver,
       granDozer,
       wingDozer,
+      neoLandozer,
+      lightningDozer,
     },
 
     isImgLoaded,

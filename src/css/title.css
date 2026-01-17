@@ -234,6 +234,31 @@
   height: var(--size);
 }
 
+
+.title__neo-landozer {
+  --size: min(150vh, 90vw);
+  --offset-x: calc(50vw - 30vh);
+
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transform: scaleX(-1);
+  width: var(--size);
+  height: var(--size);
+}
+
+.title__lightning-dozer {
+  --size: min(150vh, 90vw);
+  --offset-x: calc(50vw - 30vh);
+
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transform: scaleX(-1);
+  width: var(--size);
+  height: var(--size);
+}
+
 .title__contents {
   z-index: var(--zindex-title-contents);
   flex: 1;

@@ -73,6 +73,13 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
   const wingDozerPath =
     params.resources.paths.find((p) => p.id === PathIds.WING_DOZER_BUST_SHOT)
       ?.path ?? "";
+  const neoLandozerPath =
+    params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
+      ?.path ?? "";
+  const lightningLandozerPath =
+    params.resources.paths.find(
+      (p) => p.id === PathIds.LIGHTNING_DOZER_BUST_SHOT,
+    )?.path ?? "";
 
   const gameClassName = params.isNetBattleVisible
     ? GAME_MENU_CLASS
@@ -95,6 +102,8 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     shinBraverPath,
     granDozerPath,
     wingDozerPath,
+    neoLandozerPath,
+    lightningLandozerPath,
 
     gameClassName,
     helpIconClassName,

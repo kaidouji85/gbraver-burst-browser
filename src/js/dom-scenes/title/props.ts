@@ -14,6 +14,10 @@ export type ArmdozerImages = {
   readonly granDozer: HTMLImageElement;
   /** ウィングドーザ画像 */
   readonly wingDozer: HTMLImageElement;
+  /** ネオランドーザ画像 */
+  readonly neoLandozer: HTMLImageElement;
+  /** ライトニングドーザ画像 */
+  readonly lightningDozer: HTMLImageElement;
 };
 
 /** タイトル画面プロパティ */
