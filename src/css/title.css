@@ -189,7 +189,7 @@
 }
 
 .title__genesis-braver {
-  --size: calc(min(150vh, 90vw));
+  --size: min(150vh, 90vw);
   --offset-x: calc(50vw - 30vh);
 
   opacity: 0;
