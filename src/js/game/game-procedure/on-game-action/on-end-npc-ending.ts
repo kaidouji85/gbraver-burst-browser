@@ -19,7 +19,7 @@ type Options = {
  */
 export async function onEndNPCEnding(options: Options): Promise<void> {
   const { props } = options;
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
       return await startTitle(props);
@@ -29,6 +29,7 @@ export async function onEndNPCEnding(options: Options): Promise<void> {
       await props.bgm.do(stop);
     })(),
   ]);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

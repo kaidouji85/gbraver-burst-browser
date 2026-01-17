@@ -9,16 +9,17 @@ import { startTitle } from "../../start-title";
  * @returns 処理が完了したら発火するPromise
  */
 export async function forceEndBattle(props: Readonly<GameProps>) {
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      await startTitle(props);
+      return await startTitle(props);
     })(),
     (async () => {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
   ]);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

@@ -31,16 +31,17 @@ export async function forceEndNetBattle(
   switchWaitingDialog(props, dialog);
   await disconnectConnection(props);
   props.domDialogBinder.hidden();
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      await startTitle(props);
+      return await startTitle(props);
     })(),
     (async () => {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
   ]);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

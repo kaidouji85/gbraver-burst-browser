@@ -131,12 +131,12 @@ export const extractConfig = (root: HTMLElement) =>
   extractHTMLElementByDataID(root, "config");
 
 /**
- * グランドーザ画像を抽出する
+ * ジェネシスブレイバー画像を抽出する
  * @param root ルート要素
  * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
  */
-export const extractGranDozer = (root: HTMLElement) =>
-  extractHTMLImageElementByDataID(root, "granDozer");
+export const extractGenesisBraver = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "genesisBraver");
 
 /**
  * シンブレイバー画像を抽出する
@@ -145,3 +145,35 @@ export const extractGranDozer = (root: HTMLElement) =>
  */
 export const extractShinBraver = (root: HTMLElement) =>
   extractHTMLImageElementByDataID(root, "shinBraver");
+
+/**
+ * グランドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractGranDozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "granDozer");
+
+/**
+ * ウィングドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractWingDozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "wingDozer");
+
+/**
+ * ネオランドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractNeoLandozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "neoLandozer");
+
+/**
+ * ライトニングドーザ画像を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractLightningDozer = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "lightningDozer");

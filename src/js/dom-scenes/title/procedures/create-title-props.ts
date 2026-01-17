@@ -1,5 +1,6 @@
 import { Subject } from "rxjs";
 
+import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -14,24 +15,29 @@ import {
   extractAvatar,
   extractConfig,
   extractDeleteAccount,
+  extractGenesisBraver,
   extractGranDozer,
   extractHelpIcon,
   extractHelpMenu,
+  extractLightningDozer,
   extractLogin,
   extractLogo,
   extractLogout,
+  extractNeoLandozer,
   extractNetBattle,
   extractShinBraver,
   extractStory,
   extractTutorial,
+  extractWingDozer,
 } from "../dom/extract-elements";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { TitleProps } from "../props";
 
 /** タイトル画面プロパティ生成パラメータ */
 export type CreateTitlePropsParams = RootInnerHTMLParams &
-  ResourcesContainer &
-  SEPlayerContainer;
+  Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<AbortManagerContainer>;
 
 /**
  * タイトル画面プロパティを生成する
@@ -63,18 +69,34 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
 
-  const granDozer = extractGranDozer(root);
-  const isGranDozerLoaded = waitElementLoaded(granDozer);
+  const genesisBraver = extractGenesisBraver(root);
+  const isGenesisBraverLoaded = waitElementLoaded(genesisBraver);
 
   const shinBraver = extractShinBraver(root);
   const isShinBraverLoaded = waitElementLoaded(shinBraver);
 
+  const granDozer = extractGranDozer(root);
+  const isGranDozerLoaded = waitElementLoaded(granDozer);
+
+  const wingDozer = extractWingDozer(root);
+  const isWingDozerLoaded = waitElementLoaded(wingDozer);
+
+  const neoLandozer = extractNeoLandozer(root);
+  const isNeoLandozerLoaded = waitElementLoaded(neoLandozer);
+
+  const lightningDozer = extractLightningDozer(root);
+  const isLightningDozerLoaded = waitElementLoaded(lightningDozer);
+
   const isImgLoaded = Promise.all([
     isLogoLoaded,
     isHelpIconLoaded,
-    isGranDozerLoaded,
-    isShinBraverLoaded,
     isAvatarLoaded,
+    isGenesisBraverLoaded,
+    isShinBraverLoaded,
+    isGranDozerLoaded,
+    isWingDozerLoaded,
+    isNeoLandozerLoaded,
+    isLightningDozerLoaded,
   ]);
   return {
     ...params,
@@ -93,6 +115,15 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     arcade: extractArcade(root),
     netBattle: extractNetBattle(root),
     config: extractConfig(root),
+
+    armdozerImages: {
+      genesisBraver,
+      shinBraver,
+      granDozer,
+      wingDozer,
+      neoLandozer,
+      lightningDozer,
+    },
 
     isImgLoaded,
 

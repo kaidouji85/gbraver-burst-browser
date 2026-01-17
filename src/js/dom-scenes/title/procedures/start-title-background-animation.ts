@@ -1,0 +1,185 @@
+import { SignalContainer } from "../../../abort-controller/signal-container";
+import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
+import { waitTime } from "../../../wait/wait-time";
+import { ArmdozerImages, TitleProps } from "../props";
+
+/** アームドーザが出現するまでの時間 */
+const appearDuration = 1000;
+
+/** アームドーザが表示されている時間 */
+const displayDuration = 5000;
+
+/** アームドーザが消失するまでの時間 */
+const disappearDuration = 500;
+
+/** 出現時のx方向移動量 */
+const appearDeltaX = "4vh";
+
+/** 消失時のx方向移動量 */
+const disappearDeltaX = "2vh";
+
+/**
+ * アームドーザを非表示にする
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const hidden = (img: HTMLImageElement) =>
+  img.animate([{ opacity: 0 }], { duration: 0, fill: "forwards" });
+
+/**
+ * 右側のアームドーザを出現させる
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const appearRight = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        left: "var(--offset-x)",
+        transform: `scaleX(-1) translateX(${appearDeltaX})`,
+      },
+      {
+        opacity: 1,
+        left: "var(--offset-x)",
+        transform: "scaleX(-1) translateX(0vh)",
+      },
+    ],
+    {
+      duration: appearDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
+ * 右側のアームドーザを消失させる
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const disappearRight = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        left: "var(--offset-x)",
+        transform: `scaleX(-1) translateX(${disappearDeltaX})`,
+      },
+    ],
+    {
+      duration: disappearDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
+ * 左側のアームドーザを出現させる
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const appearLeft = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        right: "var(--offset-x)",
+        transform: `translateX(${appearDeltaX})`,
+      },
+      { opacity: 1, right: "var(--offset-x)", transform: "translateX(0vh)" },
+    ],
+    {
+      duration: appearDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
+ * 左側のアームドーザを消失させる
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const disappearLeft = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        right: "var(--offset-x)",
+        transform: `translateX(${disappearDeltaX})`,
+      },
+    ],
+    {
+      duration: disappearDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
+ * アームドーザのペアをアニメーションする
+ * @param options オプション
+ * @param options.left 左側に表示するアームドーザ画像
+ * @param options.right 右側に表示するアームドーザ画像
+ * @param options.armdozerImages アームドーザ画像をあつめたもの
+ * @returns アニメーションが完了したら発火するPromise
+ */
+const animateArmdozerPair = async (
+  options: Readonly<SignalContainer> & {
+    left: HTMLImageElement;
+    right: HTMLImageElement;
+    armdozerImages: ArmdozerImages;
+  },
+) => {
+  const { left, right, armdozerImages, signal } = options;
+  const otherArmdozerImages = Object.values(armdozerImages).filter(
+    (img) => img !== left && img !== right,
+  );
+  await Promise.all([
+    waitFinishAnimation(appearLeft(left), { signal }),
+    waitFinishAnimation(appearRight(right), { signal }),
+    ...otherArmdozerImages.map((img) =>
+      waitFinishAnimation(hidden(img), { signal }),
+    ),
+  ]);
+  await waitTime(displayDuration, { signal });
+  await Promise.all([
+    waitFinishAnimation(disappearLeft(left), { signal }),
+    waitFinishAnimation(disappearRight(right), { signal }),
+  ]);
+};
+
+/**
+ * タイトル背景アニメーションのループを開始する
+ * @param props タイトルプロパティ
+ */
+export async function startTitleBackgroundLoop(props: Readonly<TitleProps>) {
+  const { armdozerImages, abort } = props;
+  const {
+    genesisBraver,
+    shinBraver,
+    granDozer,
+    wingDozer,
+    neoLandozer,
+    lightningDozer,
+  } = armdozerImages;
+  const { signal } = abort.getAbortController();
+  const sharedOptions = { signal, armdozerImages };
+  while (true) {
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: genesisBraver,
+      right: shinBraver,
+    });
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: granDozer,
+      right: wingDozer,
+    });
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: neoLandozer,
+      right: lightningDozer,
+    });
+  }
+}
