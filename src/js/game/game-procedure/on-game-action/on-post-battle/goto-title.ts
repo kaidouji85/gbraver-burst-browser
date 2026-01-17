@@ -29,7 +29,7 @@ export async function gotoTitle(options: Options) {
       await props.bgm.do(stop);
     })(),
   ]);
-  title.loopTitleAnimation();
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
   props.inProgress = { type: "None" };

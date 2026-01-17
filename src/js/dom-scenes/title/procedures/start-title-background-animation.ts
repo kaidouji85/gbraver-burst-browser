@@ -144,10 +144,10 @@ const animateArmdozerPair = async (
 };
 
 /**
- * タイトルアニメーションをループ再生する
+ * タイトル背景アニメーションのループを開始する
  * @param props タイトルプロパティ
  */
-export async function loopTitleAnimation(props: Readonly<TitleProps>) {
+export async function startTitleBackgroundLoop(props: Readonly<TitleProps>) {
   const { armdozerImages, abort } = props;
   const {
     genesisBraver,

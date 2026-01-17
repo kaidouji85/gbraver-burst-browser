@@ -29,7 +29,7 @@ export async function onEndNPCEnding(options: Options): Promise<void> {
       await props.bgm.do(stop);
     })(),
   ]);
-  title.loopTitleAnimation();
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

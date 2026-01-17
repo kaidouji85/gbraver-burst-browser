@@ -19,6 +19,6 @@ export async function onCancelEpisodeSelect(options: Options): Promise<void> {
   const { props } = options;
   await props.fader.fadeOut();
   const title = await startTitle(props);
-  title.loopTitleAnimation();
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
 }

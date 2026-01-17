@@ -6,7 +6,7 @@ import {
   createTitleProps,
   CreateTitlePropsParams,
 } from "./procedures/create-title-props";
-import { loopTitleAnimation } from "./procedures/loop-title-animation";
+import { startTitleBackgroundLoop } from "./procedures/start-title-background-animation";
 import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
@@ -36,10 +36,10 @@ export class Title implements DOMScene {
   }
 
   /**
-   * タイトルアニメーションをループ再生する
+   * タイトル背景アニメーションのループを開始する
    */
-  loopTitleAnimation(): void {
-    loopTitleAnimation(this.#props);
+  startTitleBackgroundLoop(): void {
+    startTitleBackgroundLoop(this.#props);
   }
 
   /**

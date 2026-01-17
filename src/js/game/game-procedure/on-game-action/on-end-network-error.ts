@@ -28,7 +28,7 @@ const gotoTitle = async (props: GameProps) => {
       await props.bgm.do(stop);
     })(),
   ]);
-  title.loopTitleAnimation();
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 };
