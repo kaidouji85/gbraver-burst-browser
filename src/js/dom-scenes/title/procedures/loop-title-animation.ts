@@ -110,13 +110,13 @@ const hiddenLeft = (img: HTMLImageElement) =>
   );
 
 /**
- * アームドーザ画像を切り替える
+ * アームドーザのペアをアニメーションする
  * @param left 左側に表示するアームドーザ画像
  * @param right 右側に表示するアームドーザ画像
  * @param armdozerImages アームドーザ画像をあつめたもの
  * @returns アニメーションが完了したら発火するPromise
  */
-const switchArmdozer = async (
+const animateArmdozerPair = async (
   left: HTMLImageElement,
   right: HTMLImageElement,
   armdozerImages: ArmdozerImages,
@@ -144,7 +144,7 @@ export async function loopTitleAnimation(props: Readonly<TitleProps>) {
   const { armdozerImages } = props;
   const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
   while (true) {
-    await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
-    await switchArmdozer(granDozer, wingDozer, armdozerImages);
+    await animateArmdozerPair(genesisBraver, shinBraver, armdozerImages);
+    await animateArmdozerPair(granDozer, wingDozer, armdozerImages);
   }
 }
