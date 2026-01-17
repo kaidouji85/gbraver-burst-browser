@@ -5,6 +5,9 @@ import { ArmdozerImages, TitleProps } from "../props";
 /** アームドーザを表示するまでの時間 */
 const showDuration = 600;
 
+/** アームドーザが消えるまでの時間 */
+const hiddenDuration = 600;
+
 /** x方向の移動量 */
 const deltaX = "4vh";
 
@@ -25,7 +28,7 @@ const showRight = (img: HTMLImageElement) =>
   img.animate(
     [
       {
-        opacity: 1,
+        opacity: 0,
         left: "var(--offset-x)",
         transform: `scaleX(-1) translateX(${deltaX})`,
       },
@@ -43,6 +46,27 @@ const showRight = (img: HTMLImageElement) =>
   );
 
 /**
+ * 右側のアームドーザを非表示にする
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const hiddenRight = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        left: "var(--offset-x)",
+        transform: `scaleX(-1) translateX(${deltaX})`,
+      },
+    ],
+    {
+      duration: hiddenDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
  * 左側のアームドーザを表示する
  * @param img アームドーザ画像
  * @returns アニメーション
@@ -51,7 +75,7 @@ const showLeft = (img: HTMLImageElement) =>
   img.animate(
     [
       {
-        opacity: 1,
+        opacity: 0,
         right: "var(--offset-x)",
         transform: `translateX(${deltaX})`,
       },
@@ -65,13 +89,34 @@ const showLeft = (img: HTMLImageElement) =>
   );
 
 /**
+ * 左側のアームドーザを非表示にする
+ * @param img アームドーザ画像
+ * @returns アニメーション
+ */
+const hiddenLeft = (img: HTMLImageElement) =>
+  img.animate(
+    [
+      {
+        opacity: 0,
+        right: "var(--offset-x)",
+        transform: `translateX(${deltaX})`,
+      },
+    ],
+    {
+      duration: hiddenDuration,
+      fill: "forwards",
+      easing: "ease",
+    },
+  );
+
+/**
  * アームドーザ画像を切り替える
  * @param left 左側に表示するアームドーザ画像
  * @param right 右側に表示するアームドーザ画像
  * @param armdozerImages アームドーザ画像をあつめたもの
  * @returns アニメーションが完了したら発火するPromise
  */
-const switchArmdozer = (
+const switchArmdozer = async (
   left: HTMLImageElement,
   right: HTMLImageElement,
   armdozerImages: ArmdozerImages,
@@ -79,10 +124,15 @@ const switchArmdozer = (
   const otherArmdozerImages = Object.values(armdozerImages).filter(
     (img) => img !== left && img !== right,
   );
-  return Promise.all([
+  await Promise.all([
     waitFinishAnimation(showLeft(left)),
     waitFinishAnimation(showRight(right)),
     ...otherArmdozerImages.map((img) => waitFinishAnimation(hidden(img))),
+  ]);
+  await waitTime(5000);
+  await Promise.all([
+    waitFinishAnimation(hiddenLeft(left)),
+    waitFinishAnimation(hiddenRight(right)),
   ]);
 };
 
@@ -93,11 +143,8 @@ const switchArmdozer = (
 export async function loopTitleAnimation(props: Readonly<TitleProps>) {
   const { armdozerImages } = props;
   const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
-  const interval = 5000;
   while (true) {
     await switchArmdozer(genesisBraver, shinBraver, armdozerImages);
-    await waitTime(interval);
     await switchArmdozer(granDozer, wingDozer, armdozerImages);
-    await waitTime(interval);
   }
 }
