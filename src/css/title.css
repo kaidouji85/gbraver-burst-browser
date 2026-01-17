@@ -234,7 +234,6 @@
   height: var(--size);
 }
 
-
 .title__neo-landozer {
   --size: min(150vh, 90vw);
   --offset-x: calc(50vw - 30vh);

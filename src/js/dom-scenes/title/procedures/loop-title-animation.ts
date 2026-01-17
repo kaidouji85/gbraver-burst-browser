@@ -142,9 +142,17 @@ const animateArmdozerPair = async (
  */
 export async function loopTitleAnimation(props: Readonly<TitleProps>) {
   const { armdozerImages } = props;
-  const { genesisBraver, shinBraver, granDozer, wingDozer } = armdozerImages;
+  const {
+    genesisBraver,
+    shinBraver,
+    granDozer,
+    wingDozer,
+    neoLandozer,
+    lightningDozer,
+  } = armdozerImages;
   while (true) {
     await animateArmdozerPair(genesisBraver, shinBraver, armdozerImages);
     await animateArmdozerPair(granDozer, wingDozer, armdozerImages);
+    await animateArmdozerPair(neoLandozer, lightningDozer, armdozerImages);
   }
 }

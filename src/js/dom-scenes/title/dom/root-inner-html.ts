@@ -76,7 +76,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
   const neoLandozerPath =
     params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
       ?.path ?? "";
-  const lightningLandozerPath =
+  const lightningDozerPath =
     params.resources.paths.find(
       (p) => p.id === PathIds.LIGHTNING_DOZER_BUST_SHOT,
     )?.path ?? "";
@@ -103,7 +103,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     granDozerPath,
     wingDozerPath,
     neoLandozerPath,
-    lightningLandozerPath,
+    lightningDozerPath,
 
     gameClassName,
     helpIconClassName,

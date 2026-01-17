@@ -18,7 +18,7 @@ import {
   extractGranDozer,
   extractHelpIcon,
   extractHelpMenu,
-  extractLightningLandozer,
+  extractLightningDozer,
   extractLogin,
   extractLogo,
   extractLogout,
@@ -82,7 +82,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const neoLandozer = extractNeoLandozer(root);
   const isNeoLandozerLoaded = waitElementLoaded(neoLandozer);
 
-  const lightningDozer = extractLightningLandozer(root);
+  const lightningDozer = extractLightningDozer(root);
   const isLightningDozerLoaded = waitElementLoaded(lightningDozer);
 
   const isImgLoaded = Promise.all([
