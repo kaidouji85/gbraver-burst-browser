@@ -1,3 +1,4 @@
+import { SignalContainer } from "../../../abort-controller/signal-container";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
 import { ArmdozerImages, TitleProps } from "../props";
@@ -111,23 +112,29 @@ const hiddenLeft = (img: HTMLImageElement) =>
 
 /**
  * アームドーザのペアをアニメーションする
- * @param left 左側に表示するアームドーザ画像
- * @param right 右側に表示するアームドーザ画像
- * @param armdozerImages アームドーザ画像をあつめたもの
+ * @param options オプション
+ * @param options.left 左側に表示するアームドーザ画像
+ * @param options.right 右側に表示するアームドーザ画像
+ * @param options.armdozerImages アームドーザ画像をあつめたもの
  * @returns アニメーションが完了したら発火するPromise
  */
 const animateArmdozerPair = async (
-  left: HTMLImageElement,
-  right: HTMLImageElement,
-  armdozerImages: ArmdozerImages,
+  options: Readonly<SignalContainer> & {
+    left: HTMLImageElement;
+    right: HTMLImageElement;
+    armdozerImages: ArmdozerImages;
+  },
 ) => {
+  const { left, right, armdozerImages, signal } = options;
   const otherArmdozerImages = Object.values(armdozerImages).filter(
     (img) => img !== left && img !== right,
   );
   await Promise.all([
-    waitFinishAnimation(showLeft(left)),
-    waitFinishAnimation(showRight(right)),
-    ...otherArmdozerImages.map((img) => waitFinishAnimation(hidden(img))),
+    waitFinishAnimation(showLeft(left), { signal }),
+    waitFinishAnimation(showRight(right), { signal }),
+    ...otherArmdozerImages.map((img) =>
+      waitFinishAnimation(hidden(img), { signal }),
+    ),
   ]);
   await waitTime(5000);
   await Promise.all([
@@ -141,7 +148,7 @@ const animateArmdozerPair = async (
  * @param props タイトルプロパティ
  */
 export async function loopTitleAnimation(props: Readonly<TitleProps>) {
-  const { armdozerImages } = props;
+  const { armdozerImages, abort } = props;
   const {
     genesisBraver,
     shinBraver,
@@ -150,9 +157,23 @@ export async function loopTitleAnimation(props: Readonly<TitleProps>) {
     neoLandozer,
     lightningDozer,
   } = armdozerImages;
+  const { signal } = abort.getAbortController();
+  const sharedOptions = { signal, armdozerImages };
   while (true) {
-    await animateArmdozerPair(genesisBraver, shinBraver, armdozerImages);
-    await animateArmdozerPair(granDozer, wingDozer, armdozerImages);
-    await animateArmdozerPair(neoLandozer, lightningDozer, armdozerImages);
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: genesisBraver,
+      right: shinBraver,
+    });
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: granDozer,
+      right: wingDozer,
+    });
+    await animateArmdozerPair({
+      ...sharedOptions,
+      left: neoLandozer,
+      right: lightningDozer,
+    });
   }
 }
