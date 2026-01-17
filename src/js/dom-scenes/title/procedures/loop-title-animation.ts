@@ -136,10 +136,10 @@ const animateArmdozerPair = async (
       waitFinishAnimation(hidden(img), { signal }),
     ),
   ]);
-  await waitTime(5000);
+  await waitTime(3000, { signal });
   await Promise.all([
-    waitFinishAnimation(hiddenLeft(left)),
-    waitFinishAnimation(hiddenRight(right)),
+    waitFinishAnimation(hiddenLeft(left), { signal }),
+    waitFinishAnimation(hiddenRight(right), { signal }),
   ]);
 };
 
