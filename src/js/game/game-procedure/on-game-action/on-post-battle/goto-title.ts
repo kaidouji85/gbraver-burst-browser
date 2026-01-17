@@ -19,7 +19,7 @@ type Options = {
  */
 export async function gotoTitle(options: Options) {
   const { props } = options;
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
       return await startTitle(props);
@@ -29,6 +29,7 @@ export async function gotoTitle(options: Options) {
       await props.bgm.do(stop);
     })(),
   ]);
+  title.loopTitleAnimation();
   await props.fader.fadeIn();
   playTitleBGM(props);
   props.inProgress = { type: "None" };

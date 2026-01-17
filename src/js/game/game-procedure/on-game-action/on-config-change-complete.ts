@@ -28,6 +28,7 @@ export async function onConfigChangeComplete(options: Options): Promise<void> {
   );
   applyBattleWindowFontSize(action.config.battleWindowFontSize);
   await props.config.save(action.config);
-  await startTitle(props);
+  const title = await startTitle(props);
+  title.loopTitleAnimation();
   await props.fader.fadeIn();
 }

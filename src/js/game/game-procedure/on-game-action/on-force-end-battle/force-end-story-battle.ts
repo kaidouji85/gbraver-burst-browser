@@ -37,15 +37,16 @@ const gotoEpisodeSelector = async (
  */
 const gotoTitle = async (props: Readonly<GameProps>) => {
   await props.fader.fadeOut();
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
-      await startTitle(props);
+      return await startTitle(props);
     })(),
     (async () => {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
   ]);
+  title.loopTitleAnimation();
   await props.fader.fadeIn();
   playTitleBGM(props);
 };
