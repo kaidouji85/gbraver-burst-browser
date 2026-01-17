@@ -7,13 +7,16 @@ import { ArmdozerImages, TitleProps } from "../props";
 const appearDuration = 1000;
 
 /** アームドーザが表示されている時間 */
-const displayDuration = 3000;
+const displayDuration = 5000;
 
 /** アームドーザが消失するまでの時間 */
-const disappearDuration = 1000;
+const disappearDuration = 500;
 
-/** x方向の移動量 */
-const deltaX = "4vh";
+/** 出現時のx方向移動量 */
+const appearDeltaX = "4vh";
+
+/** 消失時のx方向移動量 */
+const disappearDeltaX = "2vh";
 
 /**
  * アームドーザを非表示にする
@@ -34,7 +37,7 @@ const appearRight = (img: HTMLImageElement) =>
       {
         opacity: 0,
         left: "var(--offset-x)",
-        transform: `scaleX(-1) translateX(${deltaX})`,
+        transform: `scaleX(-1) translateX(${appearDeltaX})`,
       },
       {
         opacity: 1,
@@ -60,7 +63,7 @@ const disappearRight = (img: HTMLImageElement) =>
       {
         opacity: 0,
         left: "var(--offset-x)",
-        transform: `scaleX(-1) translateX(${deltaX})`,
+        transform: `scaleX(-1) translateX(${disappearDeltaX})`,
       },
     ],
     {
@@ -81,7 +84,7 @@ const appearLeft = (img: HTMLImageElement) =>
       {
         opacity: 0,
         right: "var(--offset-x)",
-        transform: `translateX(${deltaX})`,
+        transform: `translateX(${appearDeltaX})`,
       },
       { opacity: 1, right: "var(--offset-x)", transform: "translateX(0vh)" },
     ],
@@ -103,7 +106,7 @@ const disappearLeft = (img: HTMLImageElement) =>
       {
         opacity: 0,
         right: "var(--offset-x)",
-        transform: `translateX(${deltaX})`,
+        transform: `translateX(${disappearDeltaX})`,
       },
     ],
     {
