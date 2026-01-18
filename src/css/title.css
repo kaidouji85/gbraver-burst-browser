@@ -240,7 +240,7 @@
 
   opacity: 0;
   position: fixed;
-  top: 0;
+  top: -7vh;
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
@@ -252,7 +252,7 @@
 
   opacity: 0;
   position: fixed;
-  top: 0;
+  top: -8vh;
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
