@@ -223,12 +223,12 @@
 }
 
 .title__wing-dozer {
-  --size: calc(min(150vh, 90vw) * 1.2);
+  --size: min(150vh, 90vw);
   --offset-x: calc(50vw - var(--size) * 0.3);
 
   opacity: 0;
   position: fixed;
-  top: calc(var(--size) * -0.14);
+  top: calc(var(--size) * -0.05);
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
@@ -240,7 +240,7 @@
 
   opacity: 0;
   position: fixed;
-  top: 0;
+  top: calc(var(--size) * -0.03);
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
