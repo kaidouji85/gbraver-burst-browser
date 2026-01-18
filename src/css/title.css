@@ -252,7 +252,7 @@
 
   opacity: 0;
   position: fixed;
-  top: calc(var(--size) * -0.05);
+  top: 0;
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
