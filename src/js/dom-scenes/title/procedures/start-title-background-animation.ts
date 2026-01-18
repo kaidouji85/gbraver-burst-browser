@@ -135,6 +135,8 @@ const animateArmdozerPair = async (
   const otherArmdozerImages = Object.values(armdozerImages).filter(
     (img) => img !== left && img !== right,
   );
+  left.style.zIndex = "1";
+  right.style.zIndex = "2";
   await Promise.all([
     waitFinishAnimation(appearLeft(left), { signal }),
     waitFinishAnimation(appearRight(right), { signal }),
