@@ -228,7 +228,7 @@
 
   opacity: 0;
   position: fixed;
-  top: calc(var(--size) * -0.13);
+  top: calc(var(--size) * -0.05);
   transform: scaleX(-1);
   width: var(--size);
   height: var(--size);
