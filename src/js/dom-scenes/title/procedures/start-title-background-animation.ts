@@ -18,6 +18,12 @@ const appearDeltaX = "4vh";
 /** 消失時のx方向移動量 */
 const disappearDeltaX = "2vh";
 
+/** 右側のアームドーザのz-index */
+const rightArmdozerZIndex = 1;
+
+/** 左側のアームドーザのz-index */
+const leftArmdozerZIndex = 2;
+
 /**
  * アームドーザを非表示にする
  * @param img アームドーザ画像
@@ -135,8 +141,8 @@ const animateArmdozerPair = async (
   const otherArmdozerImages = Object.values(armdozerImages).filter(
     (img) => img !== left && img !== right,
   );
-  left.style.zIndex = "1";
-  right.style.zIndex = "2";
+  left.style.zIndex = `${rightArmdozerZIndex}`;
+  right.style.zIndex = `${leftArmdozerZIndex}`;
   await Promise.all([
     waitFinishAnimation(appearLeft(left), { signal }),
     waitFinishAnimation(appearRight(right), { signal }),
