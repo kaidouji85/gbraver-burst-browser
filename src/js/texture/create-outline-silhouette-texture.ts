@@ -33,7 +33,7 @@ export function createOutlineSilhouetteTexture(
   const canvas = toSilhouette({
     ...color,
     image: texture.image,
-    scale: 0.5,
+    scale: 0.25,
   });
   return new CanvasDisposeTexture(canvas);
 }
