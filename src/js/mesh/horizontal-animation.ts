@@ -17,10 +17,10 @@ export type HorizontalAnimationMeshParam = {
   /** ブレンドモード */
   blending?: THREE.Blending;
   /**
-   * RGBを無視しアルファだけをマスクとして使うか
-   * trueにするとテクスチャのRGBは使わず、アルファだけで色を抜く
+   * シェーダーのカスタマイズ
+   * @param shader シェーダーパラメータ
    */
-  alphaMaskOnly?: boolean;
+  shader?: (shader: THREE.WebGLProgramParametersWithUniforms) => void;
 };
 
 /**
@@ -51,20 +51,11 @@ export class HorizontalAnimationMesh {
       map: this.#texture,
       blending: param.blending ?? THREE.NormalBlending,
     });
-    if (param.alphaMaskOnly) {
-      material.onBeforeCompile = (shader) => {
-        shader.fragmentShader = shader.fragmentShader.replace(
-          "#include <map_fragment>",
-          [
-            "#ifdef USE_MAP",
-            "  vec4 texelColor = texture2D( map, vMapUv );",
-            "  diffuseColor.a *= texelColor.a;",
-            "#endif",
-          ].join("\n"),
-        );
-      };
-      material.needsUpdate = true;
+
+    if (param.shader) {
+      material.onBeforeCompile = param.shader;
     }
+
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
     this.#mesh.material.depthTest = false;

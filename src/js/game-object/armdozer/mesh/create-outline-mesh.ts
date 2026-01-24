@@ -47,9 +47,23 @@ export function createOutlineMesh(
     texture,
     maxAnimation,
     blending: THREE.AdditiveBlending,
-    alphaMaskOnly: true,
+    shader: (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <map_fragment>",
+        [
+          "#ifdef USE_MAP",
+          "  vec4 texelColor = texture2D( map, vMapUv );",
+          "  diffuseColor.a *= texelColor.a;",
+          "#endif",
+        ].join("\n"),
+      );
+    },
   });
-  ret.color(options.color.r / 255, options.color.g / 255, options.color.b / 255);
+  ret.color(
+    options.color.r / 255,
+    options.color.g / 255,
+    options.color.b / 255,
+  );
   const object = ret.getObject3D();
   object.position.x = offset.x ?? 0;
   object.position.y = offset.y ?? 0;
