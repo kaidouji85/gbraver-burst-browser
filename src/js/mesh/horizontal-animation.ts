@@ -16,6 +16,11 @@ export type HorizontalAnimationMeshParam = {
   height: number;
   /** ブレンドモード */
   blending?: THREE.Blending;
+  /**
+   * シェーダーのカスタマイズ
+   * @param shader シェーダーパラメータ
+   */
+  shader?: (shader: THREE.WebGLProgramParametersWithUniforms) => void;
 };
 
 /**
@@ -46,6 +51,11 @@ export class HorizontalAnimationMesh {
       map: this.#texture,
       blending: param.blending ?? THREE.NormalBlending,
     });
+
+    if (param.shader) {
+      material.onBeforeCompile = param.shader;
+    }
+
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
     this.#mesh.material.depthTest = false;
