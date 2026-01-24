@@ -4,6 +4,7 @@ import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
+import { outlineShader } from "../../../shader/outline-shader";
 import { OutlineColor } from "../../../texture/create-outline-silhouette-texture";
 import { ArmdozerAnimation } from "./armdozer-animation";
 
@@ -47,17 +48,7 @@ export function createOutlineMesh(
     texture,
     maxAnimation,
     blending: THREE.AdditiveBlending,
-    shader: (shader) => {
-      shader.fragmentShader = shader.fragmentShader.replace(
-        "#include <map_fragment>",
-        [
-          "#ifdef USE_MAP",
-          "  vec4 texelColor = texture2D( map, vMapUv );",
-          "  diffuseColor.a *= texelColor.a;",
-          "#endif",
-        ].join("\n"),
-      );
-    },
+    shader: outlineShader,
   });
   ret.color(
     options.color.r / 255,
