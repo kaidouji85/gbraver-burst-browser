@@ -5,8 +5,17 @@ import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
 import { outlineShader } from "../../../shader/outline-shader";
-import { OutlineColor } from "../../../texture/create-outline-silhouette-texture";
 import { ArmdozerAnimation } from "./armdozer-animation";
+
+/** アウトラインカラー */
+type OutlineColor = {
+  /** アウトライン Red */
+  r: number;
+  /** アウトライン Green */
+  g: number;
+  /** アウトライン Blue */
+  b: number;
+};
 
 /** createOutlineMesh オプション */
 type CreateOutlineMeshOptions = ResourcesContainer & {
