@@ -5,7 +5,7 @@ import { CasualMatch } from "../../../in-progress/casual-match";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
-import { disconnectConnection } from "../../helpers/disconnect-connection";
+import { disconnectConnection } from "../../disconnect-connection";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
