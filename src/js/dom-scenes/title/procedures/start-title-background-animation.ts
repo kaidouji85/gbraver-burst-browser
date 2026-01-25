@@ -186,8 +186,8 @@ export async function startTitleBackgroundLoop(props: Readonly<TitleProps>) {
     });
     await animateArmdozerPair({
       ...sharedOptions,
-      left: neoLandozer,
-      right: lightningDozer,
+      left: lightningDozer,
+      right: neoLandozer,
     });
   }
 }
