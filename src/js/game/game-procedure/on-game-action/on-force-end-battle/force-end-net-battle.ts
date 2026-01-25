@@ -5,7 +5,7 @@ import { CasualMatch } from "../../../in-progress/casual-match";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
-import { disconnectConnection } from "../../helpers/disconnect-connection";
+import { disconnectConnection } from "../../disconnect-connection";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
@@ -31,16 +31,17 @@ export async function forceEndNetBattle(
   switchWaitingDialog(props, dialog);
   await disconnectConnection(props);
   props.domDialogBinder.hidden();
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
-      await startTitle(props);
+      return await startTitle(props);
     })(),
     (async () => {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
   ]);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 }

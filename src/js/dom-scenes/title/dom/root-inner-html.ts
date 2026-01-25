@@ -16,7 +16,6 @@ import {
   NET_BATTLE_CLASS,
   ROOT_CLASS,
 } from "./class-name";
-import { DataIDs } from "./data-ids";
 import template from "./root-inner-html.hbs";
 
 /** data-id以外のinnerHTMLジェネレータパラメータ */
@@ -43,14 +42,10 @@ export type RootInnerHTMLParams = ResourcesContainer & {
 
 /**
  * ルート要素のinnerHTML
- * @param ids data-idを集めたもの
  * @param params ids以外のパラメータ
  * @returns innerHTML
  */
-export function rootInnerHTML(
-  ids: DataIDs,
-  params: RootInnerHTMLParams,
-): string {
+export function rootInnerHTML(params: RootInnerHTMLParams): string {
   const loginClassName =
     params.isLoginVisible && params.account.type === "GuestAccount"
       ? LOGIN_CLASS
@@ -64,30 +59,52 @@ export function rootInnerHTML(
   const netBattleClassName = params.isNetBattleVisible
     ? NET_BATTLE_CLASS
     : INVISIBLE_NET_BATTLE_CLASS;
+
+  const genesisBraverPath =
+    params.resources.paths.find(
+      (p) => p.id === PathIds.GENESIS_BRAVER_BUST_SHOT,
+    )?.path ?? "";
   const shinBraverPath =
     params.resources.paths.find((p) => p.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? "";
   const granDozerPath =
     params.resources.paths.find((p) => p.id === PathIds.GRAN_DOZER_BUST_SHOT)
       ?.path ?? "";
+  const wingDozerPath =
+    params.resources.paths.find((p) => p.id === PathIds.WING_DOZER_BUST_SHOT)
+      ?.path ?? "";
+  const neoLandozerPath =
+    params.resources.paths.find((p) => p.id === PathIds.NEO_LANDOZER_BUST_SHOT)
+      ?.path ?? "";
+  const lightningDozerPath =
+    params.resources.paths.find(
+      (p) => p.id === PathIds.LIGHTNING_DOZER_BUST_SHOT,
+    )?.path ?? "";
+
   const gameClassName = params.isNetBattleVisible
     ? GAME_MENU_CLASS
     : GAME_MENU_CLASS_WHEN_NET_BATTLE_DISABLED;
   const helpIconClassName = params.isTitleHelpIconEnable
     ? HELP_ICON_CLASS
     : INVISIBLE_HELP_ICON_CLASS;
+
   return template({
     ROOT_CLASS,
     INVISIBLE__HELP_MENU_CLASS,
     INVISIBLE_ACCOUNT_MENU_CLASS,
     params,
-    ids,
     loginClassName,
     accountName,
     accountClassName,
     netBattleClassName,
+
+    genesisBraverPath,
     shinBraverPath,
     granDozerPath,
+    wingDozerPath,
+    neoLandozerPath,
+    lightningDozerPath,
+
     gameClassName,
     helpIconClassName,
   });

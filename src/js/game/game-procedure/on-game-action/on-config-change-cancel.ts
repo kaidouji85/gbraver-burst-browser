@@ -23,6 +23,7 @@ export async function onConfigChangeCancel(options: Options): Promise<void> {
   const config = await props.config.load();
   applyBattleWindowFontSize(config.battleWindowFontSize);
   await applySoundVolume(props, config);
-  await startTitle(props);
+  const title = await startTitle(props);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
 }

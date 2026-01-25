@@ -22,6 +22,7 @@ export async function onSelectionCancel(options: Options): Promise<void> {
     type: "None",
   };
   await props.fader.fadeOut();
-  await startTitle(props);
+  const title = await startTitle(props);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
 }

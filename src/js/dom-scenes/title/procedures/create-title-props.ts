@@ -1,23 +1,43 @@
 import { Subject } from "rxjs";
 
+import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { waitElementLoaded } from "../../../wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
-import { DataIDs } from "../dom/data-ids";
-import { extractElements } from "../dom/elements";
+import {
+  extractAccountMenu,
+  extractArcade,
+  extractAvatar,
+  extractConfig,
+  extractDeleteAccount,
+  extractGenesisBraver,
+  extractGranDozer,
+  extractHelpIcon,
+  extractHelpMenu,
+  extractLightningDozer,
+  extractLogin,
+  extractLogo,
+  extractLogout,
+  extractNeoLandozer,
+  extractNetBattle,
+  extractShinBraver,
+  extractStory,
+  extractTutorial,
+  extractWingDozer,
+} from "../dom/extract-elements";
 import { rootInnerHTML, RootInnerHTMLParams } from "../dom/root-inner-html";
 import { TitleProps } from "../props";
 
 /** タイトル画面プロパティ生成パラメータ */
 export type CreateTitlePropsParams = RootInnerHTMLParams &
-  ResourcesContainer &
-  SEPlayerContainer;
+  Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<AbortManagerContainer>;
 
 /**
  * タイトル画面プロパティを生成する
@@ -26,53 +46,87 @@ export type CreateTitlePropsParams = RootInnerHTMLParams &
  * @returns 生成結果
  */
 export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
-  const dataIDs: DataIDs = {
-    login: domUuid(),
-    accountMenu: domUuid(),
-    avatar: domUuid(),
-    helpIcon: domUuid(),
-    helpMenu: domUuid(),
-    deleteAccount: domUuid(),
-    logout: domUuid(),
-    logo: domUuid(),
-    story: domUuid(),
-    tutorial: domUuid(),
-    arcade: domUuid(),
-    netBattle: domUuid(),
-    config: domUuid(),
-    granDozer: domUuid(),
-    shinBraver: domUuid(),
-  };
   const root = document.createElement("div");
-  root.innerHTML = rootInnerHTML(dataIDs, params);
+  root.innerHTML = rootInnerHTML(params);
   root.className = ROOT_CLASS;
-  const elements = extractElements(root, dataIDs);
-  const avatar = elements.avatar;
+
+  const avatar = extractAvatar(root);
+
   const isAvatarLoaded =
     params.account.type === "LoggedInAccount"
       ? waitElementLoaded(avatar)
       : Promise.resolve();
   avatar.src =
     params.account.type === "LoggedInAccount" ? params.account.pictureURL : "";
-  const isLogoLoaded = waitElementLoaded(elements.logo);
-  elements.logo.src =
+
+  const logo = extractLogo(root);
+  const isLogoLoaded = waitElementLoaded(logo);
+  logo.src =
     params.resources.paths.find((v) => v.id === PathIds.LOGO)?.path ?? "";
-  const isHelpIconLoaded = waitElementLoaded(elements.helpIcon);
-  elements.helpIcon.src =
+
+  const helpIcon = extractHelpIcon(root);
+  const isHelpIconLoaded = waitElementLoaded(helpIcon);
+  helpIcon.src =
     params.resources.paths.find((v) => v.id === PathIds.HELP_ICON)?.path ?? "";
-  const isGranDozerLoaded = waitElementLoaded(elements.granDozer);
-  const isShinBraverLoaded = waitElementLoaded(elements.shinBraver);
+
+  const genesisBraver = extractGenesisBraver(root);
+  const isGenesisBraverLoaded = waitElementLoaded(genesisBraver);
+
+  const shinBraver = extractShinBraver(root);
+  const isShinBraverLoaded = waitElementLoaded(shinBraver);
+
+  const granDozer = extractGranDozer(root);
+  const isGranDozerLoaded = waitElementLoaded(granDozer);
+
+  const wingDozer = extractWingDozer(root);
+  const isWingDozerLoaded = waitElementLoaded(wingDozer);
+
+  const neoLandozer = extractNeoLandozer(root);
+  const isNeoLandozerLoaded = waitElementLoaded(neoLandozer);
+
+  const lightningDozer = extractLightningDozer(root);
+  const isLightningDozerLoaded = waitElementLoaded(lightningDozer);
+
+  const isImgLoaded = Promise.all([
+    isLogoLoaded,
+    isHelpIconLoaded,
+    isAvatarLoaded,
+    isGenesisBraverLoaded,
+    isShinBraverLoaded,
+    isGranDozerLoaded,
+    isWingDozerLoaded,
+    isNeoLandozerLoaded,
+    isLightningDozerLoaded,
+  ]);
   return {
     ...params,
-    ...elements,
     exclusive: new Exclusive(),
+
     root,
+    login: extractLogin(root),
+    accountMenu: extractAccountMenu(root),
     avatar,
-    isLogoLoaded,
-    isAvatarLoaded,
-    isHelpIconLoaded,
-    isGranDozerLoaded,
-    isShinBraverLoaded,
+    deleteAccount: extractDeleteAccount(root),
+    logout: extractLogout(root),
+    helpIcon,
+    helpMenu: extractHelpMenu(root),
+    tutorial: extractTutorial(root),
+    story: extractStory(root),
+    arcade: extractArcade(root),
+    netBattle: extractNetBattle(root),
+    config: extractConfig(root),
+
+    armdozerImages: {
+      genesisBraver,
+      shinBraver,
+      granDozer,
+      wingDozer,
+      neoLandozer,
+      lightningDozer,
+    },
+
+    isImgLoaded,
+
     pushButton:
       params.resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
       createEmptySoundResource(),

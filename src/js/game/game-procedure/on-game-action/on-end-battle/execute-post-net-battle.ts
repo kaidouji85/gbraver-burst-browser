@@ -5,7 +5,7 @@ import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-m
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
-import { disconnectConnection } from "../../helpers/disconnect-connection";
+import { disconnectConnection } from "../../disconnect-connection";
 
 /** ネット対戦のフロー */
 type PostNetworkBattle =

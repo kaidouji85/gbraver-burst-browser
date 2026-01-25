@@ -6,6 +6,7 @@ import {
   createTitleProps,
   CreateTitlePropsParams,
 } from "./procedures/create-title-props";
+import { startTitleBackgroundLoop } from "./procedures/start-title-background-animation";
 import { TitleProps } from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
@@ -32,6 +33,13 @@ export class Title implements DOMScene {
     this.#unsubscribers.forEach((v) => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * タイトル背景アニメーションのループを開始する
+   */
+  startTitleBackgroundLoop(): void {
+    startTitleBackgroundLoop(this.#props);
   }
 
   /**
@@ -111,12 +119,6 @@ export class Title implements DOMScene {
    * @returns 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([
-      this.#props.isAvatarLoaded,
-      this.#props.isLogoLoaded,
-      this.#props.isHelpIconLoaded,
-      this.#props.isGranDozerLoaded,
-      this.#props.isShinBraverLoaded,
-    ]);
+    await this.#props.isImgLoaded;
   }
 }

@@ -1,4 +1,4 @@
-import { GameProps } from "../../game-props";
+import { GameProps } from "../game-props";
 
 /**
  * ネットワークコンテキストに応じた通信接続の切断を行う

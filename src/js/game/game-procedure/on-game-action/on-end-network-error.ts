@@ -18,7 +18,7 @@ const close = async (props: GameProps) => {
  */
 const gotoTitle = async (props: GameProps) => {
   props.domDialogBinder.hidden();
-  await Promise.all([
+  const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
       return await startTitle(props);
@@ -28,6 +28,7 @@ const gotoTitle = async (props: GameProps) => {
       await props.bgm.do(stop);
     })(),
   ]);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
   playTitleBGM(props);
 };

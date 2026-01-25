@@ -4,11 +4,18 @@ import { HorizontalAnimationMesh } from "../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../resource/texture/resource";
-import {
-  createOutlineSilhouetteTexture,
-  OutlineColor,
-} from "../../../texture/create-outline-silhouette-texture";
+import { outlineShader } from "../../../shader/outline-shader";
 import { ArmdozerAnimation } from "./armdozer-animation";
+
+/** アウトラインカラー */
+type OutlineColor = {
+  /** アウトライン Red */
+  r: number;
+  /** アウトライン Green */
+  g: number;
+  /** アウトライン Blue */
+  b: number;
+};
 
 /** createOutlineMesh オプション */
 type CreateOutlineMeshOptions = ResourcesContainer & {
@@ -43,18 +50,20 @@ export function createOutlineMesh(
 ): ArmdozerAnimation {
   const { resources, textureId, maxAnimation, offset } = options;
   const { texture } = findTextureOrThrow(resources, textureId);
-  const silhouetteTexture = createOutlineSilhouetteTexture({
-    ...options,
-    texture,
-  });
   const ret = new HorizontalAnimationMesh({
     ...options,
     width: options.width + options.outlineWidth,
     height: options.height + options.outlineWidth,
-    texture: silhouetteTexture,
+    texture,
     maxAnimation,
     blending: THREE.AdditiveBlending,
+    shader: outlineShader,
   });
+  ret.color(
+    options.color.r / 255,
+    options.color.g / 255,
+    options.color.b / 255,
+  );
   const object = ret.getObject3D();
   object.position.x = offset.x ?? 0;
   object.position.y = offset.y ?? 0;

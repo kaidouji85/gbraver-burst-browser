@@ -4,7 +4,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
-import { createOutlineSilhouetteTexture } from "../../../../texture/create-outline-silhouette-texture";
+import { outlineShader } from "../../../../shader/outline-shader";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */
@@ -38,16 +38,14 @@ export const shinBraverDefenseIcon = (
   mesh.animate(1);
   group.add(mesh.getObject3D());
 
-  const outlineTexture = createOutlineSilhouetteTexture({
-    texture,
-    color: { r: 0, g: 0, b: 0 },
-  });
   const outlineMesh = new HorizontalAnimationMesh({
-    texture: outlineTexture,
+    texture,
     maxAnimation: 4,
     width: OUTLINE_SIZE,
     height: OUTLINE_SIZE,
+    shader: outlineShader,
   });
+  outlineMesh.color(0 / 255, 0 / 255, 0 / 255);
   outlineMesh.animate(1);
   outlineMesh.getObject3D().position.set(0, 0, -0.01);
   group.add(outlineMesh.getObject3D());

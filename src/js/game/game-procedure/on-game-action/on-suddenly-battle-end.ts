@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../../../dom-dialogs/network-error/network-error-dialog";
 import { SuddenlyBattleEnd } from "../../game-actions/suddenly-battle-end";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../helpers/disconnect-connection";
+import { disconnectConnection } from "../disconnect-connection";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /** オプション */

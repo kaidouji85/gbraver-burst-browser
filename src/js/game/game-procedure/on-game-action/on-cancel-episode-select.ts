@@ -18,6 +18,7 @@ type Options = {
 export async function onCancelEpisodeSelect(options: Options): Promise<void> {
   const { props } = options;
   await props.fader.fadeOut();
-  await startTitle(props);
+  const title = await startTitle(props);
+  title.startTitleBackgroundLoop();
   await props.fader.fadeIn();
 }
