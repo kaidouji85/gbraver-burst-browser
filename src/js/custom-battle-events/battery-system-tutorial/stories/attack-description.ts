@@ -19,8 +19,7 @@ export async function attackDescription(
 
   activeNearBatterySelectorMessageWindow(props);
   await scrollNearBatterySelectorMessages(props, [
-    [`ここに注目→`],
-    [`-/+で数字を調整して`],
+    [`→`,`-/+で数字を調整して`],
   ]);
   invisibleAllMessageWindows(props);
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
