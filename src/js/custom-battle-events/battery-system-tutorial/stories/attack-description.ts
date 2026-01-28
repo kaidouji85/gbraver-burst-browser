@@ -2,6 +2,8 @@ import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-eve
 import { waitTime } from "../../../wait/wait-time";
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import { focusInBatterySelector } from "../../focus";
+import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
+import { scrollNearBatterySelectorMessages } from "../../scroll-messages";
 import { BatterySystemTutorialProps } from "../props";
 
 /**
@@ -14,6 +16,13 @@ export async function attackDescription(
 ): Promise<void> {
   await focusInBatterySelector(props);
   const signal = props.abort.getAbortController().signal;
+
+  activeNearBatterySelectorMessageWindow(props);
+  await scrollNearBatterySelectorMessages(props, [
+    [`ここに注目→`],
+    [`-/+で数字を調整して`],
+  ]);
+  invisibleAllMessageWindows(props);
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
@@ -21,6 +30,9 @@ export async function attackDescription(
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
   await props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
-  activeNearBatterySelectorMessageWindow(props, props.attackBatteryCaption);
-  props.view.hud.gameObjects.batterySelector.attention();
+
+  activeNearBatterySelectorMessageWindow(props);
+  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+    `”コウゲキ”を押せ`,
+  );
 }
