@@ -35,6 +35,6 @@ export async function attackDescription(
 
   activeNearBatterySelectorMessageWindow(props);
   props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
-    `”コウゲキ”を押せ`,
+    props.pushAttackButtonCaption,
   );
 }
