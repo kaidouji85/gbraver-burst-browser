@@ -21,7 +21,6 @@ export async function attackDescription(
   props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
     props.changeBatteryCaption,
   );
-  props.view.dom.nearBatterySelectorMessageWindow.nextMessageIconVisible(true);
   props.view.dom.nearBatterySelectorMessageWindow.scrollUp();
   await waitUntilWindowPushWithStream(props.pushWindow, { signal });
 
