@@ -1,5 +1,6 @@
 import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
+import { waitUntilWindowPushWithStream } from "../../../wait/wait-until-window-push-with-stream";
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import { focusInBatterySelector } from "../../focus";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
@@ -18,9 +19,13 @@ export async function attackDescription(
   const signal = props.abort.getAbortController().signal;
 
   activeNearBatterySelectorMessageWindow(props);
-  await scrollNearBatterySelectorMessages(props, [
-    [`→`,`-/+で数字を調整して`],
-  ]);
+  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+    props.changeBatteryCaption,
+  );
+  props.view.dom.nearBatterySelectorMessageWindow.nextMessageIconVisible(true);
+  props.view.dom.nearBatterySelectorMessageWindow.scrollUp();
+  await waitUntilWindowPushWithStream(props.pushWindow, { signal });
+
   invisibleAllMessageWindows(props);
   await props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
   await waitTime(200, { signal });
