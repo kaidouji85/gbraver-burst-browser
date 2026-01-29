@@ -22,6 +22,7 @@ export async function attackDescription(
     props.changeBatteryCaption,
   );
   props.view.dom.nearBatterySelectorMessageWindow.scrollUp();
+  props.se.play(props.sounds.sendMessage);
   await waitUntilWindowPushWithStream(props.pushWindow, { signal });
 
   invisibleAllMessageWindows(props);
