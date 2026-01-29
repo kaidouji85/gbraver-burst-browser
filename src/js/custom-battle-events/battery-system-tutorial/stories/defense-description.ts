@@ -13,6 +13,8 @@ export async function defenseDescription(
 ): Promise<void> {
   await focusInBatterySelector(props);
   activeNearBatterySelectorMessageWindow(props);
-  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(props.defenseBatteryCaption);
+  props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+    props.defenseBatteryCaption,
+  );
   props.view.hud.gameObjects.batterySelector.attention();
 }

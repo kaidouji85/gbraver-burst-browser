@@ -4,7 +4,6 @@ import { waitUntilWindowPushWithStream } from "../../../wait/wait-until-window-p
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import { focusInBatterySelector } from "../../focus";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
-import { scrollNearBatterySelectorMessages } from "../../scroll-messages";
 import { BatterySystemTutorialProps } from "../props";
 
 /**
