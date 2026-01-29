@@ -1,5 +1,6 @@
 import { Resources } from "../../resource";
 import { attackBatteryCaptionInnerHtml } from "./dom/attack-battery-caption-inner-html";
+import { changeBatteryCaptionInnerHtml } from "./dom/change-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "./dom/defense-battery-caption-inner-html";
 import { BatterySystemTutorialState } from "./state";
 
@@ -7,8 +8,9 @@ import { BatterySystemTutorialState } from "./state";
 export type BatterySystemTutorialProps = {
   /** チュートリアルのステート */
   eventState: BatterySystemTutorialState;
-  /** 攻撃バッテリー注釈 innerHTML */
+  /** @deprecated 攻撃バッテリー注釈 innerHTML */
   readonly attackBatteryCaption: string;
+  readonly changeBatteryCaption: string;
   /** 防御バッテリー注釈 innerHTML */
   readonly defenseBatteryCaption: string;
 };
@@ -29,6 +31,7 @@ export function createBatterySystemTutorialProps(
   return {
     eventState,
     attackBatteryCaption: attackBatteryCaptionInnerHtml(resources),
+    changeBatteryCaption: changeBatteryCaptionInnerHtml(),
     defenseBatteryCaption: defenseBatteryCaptionInnerHtml(resources),
   };
 }
