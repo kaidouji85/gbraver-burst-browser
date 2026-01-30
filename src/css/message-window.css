@@ -198,7 +198,6 @@
     filter: brightness(0.9);
   }
 
-  .message-window__attack-battery,
   .message-window__defense-battery {
     --size: calc(var(--battle-window-font-size) * 4);
 
@@ -208,15 +207,29 @@
     filter: brightness(0.9);
   }
 
+  .message-window__attack-description {
+    min-width: calc(var(--battle-window-font-size) * 13);
+  }
+
+  .message-window__change-battery,
+  .message-window__push-attack-button {
+    display: flex;
+    position: relative;
+  }
+
+  .message-window__change-battery--disactive,
+  .message-window__push-attack-button--disactive {
+    color: #a9a9a9;
+  }
+
+  .message-window__pointer {
+    flex: 1;
+    text-align: right;
+  }
+
   .message-window__highlight {
     font-weight: bold;
     color: #ffa500;
-  }
-
-  .message-window__push-attack-button {
-    min-height: calc(var(--window-height) - 2 * var(--window-padding));
-    display: flex;
-    align-items: center;
   }
 }
 
