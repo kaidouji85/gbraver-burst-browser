@@ -1,3 +1,4 @@
+import { attackBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "../src/js/custom-battle-events/battery-system-tutorial/dom/defense-battery-caption-inner-html";
 import { yoroshikuOnegaiShimasu } from "../src/js/custom-battle-events/yoroshiku-onegai-shimasu";
 import { wbr } from "../src/js/dom/wbr";
@@ -291,6 +292,15 @@ export const messagesInInnerHTML = domStub((params) => {
     <div class="${ROOT_CLASS}__paragraph">HTMLを直接指定しています。</div>
     <div class="${ROOT_CLASS}__paragraph">これで改行されたはず。</div>
   `);
+  return dom.getRootHTMLElement();
+});
+
+/** バッテリーシステムチュートリアルの攻撃バッテリーキャプション */
+export const attackBatteryCaption = domStub((params) => {
+  const { resources } = params;
+  const dom = new MessageWindow(params);
+  dom.visible(true);
+  dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
   return dom.getRootHTMLElement();
 });
 
