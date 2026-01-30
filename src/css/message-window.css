@@ -213,10 +213,14 @@
     color: #ffa500;
   }
 
-  .message-window__push-attack-button {
-    min-height: calc(var(--window-height) - 2 * var(--window-padding));
-    display: flex;
-    align-items: center;
+  .message-window__pointer {
+    --pointer-size: calc(var(--responsive-font-size) * 2);
+
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: calc(var(--pointer-size) * -0.5);
+    font-size: var(--pointer-size);
   }
 }
 
