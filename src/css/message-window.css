@@ -216,27 +216,13 @@
   .message-window__pointer {
     --pointer-size: calc(var(--responsive-font-size) * 3.5);
 
-    transform: translateY(-50%);
+    transform: translate(30%, -50%);
     position: absolute;
     top: 50%;
     right: 0;
     font-size: var(--pointer-size);
-    animation-name: pointer-move;
-    animation-fill-mode: backwards;
-    animation-duration: 0.5s;
-    animation-iteration-count: infinite;
     color: #ff4500;
     -webkit-text-stroke: 1px #1a0700;
-  }
-
-  @keyframes pointer-move {
-    0% {
-      transform: translate(30%, -50%);
-    }
-
-    100% {
-      transform: translate(40%, -50%);
-    }
   }
 }
 
