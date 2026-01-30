@@ -1,7 +1,7 @@
 import { Resources } from "../../resource";
 import { changeBatteryCaptionInnerHtml } from "./dom/change-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "./dom/defense-battery-caption-inner-html";
-import { pushAttackButtonCaptionInnerHtml } from "./dom/push-attack-button-caption-inner";
+import { pushAttackButtonCaptionInnerHtml } from "./dom/push-attack-button-caption-inner-html";
 import { BatterySystemTutorialState } from "./state";
 
 /** バッテリーシステムチュートリアル固有のプロパティ */
