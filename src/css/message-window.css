@@ -214,7 +214,7 @@
   }
 
   .message-window__pointer {
-    --pointer-size: calc(var(--responsive-font-size) * 2);
+    --pointer-size: calc(var(--responsive-font-size) * 3.5);
 
     transform: translateY(-50%);
     position: absolute;
@@ -225,15 +225,17 @@
     animation-fill-mode: backwards;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
+    color: #ff4500;
+    -webkit-text-stroke: 1px #1a0700;
   }
 
   @keyframes pointer-move {
     0% {
-      transform: translate(40%, -50%);
+      transform: translate(30%, -50%);
     }
 
     100% {
-      transform: translate(50%, -50%);
+      transform: translate(40%, -50%);
     }
   }
 }
