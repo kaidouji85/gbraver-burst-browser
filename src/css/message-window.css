@@ -219,8 +219,22 @@
     transform: translateY(-50%);
     position: absolute;
     top: 50%;
-    right: calc(var(--pointer-size) * -0.5);
+    right: 0;
     font-size: var(--pointer-size);
+    animation-name: pointer-move;
+    animation-fill-mode: backwards;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes pointer-move {
+    0% {
+      transform: translate(40%, -50%);
+    }
+
+    100% {
+      transform: translate(50%, -50%);
+    }
   }
 }
 
