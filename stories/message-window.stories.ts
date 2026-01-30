@@ -294,15 +294,6 @@ export const messagesInInnerHTML = domStub((params) => {
   return dom.getRootHTMLElement();
 });
 
-/** バッテリーシステムチュートリアルの攻撃バッテリーキャプション */
-export const attackBatteryCaption = domStub((params) => {
-  const { resources } = params;
-  const dom = new MessageWindow({ ...params, type: "NearBatterySelector" });
-  dom.visible(true);
-  dom.messagesInInnerHTML(attackBatteryCaptionInnerHtml(resources));
-  return dom.getRootHTMLElement();
-});
-
 /** バッテリーシステムチュートリアルの防御バッテリーキャプション */
 export const defenseBatteryCaption = domStub((params) => {
   const { resources } = params;
