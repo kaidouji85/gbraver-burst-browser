@@ -98,7 +98,10 @@ export async function doZeroBatteryIdNeeded(
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {
     await focusInBatterySelector(props);
-    activeNearBatterySelectorMessageWindow(props, props.defenseBatteryCaption);
+    activeNearBatterySelectorMessageWindow(props);
+    props.view.dom.nearBatterySelectorMessageWindow.messagesInInnerHTML(
+      props.defenseBatteryCaption,
+    );
   }
 
   return {
