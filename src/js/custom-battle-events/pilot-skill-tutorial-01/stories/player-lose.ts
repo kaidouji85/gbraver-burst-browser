@@ -22,10 +22,7 @@ export async function playerLose(
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    [
-      "ツバサ",
-      `「残念だが${wbr}君と${wbr}シンブレイバーの${wbr}組み合わせ${wbr}では`,
-    ],
+    ["ツバサ", `「残念だが${wbr}今回の${wbr}組み合わせ${wbr}では`],
     [`絶対に${wbr}私を${wbr}倒すことが${wbr}できない」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -36,27 +33,21 @@ export async function playerLose(
   await scrollLeftMessages(props, [
     [
       "ツバサ",
-      `「君が${wbr}すべての${wbr}バッテリーを${wbr}防御に${wbr}回したと${wbr}しても`,
+      `「君が${wbr}すべての${wbr}バッテリーを${wbr}防御に${wbr}使っても`,
     ],
     [`私の${wbr}攻撃に${wbr}耐える${wbr}ことは${wbr}できない」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
   await scrollRightMessages(props, [
-    [
-      "シンヤ",
-      `「なら${wbr} 攻撃に${wbr}バッテリーを${wbr}集中させたら${wbr}どうッスか」`,
-    ],
+    ["シンヤ", `「なら${wbr} 攻撃に${wbr}集中させたら${wbr}どうッスか」`],
   ]);
   props.view.dom.rightMessageWindow.darken();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
-    ["ツバサ", `「良い発想だが${wbr} それも${wbr}難しいな`],
     [
-      `君が${wbr}後攻${wbr}なので${wbr} 私を${wbr}一撃で${wbr}倒せなければ${wbr}負けが${wbr}確定するが`,
-    ],
-    [
-      `シンブレイバーの${wbr}5攻撃で${wbr} ウィングドーザを${wbr}即死${wbr}させることは${wbr}できないんだ」`,
+      "ツバサ",
+      `「いい発想だが それでも あと一歩で${wbr}私を${wbr}倒し${wbr}きれない」`,
     ],
   ]);
   props.view.dom.leftMessageWindow.darken();
