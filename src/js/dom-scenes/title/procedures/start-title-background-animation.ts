@@ -1,7 +1,7 @@
 import { SignalContainer } from "../../../abort-controller/signal-container";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
-import { ArmdozerImages, TitleProps } from "../props";
+import { TitleProps } from "../props";
 
 /** アームドーザが出現するまでの時間 */
 const appearDuration = 1000;
@@ -23,14 +23,6 @@ const leftArmdozerZIndex = 1;
 
 /** 右側のアームドーザのz-index */
 const rightArmdozerZIndex = 2;
-
-/**
- * アームドーザを非表示にする
- * @param img アームドーザ画像
- * @returns アニメーション
- */
-const hidden = (img: HTMLImageElement) =>
-  img.animate([{ opacity: 0 }], { duration: 0, fill: "forwards" });
 
 /**
  * 右側のアームドーザを出現させる
