@@ -127,28 +127,20 @@ const disappearLeft = (img: HTMLImageElement) =>
  * @param options オプション
  * @param options.left 左側に表示するアームドーザ画像
  * @param options.right 右側に表示するアームドーザ画像
- * @param options.armdozerImages アームドーザ画像をあつめたもの
  * @returns アニメーションが完了したら発火するPromise
  */
 const animateArmdozerPair = async (
   options: Readonly<SignalContainer> & {
     left: HTMLImageElement;
     right: HTMLImageElement;
-    armdozerImages: ArmdozerImages;
   },
 ) => {
-  const { left, right, armdozerImages, signal } = options;
-  const otherArmdozerImages = Object.values(armdozerImages).filter(
-    (img) => img !== left && img !== right,
-  );
+  const { left, right, signal } = options;
   left.style.zIndex = `${leftArmdozerZIndex}`;
   right.style.zIndex = `${rightArmdozerZIndex}`;
   await Promise.all([
     waitFinishAnimation(appearLeft(left), { signal }),
     waitFinishAnimation(appearRight(right), { signal }),
-    ...otherArmdozerImages.map((img) =>
-      waitFinishAnimation(hidden(img), { signal }),
-    ),
   ]);
   await waitTime(displayDuration, { signal });
   await Promise.all([
@@ -172,20 +164,19 @@ export async function startTitleBackgroundLoop(props: Readonly<TitleProps>) {
     lightningDozer,
   } = armdozerImages;
   const { signal } = abort.getAbortController();
-  const sharedOptions = { signal, armdozerImages };
   while (true) {
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: genesisBraver,
       right: shinBraver,
     });
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: granDozer,
       right: wingDozer,
     });
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: lightningDozer,
       right: neoLandozer,
     });
