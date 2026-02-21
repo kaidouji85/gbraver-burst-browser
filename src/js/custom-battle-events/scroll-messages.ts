@@ -73,3 +73,18 @@ export async function scrollRightMessages(
   const signal = props.abort.getAbortController().signal;
   await scrollMessages({ ...props, messageWindow, paragraphs, signal });
 }
+
+/**
+ * バッテリーセレクター近くのメッセージウインドウで複数メッセージスクロール表示をする
+ * @param props イベントプロパティ
+ * @param paragraphs 表示するメッセージ
+ * @returns 処理が完了したら発火するPromise
+ */
+export async function scrollNearBatterySelectorMessages(
+  props: CustomBattleEventProps,
+  paragraphs: Paragraph[],
+): Promise<void> {
+  const messageWindow = props.view.dom.nearBatterySelectorMessageWindow;
+  const signal = props.abort.getAbortController().signal;
+  await scrollMessages({ ...props, messageWindow, paragraphs, signal });
+}

@@ -1,7 +1,7 @@
 import { SignalContainer } from "../../../abort-controller/signal-container";
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
 import { waitTime } from "../../../wait/wait-time";
-import { ArmdozerImages, TitleProps } from "../props";
+import { TitleProps } from "../props";
 
 /** アームドーザが出現するまでの時間 */
 const appearDuration = 1000;
@@ -23,14 +23,6 @@ const leftArmdozerZIndex = 1;
 
 /** 右側のアームドーザのz-index */
 const rightArmdozerZIndex = 2;
-
-/**
- * アームドーザを非表示にする
- * @param img アームドーザ画像
- * @returns アニメーション
- */
-const hidden = (img: HTMLImageElement) =>
-  img.animate([{ opacity: 0 }], { duration: 0, fill: "forwards" });
 
 /**
  * 右側のアームドーザを出現させる
@@ -127,28 +119,20 @@ const disappearLeft = (img: HTMLImageElement) =>
  * @param options オプション
  * @param options.left 左側に表示するアームドーザ画像
  * @param options.right 右側に表示するアームドーザ画像
- * @param options.armdozerImages アームドーザ画像をあつめたもの
  * @returns アニメーションが完了したら発火するPromise
  */
 const animateArmdozerPair = async (
   options: Readonly<SignalContainer> & {
     left: HTMLImageElement;
     right: HTMLImageElement;
-    armdozerImages: ArmdozerImages;
   },
 ) => {
-  const { left, right, armdozerImages, signal } = options;
-  const otherArmdozerImages = Object.values(armdozerImages).filter(
-    (img) => img !== left && img !== right,
-  );
+  const { left, right, signal } = options;
   left.style.zIndex = `${leftArmdozerZIndex}`;
   right.style.zIndex = `${rightArmdozerZIndex}`;
   await Promise.all([
     waitFinishAnimation(appearLeft(left), { signal }),
     waitFinishAnimation(appearRight(right), { signal }),
-    ...otherArmdozerImages.map((img) =>
-      waitFinishAnimation(hidden(img), { signal }),
-    ),
   ]);
   await waitTime(displayDuration, { signal });
   await Promise.all([
@@ -172,20 +156,19 @@ export async function startTitleBackgroundLoop(props: Readonly<TitleProps>) {
     lightningDozer,
   } = armdozerImages;
   const { signal } = abort.getAbortController();
-  const sharedOptions = { signal, armdozerImages };
   while (true) {
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: genesisBraver,
       right: shinBraver,
     });
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: granDozer,
       right: wingDozer,
     });
     await animateArmdozerPair({
-      ...sharedOptions,
+      signal,
       left: lightningDozer,
       right: neoLandozer,
     });

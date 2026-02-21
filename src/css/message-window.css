@@ -16,6 +16,7 @@
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     --window-width: calc(49vw - var(--margin-x));
     --window-height: calc(var(--battle-window-font-size) * 7);
+    --window-padding: calc(var(--battle-window-font-size) * 1);
     --shout-window-height: auto;
 
     box-sizing: border-box;
@@ -26,7 +27,7 @@
     background-color: #2b2b2b;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
-    padding: calc(var(--battle-window-font-size) * 1);
+    padding: var(--window-padding);
     filter: var(--brightness);
   }
 
@@ -210,6 +211,18 @@
   .message-window__highlight {
     font-weight: bold;
     color: #ffa500;
+  }
+
+  .message-window__pointer {
+    --pointer-size: calc(var(--responsive-font-size) * 3.5);
+
+    transform: translate(30%, -50%);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: var(--pointer-size);
+    color: #ff4500;
+    -webkit-text-stroke: 1px #1a0700;
   }
 }
 
