@@ -29,6 +29,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@html-eslint/eslint-plugin": "^0.56.0",
     "@html-eslint/parser": "^0.56.0",
     "@storybook/react-webpack5": "^10.2.10",
