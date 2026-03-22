@@ -1,4 +1,4 @@
-import template from "./root-inner-hrml.hbs";
+import template from "./root-inner-html.hbs";
 
 /**
  * ルート要素のinnerHTML

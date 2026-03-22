@@ -3,7 +3,7 @@ import { createLocalBattleSelectorProps } from "./procedures/create-local-battle
 import { LocalBattleSelectorProps } from "./props";
 
 /** ローカル対戦セレクターダイアログ */
-export class LocalBattleSelector implements DOMDialog {
+export class LocalBattleSelectorDialog implements DOMDialog {
   /** プロパティ */
   #props: LocalBattleSelectorProps;
 
