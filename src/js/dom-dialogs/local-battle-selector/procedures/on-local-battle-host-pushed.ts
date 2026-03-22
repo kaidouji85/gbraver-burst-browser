@@ -14,6 +14,7 @@ export const onLocalBattleHostPushed = (
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
+    props.se.play(props.pushButtonSound);
     await pop(props.localBattleHostButton, 1.02);
   });
 };

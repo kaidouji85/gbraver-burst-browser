@@ -3,9 +3,9 @@ import { Unsubscribable } from "rxjs";
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
-  createLocalBattleSelectorProps,
+  createLocalBattleSelectorDialogProps,
   CreateLocalBattleSelectorPropsOptions,
-} from "./procedures/create-local-battle-selector-props";
+} from "./procedures/create-local-battle-selector-dialog-props";
 import { LocalBattleSelectorDialogProps } from "./props";
 
 /** コンストラクタのオプション */
@@ -23,7 +23,7 @@ export class LocalBattleSelectorDialog implements DOMDialog {
    * コンストラクタ
    */
   constructor(options: LocalBattleSelectorDialogOptions) {
-    this.#props = createLocalBattleSelectorProps(options);
+    this.#props = createLocalBattleSelectorDialogProps(options);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
