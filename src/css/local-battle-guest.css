@@ -35,9 +35,8 @@
       100vw - var(--safe-area-right) - var(--safe-area-left) -
         var(--closer-width) * 0.5
     ),
-    80vw
+    60vw
   );
-  min-height: 60vh;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
@@ -49,10 +48,8 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   font-size: calc(var(--responsive-font-size) * 1.2);
-  display: grid;
-  grid-template:
-    "description description" auto
-    "password battle-start" auto / 1fr auto;
+  display: flex;
+  flex-direction: column;
   gap: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -65,15 +62,12 @@
 }
 
 .local-battle-guest__description {
-  grid-area: description;
-  align-self: end;
-  font-size: calc(var(--responsive-font-size) * 2);
-  margin-bottom: calc(var(--responsive-font-size) * 2);
+  text-align: center;
+  font-size: calc(var(--responsive-font-size) * 1.6);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
 .local-battle-guest__password {
-  grid-area: password;
-  align-self: start;
   height: calc(var(--responsive-font-size) * 3);
   border: var(--sub-button-border);
   border-radius: var(--button-border-radius);
@@ -83,13 +77,11 @@
 }
 
 .local-battle-guest__battle-start {
-  grid-area: battle-start;
-  align-self: start;
   font-size: calc(var(--responsive-font-size) * 1);
   color: var(--button-font-color);
-  background-color: var(--sub-button-background-color);
+  background-color: var(--button-background-color);
   border-radius: var(--button-border-radius);
-  border: var(--sub-button-border);
+  border: var(--button-border);
   height: calc(var(--responsive-font-size) * 3);
   min-width: calc(var(--responsive-font-size) * 10);
 }
