@@ -14,6 +14,8 @@ export type BattleStartPayload = {
 export type LocalBattleGuestDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** バックグラウンド */
+  backGround: HTMLElement;
   /** クロージャー */
   closer: HTMLElement;
   /** あいことば入力欄 */
