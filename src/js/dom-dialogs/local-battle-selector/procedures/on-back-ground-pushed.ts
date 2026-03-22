@@ -2,7 +2,7 @@ import { PushDOM } from "../../../dom/push-dom";
 import { LocalBattleSelectorDialogProps } from "../props";
 
 /**
- * バックグランドが押された時の処理
+ * バックグラウンドが押された時の処理
  * @param props プロパティ
  * @param action アクション
  */
