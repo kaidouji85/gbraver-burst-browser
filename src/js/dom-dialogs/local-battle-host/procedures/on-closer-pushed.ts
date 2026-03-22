@@ -15,6 +15,8 @@ export const onCloserPushed = (
   action.event.stopPropagation();
 
   props.exclusive.execute(async () => {
+    props.se.play(props.closeButtonSound);
     await pop(props.closer, 1.3);
+    props.dialogClosed.next();
   });
 };

@@ -11,5 +11,8 @@ export const dialog = domStub((options) => {
     ...options,
     password: "あいうえお",
   });
+  dialog.notifyDialogClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
   return dialog.getRootHTMLElement();
 });
