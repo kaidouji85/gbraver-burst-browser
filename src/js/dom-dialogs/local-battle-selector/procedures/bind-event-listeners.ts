@@ -2,6 +2,7 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { LocalBattleSelectorDialogProps } from "../props";
+import { onCloserPushed } from "./on-closer-pushed";
 import { onLocalBattleGuestPushed } from "./on-local-battle-guest-pushed";
 import { onLocalBattleHostPushed } from "./on-local-battle-host-pushed";
 
@@ -19,6 +20,9 @@ export const bindEventListeners = (
     }),
     domPushStream(props.localBattleGuestButton).subscribe((action) => {
       onLocalBattleGuestPushed(props, action);
+    }),
+    domPushStream(props.closer).subscribe((action) => {
+      onCloserPushed(props, action);
     }),
   ];
 };

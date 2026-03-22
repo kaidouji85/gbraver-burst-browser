@@ -54,4 +54,12 @@ export class LocalBattleSelectorDialog implements DOMDialog {
   notifyLocalBattleGuestSelection(): Observable<void> {
     return this.#props.localBattleGuestSelection;
   }
+
+  /**
+   * ダイアログが閉じられたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyClosed(): Observable<void> {
+    return this.#props.dialogClosed;
+  }
 }

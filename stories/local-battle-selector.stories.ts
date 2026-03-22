@@ -14,5 +14,8 @@ export const dialog = domStub((options) => {
   dialog.notifyLocalBattleGuestSelection().subscribe(() => {
     console.log("local battle guest selected");
   });
+  dialog.notifyClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
   return dialog.getRootHTMLElement();
 });

@@ -11,12 +11,8 @@ export const extractBackGround = (root: HTMLElement): HTMLElement =>
  * @param root ルートHTML要素
  * @returns 抽出結果
  */
-export const extractCloser = (root: HTMLElement): HTMLButtonElement => {
-  const foundCloser = root.querySelector(`[data-id="closer"]`);
-  return foundCloser instanceof HTMLButtonElement
-    ? foundCloser
-    : document.createElement("button");
-};
+export const extractCloser = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
 
 /**
  * ローカル対戦ホストのボタンを抽出する
