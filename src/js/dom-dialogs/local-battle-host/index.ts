@@ -1,4 +1,7 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMDialog } from "../dialog";
+import { bindEventListeners } from "./procedures/bind-event-listenrts";
 import {
   createLocalBattleHostDialogProps,
   CreateLocalBattleHostDialogPropsOptions,
@@ -13,6 +16,8 @@ export type LocalBattleHostDialogOptions =
 export class LocalBattleHostDialog implements DOMDialog {
   /** プロパティ */
   #props: LocalBattleHostDialogProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -20,11 +25,14 @@ export class LocalBattleHostDialog implements DOMDialog {
    */
   constructor(options: LocalBattleHostDialogOptions) {
     this.#props = createLocalBattleHostDialogProps(options);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach((unsubscriber) => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /** @override */

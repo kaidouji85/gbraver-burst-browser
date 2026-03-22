@@ -1,4 +1,6 @@
+import { Exclusive } from "../../../exclusive/exclusive";
 import { ROOT_CLASS } from "../dom/class-name";
+import { extractCloser } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 
 /** ローカル対戦ホストダイアログのプロパティ生成オプション */
@@ -16,7 +18,14 @@ export const createLocalBattleHostDialogProps = (
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(options);
 
+  const closer = extractCloser(root);
+
+  const exclusive = new Exclusive();
+
   return {
     root,
+    closer,
+
+    exclusive,
   };
 };
