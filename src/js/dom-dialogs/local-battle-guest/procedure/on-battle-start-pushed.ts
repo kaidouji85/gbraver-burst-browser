@@ -16,5 +16,7 @@ export const onBattleStartPushed = (
   props.exclusive.execute(async () => {
     props.se.play(props.battleStartSound);
     await pop(props.battleStartButton);
+    const password = props.password.value;
+    props.battleStartSubject.next({ password });
   });
 };
