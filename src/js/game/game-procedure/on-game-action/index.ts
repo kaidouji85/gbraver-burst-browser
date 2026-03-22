@@ -16,6 +16,7 @@ import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
 import { onForceEndBattle } from "./on-force-end-battle";
 import { onForceRetry } from "./on-force-retry";
+import { onLocalBattleStart } from "./on-local-battle-start";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
@@ -125,5 +126,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onForceRetry({ props, action });
     case "UnhandledRejection":
       return onUnhandledRejection({ props, action });
+    case "LocalBattleStart":
+      return onLocalBattleStart({ props, action });
   }
 }

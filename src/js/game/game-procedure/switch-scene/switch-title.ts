@@ -21,6 +21,7 @@ export const switchTitle = (props: GameProps, scene: Title) =>
         .pipe(map(() => ({ type: "AccountDeleteConsent" }))),
       scene.notifyArcade().pipe(map(() => ({ type: "ArcadeStart" }))),
       scene.notifyNetBattle().pipe(map(() => ({ type: "NetBattleStart" }))),
+      scene.notifyLocalBattle().pipe(map(() => ({ type: "LocalBattleStart" }))),
       scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
       scene.notifyTutorial().pipe(map(() => ({ type: "TutorialConsent" }))),
       scene.notifyStory().pipe(map(() => ({ type: "StoryStart" }))),
