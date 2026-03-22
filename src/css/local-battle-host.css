@@ -48,6 +48,11 @@
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(var(--responsive-font-size) * 1.2);
 }
 
 .local-battle-host__closer {
@@ -56,4 +61,14 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.local-battle-host__password-label {
+  color: var(--disabled-button-font-color);
+}
+
+.local-battle-host__password-value {
+  font-size: calc(var(--responsive-font-size) * 3);
+  font-weight: bold;
+  margin-bottom: calc(var(--responsive-font-size) * 2);
 }
