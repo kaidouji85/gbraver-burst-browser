@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
-import { bindEventListeners } from "./procedures/bind-event-listenrts";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createLocalBattleHostDialogProps,
   CreateLocalBattleHostDialogPropsOptions,
