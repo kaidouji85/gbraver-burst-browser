@@ -1,1 +1,33 @@
-hello
+<div class="{{ROOT_CLASS}}__background" data-id="{{ids.backGround}}"></div>
+<div class="{{ROOT_CLASS}}__dialog">
+  <img
+    class="{{ROOT_CLASS}}__closer"
+    alt="閉じる"
+    src="{{closerPath}}"
+    data-id="{{ids.closer}}"
+  />
+  <button
+    class="{{ROOT_CLASS}}__local-battle-host"
+    alt="ローカル対戦（ホスト）をする"
+    data-id="local-battle-host"
+  >
+    <div class="{{ROOT_CLASS}}__local-battle-host-title">
+      ローカル対戦<wbr />（ホスト）
+    </div>
+    <div
+      class="{{ROOT_CLASS}}__local-battle-host-description"
+    >{{localBattleHostDescription}}</div>
+  </button>
+  <button
+    class="{{ROOT_CLASS}}__local-battle-guest"
+    alt="ローカル対戦（ゲスト）をする"
+    data-id="local-battle-guest"
+  >
+    <div class="{{ROOT_CLASS}}__local-battle-guest-title">
+      ローカル対戦<wbr />（ゲスト）
+    </div>
+    <div
+      class="{{ROOT_CLASS}}__local-battle-guest-description"
+    >{{localBattleGuestDescription}}</div>
+  </button>
+</div>
