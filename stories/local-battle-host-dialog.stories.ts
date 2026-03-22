@@ -7,6 +7,9 @@ export default {
 
 /** ダイアログ表示 */
 export const dialog = domStub((options) => {
-  const dialog = new LocalBattleHostDialog(options);
+  const dialog = new LocalBattleHostDialog({
+    ...options,
+    password: "あいうえお",
+  });
   return dialog.getRootHTMLElement();
 });

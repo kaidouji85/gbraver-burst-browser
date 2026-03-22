@@ -4,7 +4,10 @@ import { ROOT_CLASS } from "./class-name";
 import template from "./root-inner-html.hbs";
 
 /** ルートHTML要素のinnerHTML生成オプション */
-export type RootInnerHTMLOptions = ResourcesContainer;
+export type RootInnerHTMLOptions = ResourcesContainer & {
+  /** パスワード */
+  password: string;
+};
 
 /**
  * ルートHTML要素のinnerHTMLを生成する
@@ -12,10 +15,12 @@ export type RootInnerHTMLOptions = ResourcesContainer;
  * @returns 生成されたinnerHTML
  */
 export const rootInnerHTML = (options: RootInnerHTMLOptions) => {
-  const {resources} = options;
-  const closerPath = resources.paths.find(p => p.id === PathIds.CLOSER)?.path ?? "";
+  const { resources, password } = options;
+  const closerPath =
+    resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
   return template({
     ROOT_CLASS,
     closerPath,
+    password,
   });
 };
