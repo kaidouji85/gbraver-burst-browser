@@ -1,6 +1,13 @@
 import { DOMDialog } from "../dialog";
-import { createLocalBattleGuestDialogProps } from "./procedure/create-local-battle-guest-dialog-props";
+import {
+  createLocalBattleGuestDialogProps,
+  CreateLocalBattleGuestDialogPropsOptions,
+} from "./procedure/create-local-battle-guest-dialog-props";
 import { LocalBattleGuestDialogProps } from "./props";
+
+/** ローカル対戦ゲストのダイアログのオプション */
+export type LocalBattleGuestDialogOptions =
+  CreateLocalBattleGuestDialogPropsOptions;
 
 /** ローカル対戦ゲストのダイアログ */
 export class LocalBattleGuestDialog implements DOMDialog {
@@ -9,9 +16,10 @@ export class LocalBattleGuestDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param options オプション
    */
-  constructor() {
-    this.#props = createLocalBattleGuestDialogProps();
+  constructor(options: LocalBattleGuestDialogOptions) {
+    this.#props = createLocalBattleGuestDialogProps(options);
   }
 
   /** @override */

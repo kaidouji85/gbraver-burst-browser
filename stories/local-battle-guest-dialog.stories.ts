@@ -6,7 +6,7 @@ export default {
 };
 
 /** ダイアログ表示 */
-export const dialog = domStub(() => {
-  const dialog = new LocalBattleGuestDialog();
+export const dialog = domStub((options) => {
+  const dialog = new LocalBattleGuestDialog(options);
   return dialog.getRootHTMLElement();
 });
