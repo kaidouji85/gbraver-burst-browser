@@ -11,5 +11,8 @@ export const dialog = domStub((options) => {
   dialog.notifyBattleStart().subscribe((payload) => {
     console.log(`battle start ${payload.password}`);
   });
+  dialog.notifyDialogClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
   return dialog.getRootHTMLElement();
 });

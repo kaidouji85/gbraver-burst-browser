@@ -23,9 +23,13 @@ export type LocalBattleGuestDialogProps = SEPlayerContainer & {
 
   /** バトルスタートボタンを押したときのサウンド */
   battleStartSound: SoundResource;
+  /** ダイアログを閉じたときのサウンド */
+  dialogClosedSound: SoundResource;
 
   /** バトルスタート通知 */
   battleStartSubject: Subject<BattleStartPayload>;
+  /** ダイアログが閉じられたときの通知 */
+  dialogClosedSubject: Subject<void>;
 
   /** 排他制御 */
   exclusive: Exclusive;

@@ -42,9 +42,17 @@ export class LocalBattleGuestDialog implements DOMDialog {
 
   /**
    * バトルスタートを通知する
-   * @returns バトルスタート通知ストリーム
+   * @returns 通知ストリーム
    */
   notifyBattleStart(): Observable<BattleStartPayload> {
     return this.#props.battleStartSubject;
+  }
+
+  /**
+   * ダイアログが閉じられたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyDialogClosed(): Observable<void> {
+    return this.#props.dialogClosedSubject;
   }
 }
