@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
@@ -6,7 +6,7 @@ import {
   createLocalBattleGuestDialogProps,
   CreateLocalBattleGuestDialogPropsOptions,
 } from "./procedure/create-local-battle-guest-dialog-props";
-import { LocalBattleGuestDialogProps } from "./props";
+import { BattleStartPayload, LocalBattleGuestDialogProps } from "./props";
 
 /** ローカル対戦ゲストのダイアログのオプション */
 export type LocalBattleGuestDialogOptions =
@@ -38,5 +38,13 @@ export class LocalBattleGuestDialog implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * バトルスタートを通知する
+   * @returns バトルスタート通知ストリーム
+   */
+  notifyBattleStart(): Observable<BattleStartPayload> {
+    return this.#props.battleStartSubject;
   }
 }
