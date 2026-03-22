@@ -123,6 +123,14 @@ export const extractNetBattle = (root: HTMLElement) =>
   extractHTMLElementByDataID(root, "netBattle");
 
 /**
+ * ローカル対戦を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
+ */
+export const extractLocalBattle = (root: HTMLElement) =>
+  extractHTMLElementByDataID(root, "localBattle");
+
+/**
  * 設定を抽出する
  * @param root ルート要素
  * @returns 抽出結果、見つからない場合は新規作成したdiv要素を返す
