@@ -5,7 +5,7 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
-import { extractBattleStart, extractPassword } from "../dom/extract-element";
+import { extractBattleStart, extractCloser, extractPassword } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { BattleStartPayload, LocalBattleGuestDialogProps } from "../props";
 
@@ -26,6 +26,8 @@ export const createLocalBattleGuestDialogProps = (
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(options);
 
+  const closer = extractCloser(root);
+
   const password = extractPassword(root);
 
   const battleStartButton = extractBattleStart(root);
@@ -40,6 +42,7 @@ export const createLocalBattleGuestDialogProps = (
 
   return {
     root,
+    closer,
     password,
     battleStartButton,
 
