@@ -3,12 +3,24 @@ import {
   createBrowserSDK,
   initializeBrowserSDK,
 } from "@gbraver-burst-network/browser-sdk";
+import {
+  createLocalWebRTCGuestSDK,
+  createLocalWebRTCHostSDK,
+  LocalWebRTCGuestSDK,
+  LocalWebRTCHostSDK,
+} from "@gbraver-burst-network/local-webrtc-browser-sdk";
 
 /** オンライン */
 export type Online = {
   type: "online";
+
   /** オンライン用のSDK */
   sdk: BrowserSDK;
+
+  /** ローカルWebRTCホスト用のSDK */
+  localHostSDK: LocalWebRTCHostSDK;
+  /** ローカルWebRTCゲスト用のSDK */
+  localGuestSDK: LocalWebRTCGuestSDK;
 };
 
 /**
@@ -27,8 +39,19 @@ export async function createOnlineContext(options: {
   ownURL: string;
   /** WebSocket APIのURL */
   webSocketAPIURL: string;
+  /** ローカルWebRTC用シグナルサーバーのURL */
+  signalServerURL: string;
 }): Promise<Online> {
   initializeBrowserSDK(options);
   const sdk = await createBrowserSDK(options.webSocketAPIURL);
-  return { type: "online", sdk };
+  const localHostSDK = createLocalWebRTCHostSDK(options.signalServerURL);
+  const localGuestSDK = createLocalWebRTCGuestSDK(options.signalServerURL);
+  return {
+    type: "online",
+
+    sdk,
+
+    localHostSDK,
+    localGuestSDK,
+  };
 }

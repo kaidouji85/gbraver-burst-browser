@@ -30,6 +30,7 @@ declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 declare let GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: string;
+declare let GBRAVER_BURST_SIGNAL_SERVER_URL: string;
 
 /** モバイル用リソースルート */
 const mobileResourceRoot = { get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT };
@@ -52,6 +53,7 @@ async function createNetworkContext(): Promise<NetworkContext> {
         hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
         ownURL: GBRAVER_BURST_OWN_ROOT_URL,
         webSocketAPIURL: GBRAVER_BURST_WEBSOCKET_API_URL,
+        signalServerURL: GBRAVER_BURST_SIGNAL_SERVER_URL,
       });
     case "OFFLINE_LAN":
       return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);
