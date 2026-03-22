@@ -7,7 +7,10 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { LocalBattleSelectorDialogProps } from "../props";
-import { extractLocalBattleHost } from "./extract-element";
+import {
+  extractLocalBattleGuest,
+  extractLocalBattleHost,
+} from "./extract-element";
 
 /** ローカル対戦セレクターダイアログのプロパティ作成オプション */
 export type CreateLocalBattleSelectorPropsOptions = RootInnerHTMLOptions &
@@ -28,23 +31,28 @@ export const createLocalBattleSelectorDialogProps = (
   root.className = ROOT_CLASS;
 
   const localBattleHostButton = extractLocalBattleHost(root);
+  const localBattleGuestButton = extractLocalBattleGuest(root);
 
   const pushButtonSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
 
   const localBattleHostSelection = new Subject<void>();
+  const localBattleGuestSelection = new Subject<void>();
 
   const exclusive = new Exclusive();
 
   return {
     root,
     localBattleHostButton,
+    localBattleGuestButton,
 
     se,
     pushButtonSound,
 
     localBattleHostSelection,
+    localBattleGuestSelection,
+
     exclusive,
   };
 };

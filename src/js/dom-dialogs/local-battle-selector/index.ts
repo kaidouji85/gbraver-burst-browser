@@ -46,4 +46,12 @@ export class LocalBattleSelectorDialog implements DOMDialog {
   notifyLocalBattleHostSelection(): Observable<void> {
     return this.#props.localBattleHostSelection;
   }
+
+  /**
+   * ローカル対戦ゲスト選択が選択されたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyLocalBattleGuestSelection(): Observable<void> {
+    return this.#props.localBattleGuestSelection;
+  }
 }

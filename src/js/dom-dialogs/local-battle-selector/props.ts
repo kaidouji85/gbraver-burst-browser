@@ -10,12 +10,16 @@ export type LocalBattleSelectorDialogProps = SEPlayerContainer & {
   root: HTMLElement;
   /** ローカル対戦ホストボタン */
   localBattleHostButton: HTMLButtonElement;
+  /** ローカル対戦ゲストボタン */
+  localBattleGuestButton: HTMLButtonElement;
 
   /** ボタン押下時のサウンド */
   pushButtonSound: SoundResource;
 
   /** ローカル対戦ホストが選択されたことを通知する */
   localBattleHostSelection: Subject<void>;
+  /** ローカル対戦ゲストが選択されたことを通知する */
+  localBattleGuestSelection: Subject<void>;
 
   /** 排他制御 */
   exclusive: Exclusive;
