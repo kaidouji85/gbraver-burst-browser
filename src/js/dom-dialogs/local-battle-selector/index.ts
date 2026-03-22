@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { Observable, Unsubscribable } from "rxjs";
 
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
@@ -37,5 +37,13 @@ export class LocalBattleSelectorDialog implements DOMDialog {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this.#props.root;
+  }
+
+  /**
+   * ローカル対戦ホスト選択が選択されたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyLocalBattleHostSelection(): Observable<void> {
+    return this.#props.localBattleHostSelection;
   }
 }

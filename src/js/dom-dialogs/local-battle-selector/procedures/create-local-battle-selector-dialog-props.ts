@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../../exclusive/exclusive";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
@@ -31,6 +33,8 @@ export const createLocalBattleSelectorDialogProps = (
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
 
+  const localBattleHostSelection = new Subject<void>();
+
   const exclusive = new Exclusive();
 
   return {
@@ -40,6 +44,7 @@ export const createLocalBattleSelectorDialogProps = (
     se,
     pushButtonSound,
 
+    localBattleHostSelection,
     exclusive,
   };
 };

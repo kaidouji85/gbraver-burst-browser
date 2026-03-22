@@ -8,5 +8,8 @@ export default {
 /** ダイアログ表示 */
 export const dialog = domStub((options) => {
   const dialog = new LocalBattleSelectorDialog(options);
+  dialog.notifyLocalBattleHostSelection().subscribe(() => {
+    console.log("local battle host selected");
+  });
   return dialog.getRootHTMLElement();
 });

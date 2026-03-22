@@ -1,3 +1,5 @@
+import { Subject } from "rxjs";
+
 import { Exclusive } from "../../exclusive/exclusive";
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
@@ -11,6 +13,9 @@ export type LocalBattleSelectorDialogProps = SEPlayerContainer & {
 
   /** ボタン押下時のサウンド */
   pushButtonSound: SoundResource;
+
+  /** ローカル対戦ホストが選択されたことを通知する */
+  localBattleHostSelection: Subject<void>;
 
   /** 排他制御 */
   exclusive: Exclusive;
