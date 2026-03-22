@@ -1,6 +1,13 @@
 import { DOMDialog } from "../dialog";
-import { createLocalBattleSelectorProps } from "./procedures/create-local-battle-selector-props";
+import {
+  createLocalBattleSelectorProps,
+  CreateLocalBattleSelectorPropsOptions,
+} from "./procedures/create-local-battle-selector-props";
 import { LocalBattleSelectorProps } from "./props";
+
+/** コンストラクタのオプション */
+export type LocalBattleSelectorDialogOptions =
+  CreateLocalBattleSelectorPropsOptions;
 
 /** ローカル対戦セレクターダイアログ */
 export class LocalBattleSelectorDialog implements DOMDialog {
@@ -10,8 +17,8 @@ export class LocalBattleSelectorDialog implements DOMDialog {
   /**
    * コンストラクタ
    */
-  constructor() {
-    this.#props = createLocalBattleSelectorProps();
+  constructor(options: LocalBattleSelectorDialogOptions) {
+    this.#props = createLocalBattleSelectorProps(options);
   }
 
   /** @override */
