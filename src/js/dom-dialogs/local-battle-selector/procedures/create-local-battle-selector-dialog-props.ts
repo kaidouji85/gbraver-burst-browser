@@ -8,10 +8,11 @@ import { ROOT_CLASS } from "../dom/class-name";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { LocalBattleSelectorDialogProps } from "../props";
 import {
+  extractBackGround,
   extractCloser,
   extractLocalBattleGuest,
   extractLocalBattleHost,
-} from "./extract-element";
+} from "../dom/extract-element";
 
 /** ローカル対戦セレクターダイアログのプロパティ作成オプション */
 export type CreateLocalBattleSelectorPropsOptions = RootInnerHTMLOptions &
@@ -32,6 +33,7 @@ export const createLocalBattleSelectorDialogProps = (
   root.className = ROOT_CLASS;
 
   const closer = extractCloser(root);
+  const backGround = extractBackGround(root);
   const localBattleHostButton = extractLocalBattleHost(root);
   const localBattleGuestButton = extractLocalBattleGuest(root);
 
@@ -50,6 +52,7 @@ export const createLocalBattleSelectorDialogProps = (
 
   return {
     root,
+    backGround,
     closer,
     localBattleHostButton,
     localBattleGuestButton,

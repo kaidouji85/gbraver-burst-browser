@@ -10,6 +10,8 @@ export type LocalBattleSelectorDialogProps = SEPlayerContainer & {
   root: HTMLElement;
   /** クロージャー */
   closer: HTMLElement;
+  /** バックグラウンド */
+  backGround: HTMLElement;
   /** ローカル対戦ホストボタン */
   localBattleHostButton: HTMLButtonElement;
   /** ローカル対戦ゲストボタン */
