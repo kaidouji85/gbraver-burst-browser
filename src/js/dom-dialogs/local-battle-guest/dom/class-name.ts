@@ -1,2 +1,2 @@
 /** ルートHTML要素のクラス名 */
-export const ROOT_CLASS="local-battle-guest-dialog";
+export const ROOT_CLASS = "local-battle-guest";
