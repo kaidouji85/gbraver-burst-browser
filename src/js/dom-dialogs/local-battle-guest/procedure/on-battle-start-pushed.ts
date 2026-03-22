@@ -14,6 +14,7 @@ export const onBattleStartPushed = (
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
+    props.se.play(props.battleStartSound);
     await pop(props.battleStartButton);
   });
 };
