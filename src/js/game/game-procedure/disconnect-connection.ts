@@ -9,6 +9,8 @@ export const disconnectConnection = async (
   props: Readonly<GameProps>,
 ): Promise<void> => {
   if (props.networkContext.type === "online") {
+    props.networkContext.localHostSDK.disconnectWebRTC();
+    props.networkContext.localGuestSDK.disconnectWebRTC();
     await props.networkContext.sdk.disconnectWebsocket();
   } else if (props.networkContext.type === "offline-lan") {
     props.networkContext.sdk.closeConnection();
