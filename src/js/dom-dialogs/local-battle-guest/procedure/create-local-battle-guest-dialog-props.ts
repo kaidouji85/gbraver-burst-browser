@@ -1,4 +1,6 @@
+import { Exclusive } from "../../../exclusive/exclusive";
 import { ROOT_CLASS } from "../dom/class-name";
+import { extractBattleStart } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { LocalBattleGuestDialogProps } from "../props";
 
@@ -16,5 +18,9 @@ export const createLocalBattleGuestDialogProps = (
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(options);
 
-  return { root };
+  const battleStartButton = extractBattleStart(root);
+
+  const exclusive = new Exclusive();
+
+  return { root, battleStartButton, exclusive };
 };
