@@ -1,0 +1,21 @@
+import { LocalBattleSelectorDialog } from "../src/js/dom-dialogs/local-battle-selector";
+import { domStub } from "./stub/dom-stub";
+
+export default {
+  title: "local-battle-selector",
+};
+
+/** ダイアログ表示 */
+export const dialog = domStub((options) => {
+  const dialog = new LocalBattleSelectorDialog(options);
+  dialog.notifyLocalBattleHostSelection().subscribe(() => {
+    console.log("local battle host selected");
+  });
+  dialog.notifyLocalBattleGuestSelection().subscribe(() => {
+    console.log("local battle guest selected");
+  });
+  dialog.notifyClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
+  return dialog.getRootHTMLElement();
+});
