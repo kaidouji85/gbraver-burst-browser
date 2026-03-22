@@ -13,4 +13,4 @@ export const onLocalBattleGuestPushed = (
     await pop(props.localBattleGuestButton, 1.02);
     props.localBattleGuestSelection.next();
   });
-}
+};
