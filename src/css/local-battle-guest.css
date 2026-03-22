@@ -35,7 +35,7 @@
       100vw - var(--safe-area-right) - var(--safe-area-left) -
         var(--closer-width) * 0.5
     ),
-    90vw
+    80vw
   );
   min-height: 60vh;
   transform: translate(-50%, -50%);
@@ -48,11 +48,12 @@
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-size: calc(var(--responsive-font-size) * 1.2);
+  display: grid;
+  grid-template:
+    "description description" auto
+    "password battle-start" auto / 1fr auto;
+  gap: calc(var(--responsive-font-size) * 0.5);
 }
 
 .local-battle-guest__closer {
@@ -61,4 +62,34 @@
   position: absolute;
   top: calc(var(--closer-width) * -0.5);
   left: calc(var(--closer-height) * -0.5);
+}
+
+.local-battle-guest__description {
+  grid-area: description;
+  align-self: end;
+  font-size: calc(var(--responsive-font-size) * 2);
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
+.local-battle-guest__password {
+  grid-area: password;
+  align-self: start;
+  height: calc(var(--responsive-font-size) * 3);
+  border: var(--sub-button-border);
+  border-radius: var(--button-border-radius);
+  padding: var(--button-border-radius);
+  box-sizing: border-box;
+  font-size: calc(var(--responsive-font-size) * 1);
+}
+
+.local-battle-guest__battle-start {
+  grid-area: battle-start;
+  align-self: start;
+  font-size: calc(var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--sub-button-background-color);
+  border-radius: var(--button-border-radius);
+  border: var(--sub-button-border);
+  height: calc(var(--responsive-font-size) * 3);
+  min-width: calc(var(--responsive-font-size) * 10);
 }
