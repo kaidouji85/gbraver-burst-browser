@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@gbraver-burst-network/browser-sdk": "1.19.4",
+    "@gbraver-burst-network/local-webrtc-browser-sdk": "^1.20.0-beta.0",
     "@gbraver-burst-network/offline-browser-sdk": "^1.19.4",
     "@tweenjs/tween.js": "^25.0.0",
     "gbraver-burst-core": "1.43.1",
