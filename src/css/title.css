@@ -299,8 +299,8 @@
 
 .title__game-menu {
   grid-template:
-    "net-battle story  tutorial" 1fr
-    "config     arcade tutorial" 1fr / 1fr 1fr 1fr;
+    "net-battle   story    arcade" 1fr
+    "local-battle tutorial config" 1fr / 1fr 1fr 1fr;
 }
 
 .title__game-menu--net-battle-disabled {
@@ -311,8 +311,10 @@
 
 .title__config,
 .title__net-battle,
+.title__local-battle,
 .title__arcade,
-.title__story {
+.title__story,
+.title__tutorial {
   border: var(--sub-button-border);
   background-color: var(--sub-button-background-color);
   font-size: calc(var(--responsive-font-size));
@@ -338,6 +340,10 @@
   display: none;
 }
 
+.title__local-battle {
+  grid-area: local-battle;
+}
+
 .title__arcade {
   grid-area: arcade;
 }
@@ -348,18 +354,4 @@
 
 .title__tutorial {
   grid-area: tutorial;
-  font-size: calc(var(--responsive-font-size) * 1.1);
-  border-radius: var(--button-border-radius);
-  color: var(--button-font-color);
-  box-shadow: var(--button-box-shadow);
-  border: var(--button-border);
-  background-color: var(--button-background-color);
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title__tutorial-icon {
-  font-size: calc(var(--responsive-font-size) * 2);
 }
