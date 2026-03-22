@@ -8,6 +8,8 @@ import { SEPlayerContainer } from "../../se/se-player";
 export type LocalBattleHostDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
+  /** バックグラウンド */
+  backGround: HTMLElement;
   /** クロージャー */
   closer: HTMLElement;
 
