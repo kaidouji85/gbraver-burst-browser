@@ -47,7 +47,6 @@
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  font-size: calc(var(--responsive-font-size) * 1.2);
   display: flex;
   flex-direction: column;
   gap: calc(var(--responsive-font-size) * 0.5);
@@ -63,7 +62,7 @@
 
 .local-battle-guest__description {
   text-align: center;
-  font-size: calc(var(--responsive-font-size) * 1.6);
+  font-size: calc(var(--responsive-font-size) * 1.3);
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -74,6 +73,7 @@
   padding: var(--button-border-radius);
   box-sizing: border-box;
   font-size: calc(var(--responsive-font-size) * 1);
+  text-align: center;
 }
 
 .local-battle-guest__battle-start {
