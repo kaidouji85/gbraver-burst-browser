@@ -9,7 +9,10 @@ import { switchRejectPrivateMatchEntryDialog } from "../switch-dialog/switch-rej
 
 /**
  * ゲストがローカル対戦にエントリーする
- * @param options
+ * @param options オプション
+ * @param options.props ゲームプロパティ
+ * @param options.action アクション
+ * @returns 処理が完了したら発火するPromise
  */
 export const onLocalBattleEntry = async (options: {
   props: GameProps;

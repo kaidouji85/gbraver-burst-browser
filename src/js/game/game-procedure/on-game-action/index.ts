@@ -43,6 +43,7 @@ import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
+import { onWithdrawLocalBattleEntry } from "./on-withdraw-local-battle-entry";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
@@ -139,6 +140,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "LocalBattleGuestStart":
       return onLocalBattleGuestStart({ props, action });
     case "LocalBattleEntry":
-      return onLocalBattleEntry({ props, action });  
+      return onLocalBattleEntry({ props, action });
+    case "WithdrawLocalBattleEntry":
+      return onWithdrawLocalBattleEntry({ props, action });
   }
 }
