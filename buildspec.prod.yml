@@ -13,6 +13,7 @@ env:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
     WS_API_DOMAIN_NAME: /GbraverBurst/prod/wsApiDomainName
+    WS_SIGNAL_DOMAIN_NAME: /GbraverBurst/prod/wsSignalDomainName
     ASSETLINKS_JSON_URI: /GbraverBurst/prod/assetlinksJsonURI
     S3_BUCKET: /GbraverBurst/prod/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/prod/distributionId
@@ -36,5 +37,6 @@ phases:
   build:
     commands:
       - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
+      - export WS_SIGNAL_DOMAIN_NAME="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"
