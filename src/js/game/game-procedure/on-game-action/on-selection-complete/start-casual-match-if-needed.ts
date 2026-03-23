@@ -1,6 +1,7 @@
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
+import { disconnectConnection } from "../../disconnect-connection";
 import { startOnlineBattle } from "../../start-online-battle";
 import { waitUntilCasualMatching } from "../../wait-until-casual-matching";
 
@@ -36,7 +37,7 @@ export async function startCasualMatchIfNeeded(
     return { isStarted: false };
   }
 
-  await networkContext.sdk.disconnectWebsocket();
+  await disconnectConnection(props);
   const battle = await waitUntilCasualMatching(
     { ...props, networkContext },
     action,
