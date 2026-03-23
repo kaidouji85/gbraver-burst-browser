@@ -12,12 +12,12 @@ type IsPrivateMatchGuestStarted = {
 };
 
 /** プライベートマッチ（ゲスト）を開始していない */
-type IsNotPrivateatchGuestStarted = {
+type IsNotPrivateMatchGuestStarted = {
   isStarted: false;
 };
 
 /** プライベートマッチ（ゲスト）開始情報 */
-type Ret = IsPrivateMatchGuestStarted | IsNotPrivateatchGuestStarted;
+type Ret = IsPrivateMatchGuestStarted | IsNotPrivateMatchGuestStarted;
 
 /**
  * 条件を満たした場合、プライベートマッチ（ゲスト）を開始する
