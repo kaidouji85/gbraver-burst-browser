@@ -47,6 +47,7 @@ THREE.ColorManagement.enabled = false;
 async function createNetworkContext(): Promise<NetworkContext> {
   switch (GBRAVER_BURST_NETWORK_MODE) {
     case "ONLINE":
+    case "ONLINE_BETA":
       return await createOnlineContext({
         userPoolId: GBRAVER_BURST_COGNITO_USER_POOL_ID,
         userPoolClientId: GBRAVER_BURST_COGNITO_CLIENT_ID,
