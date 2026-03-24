@@ -9,6 +9,7 @@ export default {
   title: "title",
 };
 
+/** オンラインモード(ゲストアカウント) */
 export const guestAccount = domStub((params) => {
   const account: GuestAccount = {
     type: "GuestAccount",
@@ -17,7 +18,7 @@ export const guestAccount = domStub((params) => {
     ...params,
     account,
     isLoginVisible: true,
-    isNetBattleVisible: true,
+    titleMenuMode: "ONLINE",
     isTitleHelpIconEnable: true,
     howToPlayURL: "how-to-play",
     characterDescriptionURL: "character-description",
@@ -28,6 +29,7 @@ export const guestAccount = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
+/** オンラインモード(ログイン済みアカウント) */
 export const loggedInAccount = domStub((params) => {
   const account: LoggedInAccount = {
     type: "LoggedInAccount",
@@ -37,7 +39,7 @@ export const loggedInAccount = domStub((params) => {
   const scene = new Title({
     ...params,
     account,
-    isNetBattleVisible: true,
+    titleMenuMode: "ONLINE",
     isLoginVisible: true,
     isTitleHelpIconEnable: true,
     howToPlayURL: "how-to-play",
