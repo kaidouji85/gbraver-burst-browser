@@ -40,7 +40,16 @@ export const INVISIBLE_LOCAL_BATTLE_CLASS = `${LOCAL_BATTLE_CLASS}--invisible`;
 /** ゲームメニュー class属性 */
 export const GAME_MENU_CLASS = `${ROOT_CLASS}__game-menu`;
 
-/** ゲームメニュー ネットバトル不可能 class属性 */
+/** ゲームメニュー NETWORK_MODE=STANDALONE class属性 */
+export const GAME_MENU_CLASS_WHEN_STANDALONE = `${GAME_MENU_CLASS}--standalone`;
+
+/** ゲームメニュー NETWORK_MODE=OFFLINE_LAN class属性 */
+export const GAME_MENU_CLASS_WHEN_OFFLINE_LAN = `${GAME_MENU_CLASS}--offline-lan`;
+
+/** ゲームメニュー NETWORK_MODE=ONLINE_BETA class属性 */
+export const GAME_MENU_CLASS_WHEN_ONLINE_BETA = `${GAME_MENU_CLASS}--online-beta`;
+
+/** @deprecated ゲームメニュー ネットバトル不可能 class属性 */
 export const GAME_MENU_CLASS_WHEN_NET_BATTLE_DISABLED = `${GAME_MENU_CLASS}--net-battle-disabled`;
 
 /** ヘルプアイコン class属性 */
