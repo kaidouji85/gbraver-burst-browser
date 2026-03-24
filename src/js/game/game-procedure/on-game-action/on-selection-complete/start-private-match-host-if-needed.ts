@@ -48,7 +48,7 @@ export async function startPrivateMatchHostIfNeeded(
     isStarted: true,
     inProgress: {
       ...props.inProgress,
-      localBattleHost: { type: "Battle" },
+      privateMatchHost: { type: "Battle" },
     },
   };
 }
