@@ -31,6 +31,8 @@ declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 declare let GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: string;
 declare let GBRAVER_BURST_SIGNAL_SERVER_URL: string;
+// TODO ローカル対戦を正式リリースしたら削除する
+declare let GBRAVER_BURST_CAN_LOCAL_BATTLE: string;
 
 /** モバイル用リソースルート */
 const mobileResourceRoot = { get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT };

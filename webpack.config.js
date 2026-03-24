@@ -174,6 +174,10 @@ module.exports = async () => ({
       GBRAVER_BURST_SIGNAL_SERVER_URL: JSON.stringify(
         process.env.SIGNAL_SERVER_URL,
       ),
+      // TODO ローカル対戦を正式リリースしたら削除する
+      GBRAVER_BURST_CAN_LOCAL_BATTLE: JSON.stringify(
+        process.env.CAN_LOCAL_BATTLE,
+      ),
     }),
   ],
 });
