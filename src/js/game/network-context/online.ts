@@ -14,6 +14,12 @@ import {
 export type Online = {
   type: "online";
 
+  /**
+   * データ版機能が利用できるか否か、trueで利用できる
+   * 本フラグはボタン表示制御に利用される
+   */
+  canBeta: boolean;
+
   /** オンライン用のSDK */
   sdk: BrowserSDK;
 
@@ -41,6 +47,8 @@ export async function createOnlineContext(options: {
   webSocketAPIURL: string;
   /** ローカルWebRTC用シグナルサーバーのURL */
   signalServerURL: string;
+  /** オンラインベータ機能が利用できるか否か、trueで利用できる */
+  canBeta: boolean;
 }): Promise<Online> {
   initializeBrowserSDK(options);
   const sdk = await createBrowserSDK(options.webSocketAPIURL);
@@ -48,6 +56,7 @@ export async function createOnlineContext(options: {
   const localGuestSDK = createLocalWebRTCGuestSDK(options.signalServerURL);
   return {
     type: "online",
+    canBeta: options.canBeta,
 
     sdk,
 
