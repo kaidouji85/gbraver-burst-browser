@@ -31,6 +31,12 @@ export const NET_BATTLE_CLASS = `${ROOT_CLASS}__net-battle`;
 /** ネット対戦ボタン 非表示 class属性 */
 export const INVISIBLE_NET_BATTLE_CLASS = `${NET_BATTLE_CLASS}--invisible`;
 
+/** ローカル対戦ボタン class属性 */
+export const LOCAL_BATTLE_CLASS = `${ROOT_CLASS}__local-battle`;
+
+/** ローカル対戦ボタン 非表示 class属性 */
+export const INVISIBLE_LOCAL_BATTLE_CLASS = `${LOCAL_BATTLE_CLASS}--invisible`;
+
 /** ゲームメニュー class属性 */
 export const GAME_MENU_CLASS = `${ROOT_CLASS}__game-menu`;
 
