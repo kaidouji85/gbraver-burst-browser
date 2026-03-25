@@ -1,29 +1,27 @@
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
 import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
-import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
+import { LocalBattleEntry } from "../../game-actions/local-battle-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
-import { startOnlineBattle } from "../start-online-battle";
+import { startLocalBattle } from "../start-local-battle";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchRejectPrivateMatchEntryDialog } from "../switch-dialog/switch-reject-private-match-entry-dialog";
 
-/** オプション */
-type Options = {
-  /** ゲームプロパティ */
-  props: GameProps;
-  /** アクション */
-  action: PrivateMatchEntry;
-};
-
 /**
- * ゲストがプライベートマッチにエントリする
+ * ゲストがローカル対戦にエントリーする
  * @param options オプション
+ * @param options.props ゲームプロパティ
+ * @param options.action アクション
+ * @returns 処理が完了したら発火するPromise
  */
-export async function onPrivateMatchEntry(options: Options): Promise<void> {
+export const onLocalBattleEntry = async (options: {
+  props: GameProps;
+  action: LocalBattleEntry;
+}) => {
   const { props, action } = options;
   if (
-    props.inProgress.type !== "PrivateMatchGuest" ||
-    props.inProgress.privateMatchGuest.type !== "Entry" ||
+    props.inProgress.type !== "LocalBattleGuest" ||
+    props.inProgress.localBattleGuest.type !== "Entry" ||
     props.networkContext.type !== "online"
   ) {
     return;
@@ -31,13 +29,16 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
 
   switchMatchingDialog(props, new MatchingDialog(props));
   await disconnectConnection(props);
-  const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
-  const battle = await props.networkContext.sdk.enterPrivateMatchRoom(
-    action.roomID,
+
+  const { armdozerId, pilotId } = props.inProgress.localBattleGuest;
+  const { roomID } = action;
+  const battle = await props.networkContext.localGuestSDK.joinRoom({
+    roomID,
     armdozerId,
     pilotId,
-  );
+  });
   if (!battle) {
+    // TODO 専用ダイアログを作る
     const dialog = new RejectPrivateMatchEntryDialog(props);
     switchRejectPrivateMatchEntryDialog(props, dialog);
     return;
@@ -45,7 +46,7 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
 
   props.inProgress = {
     ...props.inProgress,
-    privateMatchGuest: { type: "Battle" },
+    localBattleGuest: { type: "Battle" },
   };
-  await startOnlineBattle(props, battle, "PRIVATE MATCH");
-}
+  await startLocalBattle(props, battle);
+};

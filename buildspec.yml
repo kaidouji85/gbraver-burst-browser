@@ -4,6 +4,7 @@ env:
     IS_SEARCH_ENGINE_NO_INDEX: true
     IS_SERVICE_WORKER_USED: true
     APP_ICON_TYPE: "DEV"
+    CAN_ONLINE_BETA: true
     CAN_PLAY_DEVELOPING_ARMDOZER: true
     CAN_PLAY_DEVELOPING_PILOT: true
     CAN_PLAY_EPISODE_IN_DEVELOPMENT: true
@@ -13,6 +14,7 @@ env:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
     WS_API_DOMAIN_NAME: /GbraverBurst/dev/wsApiDomainName
+    WS_SIGNAL_DOMAIN_NAME: /GbraverBurst/dev/wsSignalDomainName
     ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
     S3_BUCKET: /GbraverBurst/dev/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/dev/distributionId
@@ -36,5 +38,6 @@ phases:
   build:
     commands:
       - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
+      - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"

@@ -2,6 +2,8 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
+import { startLocalBattleGuest } from "./start-local-battle-guest";
+import { startLocalBattleHost } from "./start-local-battle-host";
 import { startOfflineLANCasualMatch } from "./start-offline-lan-casual-match";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
 import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
@@ -54,11 +56,29 @@ export async function onSelectionComplete(options: Options): Promise<void> {
     networkContext.type === "offline-lan"
   ) {
     props.inProgress = await startOfflineLANCasualMatch(
-      {
-        ...props,
-        inProgress,
-        networkContext,
-      },
+      { ...props, inProgress, networkContext },
+      action,
+    );
+    return;
+  }
+
+  if (
+    inProgress.type === "LocalBattleHost" &&
+    networkContext.type === "online"
+  ) {
+    props.inProgress = await startLocalBattleHost(
+      { ...props, inProgress, networkContext },
+      action,
+    );
+    return;
+  }
+
+  if (
+    inProgress.type === "LocalBattleGuest" &&
+    networkContext.type === "online"
+  ) {
+    props.inProgress = await startLocalBattleGuest(
+      { ...props, inProgress, networkContext },
       action,
     );
     return;

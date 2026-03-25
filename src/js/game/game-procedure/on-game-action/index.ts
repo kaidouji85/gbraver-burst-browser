@@ -16,6 +16,11 @@ import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
 import { onForceEndBattle } from "./on-force-end-battle";
 import { onForceRetry } from "./on-force-retry";
+import { onLocalBattleCancel } from "./on-local-battle-cancel";
+import { onLocalBattleEntry } from "./on-local-battle-entry";
+import { onLocalBattleGuestStart } from "./on-local-battle-guest-start";
+import { onLocalBattleHostStart } from "./on-local-battle-host-start";
+import { onLocalBattleStart } from "./on-local-battle-start";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
@@ -38,6 +43,7 @@ import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
+import { onWithdrawLocalBattleEntry } from "./on-withdraw-local-battle-entry";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
@@ -125,5 +131,17 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onForceRetry({ props, action });
     case "UnhandledRejection":
       return onUnhandledRejection({ props, action });
+    case "LocalBattleStart":
+      return onLocalBattleStart({ props, action });
+    case "LocalBattleCancel":
+      return onLocalBattleCancel({ props, action });
+    case "LocalBattleHostStart":
+      return onLocalBattleHostStart({ props, action });
+    case "LocalBattleGuestStart":
+      return onLocalBattleGuestStart({ props, action });
+    case "LocalBattleEntry":
+      return onLocalBattleEntry({ props, action });
+    case "WithdrawLocalBattleEntry":
+      return onWithdrawLocalBattleEntry({ props, action });
   }
 }

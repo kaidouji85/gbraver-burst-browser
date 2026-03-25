@@ -104,7 +104,7 @@
     </small>
     <small class="{{ROOT_CLASS}}__music">音楽 魔王魂</small>
   </div>
-  <div class="{{gameClassName}}">
+  <div class="{{gameMenuClassName}}">
     <button class="{{ROOT_CLASS}}__config" data-id="config">
       <span
         class="{{ROOT_CLASS}}__menu-button-icon"
@@ -118,6 +118,13 @@
         aria-hidden="true"
       >🌐</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">ネット対戦</span>
+    </button>
+    <button class="{{localBattleClassName}}" data-id="localBattle">
+      <span
+        class="{{ROOT_CLASS}}__menu-button-icon"
+        aria-hidden="true"
+      >👥</span>
+      <span class="{{ROOT_CLASS}}__menu-button-label">ローカル対戦</span>
     </button>
     <button class="{{ROOT_CLASS}}__arcade" data-id="arcade">
       <span
@@ -134,8 +141,11 @@
       <span class="{{ROOT_CLASS}}__menu-button-label">ストーリー</span>
     </button>
     <button class="{{ROOT_CLASS}}__tutorial" data-id="tutorial">
-      <span class="{{ROOT_CLASS}}__tutorial-icon" aria-hidden="true">🔰</span>
-      <span class="{{ROOT_CLASS}}__tutorial-label">チュートリアル</span>
+      <span
+        class="{{ROOT_CLASS}}__menu-button-icon"
+        aria-hidden="true"
+      >🔰</span>
+      <span class="{{ROOT_CLASS}}__menu-button-label">チュートリアル</span>
     </button>
   </div>
 </div>
