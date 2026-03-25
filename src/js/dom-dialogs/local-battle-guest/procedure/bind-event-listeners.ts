@@ -2,7 +2,6 @@ import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
 import { LocalBattleGuestDialogProps } from "../props";
-import { onBackGroundPushed } from "./on-back-ground-pushed";
 import { onBattleStartPushed } from "./on-battle-start-pushed";
 import { onCloserPushed } from "./on-closer-pushed";
 
@@ -20,9 +19,6 @@ export const bindEventListeners = (
     }),
     domPushStream(props.closer).subscribe((action) => {
       onCloserPushed(props, action);
-    }),
-    domPushStream(props.backGround).subscribe((action) => {
-      onBackGroundPushed(props, action);
     }),
   ];
 };
