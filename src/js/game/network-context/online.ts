@@ -15,7 +15,7 @@ export type Online = {
   type: "online";
 
   /**
-   * データ版機能が利用できるか否か、trueで利用できる
+   * ベータ版機能が利用できるか否か、trueで利用できる
    * 本フラグはボタン表示制御に利用される
    */
   canBeta: boolean;
