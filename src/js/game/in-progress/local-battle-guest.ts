@@ -9,9 +9,9 @@ export type PlayerSelect = {
 export type Entry = {
   type: "Entry";
   /** 選択したアームドーザ */
-  armdozerId: ArmdozerId;
+  readonly armdozerId: ArmdozerId;
   /** 選択したパイロット */
-  pilotId: PilotId;
+  readonly pilotId: PilotId;
 };
 
 /** ローカル対戦（ゲスト）サブフロー マッチング待ち */
@@ -31,5 +31,5 @@ export type LocalBattleGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
 export type LocalBattleGuest = {
   type: "LocalBattleGuest";
   /** サブフロー */
-  localBattleGuest: LocalBattleGuestSubFlow;
+  readonly localBattleGuest: LocalBattleGuestSubFlow;
 };

@@ -15,5 +15,5 @@ export type LocalBattleHostSubFlow = PlayerSelect | Battle;
 export type LocalBattleHost = {
   type: "LocalBattleHost";
   /** サブフロー */
-  localBattleHost: LocalBattleHostSubFlow;
+  readonly localBattleHost: LocalBattleHostSubFlow;
 };
