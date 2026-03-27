@@ -312,8 +312,8 @@
 
 .title__game-menu--online-beta {
   grid-template:
-    "net-battle   story    arcade" 1fr
-    "local-battle tutorial config" 1fr / 1fr 1fr 1fr;
+    "local-battle story    arcade" 1fr
+    "net-battle   tutorial config" 1fr / 1fr 1fr 1fr;
 }
 
 .title__config,

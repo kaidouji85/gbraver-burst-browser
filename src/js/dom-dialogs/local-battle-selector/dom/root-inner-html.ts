@@ -15,14 +15,8 @@ export const rootInnerHTML = (options: RootInnerHTMLOptions) => {
   const { resources } = options;
   const closerPath =
     resources.paths.find((p) => p.id === PathIds.CLOSER)?.path ?? "";
-  const localBattleHostDescription =
-    "ローカル対戦を開催します、ルームIDをゲストに共有してください";
-  const localBattleGuestDescription =
-    "ホストから共有されたルームIDを入力して、対戦を開始します";
   return template({
     ROOT_CLASS,
     closerPath,
-    localBattleHostDescription,
-    localBattleGuestDescription,
   });
 };
