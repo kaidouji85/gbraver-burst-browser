@@ -86,11 +86,14 @@
 
 .local-battle-selector__local-battle-host,
 .local-battle-selector__local-battle-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
   padding: calc(var(--responsive-font-size) * 1)
     calc(var(--responsive-font-size) * 2);
-  text-align: left;
 }
 
 .local-battle-selector__local-battle-host-title,
@@ -100,10 +103,4 @@
   overflow-wrap: anywhere;
   word-break: normal;
   line-break: strict;
-}
-
-.local-battle-selector__local-battle-host-description,
-.local-battle-selector__local-battle-guest-description {
-  color: var(--button-font-color);
-  font-size: calc(var(--responsive-font-size) * 0.6);
 }
