@@ -96,6 +96,11 @@
     calc(var(--responsive-font-size) * 2);
 }
 
+.local-battle-selector__local-battle-host-icon,
+.local-battle-selector__local-battle-guest-icon {
+  font-size: calc(var(--responsive-font-size) * 1.8);
+}
+
 .local-battle-selector__local-battle-host-title,
 .local-battle-selector__local-battle-guest-title {
   font-size: calc(var(--responsive-font-size) * 1.2);
