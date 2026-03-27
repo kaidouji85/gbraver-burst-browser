@@ -4,10 +4,8 @@
   .local-battle-selector {
     --host-background-color: #001a06;
     --host-border: 2px solid #00cc30;
-    --host-box-shadow: 0 0 0.5em #00b32a;
     --guest-background-color: #170a1a;
     --guest-border: 2px solid #e666ff;
-    --guest-box-shadow: 0 0 0.5em #cf5ce6;
 
     display: block;
   }
@@ -40,11 +38,10 @@
   width: min(
     calc(
       100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width) * 0.5
+        var(--closer-width)
     ),
-    90vw
+    calc(var(--responsive-font-size) * 40)
   );
-  min-height: 60vh;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
@@ -73,7 +70,6 @@
   color: var(--button-font-color);
   background-color: var(--host-background-color);
   border: var(--host-border);
-  box-shadow: var(--host-box-shadow);
 }
 
 .local-battle-selector__local-battle-guest {
@@ -81,7 +77,6 @@
   color: var(--button-font-color);
   background-color: var(--guest-background-color);
   border: var(--guest-border);
-  box-shadow: var(--guest-box-shadow);
 }
 
 .local-battle-selector__local-battle-host,
@@ -90,15 +85,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(var(--responsive-font-size) * 1);
   border-radius: var(--button-border-radius);
   padding: calc(var(--responsive-font-size) * 1)
     calc(var(--responsive-font-size) * 2);
-}
-
-.local-battle-selector__local-battle-host-icon,
-.local-battle-selector__local-battle-guest-icon {
-  font-size: calc(var(--responsive-font-size) * 1.8);
+  min-height: calc(var(--responsive-font-size) * 10);
 }
 
 .local-battle-selector__local-battle-host-title,
