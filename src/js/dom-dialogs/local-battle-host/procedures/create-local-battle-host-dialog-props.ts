@@ -5,7 +5,7 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
-import { extractBackGround, extractCloser } from "../dom/extract-element";
+import { extractCloser } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 
 /** ローカル対戦ホストダイアログのプロパティ生成オプション */
@@ -25,8 +25,6 @@ export const createLocalBattleHostDialogProps = (
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(options);
 
-  const backGround = extractBackGround(root);
-
   const closer = extractCloser(root);
 
   const closeButtonSound =
@@ -39,7 +37,6 @@ export const createLocalBattleHostDialogProps = (
 
   return {
     root,
-    backGround,
     closer,
 
     se,
