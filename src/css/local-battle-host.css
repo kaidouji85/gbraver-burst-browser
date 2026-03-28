@@ -19,12 +19,9 @@
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
   position: absolute;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
@@ -40,8 +37,8 @@
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
-  top: calc(var(--closer-width) * -0.5);
-  left: calc(var(--closer-height) * -0.5);
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .local-battle-host__password-label {
