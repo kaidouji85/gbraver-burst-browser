@@ -39,6 +39,7 @@
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: calc(var(--responsive-font-size) * 0.5);
 }
@@ -65,6 +66,7 @@
   box-sizing: border-box;
   font-size: calc(var(--responsive-font-size) * 1);
   text-align: center;
+  width: calc(var(--responsive-font-size) * 30);
 }
 
 .local-battle-guest__battle-start {
@@ -75,4 +77,5 @@
   border: var(--button-border);
   height: calc(var(--responsive-font-size) * 3);
   min-width: calc(var(--responsive-font-size) * 10);
+  width: calc(var(--responsive-font-size) * 30);
 }
