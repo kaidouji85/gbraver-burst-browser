@@ -65,6 +65,5 @@
   border-radius: var(--button-border-radius);
   border: var(--button-border);
   height: calc(var(--responsive-font-size) * 3);
-  min-width: calc(var(--responsive-font-size) * 10);
   width: calc(var(--responsive-font-size) * 30);
 }
