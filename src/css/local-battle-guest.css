@@ -26,29 +26,20 @@
 .local-battle-guest__dialog {
   --dialog-padding: calc(var(--responsive-font-size) * 2);
 
-  top: 50vh;
-  top: 50dvh;
-  left: 50vw;
-  left: 50dvw;
-  width: min(
-    calc(
-      100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width) * 0.5
-    ),
-    60vw
-  );
-  transform: translate(-50%, -50%);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   color: var(--font-color);
   background-color: var(--background-color);
   position: absolute;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -56,8 +47,8 @@
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
-  top: calc(var(--closer-width) * -0.5);
-  left: calc(var(--closer-height) * -0.5);
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .local-battle-guest__description {
