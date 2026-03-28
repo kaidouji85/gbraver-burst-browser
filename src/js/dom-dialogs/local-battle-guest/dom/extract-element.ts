@@ -1,12 +1,4 @@
 /**
- * バックグラウンドを抽出する
- * @param root ルートHTML要素
- * @returns 抽出したもの
- */
-export const extractBackGround = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="background"]`) ?? document.createElement("div");
-
-/**
  * クロージャーを抽出する
  * @param root ルートHTML要素
  * @returns 抽出したもの

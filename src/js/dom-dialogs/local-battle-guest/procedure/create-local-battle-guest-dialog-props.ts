@@ -6,7 +6,6 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { ROOT_CLASS } from "../dom/class-name";
 import {
-  extractBackGround,
   extractBattleStart,
   extractCloser,
   extractPassword,
@@ -31,8 +30,6 @@ export const createLocalBattleGuestDialogProps = (
   root.className = ROOT_CLASS;
   root.innerHTML = rootInnerHTML(options);
 
-  const backGround = extractBackGround(root);
-
   const closer = extractCloser(root);
 
   const password = extractPassword(root);
@@ -53,7 +50,6 @@ export const createLocalBattleGuestDialogProps = (
 
   return {
     root,
-    backGround,
     closer,
     password,
     battleStartButton,
