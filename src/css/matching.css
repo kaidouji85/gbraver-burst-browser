@@ -1,11 +1,6 @@
 /** マッチング ダイアログ */
 @media (orientation: landscape) {
   .matching {
-    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50vw));
-    --dialog-height: calc(var(--responsive-font-size) * 10);
-    --control-button-width: calc(var(--responsive-font-size) * 10);
-    --control-button-height: calc(var(--responsive-font-size) * 3);
-
     display: block;
   }
 }
@@ -28,8 +23,6 @@
 }
 
 .matching__dialog {
-  --dialog-padding: var(--responsive-font-size);
-
   width: 100vw;
   width: 100dvw;
   height: 100vh;
