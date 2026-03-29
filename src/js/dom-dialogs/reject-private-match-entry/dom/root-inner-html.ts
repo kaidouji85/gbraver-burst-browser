@@ -16,7 +16,6 @@ export function rootInnerHTML(resources: Resources, ids: DataIDs) {
   const description =
     "ホストに連絡して、ルームを既に破棄していないか、先にマッチメイクしたプレイヤーがいないかを、確認してください。";
   return `
-    <div class="${ROOT_CLASS}__background" data-id="${ids.background}"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" src="${closerPath}" alt="閉じる" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__title">マッチメイクに${wbr}失敗しました。</div>

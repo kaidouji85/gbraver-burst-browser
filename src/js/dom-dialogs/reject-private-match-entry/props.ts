@@ -18,8 +18,6 @@ export type RejectPrivateMatchEntryDialogProps = SEPlayerContainer & {
   root: HTMLElement;
   /** クロージャ */
   closer: HTMLElement;
-  /** 背景 */
-  background: HTMLElement;
   /** 閉じるボタン */
   closeButton: HTMLElement;
   /** 効果音 プッシュボタン */
@@ -48,7 +46,6 @@ export function createRejectPrivateMatchEntryDialogProps(
   root.className = ROOT_CLASS;
   const dataIDs: DataIDs = {
     closer: domUuid(),
-    background: domUuid(),
     closeButton: domUuid(),
   };
   root.innerHTML = rootInnerHTML(resources, dataIDs);

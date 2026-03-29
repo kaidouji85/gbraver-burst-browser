@@ -2,7 +2,6 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../dom/push-dom";
 import { DOMDialog } from "../dialog";
-import { onBackgroundPush } from "./listeners/on-background-push";
 import { onCloseButtonPush } from "./listeners/on-close-button-push";
 import { onCloserPush } from "./listeners/on-closer-push";
 import {
@@ -33,9 +32,6 @@ export class RejectPrivateMatchEntryDialog implements DOMDialog {
       }),
       domPushStream(this.#props.closer).subscribe((action) => {
         onCloserPush(this.#props, action);
-      }),
-      domPushStream(this.#props.background).subscribe((action) => {
-        onBackgroundPush(this.#props, action);
       }),
     ];
   }
