@@ -31,7 +31,6 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
   return `
-    <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <span class="${ROOT_CLASS}__caption">マッチング中......</span>    
