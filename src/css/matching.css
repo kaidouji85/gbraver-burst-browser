@@ -30,12 +30,10 @@
 .matching__dialog {
   --dialog-padding: var(--responsive-font-size);
 
-  width: var(--dialog-width);
-  height: var(--dialog-height);
-  top: 50vh;
-  top: 50dvh;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   background-color: var(--background-color);
@@ -44,19 +42,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
 }
 
 .matching__closer {
-  position: absolute;
-  top: calc(var(--closer-height) * -0.5);
-  left: calc(var(--closer-width) * -0.5);
   width: var(--closer-width);
   height: var(--closer-height);
-  z-index: var(--zindex-close);
+  position: absolute;
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .matching__caption {
