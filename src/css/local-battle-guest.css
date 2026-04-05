@@ -24,10 +24,10 @@
   position: absolute;
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+  padding: max(var(--dialog-padding), var(--closer-height))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: calc(var(--responsive-font-size) * 0.5);
@@ -41,12 +41,6 @@
   left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
-.local-battle-guest__description {
-  text-align: center;
-  font-size: calc(var(--responsive-font-size) * 1.2);
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
-}
-
 .local-battle-guest__password {
   height: calc(var(--responsive-font-size) * 3);
   border: var(--sub-button-border);
@@ -54,7 +48,6 @@
   padding: var(--button-border-radius);
   box-sizing: border-box;
   font-size: calc(var(--responsive-font-size) * 1);
-  text-align: center;
   width: calc(var(--responsive-font-size) * 30);
 }
 
@@ -65,5 +58,5 @@
   border-radius: var(--button-border-radius);
   border: var(--button-border);
   height: calc(var(--responsive-font-size) * 3);
-  width: calc(var(--responsive-font-size) * 30);
+  min-width: calc(var(--responsive-font-size) * 12);
 }
