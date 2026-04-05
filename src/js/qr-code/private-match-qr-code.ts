@@ -23,6 +23,7 @@ export const drawPrivateMatchQRCode = async (
 
 /**
  * 任意のQRコードテキストを受け取り、それがプライベートマッチQRコードである場合にルームIDを抽出する
+ * 現状ではひらがな5文字がルームIDとして正しいフォーマットである
  * フォーマットが違う場合はnullを返す
  * @param qrCodeStr QRコード文字列
  * @returns 抽出結果
@@ -30,7 +31,7 @@ export const drawPrivateMatchQRCode = async (
 export const extractRoomIDFromPrivateMatchQRCodeText = (
   qrCodeStr: string,
 ): string | null => {
-  const regExp = /^gbraver-burst-private-match:([A-Za-z0-9_-]+)$/;
+  const regExp = /^gbraver-burst-private-match:([ぁ-ん]{5})$/;
   const matched = qrCodeStr.match(regExp);
   return matched?.at(1) ?? null;
 };
