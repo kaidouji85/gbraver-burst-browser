@@ -24,7 +24,7 @@
   position: absolute;
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+  padding: max(var(--dialog-padding), var(--closer-height))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: flex;
   flex-direction: row;
@@ -40,12 +40,6 @@
   top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
   left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
-
-/* .local-battle-guest__description {
-  text-align: center;
-  font-size: calc(var(--responsive-font-size) * 1.2);
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
-} */
 
 .local-battle-guest__password {
   height: calc(var(--responsive-font-size) * 3);
