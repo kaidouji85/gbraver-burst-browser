@@ -9,7 +9,7 @@ export default {
 export const dialog = domStub((params) => {
   const dialog = new PrivateMatchHostDialog({
     ...params,
-    roomID: "V1StGXR8_Z5jdHi6B-myT",
+    roomID: "あかんやろ",
   });
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");
