@@ -24,10 +24,11 @@
   position: absolute;
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+  padding: max(var(--dialog-padding), calc(var(--closer-height)))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  text-align: center;
+  grid-template-rows: 1fr auto 1fr auto 1fr;
+  justify-items: center;
   font-size: calc(var(--responsive-font-size) * 1);
 }
 
@@ -40,6 +41,7 @@
 }
 
 .private-match-guest__qr-code-description {
+  align-self: end;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -50,14 +52,15 @@
   border-radius: var(--button-border-radius);
   border: var(--sub-button-border);
   height: calc(var(--responsive-font-size) * 3);
-  min-width: calc(var(--responsive-font-size) * 7);
+  min-width: calc(var(--responsive-font-size) * 12);
 }
 
 .private-match-guest__separator {
-  margin: calc(var(--responsive-font-size) * 1) 0;
+  align-self: center;
 }
 
 .private-match-guest__room-id-description {
+  align-self: end;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
