@@ -12,37 +12,23 @@
   }
 }
 
-.private-match-guest__background {
-  position: absolute;
+.private-match-guest__dialog {
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
+
   width: 100vw;
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: var(--zindex-background);
-}
-
-.private-match-guest__dialog {
-  --dialog-padding: calc(var(--responsive-font-size) * 2);
-
-  top: 50dvh;
-  left: 50dvw;
-  transform: translate(-50%, -50%);
   color: var(--font-color);
   background-color: var(--background-color);
   position: absolute;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+  padding: max(var(--dialog-padding), calc(var(--closer-height)))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
-  min-width: calc(var(--responsive-font-size) * 35);
-  min-height: 30vh;
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
-  text-align: center;
+  grid-template-rows: 1fr auto auto auto 1fr;
+  justify-items: center;
   font-size: calc(var(--responsive-font-size) * 1);
 }
 
@@ -50,11 +36,12 @@
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
-  top: calc(var(--closer-width) * -0.5);
-  left: calc(var(--closer-height) * -0.5);
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .private-match-guest__qr-code-description {
+  align-self: end;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -65,14 +52,16 @@
   border-radius: var(--button-border-radius);
   border: var(--sub-button-border);
   height: calc(var(--responsive-font-size) * 3);
-  min-width: calc(var(--responsive-font-size) * 7);
+  min-width: calc(var(--responsive-font-size) * 22);
 }
 
 .private-match-guest__separator {
+  align-self: center;
   margin: calc(var(--responsive-font-size) * 1) 0;
 }
 
 .private-match-guest__room-id-description {
+  align-self: end;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
@@ -90,6 +79,7 @@
   padding: var(--button-border-radius);
   box-sizing: border-box;
   font-size: calc(var(--responsive-font-size) * 1);
+  min-width: calc(var(--responsive-font-size) * 14.5);
 }
 
 .private-match-guest__enter {
