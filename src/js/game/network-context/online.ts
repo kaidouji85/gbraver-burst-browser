@@ -46,14 +46,28 @@ export async function createOnlineContext(options: {
   /** WebSocket APIのURL */
   webSocketAPIURL: string;
   /** ローカルWebRTC用シグナルサーバーのURL */
-  signalServerURL: string;
+  wsSignalUrl: string;
+  /** WebRTC対戦ヘルパーAPIのURL */
+  webRTCHelperApiURL: string;
+  /** coturn サーバーのドメイン名 */
+  coturnDomainName: string;
   /** オンラインベータ機能が利用できるか否か、trueで利用できる */
   canBeta: boolean;
 }): Promise<Online> {
   initializeBrowserSDK(options);
-  const sdk = await createBrowserSDK(options.webSocketAPIURL);
-  const localHostSDK = createLocalWebRTCHostSDK(options.signalServerURL);
-  const localGuestSDK = createLocalWebRTCGuestSDK(options.signalServerURL);
+  const { webSocketAPIURL, wsSignalUrl, webRTCHelperApiURL, coturnDomainName } =
+    options;
+  const sdk = await createBrowserSDK(webSocketAPIURL);
+  const localHostSDK = createLocalWebRTCHostSDK({
+    wsSignalUrl,
+    webRTCHelperApiURL,
+    coturnDomainName,
+  });
+  const localGuestSDK = createLocalWebRTCGuestSDK({
+    wsSignalUrl,
+    webRTCHelperApiURL,
+    coturnDomainName,
+  });
   return {
     type: "online",
     canBeta: options.canBeta,
