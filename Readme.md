@@ -192,6 +192,7 @@ shfmt -l -w *.bash
 | /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
 | /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                     |
 | /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
+| /GbraverBurst/dev/coturnDomainName        | String | coturnサーバーのドメイン名                |
 
 #### Parameter Store（本番環境）
 
@@ -210,6 +211,7 @@ shfmt -l -w *.bash
 | /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
 | /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                     |
 | /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
+| /GbraverBurst/prod/coturnDomainName        | String | coturnサーバーのドメイン名                |
 
 ### IAMポリシー
 
