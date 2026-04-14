@@ -9,7 +9,6 @@ import { NetworkContext } from "./game/network-context";
 import { createOfflineLanContext } from "./game/network-context/offline-lan";
 import { createOnlineContext } from "./game/network-context/online";
 import { createStandAloneContext } from "./game/network-context/stand-alone";
-import { de } from "zod/locales";
 
 /** webpack.config.js Webpack Define Pluginで定義したグローバル変数 */
 declare let GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: string;
