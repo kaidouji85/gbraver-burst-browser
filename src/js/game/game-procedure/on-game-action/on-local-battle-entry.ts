@@ -39,8 +39,8 @@ export const onLocalBattleEntry = async (options: {
   });
   if (!battle) {
     // TODO 専用ダイアログを作る
-    const dialog = new RejectPrivateMatchEntryDialog(props);
-    switchRejectPrivateMatchEntryDialog(props, dialog);
+    //const dialog = new RejectPrivateMatchEntryDialog(props);
+    //switchRejectPrivateMatchEntryDialog(props, dialog);
     return;
   }
 
