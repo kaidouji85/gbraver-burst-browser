@@ -1,11 +1,11 @@
+import { LocalBattleGuestDialog } from "../../../dom-dialogs/local-battle-guest";
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
-import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
 import { LocalBattleEntry } from "../../game-actions/local-battle-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
 import { startLocalBattle } from "../start-local-battle";
+import { switchLocalBattleGuestDialog } from "../switch-dialog/switch-local-battle-guest-dialog";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
-import { switchRejectPrivateMatchEntryDialog } from "../switch-dialog/switch-reject-private-match-entry-dialog";
 
 /**
  * ゲストがローカル対戦にエントリーする
@@ -38,9 +38,11 @@ export const onLocalBattleEntry = async (options: {
     pilotId,
   });
   if (!battle) {
-    // TODO 専用ダイアログを作る
-    //const dialog = new RejectPrivateMatchEntryDialog(props);
-    //switchRejectPrivateMatchEntryDialog(props, dialog);
+    const dialog = new LocalBattleGuestDialog({
+      ...props,
+      initialRoomId: roomID,
+    });
+    switchLocalBattleGuestDialog(props, dialog);
     return;
   }
 
