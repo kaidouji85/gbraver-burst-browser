@@ -20,6 +20,8 @@ export type LocalBattleGuestDialogProps = SEPlayerContainer & {
   password: HTMLInputElement;
   /** バトルスタートボタン */
   battleStartButton: HTMLElement;
+  /** マッチング失敗のメッセージ */
+  matchingFailed: HTMLElement;
 
   /** バトルスタートボタンを押したときのサウンド */
   battleStartSound: SoundResource;

@@ -8,6 +8,7 @@ import { ROOT_CLASS } from "../dom/class-name";
 import {
   extractBattleStart,
   extractCloser,
+  extractMatchingFailed,
   extractPassword,
 } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
@@ -36,6 +37,8 @@ export const createLocalBattleGuestDialogProps = (
 
   const battleStartButton = extractBattleStart(root);
 
+  const matchingFailed = extractMatchingFailed(root);
+
   const battleStartSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
@@ -53,6 +56,7 @@ export const createLocalBattleGuestDialogProps = (
     closer,
     password,
     battleStartButton,
+    matchingFailed,
 
     se,
     battleStartSound,

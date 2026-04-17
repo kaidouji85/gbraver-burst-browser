@@ -10,10 +10,19 @@
       あいことばを入れてね
       <span class="{{ROOT_CLASS}}__arrow">⬇</span>
     </div>
-    <input class="{{ROOT_CLASS}}__password" type="text" data-id="password" />
+    <input
+      class="{{ROOT_CLASS}}__password"
+      type="text"
+      data-id="password"
+      value="{{initialRoomId}}"
+    />
     <button
       class="{{ROOT_CLASS}}__battle-start"
       data-id="battle-start"
     >バトルスタート</button>
+    <div
+      class="{{ROOT_CLASS}}__matching-failed"
+      data-id="matching-failed"
+    >マッチング失敗</div>
   </div>
 </div>

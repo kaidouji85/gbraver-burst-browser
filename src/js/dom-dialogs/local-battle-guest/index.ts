@@ -6,6 +6,7 @@ import {
   createLocalBattleGuestDialogProps,
   CreateLocalBattleGuestDialogPropsOptions,
 } from "./procedure/create-local-battle-guest-dialog-props";
+import { flashFailedMessage } from "./procedure/flash-failed-message";
 import { BattleStartPayload, LocalBattleGuestDialogProps } from "./props";
 
 /** ローカル対戦ゲストのダイアログのオプション */
@@ -54,5 +55,13 @@ export class LocalBattleGuestDialog implements DOMDialog {
    */
   notifyDialogClosed(): Observable<void> {
     return this.#props.dialogClosedSubject;
+  }
+
+  /**
+   * 失敗メッセージをフラッシュ表示する
+   * @returns アニメーション
+   */
+  flashFailedMessage(): Promise<void> {
+    return flashFailedMessage(this.#props);
   }
 }
