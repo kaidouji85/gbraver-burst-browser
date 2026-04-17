@@ -16,3 +16,19 @@ export const dialog = domStub((options) => {
   });
   return dialog.getRootHTMLElement();
 });
+
+/** 失敗メッセージ表示 */
+export const failed = domStub((options) => {
+  const dialog = new LocalBattleGuestDialog({
+    ...options,
+    initialRoomId: "ないよそん",
+  });
+  dialog.notifyBattleStart().subscribe((payload) => {
+    console.log(`battle start ${payload.password}`);
+  });
+  dialog.notifyDialogClosed().subscribe(() => {
+    console.log("dialog closed");
+  });
+  dialog.flushFailedMessage();
+  return dialog.getRootHTMLElement();
+});

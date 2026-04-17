@@ -6,8 +6,8 @@ import {
   createLocalBattleGuestDialogProps,
   CreateLocalBattleGuestDialogPropsOptions,
 } from "./procedure/create-local-battle-guest-dialog-props";
-import { BattleStartPayload, LocalBattleGuestDialogProps } from "./props";
 import { flashFailedMessage } from "./procedure/flash-failed-message";
+import { BattleStartPayload, LocalBattleGuestDialogProps } from "./props";
 
 /** ローカル対戦ゲストのダイアログのオプション */
 export type LocalBattleGuestDialogOptions =
