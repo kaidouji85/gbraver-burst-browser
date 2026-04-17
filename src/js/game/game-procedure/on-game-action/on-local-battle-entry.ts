@@ -43,7 +43,7 @@ export const onLocalBattleEntry = async (options: {
       initialRoomId: roomID,
     });
     switchLocalBattleGuestDialog(props, dialog);
-    dialog.flushFailedMessage();
+    dialog.flashFailedMessage();
     return;
   }
 

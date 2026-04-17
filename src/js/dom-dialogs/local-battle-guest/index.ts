@@ -61,7 +61,7 @@ export class LocalBattleGuestDialog implements DOMDialog {
    * 失敗メッセージをフラッシュ表示する
    * @returns アニメーション
    */
-  flushFailedMessage(): Promise<void> {
+  flashFailedMessage(): Promise<void> {
     return flashFailedMessage(this.#props);
   }
 }

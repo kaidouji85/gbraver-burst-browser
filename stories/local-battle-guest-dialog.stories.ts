@@ -29,6 +29,6 @@ export const failed = domStub((options) => {
   dialog.notifyDialogClosed().subscribe(() => {
     console.log("dialog closed");
   });
-  dialog.flushFailedMessage();
+  dialog.flashFailedMessage();
   return dialog.getRootHTMLElement();
 });
