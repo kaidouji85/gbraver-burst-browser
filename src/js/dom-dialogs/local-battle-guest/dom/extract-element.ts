@@ -26,3 +26,12 @@ export const extractPassword = (root: HTMLElement): HTMLInputElement => {
 export const extractBattleStart = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="battle-start"]`) ??
   document.createElement("div");
+
+/**
+ * マッチング失敗の表示を抽出する
+ * @param root ルートHTML要素
+ * @returns 抽出したもの
+ */
+export const extractMatchingFailed = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="matching-failed"]`) ??
+  document.createElement("div");
