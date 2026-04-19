@@ -14,7 +14,7 @@ import {
   extractRoomID,
   extractStartQRCodeReader,
 } from "../dom/elements";
-import { rootInnerHtml } from "../dom/root-inner-html";
+import { RootHTMLOptions, rootInnerHtml } from "../dom/root-inner-html";
 import { PrivateMatchGuestDialogProps } from "../props";
 import {
   PrivateMatchQRCodeReader,
@@ -24,7 +24,8 @@ import {
 /** PrivateMatchGuestDialogProps生成パラメータ */
 export type PropsCreatorParams = ResourcesContainer &
   SEPlayerContainer &
-  PrivateMatchQRCodeReaderParams;
+  PrivateMatchQRCodeReaderParams &
+  RootHTMLOptions;
 
 /**
  * PrivateMatchGuestDialogPropsを生成する
@@ -38,7 +39,7 @@ export function createPrivateMatchGuestDialogProps(
 
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-  root.innerHTML = rootInnerHtml(resources);
+  root.innerHTML = rootInnerHtml(params);
 
   const qrCodeReader = new PrivateMatchQRCodeReader(params);
   const qrCodeReaderStarter = extractDummyQRCodeReader(root);
