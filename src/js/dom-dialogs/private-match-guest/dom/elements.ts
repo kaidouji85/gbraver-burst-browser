@@ -7,6 +7,15 @@ export const extractCloser = (root: HTMLElement): HTMLElement =>
   root.querySelector(`[data-id="closer"]`) ?? document.createElement("div");
 
 /**
+ * マッチング失敗メッセージを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractMatchingFailed = (root: HTMLElement): HTMLElement =>
+  root.querySelector(`[data-id="matching-failed"]`) ??
+  document.createElement("div");
+
+/**
  * ルームID入力フォームを抽出する
  * @param root ルート要素
  * @returns 抽出結果

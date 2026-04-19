@@ -29,5 +29,6 @@ export const initialRoomID = domStub((params) => {
   dialog.notifyPrivateMatchStart().subscribe((roomID) => {
     console.log(`enter private match room ${roomID}`);
   });
+  dialog.flashFailedMessage();
   return dialog.getRootHTMLElement();
 });

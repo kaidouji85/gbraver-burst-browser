@@ -93,6 +93,7 @@
 }
 
 .private-match-guest__matching-failed {
+  opacity: 0;
   min-width: calc(var(--responsive-font-size) * 22);
   height: calc(var(--responsive-font-size) * 3);
   color: var(--error-color);

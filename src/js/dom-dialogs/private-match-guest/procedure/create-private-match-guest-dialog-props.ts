@@ -11,6 +11,7 @@ import {
   extractCloser,
   extractDummyQRCodeReader,
   extractEnterButton,
+  extractMatchingFailed,
   extractRoomID,
   extractStartQRCodeReader,
 } from "../dom/elements";
@@ -47,6 +48,7 @@ export function createPrivateMatchGuestDialogProps(
   return {
     root,
     closer: extractCloser(root),
+    matchingFailed: extractMatchingFailed(root),
     roomID: extractRoomID(root),
     startQRCodeReader: extractStartQRCodeReader(root),
     enterButton: extractEnterButton(root),
