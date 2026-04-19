@@ -38,8 +38,12 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
     pilotId,
   );
   if (!battle) {
-    const dialog = new PrivateMatchGuestDialog(props);
+    const dialog = new PrivateMatchGuestDialog({
+      ...props,
+      initialRoomID: action.roomID,
+    });
     switchPrivateMatchGuestDialog(props, dialog);
+    dialog.flashFailedMessage();
     return;
   }
 
