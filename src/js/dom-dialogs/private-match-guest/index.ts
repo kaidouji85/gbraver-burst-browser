@@ -60,7 +60,7 @@ export class PrivateMatchGuestDialog implements DOMDialog {
 
   /**
    * マッチング失敗メッセージをフラッシュ表示する
-   * @returns アニメーション
+   * @returns アニメーションが完了したら発火するPromise
    */
   flashFailedMessage(): Promise<void> {
     return flashFailedMessage(this.#props);
