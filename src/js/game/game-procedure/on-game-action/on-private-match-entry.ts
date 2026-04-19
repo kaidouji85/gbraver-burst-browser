@@ -1,11 +1,11 @@
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
-import { RejectPrivateMatchEntryDialog } from "../../../dom-dialogs/reject-private-match-entry";
+import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
 import { startOnlineBattle } from "../start-online-battle";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
-import { switchRejectPrivateMatchEntryDialog } from "../switch-dialog/switch-reject-private-match-entry-dialog";
+import { switchPrivateMatchGuestDialog } from "../switch-dialog/switch-private-match-guest-dialog";
 
 /** オプション */
 type Options = {
@@ -38,8 +38,12 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
     pilotId,
   );
   if (!battle) {
-    const dialog = new RejectPrivateMatchEntryDialog(props);
-    switchRejectPrivateMatchEntryDialog(props, dialog);
+    const dialog = new PrivateMatchGuestDialog({
+      ...props,
+      initialRoomID: action.roomID,
+    });
+    switchPrivateMatchGuestDialog(props, dialog);
+    dialog.flashFailedMessage();
     return;
   }
 

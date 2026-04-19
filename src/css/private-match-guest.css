@@ -27,7 +27,7 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height)))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  grid-template-rows: 1fr auto auto auto 1fr;
+  grid-template-rows: 1fr auto auto auto auto 1fr;
   justify-items: center;
   font-size: calc(var(--responsive-font-size) * 1);
 }
@@ -38,6 +38,19 @@
   position: absolute;
   top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
   left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
+}
+
+.private-match-guest__matching-failed {
+  opacity: 0;
+  align-self: end;
+  min-width: calc(var(--responsive-font-size) * 22);
+  height: calc(var(--responsive-font-size) * 3);
+  color: var(--error-color);
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  background-color: var(--error-background-color);
+  border-left: var(--error-color) solid thick;
 }
 
 .private-match-guest__qr-code-description {

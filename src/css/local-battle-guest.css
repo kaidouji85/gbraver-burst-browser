@@ -80,9 +80,6 @@
 }
 
 .local-battle-guest__matching-failed {
-  --main-color: #b22222;
-  --sub-color: #f6bfbc;
-
   grid-area: matching-failed;
   display: grid;
   place-items: center;
@@ -90,9 +87,9 @@
   font-size: calc(var(--responsive-font-size) * 1.3);
   min-width: calc(var(--responsive-font-size) * 9);
   min-height: calc(var(--responsive-font-size) * 2);
-  color: var(--main-color);
-  background-color: var(--sub-color);
-  border-left: var(--main-color) solid thick;
+  color: var(--error-color);
+  background-color: var(--error-background-color);
+  border-left: var(--error-color) solid thick;
   box-sizing: border-box;
   padding: calc(var(--responsive-font-size) * 0.5) 0;
   margin-top: calc(var(--responsive-font-size) * 0.5);

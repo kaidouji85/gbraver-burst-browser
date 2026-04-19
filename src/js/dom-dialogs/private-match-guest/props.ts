@@ -11,6 +11,8 @@ export type PrivateMatchGuestDialogProps = SEPlayerContainer & {
   readonly root: HTMLElement;
   /** クロージャ */
   readonly closer: HTMLElement;
+  /** マッチング失敗メッセージ */
+  readonly matchingFailed: HTMLElement;
   /** ルームIDテキスト入力フォーム */
   readonly roomID: HTMLInputElement;
   /** QRコードリーダー開始ボタン */
