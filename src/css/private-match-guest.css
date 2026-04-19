@@ -27,7 +27,7 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height)))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
   display: grid;
-  grid-template-rows: 1fr auto auto auto 1fr;
+  grid-template-rows: 1fr auto auto auto auto 1fr;
   justify-items: center;
   font-size: calc(var(--responsive-font-size) * 1);
 }
@@ -90,4 +90,15 @@
   border: var(--sub-button-border);
   height: calc(var(--responsive-font-size) * 3);
   min-width: calc(var(--responsive-font-size) * 7);
+}
+
+.private-match-guest__matching-failed {
+  min-width: calc(var(--responsive-font-size) * 22);
+  height: calc(var(--responsive-font-size) * 3);
+  color: var(--error-color);
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  background-color: var(--error-background-color);
+  border-left: var(--error-color) solid thick;
 }
