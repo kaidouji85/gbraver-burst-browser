@@ -32,7 +32,7 @@
   position: absolute;
   right: var(--screen-padding-right);
   border-radius: var(--button-border-radius);
-  border: 1px solid #e6e3e1;
+  border: var(--dialog-border);
   background-color: var(--sub-button-background-color);
   box-shadow: var(--sub-button-box-shadow);
   color: var(--button-font-color);

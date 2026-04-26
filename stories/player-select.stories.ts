@@ -11,36 +11,13 @@ export default {
   title: "player-select",
 };
 
+/** シーン表示 */
 export const scene = domStub((params) => {
   const scene = new PlayerSelect({
     ...params,
     armdozerIds: PlayableArmdozers,
     pilotIds: PlayablePilots,
+    battleMode: "アーケード",
   });
   return scene.getRootHTMLElement();
-});
-
-export const armdozerSelector = domStub((params) => {
-  const armdozerIds = [
-    ArmdozerIds.NEO_LANDOZER,
-    ArmdozerIds.SHIN_BRAVER,
-    ArmdozerIds.WING_DOZER,
-    ArmdozerIds.LIGHTNING_DOZER,
-  ];
-  const component = new ArmdozerSelector({
-    ...params,
-    armdozerIds,
-    initialArmdozerId: ArmdozerIds.SHIN_BRAVER,
-  });
-  return component.getRootHTMLElement();
-});
-
-export const pilotSelector = domStub((params) => {
-  const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
-  const component = new PilotSelector({
-    ...params,
-    pilotIds,
-    initialPilotId: PilotIds.SHINYA,
-  });
-  return component.getRootHTMLElement();
 });
