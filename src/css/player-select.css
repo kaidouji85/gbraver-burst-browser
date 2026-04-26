@@ -27,6 +27,19 @@
   }
 }
 
+.player-select__battle-mode {
+  font-size: var(--responsive-font-size);
+  position: absolute;
+  right: var(--screen-padding-right);
+  border-radius: var(--button-border-radius);
+  border: 1px solid #e6e3e1;
+  background-color: var(--sub-button-background-color);
+  box-shadow: var(--sub-button-box-shadow);
+  color: var(--button-font-color);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  z-index: 2;
+}
+
 .player-select__working {
   z-index: var(--working-zindex);
   position: relative;
