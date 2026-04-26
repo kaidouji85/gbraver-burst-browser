@@ -7,7 +7,7 @@ import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
 import { extractElements } from "../dom/elements";
-import { rootInnerHTML } from "../dom/root-innrt-html";
+import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotBustShotContainer } from "../pilot-bust-shot";
 import { PilotSelector } from "../pilot-selector";
 import { PlayerDecide } from "../player-decide";
