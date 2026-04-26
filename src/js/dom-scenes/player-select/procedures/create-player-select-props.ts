@@ -6,7 +6,7 @@ import { SEPlayerContainer } from "../../../se/se-player";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
 import { extractSelector, extractWorking } from "../dom/elements";
-import { rootInnerHTML } from "../dom/root-inner-html";
+import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PilotBustShotContainer } from "../pilot-bust-shot";
 import { PilotSelector } from "../pilot-selector";
 import { PlayerDecide } from "../player-decide";
@@ -14,6 +14,7 @@ import { PlayerSelectProps } from "../props";
 
 /** 生成パラメータ */
 export type CreatePlayerSelectPropsParams = ResourcesContainer &
+  RootInnerHTMLOptions &
   SEPlayerContainer & {
     /** プレイアブルなアームドーザのID */
     armdozerIds: ArmdozerId[];
@@ -37,7 +38,7 @@ export function createPlayerSelectProps(
 
   const root = document.createElement("div");
   root.className = "player-select";
-  root.innerHTML = rootInnerHTML();
+  root.innerHTML = rootInnerHTML(params);
 
   const working = extractWorking(root);
   const selector = extractSelector(root);
