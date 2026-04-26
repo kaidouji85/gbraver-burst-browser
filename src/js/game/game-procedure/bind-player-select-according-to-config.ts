@@ -15,6 +15,8 @@ type SceneBinderParams = GameProps & {
   armdozerIds: ArmdozerId[];
   /** 選択可能なパイロットID */
   pilotIds: PilotId[];
+  /** 戦闘モード（通常選択画面でのみ有効） */
+  battleMode?: string;
 };
 
 /**
@@ -56,16 +58,19 @@ const binders: { [key in PlayerSelectorType]: SceneBinder } = {
  * 設定値に応じたプレイヤー選択画面をバインドする
  * @param props ゲームプロパティ
  * @param playerSelectorType ロボ、パイロット選択タイプ
+ * @param battleMode 戦闘モード（通常選択画面でのみ有効）
  * @returns 画面の素材読み込みまで完了したら発火するPromise
  */
 export async function bindPlayerSelectAccordingToConfig(
   props: GameProps,
   playerSelectorType: PlayerSelectorType,
+  battleMode?: string,
 ): Promise<void> {
   const binder = binders[playerSelectorType] ?? binders.open;
   await binder({
     ...props,
     armdozerIds: getPlayableArmdozers(props),
     pilotIds: getPlayablePilots(props),
+    battleMode,
   });
 }

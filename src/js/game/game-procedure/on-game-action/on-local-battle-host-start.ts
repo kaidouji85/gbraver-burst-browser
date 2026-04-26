@@ -28,7 +28,11 @@ export const onLocalBattleHostStart = async (options: {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(props, config.playerSelectorType),
+    bindPlayerSelectAccordingToConfig(
+      props,
+      config.playerSelectorType,
+      "🔑あいことばを作る",
+    ),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();
