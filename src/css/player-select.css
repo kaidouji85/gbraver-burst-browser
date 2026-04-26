@@ -40,6 +40,10 @@
   z-index: 2;
 }
 
+.player-select__battle-mode--invisible {
+  display: none;
+}
+
 .player-select__working {
   z-index: var(--working-zindex);
   position: relative;

@@ -12,6 +12,9 @@ export type RootInnerHTMLOptions = {
  * @returns innerHTML
  */
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
-  const battleMode = options?.battleMode ?? "";
-  return template({ battleMode });
+  const battleModeClass = options.battleMode
+    ? "player-select__battle-mode"
+    : "player-select__battle-mode--invisible";
+  const battleModeValue = options?.battleMode ?? "";
+  return template({ battleModeClass, battleModeValue });
 }
