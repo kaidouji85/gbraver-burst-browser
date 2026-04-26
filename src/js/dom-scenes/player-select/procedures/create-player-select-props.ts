@@ -3,7 +3,6 @@ import { Subject } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
 import { extractSelector, extractWorking } from "../dom/elements";
@@ -35,16 +34,11 @@ export function createPlayerSelectProps(
   const pilotId = PilotIds.SHINYA;
   const playerDecide = new Subject<PlayerDecide>();
   const prev = new Subject<void>();
-  const dataIDs = {
-    selector: domUuid(),
-    working: domUuid(),
-  };
 
   const root = document.createElement("div");
   root.className = "player-select";
-  root.innerHTML = rootInnerHTML(dataIDs);
+  root.innerHTML = rootInnerHTML();
 
-  //const elements = extractElements(root, dataIDs);
   const working = extractWorking(root);
   const selector = extractSelector(root);
 
