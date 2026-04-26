@@ -3,11 +3,10 @@ import { Subject } from "rxjs";
 
 import { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../se/se-player";
-import { domUuid } from "../../../uuid/dom-uuid";
 import { ArmdozerBustShotContainer } from "../armdozer-bust-shot";
 import { ArmdozerSelector } from "../armdozer-selector";
-import { extractElements } from "../dom/elements";
-import { rootInnerHTML } from "../dom/root-innrt-html";
+import { extractSelector, extractWorking } from "../dom/elements";
+import { rootInnerHTML } from "../dom/root-inner-html";
 import { PilotBustShotContainer } from "../pilot-bust-shot";
 import { PilotSelector } from "../pilot-selector";
 import { PlayerDecide } from "../player-decide";
@@ -35,36 +34,33 @@ export function createPlayerSelectProps(
   const pilotId = PilotIds.SHINYA;
   const playerDecide = new Subject<PlayerDecide>();
   const prev = new Subject<void>();
-  const dataIDs = {
-    selector: domUuid(),
-    working: domUuid(),
-  };
 
   const root = document.createElement("div");
   root.className = "player-select";
-  root.innerHTML = rootInnerHTML(dataIDs);
+  root.innerHTML = rootInnerHTML();
 
-  const elements = extractElements(root, dataIDs);
+  const working = extractWorking(root);
+  const selector = extractSelector(root);
 
   const armdozerBustShot = new ArmdozerBustShotContainer(
     resources,
     armdozerIds,
     armdozerId,
   );
-  elements.working.appendChild(armdozerBustShot.getRootHTMLElement());
+  working.appendChild(armdozerBustShot.getRootHTMLElement());
   const pilotBustShot = new PilotBustShotContainer(
     resources,
     pilotIds,
     pilotId,
   );
   pilotBustShot.hidden();
-  elements.working.appendChild(pilotBustShot.getRootHTMLElement());
+  working.appendChild(pilotBustShot.getRootHTMLElement());
 
   const armdozerSelector = new ArmdozerSelector({
     ...params,
     initialArmdozerId: armdozerId,
   });
-  elements.selector.appendChild(armdozerSelector.getRootHTMLElement());
+  selector.appendChild(armdozerSelector.getRootHTMLElement());
 
   const pilotSelector = new PilotSelector({
     ...params,
@@ -72,7 +68,7 @@ export function createPlayerSelectProps(
     initialPilotId: pilotId,
   });
   pilotSelector.hidden();
-  elements.selector.appendChild(pilotSelector.getRootHTMLElement());
+  selector.appendChild(pilotSelector.getRootHTMLElement());
 
   return {
     root,
