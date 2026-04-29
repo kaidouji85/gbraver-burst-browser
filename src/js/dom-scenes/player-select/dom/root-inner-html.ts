@@ -8,7 +8,7 @@ export type RootInnerHTMLOptions = {
 
 /**
  * ルート要素のinnerHTML
- * @param battleMode 戦闘モード
+ * @param options オプション
  * @returns innerHTML
  */
 export function rootInnerHTML(options: RootInnerHTMLOptions): string {
