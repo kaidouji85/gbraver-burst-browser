@@ -1,8 +1,4 @@
-import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
-
 import { PlayerSelect } from "../src/js/dom-scenes/player-select";
-import { ArmdozerSelector } from "../src/js/dom-scenes/player-select/armdozer-selector";
-import { PilotSelector } from "../src/js/dom-scenes/player-select/pilot-selector";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import { PlayablePilots } from "../src/js/game/playable-pilots";
 import { domStub } from "./stub/dom-stub";
@@ -11,6 +7,7 @@ export default {
   title: "player-select",
 };
 
+/** シーン表示 */
 export const scene = domStub((params) => {
   const scene = new PlayerSelect({
     ...params,
@@ -20,27 +17,13 @@ export const scene = domStub((params) => {
   return scene.getRootHTMLElement();
 });
 
-export const armdozerSelector = domStub((params) => {
-  const armdozerIds = [
-    ArmdozerIds.NEO_LANDOZER,
-    ArmdozerIds.SHIN_BRAVER,
-    ArmdozerIds.WING_DOZER,
-    ArmdozerIds.LIGHTNING_DOZER,
-  ];
-  const component = new ArmdozerSelector({
+/** 戦闘モード表示 */
+export const hasBattleMode = domStub((params) => {
+  const scene = new PlayerSelect({
     ...params,
-    armdozerIds,
-    initialArmdozerId: ArmdozerIds.SHIN_BRAVER,
+    armdozerIds: PlayableArmdozers,
+    pilotIds: PlayablePilots,
+    battleMode: "🔑あいことばを作る",
   });
-  return component.getRootHTMLElement();
-});
-
-export const pilotSelector = domStub((params) => {
-  const pilotIds = [PilotIds.SHINYA, PilotIds.GAI];
-  const component = new PilotSelector({
-    ...params,
-    pilotIds,
-    initialPilotId: PilotIds.SHINYA,
-  });
-  return component.getRootHTMLElement();
+  return scene.getRootHTMLElement();
 });
