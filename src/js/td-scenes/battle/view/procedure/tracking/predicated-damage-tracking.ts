@@ -45,7 +45,7 @@ function enemyPredicatedDamageTracking(params: PredicatedDamageTrackingParams) {
   const { predicatedDamage, tdCamera, rendererDOM } = params;
   const origin = {
     x: -ARMDOZER_EFFECT_STANDARD_X + 130,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 30,
+    y: ARMDOZER_EFFECT_STANDARD_Y,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, tdCamera, rendererDOM);
