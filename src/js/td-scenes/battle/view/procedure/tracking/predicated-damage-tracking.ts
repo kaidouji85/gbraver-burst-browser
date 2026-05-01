@@ -44,7 +44,7 @@ function playerPredicatedDamageTracking(
 function enemyPredicatedDamageTracking(params: PredicatedDamageTrackingParams) {
   const { predicatedDamage, tdCamera, rendererDOM } = params;
   const origin = {
-    x: -ARMDOZER_EFFECT_STANDARD_X + 130,
+    x: -ARMDOZER_EFFECT_STANDARD_X + 150,
     y: ARMDOZER_EFFECT_STANDARD_Y,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
