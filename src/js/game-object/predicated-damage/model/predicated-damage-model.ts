@@ -1,3 +1,6 @@
+/** バトルシミュレーターアイコンの位置 */
+export type BattleSimulatorIconPosition = "right" | "left";
+
 /** ダメージ予想 モデル */
 export type PredicatedDamageModel = {
   /** 表示するダメージ */
@@ -10,6 +13,8 @@ export type PredicatedDamageModel = {
    * バーストボタンが反応しないようにする
    */
   shouldPushNotifierStop: boolean;
+  /** バトルシミュレーターアイコンの位置 */
+  battleSimulatorIconPosition: BattleSimulatorIconPosition;
   /** バトルシミュレーターアイコンのスケール */
   battleSimulatorIconScale: number;
 };
