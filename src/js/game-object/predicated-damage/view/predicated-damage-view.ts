@@ -160,9 +160,10 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    const battleSimulatorIconOffsetX = (intervalCount / 2) * NUMBER_MESH_INTERVAL +
-          BATTLE_SIMULATOR_ICON_SIZE / 2 +
-          NUMBER_TO_ICON_MARGIN;
+    const battleSimulatorIconOffsetX =
+      (intervalCount / 2) * NUMBER_MESH_INTERVAL +
+      BATTLE_SIMULATOR_ICON_SIZE / 2 +
+      NUMBER_TO_ICON_MARGIN;
     const battleSimulatorIconX =
       model.battleSimulatorIconPosition === "right"
         ? battleSimulatorIconOffsetX
