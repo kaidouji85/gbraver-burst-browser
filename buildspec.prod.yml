@@ -4,17 +4,17 @@ env:
     IS_SEARCH_ENGINE_NO_INDEX: false
     IS_SERVICE_WORKER_USED: true
     APP_ICON_TYPE: "PROD"
-    CAN_ONLINE_BETA: false
     CAN_PLAY_DEVELOPING_ARMDOZER: false
     CAN_PLAY_DEVELOPING_PILOT: false
     CAN_PLAY_EPISODE_IN_DEVELOPMENT: false
     IS_TITLE_HELP_ICON_ENABLE: true
     NETWORK_MODE: "ONLINE"
+    CAN_ONLINE_BETA: false
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
     WS_API_DOMAIN_NAME: /GbraverBurst/prod/wsApiDomainName
-    WS_SIGNAL_DOMAIN_NAME: /GbraverBurst/prod/wsSignalDomainName
+    # WS_SIGNAL_DOMAIN_NAME: /GbraverBurst/prod/wsSignalDomainName #あいことば対戦正式リリースまでコメントアウトする
     ASSETLINKS_JSON_URI: /GbraverBurst/prod/assetlinksJsonURI
     S3_BUCKET: /GbraverBurst/prod/s3Bucket
     DISTRIBUTION_ID: /GbraverBurst/prod/distributionId
@@ -28,8 +28,8 @@ env:
     COGNITO_USER_POOL_ID: /GbraverBurst/prod/cognitoUserPoolId
     COGNITO_CLIENT_ID: /GbraverBurst/prod/cognitoClientId
     COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/prod/cognitoHostedUIDomain
-    WEBRTC_HELPER_DOMAIN_NAME: /GbraverBurst/prod/webrtcHelperDomainName
-    COTURN_DOMAIN_NAME: /GbraverBurst/prod/coturnDomainName
+    # WEBRTC_HELPER_DOMAIN_NAME: /GbraverBurst/prod/webrtcHelperDomainName #あいことば対戦正式リリースまでコメントアウトする
+    # COTURN_DOMAIN_NAME: /GbraverBurst/prod/coturnDomainName #あいことば対戦正式リリースまでコメントアウトする
 phases:
   install:
     runtime-versions:
@@ -40,7 +40,7 @@ phases:
   build:
     commands:
       - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
-      - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}"
-      - export WEBRTC_HELPER_API_URL="https://${STAGE}.${WEBRTC_HELPER_DOMAIN_NAME}"
+      # - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}" #あいことば対戦正式リリースまでコメントアウトする
+      # - export WEBRTC_HELPER_API_URL="https://${STAGE}.${WEBRTC_HELPER_DOMAIN_NAME}" #あいことば対戦正式リリースまでコメントアウトする
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"
