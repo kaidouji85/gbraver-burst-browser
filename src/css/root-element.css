@@ -57,6 +57,10 @@
   --disabled-button-border: 2px solid #4d4d4d;
   --disabled-button-font-color: #808080;
 
+  /** エラーメッセージ */
+  --error-color: #b22222;
+  --error-background-color: #f6bfbc;
+
   /** ホバー */
   --hovered-back-ground-color: #007599;
 

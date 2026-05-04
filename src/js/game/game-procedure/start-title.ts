@@ -8,6 +8,7 @@ import { ResourcesContainer } from "../../resource";
 import { PathIds } from "../../resource/path/ids";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
+import { NetworkContext } from "../network-context";
 import { Online } from "../network-context/online";
 import { switchTitle } from "./switch-scene/switch-title";
 
@@ -37,6 +38,25 @@ const createLoggedInAccount = async (
 };
 
 /**
+ * ネットワークコンテクストに応じたタイトルメニューモードを取得する
+ * @param networkContext ネットワークコンテキスト
+ * @returns タイトルメニューのモード
+ */
+const getTitleMenuMode = (
+  networkContext: NetworkContext,
+): "ONLINE" | "ONLINE_BETA" | "OFFLINE_LAN" | "STANDALONE" => {
+  if (networkContext.type === "online" && networkContext.canBeta) {
+    return "ONLINE_BETA";
+  } else if (networkContext.type === "stand-alone") {
+    return "STANDALONE";
+  } else if (networkContext.type === "offline-lan") {
+    return "OFFLINE_LAN";
+  } else {
+    return "ONLINE";
+  }
+};
+
+/**
  * タイトル画面を開始するヘルパー関数
  * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
  * に同じ値をセットするために、ヘルパーメソッド化した
@@ -49,13 +69,12 @@ export async function startTitle(props: Readonly<GameProps>): Promise<Title> {
     networkContext.type === "online" && (await networkContext.sdk.isLogin())
       ? await createLoggedInAccount({ ...props, networkContext })
       : { type: "GuestAccount" };
-  const isNetBattleVisible =
-    networkContext.type === "online" || networkContext.type === "offline-lan";
+  const titleMenuMode = getTitleMenuMode(networkContext);
   const isLoginVisible = networkContext.type === "online";
   const scene = new Title({
     ...props,
     account,
-    isNetBattleVisible,
+    titleMenuMode,
     isLoginVisible,
   });
   switchTitle(props, scene);

@@ -6,6 +6,7 @@ import {
   createPrivateMatchGuestDialogProps,
   PropsCreatorParams,
 } from "./procedure/create-private-match-guest-dialog-props";
+import { flashFailedMessage } from "./procedure/flash-failed-message";
 import { PrivateMatchGuestDialogProps } from "./props";
 
 /** コンストラクタのパラメータ */
@@ -55,5 +56,13 @@ export class PrivateMatchGuestDialog implements DOMDialog {
    */
   notifyPrivateMatchStart(): Observable<string> {
     return this.#props.privateMatchStart;
+  }
+
+  /**
+   * マッチング失敗メッセージをフラッシュ表示する
+   * @returns アニメーションが完了したら発火するPromise
+   */
+  flashFailedMessage(): Promise<void> {
+    return flashFailedMessage(this.#props);
   }
 }

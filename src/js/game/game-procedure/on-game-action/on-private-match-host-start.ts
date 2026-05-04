@@ -26,9 +26,7 @@ export async function onPrivateMatchHostStart(options: Options): Promise<void> {
 
   props.inProgress = {
     type: "PrivateMatchHost",
-    privateMatchHost: {
-      type: "PlayerSelect",
-    },
+    privateMatchHost: { type: "PlayerSelect" },
   };
   await props.fader.fadeOut();
   const config = await props.config.load();

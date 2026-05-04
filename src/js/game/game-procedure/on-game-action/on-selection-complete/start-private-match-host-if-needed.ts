@@ -1,6 +1,7 @@
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
+import { disconnectConnection } from "../../disconnect-connection";
 import { startOnlineBattle } from "../../start-online-battle";
 import { waitUntilPrivateMatchingAsHost } from "../../wait-until-private-matching-as-host";
 
@@ -37,7 +38,7 @@ export async function startPrivateMatchHostIfNeeded(
     return { isStarted: false };
   }
 
-  await networkContext.sdk.disconnectWebsocket();
+  await disconnectConnection(props);
   const battle = await waitUntilPrivateMatchingAsHost(
     { ...props, networkContext },
     action,

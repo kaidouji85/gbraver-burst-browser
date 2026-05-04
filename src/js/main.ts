@@ -30,6 +30,10 @@ declare let GBRAVER_BURST_CAN_PLAY_EPISODE_IN_DEVELOPMENT: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_ARMDOZER: string;
 declare let GBRAVER_BURST_CAN_PLAY_DEVELOPING_PILOT: string;
 declare let GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: string;
+declare let GBRAVER_BURST_SIGNAL_SERVER_URL: string;
+declare let GBRAVER_BURST_CAN_ONLINE_BETA: string;
+declare let GBRAVER_BURST_WEBRTC_HELPER_API_URL: string;
+declare let GBRAVER_BURST_COTURN_DOMAIN_NAME: string;
 
 /** モバイル用リソースルート */
 const mobileResourceRoot = { get: () => GBRAVER_BURST_MOBILE_RESOURCE_ROOT };
@@ -47,11 +51,15 @@ async function createNetworkContext(): Promise<NetworkContext> {
   switch (GBRAVER_BURST_NETWORK_MODE) {
     case "ONLINE":
       return await createOnlineContext({
+        canBeta: GBRAVER_BURST_CAN_ONLINE_BETA === "true",
         userPoolId: GBRAVER_BURST_COGNITO_USER_POOL_ID,
         userPoolClientId: GBRAVER_BURST_COGNITO_CLIENT_ID,
         hostedUIDomain: GBRAVER_BURST_COGNITO_HOSTED_UI_DOMAIN,
         ownURL: GBRAVER_BURST_OWN_ROOT_URL,
         webSocketAPIURL: GBRAVER_BURST_WEBSOCKET_API_URL,
+        wsSignalUrl: GBRAVER_BURST_SIGNAL_SERVER_URL,
+        webRTCHelperApiURL: GBRAVER_BURST_WEBRTC_HELPER_API_URL,
+        coturnDomainName: GBRAVER_BURST_COTURN_DOMAIN_NAME,
       });
     case "OFFLINE_LAN":
       return createOfflineLanContext(GBRAVER_BURST_OFFLINE_API_URL);

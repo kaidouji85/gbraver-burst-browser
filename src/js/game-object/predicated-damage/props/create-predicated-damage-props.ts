@@ -1,5 +1,6 @@
 import { SEPlayerContainer } from "../../../se/se-player";
 import { initialValue } from "../model/initial-value";
+import { BattleSimulatorIconPosition } from "../model/predicated-damage-model";
 import { createPredicatedDamageSounds } from "../sounds/create-status-icon-sounds";
 import {
   PredicatedDamageView,
@@ -9,7 +10,11 @@ import { PredicatedDamageProps } from "./predicated-damage-props";
 
 /** 生成パラメータ */
 export type PredicatedDamagePropsCreatorParams =
-  PredicatedDamageViewConstructParams & SEPlayerContainer;
+  PredicatedDamageViewConstructParams &
+    SEPlayerContainer & {
+      /** バトルシミュレーターアイコンの位置 */
+      battleSimulatorIconPosition: BattleSimulatorIconPosition;
+    };
 
 /**
  * PredicatedDamagePropsを生成する
@@ -19,9 +24,10 @@ export type PredicatedDamagePropsCreatorParams =
 export function createPredicatedDamageProps(
   params: PredicatedDamagePropsCreatorParams,
 ): PredicatedDamageProps {
+  const { battleSimulatorIconPosition } = params;
   return {
     ...params,
-    model: initialValue(),
+    model: initialValue(battleSimulatorIconPosition),
     view: new PredicatedDamageView(params),
     sounds: createPredicatedDamageSounds(params.resources),
     disabled: false,

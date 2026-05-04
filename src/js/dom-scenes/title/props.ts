@@ -51,6 +51,8 @@ export type TitleProps = Readonly<SEPlayerContainer> &
     readonly arcade: HTMLElement;
     /** ネット対戦 */
     readonly netBattle: HTMLElement;
+    /** ローカル対戦 */
+    readonly localBattle: HTMLElement;
     /** 設定 */
     readonly config: HTMLElement;
 
@@ -79,6 +81,8 @@ export type TitleProps = Readonly<SEPlayerContainer> &
     readonly pushArcade: Subject<void>;
     /** ネット対戦押下ストリーム */
     readonly pushNetBattle: Subject<void>;
+    /** ローカル対戦押下ストリーム */
+    readonly pushLocalBattle: Subject<void>;
     /** 設定押下ストリーム */
     readonly pushConfig: Subject<void>;
   };

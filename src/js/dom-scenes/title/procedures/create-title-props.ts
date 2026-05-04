@@ -20,6 +20,7 @@ import {
   extractHelpIcon,
   extractHelpMenu,
   extractLightningDozer,
+  extractLocalBattle,
   extractLogin,
   extractLogo,
   extractLogout,
@@ -114,6 +115,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     story: extractStory(root),
     arcade: extractArcade(root),
     netBattle: extractNetBattle(root),
+    localBattle: extractLocalBattle(root),
     config: extractConfig(root),
 
     armdozerImages: {
@@ -140,6 +142,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushStory: new Subject(),
     pushArcade: new Subject(),
     pushNetBattle: new Subject(),
+    pushLocalBattle: new Subject(),
     pushConfig: new Subject(),
   };
 }

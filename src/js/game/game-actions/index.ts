@@ -14,6 +14,11 @@ import { EndNetworkError } from "./end-network-error";
 import { EndNPCEnding } from "./end-npc-ending";
 import { ForceEndBattle } from "./force-end-battle";
 import { ForceRetry } from "./force-retry";
+import { LocalBattleCancel } from "./local-battle-cancel";
+import { LocalBattleEntry } from "./local-battle-entry";
+import { LocalBattleGuestStart } from "./local-battle-guest-start";
+import { LocalBattleHostStart } from "./local-battle-host-start";
+import { LocalBattleStart } from "./local-battle-start";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
 import { MatchingCanceled } from "./matching-canceled";
@@ -36,6 +41,7 @@ import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
+import { WithdrawLocalBattleEntry } from "./withdraw-local-battle-entry";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
 /** ゲーム全体で利用するアクション */
@@ -49,6 +55,12 @@ export type GameAction =
   | PrivateMatchGuestStart
   | PrivateMatchEntry
   | WithdrawPrivateMatchEntry
+  | LocalBattleStart
+  | LocalBattleCancel
+  | LocalBattleHostStart
+  | LocalBattleGuestStart
+  | LocalBattleEntry
+  | WithdrawLocalBattleEntry
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel

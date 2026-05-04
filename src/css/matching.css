@@ -1,11 +1,6 @@
 /** マッチング ダイアログ */
 @media (orientation: landscape) {
   .matching {
-    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50vw));
-    --dialog-height: calc(var(--responsive-font-size) * 10);
-    --control-button-width: calc(var(--responsive-font-size) * 10);
-    --control-button-height: calc(var(--responsive-font-size) * 3);
-
     display: block;
   }
 }
@@ -16,26 +11,11 @@
   }
 }
 
-.matching__background {
-  position: absolute;
+.matching__dialog {
   width: 100vw;
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: var(--zindex-background);
-}
-
-.matching__dialog {
-  --dialog-padding: var(--responsive-font-size);
-
-  width: var(--dialog-width);
-  height: var(--dialog-height);
-  top: 50vh;
-  top: 50dvh;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   background-color: var(--background-color);
@@ -44,19 +24,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
 }
 
 .matching__closer {
-  position: absolute;
-  top: calc(var(--closer-height) * -0.5);
-  left: calc(var(--closer-width) * -0.5);
   width: var(--closer-width);
   height: var(--closer-height);
-  z-index: var(--zindex-close);
+  position: absolute;
+  top: max(var(--safe-area-top), calc(var(--closer-width) * 0.3));
+  left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
 .matching__caption {

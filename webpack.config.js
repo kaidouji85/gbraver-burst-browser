@@ -171,6 +171,18 @@ module.exports = async () => ({
       GBRAVER_BURST_IS_TITLE_HELP_ICON_ENABLE: JSON.stringify(
         process.env.IS_TITLE_HELP_ICON_ENABLE,
       ),
+      GBRAVER_BURST_SIGNAL_SERVER_URL: JSON.stringify(
+        process.env.SIGNAL_SERVER_URL,
+      ),
+      GBRAVER_BURST_CAN_ONLINE_BETA: JSON.stringify(
+        process.env.CAN_ONLINE_BETA,
+      ),
+      GBRAVER_BURST_WEBRTC_HELPER_API_URL: JSON.stringify(
+        process.env.WEBRTC_HELPER_API_URL,
+      ),
+      GBRAVER_BURST_COTURN_DOMAIN_NAME: JSON.stringify(
+        process.env.COTURN_DOMAIN_NAME,
+      ),
     }),
   ],
 });

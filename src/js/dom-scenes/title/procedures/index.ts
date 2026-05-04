@@ -1,12 +1,13 @@
 import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../dom/push-dom";
-import type { TitleProps } from "../props";
+import { TitleProps } from "../props";
 import { onArcadePush } from "./on-arcade-push";
 import { onAvatarPush } from "./on-avatar-push";
 import { onConfigPush } from "./on-config-push";
 import { onHelpAnkerPush } from "./on-help-anker-push";
 import { onHelpIconPush } from "./on-help-icon-push";
+import { onLocalBattlePush } from "./on-local-battle-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
 import { onNetBattlePush } from "./on-net-battle-push";
@@ -57,6 +58,9 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     }),
     domPushStream(props.netBattle).subscribe((action) => {
       onNetBattlePush(props, action);
+    }),
+    domPushStream(props.localBattle).subscribe((action) => {
+      onLocalBattlePush(props, action);
     }),
     domPushStream(props.config).subscribe((action) => {
       onConfigPush(props, action);

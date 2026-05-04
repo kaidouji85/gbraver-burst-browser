@@ -2,6 +2,8 @@ import { fadeOut, stop } from "../../../../bgm/bgm-operators";
 import { WaitingDialog } from "../../../../dom-dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { CasualMatch } from "../../../in-progress/casual-match";
+import { LocalBattleGuest } from "../../../in-progress/local-battle-guest";
+import { LocalBattleHost } from "../../../in-progress/local-battle-host";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
@@ -23,7 +25,9 @@ export async function forceEndNetBattle(
         | CasualMatch
         | PrivateMatchHost
         | PrivateMatchGuest
-        | OfflineLANCasualMatch;
+        | OfflineLANCasualMatch
+        | LocalBattleHost
+        | LocalBattleGuest;
     }
   >,
 ) {

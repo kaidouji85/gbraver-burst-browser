@@ -22,7 +22,10 @@ export function createEnemyProps(
     battery: enemy.armdozer.maxBattery,
   });
 
-  const predicatedDamage = new PredicatedDamage(params);
+  const predicatedDamage = new PredicatedDamage({
+    ...params,
+    battleSimulatorIconPosition: "left",
+  });
 
   const statusIcon = new StatusIcon(params);
 

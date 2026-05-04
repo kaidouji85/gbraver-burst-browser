@@ -1,4 +1,3 @@
-<div class="{{ROOT_CLASS}}__background"></div>
 <div
   class="{{ROOT_CLASS}}__dummy-qr-code-reader"
   data-id="dummy-qr-code-reader"
@@ -10,6 +9,10 @@
     src="{{closerPath}}"
     data-id="closer"
   />
+  <div
+    class="{{ROOT_CLASS}}__matching-failed"
+    data-id="matching-failed"
+  >マッチング失敗</div>
   <div
     class="{{ROOT_CLASS}}__qr-code-description"
   >QRコードを読み込んでプライベートマッチ開始</div>
@@ -24,7 +27,12 @@
     class="{{ROOT_CLASS}}__room-id-description"
   >ルームIDを入力してプライベートマッチ開始</div>
   <div class="{{ROOT_CLASS}}__room-id-form">
-    <input class="{{ROOT_CLASS}}__room-id" type="text" data-id="roomID" />
+    <input
+      class="{{ROOT_CLASS}}__room-id"
+      type="text"
+      data-id="roomID"
+      value="{{initialRoomID}}"
+    />
     <button class="{{ROOT_CLASS}}__enter" data-id="enterButton">入室</button>
   </div>
 </div>

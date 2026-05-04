@@ -52,7 +52,7 @@
 .private-match-host__room-id {
   display: grid;
   grid-template-areas:
-    "description copy"
+    "description description"
     "value       copy";
   gap: 0 calc(var(--responsive-font-size) * 0.5);
 }
