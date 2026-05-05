@@ -34,7 +34,7 @@ export async function onCasualMatchStart(options: Options): Promise<void> {
     bindPlayerSelectAccordingToConfig(
       props,
       config.playerSelectorType,
-      "カジュアルマッチ",
+      "🎮カジュアルマッチ",
     ),
     waitTime(MAX_LOADING_TIME),
   ]);

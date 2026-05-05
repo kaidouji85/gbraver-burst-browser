@@ -38,7 +38,7 @@ export async function onPrivateMatchGuestStart(
     bindPlayerSelectAccordingToConfig(
       props,
       config.playerSelectorType,
-      "プライベートマッチ（ゲスト）",
+      "🙋ゲスト",
     ),
     waitTime(MAX_LOADING_TIME),
   ]);

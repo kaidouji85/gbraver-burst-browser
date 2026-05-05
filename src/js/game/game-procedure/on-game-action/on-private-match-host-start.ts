@@ -34,7 +34,7 @@ export async function onPrivateMatchHostStart(options: Options): Promise<void> {
     bindPlayerSelectAccordingToConfig(
       props,
       config.playerSelectorType,
-      "プライベートマッチ（ホスト）",
+      "👑ホスト",
     ),
     waitTime(MAX_LOADING_TIME),
   ]);
