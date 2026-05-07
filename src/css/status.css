@@ -62,7 +62,7 @@
       100vw - var(--safe-area-right) - var(--safe-area-left) -
         var(--closer-width)
     ),
-    90vw
+    80vw
   );
   height: calc(
     100dvh -
