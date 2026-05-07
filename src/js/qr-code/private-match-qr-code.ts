@@ -22,8 +22,6 @@ export const drawPrivateMatchQRCode = async (
     type: "svg",
   });
   img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-  //img.style.minWidth = "164px";
-  //img.style.minHeight = "164px";
 };
 
 /**
