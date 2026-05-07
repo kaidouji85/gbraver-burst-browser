@@ -40,7 +40,7 @@
   width: min(
     calc(
       100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width) * 0.5
+        var(--closer-width)
     ),
     90vw
   );
