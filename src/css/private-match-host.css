@@ -41,6 +41,12 @@
   left: max(var(--safe-area-left), calc(var(--closer-height) * 0.3));
 }
 
+.private-match-host__qr-code {
+  aspect-ratio: 1 / 1;
+  min-height: 164px;
+  flex: 1;
+}
+
 .private-match-host__qr-code-description {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
