@@ -14,8 +14,14 @@ export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
     return;
   }
 
-  cameraCanvas.height = video.videoHeight;
-  cameraCanvas.width = video.videoWidth;
+  if (
+    cameraCanvas.width !== video.videoWidth ||
+    cameraCanvas.height !== video.videoHeight
+  ) {
+    cameraCanvas.height = video.videoHeight;
+    cameraCanvas.width = video.videoWidth;
+  }
+
   canvas.drawImage(video, 0, 0, cameraCanvas.width, cameraCanvas.height);
   const imageData = canvas.getImageData(
     0,
