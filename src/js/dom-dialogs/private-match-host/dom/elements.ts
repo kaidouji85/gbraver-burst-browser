@@ -12,9 +12,7 @@ export const extractCloser = (root: HTMLElement): HTMLElement =>
  * @returns 抽出結果
  */
 export const extractQRCode = (root: HTMLElement): HTMLImageElement => {
-  const extractedQRCode = root.querySelector(
-    `[data-id="qr-code"]`,
-  ) as HTMLCanvasElement;
+  const extractedQRCode = root.querySelector(`[data-id="qr-code"]`);
   return extractedQRCode instanceof HTMLImageElement
     ? extractedQRCode
     : document.createElement("img");
