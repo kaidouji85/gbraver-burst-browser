@@ -4,6 +4,9 @@ import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../../qr-code/pri
 import { PrivateMatchQRCodeReaderProps } from "../props";
 import { drawQRCodeBorder } from "./draw-qr-code-border";
 
+const QR_SCAN_INTERVAL_MS = 1000 / 15;
+const lastScanTimestamp = new WeakMap<PrivateMatchQRCodeReaderProps, number>();
+
 /**
  * ゲームループ内での処理を行う
  * @param props プロパティ
@@ -23,6 +26,14 @@ export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
   }
 
   canvas.drawImage(video, 0, 0, cameraCanvas.width, cameraCanvas.height);
+
+  const now = performance.now();
+  const previousScanTimestamp = lastScanTimestamp.get(props) ?? 0;
+  if (now - previousScanTimestamp < QR_SCAN_INTERVAL_MS) {
+    return;
+  }
+  lastScanTimestamp.set(props, now);
+
   const imageData = canvas.getImageData(
     0,
     0,

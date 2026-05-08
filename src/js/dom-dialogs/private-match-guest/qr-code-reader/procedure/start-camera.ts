@@ -1,5 +1,9 @@
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
+const IDEAL_CAMERA_WIDTH = 1920;
+const IDEAL_CAMERA_HEIGHT = 1080;
+const IDEAL_CAMERA_FRAME_RATE = 30;
+
 /**
  * 可能な限り高解像度で背面カメラを起動するための制約を生成する
  */
@@ -7,8 +11,9 @@ function createCameraConstraints(): MediaTrackConstraints {
   const supported = navigator.mediaDevices.getSupportedConstraints();
   const constraints: MediaTrackConstraints = {
     facingMode: { ideal: "environment" },
-    width: { ideal: 3840 },
-    height: { ideal: 2160 },
+    width: { ideal: IDEAL_CAMERA_WIDTH },
+    height: { ideal: IDEAL_CAMERA_HEIGHT },
+    frameRate: { ideal: IDEAL_CAMERA_FRAME_RATE, max: IDEAL_CAMERA_FRAME_RATE },
   };
 
   // 一部ブラウザでは未対応キーを含むと失敗するため、対応キーのみを渡す
@@ -21,27 +26,48 @@ function createCameraConstraints(): MediaTrackConstraints {
   if (!supported.height) {
     delete constraints.height;
   }
+  if (!supported.frameRate) {
+    delete constraints.frameRate;
+  }
 
   return constraints;
 }
 
 /**
- * trackの能力から可能な範囲で解像度制約を引き上げる
+ * trackの能力から、解像度とフレームレートを上げすぎない範囲で制約を最適化する
  */
-async function raiseResolutionAsMuchAsPossible(track: MediaStreamTrack) {
+async function tuneTrackConstraints(track: MediaStreamTrack) {
   if (typeof track.getCapabilities !== "function") {
     return;
   }
 
   const capabilities = track.getCapabilities();
-  if (!capabilities.width || !capabilities.height) {
+  const constraints: MediaTrackConstraints = {};
+
+  if (capabilities.width?.max) {
+    constraints.width = { ideal: Math.min(capabilities.width.max, IDEAL_CAMERA_WIDTH) };
+  }
+  if (capabilities.height?.max) {
+    constraints.height = {
+      ideal: Math.min(capabilities.height.max, IDEAL_CAMERA_HEIGHT),
+    };
+  }
+  if (capabilities.frameRate?.max) {
+    const frameRateUpperLimit = Math.min(
+      capabilities.frameRate.max,
+      IDEAL_CAMERA_FRAME_RATE,
+    );
+    constraints.frameRate = {
+      ideal: frameRateUpperLimit,
+      max: frameRateUpperLimit,
+    };
+  }
+
+  if (Object.keys(constraints).length === 0) {
     return;
   }
 
-  await track.applyConstraints({
-    width: { ideal: capabilities.width.max },
-    height: { ideal: capabilities.height.max },
-  });
+  await track.applyConstraints(constraints);
 }
 
 /**
@@ -57,7 +83,7 @@ export async function startCamera(props: PrivateMatchQRCodeReaderProps) {
 
   const [videoTrack] = stream.getVideoTracks();
   if (videoTrack) {
-    await raiseResolutionAsMuchAsPossible(videoTrack).catch(() => {
+    await tuneTrackConstraints(videoTrack).catch(() => {
       // 制約適用失敗時は取得済みストリームを継続利用する
     });
   }
