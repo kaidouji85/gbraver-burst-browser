@@ -1,10 +1,11 @@
 import jsQR from "jsqr";
 
+import { isMobile } from "../../../../device-ditect/is-mobile";
 import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../../qr-code/private-match-qr-code";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 import { drawQRCodeBorder } from "./draw-qr-code-border";
 
-const QR_SCAN_INTERVAL_MS = 1000 / 15;
+const QR_SCAN_INTERVAL_MS = isMobile() ? 1000 / 10 : 1000 / 15;
 const lastScanTimestamp = new WeakMap<PrivateMatchQRCodeReaderProps, number>();
 
 /**

@@ -1,19 +1,40 @@
+import { isMobile } from "../../../../device-ditect/is-mobile";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
-const IDEAL_CAMERA_WIDTH = 1920;
-const IDEAL_CAMERA_HEIGHT = 1080;
-const IDEAL_CAMERA_FRAME_RATE = 30;
+type CameraProfile = {
+  idealWidth: number;
+  idealHeight: number;
+  idealFrameRate: number;
+};
+
+const MOBILE_CAMERA_PROFILE: CameraProfile = {
+  idealWidth: 1280,
+  idealHeight: 720,
+  idealFrameRate: 24,
+};
+
+const DESKTOP_OR_TABLET_CAMERA_PROFILE: CameraProfile = {
+  idealWidth: 1920,
+  idealHeight: 1080,
+  idealFrameRate: 30,
+};
+
+function selectCameraProfile(): CameraProfile {
+  return isMobile()
+    ? MOBILE_CAMERA_PROFILE
+    : DESKTOP_OR_TABLET_CAMERA_PROFILE;
+}
 
 /**
  * 可能な限り高解像度で背面カメラを起動するための制約を生成する
  */
-function createCameraConstraints(): MediaTrackConstraints {
+function createCameraConstraints(profile: CameraProfile): MediaTrackConstraints {
   const supported = navigator.mediaDevices.getSupportedConstraints();
   const constraints: MediaTrackConstraints = {
     facingMode: { ideal: "environment" },
-    width: { ideal: IDEAL_CAMERA_WIDTH },
-    height: { ideal: IDEAL_CAMERA_HEIGHT },
-    frameRate: { ideal: IDEAL_CAMERA_FRAME_RATE, max: IDEAL_CAMERA_FRAME_RATE },
+    width: { ideal: profile.idealWidth },
+    height: { ideal: profile.idealHeight },
+    frameRate: { ideal: profile.idealFrameRate, max: profile.idealFrameRate },
   };
 
   // 一部ブラウザでは未対応キーを含むと失敗するため、対応キーのみを渡す
@@ -36,7 +57,7 @@ function createCameraConstraints(): MediaTrackConstraints {
 /**
  * trackの能力から、解像度とフレームレートを上げすぎない範囲で制約を最適化する
  */
-async function tuneTrackConstraints(track: MediaStreamTrack) {
+async function tuneTrackConstraints(track: MediaStreamTrack, profile: CameraProfile) {
   if (typeof track.getCapabilities !== "function") {
     return;
   }
@@ -45,17 +66,17 @@ async function tuneTrackConstraints(track: MediaStreamTrack) {
   const constraints: MediaTrackConstraints = {};
 
   if (capabilities.width?.max) {
-    constraints.width = { ideal: Math.min(capabilities.width.max, IDEAL_CAMERA_WIDTH) };
+    constraints.width = { ideal: Math.min(capabilities.width.max, profile.idealWidth) };
   }
   if (capabilities.height?.max) {
     constraints.height = {
-      ideal: Math.min(capabilities.height.max, IDEAL_CAMERA_HEIGHT),
+      ideal: Math.min(capabilities.height.max, profile.idealHeight),
     };
   }
   if (capabilities.frameRate?.max) {
     const frameRateUpperLimit = Math.min(
       capabilities.frameRate.max,
-      IDEAL_CAMERA_FRAME_RATE,
+      profile.idealFrameRate,
     );
     constraints.frameRate = {
       ideal: frameRateUpperLimit,
@@ -76,14 +97,15 @@ async function tuneTrackConstraints(track: MediaStreamTrack) {
  */
 export async function startCamera(props: PrivateMatchQRCodeReaderProps) {
   const { video } = props;
+  const cameraProfile = selectCameraProfile();
   const stream = await navigator.mediaDevices.getUserMedia({
-    video: createCameraConstraints(),
+    video: createCameraConstraints(cameraProfile),
   });
   video.srcObject = stream;
 
   const [videoTrack] = stream.getVideoTracks();
   if (videoTrack) {
-    await tuneTrackConstraints(videoTrack).catch(() => {
+    await tuneTrackConstraints(videoTrack, cameraProfile).catch(() => {
       // 制約適用失敗時は取得済みストリームを継続利用する
     });
   }
