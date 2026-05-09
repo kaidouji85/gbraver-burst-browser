@@ -19,12 +19,9 @@ export default defineConfig([
           selfClosing: "always",
         },
       ],
-      "html/no-extra-spacing-attrs": [
-        "error",
-        {
-          enforceBeforeSelfClose: true,
-        },
-      ],
+      // Prettierでのフォーマットに寄せるため、スペース関連ルールはオフ
+      "html/no-extra-spacing-attrs": "off",
+      "html/no-extra-spacing-tags": "off",
     },
   },
 ]);
