@@ -53,10 +53,25 @@ function createCameraConstraints(
 }
 
 /**
+ * OverconstrainedErrorかどうかを判定する
+ * @param error 判定対象
+ * @returns 判定結果、OverconstrainedErrorであればtrue、そうでなければfalse
+ */
+function isOverconstrainedError(error: unknown): error is Error {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "name" in error &&
+    typeof error.name === "string" &&
+    error.name === "OverconstrainedError"
+  );
+}
+
+/**
  * trackの能力から、解像度とフレームレートを上げすぎない範囲で制約を最適化する
  * @param track メディアストリームトラック
  * @param profile カメラプロファイル
- * @returns 制約の適用に成功した場合はPromiseが解決し、失敗した場合はPromiseが拒否される
+ * @returns 処理が完了したら発火するPromise
  */
 async function tuneTrackConstraints(
   track: MediaStreamTrack,
@@ -67,34 +82,34 @@ async function tuneTrackConstraints(
   }
 
   const capabilities = track.getCapabilities();
-  const constraints: MediaTrackConstraints = {};
-
-  if (capabilities.width?.max) {
-    constraints.width = {
-      ideal: Math.min(capabilities.width.max, profile.idealWidth),
-    };
-  }
-  if (capabilities.height?.max) {
-    constraints.height = {
-      ideal: Math.min(capabilities.height.max, profile.idealHeight),
-    };
-  }
-  if (capabilities.frameRate?.max) {
-    const frameRateUpperLimit = Math.min(
-      capabilities.frameRate.max,
-      profile.idealFrameRate,
-    );
-    constraints.frameRate = {
-      ideal: frameRateUpperLimit,
-      max: frameRateUpperLimit,
-    };
-  }
-
+  const constraints: MediaTrackConstraints = {
+    ...(capabilities.width?.max && {
+      width: { ideal: Math.min(capabilities.width.max, profile.idealWidth) },
+    }),
+    ...(capabilities.height?.max && {
+      height: { ideal: Math.min(capabilities.height.max, profile.idealHeight) },
+    }),
+    ...(capabilities.frameRate?.max && {
+      frameRate: {
+        ideal: Math.min(capabilities.frameRate.max, profile.idealFrameRate),
+        max: Math.min(capabilities.frameRate.max, profile.idealFrameRate),
+      },
+    }),
+  };
   if (Object.keys(constraints).length === 0) {
     return;
   }
 
-  await track.applyConstraints(constraints);
+  try {
+    await track.applyConstraints(constraints);
+  } catch (error: unknown) {
+    if (isOverconstrainedError(error)) {
+      // applyConstraintsが失敗した時でも処理をそのまま続けたいので、
+      // 同メソッドが投げるOverconstrainedErrorは握り潰す
+      return;
+    }
+    throw error;
+  }
 }
 
 /**
@@ -111,9 +126,7 @@ export async function startCamera(props: PrivateMatchQRCodeReaderProps) {
 
   const [videoTrack] = stream.getVideoTracks();
   if (videoTrack) {
-    await tuneTrackConstraints(videoTrack, cameraProfile).catch(() => {
-      // 制約適用失敗時は取得済みストリームを継続利用する
-    });
+    await tuneTrackConstraints(videoTrack, cameraProfile);
   }
 
   // videoタグのplaysinline属性には値がないので、2番目の引数は空文字である
