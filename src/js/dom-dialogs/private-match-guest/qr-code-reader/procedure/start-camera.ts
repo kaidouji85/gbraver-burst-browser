@@ -30,9 +30,7 @@ const DESKTOP_OR_TABLET_CAMERA_PROFILE: CameraProfile = {
  * @returns カメラプロファイル
  */
 function selectCameraProfile(): CameraProfile {
-  return isMobile()
-    ? MOBILE_CAMERA_PROFILE
-    : DESKTOP_OR_TABLET_CAMERA_PROFILE;
+  return isMobile() ? MOBILE_CAMERA_PROFILE : DESKTOP_OR_TABLET_CAMERA_PROFILE;
 }
 
 /**
@@ -40,30 +38,18 @@ function selectCameraProfile(): CameraProfile {
  * @param profile カメラプロファイル
  * @returns カメラ制約
  */
-function createCameraConstraints(profile: CameraProfile): MediaTrackConstraints {
+function createCameraConstraints(
+  profile: CameraProfile,
+): MediaTrackConstraints {
   const supported = navigator.mediaDevices.getSupportedConstraints();
-  const constraints: MediaTrackConstraints = {
-    facingMode: { ideal: "environment" },
-    width: { ideal: profile.idealWidth },
-    height: { ideal: profile.idealHeight },
-    frameRate: { ideal: profile.idealFrameRate, max: profile.idealFrameRate },
+  return {
+    ...(supported.facingMode && { facingMode: { ideal: "environment" } }),
+    ...(supported.width && { width: { ideal: profile.idealWidth } }),
+    ...(supported.height && { height: { ideal: profile.idealHeight } }),
+    ...(supported.frameRate && {
+      frameRate: { ideal: profile.idealFrameRate, max: profile.idealFrameRate },
+    }),
   };
-
-  // 一部ブラウザでは未対応キーを含むと失敗するため、対応キーのみを渡す
-  if (!supported.facingMode) {
-    delete constraints.facingMode;
-  }
-  if (!supported.width) {
-    delete constraints.width;
-  }
-  if (!supported.height) {
-    delete constraints.height;
-  }
-  if (!supported.frameRate) {
-    delete constraints.frameRate;
-  }
-
-  return constraints;
 }
 
 /**
@@ -72,7 +58,10 @@ function createCameraConstraints(profile: CameraProfile): MediaTrackConstraints 
  * @param profile カメラプロファイル
  * @returns 制約の適用に成功した場合はPromiseが解決し、失敗した場合はPromiseが拒否される
  */
-async function tuneTrackConstraints(track: MediaStreamTrack, profile: CameraProfile) {
+async function tuneTrackConstraints(
+  track: MediaStreamTrack,
+  profile: CameraProfile,
+) {
   if (typeof track.getCapabilities !== "function") {
     return;
   }
@@ -81,7 +70,9 @@ async function tuneTrackConstraints(track: MediaStreamTrack, profile: CameraProf
   const constraints: MediaTrackConstraints = {};
 
   if (capabilities.width?.max) {
-    constraints.width = { ideal: Math.min(capabilities.width.max, profile.idealWidth) };
+    constraints.width = {
+      ideal: Math.min(capabilities.width.max, profile.idealWidth),
+    };
   }
   if (capabilities.height?.max) {
     constraints.height = {
