@@ -1,24 +1,34 @@
 import { isMobile } from "../../../../device-ditect/is-mobile";
 import { PrivateMatchQRCodeReaderProps } from "../props";
 
+/** カメラのプロファイル */
 type CameraProfile = {
+  /** カメラ映像の理想的な幅 */
   idealWidth: number;
+  /** カメラ映像の理想的な高さ */
   idealHeight: number;
+  /** カメラ映像の理想的なフレームレート */
   idealFrameRate: number;
 };
 
+/** モバイル端末用のカメラプロファイル */
 const MOBILE_CAMERA_PROFILE: CameraProfile = {
   idealWidth: 1280,
   idealHeight: 720,
   idealFrameRate: 24,
 };
 
+/** デスクトップまたはタブレット用のカメラプロファイル */
 const DESKTOP_OR_TABLET_CAMERA_PROFILE: CameraProfile = {
   idealWidth: 1920,
   idealHeight: 1080,
   idealFrameRate: 30,
 };
 
+/**
+ * 端末に応じたカメラプロファイルを選択する
+ * @returns カメラプロファイル
+ */
 function selectCameraProfile(): CameraProfile {
   return isMobile()
     ? MOBILE_CAMERA_PROFILE
@@ -27,6 +37,8 @@ function selectCameraProfile(): CameraProfile {
 
 /**
  * 可能な限り高解像度で背面カメラを起動するための制約を生成する
+ * @param profile カメラプロファイル
+ * @returns カメラ制約
  */
 function createCameraConstraints(profile: CameraProfile): MediaTrackConstraints {
   const supported = navigator.mediaDevices.getSupportedConstraints();
@@ -56,6 +68,9 @@ function createCameraConstraints(profile: CameraProfile): MediaTrackConstraints 
 
 /**
  * trackの能力から、解像度とフレームレートを上げすぎない範囲で制約を最適化する
+ * @param track メディアストリームトラック
+ * @param profile カメラプロファイル
+ * @returns 制約の適用に成功した場合はPromiseが解決し、失敗した場合はPromiseが拒否される
  */
 async function tuneTrackConstraints(track: MediaStreamTrack, profile: CameraProfile) {
   if (typeof track.getCapabilities !== "function") {
