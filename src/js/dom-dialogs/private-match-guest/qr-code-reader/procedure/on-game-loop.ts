@@ -18,10 +18,10 @@ export function onGameLoop(props: PrivateMatchQRCodeReaderProps) {
     return;
   }
 
-  if (
+  const isCanvasSizeChanged =
     cameraCanvas.width !== video.videoWidth ||
-    cameraCanvas.height !== video.videoHeight
-  ) {
+    cameraCanvas.height !== video.videoHeight;
+  if (isCanvasSizeChanged) {
     cameraCanvas.height = video.videoHeight;
     cameraCanvas.width = video.videoWidth;
   }
