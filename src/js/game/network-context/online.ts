@@ -4,10 +4,12 @@ import {
   initializeBrowserSDK,
 } from "@gbraver-burst-network/browser-sdk";
 import {
-  createLocalWebRTCGuestSDK,
-  createLocalWebRTCHostSDK,
-  LocalWebRTCGuestSDK,
-  LocalWebRTCHostSDK,
+  AuthTokenManager,
+  createAuthTokenManager,
+  createGuestLocalWebRTCSDK,
+  createHostLocalWebRTCSDK,
+  GuestLocalWebRTCSDK,
+  HostLocalWebRTCSDK,
 } from "@gbraver-burst-network/local-webrtc-browser-sdk";
 
 /** オンライン */
@@ -23,10 +25,12 @@ export type Online = {
   /** オンライン用のSDK */
   sdk: BrowserSDK;
 
+  /** ローカルWebRTC用認証トークンマネージャー */
+  localAuthTokenManager: AuthTokenManager;
   /** ローカルWebRTCホスト用のSDK */
-  localHostSDK: LocalWebRTCHostSDK;
+  localHostSDK: HostLocalWebRTCSDK;
   /** ローカルWebRTCゲスト用のSDK */
-  localGuestSDK: LocalWebRTCGuestSDK;
+  localGuestSDK: GuestLocalWebRTCSDK;
 };
 
 /**
@@ -58,12 +62,15 @@ export async function createOnlineContext(options: {
   const { webSocketAPIURL, wsSignalUrl, webRTCHelperApiURL, coturnDomainName } =
     options;
   const sdk = await createBrowserSDK(webSocketAPIURL);
-  const localHostSDK = createLocalWebRTCHostSDK({
+  const localAuthTokenManager = createAuthTokenManager(webRTCHelperApiURL);
+  const localHostSDK = createHostLocalWebRTCSDK({
+    authToken: localAuthTokenManager,
     wsSignalUrl,
     webRTCHelperApiURL,
     coturnDomainName,
   });
-  const localGuestSDK = createLocalWebRTCGuestSDK({
+  const localGuestSDK = createGuestLocalWebRTCSDK({
+    authToken: localAuthTokenManager,
     wsSignalUrl,
     webRTCHelperApiURL,
     coturnDomainName,
@@ -74,6 +81,7 @@ export async function createOnlineContext(options: {
 
     sdk,
 
+    localAuthTokenManager,
     localHostSDK,
     localGuestSDK,
   };
