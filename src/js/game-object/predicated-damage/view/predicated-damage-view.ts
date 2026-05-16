@@ -164,16 +164,16 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    const battleSimulatorIconOffsetX =
-      (intervalCount / 2) * NUMBER_MESH_INTERVAL +
-      BATTLE_SIMULATOR_ICON_SIZE / 2 +
-      NUMBER_TO_ICON_MARGIN;
-    const battleSimulatorIconX =
-      model.battleSimulatorIconPosition === "right"
-        ? battleSimulatorIconOffsetX
-        : -battleSimulatorIconOffsetX;
+    // const battleSimulatorIconOffsetX =
+    //   (intervalCount / 2) * NUMBER_MESH_INTERVAL +
+    //   BATTLE_SIMULATOR_ICON_SIZE / 2 +
+    //   NUMBER_TO_ICON_MARGIN;
+    // const battleSimulatorIconX =
+    //   model.battleSimulatorIconPosition === "right"
+    //     ? battleSimulatorIconOffsetX
+    //     : -battleSimulatorIconOffsetX;
 
-    this.#battleSimulatorIcon.getObject3D().position.x = battleSimulatorIconX;
+    this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =
       BATTLE_SIMULATOR_ICON_Y;
     this.#battleSimulatorIcon
@@ -185,8 +185,7 @@ export class PredicatedDamageView {
       );
     this.#battleSimulatorIcon.opacity(opacity);
 
-    this.#battleSimulatorIconPushDetector.getObject3D().position.x =
-      battleSimulatorIconX;
+    this.#battleSimulatorIconPushDetector.getObject3D().position.x = 0;
     this.#battleSimulatorIconPushDetector.getObject3D().position.y =
       BATTLE_SIMULATOR_ICON_Y;
   }
