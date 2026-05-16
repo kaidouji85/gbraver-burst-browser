@@ -137,6 +137,10 @@ export class PredicatedDamageView {
       .split("")
       .reverse()
       .map((v) => Number(v));
+    // マイナス記号も含めた数字間隔数
+    // 数字桁をnとすると、その間隔はn-1だが、マイナス記号がある場合はさらに+1されるので
+    //   n - 1 + 1 = n
+    // が正しい計算になる
     const intervalCount = values.length;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
