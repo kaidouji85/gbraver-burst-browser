@@ -137,14 +137,13 @@ export class PredicatedDamageView {
       .split("")
       .reverse()
       .map((v) => Number(v));
-    // マイナス記号も含めた数字間隔数
-    const intervalCount = values.length + 1;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
       mesh.getObject3D().position.x =
-        //(-i + intervalCount) * NUMBER_MESH_INTERVAL
-        //-(intervalCount + 1) * NUMBER_MESH_INTERVAL
-        (-i - 1) * NUMBER_MESH_INTERVAL - NUMBER_TO_ICON_MARGIN;
+        model.battleSimulatorIconPosition === "left"
+          ? (-i + values.length + 1) * NUMBER_MESH_INTERVAL +
+            NUMBER_TO_ICON_MARGIN
+          : (-i - 1) * NUMBER_MESH_INTERVAL - NUMBER_TO_ICON_MARGIN;
     });
 
     R.zip(this.#numbers, values)
