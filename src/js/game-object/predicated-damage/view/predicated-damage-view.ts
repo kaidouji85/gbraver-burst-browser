@@ -38,7 +38,7 @@ const MIN_DISPLAYABLE_DAMAGE = 0;
 const BATTLE_SIMULATOR_ICON_SIZE = 70;
 
 /** 数字とアイコンの間のマージン */
-const NUMBER_TO_ICON_MARGIN = 2;
+const NUMBER_TO_ICON_MARGIN = 16;
 
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
@@ -138,14 +138,12 @@ export class PredicatedDamageView {
       .reverse()
       .map((v) => Number(v));
     // マイナス記号も含めた数字間隔数
-    // 数字桁をnとすると、その間隔はn-1だが、マイナス記号がある場合はさらに+1されるので
-    //   n - 1 + 1 = n
-    // が正しい計算になる
-    const intervalCount = values.length;
+    const intervalCount = values.length + 1;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
-      mesh.getObject3D().position.x =
-        (-i + intervalCount / 2) * NUMBER_MESH_INTERVAL;
+      mesh.getObject3D().position.x = model.battleSimulatorIconPosition
+        ? (-i + intervalCount) * NUMBER_MESH_INTERVAL + NUMBER_TO_ICON_MARGIN
+        : (-i + intervalCount) * NUMBER_MESH_INTERVAL + NUMBER_TO_ICON_MARGIN;
     });
 
     R.zip(this.#numbers, values)
@@ -163,15 +161,6 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
-
-    // const battleSimulatorIconOffsetX =
-    //   (intervalCount / 2) * NUMBER_MESH_INTERVAL +
-    //   BATTLE_SIMULATOR_ICON_SIZE / 2 +
-    //   NUMBER_TO_ICON_MARGIN;
-    // const battleSimulatorIconX =
-    //   model.battleSimulatorIconPosition === "right"
-    //     ? battleSimulatorIconOffsetX
-    //     : -battleSimulatorIconOffsetX;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =
