@@ -142,7 +142,9 @@ export class PredicatedDamageView {
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
       mesh.getObject3D().position.x =
-        (-i + intervalCount) * NUMBER_MESH_INTERVAL + NUMBER_TO_ICON_MARGIN;
+        (-i + intervalCount) * NUMBER_MESH_INTERVAL 
+        -(intervalCount + 1) * NUMBER_MESH_INTERVAL
+        - NUMBER_TO_ICON_MARGIN;
     });
 
     R.zip(this.#numbers, values)
