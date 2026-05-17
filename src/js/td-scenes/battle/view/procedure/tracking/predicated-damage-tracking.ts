@@ -6,8 +6,8 @@ import { TrackingParams } from "./tracking-params";
  * @param params パラメータ
  */
 export function predicatedDamageTracking(params: TrackingParams) {
-  const { td, hud, rendererDOM, playerId } = params;
-  hud.players.forEach(({ predicatedDamage }) => {
+  const { td, hud, rendererDOM } = params;
+  hud.players.forEach(({ playerId, predicatedDamage }) => {
     const armdozer = td.armdozers.find((a) => a.playerId === playerId);
     if (!armdozer) {
       return;

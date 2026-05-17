@@ -7,6 +7,8 @@ import { NeoLandozerModel } from "../model/neo-landozer-model";
 export interface NeoLandozerView {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
+  /** ダメージ予想の位置（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /** デストラクタ */
   destructor(): void;

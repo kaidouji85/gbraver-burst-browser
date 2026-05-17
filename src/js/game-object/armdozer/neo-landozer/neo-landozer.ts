@@ -55,6 +55,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     const { gameObjectAction } = params;
     this.#props = createNeoLandozerProps(params);
     this.statusIconPosition = this.#props.view.statusIconPosition;
+    this.predicatedDamagePosition = this.#props.view.predicatedDamagePosition;
     this.#unsubscribers = bindEventListeners({
       props: this.#props,
       gameObjectAction,
