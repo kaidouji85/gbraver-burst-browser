@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
 import { ShinBraverModel } from "../model/shin-braver-model";
@@ -15,7 +15,7 @@ import { ShinBraverView } from "./shin-braver-view";
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

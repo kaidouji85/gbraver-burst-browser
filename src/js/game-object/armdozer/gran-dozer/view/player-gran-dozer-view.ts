@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../meshes";
 import { AnimationMesh } from "../meshes/animation-mesh";
 import { GranDozerModel } from "../model/gran-dozer-model";
@@ -15,7 +15,7 @@ import { GranDozerView } from "./gran-dozer-view";
 /** プレイヤー グランドーザービュー */
 export class PlayerGranDozerView implements GranDozerView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

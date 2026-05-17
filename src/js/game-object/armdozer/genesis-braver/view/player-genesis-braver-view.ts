@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
@@ -15,7 +15,7 @@ import { GenesisBraverView } from "./genesis-braver-view";
 /** プレイヤー ジェネシスブレイバービュー */
 export class PlayerGenesisBraverView implements GenesisBraverView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

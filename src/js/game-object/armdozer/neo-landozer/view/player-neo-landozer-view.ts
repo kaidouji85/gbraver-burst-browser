@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
 import { NeoLandozerModel } from "../model/neo-landozer-model";
@@ -15,7 +15,7 @@ import { NeoLandozerView } from "./neo-landozer-view";
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

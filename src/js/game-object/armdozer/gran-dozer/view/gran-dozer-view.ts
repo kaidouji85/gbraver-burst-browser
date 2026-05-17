@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { GranDozerModel } from "../model/gran-dozer-model";
 
 /** グランドーザービュー */
 export interface GranDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理

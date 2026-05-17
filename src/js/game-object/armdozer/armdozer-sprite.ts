@@ -2,8 +2,8 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 
-/** ステータスアイコンの位置（ワールド座標） */
-export type StatusIconPosition = {
+/** アームドーザ用ワールド座標 */
+export type ArmdozerWorldCoordinate = {
   /** x軸 */
   x: number;
   /** y軸 */
@@ -15,7 +15,9 @@ export type StatusIconPosition = {
 /** アームドーザスプライト */
 export interface ArmdozerSprite {
   /** ステータスアイコンの位置（ワールド座標） */
-  readonly statusIconPosition: StatusIconPosition;
+  readonly statusIconPosition: ArmdozerWorldCoordinate;
+  /** ダメージ予想の位置（ワールド座標） */
+  readonly predicatedDamagePosition: ArmdozerWorldCoordinate;
   /** ダウンアニメーション開始から衝撃演出までの遅延時間(ミリ秒) */
   readonly downImpactDelay: number;
   /**

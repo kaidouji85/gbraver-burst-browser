@@ -20,6 +20,12 @@ export class EmptyArmdozerSprite implements ArmdozerSprite {
     y: ARMDOZER_EFFECT_STANDARD_Y + 80,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
+  /** @override */
+  predicatedDamagePosition = {
+    x: ARMDOZER_EFFECT_STANDARD_X - 30,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 30,
+    z: ARMDOZER_EFFECT_STANDARD_Z,
+  };
 
   /** @override */
   downImpactDelay = 800;

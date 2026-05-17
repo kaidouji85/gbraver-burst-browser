@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { LightningDozerModel } from "../model/lightning-dozer-model";
 
 /**
@@ -8,7 +8,7 @@ import { LightningDozerModel } from "../model/lightning-dozer-model";
  */
 export interface LightningDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
 
   /** デストラクタ相当の処理 */
   destructor(): void;

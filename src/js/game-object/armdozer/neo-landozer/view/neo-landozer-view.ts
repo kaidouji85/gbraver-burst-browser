@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { NeoLandozerModel } from "../model/neo-landozer-model";
 
 /** ネオランドーザのビュー */
 export interface NeoLandozerView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
 
   /** デストラクタ */
   destructor(): void;

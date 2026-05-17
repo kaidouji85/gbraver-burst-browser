@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
 import { WingDozerModel } from "../model/wing-dozer-model";
@@ -16,7 +16,7 @@ import { WingDozerView } from "./wing-dozer-view";
 /** プレイヤー側 ウィングドーザ ビュー */
 export class PlayerWingDozerView implements WingDozerView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
 
   /** グループ */
   #group: THREE.Group;

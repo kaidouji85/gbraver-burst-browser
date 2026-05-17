@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../td-position";
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { createAllMeshes } from "../mesh";
 import { AnimationMesh } from "../mesh/animation-mesh";
 import { LightningDozerModel } from "../model/lightning-dozer-model";
@@ -15,7 +15,7 @@ import { LightningDozerView } from "./lightning-dozer-view";
 /** プレイヤー側のライトニングドーザビュー */
 export class PlayerLightingDozerView implements LightningDozerView {
   /** @override */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

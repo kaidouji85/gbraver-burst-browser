@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 
 /** ジェネシスブレイバービュー */
 export interface GenesisBraverView {
   /** ステータスアイコンの位置情報（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理
