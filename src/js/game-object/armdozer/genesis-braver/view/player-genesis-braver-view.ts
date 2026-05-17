@@ -16,6 +16,9 @@ import { GenesisBraverView } from "./genesis-braver-view";
 export class PlayerGenesisBraverView implements GenesisBraverView {
   /** @override */
   statusIconPosition: ArmdozerWorldCoordinate;
+  /** @override */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
+
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */
@@ -29,6 +32,11 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
     this.statusIconPosition = {
       x: ARMDOZER_EFFECT_STANDARD_X - 90,
       y: ARMDOZER_EFFECT_STANDARD_Y + 80,
+      z: ARMDOZER_EFFECT_STANDARD_Z,
+    };
+    this.predicatedDamagePosition = {
+      x: ARMDOZER_EFFECT_STANDARD_X - 50,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 20,
       z: ARMDOZER_EFFECT_STANDARD_Z,
     };
     this.#group = new THREE.Group();

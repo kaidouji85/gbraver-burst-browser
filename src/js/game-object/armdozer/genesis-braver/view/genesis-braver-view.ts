@@ -7,6 +7,8 @@ import { GenesisBraverModel } from "../model/genesis-braver-model";
 export interface GenesisBraverView {
   /** ステータスアイコンの位置情報（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
+  /** 予測ダメージの位置情報（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理
