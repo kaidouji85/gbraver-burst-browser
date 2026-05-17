@@ -7,6 +7,8 @@ import { GranDozerModel } from "../model/gran-dozer-model";
 export interface GranDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
+  /** 予測ダメージの位置（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理

@@ -18,7 +18,6 @@ export class PlayerGenesisBraverView implements GenesisBraverView {
   statusIconPosition: ArmdozerWorldCoordinate;
   /** @override */
   predicatedDamagePosition: ArmdozerWorldCoordinate;
-
   /** グループ */
   #group: THREE.Group;
   /** メッシュ */

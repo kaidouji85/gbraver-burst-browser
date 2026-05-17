@@ -53,6 +53,7 @@ export class GranDozer extends EmptyArmdozerSprite {
     super();
     this.#props = createGranDozerProps(options);
     this.statusIconPosition = this.#props.view.statusIconPosition;
+    this.predicatedDamagePosition = this.#props.view.predicatedDamagePosition;
     this.#unsubscribers = bindEventListeners({
       ...options,
       props: this.#props,
