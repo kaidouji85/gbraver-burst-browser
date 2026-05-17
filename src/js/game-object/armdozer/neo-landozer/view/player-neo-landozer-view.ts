@@ -35,7 +35,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     };
     this.predicatedDamagePosition = {
       x: ARMDOZER_EFFECT_STANDARD_X - 50,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 30,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 20,
       z: ARMDOZER_EFFECT_STANDARD_Z,
     };
     this.#group = new THREE.Group();
