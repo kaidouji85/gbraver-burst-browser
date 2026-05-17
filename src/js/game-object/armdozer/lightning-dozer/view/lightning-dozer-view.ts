@@ -9,6 +9,8 @@ import { LightningDozerModel } from "../model/lightning-dozer-model";
 export interface LightningDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
+  /** 予測ダメージの位置（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /** デストラクタ相当の処理 */
   destructor(): void;
