@@ -1,12 +1,14 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { WingDozerModel } from "../model/wing-dozer-model";
 
 /**ウィングドーザ ビュー */
 export interface WingDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
+  /** 予測ダメージの位置（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理
