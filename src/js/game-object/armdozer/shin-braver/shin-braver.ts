@@ -57,6 +57,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
     const { gameObjectAction } = params;
     this.#props = createShinBraverProps(params);
     this.statusIconPosition = this.#props.view.statusIconPosition;
+    this.predicatedDamagePosition = this.#props.view.predicatedDamagePosition;
     this.#unsubscribers = bindEventListeners({
       props: this.#props,
       gameObjectAction,
