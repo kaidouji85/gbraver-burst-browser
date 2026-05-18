@@ -5,6 +5,7 @@ import { empty } from "../../../../../animation/delay";
 import { HUDPlayer } from "../../../view/hud/player";
 
 /**
+ * @deprecated switchPredicatedDamageに置き換え
  * ダメージ予想を表示する
  * @param hudPlayers HUDプレイヤーをあつめたもの
  * @param players プレイヤーステート
