@@ -9,6 +9,7 @@ import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
 import { updateGauge } from "./update-gauge";
+import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -37,7 +38,8 @@ export function inputCommandAnimation(
   }
 
   const isPlayerTurn = playerId === activePlayerId;
-  const initialBattery = getInitialBattery(player.armdozer.maxBattery);
+  const enableMaxBattery = getEnableMaxBattery(playerCommand.command);
+  const initialBattery = getInitialBattery(enableMaxBattery);
   const nowPlayerBattery =
     props.controllerType === "BigButton"
       ? initialBattery
