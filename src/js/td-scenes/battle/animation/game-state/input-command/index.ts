@@ -3,10 +3,11 @@ import { GameStateX, InputCommand } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
+import { getInitialBattery } from "../../../get-initial-battery";
+import { getPredicatedDamage } from "../get-predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
-import { showPredicatedDamage } from "./show-predicated-damage";
 import { updateGauge } from "./update-gauge";
 
 /**
@@ -24,7 +25,10 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  if (!player || !playerCommand) {
+  const defenderHUD = view.hud.players.find(
+    (h) => h.playerId !== activePlayerId,
+  );
+  if (!player || !playerCommand || !defenderHUD) {
     return empty();
   }
 
@@ -33,6 +37,18 @@ export function inputCommandAnimation(
   }
 
   const isPlayerTurn = playerId === activePlayerId;
+  const initialBattery = getInitialBattery(player.armdozer.maxBattery);
+  const nowPlayerBattery =
+    props.controllerType === "BigButton"
+      ? initialBattery
+      : player.armdozer.battery;
+  const predicatedDamage = getPredicatedDamage({
+    hudPlayers: view.hud.players,
+    players,
+    activePlayerId,
+    playerId,
+    nowPlayerBattery,
+  });
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
@@ -45,6 +61,6 @@ export function inputCommandAnimation(
     view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
-    showPredicatedDamage(view.hud.players, players, activePlayerId),
+    defenderHUD.predicatedDamage.show(predicatedDamage),
   );
 }
