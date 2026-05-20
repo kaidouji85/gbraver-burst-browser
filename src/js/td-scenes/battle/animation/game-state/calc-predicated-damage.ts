@@ -18,7 +18,7 @@ export function calcPredicatedDamage(options: {
   players: PlayerState[];
   activePlayerId: PlayerId;
   playerId: PlayerId;
-  nowPlayerBattery?: number;
+  nowPlayerBattery: number;
 }) {
   const { players, activePlayerId, playerId, nowPlayerBattery } = options;
   const attacker = players.find((p) => p.playerId === activePlayerId);
@@ -28,7 +28,7 @@ export function calcPredicatedDamage(options: {
   }
 
   const attackerBattery =
-    attacker.playerId === playerId && nowPlayerBattery !== undefined
+    attacker.playerId === playerId
       ? nowPlayerBattery
       : attacker.armdozer.battery;
   const attackerCorrectedBattery = correctedBattery(
@@ -36,7 +36,7 @@ export function calcPredicatedDamage(options: {
     attacker.armdozer.effects,
   );
   const defenderBattery =
-    defender.playerId === playerId && nowPlayerBattery !== undefined
+    defender.playerId === playerId
       ? nowPlayerBattery
       : defender.armdozer.battery;
   const defenderCorrectedBattery = correctedBattery(
