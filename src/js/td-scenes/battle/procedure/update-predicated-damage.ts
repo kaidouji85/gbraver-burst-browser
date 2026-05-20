@@ -27,7 +27,6 @@ export const updatePredicatedDamage = (
   }
 
   const predicatedDamage = getPredicatedDamage({
-    hudPlayers: props.view.hud.players,
     players,
     activePlayerId: latestState.activePlayerId,
     playerId: props.playerId,

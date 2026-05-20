@@ -45,7 +45,6 @@ export function inputCommandAnimation(
       ? initialBattery
       : player.armdozer.battery;
   const predicatedDamage = getPredicatedDamage({
-    hudPlayers: view.hud.players,
     players,
     activePlayerId,
     playerId,

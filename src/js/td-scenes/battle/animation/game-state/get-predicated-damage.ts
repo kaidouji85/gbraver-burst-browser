@@ -1,11 +1,13 @@
-import { battleResult, PlayerId, PlayerState } from "gbraver-burst-core";
-
-import { HUDPlayer } from "../../view/hud/player";
+import {
+  battleResult,
+  correctedBattery,
+  PlayerId,
+  PlayerState,
+} from "gbraver-burst-core";
 
 /**
  * ダメージ予想数字を取得する
  * @param options オプション
- * @param options.hudPlayers HUDプレイヤーをあつめたもの
  * @param options.players プレイヤーステートをあつめたもの
  * @param options.activePlayerId 現在アクティブなプレイヤーID
  * @param options.playerId プレイヤーID
@@ -13,18 +15,15 @@ import { HUDPlayer } from "../../view/hud/player";
  * @returns ダメージ予想数字
  */
 export function getPredicatedDamage(options: {
-  hudPlayers: HUDPlayer[];
   players: PlayerState[];
   activePlayerId: PlayerId;
   playerId: PlayerId;
   nowPlayerBattery?: number;
 }) {
-  const { hudPlayers, players, activePlayerId, playerId, nowPlayerBattery } =
-    options;
+  const { players, activePlayerId, playerId, nowPlayerBattery } = options;
   const attacker = players.find((p) => p.playerId === activePlayerId);
   const defender = players.find((p) => p.playerId !== activePlayerId);
-  const defenderHUD = hudPlayers.find((h) => h.playerId !== activePlayerId);
-  if (!attacker || !defender || !defenderHUD) {
+  if (!attacker || !defender) {
     return 0;
   }
 
@@ -32,15 +31,23 @@ export function getPredicatedDamage(options: {
     attacker.playerId === playerId && nowPlayerBattery !== undefined
       ? nowPlayerBattery
       : attacker.armdozer.battery;
+  const attackerCorrectedBattery = correctedBattery(
+    { type: "BATTERY_COMMAND", battery: attackerBattery },
+    attacker.armdozer.effects,
+  );
   const defenderBattery =
     defender.playerId === playerId && nowPlayerBattery !== undefined
       ? nowPlayerBattery
       : defender.armdozer.battery;
+  const defenderCorrectedBattery = correctedBattery(
+    { type: "BATTERY_COMMAND", battery: defenderBattery },
+    defender.armdozer.effects,
+  );
   const result = battleResult(
     attacker,
-    attackerBattery,
+    attackerBattery + attackerCorrectedBattery,
     defender,
-    defenderBattery,
+    defenderBattery + defenderCorrectedBattery,
   );
   return result.name === "NormalHit" ||
     result.name === "CriticalHit" ||
