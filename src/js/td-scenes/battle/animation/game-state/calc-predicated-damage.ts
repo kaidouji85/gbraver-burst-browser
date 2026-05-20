@@ -45,9 +45,9 @@ export function calcPredicatedDamage(options: {
   );
   const result = battleResult(
     attacker,
-    attackerBattery + attackerCorrectedBattery,
+    attackerCorrectedBattery,
     defender,
-    defenderBattery + defenderCorrectedBattery,
+    defenderCorrectedBattery,
   );
   return result.name === "NormalHit" ||
     result.name === "CriticalHit" ||
