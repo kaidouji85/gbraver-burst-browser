@@ -6,7 +6,7 @@ import {
 } from "gbraver-burst-core";
 
 /**
- * ダメージ予想数字を取得する
+ * ダメージ予想を計算する
  * @param options オプション
  * @param options.players プレイヤーステートをあつめたもの
  * @param options.activePlayerId 現在アクティブなプレイヤーID
@@ -14,7 +14,7 @@ import {
  * @param options.nowPlayerBattery 現在のプレイヤーが選択しているバッテリー値
  * @returns ダメージ予想数字
  */
-export function getPredicatedDamage(options: {
+export function calcPredicatedDamage(options: {
   players: PlayerState[];
   activePlayerId: PlayerId;
   playerId: PlayerId;

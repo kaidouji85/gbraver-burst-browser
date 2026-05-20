@@ -1,7 +1,7 @@
 import { PlayerCommand, PlayerId, PlayerState } from "gbraver-burst-core";
 
 import { HUDPlayer } from "../../../view/hud/player";
-import { getPredicatedDamage } from "../get-predicated-damage";
+import { calcPredicatedDamage } from "../calc-predicated-damage";
 
 /**
  * ダメージ予想を表示する
@@ -22,6 +22,6 @@ export const showPredicatedDamage = (options: {
   nowPlayerBattery?: number;
   defenderHUD: HUDPlayer;
 }) => {
-  const predicatedDamage = getPredicatedDamage(options);
+  const predicatedDamage = calcPredicatedDamage(options);
   return options.defenderHUD.predicatedDamage.show(predicatedDamage);
 };

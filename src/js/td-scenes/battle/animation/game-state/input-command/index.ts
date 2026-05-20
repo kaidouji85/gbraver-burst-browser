@@ -5,7 +5,7 @@ import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
-import { getPredicatedDamage } from "../get-predicated-damage";
+import { calcPredicatedDamage } from "../calc-predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
@@ -44,7 +44,7 @@ export function inputCommandAnimation(
     props.controllerType === "BigButton"
       ? initialBattery
       : player.armdozer.battery;
-  const predicatedDamage = getPredicatedDamage({
+  const predicatedDamage = calcPredicatedDamage({
     players,
     activePlayerId,
     playerId,

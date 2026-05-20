@@ -1,4 +1,4 @@
-import { getPredicatedDamage } from "../animation/game-state/get-predicated-damage";
+import { calcPredicatedDamage } from "../animation/game-state/calc-predicated-damage";
 import { BattleSceneProps } from "../props";
 
 /**
@@ -26,7 +26,7 @@ export const updatePredicatedDamage = (
     return;
   }
 
-  const predicatedDamage = getPredicatedDamage({
+  const predicatedDamage = calcPredicatedDamage({
     players,
     activePlayerId: latestState.activePlayerId,
     playerId: props.playerId,
