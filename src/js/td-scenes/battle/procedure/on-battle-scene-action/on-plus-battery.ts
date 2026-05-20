@@ -7,7 +7,9 @@ import { updatePredicatedDamage } from "../update-predicated-damage";
  */
 export const onPlusBattery = (props: BattleSceneProps): void => {
   props.exclusive.execute(async () => {
+    const nextPlayerBattery =
+      props.view.hud.gameObjects.batterySelector.getBattery() + 1;
     props.view.hud.gameObjects.batterySelector.batteryPlus();
-    updatePredicatedDamage(props);
+    updatePredicatedDamage(props, nextPlayerBattery);
   });
 };
