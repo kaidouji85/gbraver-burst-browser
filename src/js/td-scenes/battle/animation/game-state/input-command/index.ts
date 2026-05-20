@@ -39,10 +39,9 @@ export function inputCommandAnimation(
 
   const isPlayerTurn = playerId === activePlayerId;
   const enableMaxBattery = getEnableMaxBattery(playerCommand.command);
-  const initialBattery = getInitialBattery(enableMaxBattery);
   const nowPlayerBattery =
     props.controllerType === "BigButton"
-      ? initialBattery
+      ? getInitialBattery(enableMaxBattery)
       : player.armdozer.battery;
   const predicatedDamage = calcPredicatedDamage({
     players,
