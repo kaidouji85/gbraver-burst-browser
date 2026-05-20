@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { updatePredicatedDamage } from "../../../../td-scenes/battle/procedure/update-predicated-damage";
 import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
 import {
@@ -94,6 +95,7 @@ export async function doZeroBatteryIdNeeded(
   props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
     1,
   );
+  updatePredicatedDamage(props, 1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);
   if (isBatterySelectorFocused(props)) {

@@ -1,13 +1,13 @@
 import { calcPredicatedDamage } from "../animation/game-state/calc-predicated-damage";
-import { BattleSceneProps } from "../props";
+import { CustomBattleEventProps } from "../custom-battle-event";
 
 /**
  * ダメージ予想を更新する
- * @param props 戦闘シーンプロパティ
+ * @param props カスタムバトルイベントのプロパティ
  * @param nowPlayerBattery 現在のプレイヤーのバッテリー
  */
 export const updatePredicatedDamage = (
-  props: BattleSceneProps,
+  props: CustomBattleEventProps,
   nowPlayerBattery: number,
 ): void => {
   const latestState = props.stateHistory.at(-1);
