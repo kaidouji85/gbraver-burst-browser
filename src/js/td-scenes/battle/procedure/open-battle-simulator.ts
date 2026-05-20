@@ -22,7 +22,9 @@ export function openBattleSimulator(props: Readonly<BattleSceneProps>): void {
 
   const isPlayerAttacker = lastState.activePlayerId === playerId;
   const initialPlayerBattery =
-    view.hud.gameObjects.batterySelector.getBattery();
+    props.controllerType === "BigButton"
+      ? view.hud.gameObjects.batterySelector.getBattery()
+      : player.armdozer.battery;
   const dialog = new BattleSimulator({
     ...props,
     player,
