@@ -4,11 +4,11 @@ import { CustomBattleEventProps } from "../custom-battle-event";
 /**
  * ダメージ予想を更新する
  * @param props カスタムバトルイベントのプロパティ
- * @param nowPlayerBattery 現在のプレイヤーのバッテリー
+ * @param playerBattery プレイヤーが出すバッテリー
  */
 export const updatePredicatedDamage = (
   props: CustomBattleEventProps,
-  nowPlayerBattery: number,
+  playerBattery: number,
 ): void => {
   const latestState = props.stateHistory.at(-1);
   if (!latestState) {
@@ -33,7 +33,7 @@ export const updatePredicatedDamage = (
     attacker,
     defender,
     playerId: props.playerId,
-    nowPlayerBattery,
+    playerBattery,
   });
   defenderHUD.predicatedDamage.set(predicatedDamage);
 };

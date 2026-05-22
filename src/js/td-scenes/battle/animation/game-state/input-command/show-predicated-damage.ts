@@ -24,7 +24,7 @@ export const showPredicatedDamage = (options: {
   } = options;
   const player = attacker.playerId === playerId ? attacker : defender;
   const enableMaxBattery = getEnableMaxBattery(commands);
-  const nowPlayerBattery =
+  const playerBattery =
     controllerType === "BigButton"
       ? getInitialBattery(enableMaxBattery)
       : player.armdozer.battery;
@@ -32,7 +32,7 @@ export const showPredicatedDamage = (options: {
     attacker,
     defender,
     playerId,
-    nowPlayerBattery,
+    playerBattery,
   });
   return defenderHUD.predicatedDamage.show(predicatedDamage);
 };

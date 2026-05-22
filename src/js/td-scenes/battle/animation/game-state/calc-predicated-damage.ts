@@ -11,20 +11,20 @@ import {
  * @param options.attacker 攻撃側のプレイヤーステート
  * @param options.defender 防御側のプレイヤーステート
  * @param options.playerId プレイヤーID
- * @param options.nowPlayerBattery 現在のプレイヤーが選択しているバッテリー値
+ * @param options.playerBattery プレイヤーが出すバッテリー
  * @returns ダメージ予想数字
  */
 export function calcPredicatedDamage(options: {
   attacker: PlayerState;
   defender: PlayerState;
   playerId: PlayerId;
-  nowPlayerBattery: number;
+  playerBattery: number;
 }) {
-  const { attacker, defender, playerId, nowPlayerBattery } = options;
+  const { attacker, defender, playerId, playerBattery } = options;
 
   const attackerBattery =
     attacker.playerId === playerId
-      ? nowPlayerBattery
+      ? playerBattery
       : attacker.armdozer.battery;
   const attackerCorrectedBattery = correctedBattery(
     { type: "BATTERY_COMMAND", battery: attackerBattery },
@@ -32,7 +32,7 @@ export function calcPredicatedDamage(options: {
   );
   const defenderBattery =
     defender.playerId === playerId
-      ? nowPlayerBattery
+      ? playerBattery
       : defender.armdozer.battery;
   const defenderCorrectedBattery = correctedBattery(
     { type: "BATTERY_COMMAND", battery: defenderBattery },
