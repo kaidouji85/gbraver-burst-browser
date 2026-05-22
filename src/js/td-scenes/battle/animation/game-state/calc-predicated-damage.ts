@@ -8,24 +8,19 @@ import {
 /**
  * ダメージ予想を計算する
  * @param options オプション
- * @param options.players プレイヤーステートをあつめたもの
- * @param options.activePlayerId 現在アクティブなプレイヤーID
+ * @param options.attacker 攻撃側のプレイヤーステート
+ * @param options.defender 防御側のプレイヤーステート
  * @param options.playerId プレイヤーID
  * @param options.nowPlayerBattery 現在のプレイヤーが選択しているバッテリー値
  * @returns ダメージ予想数字
  */
 export function calcPredicatedDamage(options: {
-  players: PlayerState[];
-  activePlayerId: PlayerId;
+  attacker: PlayerState;
+  defender: PlayerState;
   playerId: PlayerId;
   nowPlayerBattery: number;
 }) {
-  const { players, activePlayerId, playerId, nowPlayerBattery } = options;
-  const attacker = players.find((p) => p.playerId === activePlayerId);
-  const defender = players.find((p) => p.playerId !== activePlayerId);
-  if (!attacker || !defender) {
-    return 0;
-  }
+  const { attacker, defender, playerId, nowPlayerBattery } = options;
 
   const attackerBattery =
     attacker.playerId === playerId

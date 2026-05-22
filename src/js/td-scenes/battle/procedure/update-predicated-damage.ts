@@ -19,16 +19,19 @@ export const updatePredicatedDamage = (
   const attacker = players.find(
     (p) => p.playerId === latestState.activePlayerId,
   );
+  const defender = players.find(
+    (p) => p.playerId !== latestState.activePlayerId,
+  );
   const defenderHUD = props.view.hud.players.find(
     (h) => h.playerId !== latestState.activePlayerId,
   );
-  if (!attacker || !defenderHUD) {
+  if (!attacker || !defender || !defenderHUD) {
     return;
   }
 
   const predicatedDamage = calcPredicatedDamage({
-    players,
-    activePlayerId: latestState.activePlayerId,
+    attacker,
+    defender,
     playerId: props.playerId,
     nowPlayerBattery,
   });
