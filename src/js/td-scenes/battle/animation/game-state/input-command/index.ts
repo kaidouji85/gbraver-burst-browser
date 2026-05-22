@@ -3,12 +3,10 @@ import { GameStateX, InputCommand } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
-import { getEnableMaxBattery } from "../../../get-enable-max-battery";
-import { getInitialBattery } from "../../../get-initial-battery";
-import { calcPredicatedDamage } from "../calc-predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
+import { showPredicatedDamage } from "./show-predicated-damage";
 import { updateGauge } from "./update-gauge";
 
 /**
@@ -40,17 +38,6 @@ export function inputCommandAnimation(
   }
 
   const isPlayerTurn = playerId === activePlayerId;
-  const enableMaxBattery = getEnableMaxBattery(playerCommand.command);
-  const nowPlayerBattery =
-    props.controllerType === "BigButton"
-      ? getInitialBattery(enableMaxBattery)
-      : player.armdozer.battery;
-  const predicatedDamage = calcPredicatedDamage({
-    attacker,
-    defender,
-    playerId,
-    nowPlayerBattery,
-  });
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
@@ -63,6 +50,13 @@ export function inputCommandAnimation(
     view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
-    defenderHUD.predicatedDamage.show(predicatedDamage),
+    showPredicatedDamage({
+      attacker,
+      defender,
+      defenderHUD,
+      playerId,
+      commands: playerCommand.command,
+      controllerType,
+    }),
   );
 }
