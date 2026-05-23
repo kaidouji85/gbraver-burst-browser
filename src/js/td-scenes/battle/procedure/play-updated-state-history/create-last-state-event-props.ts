@@ -1,9 +1,9 @@
 import { GameState } from "gbraver-burst-core";
 
-import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
-import { separatePlayers } from "../../../../custom-battle-events/separate-players";
 import { LastStateEventProps } from "../../custom-battle-event";
+import { getMainTurnCount } from "../../get-main-turn-count";
 import { BattleSceneProps } from "../../props";
+import { separatePlayers } from "../../separate-players";
 
 /**
  * LastStateEventPropsを生成する

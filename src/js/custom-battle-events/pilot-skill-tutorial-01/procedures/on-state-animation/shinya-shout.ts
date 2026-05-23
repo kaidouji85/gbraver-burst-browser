@@ -1,4 +1,5 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import {
   getBattleCount,
@@ -6,7 +7,6 @@ import {
 } from "../../../get-battle-count";
 import { isPlayerBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { isPlayerPilotSkillActivatedFromCurrentState } from "../../../is-pilot-skill-activated";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { shinyaBurstShout } from "../../animation/shinya-burst-shout";
 import { shinyaFirstAttackShout } from "../../animation/shinya-first-attack-shout";
 import { shinyaPilotSkillShoutWhenHeAttack } from "../../animation/shinya-pilot-skill-shout-when-he-attack";

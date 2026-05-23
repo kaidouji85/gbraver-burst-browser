@@ -3,12 +3,12 @@ import { GameState } from "gbraver-burst-core";
 import { all } from "../../../../animation/all";
 import { Animate } from "../../../../animation/animate";
 import { empty } from "../../../../animation/delay";
-import { getMainTurnCount } from "../../../../custom-battle-events/get-main-turn-count";
-import { isContinuousActiveTurn } from "../../../../custom-battle-events/is-continuous-active-turn";
-import { separatePlayers } from "../../../../custom-battle-events/separate-players";
 import { stateAnimation } from "../../animation/game-state";
 import { CustomStateAnimationProps } from "../../custom-battle-event";
+import { getMainTurnCount } from "../../get-main-turn-count";
+import { isContinuousActiveTurn } from "../../is-continuous-active-turn";
 import { BattleSceneProps } from "../../props";
+import { separatePlayers } from "../../separate-players";
 
 /**
  * 同時再生する効果

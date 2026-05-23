@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayers } from "../../../../td-scenes/battle/separate-players";
 import { updatePredicatedDamage } from "../../../../td-scenes/battle/procedure/update-predicated-damage";
 import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
@@ -9,7 +10,6 @@ import {
   isBatterySelectorFocused,
 } from "../../../focus";
 import { refreshConversation } from "../../../invisible-all-message-windows";
-import { separatePlayers } from "../../../separate-players";
 import { burstCaption, pilotSkillCaption } from "../../captions";
 import { BatterySystemTutorialProps } from "../../props";
 import {
