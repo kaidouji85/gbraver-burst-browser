@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../../battery-selector-animations";
 import { noZeroDefense } from "../../stories/no-zero-defense";
 
 /**
@@ -21,9 +22,7 @@ export async function executeNoZeroDefenseIfNeeded(
     isEnemyTurn &&
     0 < player.armdozer.battery
   ) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-      1,
-    );
+    batterySelectorPushBatteryAdjustButtonsSilently(props, 1);
     await noZeroDefense(props);
     return true;
   }

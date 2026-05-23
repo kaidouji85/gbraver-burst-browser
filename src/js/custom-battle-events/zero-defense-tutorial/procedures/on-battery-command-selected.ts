@@ -6,6 +6,7 @@ import {
   unattentionBurstButton,
   unattentionPilotButton,
 } from "../../attention";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { focusInBurstButton, focusInPilotButton } from "../../focus";
 import { refreshConversation } from "../../invisible-all-message-windows";
 import { shouldBurst, shouldPilotSkill } from "../captions";
@@ -58,9 +59,7 @@ export async function onBatteryCommandSelected(
 
   const isZeroBattery = player.armdozer.battery === 0;
   if (!isZeroBattery) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-      1,
-    );
+    batterySelectorPushBatteryAdjustButtonsSilently(props, 1);
     await cancelZeroBatteryDefense(props);
     return {
       eventState: props.eventState,

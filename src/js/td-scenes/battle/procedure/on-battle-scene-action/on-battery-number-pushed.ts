@@ -1,5 +1,6 @@
 import { BatteryNumberPushed } from "../../actions/battery-number-pushed";
 import type { BattleSceneProps } from "../../props";
+import { updatePredicatedDamage } from "../update-predicated-damage";
 
 /**
  * バッテリーセレクタの数字が押された時の処理
@@ -12,5 +13,6 @@ export const onBatteryNumberPushed = (
 ): void => {
   props.exclusive.execute(async () => {
     props.view.hud.gameObjects.batterySelector.toBattery(action.value);
+    updatePredicatedDamage(props, action.value);
   });
 };
