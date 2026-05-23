@@ -6,6 +6,17 @@ import { getInitialBattery } from "../../../get-initial-battery";
 import { HUDPlayer } from "../../../view/hud/player";
 import { calcPredicatedDamage } from "../calc-predicated-damage";
 
+/**
+ * ダメージ予想を表示する
+ * @param options オプション
+ * @param options.attacker 攻撃側プレイヤー
+ * @param options.defender 防御側プレイヤー
+ * @param options.defenderHUD 防御側プレイヤーのHUD
+ * @param options.playerId プレイヤーID
+ * @param options.commands コマンド
+ * @param options.controllerType コントローラー種別
+ * @returns アニメーション
+ */
 export const showPredicatedDamage = (options: {
   attacker: PlayerState;
   defender: PlayerState;
