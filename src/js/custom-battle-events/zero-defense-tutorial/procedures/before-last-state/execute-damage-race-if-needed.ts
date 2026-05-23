@@ -1,5 +1,5 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayers } from "../../../separate-players";
+import { separatePlayers } from "../../../../td-scenes/battle/separate-players";
 import { ZeroDefenseTutorialProps } from "../../props";
 import { ZeroDefenseTutorialState } from "../../state";
 import { damageRace } from "../../stories/damage-race";

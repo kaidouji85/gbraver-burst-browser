@@ -4,7 +4,7 @@ import {
   CustomBattleEventProps,
   CustomStateAnimationProps,
   LastStateContainer,
-} from "../td-scenes/battle/custom-battle-event";
+} from "./custom-battle-event";
 
 /** 分割されたプレイヤー */
 type SeparatedPlayers = {

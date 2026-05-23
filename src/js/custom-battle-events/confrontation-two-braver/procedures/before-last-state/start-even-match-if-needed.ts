@@ -2,8 +2,8 @@ import {
   CustomBattleEventProps,
   LastStateContainer,
 } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../../td-scenes/battle/separate-players";
 import { isEvenMatch } from "../../../is-even-match";
-import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { shinyaMonologueWhenEvenMatch } from "../../stories/shinya-monologue-when-even-match";

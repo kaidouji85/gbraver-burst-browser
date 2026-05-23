@@ -1,8 +1,8 @@
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEvenMatch } from "../../../is-even-match";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { tsubasaAttackShoutWhenEvenMatch } from "../../animation/tsubasa-attack-shout-when-even-match";
 import { QueenOfTragedyProps } from "../../props";
 

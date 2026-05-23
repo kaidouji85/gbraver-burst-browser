@@ -1,7 +1,7 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEvenMatch } from "../../../is-even-match";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { yuuyaAttackShout1WhenEvenMatch } from "../../animation/yuuya-attack-shout1-when-even-match";
 import { yuuyaAttackShout2WhenEvenMatch } from "../../animation/yuuya-attack-shout2-when-even-match";
 import { QueenOfTragedyProps } from "../../props";
