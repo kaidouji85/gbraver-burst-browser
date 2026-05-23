@@ -1,6 +1,6 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayers } from "../../../../td-scenes/battle/separate-players";
 import { updatePredicatedDamage } from "../../../../td-scenes/battle/procedure/update-predicated-damage";
+import { separatePlayers } from "../../../../td-scenes/battle/separate-players";
 import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
 import {

@@ -23,17 +23,13 @@ export function calcPredicatedDamage(options: {
   const { attacker, defender, playerId, playerBattery } = options;
 
   const attackerBattery =
-    attacker.playerId === playerId
-      ? playerBattery
-      : attacker.armdozer.battery;
+    attacker.playerId === playerId ? playerBattery : attacker.armdozer.battery;
   const attackerCorrectedBattery = correctedBattery(
     { type: "BATTERY_COMMAND", battery: attackerBattery },
     attacker.armdozer.effects,
   );
   const defenderBattery =
-    defender.playerId === playerId
-      ? playerBattery
-      : defender.armdozer.battery;
+    defender.playerId === playerId ? playerBattery : defender.armdozer.battery;
   const defenderCorrectedBattery = correctedBattery(
     { type: "BATTERY_COMMAND", battery: defenderBattery },
     defender.armdozer.effects,
