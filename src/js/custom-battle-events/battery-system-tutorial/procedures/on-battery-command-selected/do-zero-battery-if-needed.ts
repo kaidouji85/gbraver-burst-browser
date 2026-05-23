@@ -3,6 +3,7 @@ import { updatePredicatedDamage } from "../../../../td-scenes/battle/procedure/u
 import { separatePlayers } from "../../../../td-scenes/battle/separate-players";
 import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../../battery-selector-animations";
 import {
   focusInBatterySelector,
   focusInBurstButton,
@@ -92,9 +93,7 @@ export async function doZeroBatteryIdNeeded(
     };
   }
 
-  props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-    1,
-  );
+  batterySelectorPushBatteryAdjustButtonsSilently(props, 1);
   updatePredicatedDamage(props, 1);
   await cancelZeroBatteryDefense(props);
   refreshConversation(props);

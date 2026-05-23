@@ -2,6 +2,7 @@ import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { PilotSkillTutorial01Props } from "../props";
 import { PilotSkillTutorial01State } from "../state";
@@ -27,9 +28,7 @@ async function executeNoZeroDefenseIfNeeded(
     0 < player.armdozer.battery &&
     props.battery.battery <= 0
   ) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-      1,
-    );
+    batterySelectorPushBatteryAdjustButtonsSilently(props, 1);
     await noZeroDefense(props);
     invisibleAllMessageWindows(props);
     return true;

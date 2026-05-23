@@ -1,7 +1,10 @@
 import { LastStateEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
-import { batterySelectorMinus, batterySelectorPlus } from "../../battery-selector-animations";
+import {
+  batterySelectorMinus,
+  batterySelectorPlus,
+} from "../../battery-selector-animations";
 import { focusInBatterySelector } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
 

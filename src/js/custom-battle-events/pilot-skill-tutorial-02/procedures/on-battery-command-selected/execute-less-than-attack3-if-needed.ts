@@ -1,4 +1,5 @@
 import { BatteryCommandSelectedEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../../battery-selector-animations";
 import { PilotSkillTutorial02Props } from "../../props";
 import { lessThanAttack3 } from "../../stories/less-than-attack3";
 
@@ -23,9 +24,7 @@ export async function executeLessThanAttack3IfNeeded(
     props.eventState.isShouldAttack3OrMoreComplete &&
     props.battery.battery < 3
   ) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-      3,
-    );
+    batterySelectorPushBatteryAdjustButtonsSilently(props, 3);
     await lessThanAttack3(props);
     return true;
   }
