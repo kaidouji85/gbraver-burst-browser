@@ -14,7 +14,8 @@ export const batterySelectorPlus = (
   const nextPlayerBattery =
     props.view.hud.gameObjects.batterySelector.getBattery() + 1;
   updatePredicatedDamage(props, nextPlayerBattery);
-  return props.view.hud.gameObjects.batterySelector.batteryPlus();
+  const signal = props.abort.getAbortController().signal;
+  return props.view.hud.gameObjects.batterySelector.batteryPlus({ signal });
 };
 
 /**
@@ -29,7 +30,8 @@ export const batterySelectorMinus = (
   const nextPlayerBattery =
     props.view.hud.gameObjects.batterySelector.getBattery() - 1;
   updatePredicatedDamage(props, nextPlayerBattery);
-  return props.view.hud.gameObjects.batterySelector.batteryMinus();
+  const signal = props.abort.getAbortController().signal;
+  return props.view.hud.gameObjects.batterySelector.batteryMinus({ signal });
 };
 
 /**
@@ -37,17 +39,18 @@ export const batterySelectorMinus = (
  * バッテリーセレクター変更に応じて関連するオブジェクトの更新も行う
  * @param props カスタムバトルイベントプロパティ
  * @param value 設定するバッテリーの値
- * @param options オプション
+ * @param options オプション（signalは自動的に設定されるので設定不可）
  * @returns アニメーションが完了したら発火するPromise
  */
 export const batterySelectorPushBatteryAdjustButtonsSilently = (
   props: CustomBattleEventProps,
   value: number,
-  options?: SilentlyBatteryAdjustOptions,
+  options?: Omit<SilentlyBatteryAdjustOptions, "signal">,
 ): Promise<void> => {
   updatePredicatedDamage(props, value);
+  const signal = props.abort.getAbortController().signal;
   return props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
     value,
-    options,
+    { ...options, signal },
   );
 };
