@@ -3,6 +3,7 @@ import { updatePredicatedDamage } from "../td-scenes/battle/procedure/update-pre
 
 /**
  * バッテリーセレクターを+1するアニメーション
+ * バッテリーセレクター変更に応じて関連するオブジェクトの更新も行う
  * @param props カスタムバトルイベントプロパティ
  * @returns アニメーションが完了したら発火するPromise
  */
@@ -17,6 +18,7 @@ export const batterySelectorPlus = (
 
 /**
  * バッテリーセレクターを-1するアニメーション
+ * バッテリーセレクター変更に応じて関連するオブジェクトの更新も行う
  * @param props カスタムバトルイベントプロパティ
  * @returns アニメーションが完了したら発火するPromise
  */
@@ -30,21 +32,8 @@ export const batterySelectorMinus = (
 };
 
 /**
- * バッテリーセレクターを指定した値に設定するアニメーション
- * @param props カスタムバトルイベントプロパティ
- * @param value 設定するバッテリーの値
- * @returns アニメーションが完了したら発火するPromise
- */
-export const batterySelectorToBattery = (
-  props: CustomBattleEventProps,
-  value: number,
-): Promise<void> => {
-  updatePredicatedDamage(props, value);
-  return props.view.hud.gameObjects.batterySelector.toBattery(value);
-};
-
-/**
  * バッテリーセレクターのバッテリー調整ボタンを無音で押すアニメーション
+ * バッテリーセレクター変更に応じて関連するオブジェクトの更新も行う
  * @param props カスタムバトルイベントプロパティ
  * @param value 設定するバッテリーの値
  * @returns アニメーションが完了したら発火するPromise
