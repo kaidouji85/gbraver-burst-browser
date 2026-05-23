@@ -1,5 +1,5 @@
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromLastState } from "../../../separate-players";
+import { separatePlayersFromLastState } from "../../../../td-scenes/battle/separate-players";
 import { turnCount } from "../../../turn-count";
 import { QueenOfTragedyProps } from "../../props";
 import { Conditions } from "./conditions";

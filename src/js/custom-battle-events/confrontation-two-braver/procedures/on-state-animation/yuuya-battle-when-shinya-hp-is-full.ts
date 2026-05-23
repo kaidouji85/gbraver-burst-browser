@@ -1,6 +1,6 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { yuuyaAttackShoutWhenShinyaHPIsFull } from "../../animation/yuuya-attack-shout-when-shinya-hp-is-full";
 import { ConfrontationTwoBraverProps } from "../../props";
 

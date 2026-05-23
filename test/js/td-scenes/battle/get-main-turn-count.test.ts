@@ -1,6 +1,6 @@
 import { EMPTY_GAME_STATE, GameState, PlayerId } from "gbraver-burst-core";
 
-import { getMainTurnCount } from "../../../src/js/custom-battle-events/get-main-turn-count";
+import { getMainTurnCount } from "../../../../src/js/td-scenes/battle/get-main-turn-count";
 
 /** プレイヤーAのID */
 const playerA: PlayerId = "playerA";

@@ -1,8 +1,8 @@
 import { empty } from "../../../../animation/delay";
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { tsubasaAttackShoutWhenSheHasAdvantage } from "../../animation/tsubasa-attack-shout-when-she-has-advantage";
 import { QueenOfTragedyProps } from "../../props";
 

@@ -1,9 +1,9 @@
 import { BatteryCommand } from "gbraver-burst-core";
 
-import { getMainTurnCount } from "../../../custom-battle-events/get-main-turn-count";
-import { separatePlayers } from "../../../custom-battle-events/separate-players";
 import { CommandCanceled } from "../custom-battle-event";
+import { getMainTurnCount } from "../get-main-turn-count";
 import { BattleSceneProps } from "../props";
+import { separatePlayers } from "../separate-players";
 
 /**
  * カスタムバトルイベントがセットされていれば onBatteryCommandSelected を実行する
