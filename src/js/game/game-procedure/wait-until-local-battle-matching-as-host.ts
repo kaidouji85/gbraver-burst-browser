@@ -1,13 +1,13 @@
 import { BattleSDK } from "@gbraver-burst-network/local-webrtc-browser-sdk";
 
-import { LocalBattleHostDialog } from "../../dom-dialogs/local-battle-host";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
+import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { Online } from "../network-context/online";
-import { switchLocalBattleHostDialog } from "./switch-dialog/switch-local-battle-host-dialog";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
+import { switchPrivateMatchHostDialogWhenLocalBattle } from "./switch-dialog/switch-private-match-host-dialog-when-local-battle";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 
 /**
@@ -27,11 +27,11 @@ export const waitUntilLocalBattleMatchingAsHost = async (
       throw new Error("ルームの作成に失敗");
     }
 
-    const dialog = new LocalBattleHostDialog({
+    const dialog = new PrivateMatchHostDialog({
       ...props,
-      password: room.roomID,
+      roomID: room.roomID,
     });
-    switchLocalBattleHostDialog(props, dialog);
+    switchPrivateMatchHostDialogWhenLocalBattle(props, dialog);
     return await room.waitUntilMatching();
   } catch (e) {
     const errorDialog = new NetworkErrorDialog({
