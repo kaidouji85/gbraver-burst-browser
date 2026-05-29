@@ -9,11 +9,11 @@ import {
 import { flashFailedMessage } from "./procedure/flash-failed-message";
 import { BattleStartPayload, LocalBattleGuestDialogProps } from "./props";
 
-/** ローカル対戦ゲストのダイアログのオプション */
+/** @deprecated ローカル対戦ゲストのダイアログのオプション */
 export type LocalBattleGuestDialogOptions =
   CreateLocalBattleGuestDialogPropsOptions;
 
-/** ローカル対戦ゲストのダイアログ */
+/** @deprecated ローカル対戦ゲストのダイアログ */
 export class LocalBattleGuestDialog implements DOMDialog {
   /** プロパティ */
   #props: LocalBattleGuestDialogProps;

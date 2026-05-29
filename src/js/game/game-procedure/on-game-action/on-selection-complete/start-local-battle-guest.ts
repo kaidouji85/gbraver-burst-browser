@@ -1,9 +1,9 @@
-import { LocalBattleGuestDialog } from "../../../../dom-dialogs/local-battle-guest";
+import { PrivateMatchGuestDialog } from "../../../../dom-dialogs/private-match-guest";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { LocalBattleGuest } from "../../../in-progress/local-battle-guest";
-import { switchLocalBattleGuestDialog } from "../../switch-dialog/switch-local-battle-guest-dialog";
+import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
  * ローカル対戦（ゲスト）を開始する
@@ -17,7 +17,8 @@ export const startLocalBattleGuest = async (
 ): Promise<InProgress> => {
   const { inProgress } = props;
   const { armdozerId, pilotId } = action;
-  switchLocalBattleGuestDialog(props, new LocalBattleGuestDialog(props));
+  const dialog = new PrivateMatchGuestDialog(props);
+  switchPrivateMatchGuestDialogWhenLocalBattle(props, dialog);
   return {
     ...inProgress,
     localBattleGuest: { type: "Entry", armdozerId, pilotId },
