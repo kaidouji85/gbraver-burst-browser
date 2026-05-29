@@ -4,6 +4,7 @@ import { LocalBattleHostDialog } from "../../../dom-dialogs/local-battle-host";
 import { GameProps } from "../../game-props";
 
 /**
+ * @deprecated
  * ローカル対戦（ホスト）ダイアログに切り替える
  * @param props プロパティ
  * @param dialog ダイアログ

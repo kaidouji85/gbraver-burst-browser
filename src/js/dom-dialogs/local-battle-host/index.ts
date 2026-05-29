@@ -12,7 +12,7 @@ import { LocalBattleHostDialogProps } from "./props";
 export type LocalBattleHostDialogOptions =
   CreateLocalBattleHostDialogPropsOptions;
 
-/** ローカル対戦ホストダイアログ */
+/** @deprecated ローカル対戦ホストダイアログ */
 export class LocalBattleHostDialog implements DOMDialog {
   /** プロパティ */
   #props: LocalBattleHostDialogProps;
