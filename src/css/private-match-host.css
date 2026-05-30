@@ -14,6 +14,7 @@
 
 .private-match-host__dialog {
   --dialog-padding: calc(var(--responsive-font-size) * 2);
+  --description-color: #a9a9a9;
 
   width: 100vw;
   width: 100dvw;
@@ -49,6 +50,7 @@
 
 .private-match-host__qr-code-description {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  color: var(--description-color);
 }
 
 .private-match-host__separator {
@@ -64,9 +66,10 @@
 }
 
 .private-match-host__room-id-description {
-  text-align: right;
+  text-align: center;
   grid-area: description;
   font-size: calc(var(--responsive-font-size) * 1);
+  color: var(--description-color);
 }
 
 .private-match-host__room-id-value {
