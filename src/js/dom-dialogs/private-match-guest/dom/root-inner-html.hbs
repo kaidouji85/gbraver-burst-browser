@@ -13,19 +13,13 @@
     class="{{ROOT_CLASS}}__matching-failed"
     data-id="matching-failed"
   >マッチング失敗</div>
-  <div
-    class="{{ROOT_CLASS}}__qr-code-description"
-  >QRコードでバトルスタート！！</div>
   <button
     class="{{ROOT_CLASS}}__start-qr-code-reader"
     data-id="start-qr-code-reader"
   >
-    📷カメラをつかう
+    📷QRコードで対戦
   </button>
   <div class="{{ROOT_CLASS}}__separator">または</div>
-  <div
-    class="{{ROOT_CLASS}}__room-id-description"
-  >あいことを入れてね</div>
   <div class="{{ROOT_CLASS}}__room-id-form">
     <input
       class="{{ROOT_CLASS}}__room-id"
@@ -33,6 +27,9 @@
       data-id="roomID"
       value="{{initialRoomID}}"
     />
-    <button class="{{ROOT_CLASS}}__enter" data-id="enterButton">入室</button>
+    <button
+      class="{{ROOT_CLASS}}__enter"
+      data-id="enterButton"
+    >あいことばで対戦</button>
   </div>
 </div>
