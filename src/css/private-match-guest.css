@@ -43,7 +43,7 @@
 .private-match-guest__matching-failed {
   opacity: 0;
   align-self: end;
-  min-width: calc(var(--responsive-font-size) * 32.5);
+  width: calc(var(--responsive-font-size) * 27.5);
   height: calc(var(--responsive-font-size) * 3);
   color: var(--error-color);
   display: grid;
