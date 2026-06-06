@@ -61,6 +61,8 @@ export function createPrivateMatchQRCodeReaderProps(
     notificationOfReadQRCode,
     notificationOfClose,
 
+    lastScanTimestamp: 0,
+
     exclusive,
     gameLoop,
   };

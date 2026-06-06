@@ -2,6 +2,7 @@ import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
 } from "../../../td-scenes/battle/custom-battle-event";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { focusInBurstButton } from "../../focus";
 import { shouldBurst } from "../captions";
 import { BurstTutorialProps } from "../props";
@@ -72,9 +73,7 @@ export async function onBatteryCommandSelected(
       cancel: { isCommandCanceled: true },
     };
   } else if (willPlayerDeath && isPlayerFullBattery) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-      5,
-    );
+    batterySelectorPushBatteryAdjustButtonsSilently(props, 5);
     await defense5(props);
     if (result.eventState.isLoseIfNoDefense5Complete) {
       await notDefense5Carelessly(props);

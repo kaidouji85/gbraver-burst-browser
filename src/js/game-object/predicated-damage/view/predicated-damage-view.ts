@@ -38,7 +38,7 @@ const MIN_DISPLAYABLE_DAMAGE = 0;
 const BATTLE_SIMULATOR_ICON_SIZE = 70;
 
 /** 数字とアイコンの間のマージン */
-const NUMBER_TO_ICON_MARGIN = 2;
+const NUMBER_TO_ICON_MARGIN = 16;
 
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
@@ -137,11 +137,13 @@ export class PredicatedDamageView {
       .split("")
       .reverse()
       .map((v) => Number(v));
-    const intervalCount = values.length;
     this.#numbers.forEach((mesh, i) => {
       mesh.opacity(0);
       mesh.getObject3D().position.x =
-        (-i + intervalCount / 2) * NUMBER_MESH_INTERVAL;
+        model.battleSimulatorIconPosition === "left"
+          ? (-i + values.length + 1) * NUMBER_MESH_INTERVAL +
+            NUMBER_TO_ICON_MARGIN
+          : (-i - 1) * NUMBER_MESH_INTERVAL - NUMBER_TO_ICON_MARGIN;
     });
 
     R.zip(this.#numbers, values)
@@ -160,16 +162,7 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    const battleSimulatorIconOffsetX =
-      (intervalCount / 2) * NUMBER_MESH_INTERVAL +
-      BATTLE_SIMULATOR_ICON_SIZE / 2 +
-      NUMBER_TO_ICON_MARGIN;
-    const battleSimulatorIconX =
-      model.battleSimulatorIconPosition === "right"
-        ? battleSimulatorIconOffsetX
-        : -battleSimulatorIconOffsetX;
-
-    this.#battleSimulatorIcon.getObject3D().position.x = battleSimulatorIconX;
+    this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =
       BATTLE_SIMULATOR_ICON_Y;
     this.#battleSimulatorIcon
@@ -181,8 +174,7 @@ export class PredicatedDamageView {
       );
     this.#battleSimulatorIcon.opacity(opacity);
 
-    this.#battleSimulatorIconPushDetector.getObject3D().position.x =
-      battleSimulatorIconX;
+    this.#battleSimulatorIconPushDetector.getObject3D().position.x = 0;
     this.#battleSimulatorIconPushDetector.getObject3D().position.y =
       BATTLE_SIMULATOR_ICON_Y;
   }

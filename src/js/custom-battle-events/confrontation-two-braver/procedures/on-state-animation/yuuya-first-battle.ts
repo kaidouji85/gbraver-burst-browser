@@ -1,7 +1,7 @@
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
-import { separatePlayersFromCurrentState } from "../../../separate-players";
 import { yuuyaShoutWhenFirstBattle } from "../../animation/yuuya-shout-when-first-battle";
 import { ConfrontationTwoBraverProps } from "../../props";
 

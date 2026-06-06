@@ -2,6 +2,7 @@ import { wbr } from "../../../dom/wbr";
 import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
 import { SurviveSuperPowerWithGuardProps } from "../props";
@@ -14,10 +15,10 @@ import { SurviveSuperPowerWithGuardProps } from "../props";
 export async function recommendZeroAttack(
   props: Readonly<CustomBattleEventProps & SurviveSuperPowerWithGuardProps>,
 ) {
-  props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
-    0,
-    { interval: 50, timeScale: 0.5 },
-  );
+  batterySelectorPushBatteryAdjustButtonsSilently(props, 0, {
+    interval: 50,
+    timeScale: 0.5,
+  });
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     [

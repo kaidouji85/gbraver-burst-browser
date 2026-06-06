@@ -1,7 +1,7 @@
-import { getMainTurnCount } from "../../../custom-battle-events/get-main-turn-count";
-import { separatePlayers } from "../../../custom-battle-events/separate-players";
 import { BattleSimulatorEventProps } from "../custom-battle-event";
+import { getMainTurnCount } from "../get-main-turn-count";
 import { BattleSceneProps } from "../props";
+import { separatePlayers } from "../separate-players";
 
 /**
  * 戦闘シーンプロパティからバトルシミュレーターイベントプロパティを生成する

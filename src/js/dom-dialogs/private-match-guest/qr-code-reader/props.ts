@@ -29,6 +29,12 @@ export type PrivateMatchQRCodeReaderProps = SEPlayerContainer &
     /** 閉じる通知 */
     readonly notificationOfClose: Subject<void>;
 
+    /**
+     * 最後にQRコードをスキャンした日時のタイムスタンプ
+     * QRコード読み取りのスキャン間隔を制御するために利用する
+     */
+    lastScanTimestamp: number;
+
     /** 排他制御 */
     readonly exclusive: Exclusive;
   };

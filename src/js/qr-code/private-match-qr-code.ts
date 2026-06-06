@@ -9,16 +9,19 @@ export const createPrivateMatchQRCodeText = (roomID: string): string =>
   `gbraver-burst-private-match:${roomID}`;
 
 /**
- * プライベートマッチQRコードをキャンバスに描画する
- * @param canvas 描画対象のキャンバス
+ * プライベートマッチQRコードを描画する
+ * @param img 描画対象
  * @param roomID ルームID
  * @returns 処理結果
  */
 export const drawPrivateMatchQRCode = async (
-  canvas: HTMLCanvasElement,
+  img: HTMLImageElement,
   roomID: string,
 ) => {
-  await QRCode.toCanvas(canvas, createPrivateMatchQRCodeText(roomID));
+  const svg = await QRCode.toString(createPrivateMatchQRCodeText(roomID), {
+    type: "svg",
+  });
+  img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 };
 
 /**

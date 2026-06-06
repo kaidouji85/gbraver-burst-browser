@@ -13,26 +13,27 @@
     class="{{ROOT_CLASS}}__matching-failed"
     data-id="matching-failed"
   >マッチング失敗</div>
-  <div
-    class="{{ROOT_CLASS}}__qr-code-description"
-  >QRコードを読み込んでプライベートマッチ開始</div>
   <button
     class="{{ROOT_CLASS}}__start-qr-code-reader"
     data-id="start-qr-code-reader"
   >
-    カメラを起動
+    📷QRコードでバトルスタート
   </button>
-  <div class="{{ROOT_CLASS}}__separator">or</div>
-  <div
-    class="{{ROOT_CLASS}}__room-id-description"
-  >ルームIDを入力してプライベートマッチ開始</div>
+  <div class="{{ROOT_CLASS}}__separator">または</div>
   <div class="{{ROOT_CLASS}}__room-id-form">
+    <div class="{{ROOT_CLASS}}__room-id-description">
+      あいことばを入れてね
+      <span class="{{ROOT_CLASS}}__room-id-arrow">⬇</span>
+    </div>
     <input
       class="{{ROOT_CLASS}}__room-id"
       type="text"
       data-id="roomID"
       value="{{initialRoomID}}"
     />
-    <button class="{{ROOT_CLASS}}__enter" data-id="enterButton">入室</button>
+    <button
+      class="{{ROOT_CLASS}}__enter"
+      data-id="enterButton"
+    >バトルスタート</button>
   </div>
 </div>

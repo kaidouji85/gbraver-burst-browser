@@ -3,6 +3,7 @@ import { getMinimumSurvivableBattery } from "../../../npc/get-minimum-survivable
 import { BattleSimulatorEventProps } from "../../../td-scenes/battle/custom-battle-event";
 import { waitTime } from "../../../wait/wait-time";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
+import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollRightMessages } from "../../scroll-messages";
 import { SurviveSuperPowerWithGuardProps } from "../props";
@@ -24,7 +25,8 @@ export async function willNotSurviveCurrentBattery(
     enemy.armdozer.battery,
   );
   if (minimumSurvivableBattery.isExist) {
-    props.view.hud.gameObjects.batterySelector.pushBatteryAdjustButtonsSilently(
+    batterySelectorPushBatteryAdjustButtonsSilently(
+      props,
       minimumSurvivableBattery.value,
       { interval: 50, timeScale: 0.5 },
     );

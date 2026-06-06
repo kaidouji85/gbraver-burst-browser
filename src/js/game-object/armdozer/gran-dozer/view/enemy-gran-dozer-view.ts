@@ -11,6 +11,7 @@ export class EnemyGranDozerView extends PlayerGranDozerView {
   constructor(resources: Resources) {
     super(resources);
     this.statusIconPosition.x *= -1;
+    this.predicatedDamagePosition.x *= -1;
   }
 
   /** @override */

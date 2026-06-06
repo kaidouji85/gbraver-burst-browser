@@ -1,28 +1,49 @@
-import { PlayerId, PlayerState, predicatedDamage } from "gbraver-burst-core";
+import { Command, PlayerId, PlayerState } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { BattleControllerType } from "../../../controller-type";
+import { getEnableMaxBattery } from "../../../get-enable-max-battery";
+import { getInitialBattery } from "../../../get-initial-battery";
 import { HUDPlayer } from "../../../view/hud/player";
+import { calcPredicatedDamage } from "../calc-predicated-damage";
 
 /**
  * ダメージ予想を表示する
- * @param hudPlayers HUDプレイヤーをあつめたもの
- * @param players プレイヤーステート
- * @param activePlayerId 現在アクティブなプレイヤーID
+ * @param options オプション
+ * @param options.attacker 攻撃側プレイヤー
+ * @param options.defender 防御側プレイヤー
+ * @param options.defenderHUD 防御側プレイヤーのHUD
+ * @param options.playerId プレイヤーID
+ * @param options.commands コマンド
+ * @param options.controllerType コントローラー種別
  * @returns アニメーション
  */
-export function showPredicatedDamage(
-  hudPlayers: HUDPlayer[],
-  players: PlayerState[],
-  activePlayerId: PlayerId,
-): Animate {
-  const attacker = players.find((p) => p.playerId === activePlayerId);
-  const defender = players.find((p) => p.playerId !== activePlayerId);
-  const defenderHUD = hudPlayers.find((h) => h.playerId !== activePlayerId);
-  if (!attacker || !defender || !defenderHUD) {
-    return empty();
-  }
-
-  const damage = predicatedDamage(attacker, defender);
-  return defenderHUD.predicatedDamage.show(damage);
-}
+export const showPredicatedDamage = (options: {
+  attacker: PlayerState;
+  defender: PlayerState;
+  defenderHUD: HUDPlayer;
+  playerId: PlayerId;
+  commands: Command[];
+  controllerType: BattleControllerType;
+}) => {
+  const {
+    attacker,
+    defender,
+    playerId,
+    commands,
+    controllerType,
+    defenderHUD,
+  } = options;
+  const player = attacker.playerId === playerId ? attacker : defender;
+  const enableMaxBattery = getEnableMaxBattery(commands);
+  const playerBattery =
+    controllerType === "BigButton"
+      ? getInitialBattery(enableMaxBattery)
+      : player.armdozer.battery;
+  const predicatedDamage = calcPredicatedDamage({
+    attacker,
+    defender,
+    playerId,
+    playerBattery,
+  });
+  return defenderHUD.predicatedDamage.show(predicatedDamage);
+};

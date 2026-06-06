@@ -68,6 +68,14 @@ export class PredicatedDamage {
   }
 
   /**
+   * ダメージを設定する
+   * @param damage ダメージ
+   */
+  set(damage: number): void {
+    this.#props.model.damage = damage;
+  }
+
+  /**
    * 非表示
    * @returns アニメーション
    */

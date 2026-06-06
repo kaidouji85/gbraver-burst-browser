@@ -1,11 +1,11 @@
-import { LocalBattleGuestDialog } from "../../../dom-dialogs/local-battle-guest";
 import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
+import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
 import { LocalBattleEntry } from "../../game-actions/local-battle-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
 import { startLocalBattle } from "../start-local-battle";
-import { switchLocalBattleGuestDialog } from "../switch-dialog/switch-local-battle-guest-dialog";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
+import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
  * ゲストがローカル対戦にエントリーする
@@ -38,11 +38,11 @@ export const onLocalBattleEntry = async (options: {
     pilotId,
   });
   if (!battle) {
-    const dialog = new LocalBattleGuestDialog({
+    const dialog = new PrivateMatchGuestDialog({
       ...props,
-      initialRoomId: roomID,
+      initialRoomID: roomID,
     });
-    switchLocalBattleGuestDialog(props, dialog);
+    switchPrivateMatchGuestDialogWhenLocalBattle(props, dialog);
     dialog.flashFailedMessage();
     return;
   }

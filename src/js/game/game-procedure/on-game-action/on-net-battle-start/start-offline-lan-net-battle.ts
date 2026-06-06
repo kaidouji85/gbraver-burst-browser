@@ -21,7 +21,11 @@ export async function startOfflineLANNetBattle(
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(props, config.playerSelectorType),
+    bindPlayerSelectAccordingToConfig(
+      props,
+      config.playerSelectorType,
+      "ネット対戦",
+    ),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();

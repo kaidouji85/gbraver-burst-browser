@@ -2,8 +2,8 @@ import {
   CustomBattleEventProps,
   LastStateContainer,
 } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../../td-scenes/battle/separate-players";
 import { isPlayerAdvantage } from "../../../is-player-advantage";
-import { separatePlayersFromLastState } from "../../../separate-players";
 import { turnCount } from "../../../turn-count";
 import { ConfrontationTwoBraverProps } from "../../props";
 import { shinyaMonologueWhenShinyaHasAdvantage } from "../../stories/shinya-monologue-when-shinya-has-advantage";

@@ -31,7 +31,11 @@ export async function onPrivateMatchHostStart(options: Options): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(props, config.playerSelectorType),
+    bindPlayerSelectAccordingToConfig(
+      props,
+      config.playerSelectorType,
+      "👑ルーム作成",
+    ),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();

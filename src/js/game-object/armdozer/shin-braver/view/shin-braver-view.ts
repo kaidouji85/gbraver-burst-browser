@@ -1,12 +1,14 @@
 import * as THREE from "three";
 
-import { StatusIconPosition } from "../../armdozer-sprite";
+import { ArmdozerWorldCoordinate } from "../../armdozer-sprite";
 import { ShinBraverModel } from "../model/shin-braver-model";
 
 /** シンブレイバーのビュー */
 export interface ShinBraverView {
   /** ステータスアイコンの位置（ワールド座標） */
-  statusIconPosition: StatusIconPosition;
+  statusIconPosition: ArmdozerWorldCoordinate;
+  /** ダメージ予測の位置（ワールド座標） */
+  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処置

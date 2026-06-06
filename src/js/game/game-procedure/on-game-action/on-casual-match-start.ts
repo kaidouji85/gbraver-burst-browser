@@ -31,7 +31,11 @@ export async function onCasualMatchStart(options: Options): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(props, config.playerSelectorType),
+    bindPlayerSelectAccordingToConfig(
+      props,
+      config.playerSelectorType,
+      "🎮カジュアルマッチ",
+    ),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();

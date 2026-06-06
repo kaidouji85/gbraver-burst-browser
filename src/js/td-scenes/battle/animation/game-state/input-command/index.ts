@@ -24,7 +24,12 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  if (!player || !playerCommand) {
+  const attacker = players.find((p) => p.playerId === activePlayerId);
+  const defender = players.find((p) => p.playerId !== activePlayerId);
+  const defenderHUD = view.hud.players.find(
+    (h) => h.playerId !== activePlayerId,
+  );
+  if (!player || !playerCommand || !attacker || !defender || !defenderHUD) {
     return empty();
   }
 
@@ -45,6 +50,13 @@ export function inputCommandAnimation(
     view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
-    showPredicatedDamage(view.hud.players, players, activePlayerId),
+    showPredicatedDamage({
+      attacker,
+      defender,
+      defenderHUD,
+      playerId,
+      commands: playerCommand.command,
+      controllerType,
+    }),
   );
 }

@@ -58,6 +58,7 @@ export class GenesisBraver
     const { gameObjectAction } = params;
     this.#props = createGenesisBraverProps(params);
     this.statusIconPosition = this.#props.view.statusIconPosition;
+    this.predicatedDamagePosition = this.#props.view.predicatedDamagePosition;
     this.#unsubscribers = bindEventListeners({
       gameObjectAction,
       props: this.#props,

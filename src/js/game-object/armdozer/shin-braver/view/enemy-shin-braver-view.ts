@@ -14,6 +14,7 @@ export class EnemyShinBraverView extends PlayerShinBraverView {
   constructor(resources: Resources) {
     super(resources);
     this.statusIconPosition.x *= -1;
+    this.predicatedDamagePosition.x *= -1;
   }
 
   /** モデルをビューに反映させる */

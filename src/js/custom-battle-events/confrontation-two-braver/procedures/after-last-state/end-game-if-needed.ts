@@ -1,8 +1,8 @@
 import { GameEnd, PlayerState } from "gbraver-burst-core";
 
 import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../../td-scenes/battle/separate-players";
 import { invisibleAllMessageWindows } from "../../../invisible-all-message-windows";
-import { separatePlayersFromLastState } from "../../../separate-players";
 import { shinyaMonologueWhenHeLose } from "../../stories/shinya-monologue-when-he-lose";
 import { shinyaVictory } from "../../stories/shinya-vistory";
 import { yuuyaShoutWhenYuuyaCompleteVictory } from "../../stories/yuuya-shout-when-yuuya-complete-victory";
