@@ -5,12 +5,12 @@ import { z } from "zod";
  * リリース後のアプリ挙動を手軽に変更するために利用する
  */
 export type ConfigJSON = {
-  "can-network-features": boolean;
+  canNetWorkFeatures: boolean;
 };
 
 /** ConfigJSON zod スキーマ */
 export const ConfigJSONSchema = z.object({
-  "can-network-features": z.boolean(),
+  canNetWorkFeatures: z.boolean(),
 });
 
 /**

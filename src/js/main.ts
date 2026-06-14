@@ -2,6 +2,7 @@ import "../css/style.css";
 
 import * as THREE from "three";
 
+import { ConfigJSON, fetchConfigJSON } from "./config-json";
 import { isMobile } from "./device-ditect/is-mobile";
 import { Game } from "./game";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
@@ -45,10 +46,16 @@ THREE.ColorManagement.enabled = false;
 
 /**
  * ネットワークコンテキストを作成する
+ * @param configJSON config.jsonの内容
  * @returns ネットワークコンテキスト
  */
-async function createNetworkContext(): Promise<NetworkContext> {
-  switch (GBRAVER_BURST_NETWORK_MODE) {
+async function createNetworkContext(
+  configJSON: ConfigJSON,
+): Promise<NetworkContext> {
+  const networkMode = configJSON.canNetWorkFeatures
+    ? GBRAVER_BURST_NETWORK_MODE
+    : "STANDALONE";
+  switch (networkMode) {
     case "ONLINE":
       return await createOnlineContext({
         canBeta: GBRAVER_BURST_CAN_ONLINE_BETA === "true",
@@ -72,7 +79,8 @@ async function createNetworkContext(): Promise<NetworkContext> {
  * Gブレイバーバーストのエントリポイント
  */
 export async function main(): Promise<void> {
-  const networkContext = await createNetworkContext();
+  const configJSON = await fetchConfigJSON();
+  const networkContext = await createNetworkContext(configJSON);
   const resourceRoot = isMobile() ? mobileResourceRoot : desktopResourceRoot;
   const webglPowerPreference = isMobile() ? "low-power" : "high-performance";
   const game = new Game({
