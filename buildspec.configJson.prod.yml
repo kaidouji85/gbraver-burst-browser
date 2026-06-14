@@ -1,9 +1,6 @@
 version: 0.2
 env:
-  variables:
-    IS_SEARCH_ENGINE_NO_INDEX: true
   parameter-store:
-    SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
     S3_BUCKET: /GbraverBurst/prod/s3Bucket
 phases:
