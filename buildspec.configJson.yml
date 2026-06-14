@@ -1,0 +1,11 @@
+version: 0.2
+env:
+  variables:
+    IS_SEARCH_ENGINE_NO_INDEX: true
+  parameter-store:
+    SERVICE: /GbraverBurst/dev/service
+    STAGE: /GbraverBurst/dev/stage
+phases:
+  build:
+    commands:
+      - ./overwrite-config-json.bash
