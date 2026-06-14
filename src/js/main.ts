@@ -52,7 +52,7 @@ THREE.ColorManagement.enabled = false;
 async function createNetworkContext(
   configJSON: ConfigJSON,
 ): Promise<NetworkContext> {
-  const networkMode = configJSON.canNetWorkFeatures
+  const networkMode = configJSON.isBackendServerAvailable
     ? GBRAVER_BURST_NETWORK_MODE
     : "STANDALONE";
   switch (networkMode) {

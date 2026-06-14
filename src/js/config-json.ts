@@ -5,12 +5,16 @@ import { z } from "zod";
  * リリース後のアプリ挙動を手軽に変更するために利用する
  */
 export type ConfigJSON = {
-  canNetWorkFeatures: boolean;
+  /**
+   * バックエンドサーバーが利用可能かどうか
+   * trueの場合、バックエンドサーバーが利用可能である
+   */
+  isBackendServerAvailable: boolean;
 };
 
 /** ConfigJSON zod スキーマ */
 export const ConfigJSONSchema = z.object({
-  canNetWorkFeatures: z.boolean(),
+  isBackendServerAvailable: z.boolean(),
 });
 
 /**
