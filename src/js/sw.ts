@@ -66,6 +66,18 @@ Routing.registerRoute(
 );
 
 Routing.registerRoute(
+  /(\/|config\.json)$/,
+  new Strategies.NetworkFirst({
+    cacheName: "config-json-cache",
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 3 * 24 * 60 * 60,
+      }),
+    ],
+  }),
+);
+
+Routing.registerRoute(
   /\/resources\/.*\.(?:png|glb|mp3|svg|webp)$/,
   new Strategies.CacheFirst({
     cacheName: "resource-cache",
