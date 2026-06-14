@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -Ceu
 touch config.json
 cat <<EOT > config.json
 {

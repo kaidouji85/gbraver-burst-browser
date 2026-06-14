@@ -40,7 +40,7 @@ npm start
 3. [aseetlinks.json](https://developers.google.com/digital-asset-links/v1/getting-started)を作成し、任意のS3バケットに配置する
 4. デプロイ対象のS3バケットを用意する
 
-### デプロイコマンド
+### 各種コマンド
 
 ```shell script
 # デプロイ
@@ -53,6 +53,13 @@ npm start
 # CDNのキャッシュをクリア
 # デプロイ、ステージ切り替えなどの一連の操作が終わったら実行する
 ./clear-cdn.bash <CloudFrontのdistributionId>
+
+# S3にあるconfig.jsonを上書きする
+# 本スクリプトの実行には、以下の環境変数が必要
+# - S3_BUCKET
+# - STAGE
+# - IS_BACKEND_SERVER_AVAILABLE
+./overwrite-config-json.bash
 ```
 
 ## AWSでCI/CDを構築する
