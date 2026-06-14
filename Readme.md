@@ -74,11 +74,11 @@ npm start
 2. 「[Parameter Store（テスト環境）](#parameter-storeテスト環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割              | buildspec                 | 環境                                                                                                         | IAMポリシー                                                      | webhook                                                 |
-| ----------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------- |
-| ビルド            | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
-| ステージ切り替え  | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                                |
-| config.json上書き | buildspec.configJson.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                                |
+| 役割              | buildspec                 | 環境                                                                                                             | IAMポリシー                                                      | webhook                                                 |
+| ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| ビルド            | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
+| ステージ切り替え  | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                                |
+| config.json上書き | buildspec.configJson.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                                |
 
 ### 本番環境
 
