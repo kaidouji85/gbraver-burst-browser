@@ -5,6 +5,7 @@ env:
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
+    S3_BUCKET: /GbraverBurst/dev/s3Bucket
 phases:
   build:
     commands:

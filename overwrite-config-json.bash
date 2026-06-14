@@ -1,8 +1,7 @@
 #!/bin/bash
 
 set -Ceu
-touch config.json
-cat <<EOT > config.json
+cat <<EOT >| config.json
 {
   "isBackendServerAvailable": ${IS_BACKEND_SERVER_AVAILABLE:-true}
 }
