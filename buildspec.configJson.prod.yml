@@ -1,0 +1,9 @@
+version: 0.2
+env:
+  parameter-store:
+    STAGE: /GbraverBurst/prod/stage
+    S3_BUCKET: /GbraverBurst/prod/s3Bucket
+phases:
+  build:
+    commands:
+      - ./overwrite-config-json.bash
