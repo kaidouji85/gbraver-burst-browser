@@ -58,7 +58,7 @@ npm start
 # 本スクリプトの実行には、以下の環境変数が必要
 # - S3_BUCKET
 # - STAGE
-# - IS_BACKEND_SERVER_AVAILABLE
+# - IS_BACKEND_SERVER_AVAILABLE（省略可能、デフォルトはtrue）
 ./overwrite-config-json.bash
 ```
 
