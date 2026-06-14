@@ -28,7 +28,7 @@ env:
     COGNITO_USER_POOL_ID: /GbraverBurst/dev/cognitoUserPoolId
     COGNITO_CLIENT_ID: /GbraverBurst/dev/cognitoClientId
     COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/dev/cognitoHostedUIDomain
-    BACKEND_CLOUDFRONT_DOMAIN_NAME: /GbraverBurst/dev/backendCloudFrontDomainName
+    BACKEND_CLOUDFRONT_DOMAIN_NAME: /GbraverBurst/dev/backendCloudfrontDomainName
     COTURN_DOMAIN_NAME: /GbraverBurst/dev/coturnDomainName
 phases:
   install:
