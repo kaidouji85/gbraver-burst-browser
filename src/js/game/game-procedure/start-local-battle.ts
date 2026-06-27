@@ -17,6 +17,7 @@ import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 import { switchMatchCard } from "./switch-scene/switch-match-card";
+import { preloadBattleSceneImages } from "../../resource/pre-load-images";
 
 /**
  * BattleProgressを生成するヘルパー関数
@@ -76,10 +77,14 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
   const battleProgress = createBattleProgress(props, battle);
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
-  props.resources = await updateBattleSceneResources({
-    resources: props.resources,
-    players: [battle.player, battle.enemy],
-  });
+  const [updatedResources] = await Promise.all([
+    updateBattleSceneResources({
+      resources: props.resources,
+      players: [battle.player, battle.enemy],
+    }),
+    preloadBattleSceneImages(props.resources, [battle.player, battle.enemy]),
+  ]);
+  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,
