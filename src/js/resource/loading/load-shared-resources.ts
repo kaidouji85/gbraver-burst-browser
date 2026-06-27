@@ -20,7 +20,6 @@ export function loadSharedResources(options: {
   const isShared = (c: ResourceType) => c.type === "Shared";
   return loadResources({
     resourceRoot,
-    preLoadImages: [],
     gltfConfigs: GLTF_CONFIGS.filter(isShared),
     textureConfigs: TEXTURE_CONFIGS.filter(isShared),
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS.filter(isShared),

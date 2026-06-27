@@ -51,9 +51,3 @@ export const PathConfigs: PathConfig[] = [
   ...TurnIndicatorConfigs,
   ...BattleHamburgerMenuConfigs,
 ];
-
-/** プリロード対象となるパス設定 */
-export const PreLoadPathConfigs: PathConfig[] = [
-  ...NPCCoursePathConfigs,
-  ...MessageWindowPathConfigs,
-];
