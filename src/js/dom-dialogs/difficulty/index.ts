@@ -1,10 +1,20 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { NPCBattleCourseDifficulty } from "../../game/npc-battle/courses/npc-battle-course";
-import type { DOMDialog } from "../dialog";
+import { PathIds } from "../../resource/path/ids";
+import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./listeners";
 import { DifficultyDialogProps, PropsCreatorParams } from "./props";
 import { createDifficultyDialogProps } from "./props";
+
+/** 難易度ダイアログでプリロードする画像パスのID */
+export const DifficultyDialogPreLoadImagePathIds = [
+  PathIds.NPC_COURSE_EASY_ICON,
+  PathIds.NPC_COURSE_NORMAL_ICON,
+  PathIds.NPC_COURSE_HARD_ICON,
+  PathIds.NPC_COURSE_VERY_HARD_ICON,
+  PathIds.CLOSER,
+];
 
 /** コンストラクタのパラメータ */
 export type DifficultyDialogParams = PropsCreatorParams;
