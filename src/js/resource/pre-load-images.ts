@@ -1,8 +1,9 @@
 import { Player } from "gbraver-burst-core";
-import { Resources } from ".";
-import { PathId } from "./path/resource";
+
 import { getArmdozerStandPathId } from "../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../path/pilot-skill-cutin-path";
+import { Resources } from ".";
+import { PathId } from "./path/resource";
 
 /**
  * 画像をプリロードする
