@@ -1,5 +1,5 @@
-import { DifficultyDialogPreLoadImagePathIds } from "../../../dom-dialogs/difficulty";
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
+import { PathIds } from "../../../resource/path/ids";
 import { preLoadImages } from "../../../resource/path/pre-load-images";
 import { waitTime } from "../../../wait/wait-time";
 import { ArcadeStart } from "../../game-actions/arcade-start";
@@ -40,7 +40,12 @@ export async function onArcadeStart(options: Options): Promise<void> {
         config.playerSelectorType,
         "🕹️アーケード",
       ),
-      preLoadImages(props.resources, DifficultyDialogPreLoadImagePathIds),
+      preLoadImages(props.resources, [
+          PathIds.NPC_COURSE_EASY_ICON,
+          PathIds.NPC_COURSE_NORMAL_ICON,
+          PathIds.NPC_COURSE_HARD_ICON,
+          PathIds.NPC_COURSE_VERY_HARD_ICON,
+      ]),
     ]),
     waitTime(MAX_LOADING_TIME),
   ]);
