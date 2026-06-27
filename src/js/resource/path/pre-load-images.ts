@@ -33,7 +33,7 @@ const preLoadImage = (src: string) => {
  * @param pathIds プリロードするパスIDの配列
  * @returns プリロードが完了したら発火するPromise
  */
-export const preloadImages = (resources: Resources, pathIds: PathId[]) => {
+export const preLoadImages = (resources: Resources, pathIds: PathId[]) => {
   const uniquePathIds = Array.from(new Set(pathIds));
   return Promise.all(
     uniquePathIds

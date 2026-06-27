@@ -1,4 +1,6 @@
+import { DifficultyDialogPreLoadImagePathIds } from "../../../dom-dialogs/difficulty";
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
+import { preLoadImages } from "../../../resource/path/pre-load-images";
 import { waitTime } from "../../../wait/wait-time";
 import { ArcadeStart } from "../../game-actions/arcade-start";
 import { GameProps } from "../../game-props";
@@ -32,11 +34,14 @@ export async function onArcadeStart(options: Options): Promise<void> {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(
-      props,
-      config.playerSelectorType,
-      "🕹️アーケード",
-    ),
+    Promise.all([
+      bindPlayerSelectAccordingToConfig(
+        props,
+        config.playerSelectorType,
+        "🕹️アーケード",
+      ),
+      preLoadImages(props.resources, DifficultyDialogPreLoadImagePathIds),
+    ]),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();
