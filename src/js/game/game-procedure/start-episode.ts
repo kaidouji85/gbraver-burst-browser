@@ -1,3 +1,5 @@
+import { Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
@@ -49,15 +51,13 @@ export async function startEpisode(options: {
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+  const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
   const [updatedResources] = await Promise.all([
     updateBattleSceneResources({
       resources: props.resources,
-      players: [npcBattle.player, npcBattle.enemy],
+      players,
     }),
-    preloadBattleSceneImages(props.resources, [
-      npcBattle.player,
-      npcBattle.enemy,
-    ]),
+    preloadBattleSceneImages(props.resources, players),
   ]);
   props.resources = updatedResources;
   const battleScene = new BattleScene({
