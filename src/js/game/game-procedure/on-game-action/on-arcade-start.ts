@@ -1,6 +1,6 @@
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
 import { PathIds } from "../../../resource/path/ids";
-import { preLoadImages } from "../../../resource/path/pre-load-images";
+import { preLoadImages } from "../../../resource/pre-load-images";
 import { waitTime } from "../../../wait/wait-time";
 import { ArcadeStart } from "../../game-actions/arcade-start";
 import { GameProps } from "../../game-props";

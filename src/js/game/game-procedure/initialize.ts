@@ -2,7 +2,7 @@ import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { loadBootResources } from "../../resource/loading/load-boot-resources";
 import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 import { PathIds } from "../../resource/path/ids";
-import { preLoadImages } from "../../resource/path/pre-load-images";
+import { preLoadImages } from "../../resource/pre-load-images";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";

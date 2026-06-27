@@ -1,5 +1,8 @@
-import { Resources } from "..";
-import { PathId } from "./resource";
+import { Player } from "gbraver-burst-core";
+import { Resources } from ".";
+import { PathId } from "./path/resource";
+import { getArmdozerStandPathId } from "../path/armdozer-stand-path";
+import { getPilotSkillCutinPathId } from "../path/pilot-skill-cutin-path";
 
 /**
  * 画像をプリロードする
@@ -42,3 +45,21 @@ export const preLoadImages = (resources: Resources, pathIds: PathId[]) => {
       .map((path) => preLoadImage(path)),
   );
 };
+
+/**
+ * バトルシーンで使用する画像をプリロードする
+ * @param resources リソース管理オブジェクト
+ * @param players ゲームに参加するプレイヤーの情報
+ * @returns
+ */
+export const preloadBattleSceneImages = (
+  resources: Resources,
+  players: [Player, Player],
+) =>
+  preLoadImages(
+    resources,
+    players.flatMap((player) => [
+      getArmdozerStandPathId(player.armdozer.id),
+      getPilotSkillCutinPathId(player.pilot.id),
+    ]),
+  );
