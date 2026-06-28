@@ -58,16 +58,15 @@ export async function startNPCBattleStage(
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players,
+  });
   const customBattleEvent = createSeriousMatchEvent();
-  const [updatedResources] = await Promise.all([
-    updateBattleSceneResources({
-      resources: props.resources,
-      players,
-    }),
+  await Promise.all([
     preloadBattleSceneImages(props.resources, players),
     preloadImages(props.resources, customBattleEvent.preloadImagePathIds),
   ]);
-  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: stage.bgm,
