@@ -73,7 +73,7 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
     resources: props.resources,
     player: battle.player.armdozer.id,
     enemy: battle.enemy.armdozer.id,
-    caption: "Local Battle",
+    caption: "あいことば対戦",
   });
   switchMatchCard(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
