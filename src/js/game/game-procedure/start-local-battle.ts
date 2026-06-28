@@ -82,16 +82,15 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const players: [Player, Player] = [battle.player, battle.enemy];
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players,
+  });
   const customBattleEvent = createSeriousMatchEvent();
-  const [updatedResources] = await Promise.all([
-    updateBattleSceneResources({
-      resources: props.resources,
-      players,
-    }),
+  await Promise.all([
     preloadBattleSceneImages(props.resources, players),
     preloadImages(props.resources, customBattleEvent.preloadImagePathIds),
   ]);
-  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,
