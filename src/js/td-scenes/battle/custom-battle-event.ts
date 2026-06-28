@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 
 import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { Animate } from "../../animation/animate";
+import { PathId } from "../../resource/path/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
@@ -158,6 +159,9 @@ export type BattleSimulatorEventProps = CustomBattleEventProps &
 
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
+  /** プリロードする画像のパスIDを指定する */
+  readonly preloadImagePathIds: PathId[];
+
   /**
    * ステート更新が開始された時に呼ばれるイベント
    * @param props イベントプロパティ

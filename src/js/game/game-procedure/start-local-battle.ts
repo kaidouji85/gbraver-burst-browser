@@ -7,7 +7,10 @@ import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-erro
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../../dom-scenes/match-card";
-import { preloadBattleSceneImages } from "../../resource/preload-images";
+import {
+  preloadBattleSceneImages,
+  preloadImages,
+} from "../../resource/preload-images";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
@@ -79,14 +82,15 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const players: [Player, Player] = [battle.player, battle.enemy];
-  const [updatedResources] = await Promise.all([
-    updateBattleSceneResources({
-      resources: props.resources,
-      players,
-    }),
+  props.resources = await updateBattleSceneResources({
+    resources: props.resources,
+    players,
+  });
+  const customBattleEvent = createSeriousMatchEvent();
+  await Promise.all([
     preloadBattleSceneImages(props.resources, players),
+    preloadImages(props.resources, customBattleEvent.preloadImagePathIds),
   ]);
-  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,
@@ -98,7 +102,7 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
     controllerType: config.battleControllerType,
     playerPilotVisibility: config.playerPilotVisibility,
     emergencyStop: battle.suddenlyBattleEndNotifier(),
-    customBattleEvent: createSeriousMatchEvent(),
+    customBattleEvent,
     canRetry: false,
   });
   bindBattleScene(props, battleScene);
