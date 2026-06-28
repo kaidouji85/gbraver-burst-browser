@@ -2,7 +2,7 @@ import { invisibleFirstView } from "../../first-view/first-view-visible";
 import { loadBootResources } from "../../resource/loading/load-boot-resources";
 import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 import { PathIds } from "../../resource/path/ids";
-import { preLoadImages } from "../../resource/pre-load-images";
+import { preloadImages } from "../../resource/preload-images";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
 import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
@@ -29,7 +29,7 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const [config] = await Promise.all([
     props.config.load(),
-    preLoadImages(props.resources, [PathIds.CLOSER, PathIds.BATTERY_ICON]),
+    preloadImages(props.resources, [PathIds.CLOSER, PathIds.BATTERY_ICON]),
   ]);
   applyPerformanceStatsVisibility(props, config.performanceStatsVisibility);
   applyBattleWindowFontSize(config.battleWindowFontSize);

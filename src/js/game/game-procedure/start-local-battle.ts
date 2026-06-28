@@ -7,7 +7,7 @@ import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-erro
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../../dom-scenes/match-card";
-import { preloadBattleSceneImages } from "../../resource/pre-load-images";
+import { preloadBattleSceneImages } from "../../resource/preload-images";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";

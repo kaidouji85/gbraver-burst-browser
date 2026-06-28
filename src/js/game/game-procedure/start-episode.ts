@@ -4,7 +4,7 @@ import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
-import { preloadBattleSceneImages } from "../../resource/pre-load-images";
+import { preloadBattleSceneImages } from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";

@@ -11,7 +11,7 @@ import { PathId } from "./path/resource";
  * @param src 画像のパス
  * @returns プリロードが完了したら発火するPromise
  */
-const preLoadImage = (src: string) => {
+const preloadImage = (src: string) => {
   const img = new Image();
   let onLoad: null | (() => void) = null;
   let onError: null | ((e: Event) => void) = null;
@@ -37,13 +37,13 @@ const preLoadImage = (src: string) => {
  * @param pathIds プリロードするパスIDの配列
  * @returns プリロードが完了したら発火するPromise
  */
-export const preLoadImages = (resources: Resources, pathIds: PathId[]) => {
+export const preloadImages = (resources: Resources, pathIds: PathId[]) => {
   const uniquePathIds = Array.from(new Set(pathIds));
   return Promise.all(
     uniquePathIds
       .map((pathId) => resources.paths.find((p) => p.id === pathId)?.path)
       .filter((p) => p !== undefined)
-      .map((path) => preLoadImage(path)),
+      .map((path) => preloadImage(path)),
   );
 };
 
@@ -57,7 +57,7 @@ export const preloadBattleSceneImages = (
   resources: Resources,
   players: [Player, Player],
 ) =>
-  preLoadImages(resources, [
+  preloadImages(resources, [
     ...players.flatMap((player) => [
       getArmdozerStandPathId(player.armdozer.id),
       getPilotSkillCutinPathId(player.pilot.id),
