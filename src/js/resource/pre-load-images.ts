@@ -4,6 +4,7 @@ import { getArmdozerStandPathId } from "../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../path/pilot-skill-cutin-path";
 import { Resources } from ".";
 import { PathId } from "./path/resource";
+import { PathIds } from "./path/ids";
 
 /**
  * 画像をプリロードする
@@ -57,10 +58,12 @@ export const preloadBattleSceneImages = (
   resources: Resources,
   players: [Player, Player],
 ) =>
-  preLoadImages(
-    resources,
-    players.flatMap((player) => [
-      getArmdozerStandPathId(player.armdozer.id),
-      getPilotSkillCutinPathId(player.pilot.id),
-    ]),
-  );
+  preLoadImages(resources, [
+    ...players.flatMap(
+      (player) => [
+        getArmdozerStandPathId(player.armdozer.id),
+        getPilotSkillCutinPathId(player.pilot.id),
+      ],
+      PathIds.TURN_INDICATOR,
+    ),
+  ]);
