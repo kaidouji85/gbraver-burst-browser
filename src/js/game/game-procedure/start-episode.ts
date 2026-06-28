@@ -4,7 +4,10 @@ import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
-import { preloadBattleSceneImages } from "../../resource/preload-images";
+import {
+  preloadBattleSceneImages,
+  preloadImages,
+} from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -52,12 +55,14 @@ export async function startEpisode(options: {
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
   const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
+  const customBattleEvent = episode.event(props.resources);
   const [updatedResources] = await Promise.all([
     updateBattleSceneResources({
       resources: props.resources,
       players,
     }),
     preloadBattleSceneImages(props.resources, players),
+    preloadImages(props.resources, customBattleEvent.preloadImagePathIds),
   ]);
   props.resources = updatedResources;
   const battleScene = new BattleScene({
@@ -69,7 +74,7 @@ export async function startEpisode(options: {
     player: npcBattle.player,
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
-    customBattleEvent: episode.event(props.resources),
+    customBattleEvent,
     controllerType: "BigButton",
     playerPilotVisibility: "visible",
     canRetry: true,
