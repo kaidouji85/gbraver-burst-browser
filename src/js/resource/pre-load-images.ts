@@ -3,8 +3,8 @@ import { Player } from "gbraver-burst-core";
 import { getArmdozerStandPathId } from "../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../path/pilot-skill-cutin-path";
 import { Resources } from ".";
-import { PathId } from "./path/resource";
 import { PathIds } from "./path/ids";
+import { PathId } from "./path/resource";
 
 /**
  * 画像をプリロードする
@@ -59,11 +59,9 @@ export const preloadBattleSceneImages = (
   players: [Player, Player],
 ) =>
   preLoadImages(resources, [
-    ...players.flatMap(
-      (player) => [
-        getArmdozerStandPathId(player.armdozer.id),
-        getPilotSkillCutinPathId(player.pilot.id),
-      ],
-      PathIds.TURN_INDICATOR,
-    ),
+    ...players.flatMap((player) => [
+      getArmdozerStandPathId(player.armdozer.id),
+      getPilotSkillCutinPathId(player.pilot.id),
+    ]),
+    PathIds.TURN_INDICATOR,
   ]);
