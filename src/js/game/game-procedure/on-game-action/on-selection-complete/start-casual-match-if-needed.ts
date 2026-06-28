@@ -42,7 +42,7 @@ export async function startCasualMatchIfNeeded(
     { ...props, networkContext },
     action,
   );
-  await startOnlineBattle(props, battle, "CASUAL MATCH");
+  await startOnlineBattle(props, battle, "カジュアルマッチ");
   return {
     isStarted: true,
     inProgress: {

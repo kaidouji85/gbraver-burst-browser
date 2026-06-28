@@ -43,7 +43,7 @@ export async function startPrivateMatchHostIfNeeded(
     { ...props, networkContext },
     action,
   );
-  await startOnlineBattle(props, battle, "PRIVATE MATCH");
+  await startOnlineBattle(props, battle, "プライベートマッチ");
   return {
     isStarted: true,
     inProgress: {
