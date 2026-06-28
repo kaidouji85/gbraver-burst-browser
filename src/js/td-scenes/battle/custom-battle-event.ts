@@ -10,12 +10,12 @@ import { Observable } from "rxjs";
 
 import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
 import { Animate } from "../../animation/animate";
+import { PathId } from "../../resource/path/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
-import { PathId } from "../../resource/path/resource";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
