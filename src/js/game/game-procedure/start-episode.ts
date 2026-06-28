@@ -1,7 +1,10 @@
+import { Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { preloadBattleSceneImages } from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -48,10 +51,15 @@ export async function startEpisode(options: {
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
-  props.resources = await updateBattleSceneResources({
-    resources: props.resources,
-    players: [npcBattle.player, npcBattle.enemy],
-  });
+  const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
+  const [updatedResources] = await Promise.all([
+    updateBattleSceneResources({
+      resources: props.resources,
+      players,
+    }),
+    preloadBattleSceneImages(props.resources, players),
+  ]);
+  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     isRetry,

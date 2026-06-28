@@ -1,4 +1,5 @@
 import { BattleSDK } from "@gbraver-burst-network/local-webrtc-browser-sdk";
+import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
@@ -6,6 +7,7 @@ import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-erro
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../../dom-scenes/match-card";
+import { preloadBattleSceneImages } from "../../resource/preload-images";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
@@ -76,10 +78,15 @@ export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
   const battleProgress = createBattleProgress(props, battle);
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
-  props.resources = await updateBattleSceneResources({
-    resources: props.resources,
-    players: [battle.player, battle.enemy],
-  });
+  const players: [Player, Player] = [battle.player, battle.enemy];
+  const [updatedResources] = await Promise.all([
+    updateBattleSceneResources({
+      resources: props.resources,
+      players,
+    }),
+    preloadBattleSceneImages(props.resources, players),
+  ]);
+  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: SOUND_IDS.BATTLE_BGM_01,

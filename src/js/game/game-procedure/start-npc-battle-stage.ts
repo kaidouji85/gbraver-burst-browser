@@ -5,6 +5,7 @@ import { createSeriousMatchEvent } from "../../custom-battle-events/serious-matc
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { preloadBattleSceneImages } from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -53,10 +54,15 @@ export async function startNPCBattleStage(
   };
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
-  props.resources = await updateBattleSceneResources({
-    resources: props.resources,
-    players: [npcBattle.player, npcBattle.enemy],
-  });
+  const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
+  const [updatedResources] = await Promise.all([
+    updateBattleSceneResources({
+      resources: props.resources,
+      players,
+    }),
+    preloadBattleSceneImages(props.resources, players),
+  ]);
+  props.resources = updatedResources;
   const battleScene = new BattleScene({
     ...props,
     playingBGM: stage.bgm,
