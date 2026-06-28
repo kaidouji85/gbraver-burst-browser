@@ -16,7 +16,6 @@ const preLoadImage = (src: string) => {
   let onLoad: null | (() => void) = null;
   let onError: null | ((e: Event) => void) = null;
   return new Promise<void>((resolve, reject) => {
-    const img = new Image();
     onLoad = () => resolve();
     onError = (e) => reject(e);
     img.addEventListener("load", onLoad);
