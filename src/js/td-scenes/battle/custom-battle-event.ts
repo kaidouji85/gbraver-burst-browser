@@ -15,6 +15,7 @@ import { PushWindow } from "../../window/push-window";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleSceneSounds } from "./sounds";
 import { BattleSceneView } from "./view";
+import { PathId } from "../../resource/path/resource";
 
 /**
  * 全カスタムイベントで利用できるプロパティ
@@ -158,6 +159,9 @@ export type BattleSimulatorEventProps = CustomBattleEventProps &
 
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
+  /** プリロードする画像のパスIDを指定する */
+  readonly preloadImagePathIds: PathId[];
+
   /**
    * ステート更新が開始された時に呼ばれるイベント
    * @param props イベントプロパティ

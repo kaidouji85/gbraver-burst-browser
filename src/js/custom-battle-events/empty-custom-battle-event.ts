@@ -1,5 +1,6 @@
 import { Animate } from "../animation/animate";
 import { empty } from "../animation/delay";
+import { PathId } from "../resource/path/resource";
 import type {
   BatteryCommandSelectedEventProps,
   BattleSimulatorEventProps,
@@ -17,6 +18,9 @@ import type {
  * CustomBattleEventのデフォルト実装を定義する目的で、本クラスを利用すること
  */
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
+  /** @override */
+  readonly preloadImagePathIds: PathId[] = [];
+
   /** @override */
   /* eslint-disable @typescript-eslint/no-unused-vars */
   onStateUpdateStarted(props: StateUpdateStartedEventProps): void {
