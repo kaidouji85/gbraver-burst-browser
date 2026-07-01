@@ -15,10 +15,10 @@ import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { pushWindowsStream } from "../../window/push-window";
 import { resizeStream } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { GameAction } from "../game-actions";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { NetworkContext } from "../network-context";
+import { SuddenlyBattleEnd } from "../suddenly-battle-end";
 import { GameProps } from "./index";
 
 /** GamePropsジェネレータパラメータ */
@@ -85,7 +85,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     gameLoop,
     gameAction: createActionManager<GameAction>(),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
-    suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
+    suddenlyBattleEnd: new SuddenlyBattleEnd(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),
