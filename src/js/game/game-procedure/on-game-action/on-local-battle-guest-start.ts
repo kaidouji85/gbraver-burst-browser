@@ -1,4 +1,6 @@
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
+import { PathIds } from "../../../resource/path/ids";
+import { preloadImages } from "../../../resource/preload-images";
 import { waitTime } from "../../../wait/wait-time";
 import { LocalBattleGuestStart } from "../../game-actions/local-battle-guest-start";
 import { GameProps } from "../../game-props";
@@ -27,11 +29,14 @@ export const onLocalBattleGuestStart = async (options: {
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(
-      props,
-      config.playerSelectorType,
-      "🔓あいことばで入る",
-    ),
+    Promise.all([
+      bindPlayerSelectAccordingToConfig(
+        props,
+        config.playerSelectorType,
+        "🔓あいことばで入る",
+      ),
+      preloadImages(props.resources, [PathIds.CAMERA_ICON]),
+    ]),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();

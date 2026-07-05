@@ -19,9 +19,12 @@ export function rootInnerHtml(options: RootHTMLOptions): string {
   const initialRoomID = options.initialRoomID ?? "";
   const closerPath =
     resources.paths.find((v) => v.id === PathIds.CLOSER)?.path ?? "";
+  const cameraIconPath =
+    resources.paths.find((v) => v.id === PathIds.CAMERA_ICON)?.path ?? "";
   return template({
     ROOT_CLASS,
     closerPath,
+    cameraIconPath,
     initialRoomID,
   });
 }
