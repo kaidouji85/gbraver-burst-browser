@@ -1,6 +1,7 @@
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
 import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
+import { CameraIconConfigs } from "./camera-icon";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
@@ -50,4 +51,5 @@ export const PathConfigs: PathConfig[] = [
   ...MessageWindowPathConfigs,
   ...TurnIndicatorConfigs,
   ...BattleHamburgerMenuConfigs,
+  ...CameraIconConfigs,
 ];
