@@ -1,4 +1,6 @@
 import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
+import { PathIds } from "../../../resource/path/ids";
+import { preloadImages } from "../../../resource/preload-images";
 import { waitTime } from "../../../wait/wait-time";
 import { PrivateMatchGuestStart } from "../../game-actions/private-match-guest-start";
 import { GameProps } from "../../game-props";
@@ -35,11 +37,14 @@ export async function onPrivateMatchGuestStart(
   await props.fader.fadeOut();
   const config = await props.config.load();
   await Promise.race([
-    bindPlayerSelectAccordingToConfig(
-      props,
-      config.playerSelectorType,
-      "🙋ルーム参加",
-    ),
+    Promise.all([
+      bindPlayerSelectAccordingToConfig(
+        props,
+        config.playerSelectorType,
+        "🙋ルーム参加",
+      ),
+      preloadImages(props.resources, [PathIds.CAMERA_ICON]),
+    ]),
     waitTime(MAX_LOADING_TIME),
   ]);
   await props.fader.fadeIn();
