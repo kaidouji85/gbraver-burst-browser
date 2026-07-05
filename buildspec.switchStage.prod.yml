@@ -6,7 +6,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 22
+      nodejs: 24
   build:
     commands:
       - ./switch-stage.bash "${DISTRIBUTION_ID}" "${CLOUD_FRONT_ORIGIN_NAME}" "${STAGE}"
