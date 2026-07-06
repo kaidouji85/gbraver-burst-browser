@@ -158,17 +158,9 @@
   display: none;
 }
 
-.title__help-menu-separation {
-  height: 0;
-  border-top: solid #626262 1px;
-  margin: var(--margin-vertical) 0;
-}
-
 .title__how-to-play,
 .title__character-description,
 .title__trailer,
-.title__terms-of-service,
-.title__privacy-policy,
 .title__contact {
   text-decoration: none;
   color: var(--button-font-color);
@@ -178,8 +170,6 @@
 .title__how-to-play:hover,
 .title__character-description:hover,
 .title__trailer:hover,
-.title__terms-of-service:hover,
-.title__privacy-policy:hover,
 .title__contact:hover {
   background-color: var(--hovered-back-ground-color);
 }
@@ -371,4 +361,10 @@
   font-size: calc(var(--responsive-font-size));
   background-color: var(--background-color);
   border-radius: calc(var(--responsive-font-size) * 0.3);
+}
+
+.title__terms-of-service,
+.title__privacy-policy {
+  text-decoration: none;
+  color: var(--button-font-color);
 }
