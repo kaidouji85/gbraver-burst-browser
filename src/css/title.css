@@ -283,8 +283,7 @@
   height: 30vh;
 }
 
-.title__copy-rights,
-.title__music {
+.title__copy-rights {
   font-size: calc(var(--responsive-font-size) * 0.8);
   font-weight: bold;
   text-shadow: 1px 1px 4px black;
@@ -365,4 +364,11 @@
 
 .title__tutorial {
   grid-area: tutorial;
+}
+
+.title__confirm {
+  text-align: center;
+  font-size: calc(var(--responsive-font-size));
+  background-color: var(--background-color);
+  border-radius: calc(var(--responsive-font-size) * 0.3);
 }
