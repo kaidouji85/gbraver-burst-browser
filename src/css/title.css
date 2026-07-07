@@ -275,8 +275,9 @@
 
 .title__copy-rights {
   font-size: calc(var(--responsive-font-size) * 0.8);
-  font-weight: bold;
-  text-shadow: 1px 1px 4px black;
+  background-color: var(--background-color);
+  border-radius: calc(var(--responsive-font-size) * 0.3);
+  padding: 0 calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__game-menu,
@@ -358,9 +359,10 @@
 
 .title__confirm {
   text-align: center;
-  font-size: calc(var(--responsive-font-size));
+  font-size: calc(var(--responsive-font-size) * 0.8);
   background-color: var(--background-color);
   border-radius: calc(var(--responsive-font-size) * 0.3);
+  padding: 0 calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__terms-of-service,
