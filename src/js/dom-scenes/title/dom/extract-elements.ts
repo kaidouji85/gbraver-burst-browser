@@ -185,3 +185,19 @@ export const extractNeoLandozer = (root: HTMLElement) =>
  */
 export const extractLightningDozer = (root: HTMLElement) =>
   extractHTMLImageElementByDataID(root, "lightningDozer");
+
+/**
+ * 利用規約リンクアイコンを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractTermsOfServiceLinkIcon = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "termsOfServiceLinkIcon");
+
+/**
+ * プライバシーポリシーリンクアイコンを抽出する
+ * @param root ルート要素
+ * @returns 抽出結果、見つからない場合は新規作成したimg要素を返す
+ */
+export const extractPrivacyPolicyLinkIcon = (root: HTMLElement) =>
+  extractHTMLImageElementByDataID(root, "privacyPolicyLinkIcon");

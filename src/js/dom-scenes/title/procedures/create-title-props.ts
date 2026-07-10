@@ -26,8 +26,10 @@ import {
   extractLogout,
   extractNeoLandozer,
   extractNetBattle,
+  extractPrivacyPolicyLinkIcon,
   extractShinBraver,
   extractStory,
+  extractTermsOfServiceLinkIcon,
   extractTutorial,
   extractWingDozer,
 } from "../dom/extract-elements";
@@ -88,6 +90,16 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const lightningDozer = extractLightningDozer(root);
   const isLightningDozerLoaded = waitElementLoaded(lightningDozer);
 
+  const termsOfServiceLinkIcon = extractTermsOfServiceLinkIcon(root);
+  const isTermsOfServiceLinkIconLoaded = waitElementLoaded(
+    termsOfServiceLinkIcon,
+  );
+
+  const privacyPolicyLinkIcon = extractPrivacyPolicyLinkIcon(root);
+  const isPrivacyPolicyLinkIconLoaded = waitElementLoaded(
+    privacyPolicyLinkIcon,
+  );
+
   const isImgLoaded = Promise.all([
     isLogoLoaded,
     isHelpIconLoaded,
@@ -98,6 +110,8 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     isWingDozerLoaded,
     isNeoLandozerLoaded,
     isLightningDozerLoaded,
+    isTermsOfServiceLinkIconLoaded,
+    isPrivacyPolicyLinkIconLoaded,
   ]);
   return {
     ...params,
