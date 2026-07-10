@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <polyline points="55.88 26.58 55.88 55.88 8.12 55.88 8.12 8.12 37.17 8.12" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;"/>
+  <g>
+    <line x1="28.37" y1="35.63" x2="60.63" y2="3.37" style="fill: #fff;"/>
+    <g>
+      <line x1="28.37" y1="35.63" x2="51.5" y2="12.5" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+      <polygon points="55.99 20.7 60.64 3.37 43.3 8.01 55.99 20.7" style="fill: #fff;"/>
+    </g>
+  </g>
+</svg>

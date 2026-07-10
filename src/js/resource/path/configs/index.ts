@@ -11,6 +11,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { GranDozerPathConfigs } from "./gran-dozer";
 import { HelpIconPathConfigs } from "./help-icon";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
+import { LinkIconConfigs } from "./link-icon";
 import { LogoPathConfigs } from "./logo";
 import { MessageWindowPathConfigs } from "./message-window";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
@@ -52,4 +53,5 @@ export const PathConfigs: PathConfig[] = [
   ...TurnIndicatorConfigs,
   ...BattleHamburgerMenuConfigs,
   ...CameraIconConfigs,
+  ...LinkIconConfigs,
 ];
