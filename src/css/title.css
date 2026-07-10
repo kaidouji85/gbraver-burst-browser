@@ -367,6 +367,15 @@
 
 .title__terms-of-service,
 .title__privacy-policy {
-  text-decoration: none;
   color: var(--button-font-color);
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+}
+
+.title__link-icon {
+  --size: calc(var(--responsive-font-size) * 0.8);
+
+  width: var(--size);
+  height: var(--size);
 }

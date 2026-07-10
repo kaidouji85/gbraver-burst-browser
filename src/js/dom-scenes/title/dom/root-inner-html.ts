@@ -96,6 +96,9 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
       (p) => p.id === PathIds.LIGHTNING_DOZER_BUST_SHOT,
     )?.path ?? "";
 
+  const linkIconPath =
+    params.resources.paths.find((p) => p.id === PathIds.LINK_ICON)?.path ?? "";
+
   const gameMenuClassName = (() => {
     switch (params.titleMenuMode) {
       case "STANDALONE":
@@ -129,6 +132,8 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     wingDozerPath,
     neoLandozerPath,
     lightningDozerPath,
+
+    linkIconPath,
 
     gameMenuClassName,
     helpIconClassName,
