@@ -4,7 +4,6 @@ import {
   correctedBattery,
   GameState,
   PlayerId,
-  PlayerState,
 } from "gbraver-burst-core";
 
 import { CustomBattleEventProps } from "../custom-battle-event";
@@ -17,11 +16,11 @@ import { CustomBattleEventProps } from "../custom-battle-event";
  * @param options.playerBattery プレイヤーが出すバッテリー
  * @returns
  */
-export function getBattleResultForPredicatedDamage(options: {
+export const getBattleResultForPredicatedDamage = (options: {
   gameState: GameState;
   playerId: PlayerId;
   playerBattery: number;
-}) {
+}): BattleResult => {
   const { gameState, playerId, playerBattery } = options;
   const { players, activePlayerId } = gameState;
 
@@ -49,63 +48,19 @@ export function getBattleResultForPredicatedDamage(options: {
     defender,
     defenderCorrectedBattery,
   );
-}
+};
 
 /**
  * ダメージ予想を計算する
  * @param result 戦闘結果
  * @returns ダメージ予想
  */
-export function calcPredicatedDamage(result: BattleResult): number {
-  return result.name === "NormalHit" ||
-    result.name === "CriticalHit" ||
-    result.name === "Guard"
+export const calcPredicatedDamage = (result: BattleResult): number =>
+  result.name === "NormalHit" ||
+  result.name === "CriticalHit" ||
+  result.name === "Guard"
     ? result.damage
     : 0;
-}
-
-/**
- * @deprecated
- * ダメージ予想を計算する
- * @param options オプション
- * @param options.attacker 攻撃側のプレイヤーステート
- * @param options.defender 防御側のプレイヤーステート
- * @param options.playerId プレイヤーID
- * @param options.playerBattery プレイヤーが出すバッテリー
- * @returns ダメージ予想数字
- */
-export function deprecated_calcPredicatedDamage(options: {
-  attacker: PlayerState;
-  defender: PlayerState;
-  playerId: PlayerId;
-  playerBattery: number;
-}) {
-  const { attacker, defender, playerId, playerBattery } = options;
-
-  const attackerBattery =
-    attacker.playerId === playerId ? playerBattery : attacker.armdozer.battery;
-  const attackerCorrectedBattery = correctedBattery(
-    { type: "BATTERY_COMMAND", battery: attackerBattery },
-    attacker.armdozer.effects,
-  );
-  const defenderBattery =
-    defender.playerId === playerId ? playerBattery : defender.armdozer.battery;
-  const defenderCorrectedBattery = correctedBattery(
-    { type: "BATTERY_COMMAND", battery: defenderBattery },
-    defender.armdozer.effects,
-  );
-  const result = battleResult(
-    attacker,
-    attackerCorrectedBattery,
-    defender,
-    defenderCorrectedBattery,
-  );
-  return result.name === "NormalHit" ||
-    result.name === "CriticalHit" ||
-    result.name === "Guard"
-    ? result.damage
-    : 0;
-}
 
 /**
  * ダメージ予想を更新する
