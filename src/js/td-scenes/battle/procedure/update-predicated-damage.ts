@@ -1,5 +1,5 @@
-import { deprecated_calcPredicatedDamage } from "../animation/game-state/predicated-damage";
 import { CustomBattleEventProps } from "../custom-battle-event";
+import { deprecated_calcPredicatedDamage } from "./predicated-damage";
 
 /**
  * ダメージ予想を更新する

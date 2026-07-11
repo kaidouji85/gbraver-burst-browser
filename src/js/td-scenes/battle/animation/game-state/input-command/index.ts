@@ -5,7 +5,10 @@ import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
-import { calcPredicatedDamage, getBattleResultForPredicatedDamage } from "../predicated-damage";
+import {
+  calcPredicatedDamage,
+  getBattleResultForPredicatedDamage,
+} from "../../../procedure/predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
@@ -42,9 +45,9 @@ export function inputCommandAnimation(
   const isPlayerTurn = playerId === activePlayerId;
   const enableMaxBattery = getEnableMaxBattery(playerCommand.command);
   const playerBattery =
-      controllerType === "BigButton"
-        ? getInitialBattery(enableMaxBattery)
-        : player.armdozer.battery;
+    controllerType === "BigButton"
+      ? getInitialBattery(enableMaxBattery)
+      : player.armdozer.battery;
   const battleResult = getBattleResultForPredicatedDamage({
     attacker,
     defender,
