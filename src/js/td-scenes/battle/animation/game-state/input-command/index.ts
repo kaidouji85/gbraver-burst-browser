@@ -29,12 +29,10 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  const attacker = players.find((p) => p.playerId === activePlayerId);
-  const defender = players.find((p) => p.playerId !== activePlayerId);
   const defenderHUD = view.hud.players.find(
     (h) => h.playerId !== activePlayerId,
   );
-  if (!player || !playerCommand || !attacker || !defender || !defenderHUD) {
+  if (!player || !playerCommand || !defenderHUD) {
     return empty();
   }
 
@@ -49,8 +47,7 @@ export function inputCommandAnimation(
       ? getInitialBattery(enableMaxBattery)
       : player.armdozer.battery;
   const battleResult = getBattleResultForPredicatedDamage({
-    attacker,
-    defender,
+    gameState,
     playerId,
     playerBattery,
   });
