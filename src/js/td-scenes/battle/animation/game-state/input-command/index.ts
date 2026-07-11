@@ -52,7 +52,6 @@ export function inputCommandAnimation(
     playerBattery,
   });
   const predicatedDamage = calcPredicatedDamage(battleResult);
-  defenderHUD.predicatedDamage.set(predicatedDamage);
   return all(
     updateGauge(view.hud.players, players),
     showCommand({

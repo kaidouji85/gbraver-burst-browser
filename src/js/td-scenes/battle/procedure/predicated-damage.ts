@@ -7,6 +7,8 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
+import { CustomBattleEventProps } from "../custom-battle-event";
+
 /**
  * ダメージ予想のための戦闘結果を取得する
  * @param options オプション
@@ -104,3 +106,33 @@ export function deprecated_calcPredicatedDamage(options: {
     ? result.damage
     : 0;
 }
+
+/**
+ * ダメージ予想を更新する
+ * @param props カスタムバトルイベントのプロパティ
+ * @param playerBattery プレイヤーが出すバッテリー
+ */
+export const updatePredicatedDamage = (
+  props: CustomBattleEventProps,
+  playerBattery: number,
+): void => {
+  const latestState = props.stateHistory.at(-1);
+  if (!latestState) {
+    return;
+  }
+
+  const defenderHUD = props.view.hud.players.find(
+    (h) => h.playerId !== latestState.activePlayerId,
+  );
+  if (!defenderHUD) {
+    return;
+  }
+
+  const battleResult = getBattleResultForPredicatedDamage({
+    gameState: latestState,
+    playerId: props.playerId,
+    playerBattery,
+  });
+  const predicatedDamage = calcPredicatedDamage(battleResult);
+  defenderHUD.predicatedDamage.set(predicatedDamage);
+};

@@ -1,5 +1,5 @@
 import { BattleSceneProps } from "../../props";
-import { updatePredicatedDamage } from "../update-predicated-damage";
+import { updatePredicatedDamage } from "../predicated-damage";
 
 /**
  * バッテリーセレクタ マイナス押下時の処理
