@@ -1,4 +1,5 @@
 import {
+  BattleResult,
   battleResult,
   correctedBattery,
   PlayerId,
@@ -6,6 +7,57 @@ import {
 } from "gbraver-burst-core";
 
 /**
+ * ダメージ予想のための戦闘結果を取得する
+ * @param options オプション
+ * @param options.attacker 攻撃側のプレイヤーステート
+ * @param options.defender 防御側のプレイヤーステート
+ * @param options.playerId プレイヤーID
+ * @param options.playerBattery プレイヤーが出すバッテリー
+ * @returns 戦闘結果
+ */
+export function getBattleResultForPredicatedDamage(options: {
+  attacker: PlayerState;
+  defender: PlayerState;
+  playerId: PlayerId;
+  playerBattery: number;
+}) {
+  const { attacker, defender, playerId, playerBattery } = options;
+
+  const attackerBattery =
+    attacker.playerId === playerId ? playerBattery : attacker.armdozer.battery;
+  const attackerCorrectedBattery = correctedBattery(
+    { type: "BATTERY_COMMAND", battery: attackerBattery },
+    attacker.armdozer.effects,
+  );
+  const defenderBattery =
+    defender.playerId === playerId ? playerBattery : defender.armdozer.battery;
+  const defenderCorrectedBattery = correctedBattery(
+    { type: "BATTERY_COMMAND", battery: defenderBattery },
+    defender.armdozer.effects,
+  );
+  return battleResult(
+    attacker,
+    attackerCorrectedBattery,
+    defender,
+    defenderCorrectedBattery,
+  );
+}
+
+/**
+ * ダメージ予想を計算する
+ * @param result 戦闘結果
+ * @returns ダメージ予想
+ */
+export function calcPredicatedDamage(result: BattleResult): number {
+  return result.name === "NormalHit" ||
+    result.name === "CriticalHit" ||
+    result.name === "Guard"
+    ? result.damage
+    : 0;
+}
+
+/**
+ * @deprecated
  * ダメージ予想を計算する
  * @param options オプション
  * @param options.attacker 攻撃側のプレイヤーステート
@@ -14,7 +66,7 @@ import {
  * @param options.playerBattery プレイヤーが出すバッテリー
  * @returns ダメージ予想数字
  */
-export function calcPredicatedDamage(options: {
+export function deprecated_calcPredicatedDamage(options: {
   attacker: PlayerState;
   defender: PlayerState;
   playerId: PlayerId;

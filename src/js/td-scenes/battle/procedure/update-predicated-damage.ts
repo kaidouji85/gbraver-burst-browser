@@ -1,4 +1,4 @@
-import { calcPredicatedDamage } from "../animation/game-state/calc-predicated-damage";
+import { deprecated_calcPredicatedDamage } from "../animation/game-state/calc-predicated-damage";
 import { CustomBattleEventProps } from "../custom-battle-event";
 
 /**
@@ -29,7 +29,7 @@ export const updatePredicatedDamage = (
     return;
   }
 
-  const predicatedDamage = calcPredicatedDamage({
+  const predicatedDamage = deprecated_calcPredicatedDamage({
     attacker,
     defender,
     playerId: props.playerId,

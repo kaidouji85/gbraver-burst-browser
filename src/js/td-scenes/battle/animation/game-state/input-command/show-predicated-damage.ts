@@ -4,7 +4,7 @@ import { BattleControllerType } from "../../../controller-type";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
 import { HUDPlayer } from "../../../view/hud/player";
-import { calcPredicatedDamage } from "../calc-predicated-damage";
+import { deprecated_calcPredicatedDamage } from "../calc-predicated-damage";
 
 /**
  * ダメージ予想を表示する
@@ -39,7 +39,7 @@ export const showPredicatedDamage = (options: {
     controllerType === "BigButton"
       ? getInitialBattery(enableMaxBattery)
       : player.armdozer.battery;
-  const predicatedDamage = calcPredicatedDamage({
+  const predicatedDamage = deprecated_calcPredicatedDamage({
     attacker,
     defender,
     playerId,
