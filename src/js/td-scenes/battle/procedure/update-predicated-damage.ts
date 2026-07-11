@@ -1,4 +1,4 @@
-import { deprecated_calcPredicatedDamage } from "../animation/game-state/calc-predicated-damage";
+import { deprecated_calcPredicatedDamage } from "../animation/game-state/predicated-damage";
 import { CustomBattleEventProps } from "../custom-battle-event";
 
 /**
