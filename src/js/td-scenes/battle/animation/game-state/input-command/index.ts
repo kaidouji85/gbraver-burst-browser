@@ -51,7 +51,9 @@ export function inputCommandAnimation(
     playerId,
     playerBattery,
   });
-  const predicatedDamage = calcPredicatedDamage(battleResult);
+  const predicatedDamage = battleResult
+    ? calcPredicatedDamage(battleResult)
+    : 0;
   return all(
     updateGauge(view.hud.players, players),
     showCommand({

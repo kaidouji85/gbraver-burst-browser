@@ -14,20 +14,20 @@ import { CustomBattleEventProps } from "../custom-battle-event";
  * @param options.gameState ゲーム状態
  * @param options.playerId プレイヤーID
  * @param options.playerBattery プレイヤーが出すバッテリー
- * @returns
+ * @returns 戦闘結果、データ不整合の場合はnull
  */
 export const getBattleResultForPredicatedDamage = (options: {
   gameState: GameState;
   playerId: PlayerId;
   playerBattery: number;
-}): BattleResult => {
+}): BattleResult | null => {
   const { gameState, playerId, playerBattery } = options;
   const { players, activePlayerId } = gameState;
 
   const attacker = players.find((p) => p.playerId === activePlayerId);
   const defender = players.find((p) => p.playerId !== activePlayerId);
   if (!attacker || !defender) {
-    throw new Error("Attacker or defender not found");
+    return null;
   }
 
   const attackerBattery =
@@ -88,6 +88,8 @@ export const updatePredicatedDamage = (
     playerId: props.playerId,
     playerBattery,
   });
-  const predicatedDamage = calcPredicatedDamage(battleResult);
+  const predicatedDamage = battleResult
+    ? calcPredicatedDamage(battleResult)
+    : 0;
   defenderHUD.predicatedDamage.set(predicatedDamage);
 };
