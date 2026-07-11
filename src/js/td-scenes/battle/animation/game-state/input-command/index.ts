@@ -3,10 +3,15 @@ import { GameStateX, InputCommand } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
+import { getEnableMaxBattery } from "../../../get-enable-max-battery";
+import { getInitialBattery } from "../../../get-initial-battery";
+import {
+  calcPredicatedDamage,
+  getBattleResultForPredicatedDamage,
+} from "../../../procedure/predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
-import { showPredicatedDamage } from "./show-predicated-damage";
 import { updateGauge } from "./update-gauge";
 
 /**
@@ -24,12 +29,10 @@ export function inputCommandAnimation(
 
   const player = players.find((v) => v.playerId === playerId);
   const playerCommand = effect.players.find((v) => v.playerId === playerId);
-  const attacker = players.find((p) => p.playerId === activePlayerId);
-  const defender = players.find((p) => p.playerId !== activePlayerId);
   const defenderHUD = view.hud.players.find(
     (h) => h.playerId !== activePlayerId,
   );
-  if (!player || !playerCommand || !attacker || !defender || !defenderHUD) {
+  if (!player || !playerCommand || !defenderHUD) {
     return empty();
   }
 
@@ -38,6 +41,19 @@ export function inputCommandAnimation(
   }
 
   const isPlayerTurn = playerId === activePlayerId;
+  const enableMaxBattery = getEnableMaxBattery(playerCommand.command);
+  const playerBattery =
+    controllerType === "BigButton"
+      ? getInitialBattery(enableMaxBattery)
+      : player.armdozer.battery;
+  const battleResult = getBattleResultForPredicatedDamage({
+    gameState,
+    playerId,
+    playerBattery,
+  });
+  const predicatedDamage = battleResult
+    ? calcPredicatedDamage(battleResult)
+    : 0;
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
@@ -50,13 +66,6 @@ export function inputCommandAnimation(
     view.hud.gameObjects.timeScaleButton.open(animationTimeScale),
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
-    showPredicatedDamage({
-      attacker,
-      defender,
-      defenderHUD,
-      playerId,
-      commands: playerCommand.command,
-      controllerType,
-    }),
+    defenderHUD.predicatedDamage.show(predicatedDamage),
   );
 }
