@@ -5,10 +5,7 @@ import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
-import {
-  calcPredicatedDamage,
-  getBattleResultForPredicatedDamage,
-} from "../../../procedure/predicated-damage";
+import { createPredicatedDamageData } from "../../../procedure/predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
@@ -46,14 +43,12 @@ export function inputCommandAnimation(
     controllerType === "BigButton"
       ? getInitialBattery(enableMaxBattery)
       : player.armdozer.battery;
-  const battleResult = getBattleResultForPredicatedDamage({
+  const predicatedDamageData = createPredicatedDamageData({
     gameState,
     playerId,
     playerBattery,
   });
-  const predicatedDamage = battleResult
-    ? calcPredicatedDamage(battleResult)
-    : 0;
+  const predicatedDamage = predicatedDamageData?.predicatedDamage ?? 0;
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
