@@ -10,6 +10,7 @@ import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
 import { updateGauge } from "./update-gauge";
+import { onStart } from "../../../../../animation/on-start";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -49,6 +50,7 @@ export function inputCommandAnimation(
     playerBattery,
   });
   const predicatedDamage = predicatedDamageData?.predicatedDamage ?? 0;
+  const deathAlert = predicatedDamageData?.deathAlert ?? "None";
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
@@ -62,5 +64,10 @@ export function inputCommandAnimation(
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
     defenderHUD.predicatedDamage.show(predicatedDamage),
+    onStart(() => {
+      if (deathAlert === "Player") {
+        props.se.play(props.sounds.deathAlert);
+      }
+    }),
   );
 }

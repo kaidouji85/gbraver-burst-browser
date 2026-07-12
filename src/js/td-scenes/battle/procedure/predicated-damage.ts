@@ -145,6 +145,10 @@ export const updatePredicatedDamage = (
     return;
   }
 
-  const { predicatedDamage } = predicatedDamageData;
+  const { predicatedDamage, deathAlert } = predicatedDamageData;
   defenderHUD.predicatedDamage.set(predicatedDamage);
+
+  if (deathAlert === "Player") {
+    props.se.play(props.sounds.deathAlert);
+  }
 };
