@@ -3,6 +3,7 @@ import { GameStateX, InputCommand } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
+import { onStart } from "../../../../../animation/on-start";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
 import { createPredicatedDamageData } from "../../../procedure/predicated-damage";
@@ -10,7 +11,6 @@ import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
 import { showCommand } from "./show-command";
 import { updateGauge } from "./update-gauge";
-import { onStart } from "../../../../../animation/on-start";
 
 /**
  * コマンド入力フェイズのアニメーション
