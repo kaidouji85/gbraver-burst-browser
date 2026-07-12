@@ -61,7 +61,6 @@ export class Illumination {
 
   /**
    * 照明の色味を変更する
-   * @param model モデル
    * @param value 変更する色味、0から1の範囲で指定する
    * @param value.r 赤成分
    * @param value.g 緑成分

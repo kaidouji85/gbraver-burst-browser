@@ -10,13 +10,13 @@ const BaseLightColor = {
 };
 
 /**
- * ディレクショナルライトにモデルを反映させる
- * @param light モデルを反映させるディレクショナルライト
+ * three.jsのライトにモデルを反映させる
+ * @param light モデルを反映させるthree.jsのライト
  * @param model モデル
  * @param intensityScale 光の強さのスケール
  */
-const engageDirectionalLight = (
-  light: THREE.DirectionalLight,
+const engageLight = (
+  light: THREE.Light,
   model: IlluminationModel,
   intensityScale: number,
 ): void => {
@@ -24,28 +24,7 @@ const engageDirectionalLight = (
     BaseLightColor.r * model.color.r,
     BaseLightColor.g * model.color.g,
     BaseLightColor.b * model.color.b,
-  );
-  // three.js r155 から intensity に内部的にPIを乗算しないようになったので
-  // 前のバージョンと同じ照明になるようにPIを乗算している
-  // https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
-  light.intensity = model.intensity * Math.PI * intensityScale;
-};
-
-/**
- * アンビエントライトにモデルを反映させる
- * @param light モデルを反映させるアンビエントライト
- * @param model モデル
- * @param intensityScale 光の強さのスケール
- */
-const engageAmbientLight = (
-  light: THREE.AmbientLight,
-  model: IlluminationModel,
-  intensityScale: number,
-): void => {
-  light.color.setRGB(
-    BaseLightColor.r * model.color.r,
-    BaseLightColor.g * model.color.g,
-    BaseLightColor.b * model.color.b,
+    THREE.SRGBColorSpace,
   );
   // three.js r155 から intensity に内部的にPIを乗算しないようになったので
   // 前のバージョンと同じ照明になるようにPIを乗算している
@@ -106,10 +85,10 @@ export class IlluminationView {
    * @param model モデル
    */
   engage(model: IlluminationModel): void {
-    engageDirectionalLight(this.#directionalLight1, model, 0.8);
-    engageDirectionalLight(this.#directionalLight2, model, 0.8);
-    engageDirectionalLight(this.#directionalLight3, model, 0.6);
-    engageDirectionalLight(this.#directionalLight4, model, 0.6);
-    engageAmbientLight(this.#ambientLight, model, 0.8);
+    engageLight(this.#directionalLight1, model, 0.8);
+    engageLight(this.#directionalLight2, model, 0.8);
+    engageLight(this.#directionalLight3, model, 0.6);
+    engageLight(this.#directionalLight4, model, 0.6);
+    engageLight(this.#ambientLight, model, 0.8);
   }
 }
