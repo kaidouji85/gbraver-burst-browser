@@ -51,6 +51,7 @@ export class Illumination {
 
   /**
    * 照明の強さを変更する
+   * 1が標準の強さで、0に近づくほど暗くなる
    * @param value 照明の強さ
    * @param duration アニメーション時間
    * @returns アニメーション
@@ -61,7 +62,8 @@ export class Illumination {
 
   /**
    * 照明の色味を変更する
-   * @param value 変更する色味、0から1の範囲で指定する
+   * 1がベースの色味で、0に近づくほど暗くなる
+   * @param value 変更する色味
    * @param value.r 赤成分
    * @param value.g 緑成分
    * @param value.b 青成分
