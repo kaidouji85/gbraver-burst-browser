@@ -8,6 +8,7 @@ import {
 } from "gbraver-burst-core";
 
 import { CustomBattleEventProps } from "../custom-battle-event";
+import { startPlayerDeathAlert, stopDeathAlert } from "./death-alert";
 
 /**
  * ダメージ予想を計算する
@@ -149,6 +150,8 @@ export const updatePredicatedDamage = (
   defenderHUD.predicatedDamage.set(predicatedDamage);
 
   if (deathAlert === "Player") {
-    props.se.play(props.sounds.deathAlert);
+    startPlayerDeathAlert(props);
+  } else {
+    stopDeathAlert(props);
   }
 };
