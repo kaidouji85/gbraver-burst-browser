@@ -4,6 +4,7 @@ import {
   correctedBattery,
   GameState,
   PlayerId,
+  PlayerState,
 } from "gbraver-burst-core";
 
 import { CustomBattleEventProps } from "../custom-battle-event";
@@ -19,6 +20,27 @@ const calcPredicatedDamage = (result: BattleResult): number =>
   result.name === "Guard"
     ? result.damage
     : 0;
+/**
+ * デスアラートの種類
+ * Player: プレイヤーが死亡する場合
+ * Enemy: 敵が死亡する場合
+ * None: どちらも死亡しない場合
+ */
+type DeathAlertType = "Player" | "Enemy" | "None";
+
+const calcDeathAlertType = (options: {
+  defender: PlayerState;
+  playerId: PlayerId;
+  predicatedDamage: number;
+}) => {
+  const { defender, playerId, predicatedDamage } = options;
+  const isPlayer = defender.playerId === playerId;
+  const isDeath = defender.armdozer.hp - predicatedDamage <= 0;
+  if (isDeath) {
+    return isPlayer ? "Player" : "Enemy";
+  }
+  return "None";
+};
 
 /** ダメージ予想に必要なデータ */
 type PredicatedDamageData = {
@@ -26,6 +48,8 @@ type PredicatedDamageData = {
   battleResult: BattleResult;
   /** ダメージ予想 */
   predicatedDamage: number;
+  /** デスアラートの種類 */
+  deathAlert: DeathAlertType;
 };
 
 /**
@@ -71,9 +95,15 @@ export const createPredicatedDamageData = (options: {
   const predicatedDamage = calcPredicatedDamage(
     battleResultForPredicatedDamage,
   );
+  const deathAlert = calcDeathAlertType({
+    defender,
+    playerId,
+    predicatedDamage,
+  });
   return {
     battleResult: battleResultForPredicatedDamage,
     predicatedDamage,
+    deathAlert,
   };
 };
 
