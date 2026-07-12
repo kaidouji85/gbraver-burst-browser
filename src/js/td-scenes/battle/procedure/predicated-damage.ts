@@ -9,6 +9,26 @@ import {
 import { CustomBattleEventProps } from "../custom-battle-event";
 
 /**
+ * ダメージ予想を計算する
+ * @param result 戦闘結果
+ * @returns ダメージ予想
+ */
+const calcPredicatedDamage = (result: BattleResult): number =>
+  result.name === "NormalHit" ||
+  result.name === "CriticalHit" ||
+  result.name === "Guard"
+    ? result.damage
+    : 0;
+
+/** ダメージ予想に必要なデータ */
+type PredicatedDamageData = {
+  /** 戦闘結果 */
+  battleResult: BattleResult;
+  /** ダメージ予想 */
+  predicatedDamage: number;
+};
+
+/**
  * ダメージ予想のための戦闘結果を取得する
  * @param options オプション
  * @param options.gameState ゲーム状態
@@ -16,11 +36,11 @@ import { CustomBattleEventProps } from "../custom-battle-event";
  * @param options.playerBattery プレイヤーが出すバッテリー
  * @returns 戦闘結果、データ不整合の場合はnull
  */
-export const getBattleResultForPredicatedDamage = (options: {
+export const createPredicatedDamageData = (options: {
   gameState: GameState;
   playerId: PlayerId;
   playerBattery: number;
-}): BattleResult | null => {
+}): PredicatedDamageData | null => {
   const { gameState, playerId, playerBattery } = options;
   const { players, activePlayerId } = gameState;
 
@@ -42,25 +62,20 @@ export const getBattleResultForPredicatedDamage = (options: {
     { type: "BATTERY_COMMAND", battery: defenderBattery },
     defender.armdozer.effects,
   );
-  return battleResult(
+  const battleResultForPredicatedDamage = battleResult(
     attacker,
     attackerCorrectedBattery,
     defender,
     defenderCorrectedBattery,
   );
+  const predicatedDamage = calcPredicatedDamage(
+    battleResultForPredicatedDamage,
+  );
+  return {
+    battleResult: battleResultForPredicatedDamage,
+    predicatedDamage,
+  };
 };
-
-/**
- * ダメージ予想を計算する
- * @param result 戦闘結果
- * @returns ダメージ予想
- */
-export const calcPredicatedDamage = (result: BattleResult): number =>
-  result.name === "NormalHit" ||
-  result.name === "CriticalHit" ||
-  result.name === "Guard"
-    ? result.damage
-    : 0;
 
 /**
  * ダメージ予想を更新する
@@ -83,13 +98,15 @@ export const updatePredicatedDamage = (
     return;
   }
 
-  const battleResult = getBattleResultForPredicatedDamage({
+  const predicatedDamageData = createPredicatedDamageData({
     gameState: latestState,
     playerId: props.playerId,
     playerBattery,
   });
-  const predicatedDamage = battleResult
-    ? calcPredicatedDamage(battleResult)
-    : 0;
+  if (!predicatedDamageData) {
+    return;
+  }
+
+  const { predicatedDamage } = predicatedDamageData;
   defenderHUD.predicatedDamage.set(predicatedDamage);
 };
