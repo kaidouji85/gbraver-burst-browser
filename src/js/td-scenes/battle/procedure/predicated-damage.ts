@@ -28,6 +28,14 @@ const calcPredicatedDamage = (result: BattleResult): number =>
  */
 type DeathAlertType = "Player" | "Enemy" | "None";
 
+/**
+ * デスアラートの種類を計算する
+ * @param options 計算に必要なオプション
+ * @param options.defender 防御側のプレイヤー状態
+ * @param options.playerId プレイヤーID
+ * @param options.predicatedDamage ダメージ予想
+ * @returns デスアラートの種類
+ */
 const calcDeathAlertType = (options: {
   defender: PlayerState;
   playerId: PlayerId;
