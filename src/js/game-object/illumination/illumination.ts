@@ -8,17 +8,17 @@ import type { IlluminationModel } from "./model/illumination-model";
 import { createInitialValue } from "./model/initial-value";
 import { IlluminationView } from "./view/illumination-view";
 
-/**
- * ステージ全体の照明
- */
+/** ステージ全体の照明 */
 export class Illumination {
+  /** モデル */
   #model: IlluminationModel;
+  /** ビュー */
   #view: IlluminationView;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(gameObjectAction: Observable<GameObjectAction>) {
@@ -42,7 +42,6 @@ export class Illumination {
 
   /**
    * シーンに追加するオブジェクトを配列で返す
-   *
    * @returns シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[] {
@@ -51,7 +50,6 @@ export class Illumination {
 
   /**
    * 照明の強さを変更する
-   *
    * @param value 照明の強さ
    * @param duration アニメーション時間
    * @returns アニメーション

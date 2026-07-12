@@ -9,10 +9,8 @@ import type { IlluminationModel } from "../model/illumination-model";
  * @param duration アニメーション時間
  * @returns アニメーション
  */
-export function intensity(
+export const intensity = (
   model: IlluminationModel,
   value: number,
   duration: number,
-): Animate {
-  return tween(model, (t) => t.to({ intensity: value }, duration));
-}
+): Animate => tween(model, (t) => t.to({ intensity: value }, duration));
