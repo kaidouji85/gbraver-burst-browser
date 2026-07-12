@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { GameObjectAction } from "../action/game-object-action";
+import { color } from "./animation/color";
 import { intensity } from "./animation/intensity";
 import type { IlluminationModel } from "./model/illumination-model";
 import { createInitialValue } from "./model/initial-value";
@@ -56,6 +57,20 @@ export class Illumination {
    */
   intensity(value: number, duration: number): Animate {
     return intensity(this.#model, value, duration);
+  }
+
+  /**
+   * 照明の色味を変更する
+   * @param model モデル
+   * @param value 変更する色味、0から1の範囲で指定する
+   * @param value.r 赤成分
+   * @param value.g 緑成分
+   * @param value.b 青成分
+   * @param duration アニメーション時間
+   * @returns アニメーション
+   */
+  color(value: { r: number; g: number; b: number }, duration: number): Animate {
+    return color(this.#model, value, duration);
   }
 
   /**
