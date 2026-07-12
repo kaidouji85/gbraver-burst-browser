@@ -2,6 +2,57 @@ import * as THREE from "three";
 
 import type { IlluminationModel } from "../model/illumination-model";
 
+/** ベースとなる照明の色 */
+const BaseLightColor = {
+  r: 170 / 255,
+  g: 170 / 255,
+  b: 170 / 255,
+};
+
+/**
+ * ディレクショナルライトにモデルを反映させる
+ * @param light モデルを反映させるディレクショナルライト
+ * @param model モデル
+ * @param intensityScale 光の強さのスケール
+ */
+const engageDirectionalLight = (
+  light: THREE.DirectionalLight,
+  model: IlluminationModel,
+  intensityScale: number,
+): void => {
+  light.color.setRGB(
+    BaseLightColor.r * model.color.r,
+    BaseLightColor.g * model.color.g,
+    BaseLightColor.b * model.color.b,
+  );
+  // three.js r155 から intensity に内部的にPIを乗算しないようになったので
+  // 前のバージョンと同じ照明になるようにPIを乗算している
+  // https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
+  light.intensity = model.intensity * Math.PI * intensityScale;
+};
+
+/**
+ * アンビエントライトにモデルを反映させる
+ * @param light モデルを反映させるアンビエントライト
+ * @param model モデル
+ * @param intensityScale 光の強さのスケール
+ */
+const engageAmbientLight = (
+  light: THREE.AmbientLight,
+  model: IlluminationModel,
+  intensityScale: number,
+): void => {
+  light.color.setRGB(
+    BaseLightColor.r * model.color.r,
+    BaseLightColor.g * model.color.g,
+    BaseLightColor.b * model.color.b,
+  );
+  // three.js r155 から intensity に内部的にPIを乗算しないようになったので
+  // 前のバージョンと同じ照明になるようにPIを乗算している
+  // https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
+  light.intensity = model.intensity * Math.PI * intensityScale;
+};
+
 /** ステージ全体の照明 ビュー */
 export class IlluminationView {
   #directionalLight1: THREE.DirectionalLight;
@@ -14,16 +65,15 @@ export class IlluminationView {
    * コンストラクタ
    */
   constructor() {
-    const lightColor = 0xaaaaaa;
-    this.#directionalLight1 = new THREE.DirectionalLight(lightColor);
+    this.#directionalLight1 = new THREE.DirectionalLight();
     this.#directionalLight1.position.set(1, 1, 1);
-    this.#directionalLight2 = new THREE.DirectionalLight(lightColor);
+    this.#directionalLight2 = new THREE.DirectionalLight();
     this.#directionalLight2.position.set(-1, 1, 1);
-    this.#directionalLight3 = new THREE.DirectionalLight(lightColor);
+    this.#directionalLight3 = new THREE.DirectionalLight();
     this.#directionalLight3.position.set(1, -1, 1);
-    this.#directionalLight4 = new THREE.DirectionalLight(lightColor);
+    this.#directionalLight4 = new THREE.DirectionalLight();
     this.#directionalLight4.position.set(-1, -1, 1);
-    this.#ambientLight = new THREE.AmbientLight(lightColor);
+    this.#ambientLight = new THREE.AmbientLight();
   }
 
   /**
@@ -56,13 +106,10 @@ export class IlluminationView {
    * @param model モデル
    */
   engage(model: IlluminationModel): void {
-    // three.js r155 から intensity に内部的にPIを乗算しないようになったので
-    // 前のバージョンと同じ照明になるようにPIを乗算している
-    // https://discourse.threejs.org/t/updates-to-lighting-in-three-js-r155/53733
-    this.#directionalLight1.intensity = model.intensity * Math.PI * 0.8;
-    this.#directionalLight2.intensity = model.intensity * Math.PI * 0.8;
-    this.#directionalLight3.intensity = model.intensity * Math.PI * 0.6;
-    this.#directionalLight4.intensity = model.intensity * Math.PI * 0.6;
-    this.#ambientLight.intensity = model.intensity * Math.PI * 0.8;
+    engageDirectionalLight(this.#directionalLight1, model, 0.8);
+    engageDirectionalLight(this.#directionalLight2, model, 0.8);
+    engageDirectionalLight(this.#directionalLight3, model, 0.6);
+    engageDirectionalLight(this.#directionalLight4, model, 0.6);
+    engageAmbientLight(this.#ambientLight, model, 0.8);
   }
 }
