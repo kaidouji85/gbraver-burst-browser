@@ -15,6 +15,11 @@ type DeathAlertProps = Readonly<SEPlayerContainer> & {
  * @param props ゲームプロパティ
  */
 export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
+  const isDeathAlertAlreadyPlaying = props.sounds.deathAlert.sound.playing();
+  if (isDeathAlertAlreadyPlaying) {
+    return;
+  }
+
   props.se.loop(props.sounds.deathAlert);
 };
 
