@@ -35,8 +35,8 @@ export function onDecideBatteryByMiniController(
     // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
     const decisionAnimation =
       props.controllerType === "BigButton"
-        ? decisionByBatterySelector(props.view)
-        : decisionByMiniController(props.view);
+        ? decisionByBatterySelector(props)
+        : decisionByMiniController(props);
     const playAnimation = createAnimationPlay(props);
     await playAnimation(decisionAnimation);
     await progressGame(props, batteryCommand);

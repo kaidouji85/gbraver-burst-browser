@@ -2,16 +2,18 @@ import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
 import { onStart } from "../../../animation/on-start";
-import { BattleSceneView } from "../view";
+import { stopDeathAlert } from "../procedure/death-alert";
+import { BattleSceneProps } from "../props";
 
 /**
  * バッテリーセレクタによる決定アニメーション
- * @param view ビュー
+ * @param props 戦闘シーンプロパティ
  * @returns アニメーション
  */
 export function decisionByBatterySelector(
-  view: Readonly<BattleSceneView>,
+  props: Readonly<BattleSceneProps>,
 ): Animate {
+  const { view } = props;
   return all(
     view.hud.gameObjects.batterySelector.decide(),
     view.hud.gameObjects.burstButton.close(),
@@ -26,6 +28,7 @@ export function decisionByBatterySelector(
     onStart(() => {
       view.dom.hamburgerMenu.disableBattleSimulator();
       view.dom.hamburgerMenu.disableStatusOpening();
+      stopDeathAlert(props);
     }),
   )
     .chain(delay(500))

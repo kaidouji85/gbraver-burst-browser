@@ -35,7 +35,7 @@ export function onDecideBattery(
     }
 
     const playAnimation = createAnimationPlay(props);
-    await playAnimation(decisionByBatterySelector(props.view));
+    await playAnimation(decisionByBatterySelector(props));
     await progressGame(props, batteryCommand);
   });
 }

@@ -32,8 +32,8 @@ export function onBurstByMiniController(
     // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
     const decisionAnimation =
       props.controllerType === "BigButton"
-        ? decisionByBurstButton(props.view)
-        : decisionByMiniController(props.view);
+        ? decisionByBurstButton(props)
+        : decisionByMiniController(props);
     const playAnimation = createAnimationPlay(props);
     await playAnimation(decisionAnimation);
     await progressGame(props, burstCommand);
