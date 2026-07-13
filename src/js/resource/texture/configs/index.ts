@@ -3,6 +3,7 @@ import { BatteryNumberTextureConfigs } from "./battery-number";
 import { BatterySelectorTextureConfigs } from "./battery-selector";
 import { BattleSimulatorIconConfigs } from "./battle-simulator-icon";
 import { DamageNumberTextureConfigs } from "./damage-number";
+import { DeathAlertTextureConfigs } from "./death-alert";
 import { EffectLabelTextureConfigs } from "./effect-label";
 import { GaiTextureConfigs } from "./gai";
 import { GaugeTextureConfigs } from "./gauge";
@@ -52,4 +53,5 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   ...ShotTextureConfigs,
   ...StatusIconConfigs,
   ...BattleSimulatorIconConfigs,
+  ...DeathAlertTextureConfigs,
 ];
