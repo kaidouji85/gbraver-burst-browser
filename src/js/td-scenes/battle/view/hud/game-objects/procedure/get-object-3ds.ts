@@ -18,6 +18,7 @@ export function getObject3Ds(props: HUDGameObjectsProps): THREE.Object3D[] {
     props.timeScaleButton.getObject3D(),
     props.rearmostFader.getObject3D(),
     props.frontmostFader.getObject3D(),
+    props.deathAlertVignette.getObject3D(),
     props.drawIndicator.getObject3D(),
   ];
 }

@@ -14,5 +14,6 @@ export function destructor(props: HUDGameObjectsProps) {
   props.timeScaleButton.destructor();
   props.rearmostFader.destructor();
   props.frontmostFader.destructor();
+  props.deathAlertVignette.destructor();
   props.drawIndicator.destructor();
 }

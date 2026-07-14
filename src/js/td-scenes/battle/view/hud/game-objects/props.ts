@@ -26,6 +26,8 @@ export type HUDGameObjectsProps = {
   frontmostFader: Fader;
   /** フェーダ（最後尾） */
   rearmostFader: Fader;
+  /** デスアラートビネット用フェーダー */
+  deathAlertVignette: Fader;
   /** 引き分けインジケータ */
   drawIndicator: ResultIndicator;
 };
