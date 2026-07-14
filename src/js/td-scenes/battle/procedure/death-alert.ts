@@ -10,6 +10,9 @@ type DeathAlertProps = Readonly<SEPlayerContainer> & {
   readonly sounds: BattleSceneSounds;
 };
 
+/** フェード時間（ミリ秒） */
+const fadeDuration = 200;
+
 /**
  * デスアラートがすでに再生中かどうかを判定する
  * @param props ゲームプロパティ
@@ -30,7 +33,7 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   props.se.loop(props.sounds.deathAlert);
-  props.view.hud.gameObjects.deathAlertVignette.fadeOut().play();
+  props.view.hud.gameObjects.deathAlertVignette.fadeOut(fadeDuration).play();
 };
 
 /**
@@ -43,5 +46,5 @@ export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   props.sounds.deathAlert.sound.stop();
-  props.view.hud.gameObjects.deathAlertVignette.fadeIn().play();
+  props.view.hud.gameObjects.deathAlertVignette.fadeIn(fadeDuration).play();
 };
