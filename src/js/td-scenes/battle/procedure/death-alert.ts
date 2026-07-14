@@ -33,7 +33,7 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   props.se.loop(props.sounds.deathAlert);
-  props.view.hud.gameObjects.deathAlertVignette.fadeOut(fadeDuration).play();
+  props.view.hud.gameObjects.deathAlertVignette.manualFadeOut(fadeDuration);
 };
 
 /**
@@ -46,5 +46,5 @@ export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   props.sounds.deathAlert.sound.stop();
-  props.view.hud.gameObjects.deathAlertVignette.fadeIn(fadeDuration).play();
+  props.view.hud.gameObjects.deathAlertVignette.manualFadeIn(fadeDuration);
 };

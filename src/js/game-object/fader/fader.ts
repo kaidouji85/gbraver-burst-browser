@@ -1,8 +1,10 @@
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
 import type { PreRender } from "../../game-loop/pre-render";
+import { Update } from "../../game-loop/update";
 import type { GameObjectAction } from "../action/game-object-action";
 import { fadeIn } from "./animation/fade-in";
 import { fadeOut } from "./animation/fade-out";
@@ -27,6 +29,8 @@ export class Fader {
   #model: FaderModel;
   /** ビュー */
   #view: FaderView;
+  /** 手動フェード用のTWEENグループ */
+  #tweenGroup: TWEEN.Group = new TWEEN.Group();
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
@@ -38,7 +42,9 @@ export class Fader {
     this.#model = createInitialValue(param.isVisible);
     this.#view = param.view;
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
-      if (action.type === "PreRender") {
+      if (action.type === "Update") {
+        this.#onUpdate(action);
+      } else if (action.type === "PreRender") {
         this.#onPreRender(action);
       }
     });
@@ -62,12 +68,28 @@ export class Fader {
   }
 
   /**
+   * マニュアルフェードイン
+   * @param duration アニメーションの時間（ミリ秒）、省略時は500
+   */
+  manualFadeIn(duration: number = 500): void {
+    fadeIn(this.#model, duration).play({ group: this.#tweenGroup });
+  }
+
+  /**
    * フェードアウト
    * @param duration アニメーションの時間（ミリ秒）、省略時は500
    * @returns アニメーション
    */
   fadeOut(duration: number = 500): Animate {
     return fadeOut(this.#model, duration);
+  }
+
+  /**
+   * マニュアルフェードアウト
+   * @param duration アニメーションの時間（ミリ秒）、省略時は500
+   */
+  manualFadeOut(duration: number = 500): void {
+    fadeOut(this.#model, duration).play({ group: this.#tweenGroup });
   }
 
   /**
@@ -86,6 +108,14 @@ export class Fader {
    */
   getObject3D(): THREE.Object3D {
     return this.#view.getObject3D();
+  }
+
+  /**
+   * アップデートの際の処理
+   * @param action アクション
+   */
+  #onUpdate(action: Update): void {
+    this.#tweenGroup.update(action.time);
   }
 
   /**
