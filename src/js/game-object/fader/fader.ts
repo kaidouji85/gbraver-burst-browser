@@ -15,28 +15,28 @@ import { FaderView } from "./view/fader-view";
 type Param = {
   /** 表示フラグ、trueで表示する */
   isVisible: boolean;
-
   /** ゲームオブジェクトアクション */
   gameObjectAction: Observable<GameObjectAction>;
-
-  /** Z座標 */
-  z: number;
+  /** ビュー */
+  view: FaderView;
 };
 
 /** 画面フェーダー */
 export class Fader {
+  /** モデル */
   #model: FaderModel;
+  /** ビュー */
   #view: FaderView;
+  /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
   /**
    * コンストラクタ
-   *
    * @param param パラメータ
    */
   constructor(param: Param) {
     this.#model = createInitialValue(param.isVisible);
-    this.#view = new FaderView(param.z);
+    this.#view = param.view;
     this.#unsubscriber = param.gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
         this.#onPreRender(action);
@@ -44,7 +44,9 @@ export class Fader {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
@@ -52,7 +54,6 @@ export class Fader {
 
   /**
    * フェードイン
-   *
    * @returns アニメーション
    */
   fadeIn(): Animate {
@@ -61,7 +62,6 @@ export class Fader {
 
   /**
    * フェードアウト
-   *
    * @returns アニメーション
    */
   fadeOut(): Animate {
@@ -70,7 +70,6 @@ export class Fader {
 
   /**
    * 不透明度を変更
-   *
    * @param value 不透明度
    * @param duration アニメーション時間
    * @returns アニメーション
@@ -81,7 +80,6 @@ export class Fader {
 
   /**
    * シーンに追加するオブジェクトを取得する
-   *
    * @returns シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
@@ -90,7 +88,6 @@ export class Fader {
 
   /**
    * プリレンダーの際の処理
-   *
    * @param action アクション
    */
   #onPreRender(action: PreRender): void {
