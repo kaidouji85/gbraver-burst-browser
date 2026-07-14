@@ -11,7 +11,7 @@ type DeathAlertProps = Readonly<SEPlayerContainer> & {
 };
 
 /** フェード時間（ミリ秒） */
-const fadeDuration = 200;
+const fadeDuration = 300;
 
 /**
  * デスアラートがすでに再生中かどうかを判定する
