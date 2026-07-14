@@ -10,9 +10,9 @@ export default {
 export const deathAlert = hudGameObjectStory((params) => {
   const vignette = deathAlertVignette({ ...params, isVisible: false });
   delay(1000)
-    .chain(vignette.fadeIn())
-    .chain(delay(1000))
     .chain(vignette.fadeOut())
+    .chain(delay(1000))
+    .chain(vignette.fadeIn())
     .chain(delay(1000))
     .loop();
   return [vignette.getObject3D()];
