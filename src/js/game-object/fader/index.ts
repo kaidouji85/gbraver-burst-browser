@@ -7,7 +7,7 @@ import { PlaneFaderView } from "./view/plane-fader-view";
 
 /**
  * 最前面画面フェーダ
- * @options options オプション
+ * @param options オプション
  * @param options.gameObjectAction ゲームオブジェクトアクション
  * @param options.isVisible 表示フラグ、trueで表示する
  * @returns 画面フェーダ
@@ -53,7 +53,7 @@ export function rearmostFader(
  * @param options.resources リソース管理オブジェクト
  * @param options.gameObjectAction ゲームオブジェクトアクション
  * @param options.isVisible 表示フラグ、trueで表示する
- * @returns デスアラートビュー
+ * @returns  デスアラートビネット用の画面フェーダ
  */
 export function deathAlertVignette(
   options: ResourcesContainer &

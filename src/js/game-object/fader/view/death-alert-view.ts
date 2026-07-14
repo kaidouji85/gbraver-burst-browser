@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
 import { Resources } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
+import { TEXTURE_IDS } from "../../../resource/texture/ids";
 import type { FaderModel } from "../model/fader-model";
 import type { FaderView } from "./fader-view";
 
@@ -25,7 +26,10 @@ export class DeathAlertView implements FaderView {
    */
   constructor(options: { resources: Resources; z: number }) {
     const { z, resources } = options;
-    const texture = findTextureOrThrow(resources, "DEATH_ALERT_VIGNETTE");
+    const texture = findTextureOrThrow(
+      resources,
+      TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
+    );
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
       color: "rgb(255, 0, 0)",
