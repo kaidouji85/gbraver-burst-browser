@@ -1,25 +1,13 @@
 import { Animate } from "../../../animation/animate";
-import { onStart } from "../../../animation/on-start";
 import { tween } from "../../../animation/tween";
 import type { FaderModel } from "../model/fader-model";
 
 /**
  * フェードイン
- *
  * @param model モデル
+ * @param duration アニメーションの時間（ミリ秒）
  * @returns アニメーション
  */
-export function fadeIn(model: FaderModel): Animate {
-  return onStart(() => {
-    model.opacity = 1;
-  }).chain(
-    tween(model, (t) =>
-      t.to(
-        {
-          opacity: 0,
-        },
-        500,
-      ),
-    ),
-  );
+export function fadeIn(model: FaderModel, duration: number): Animate {
+  return tween(model, (t) => t.to({ opacity: 0 }, duration));
 }

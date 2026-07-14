@@ -54,18 +54,20 @@ export class Fader {
 
   /**
    * フェードイン
+   * @param duration アニメーションの時間（ミリ秒）、省略時は500
    * @returns アニメーション
    */
-  fadeIn(): Animate {
-    return fadeIn(this.#model);
+  fadeIn(duration: number = 500): Animate {
+    return fadeIn(this.#model, duration);
   }
 
   /**
    * フェードアウト
+   * @param duration アニメーションの時間（ミリ秒）、省略時は500
    * @returns アニメーション
    */
-  fadeOut(): Animate {
-    return fadeOut(this.#model);
+  fadeOut(duration: number = 500): Animate {
+    return fadeOut(this.#model, duration);
   }
 
   /**
