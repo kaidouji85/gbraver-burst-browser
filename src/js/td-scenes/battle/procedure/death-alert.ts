@@ -21,6 +21,7 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   props.se.loop(props.sounds.deathAlert);
+  //props.view.hud.gameObjects.deathAlertVignette.fadeOut().play();
 };
 
 /**
@@ -29,4 +30,5 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
  */
 export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
   props.sounds.deathAlert.sound.stop();
+  //props.view.hud.gameObjects.deathAlertVignette.fadeIn().play();
 };
