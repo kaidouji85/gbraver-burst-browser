@@ -34,7 +34,7 @@ export class DeathAlertView implements FaderView {
     const material = new THREE.MeshBasicMaterial({
       color: "rgb(255, 0, 0)",
       transparent: true,
-      map: texture.texture,
+      alphaMap: texture.texture,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
     this.#mesh.position.z = z;
