@@ -72,6 +72,8 @@ export class Fader {
    * @param duration アニメーションの時間（ミリ秒）、省略時は500
    */
   manualFadeIn(duration: number = 500): void {
+    this.#tweenGroup.update();
+    this.#tweenGroup.removeAll();
     fadeIn(this.#model, duration).play({ group: this.#tweenGroup });
   }
 
@@ -81,6 +83,8 @@ export class Fader {
    * @returns アニメーション
    */
   fadeOut(duration: number = 500): Animate {
+    this.#tweenGroup.update();
+    this.#tweenGroup.removeAll();
     return fadeOut(this.#model, duration);
   }
 
