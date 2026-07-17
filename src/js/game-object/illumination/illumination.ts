@@ -1,7 +1,9 @@
+import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../animation/animate";
+import { Update } from "../../game-loop/update";
 import type { GameObjectAction } from "../action/game-object-action";
 import { color } from "./animation/color";
 import { intensity } from "./animation/intensity";
@@ -15,6 +17,9 @@ export class Illumination {
   #model: IlluminationModel;
   /** ビュー */
   #view: IlluminationView;
+  /** Tweenグループ */
+  #tweenGroup: TWEEN.Group = new TWEEN.Group();
+
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
 
@@ -28,7 +33,7 @@ export class Illumination {
     this.#view.engage(this.#model);
     this.#unsubscriber = gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
-        this.#onUpdate();
+        this.#onUpdate(action);
       }
     });
   }
@@ -37,6 +42,7 @@ export class Illumination {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this.#tweenGroup.removeAll();
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
@@ -61,6 +67,18 @@ export class Illumination {
   }
 
   /**
+   * 割り込み可能な照明の強さ変更
+   * 1が標準の強さで、0に近づくほど暗くなる
+   * @param value 照明の強さ
+   * @param duration アニメーション時間
+   */
+  interruptToIntensity(value: number, duration: number): void {
+    this.#tweenGroup.update();
+    this.#tweenGroup.removeAll();
+    intensity(this.#model, value, duration).play({ group: this.#tweenGroup });
+  }
+
+  /**
    * 照明の色味を変更する
    * 1がベースの色味で、0に近づくほど暗くなる
    * @param value 変更する色味
@@ -77,7 +95,8 @@ export class Illumination {
   /**
    * アップデート時の処理
    */
-  #onUpdate(): void {
+  #onUpdate(action: Update): void {
+    this.#tweenGroup.update(action.time);
     this.#view.engage(this.#model);
   }
 }

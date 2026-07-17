@@ -29,7 +29,7 @@ export class Fader {
   #model: FaderModel;
   /** ビュー */
   #view: FaderView;
-  /** 手動フェード用のTWEENグループ */
+  /** 割り込み可能アニメのTWEENグループ */
   #tweenGroup: TWEEN.Group = new TWEEN.Group();
   /** アンサブスクライバ */
   #unsubscriber: Unsubscribable;
@@ -54,6 +54,7 @@ export class Fader {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this.#tweenGroup.removeAll();
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();
   }
@@ -89,11 +90,11 @@ export class Fader {
   }
 
   /**
-   * マニュアルで不透明度を変更
+   * 割り込み可能な不透明度変更
    * @param value 不透明度
    * @param duration アニメーション時間
    */
-  manualOpacity(value: number, duration: number): void {
+  interruptToOpacity(value: number, duration: number): void {
     this.#tweenGroup.update();
     this.#tweenGroup.removeAll();
     opacity(this.#model, value, duration).play({ group: this.#tweenGroup });
