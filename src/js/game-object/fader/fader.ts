@@ -68,16 +68,6 @@ export class Fader {
   }
 
   /**
-   * マニュアルフェードイン
-   * @param duration アニメーションの時間（ミリ秒）、省略時は500
-   */
-  manualFadeIn(duration: number = 500): void {
-    this.#tweenGroup.update();
-    this.#tweenGroup.removeAll();
-    fadeIn(this.#model, duration).play({ group: this.#tweenGroup });
-  }
-
-  /**
    * フェードアウト
    * @param duration アニメーションの時間（ミリ秒）、省略時は500
    * @returns アニメーション
@@ -89,14 +79,6 @@ export class Fader {
   }
 
   /**
-   * マニュアルフェードアウト
-   * @param duration アニメーションの時間（ミリ秒）、省略時は500
-   */
-  manualFadeOut(duration: number = 500): void {
-    fadeOut(this.#model, duration).play({ group: this.#tweenGroup });
-  }
-
-  /**
    * 不透明度を変更
    * @param value 不透明度
    * @param duration アニメーション時間
@@ -104,6 +86,17 @@ export class Fader {
    */
   opacity(value: number, duration: number): Animate {
     return opacity(this.#model, value, duration);
+  }
+
+  /**
+   * マニュアルで不透明度を変更
+   * @param value 不透明度
+   * @param duration アニメーション時間
+   */
+  manualOpacity(value: number, duration: number): void {
+    this.#tweenGroup.update();
+    this.#tweenGroup.removeAll();
+    opacity(this.#model, value, duration).play({ group: this.#tweenGroup });
   }
 
   /**
