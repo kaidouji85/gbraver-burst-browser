@@ -32,15 +32,12 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
     return;
   }
 
+  const { deathAlertVignette } = props.view.hud.gameObjects;
+  const { illumination, skyBrightness } = props.view.td.gameObjects;
   props.se.loop(props.sounds.deathAlert);
-  props.view.hud.gameObjects.deathAlertVignette.interruptToOpacity(
-    1,
-    fadeDuration,
-  );
-  props.view.hud.gameObjects.rearmostFader.interruptToOpacity(
-    0.2,
-    fadeDuration,
-  );
+  deathAlertVignette.interruptToOpacity(1, fadeDuration);
+  illumination.interruptToIntensity(0.25, fadeDuration);
+  skyBrightness.interruptToBrightness(0.25, fadeDuration);
 };
 
 /**
@@ -52,10 +49,10 @@ export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
     return;
   }
 
+  const { deathAlertVignette } = props.view.hud.gameObjects;
+  const { illumination, skyBrightness } = props.view.td.gameObjects;
   props.sounds.deathAlert.sound.stop();
-  props.view.hud.gameObjects.deathAlertVignette.interruptToOpacity(
-    0,
-    fadeDuration,
-  );
-  props.view.hud.gameObjects.rearmostFader.interruptToOpacity(0, fadeDuration);
+  deathAlertVignette.interruptToOpacity(0, fadeDuration);
+  illumination.interruptToIntensity(1, fadeDuration);
+  skyBrightness.interruptToBrightness(1, fadeDuration);
 };
