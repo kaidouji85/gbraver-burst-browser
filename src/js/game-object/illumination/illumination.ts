@@ -94,6 +94,7 @@ export class Illumination {
 
   /**
    * アップデート時の処理
+   * @param action アクション情報
    */
   #onUpdate(action: Update): void {
     this.#tweenGroup.update(action.time);
