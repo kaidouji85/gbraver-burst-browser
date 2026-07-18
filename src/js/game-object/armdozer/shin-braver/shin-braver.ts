@@ -31,6 +31,7 @@ import {
   PropsCreatorParams,
 } from "./props/create-shin-braver-props";
 import { ShinBraverProps } from "./props/shin-braver-props";
+import { defeated } from "./animation/defeated";
 
 /** コンストラクタのパラメータ */
 type ShinBraverParams = PropsCreatorParams & {
@@ -152,6 +153,11 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#props);
+  }
+
+  /**@override */
+  defeated(): Animate {
+    return defeated(this.#props);
   }
 
   /** @override */
