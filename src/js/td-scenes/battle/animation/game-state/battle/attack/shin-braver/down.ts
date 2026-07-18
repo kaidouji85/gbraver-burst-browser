@@ -31,9 +31,7 @@ export function down(param: ShinBraverBattle<DownResult>): Animate {
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         onStart(() => param.bgm.do(stop)),
-        param.defenderSprite
-          .defeated()
-          .chain(delay(1000))
+        all(param.defenderSprite.knockBack(), delay(1000))
           .chain(param.defenderSprite.down())
           .chain(
             all(
