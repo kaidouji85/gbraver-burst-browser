@@ -11,6 +11,7 @@ import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
+import { defeated } from "./animation/defeated";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
@@ -31,7 +32,6 @@ import {
   PropsCreatorParams,
 } from "./props/create-shin-braver-props";
 import { ShinBraverProps } from "./props/shin-braver-props";
-import { defeated } from "./animation/defeated";
 
 /** コンストラクタのパラメータ */
 type ShinBraverParams = PropsCreatorParams & {
