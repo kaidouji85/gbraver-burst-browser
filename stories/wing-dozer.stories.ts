@@ -111,7 +111,12 @@ export const enemyActiveDash = armdozerSpriteStub(EnemyWingDozer, activeDash);
  * @param sprite スプライト
  */
 const down = (sprite: WingDozer) => {
-  sprite.down().chain(delay(2000)).loop();
+  delay(1000)
+    .chain(sprite.defeated())
+    .chain(delay(1000))
+    .chain(sprite.down())
+    .chain(delay(2000))
+    .loop();
 };
 
 /**

@@ -11,6 +11,7 @@ import { bowUp } from "./animation/bow-up";
 import { charge } from "./animation/charge";
 import { dash } from "./animation/dash";
 import { dashToStand } from "./animation/dash-to-stand";
+import { defeated } from "./animation/defeated";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
@@ -154,6 +155,11 @@ export class WingDozer extends EmptyArmdozerSprite implements ArmdozerSprite {
   /** @override */
   avoidToStand(): Animate {
     return frontStep(this.#props);
+  }
+
+  /** @override */
+  defeated(): Animate {
+    return defeated(this.#props);
   }
 
   /** @override */
