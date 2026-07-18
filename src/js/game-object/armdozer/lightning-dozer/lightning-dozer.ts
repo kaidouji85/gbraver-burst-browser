@@ -164,6 +164,11 @@ export class LightningDozer
   }
 
   /** @override */
+  defeated(): Animate {
+    return knockBack(this.#props);
+  }
+
+  /** @override */
   down(): Animate {
     return down(this.#props);
   }
