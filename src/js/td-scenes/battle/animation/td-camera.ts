@@ -64,6 +64,7 @@ type ShakeYOptions = {
 /**
  * カメラをY軸方向に揺らす
  * @param camera カメラ
+ * @param options オプション
  * @returns アニメーション
  */
 export function shakeY(camera: TDCamera, options?: ShakeYOptions): Animate {
