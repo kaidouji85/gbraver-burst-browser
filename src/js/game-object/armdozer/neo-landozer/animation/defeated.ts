@@ -6,15 +6,15 @@ import { tween } from "../../../../animation/tween";
 import { NeoLandozerAnimationProps } from "./animation-props";
 
 /**
- * ダウン
+ * 倒された
  * @param props アニメーションプロパティ
  * @returns アニメーション
  */
-export function down(props: NeoLandozerAnimationProps): Animate {
+export function defeated(props: NeoLandozerAnimationProps): Animate {
   const { model } = props;
   return tween(model.animation, (t) =>
-    t.to({ frame: 0 }, 0).onStart(() => {
-      model.animation.type = "DOWN";
+    t.to({ frame: 1 }, 0).onStart(() => {
+      model.animation.type = "KNOCK_BACK";
     }),
-  ).chain(tween(model.animation, (t) => t.to({ frame: 1 }, 300)));
+  );
 }
