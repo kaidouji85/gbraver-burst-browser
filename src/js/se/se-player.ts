@@ -17,6 +17,13 @@ export interface SEPlayer {
    * @param option 再生オプション
    */
   play(sound: SoundResource, option?: SEPlayerOptions): void;
+
+  /**
+   * 効果音をループ再生する
+   * @param sound ループ再生する効果音
+   * @param option 再生オプション
+   */
+  loop(sound: SoundResource, option?: SEPlayerOptions): void;
 }
 
 /** SE再生オブジェクトのシンプルな実装 */
@@ -35,6 +42,15 @@ class SimpleSEPlayer implements SEPlayer {
   play(sound: SoundResource, option?: SEPlayerOptions): void {
     const playVolume = option?.volume ?? 1;
     sound.sound.volume(this.volume * sound.volumeScale * playVolume);
+    sound.sound.loop(false);
+    sound.sound.play();
+  }
+
+  /** @override */
+  loop(sound: SoundResource, option?: SEPlayerOptions): void {
+    const playVolume = option?.volume ?? 1;
+    sound.sound.volume(this.volume * sound.volumeScale * playVolume);
+    sound.sound.loop(true);
     sound.sound.play();
   }
 }

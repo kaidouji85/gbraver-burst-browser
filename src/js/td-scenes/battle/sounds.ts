@@ -15,6 +15,8 @@ export type BattleSceneSounds = {
   readonly bigExplosion: SoundResource;
   /** 値変更音 */
   readonly changeValue: SoundResource;
+  /** 死亡アラート */
+  readonly deathAlert: SoundResource;
   /** 戦闘BGM */
   readonly bgm: SoundResource;
   /** 勝利BGM */
@@ -53,6 +55,9 @@ export function createBattleSceneSounds(
       createEmptySoundResource(),
     changeValue:
       resources.sounds.find((v) => v.id === SOUND_IDS.CHANGE_VALUE) ??
+      createEmptySoundResource(),
+    deathAlert:
+      resources.sounds.find((v) => v.id === SOUND_IDS.DEATH_ALERT) ??
       createEmptySoundResource(),
     bgm:
       resources.sounds.find((v) => v.id === playingBGM) ??

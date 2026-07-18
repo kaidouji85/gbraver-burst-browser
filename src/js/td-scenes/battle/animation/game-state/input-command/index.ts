@@ -3,8 +3,10 @@ import { GameStateX, InputCommand } from "gbraver-burst-core";
 import { all } from "../../../../../animation/all";
 import { Animate } from "../../../../../animation/animate";
 import { empty } from "../../../../../animation/delay";
+import { onStart } from "../../../../../animation/on-start";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
+import { startPlayerDeathAlert } from "../../../procedure/death-alert";
 import { createPredicatedDamageData } from "../../../procedure/predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
@@ -49,6 +51,7 @@ export function inputCommandAnimation(
     playerBattery,
   });
   const predicatedDamage = predicatedDamageData?.predicatedDamage ?? 0;
+  const deathAlert = predicatedDamageData?.deathAlert ?? "None";
   return all(
     updateGauge(view.hud.players, players),
     showCommand({
@@ -62,5 +65,10 @@ export function inputCommandAnimation(
     ...view.hud.players.map((p) => p.statusIcon.open()),
     activeArmdozerSprite(view.td.armdozers, activePlayerId),
     defenderHUD.predicatedDamage.show(predicatedDamage),
+    onStart(() => {
+      if (deathAlert === "Player") {
+        startPlayerDeathAlert(props);
+      }
+    }),
   );
 }

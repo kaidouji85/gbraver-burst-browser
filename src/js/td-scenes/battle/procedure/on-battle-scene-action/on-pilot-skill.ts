@@ -33,7 +33,7 @@ export function onPilotSkill(
     }
 
     const playAnimation = createAnimationPlay(props);
-    await playAnimation(decisionByPilotButton(props.view));
+    await playAnimation(decisionByPilotButton(props));
     await progressGame(props, pilotSkillCommand);
   });
 }

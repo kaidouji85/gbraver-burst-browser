@@ -32,8 +32,8 @@ export function onPilotSkillByMiniController(
     // コントローラーが「おおきいボタン」の場合でも、本関数は呼ばれうる
     const decisionAnimation =
       props.controllerType === "BigButton"
-        ? decisionByPilotButton(props.view)
-        : decisionByMiniController(props.view);
+        ? decisionByPilotButton(props)
+        : decisionByMiniController(props);
     const playAnimation = createAnimationPlay(props);
     await playAnimation(decisionAnimation);
     await progressGame(props, pilotSkillCommand);

@@ -62,7 +62,7 @@ export function deathAlertVignette(
     },
 ): Fader {
   const { resources, isVisible, gameObjectAction } = options;
-  const view = new DeathAlertView({ resources, z: HUD_FROMTMOST_FADER_Z });
+  const view = new DeathAlertView({ resources, z: HUD_REARMOST_FADER_Z });
   return new Fader({
     isVisible,
     gameObjectAction,
