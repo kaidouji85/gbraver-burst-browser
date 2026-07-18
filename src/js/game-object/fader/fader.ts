@@ -74,8 +74,6 @@ export class Fader {
    * @returns アニメーション
    */
   fadeOut(duration: number = 500): Animate {
-    this.#tweenGroup.update();
-    this.#tweenGroup.removeAll();
     return fadeOut(this.#model, duration);
   }
 
