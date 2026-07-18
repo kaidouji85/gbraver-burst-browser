@@ -42,6 +42,7 @@ class SimpleSEPlayer implements SEPlayer {
   play(sound: SoundResource, option?: SEPlayerOptions): void {
     const playVolume = option?.volume ?? 1;
     sound.sound.volume(this.volume * sound.volumeScale * playVolume);
+    sound.sound.loop(false);
     sound.sound.play();
   }
 
