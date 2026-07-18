@@ -10,7 +10,6 @@ import { avoid } from "./animation/avoid";
 import { bowDown } from "./animation/bow-down";
 import { bowUp } from "./animation/bow-up";
 import { charge } from "./animation/charge";
-import { defeated } from "./animation/defeated";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
@@ -158,7 +157,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /** @override */
   defeated(): Animate {
-    return defeated(this.#props);
+    return knockBack(this.#props);
   }
 
   /** @override */

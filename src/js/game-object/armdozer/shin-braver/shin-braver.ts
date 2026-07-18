@@ -11,7 +11,6 @@ import { bowUp } from "./animation/bow-up";
 import { burst } from "./animation/burst";
 import { burstToStand } from "./animation/burst-to-stand";
 import { charge } from "./animation/charge";
-import { defeated } from "./animation/defeated";
 import { down } from "./animation/down";
 import { endActive } from "./animation/end-active";
 import { frontStep } from "./animation/front-step";
@@ -157,7 +156,7 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
 
   /**@override */
   defeated(): Animate {
-    return defeated(this.#props);
+    return knockBack(this.#props);
   }
 
   /** @override */
