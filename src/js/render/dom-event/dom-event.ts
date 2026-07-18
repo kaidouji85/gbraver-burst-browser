@@ -15,12 +15,7 @@ import {
 
 /** three.js Renderer要素のイベントをまとめたもの */
 export type RendererDOMEvent =
-  | MouseDown
-  | MouseMove
-  | MouseUp
-  | TouchStart
-  | TouchMove
-  | TouchEnd;
+  MouseDown | MouseMove | MouseUp | TouchStart | TouchMove | TouchEnd;
 
 /**
  * three.js Renderer要素のイベントストリームを生成する
