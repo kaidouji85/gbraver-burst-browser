@@ -286,7 +286,7 @@ export const enemyActiveAvoid = armdozerSpriteStub(
  */
 const down = (sprite: ShinBraver) => {
   delay(1000)
-    .chain(sprite.defeated())
+    .chain(sprite.knockBack())
     .chain(delay(1000))
     .chain(sprite.down())
     .chain(delay(1000))

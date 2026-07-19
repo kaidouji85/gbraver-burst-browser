@@ -151,7 +151,7 @@ export const enemyActiveKnockBack = armdozerSpriteStub(
  */
 const down = (sprite: GranDozer) => {
   delay(1000)
-    .chain(sprite.defeated())
+    .chain(sprite.knockBack())
     .chain(delay(1000))
     .chain(sprite.down())
     .chain(delay(2000))

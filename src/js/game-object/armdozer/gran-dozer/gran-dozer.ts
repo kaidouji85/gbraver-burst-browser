@@ -121,11 +121,6 @@ export class GranDozer extends EmptyArmdozerSprite {
   }
 
   /** @override */
-  defeated(): Animate {
-    return knockBack(this.#props);
-  }
-
-  /** @override */
   down(): Animate {
     return down(this.#props);
   }

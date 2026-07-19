@@ -154,11 +154,6 @@ export class ShinBraver extends EmptyArmdozerSprite implements ArmdozerSprite {
     return frontStep(this.#props);
   }
 
-  /**@override */
-  defeated(): Animate {
-    return knockBack(this.#props);
-  }
-
   /** @override */
   down(): Animate {
     return down(this.#props);

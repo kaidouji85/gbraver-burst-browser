@@ -89,11 +89,6 @@ export class EmptyArmdozerSprite implements ArmdozerSprite {
   }
 
   /** @override */
-  defeated(): Animate {
-    return empty();
-  }
-
-  /** @override */
   down(): Animate {
     return empty();
   }

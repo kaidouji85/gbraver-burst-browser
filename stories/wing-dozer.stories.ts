@@ -112,7 +112,7 @@ export const enemyActiveDash = armdozerSpriteStub(EnemyWingDozer, activeDash);
  */
 const down = (sprite: WingDozer) => {
   delay(1000)
-    .chain(sprite.defeated())
+    .chain(sprite.knockBack())
     .chain(delay(1000))
     .chain(sprite.down())
     .chain(delay(2000))
