@@ -27,9 +27,7 @@ export function down(param: GenesisBraverBattle<DownResult>): Animate {
       all(
         param.tdObjects.skyBrightness.brightness(0.3, 100),
         param.tdObjects.illumination.intensity(0.3, 100),
-        delay(2100)
-          .chain(param.attackerSprite.spToStand())
-          .chain(delay(500)),
+        delay(2100).chain(param.attackerSprite.spToStand()).chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         onStart(() => param.bgm.do(stop)),
