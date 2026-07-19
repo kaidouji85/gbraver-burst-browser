@@ -68,5 +68,6 @@ export function createReflectAnimationParam(
     se,
     bigExplosion,
     tdCamera: view.td.camera,
+    tdObjects: view.td.gameObjects,
   };
 }

@@ -42,7 +42,7 @@ export class GenesisBraver
   implements ArmdozerSprite
 {
   /** @override */
-  downImpactDelay = 800;
+  downImpactDelay = 200;
 
   /** プロパティ */
   #props: GenesisBraverProps;

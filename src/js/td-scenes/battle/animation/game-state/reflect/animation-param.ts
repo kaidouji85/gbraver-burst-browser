@@ -7,6 +7,7 @@ import { ResultIndicator } from "../../../../../game-object/result-indicator/res
 import { SoundResource } from "../../../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDPlayer } from "../../../view/hud/player";
+import { TDGameObjects } from "../../../view/td/game-objects";
 import { TDPlayer } from "../../../view/td/player";
 
 /** ダメージ反射アニメーション パラメータ */
@@ -37,6 +38,8 @@ export type ReflectAnimationParam = BGMManagerContainer &
 
     /** 3Dカメラ */
     readonly tdCamera: TDCamera;
+    /** 3Dレイヤーゲームオブジェクト */
+    readonly tdObjects: TDGameObjects;
 
     /** 大爆発SE */
     readonly bigExplosion: SoundResource;

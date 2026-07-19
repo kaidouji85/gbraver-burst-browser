@@ -25,17 +25,25 @@ export function down(param: WingDozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.upper())
     .chain(
       all(
-        delay(1800)
+        param.tdObjects.skyBrightness.brightness(0.3, 100),
+        param.tdObjects.illumination.intensity(0.3, 100),
+        delay(2100)
           .chain(param.attackerSprite.upperToStand())
           .chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        delay(param.defenderSprite.downImpactDelay).chain(
+        onStart(() => param.bgm.do(stop)),
+        all(param.defenderSprite.knockBack(), delay(800)).chain(
           all(
-            onStart(() => param.bgm.do(stop)),
-            onStart(() => param.se.play(param.bigExplosion)),
-            shakeY(param.tdCamera),
+            param.defenderSprite.down(),
+            param.tdObjects.skyBrightness.brightness(1, 500),
+            param.tdObjects.illumination.intensity(1, 500),
+            delay(param.defenderSprite.downImpactDelay).chain(
+              all(
+                onStart(() => param.se.play(param.bigExplosion)),
+                shakeY(param.tdCamera),
+              ),
+            ),
           ),
         ),
         param.defenderTD.hitMark.shockWave.popUp(),

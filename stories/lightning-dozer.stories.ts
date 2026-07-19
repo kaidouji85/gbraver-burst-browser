@@ -251,7 +251,12 @@ export const enemyActiveGuts = armdozerSpriteStub(
  * @param sprite スプライト
  */
 const down = (sprite: LightningDozer) => {
-  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
+  delay(1000)
+    .chain(sprite.knockBack())
+    .chain(delay(1000))
+    .chain(sprite.down())
+    .chain(delay(1000))
+    .loop();
 };
 
 /**
