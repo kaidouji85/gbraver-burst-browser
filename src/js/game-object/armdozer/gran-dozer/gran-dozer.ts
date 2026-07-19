@@ -38,7 +38,7 @@ type Options = GranDozerPropsCreatorOptions & {
 /** グランドーザースプライト */
 export class GranDozer extends EmptyArmdozerSprite {
   /** @override */
-  downImpactDelay = 800;
+  downImpactDelay = 200;
 
   /** プロパティ */
   #props: GranDozerProps;
