@@ -25,21 +25,19 @@ export function down(param: NeoLandozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(
       all(
-        param.tdObjects.skyBrightness.brightness(0.3, 200),
-        param.tdObjects.illumination.intensity(0.3, 200),
-        delay(2100).chain(
-          all(
-            param.attackerSprite.hmToStand().chain(delay(500)),
-            param.tdObjects.skyBrightness.brightness(1, 500),
-            param.tdObjects.illumination.intensity(1, 500),
-          ),
-        ),
+        param.tdObjects.skyBrightness.brightness(0.3, 100),
+        param.tdObjects.illumination.intensity(0.3, 100),
+        delay(2100)
+          .chain(param.attackerSprite.hmToStand())
+          .chain(delay(500)),
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         onStart(() => param.bgm.do(stop)),
         all(param.defenderSprite.knockBack(), delay(800)).chain(
           all(
             param.defenderSprite.down(),
+            param.tdObjects.skyBrightness.brightness(1, 500),
+            param.tdObjects.illumination.intensity(1, 500),
             delay(param.defenderSprite.downImpactDelay).chain(
               all(
                 onStart(() => param.se.play(param.bigExplosion)),
