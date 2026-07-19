@@ -14,16 +14,27 @@ import { ReflectAnimationParam } from "../animation-param";
 export const deathLightning = (param: ReflectAnimationParam): Animate =>
   all(
     param.damaged.td.hitMark.lightning.popUp(),
+    param.tdObjects.skyBrightness.brightness(0.3, 100),
+    param.tdObjects.illumination.intensity(0.3, 100),
+    onStart(() => param.bgm.do(stop)),
     delay(100).chain(
       all(
-        param.damaged.sprite.down(),
-        delay(param.damaged.sprite.downImpactDelay).chain(
-          all(
-            onStart(() => param.bgm.do(stop)),
-            onStart(() => param.se.play(param.bigExplosion)),
-            shakeY(param.tdCamera),
+        param.damaged.sprite
+          .knockBack()
+          .chain(delay(800))
+          .chain(
+            all(
+              param.damaged.sprite.down(),
+              param.tdObjects.skyBrightness.brightness(1, 500),
+              param.tdObjects.illumination.intensity(1, 500),
+              delay(param.damaged.sprite.downImpactDelay).chain(
+                all(
+                  onStart(() => param.se.play(param.bigExplosion)),
+                  shakeY(param.tdCamera),
+                ),
+              ),
+            ),
           ),
-        ),
         param.damaged.td.damageIndicator.popUp(param.effect.damage),
         param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
       ),

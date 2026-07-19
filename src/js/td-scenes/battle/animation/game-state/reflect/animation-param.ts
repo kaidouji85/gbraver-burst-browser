@@ -38,10 +38,9 @@ export type ReflectAnimationParam = BGMManagerContainer &
 
     /** 3Dカメラ */
     readonly tdCamera: TDCamera;
+    /** 3Dレイヤーゲームオブジェクト */
+    readonly tdObjects: TDGameObjects;
 
     /** 大爆発SE */
     readonly bigExplosion: SoundResource;
-
-    /** 3Dレイヤーゲームオブジェクト */
-    readonly tdObjects: TDGameObjects;
   };
