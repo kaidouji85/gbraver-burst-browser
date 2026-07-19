@@ -8,6 +8,7 @@ import { SoundResource } from "../../../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDPlayer } from "../../../view/hud/player";
 import { TDPlayer } from "../../../view/td/player";
+import { TDGameObjects } from "../../../view/td/game-objects";
 
 /** ダメージ反射アニメーション パラメータ */
 export type ReflectAnimationParam = BGMManagerContainer &
@@ -40,4 +41,7 @@ export type ReflectAnimationParam = BGMManagerContainer &
 
     /** 大爆発SE */
     readonly bigExplosion: SoundResource;
+
+    /** 3Dレイヤーゲームオブジェクト */
+    readonly tdObjects: TDGameObjects;
   };
