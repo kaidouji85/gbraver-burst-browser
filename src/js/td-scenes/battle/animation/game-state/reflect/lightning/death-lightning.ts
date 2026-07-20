@@ -19,7 +19,7 @@ export const deathLightning = (param: ReflectAnimationParam): Animate =>
     onStart(() => param.bgm.do(stop)),
     delay(100).chain(
       all(
-        all(param.damaged.sprite.knockBack(), delay(800)).chain(
+        all(param.damaged.sprite.defeated(), delay(800)).chain(
           all(
             param.damaged.sprite.down(),
             delay(param.damaged.sprite.downImpactDelay).chain(
