@@ -6,7 +6,10 @@ import { empty } from "../../../../../animation/delay";
 import { onStart } from "../../../../../animation/on-start";
 import { getEnableMaxBattery } from "../../../get-enable-max-battery";
 import { getInitialBattery } from "../../../get-initial-battery";
-import { startPlayerDeathAlert } from "../../../procedure/death-alert";
+import {
+  startEnemyDeathAlert,
+  startPlayerDeathAlert,
+} from "../../../procedure/death-alert";
 import { createPredicatedDamageData } from "../../../procedure/predicated-damage";
 import { StateAnimationProps } from "../state-animation-props";
 import { activeArmdozerSprite } from "./active-armdozer-sprite";
@@ -68,6 +71,8 @@ export function inputCommandAnimation(
     onStart(() => {
       if (deathAlert === "Player") {
         startPlayerDeathAlert(props);
+      } else if (deathAlert === "Enemy") {
+        startEnemyDeathAlert(props);
       }
     }),
   );

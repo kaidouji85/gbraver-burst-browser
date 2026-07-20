@@ -4,4 +4,6 @@ import { SoundResource } from "../../../resource/sound/resource";
 export type DeathAlertSounds = {
   /** デスアラート */
   deathAlert: SoundResource;
+  /** 敵を撃破するチャンス */
+  chance: SoundResource;
 };

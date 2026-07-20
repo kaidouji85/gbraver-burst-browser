@@ -9,5 +9,6 @@ export function createInitialValue(): DeathAlertModel {
     opacity: 0,
     width: 1,
     height: 1,
+    color: { r: 0, g: 0, b: 0 },
   };
 }

@@ -3,7 +3,8 @@ import * as THREE from "three";
 
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { play } from "./procedure/play";
+import { startEnemyAlert } from "./procedure/start-enemy-alert";
+import { startPlayerAlert } from "./procedure/start-player-alert";
 import { stop } from "./procedure/stop";
 import {
   createDeathAlertProps,
@@ -54,11 +55,19 @@ export class DeathAlert {
   }
 
   /**
-   * 再生する
+   * プレイヤーデスアラートを再生する
    * @param duration ビネット表示にかかる時間（ミリ秒）
    */
-  play(duration: number): void {
-    play(this.#props, duration);
+  startPlayerAlert(duration: number): void {
+    startPlayerAlert(this.#props, duration);
+  }
+
+  /**
+   * 敵デスアラートを再生する
+   * @param duration ビネット表示にかかる時間（ミリ秒）
+   */
+  startEnemyAlert(duration: number): void {
+    startEnemyAlert(this.#props, duration);
   }
 
   /**

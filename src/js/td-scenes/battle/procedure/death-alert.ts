@@ -24,7 +24,23 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   const { illumination, skyBrightness } = props.view.td.gameObjects;
-  deathAlert.play(fadeDuration);
+  deathAlert.startPlayerAlert(fadeDuration);
+  illumination.interruptToIntensity(0.25, fadeDuration);
+  skyBrightness.interruptToBrightness(0.25, fadeDuration);
+};
+
+/**
+ * 敵のデスアラートを開始する
+ * @param props ゲームプロパティ
+ */
+export const startEnemyDeathAlert = (props: Readonly<DeathAlertProps>) => {
+  const { deathAlert } = props.view.hud.gameObjects;
+  if (deathAlert.isPlaying()) {
+    return;
+  }
+
+  const { illumination, skyBrightness } = props.view.td.gameObjects;
+  deathAlert.startEnemyAlert(fadeDuration);
   illumination.interruptToIntensity(0.25, fadeDuration);
   skyBrightness.interruptToBrightness(0.25, fadeDuration);
 };

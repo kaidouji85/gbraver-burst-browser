@@ -1,4 +1,4 @@
-import { opacity } from "../animation/opacity";
+import { changeOpacity } from "../animation/change-opacity";
 import { DeathAlertProps } from "../props/death-alert-props";
 
 /**
@@ -14,6 +14,6 @@ export const stop = (props: DeathAlertProps, duration: number): void => {
   props.isPlaying = false;
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
-  opacity(props.model, 0, duration).play({ group: props.tweenGroup });
+  changeOpacity(props.model, 0, duration).play({ group: props.tweenGroup });
   props.sounds.deathAlert.sound.stop();
 };
