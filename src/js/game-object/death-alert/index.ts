@@ -4,6 +4,8 @@ import * as THREE from "three";
 import { ResourcesContainer } from "../../resource";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
+import { hidden } from "./procedure/hidden";
+import { show } from "./procedure/show";
 import { createDeathAlertProps } from "./props/create-death-alert-props";
 import { DeathAlertProps } from "./props/death-alert-props";
 
@@ -42,5 +44,21 @@ export class DeathAlert {
    */
   getObject3D(): THREE.Object3D {
     return this.#props.view.getObject3D();
+  }
+
+  /**
+   * 表示する
+   * @param duration 表示にかかる時間
+   */
+  show(duration: number): void {
+    show(this.#props, duration);
+  }
+
+  /**
+   * 非表示にする
+   * @param duration 非表示にかかる時間
+   */
+  hidden(duration: number): void {
+    hidden(this.#props, duration);
   }
 }
