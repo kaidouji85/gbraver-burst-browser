@@ -2,6 +2,7 @@ import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { Color, PLAYER_DEATH_ALERT_COLOR } from "./color";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { play } from "./procedure/play";
 import { stop } from "./procedure/stop";
@@ -56,9 +57,10 @@ export class DeathAlert {
   /**
    * 再生する
    * @param duration ビネット表示にかかる時間（ミリ秒）
+   * @param color ビネットの色
    */
-  play(duration: number): void {
-    play(this.#props, duration);
+  play(duration: number, color: Color = PLAYER_DEATH_ALERT_COLOR): void {
+    play(this.#props, duration, color);
   }
 
   /**

@@ -1,3 +1,4 @@
+import { PLAYER_DEATH_ALERT_COLOR } from "../color";
 import type { DeathAlertModel } from "./death-alert-model";
 
 /**
@@ -9,5 +10,6 @@ export function createInitialValue(): DeathAlertModel {
     opacity: 0,
     width: 1,
     height: 1,
+    color: PLAYER_DEATH_ALERT_COLOR,
   };
 }

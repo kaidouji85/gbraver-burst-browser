@@ -65,5 +65,10 @@ export class DeathAlertView {
     const isTransparent = 0 < model.opacity;
     this.#mesh.scale.x = isTransparent ? model.width / MESH_WIDTH : 1;
     this.#mesh.scale.y = isTransparent ? model.height / MESH_HEIGHT : 1;
+    this.#mesh.material.color.setRGB(
+      model.color.r,
+      model.color.g,
+      model.color.b,
+    );
   }
 }

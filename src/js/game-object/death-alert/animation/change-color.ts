@@ -1,16 +1,17 @@
 import { Animate } from "../../../animation/animate";
 import { tween } from "../../../animation/tween";
+import { Color } from "../color";
 import { DeathAlertModel } from "../model/death-alert-model";
 
 /**
- * 不透明度を変更する
+ * 色を変更する
  * @param model モデル
- * @param opacity 不透明度
+ * @param color 色
  * @param duration アニメーション時間
  * @returns アニメーション
  */
-export const opacity = (
+export const changeColor = (
   model: DeathAlertModel,
-  opacity: number,
+  color: Color,
   duration: number,
-): Animate => tween(model, (t) => t.to({ opacity }, duration));
+): Animate => tween(model, (t) => t.to({ color }, duration));

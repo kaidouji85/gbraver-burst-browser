@@ -1,3 +1,5 @@
+import { Color } from "../color";
+
 /** デスアラートモデル */
 export type DeathAlertModel = {
   /** 0から1で指定する不透明度、0で完全透明 */
@@ -6,4 +8,6 @@ export type DeathAlertModel = {
   width: number;
   /** 画面高 */
   height: number;
+  /** ビネットの色 */
+  color: Color;
 };
