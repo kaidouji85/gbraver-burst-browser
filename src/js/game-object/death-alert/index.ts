@@ -42,6 +42,7 @@ export class DeathAlert {
     this.#props.view.destructor();
     this.#unsubscribers.forEach((u) => u.unsubscribe());
     this.#props.sounds.deathAlert.sound.stop();
+    this.#props.tweenGroup.removeAll();
   }
 
   /**
