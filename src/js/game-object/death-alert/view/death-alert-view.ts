@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
 import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
-import type { FaderModel } from "../model/fader-model";
-import type { FaderView } from "./fader-view";
+import { HUD_REARMOST_FADER_Z } from "../../hud-position";
+import { DeathAlertModel } from "../model/death-alert-model";
 
 /** メッシュの幅 */
 export const MESH_WIDTH = 1;
@@ -13,19 +13,18 @@ export const MESH_WIDTH = 1;
 /** メッシュの高さ */
 export const MESH_HEIGHT = 1;
 
-/** デスアラートフェーダー */
-export class DeathAlertView implements FaderView {
+/** デスアラートビュー */
+export class DeathAlertView {
   /** メッシュ */
   #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
 
   /**
    * コンストラクタ
    * @param options オプション
-   * @param options.resources リソース
-   * @param options.z Z座標
+   * @param options.resources リソース管理オブジェクト
    */
-  constructor(options: { resources: Resources; z: number }) {
-    const { z, resources } = options;
+  constructor(options: ResourcesContainer) {
+    const { resources } = options;
     const texture = findTextureOrThrow(
       resources,
       TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
@@ -37,23 +36,31 @@ export class DeathAlertView implements FaderView {
       alphaMap: texture.texture,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
-    this.#mesh.position.z = z;
+    this.#mesh.position.z = HUD_REARMOST_FADER_Z;
     this.#mesh.renderOrder = FADE_RENDER_ORDER;
   }
 
-  /** @override */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#mesh.material.dispose();
     this.#mesh.geometry.dispose();
   }
 
-  /** @override */
+  /**
+   * シーンに追加するための THREE.Object3D を取得する
+   * @returns シーンに追加するための THREE.Object3D
+   */
   getObject3D(): THREE.Object3D {
     return this.#mesh;
   }
 
-  /** @override */
-  engage(model: FaderModel): void {
+  /**
+   * モデルをビューに反映する
+   * @param model モデル
+   */
+  engage(model: DeathAlertModel): void {
     this.#mesh.material.opacity = model.opacity;
     const isTransparent = 0 < model.opacity;
     this.#mesh.scale.x = isTransparent ? model.width / MESH_WIDTH : 1;

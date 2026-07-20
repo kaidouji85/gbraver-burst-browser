@@ -1,5 +1,6 @@
 import { BatterySelector } from "../../../../../game-object/battery-selector";
 import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
+import { DeathAlert } from "../../../../../game-object/death-alert";
 import { Fader } from "../../../../../game-object/fader/fader";
 import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
 import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
@@ -26,8 +27,8 @@ export type HUDGameObjectsProps = {
   frontmostFader: Fader;
   /** フェーダ（最後尾） */
   rearmostFader: Fader;
-  /** デスアラートビネット用フェーダー */
-  deathAlertVignette: Fader;
+  /** デスアラート */
+  deathAlert: DeathAlert;
   /** 引き分けインジケータ */
   drawIndicator: ResultIndicator;
 };
