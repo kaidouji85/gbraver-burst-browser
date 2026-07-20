@@ -1,6 +1,9 @@
+import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { ResourcesContainer } from "../../resource";
+import { GameObjectActionContainer } from "../action/game-object-action-container";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { createDeathAlertProps } from "./props/create-death-alert-props";
 import { DeathAlertProps } from "./props/death-alert-props";
 
@@ -8,14 +11,21 @@ import { DeathAlertProps } from "./props/death-alert-props";
 export class DeathAlert {
   /** プロパティ */
   #props: DeathAlertProps;
+  /** アンサブスクライバ */
+  #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
    * @param options オプション
    * @param options.resources リソース管理オブジェクト
+   * @param options.gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(options: ResourcesContainer) {
+  constructor(options: ResourcesContainer & GameObjectActionContainer) {
     this.#props = createDeathAlertProps(options);
+    this.#unsubscribers = bindEventListeners(
+      this.#props,
+      options.gameObjectAction,
+    );
   }
 
   /**
@@ -23,6 +33,7 @@ export class DeathAlert {
    */
   destructor(): void {
     this.#props.view.destructor();
+    this.#unsubscribers.forEach((u) => u.unsubscribe());
   }
 
   /**
