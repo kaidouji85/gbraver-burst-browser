@@ -24,7 +24,6 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   const { illumination, skyBrightness } = props.view.td.gameObjects;
-  props.se.loop(props.sounds.deathAlert);
   deathAlert.play(fadeDuration);
   illumination.interruptToIntensity(0.25, fadeDuration);
   skyBrightness.interruptToBrightness(0.25, fadeDuration);
@@ -41,7 +40,6 @@ export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   const { illumination, skyBrightness } = props.view.td.gameObjects;
-  props.sounds.deathAlert.sound.stop();
   deathAlert.stop(fadeDuration);
   illumination.interruptToIntensity(1, fadeDuration);
   skyBrightness.interruptToBrightness(1, fadeDuration);

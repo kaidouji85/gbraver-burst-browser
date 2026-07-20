@@ -47,9 +47,6 @@ export class BattleScene implements TDScene {
     this.#unSubscribers.forEach((v) => {
       v.unsubscribe();
     });
-
-    // 戦闘シーンで無限ループ再生する音を停止させる
-    this.#props.sounds.deathAlert.sound.stop();
   }
 
   /** @override */
