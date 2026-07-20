@@ -28,6 +28,6 @@ export const createDeathAlertProps = (
     view,
     sounds,
     se,
-    isAlerted: false,
+    isPlaying: false,
   };
 };

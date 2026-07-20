@@ -2,16 +2,16 @@ import { opacity } from "../animation/opacity";
 import { DeathAlertProps } from "../props/death-alert-props";
 
 /**
- * 非表示にする
+ * 停止する
  * @param props プロパティ
- * @param duration 非表示にかかる時間
+ * @param duration ビネット非表示にかかる時間（ミリ秒）
  */
-export const hidden = (props: DeathAlertProps, duration: number): void => {
-  if (!props.isAlerted) {
+export const stop = (props: DeathAlertProps, duration: number): void => {
+  if (!props.isPlaying) {
     return;
   }
 
-  props.isAlerted = false;
+  props.isPlaying = false;
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
   opacity(props.model, 0, duration).play({ group: props.tweenGroup });

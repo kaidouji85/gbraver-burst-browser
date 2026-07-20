@@ -3,8 +3,8 @@ import * as THREE from "three";
 
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { hidden } from "./procedure/hidden";
-import { show } from "./procedure/show";
+import { play } from "./procedure/play";
+import { stop } from "./procedure/stop";
 import {
   createDeathAlertProps,
   DeathAlertPropsCreatorOptions,
@@ -53,18 +53,26 @@ export class DeathAlert {
   }
 
   /**
-   * 表示する
-   * @param duration 表示にかかる時間
+   * 再生する
+   * @param duration ビネット表示にかかる時間（ミリ秒）
    */
-  show(duration: number): void {
-    show(this.#props, duration);
+  play(duration: number): void {
+    play(this.#props, duration);
   }
 
   /**
-   * 非表示にする
-   * @param duration 非表示にかかる時間
+   * 停止する
+   * @param duration ビネット非表示にかかる時間（ミリ秒）
    */
-  hidden(duration: number): void {
-    hidden(this.#props, duration);
+  stop(duration: number): void {
+    stop(this.#props, duration);
+  }
+
+  /**
+   * 再生中かどうかを取得する
+   * @returns trueで再生中
+   */
+  isPlaying(): boolean {
+    return this.#props.isPlaying;
   }
 }

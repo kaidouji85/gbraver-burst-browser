@@ -11,9 +11,9 @@ export default {
 export const deathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
-    .chain(onStart(() => alert.show(200)))
+    .chain(onStart(() => alert.play(200)))
     .chain(delay(1000))
-    .chain(onStart(() => alert.hidden(200)))
+    .chain(onStart(() => alert.stop(200)))
     .chain(delay(1000))
     .loop();
   return [alert.getObject3D()];
