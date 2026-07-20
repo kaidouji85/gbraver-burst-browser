@@ -10,4 +10,5 @@ export const hidden = (props: DeathAlertProps, duration: number): void => {
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
   opacity(props.model, 0, duration).play({ group: props.tweenGroup });
+  props.sounds.deathAlert.sound.stop();
 };

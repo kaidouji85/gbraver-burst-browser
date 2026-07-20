@@ -1,12 +1,14 @@
 import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { ResourcesContainer } from "../../resource";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
-import { createDeathAlertProps } from "./props/create-death-alert-props";
+import {
+  createDeathAlertProps,
+  DeathAlertPropsCreatorOptions,
+} from "./props/create-death-alert-props";
 import { DeathAlertProps } from "./props/death-alert-props";
 
 /** デスアラート */
@@ -20,14 +22,18 @@ export class DeathAlert {
    * コンストラクタ
    * @param options オプション
    * @param options.resources リソース管理オブジェクト
+   * @param options.se SEプレイヤー
    * @param options.gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(options: ResourcesContainer & GameObjectActionContainer) {
+  constructor(
+    options: DeathAlertPropsCreatorOptions & GameObjectActionContainer,
+  ) {
     this.#props = createDeathAlertProps(options);
     this.#unsubscribers = bindEventListeners(
       this.#props,
       options.gameObjectAction,
     );
+    this.#props.sounds.deathAlert.sound.stop();
   }
 
   /**
