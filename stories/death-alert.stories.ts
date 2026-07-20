@@ -7,8 +7,8 @@ export default {
   title: "death-alert",
 };
 
-/** デスアラート */
-export const deathAlert = hudGameObjectStory((params) => {
+/** プレイヤーデスアラート */
+export const playerDeathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
     .chain(onStart(() => alert.play(200)))
