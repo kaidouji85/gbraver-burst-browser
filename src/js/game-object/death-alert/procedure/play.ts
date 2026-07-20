@@ -15,5 +15,5 @@ export const play = (props: DeathAlertProps, duration: number): void => {
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
   opacity(props.model, 1, duration).play({ group: props.tweenGroup });
-  props.se.play(props.sounds.deathAlert);
+  props.se.loop(props.sounds.deathAlert);
 };
