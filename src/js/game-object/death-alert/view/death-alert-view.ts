@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
-import { Resources } from "../../../resource";
+import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 import { DeathAlertModel } from "../model/death-alert-model";
 
 /** メッシュの幅 */
@@ -20,11 +21,10 @@ export class DeathAlertView {
   /**
    * コンストラクタ
    * @param options オプション
-   * @param options.resources リソース
-   * @param options.z Z座標
+   * @param options.resources リソース管理オブジェクト
    */
-  constructor(options: { resources: Resources; z: number }) {
-    const { z, resources } = options;
+  constructor(options: ResourcesContainer) {
+    const { resources } = options;
     const texture = findTextureOrThrow(
       resources,
       TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
@@ -36,7 +36,7 @@ export class DeathAlertView {
       alphaMap: texture.texture,
     });
     this.#mesh = new THREE.Mesh(geometry, material);
-    this.#mesh.position.z = z;
+    this.#mesh.position.z = HUD_REARMOST_FADER_Z;
     this.#mesh.renderOrder = FADE_RENDER_ORDER;
   }
 
