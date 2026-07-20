@@ -33,7 +33,6 @@ export class DeathAlert {
       this.#props,
       options.gameObjectAction,
     );
-    this.#props.sounds.deathAlert.sound.stop();
   }
 
   /**
@@ -42,6 +41,7 @@ export class DeathAlert {
   destructor(): void {
     this.#props.view.destructor();
     this.#unsubscribers.forEach((u) => u.unsubscribe());
+    this.#props.sounds.deathAlert.sound.stop();
   }
 
   /**
