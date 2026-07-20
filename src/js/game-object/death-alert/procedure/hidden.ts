@@ -7,6 +7,11 @@ import { DeathAlertProps } from "../props/death-alert-props";
  * @param duration 非表示にかかる時間
  */
 export const hidden = (props: DeathAlertProps, duration: number): void => {
+  if (!props.isAlerted) {
+    return;
+  }
+
+  props.isAlerted = false;
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
   opacity(props.model, 0, duration).play({ group: props.tweenGroup });

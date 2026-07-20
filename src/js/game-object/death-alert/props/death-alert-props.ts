@@ -15,4 +15,6 @@ export type DeathAlertProps = SEPlayerContainer & {
   view: DeathAlertView;
   /** サウンド */
   sounds: DeathAlertSounds;
+  /** アラート済みかどうか、trueでアラート済み */
+  isAlerted: boolean;
 };
