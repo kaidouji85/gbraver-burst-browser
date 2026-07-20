@@ -14,28 +14,18 @@ type DeathAlertProps = Readonly<SEPlayerContainer> & {
 const fadeDuration = 200;
 
 /**
- * デスアラートがすでに再生中かどうかを判定する
- * @param props ゲームプロパティ
- * @returns 判定結果、trueなら再生中
- */
-const isDeathAlertAlreadyPlaying = (props: Readonly<DeathAlertProps>) =>
-  // デスアラートの効果音が再生されていれば、デスアラートは再生中と判定する
-  // デスアラート音はループ再生されるので、再生中かどうかの判定はこの条件で十分である
-  props.sounds.deathAlert.sound.playing();
-
-/**
  * プレイヤーのデスアラートを開始する
  * @param props ゲームプロパティ
  */
 export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
-  if (isDeathAlertAlreadyPlaying(props)) {
+  const { deathAlert } = props.view.hud.gameObjects;
+  if (deathAlert.isPlaying()) {
     return;
   }
 
-  const { deathAlertVignette } = props.view.hud.gameObjects;
   const { illumination, skyBrightness } = props.view.td.gameObjects;
   props.se.loop(props.sounds.deathAlert);
-  deathAlertVignette.play(fadeDuration);
+  deathAlert.play(fadeDuration);
   illumination.interruptToIntensity(0.25, fadeDuration);
   skyBrightness.interruptToBrightness(0.25, fadeDuration);
 };
@@ -45,14 +35,14 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
  * @param props ゲームプロパティ
  */
 export const stopDeathAlert = (props: Readonly<DeathAlertProps>) => {
-  if (!isDeathAlertAlreadyPlaying(props)) {
+  const { deathAlert } = props.view.hud.gameObjects;
+  if (!deathAlert.isPlaying()) {
     return;
   }
 
-  const { deathAlertVignette } = props.view.hud.gameObjects;
   const { illumination, skyBrightness } = props.view.td.gameObjects;
   props.sounds.deathAlert.sound.stop();
-  deathAlertVignette.stop(fadeDuration);
+  deathAlert.stop(fadeDuration);
   illumination.interruptToIntensity(1, fadeDuration);
   skyBrightness.interruptToBrightness(1, fadeDuration);
 };

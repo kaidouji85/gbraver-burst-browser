@@ -38,7 +38,7 @@ export function createHUDGameObjectsProps(
     timeScaleButton: new TimeScaleButton(params),
     frontmostFader: frontmostFader({ gameObjectAction, isVisible: false }),
     rearmostFader: rearmostFader({ gameObjectAction, isVisible: false }),
-    deathAlertVignette: new DeathAlert(params),
+    deathAlert: new DeathAlert(params),
     drawIndicator: drawIndicator(resources, gameObjectAction),
   };
 }
