@@ -8,7 +8,7 @@ import {
 } from "gbraver-burst-core";
 
 import { CustomBattleEventProps } from "../custom-battle-event";
-import { startPlayerDeathAlert, stopDeathAlert } from "./death-alert";
+import { startEnemyDeathAlert, startPlayerDeathAlert, stopDeathAlert } from "./death-alert";
 
 /**
  * ダメージ予想を計算する
@@ -151,6 +151,8 @@ export const updatePredicatedDamage = (
 
   if (deathAlert === "Player") {
     startPlayerDeathAlert(props);
+  } else if (deathAlert === "Enemy") {
+    startEnemyDeathAlert(props);
   } else {
     stopDeathAlert(props);
   }

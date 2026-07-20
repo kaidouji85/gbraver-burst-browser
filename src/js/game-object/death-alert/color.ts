@@ -14,3 +14,10 @@ export const PLAYER_DEATH_ALERT_COLOR: Color = {
   g: 0 / 255,
   b: 0 / 255,
 };
+
+/** 敵デスアラート */
+export const ENEMY_DEATH_ALERT_COLOR: Color = {
+  r: 0 / 255,
+  g: 255 / 255,
+  b: 255 / 255,
+};
