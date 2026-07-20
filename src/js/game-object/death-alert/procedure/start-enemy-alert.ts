@@ -24,5 +24,5 @@ export const startEnemyAlert = (
     changeOpacity(props.model, 1, duration),
     changeColor(props.model, ENEMY_DEATH_ALERT_COLOR, 0),
   ).play({ group: props.tweenGroup });
-  props.se.play(props.sounds.benefitEffect);
+  props.se.play(props.sounds.chance);
 };
