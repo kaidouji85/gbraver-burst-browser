@@ -27,7 +27,7 @@ export function down(param: NeoLandozerBattle<DownResult>): Animate {
       all(
         param.tdObjects.skyBrightness.brightness(0.3, 100),
         param.tdObjects.illumination.intensity(0.3, 100),
-        delay(1900).chain(
+        delay(2100).chain(
           all(
             param.attackerSprite.hmToStand().chain(delay(500)),
             param.tdObjects.skyBrightness.brightness(1, 500),
