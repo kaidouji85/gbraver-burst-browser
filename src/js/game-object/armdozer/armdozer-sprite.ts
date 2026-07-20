@@ -87,6 +87,12 @@ export interface ArmdozerSprite {
   avoidToStand(): Animate;
 
   /**
+   * やられる
+   * @returns アニメーション
+   */
+  defeated(): Animate;
+
+  /**
    * ダウン
    * @returns アニメーション
    */
