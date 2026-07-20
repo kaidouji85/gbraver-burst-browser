@@ -22,12 +22,12 @@ export const deathLightning = (param: ReflectAnimationParam): Animate =>
         all(param.damaged.sprite.knockBack(), delay(800)).chain(
           all(
             param.damaged.sprite.down(),
-            param.tdObjects.skyBrightness.brightness(1, 500),
-            param.tdObjects.illumination.intensity(1, 500),
             delay(param.damaged.sprite.downImpactDelay).chain(
               all(
                 onStart(() => param.se.play(param.bigExplosion)),
                 shakeY(param.tdCamera),
+                param.tdObjects.skyBrightness.brightness(1, 500),
+                param.tdObjects.illumination.intensity(1, 500),
               ),
             ),
           ),
@@ -36,4 +36,4 @@ export const deathLightning = (param: ReflectAnimationParam): Animate =>
         param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
       ),
     ),
-  );
+  ).chain(delay(200));
