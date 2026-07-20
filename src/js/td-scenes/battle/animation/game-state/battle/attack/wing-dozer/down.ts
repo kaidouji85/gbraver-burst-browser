@@ -37,7 +37,7 @@ export function down(param: WingDozerBattle<DownResult>): Animate {
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         onStart(() => param.bgm.do(stop)),
-        all(param.defenderSprite.knockBack(), delay(600)).chain(
+        all(param.defenderSprite.defeated(), delay(800)).chain(
           all(
             param.defenderSprite.down(),
             delay(param.defenderSprite.downImpactDelay).chain(
