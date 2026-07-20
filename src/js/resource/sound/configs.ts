@@ -155,6 +155,6 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.ENEMY_DEATH_ALERT,
     path: (resourceRoot) =>
       `${resourceRoot.get()}/sounds/enemy-death-alert.mp3`,
-    volumeScale: 0.6,
+    volumeScale: 0.4,
   },
 ];
