@@ -156,7 +156,7 @@ export class NeoLandozer extends EmptyArmdozerSprite implements ArmdozerSprite {
     return frontStep(this.#props);
   }
 
-  /**@override */
+  /** @override */
   defeated(): Animate {
     return defeated(this.#props);
   }
