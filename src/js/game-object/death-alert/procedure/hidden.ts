@@ -1,4 +1,4 @@
-import { opacity } from "../animation/show";
+import { opacity } from "../animation/opacity";
 import { DeathAlertProps } from "../props/death-alert-props";
 
 /**

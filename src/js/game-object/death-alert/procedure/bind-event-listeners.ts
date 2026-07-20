@@ -2,6 +2,7 @@ import { Observable, Unsubscribable } from "rxjs";
 
 import { GameObjectAction } from "../../action/game-object-action";
 import { DeathAlertProps } from "../props/death-alert-props";
+import { onPreRender } from "./on-pre-render";
 import { onUpdate } from "./on-update";
 
 /**
@@ -18,6 +19,8 @@ export const bindEventListeners = (
     gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
         onUpdate(props, action);
+      } else if (action.type === "PreRender") {
+        onPreRender(props, action);
       }
     }),
   ];

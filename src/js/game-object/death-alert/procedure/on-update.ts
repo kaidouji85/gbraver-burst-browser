@@ -8,5 +8,4 @@ import { DeathAlertProps } from "../props/death-alert-props";
  */
 export const onUpdate = (props: DeathAlertProps, action: Update) => {
   props.tweenGroup.update(action.time);
-  props.view.engage(props.model);
 };

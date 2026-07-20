@@ -13,4 +13,4 @@ export const opacity = (
   model: DeathAlertModel,
   opacity: number,
   duration: number,
-): Animate => tween(model, (t) => t.to({ opacity: opacity }, duration));
+): Animate => tween(model, (t) => t.to({ opacity }, duration));
