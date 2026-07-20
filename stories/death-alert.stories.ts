@@ -1,7 +1,6 @@
 import { delay } from "../src/js/animation/delay";
 import { onStart } from "../src/js/animation/on-start";
 import { DeathAlert } from "../src/js/game-object/death-alert";
-import { ENEMY_DEATH_ALERT_COLOR } from "../src/js/game-object/death-alert/color";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {
@@ -12,7 +11,7 @@ export default {
 export const playerDeathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
-    .chain(onStart(() => alert.play(200)))
+    .chain(onStart(() => alert.startPlayerAlert(200)))
     .chain(delay(1000))
     .chain(onStart(() => alert.stop(200)))
     .chain(delay(1000))
@@ -24,7 +23,7 @@ export const playerDeathAlert = hudGameObjectStory((params) => {
 export const enemyDeathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
-    .chain(onStart(() => alert.play(200, ENEMY_DEATH_ALERT_COLOR)))
+    .chain(onStart(() => alert.startEnemyAlert(200)))
     .chain(delay(1000))
     .chain(onStart(() => alert.stop(200)))
     .chain(delay(1000))

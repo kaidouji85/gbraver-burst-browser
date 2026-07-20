@@ -1,4 +1,3 @@
-import { ENEMY_DEATH_ALERT_COLOR, PLAYER_DEATH_ALERT_COLOR } from "../../../game-object/death-alert/color";
 import { SEPlayerContainer } from "../../../se/se-player";
 import { BattleSceneSounds } from "../sounds";
 import { BattleSceneView } from "../view";
@@ -25,7 +24,7 @@ export const startPlayerDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   const { illumination, skyBrightness } = props.view.td.gameObjects;
-  deathAlert.play(fadeDuration, PLAYER_DEATH_ALERT_COLOR);
+  deathAlert.startPlayerAlert(fadeDuration);
   illumination.interruptToIntensity(0.25, fadeDuration);
   skyBrightness.interruptToBrightness(0.25, fadeDuration);
 };
@@ -41,7 +40,7 @@ export const startEnemyDeathAlert = (props: Readonly<DeathAlertProps>) => {
   }
 
   const { illumination, skyBrightness } = props.view.td.gameObjects;
-  deathAlert.play(fadeDuration, ENEMY_DEATH_ALERT_COLOR);
+  deathAlert.startEnemyAlert(fadeDuration);
   illumination.interruptToIntensity(0.25, fadeDuration);
   skyBrightness.interruptToBrightness(0.25, fadeDuration);
 };

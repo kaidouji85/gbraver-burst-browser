@@ -11,10 +11,11 @@ import { DeathAlertSounds } from "./death-alert-sounds";
 export const createDeathAlertSounds = (
   resources: Resources,
 ): DeathAlertSounds => {
-  const deathAlertSound =
+  const deathAlert =
     resources.sounds.find((v) => v.id === SOUND_IDS.DEATH_ALERT) ??
     createEmptySoundResource();
-  return {
-    deathAlert: deathAlertSound,
-  };
+  const benefitEffect =
+    resources.sounds.find((v) => v.id === SOUND_IDS.BENEFIT_EFFECT) ??
+    createEmptySoundResource();
+  return { deathAlert, benefitEffect };
 };

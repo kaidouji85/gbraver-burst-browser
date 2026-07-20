@@ -5,6 +5,8 @@ import { GameObjectActionContainer } from "../action/game-object-action-containe
 import { Color, PLAYER_DEATH_ALERT_COLOR } from "./color";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { play } from "./procedure/play";
+import { startEnemyAlert } from "./procedure/start-enemy-alert";
+import { startPlayerAlert } from "./procedure/start-player-alert";
 import { stop } from "./procedure/stop";
 import {
   createDeathAlertProps,
@@ -55,12 +57,29 @@ export class DeathAlert {
   }
 
   /**
+   * @deprecated
    * 再生する
    * @param duration ビネット表示にかかる時間（ミリ秒）
    * @param color ビネットの色
    */
   play(duration: number, color: Color = PLAYER_DEATH_ALERT_COLOR): void {
     play(this.#props, duration, color);
+  }
+
+  /**
+   * プレイヤーデスアラートを再生する
+   * @param duration ビネット表示にかかる時間（ミリ秒）
+   */
+  startPlayerAlert(duration: number): void {
+    startPlayerAlert(this.#props, duration);
+  }
+
+  /**
+   * 敵デスアラートを再生する
+   * @param duration ビネット表示にかかる時間（ミリ秒）
+   */
+  startEnemyAlert(duration: number): void {
+    startEnemyAlert(this.#props, duration);
   }
 
   /**
