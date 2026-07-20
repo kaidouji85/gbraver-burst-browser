@@ -15,7 +15,7 @@ export const createDeathAlertSounds = (
     resources.sounds.find((v) => v.id === SOUND_IDS.DEATH_ALERT) ??
     createEmptySoundResource();
   const chance =
-    resources.sounds.find((v) => v.id === SOUND_IDS.BENEFIT_EFFECT) ??
+    resources.sounds.find((v) => v.id === SOUND_IDS.ENEMY_DEATH_ALERT) ??
     createEmptySoundResource();
   return { deathAlert, chance };
 };
