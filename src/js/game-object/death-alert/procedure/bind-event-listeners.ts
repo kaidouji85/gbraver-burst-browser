@@ -17,7 +17,7 @@ export const bindEventListeners = (
   return [
     gameObjectAction.subscribe((action) => {
       if (action.type === "Update") {
-        onUpdate(props);
+        onUpdate(props, action);
       }
     }),
   ];
