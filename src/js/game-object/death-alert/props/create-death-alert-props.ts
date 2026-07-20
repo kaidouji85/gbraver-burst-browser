@@ -22,5 +22,12 @@ export const createDeathAlertProps = (
   const model = createInitialValue();
   const view = new DeathAlertView(options);
   const sounds = createDeathAlertSounds(options.resources);
-  return { model, tweenGroup: new TWEEN.Group(), view, sounds, se, isAlerted: false };
+  return {
+    model,
+    tweenGroup: new TWEEN.Group(),
+    view,
+    sounds,
+    se,
+    isAlerted: false,
+  };
 };
