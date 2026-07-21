@@ -69,13 +69,12 @@ type MeshConfigCreator = (options: MeshConfigOptions) => MeshConfig;
 const top: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
-    x:
-      -rendererDOM.clientWidth / 2 + (MESH_WIDTH / 2) * devicePerScale + MARGIN,
+    x: 0,
     y:
       rendererDOM.clientHeight / 2 -
       (MESH_HEIGHT / 2) * devicePerScale -
       MARGIN,
-    rotation: -Math.PI / 2,
+    rotation: Math.PI,
   };
 };
 
@@ -87,10 +86,7 @@ const top: MeshConfigCreator = (options) => {
 const bottom: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
-    x:
-      -rendererDOM.clientWidth / 2 +
-      +(MESH_WIDTH / 2) * devicePerScale +
-      MARGIN,
+    x: 0,
     y:
       -rendererDOM.clientHeight / 2 +
       (MESH_HEIGHT / 2) * devicePerScale +
@@ -109,11 +105,8 @@ const right: MeshConfigCreator = (options) => {
   return {
     x:
       +rendererDOM.clientWidth / 2 - (MESH_WIDTH / 2) * devicePerScale - MARGIN,
-    y:
-      +rendererDOM.clientHeight / 2 -
-      (MESH_HEIGHT / 2) * devicePerScale -
-      MARGIN,
-    rotation: Math.PI,
+    y: 0,
+    rotation: Math.PI / 2,
   };
 };
 
@@ -126,12 +119,9 @@ const left: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      +rendererDOM.clientWidth / 2 - (MESH_WIDTH / 2) * devicePerScale - MARGIN,
-    y:
-      -rendererDOM.clientHeight / 2 +
-      (MESH_HEIGHT / 2) * devicePerScale +
-      MARGIN,
-    rotation: Math.PI / 2,
+      -rendererDOM.clientWidth / 2 + (MESH_WIDTH / 2) * devicePerScale + MARGIN,
+    y: 0,
+    rotation: -Math.PI / 2,
   };
 };
 
