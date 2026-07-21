@@ -11,13 +11,13 @@ import { hudUIScale } from "../../scale";
 import { DeathAlertModel } from "../model/death-alert-model";
 
 /** メッシュの幅 */
-export const MESH_WIDTH = 100;
+const MESH_WIDTH = 100;
 
 /** メッシュの高さ */
-export const MESH_HEIGHT = 100;
+const MESH_HEIGHT = 100;
 
 /** メッシュのマージン */
-export const MARGIN = 100;
+const MARGIN = 0;
 
 /**
  * メッシュを生成する
@@ -39,53 +39,93 @@ const createMesh = (
   return mesh;
 };
 
+/** メッシュ設定の生成オプション */
+type ConfigOptions = {
+  /** デバイスごとのスケール */
+  devicePerScale: number;
+  /** レンダラーのDOM要素 */
+  rendererDOM: HTMLElement;
+};
+
 /**
  * 左上のメッシュ設定
- * @param rendererDOM レンダリング先のDOM
- * @param margin マージン
+ * @param options 設定オプション
  * @returns 設定
  */
-const leftTop = (rendererDOM: HTMLElement, margin: number) => ({
-  x: -rendererDOM.clientWidth / 2 + margin,
-  y: rendererDOM.clientHeight / 2 - margin,
-  rotation: -Math.PI / 2,
-});
+const leftTop = (options: ConfigOptions) => {
+  const { rendererDOM, devicePerScale } = options;
+  return {
+    x:
+      -rendererDOM.clientWidth / 2 +
+      MARGIN * devicePerScale +
+      (MESH_WIDTH / 2) * devicePerScale,
+    y:
+      rendererDOM.clientHeight / 2 -
+      MARGIN * devicePerScale -
+      (MESH_HEIGHT / 2) * devicePerScale,
+    rotation: -Math.PI / 2,
+  };
+};
 
 /**
  * 左下のメッシュ設定
- * @param rendererDOM レンダリング先のDOM
- * @param margin マージン
+ * @param options 設定オプション
  * @returns 設定
  */
-const leftBottom = (rendererDOM: HTMLElement, margin: number) => ({
-  x: -rendererDOM.clientWidth / 2 + margin,
-  y: -rendererDOM.clientHeight / 2 + margin,
-  rotation: 0,
-});
+const leftBottom = (options: ConfigOptions) => {
+  const { rendererDOM, devicePerScale } = options;
+  return {
+    x:
+      -rendererDOM.clientWidth / 2 +
+      +(MESH_WIDTH / 2) * devicePerScale +
+      MARGIN * devicePerScale,
+    y:
+      -rendererDOM.clientHeight / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale +
+      MARGIN * devicePerScale,
+    rotation: 0,
+  };
+};
 
 /**
  * 右上のメッシュ設定
- * @param rendererDOM レンダリング先のDOM
- * @param margin マージン
+ * @param options 設定オプション
  * @returns 設定
  */
-const rightTop = (rendererDOM: HTMLElement, margin: number) => ({
-  x: rendererDOM.clientWidth / 2 - margin,
-  y: rendererDOM.clientHeight / 2 - margin,
-  rotation: Math.PI,
-});
+const rightTop = (options: ConfigOptions) => {
+  const { rendererDOM, devicePerScale } = options;
+  return {
+    x:
+      +rendererDOM.clientWidth / 2 -
+      (MESH_WIDTH / 2) * devicePerScale -
+      MARGIN * devicePerScale,
+    y:
+      +rendererDOM.clientHeight / 2 -
+      (MESH_HEIGHT / 2) * devicePerScale -
+      MARGIN * devicePerScale,
+    rotation: Math.PI,
+  };
+};
 
 /**
  * 右下のメッシュ設定
- * @param rendererDOM レンダリング先のDOM
- * @param margin マージン
+ * @param options 設定オプション
  * @returns 設定
  */
-const rightBottom = (rendererDOM: HTMLElement, margin: number) => ({
-  x: rendererDOM.clientWidth / 2 - margin,
-  y: -rendererDOM.clientHeight / 2 + margin,
-  rotation: Math.PI / 2,
-});
+const rightBottom = (options: ConfigOptions) => {
+  const { rendererDOM, devicePerScale } = options;
+  return {
+    x:
+      +rendererDOM.clientWidth / 2 -
+      (MESH_WIDTH / 2) * devicePerScale -
+      MARGIN * devicePerScale,
+    y:
+      -rendererDOM.clientHeight / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale +
+      MARGIN * devicePerScale,
+    rotation: Math.PI / 2,
+  };
+};
 
 /** デスアラートビュー */
 export class DeathAlertView {
@@ -152,16 +192,18 @@ export class DeathAlertView {
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
 
       const config = (() => {
+        const options = { rendererDOM: preRender.rendererDOM, devicePerScale };
         switch (i) {
           case 0:
-            return leftTop(preRender.rendererDOM, MARGIN);
+            return leftTop(options);
           case 1:
-            return leftBottom(preRender.rendererDOM, MARGIN);
+            return leftBottom(options);
           case 2:
-            return rightTop(preRender.rendererDOM, MARGIN);
+            return rightTop(options);
           case 3:
+            return rightBottom(options);
           default:
-            return rightBottom(preRender.rendererDOM, MARGIN);
+            return rightBottom(options);
         }
       })();
       mesh.position.x = config.x;
