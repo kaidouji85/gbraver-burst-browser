@@ -39,24 +39,52 @@ const createMesh = (
   return mesh;
 };
 
+/**
+ * 左上のメッシュ設定
+ * @param rendererDOM レンダリング先のDOM
+ * @param margin マージン
+ * @returns 設定
+ */
 const leftTop = (rendererDOM: HTMLElement, margin: number) => ({
   x: -rendererDOM.clientWidth / 2 + margin,
   y: rendererDOM.clientHeight / 2 - margin,
+  rotation: -Math.PI / 2,
 });
 
+/**
+ * 左下のメッシュ設定
+ * @param rendererDOM レンダリング先のDOM
+ * @param margin マージン
+ * @returns 設定
+ */
 const leftBottom = (rendererDOM: HTMLElement, margin: number) => ({
   x: -rendererDOM.clientWidth / 2 + margin,
   y: -rendererDOM.clientHeight / 2 + margin,
+  rotation: 0,
 });
 
+/**
+ * 右上のメッシュ設定
+ * @param rendererDOM レンダリング先のDOM
+ * @param margin マージン
+ * @returns 設定
+ */
 const rightTop = (rendererDOM: HTMLElement, margin: number) => ({
   x: rendererDOM.clientWidth / 2 - margin,
   y: rendererDOM.clientHeight / 2 - margin,
+  rotation: Math.PI,
 });
 
+/**
+ * 右下のメッシュ設定
+ * @param rendererDOM レンダリング先のDOM
+ * @param margin マージン
+ * @returns 設定
+ */
 const rightBottom = (rendererDOM: HTMLElement, margin: number) => ({
   x: rendererDOM.clientWidth / 2 - margin,
   y: -rendererDOM.clientHeight / 2 + margin,
+  rotation: Math.PI / 2,
 });
 
 /** デスアラートビュー */
@@ -122,7 +150,8 @@ export class DeathAlertView {
       mesh.scale.x = devicePerScale;
       mesh.scale.y = devicePerScale;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
-      const position = (() => {
+
+      const config = (() => {
         switch (i) {
           case 0:
             return leftTop(preRender.rendererDOM, MARGIN);
@@ -135,8 +164,9 @@ export class DeathAlertView {
             return rightBottom(preRender.rendererDOM, MARGIN);
         }
       })();
-      mesh.position.x = position.x;
-      mesh.position.y = position.y;
+      mesh.position.x = config.x;
+      mesh.position.y = config.y;
+      mesh.rotation.z = config.rotation;
     });
   }
 }
