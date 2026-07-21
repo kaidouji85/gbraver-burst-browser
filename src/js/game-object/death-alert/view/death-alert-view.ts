@@ -14,7 +14,7 @@ import { DeathAlertModel } from "../model/death-alert-model";
 const MESH_WIDTH = 200;
 
 /** メッシュの高さ */
-const MESH_HEIGHT = 200;
+const MESH_HEIGHT = 100;
 
 /** メッシュのマージン */
 const MARGIN = 0;
@@ -49,9 +49,16 @@ type MeshConfigOptions = {
 
 /** メッシュ設定 */
 type MeshConfig = {
+  /** X座標 */
   x: number;
+  /** Y座標 */
   y: number;
+  /** 回転角度 */
   rotation: number;
+  /** X方向のスケール */
+  scaleX: number;
+  /** Y方向のスケール */
+  scaleY: number;
 };
 
 /**
@@ -75,6 +82,8 @@ const top: MeshConfigCreator = (options) => {
       (MESH_HEIGHT / 2) * devicePerScale -
       MARGIN,
     rotation: Math.PI,
+    scaleX: devicePerScale,
+    scaleY: devicePerScale,
   };
 };
 
@@ -92,6 +101,8 @@ const bottom: MeshConfigCreator = (options) => {
       (MESH_HEIGHT / 2) * devicePerScale +
       MARGIN,
     rotation: 0,
+    scaleX: devicePerScale,
+    scaleY: devicePerScale,
   };
 };
 
@@ -104,9 +115,13 @@ const right: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      +rendererDOM.clientWidth / 2 - (MESH_WIDTH / 2) * devicePerScale - MARGIN,
+      +rendererDOM.clientWidth / 2 -
+      (MESH_HEIGHT / 2) * devicePerScale -
+      MARGIN,
     y: 0,
     rotation: Math.PI / 2,
+    scaleX: devicePerScale,
+    scaleY: devicePerScale,
   };
 };
 
@@ -119,9 +134,13 @@ const left: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      -rendererDOM.clientWidth / 2 + (MESH_WIDTH / 2) * devicePerScale + MARGIN,
+      -rendererDOM.clientWidth / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale +
+      MARGIN,
     y: 0,
     rotation: -Math.PI / 2,
+    scaleX: devicePerScale,
+    scaleY: devicePerScale,
   };
 };
 
@@ -190,8 +209,6 @@ export class DeathAlertView {
         preRender.rendererDOM,
         preRender.safeAreaInset,
       );
-      mesh.scale.x = devicePerScale;
-      mesh.scale.y = devicePerScale;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
       const config = configCreator({
         rendererDOM: preRender.rendererDOM,
@@ -200,6 +217,8 @@ export class DeathAlertView {
       mesh.position.x = config.x;
       mesh.position.y = config.y;
       mesh.rotation.z = config.rotation;
+      mesh.scale.x = config.scaleX;
+      mesh.scale.y = config.scaleY;
     });
   }
 }
