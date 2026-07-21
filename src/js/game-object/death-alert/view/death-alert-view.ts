@@ -40,19 +40,33 @@ const createMesh = (
 };
 
 /** メッシュ設定の生成オプション */
-type ConfigOptions = {
+type MeshConfigOptions = {
   /** デバイスごとのスケール */
   devicePerScale: number;
   /** レンダラーのDOM要素 */
   rendererDOM: HTMLElement;
 };
 
+/** メッシュ設定 */
+type MeshConfig = {
+  x: number;
+  y: number;
+  rotation: number;
+};
+
 /**
- * 左上のメッシュ設定
+ * メッシュ設定の生成関数
  * @param options 設定オプション
  * @returns 設定
  */
-const leftTop = (options: ConfigOptions) => {
+type MeshConfigCreator = (options: MeshConfigOptions) => MeshConfig;
+
+/**
+ * 上のメッシュ設定
+ * @param options 設定オプション
+ * @returns 設定
+ */
+const top: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -66,11 +80,11 @@ const leftTop = (options: ConfigOptions) => {
 };
 
 /**
- * 左下のメッシュ設定
+ * 下のメッシュ設定
  * @param options 設定オプション
  * @returns 設定
  */
-const leftBottom = (options: ConfigOptions) => {
+const bottom: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -86,11 +100,11 @@ const leftBottom = (options: ConfigOptions) => {
 };
 
 /**
- * 右上のメッシュ設定
+ * 右のメッシュ設定
  * @param options 設定オプション
  * @returns 設定
  */
-const rightTop = (options: ConfigOptions) => {
+const right: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -104,11 +118,11 @@ const rightTop = (options: ConfigOptions) => {
 };
 
 /**
- * 右下のメッシュ設定
+ * 左のメッシュ設定
  * @param options 設定オプション
  * @returns 設定
  */
-const rightBottom = (options: ConfigOptions) => {
+const left: MeshConfigCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -124,7 +138,12 @@ const rightBottom = (options: ConfigOptions) => {
 /** デスアラートビュー */
 export class DeathAlertView {
   /** メッシュをあつめたもの */
-  #meshes: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>[];
+  #meshes: {
+    /** メッシュ */
+    mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+    /** メッシュ設定の生成関数 */
+    configCreator: MeshConfigCreator;
+  }[];
   /** グループ */
   #group: THREE.Group;
 
@@ -140,8 +159,13 @@ export class DeathAlertView {
       TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
     );
     this.#group = new THREE.Group();
-    this.#meshes = [...Array(4)].map(() => createMesh(texture));
-    this.#meshes.forEach((mesh) => {
+    this.#meshes = [
+      { mesh: createMesh(texture), configCreator: top },
+      { mesh: createMesh(texture), configCreator: bottom },
+      { mesh: createMesh(texture), configCreator: right },
+      { mesh: createMesh(texture), configCreator: left },
+    ];
+    this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh);
     });
   }
@@ -150,7 +174,7 @@ export class DeathAlertView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#meshes.forEach((mesh) => {
+    this.#meshes.forEach(({ mesh }) => {
       mesh.geometry.dispose();
       mesh.material.dispose();
     });
@@ -170,7 +194,7 @@ export class DeathAlertView {
    * @param preRender プリレンダー情報
    */
   engage(model: DeathAlertModel, preRender: PreRender): void {
-    this.#meshes.forEach((mesh, i) => {
+    this.#meshes.forEach(({ mesh, configCreator }, i) => {
       mesh.material.opacity = model.opacity * 0.6;
       const devicePerScale = hudUIScale(
         preRender.rendererDOM,
@@ -179,22 +203,10 @@ export class DeathAlertView {
       mesh.scale.x = devicePerScale;
       mesh.scale.y = devicePerScale;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
-
-      const config = (() => {
-        const options = { rendererDOM: preRender.rendererDOM, devicePerScale };
-        switch (i) {
-          case 0:
-            return leftTop(options);
-          case 1:
-            return leftBottom(options);
-          case 2:
-            return rightTop(options);
-          case 3:
-            return rightBottom(options);
-          default:
-            return rightBottom(options);
-        }
-      })();
+      const config = configCreator({
+        rendererDOM: preRender.rendererDOM,
+        devicePerScale,
+      });
       mesh.position.x = config.x;
       mesh.position.y = config.y;
       mesh.rotation.z = config.rotation;
