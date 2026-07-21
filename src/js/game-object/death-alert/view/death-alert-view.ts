@@ -39,6 +39,26 @@ const createMesh = (
   return mesh;
 };
 
+const leftTop = (rendererDOM: HTMLElement, margin: number) => ({
+  x: -rendererDOM.clientWidth / 2 + margin,
+  y: rendererDOM.clientHeight / 2 - margin,
+});
+
+const leftBottom = (rendererDOM: HTMLElement, margin: number) => ({
+  x: -rendererDOM.clientWidth / 2 + margin,
+  y: -rendererDOM.clientHeight / 2 + margin,
+});
+
+const rightTop = (rendererDOM: HTMLElement, margin: number) => ({
+  x: rendererDOM.clientWidth / 2 - margin,
+  y: rendererDOM.clientHeight / 2 - margin,
+});
+
+const rightBottom = (rendererDOM: HTMLElement, margin: number) => ({
+  x: rendererDOM.clientWidth / 2 - margin,
+  y: -rendererDOM.clientHeight / 2 + margin,
+});
+
 /** デスアラートビュー */
 export class DeathAlertView {
   /** メッシュをあつめたもの */
@@ -93,7 +113,7 @@ export class DeathAlertView {
    * @param preRender プリレンダー情報
    */
   engage(model: DeathAlertModel, preRender: PreRender): void {
-    this.#meshes.forEach((mesh) => {
+    this.#meshes.forEach((mesh, i) => {
       mesh.material.opacity = model.opacity;
       const devicePerScale = hudUIScale(
         preRender.rendererDOM,
@@ -101,9 +121,22 @@ export class DeathAlertView {
       );
       mesh.scale.x = devicePerScale;
       mesh.scale.y = devicePerScale;
-      mesh.position.x = -preRender.rendererDOM.clientWidth / 2 + MARGIN * devicePerScale;
-      mesh.position.y = -preRender.rendererDOM.clientHeight / 2 + MARGIN * devicePerScale;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
+      const position = (() => {
+        switch (i) {
+          case 0:
+            return leftTop(preRender.rendererDOM, MARGIN);
+          case 1:
+            return leftBottom(preRender.rendererDOM, MARGIN);
+          case 2:
+            return rightTop(preRender.rendererDOM, MARGIN);
+          case 3:
+          default:
+            return rightBottom(preRender.rendererDOM, MARGIN);
+        }
+      })();
+      mesh.position.x = position.x;
+      mesh.position.y = position.y;
     });
   }
 }
