@@ -146,12 +146,7 @@ export class DeathAlertView {
       TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
     );
     this.#group = new THREE.Group();
-    this.#meshes = [
-      createMesh(texture),
-      createMesh(texture),
-      createMesh(texture),
-      createMesh(texture),
-    ];
+    this.#meshes = [...Array(4)].map(() => createMesh(texture));
     this.#meshes.forEach((mesh) => {
       this.#group.add(mesh);
     });
