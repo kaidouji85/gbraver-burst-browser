@@ -11,10 +11,10 @@ import { hudUIScale } from "../../scale";
 import { DeathAlertModel } from "../model/death-alert-model";
 
 /** メッシュの幅 */
-const MESH_WIDTH = 100;
+const MESH_WIDTH = 200;
 
 /** メッシュの高さ */
-const MESH_HEIGHT = 100;
+const MESH_HEIGHT = 200;
 
 /** メッシュのマージン */
 const MARGIN = 0;
@@ -56,13 +56,11 @@ const leftTop = (options: ConfigOptions) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      -rendererDOM.clientWidth / 2 +
-      MARGIN * devicePerScale +
-      (MESH_WIDTH / 2) * devicePerScale,
+      -rendererDOM.clientWidth / 2 + (MESH_WIDTH / 2) * devicePerScale + MARGIN,
     y:
       rendererDOM.clientHeight / 2 -
-      MARGIN * devicePerScale -
-      (MESH_HEIGHT / 2) * devicePerScale,
+      (MESH_HEIGHT / 2) * devicePerScale -
+      MARGIN,
     rotation: -Math.PI / 2,
   };
 };
@@ -78,11 +76,11 @@ const leftBottom = (options: ConfigOptions) => {
     x:
       -rendererDOM.clientWidth / 2 +
       +(MESH_WIDTH / 2) * devicePerScale +
-      MARGIN * devicePerScale,
+      MARGIN,
     y:
       -rendererDOM.clientHeight / 2 +
       (MESH_HEIGHT / 2) * devicePerScale +
-      MARGIN * devicePerScale,
+      MARGIN,
     rotation: 0,
   };
 };
@@ -96,13 +94,11 @@ const rightTop = (options: ConfigOptions) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      +rendererDOM.clientWidth / 2 -
-      (MESH_WIDTH / 2) * devicePerScale -
-      MARGIN * devicePerScale,
+      +rendererDOM.clientWidth / 2 - (MESH_WIDTH / 2) * devicePerScale - MARGIN,
     y:
       +rendererDOM.clientHeight / 2 -
       (MESH_HEIGHT / 2) * devicePerScale -
-      MARGIN * devicePerScale,
+      MARGIN,
     rotation: Math.PI,
   };
 };
@@ -116,13 +112,11 @@ const rightBottom = (options: ConfigOptions) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
-      +rendererDOM.clientWidth / 2 -
-      (MESH_WIDTH / 2) * devicePerScale -
-      MARGIN * devicePerScale,
+      +rendererDOM.clientWidth / 2 - (MESH_WIDTH / 2) * devicePerScale - MARGIN,
     y:
       -rendererDOM.clientHeight / 2 +
       (MESH_HEIGHT / 2) * devicePerScale +
-      MARGIN * devicePerScale,
+      MARGIN,
     rotation: Math.PI / 2,
   };
 };
@@ -177,7 +171,7 @@ export class DeathAlertView {
    */
   engage(model: DeathAlertModel, preRender: PreRender): void {
     this.#meshes.forEach((mesh, i) => {
-      mesh.material.opacity = model.opacity;
+      mesh.material.opacity = model.opacity * 0.6;
       const devicePerScale = hudUIScale(
         preRender.rendererDOM,
         preRender.safeAreaInset,
