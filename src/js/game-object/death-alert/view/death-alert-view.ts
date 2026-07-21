@@ -1,22 +1,50 @@
 import * as THREE from "three";
 
+import { PreRender } from "../../../game-loop/pre-render";
 import { FADE_RENDER_ORDER } from "../../../render/render-order/hud-render-order";
 import { ResourcesContainer } from "../../../resource";
 import { findTextureOrThrow } from "../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../resource/texture/ids";
+import { TextureResource } from "../../../resource/texture/resource";
 import { HUD_REARMOST_FADER_Z } from "../../hud-position";
+import { hudUIScale } from "../../scale";
 import { DeathAlertModel } from "../model/death-alert-model";
 
 /** メッシュの幅 */
-export const MESH_WIDTH = 1;
+export const MESH_WIDTH = 100;
 
 /** メッシュの高さ */
-export const MESH_HEIGHT = 1;
+export const MESH_HEIGHT = 100;
+
+/** メッシュのマージン */
+export const MARGIN = 100;
+
+/**
+ * メッシュを生成する
+ * @param texture テクスチャ
+ * @returns 生成したメッシュ
+ */
+const createMesh = (
+  texture: TextureResource,
+): THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> => {
+  const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
+  const material = new THREE.MeshBasicMaterial({
+    color: "rgb(255, 0, 0)",
+    transparent: true,
+    alphaMap: texture.texture,
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.z = HUD_REARMOST_FADER_Z;
+  mesh.renderOrder = FADE_RENDER_ORDER;
+  return mesh;
+};
 
 /** デスアラートビュー */
 export class DeathAlertView {
-  /** メッシュ */
-  #mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  /** メッシュをあつめたもの */
+  #meshes: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>[];
+  /** グループ */
+  #group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -29,23 +57,26 @@ export class DeathAlertView {
       resources,
       TEXTURE_IDS.DEATH_ALERT_VIGNETTE,
     );
-    const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
-    const material = new THREE.MeshBasicMaterial({
-      color: "rgb(255, 0, 0)",
-      transparent: true,
-      alphaMap: texture.texture,
+    this.#group = new THREE.Group();
+    this.#meshes = [
+      createMesh(texture),
+      createMesh(texture),
+      createMesh(texture),
+      createMesh(texture),
+    ];
+    this.#meshes.forEach((mesh) => {
+      this.#group.add(mesh);
     });
-    this.#mesh = new THREE.Mesh(geometry, material);
-    this.#mesh.position.z = HUD_REARMOST_FADER_Z;
-    this.#mesh.renderOrder = FADE_RENDER_ORDER;
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.#mesh.material.dispose();
-    this.#mesh.geometry.dispose();
+    this.#meshes.forEach((mesh) => {
+      mesh.geometry.dispose();
+      mesh.material.dispose();
+    });
   }
 
   /**
@@ -53,22 +84,26 @@ export class DeathAlertView {
    * @returns シーンに追加するための THREE.Object3D
    */
   getObject3D(): THREE.Object3D {
-    return this.#mesh;
+    return this.#group;
   }
 
   /**
    * モデルをビューに反映する
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: DeathAlertModel): void {
-    this.#mesh.material.opacity = model.opacity;
-    const isTransparent = 0 < model.opacity;
-    this.#mesh.scale.x = isTransparent ? model.width / MESH_WIDTH : 1;
-    this.#mesh.scale.y = isTransparent ? model.height / MESH_HEIGHT : 1;
-    this.#mesh.material.color.setRGB(
-      model.color.r,
-      model.color.g,
-      model.color.b,
-    );
+  engage(model: DeathAlertModel, preRender: PreRender): void {
+    this.#meshes.forEach((mesh) => {
+      mesh.material.opacity = model.opacity;
+      const devicePerScale = hudUIScale(
+        preRender.rendererDOM,
+        preRender.safeAreaInset,
+      );
+      mesh.scale.x = devicePerScale;
+      mesh.scale.y = devicePerScale;
+      mesh.position.x = -preRender.rendererDOM.clientWidth / 2 + MARGIN * devicePerScale;
+      mesh.position.y = -preRender.rendererDOM.clientHeight / 2 + MARGIN * devicePerScale;
+      mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
+    });
   }
 }

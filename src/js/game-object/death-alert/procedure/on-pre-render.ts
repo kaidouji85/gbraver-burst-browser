@@ -10,7 +10,5 @@ export const onPreRender = (
   props: DeathAlertProps,
   action: PreRender,
 ): void => {
-  props.model.width = action.rendererDOM.clientWidth;
-  props.model.height = action.rendererDOM.clientHeight;
-  props.view.engage(props.model);
+  props.view.engage(props.model, action);
 };
