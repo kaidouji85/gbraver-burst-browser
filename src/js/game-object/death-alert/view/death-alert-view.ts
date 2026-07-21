@@ -14,7 +14,7 @@ import { DeathAlertModel } from "../model/death-alert-model";
 const MESH_WIDTH = 200;
 
 /** メッシュの高さ */
-const MESH_HEIGHT = 100;
+const MESH_HEIGHT = 50;
 
 /** メッシュのマージン */
 const MARGIN = 0;
