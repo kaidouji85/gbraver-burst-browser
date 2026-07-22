@@ -10,11 +10,14 @@ import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 import { hudUIScale } from "../../scale";
 import { DeathAlertModel } from "../model/death-alert-model";
 
+/** サイズ調整用のスケール */
+const ADJUST_SCALE = 1.5;
+
 /** メッシュの幅 */
-const MESH_WIDTH = 200;
+const MESH_WIDTH = 200 * ADJUST_SCALE;
 
 /** メッシュの高さ */
-const MESH_HEIGHT = 50;
+const MESH_HEIGHT = 50 * ADJUST_SCALE;
 
 /** メッシュのマージン */
 const MARGIN = 0;
