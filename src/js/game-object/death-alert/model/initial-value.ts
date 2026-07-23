@@ -7,8 +7,6 @@ import type { DeathAlertModel } from "./death-alert-model";
 export function createInitialValue(): DeathAlertModel {
   return {
     opacity: 0,
-    width: 1,
-    height: 1,
     color: { r: 0, g: 0, b: 0 },
   };
 }
