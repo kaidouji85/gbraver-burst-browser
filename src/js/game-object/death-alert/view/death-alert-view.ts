@@ -19,8 +19,8 @@ const MESH_WIDTH = 200 * ADJUST_SCALE;
 /** メッシュの高さ */
 const MESH_HEIGHT = 50 * ADJUST_SCALE;
 
-/** メッシュのマージン */
-const MARGIN = 0;
+/** 最大不透明度 */
+const MAX_OPACITY = 0.6;
 
 /**
  * メッシュを生成する
@@ -80,10 +80,7 @@ const top: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x: 0,
-    y:
-      rendererDOM.clientHeight / 2 -
-      (MESH_HEIGHT / 2) * devicePerScale -
-      MARGIN,
+    y: rendererDOM.clientHeight / 2 - (MESH_HEIGHT / 2) * devicePerScale,
     rotation: Math.PI,
     scaleX: devicePerScale,
     scaleY: devicePerScale,
@@ -99,10 +96,7 @@ const bottom: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x: 0,
-    y:
-      -rendererDOM.clientHeight / 2 +
-      (MESH_HEIGHT / 2) * devicePerScale +
-      MARGIN,
+    y: -rendererDOM.clientHeight / 2 + (MESH_HEIGHT / 2) * devicePerScale,
     rotation: 0,
     scaleX: devicePerScale,
     scaleY: devicePerScale,
@@ -117,10 +111,7 @@ const bottom: MeshTransformCreator = (options) => {
 const right: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
-    x:
-      +rendererDOM.clientWidth / 2 -
-      (MESH_HEIGHT / 2) * devicePerScale -
-      MARGIN,
+    x: +rendererDOM.clientWidth / 2 - (MESH_HEIGHT / 2) * devicePerScale,
     y: 0,
     rotation: Math.PI / 2,
     scaleX: devicePerScale,
@@ -136,10 +127,7 @@ const right: MeshTransformCreator = (options) => {
 const left: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
-    x:
-      -rendererDOM.clientWidth / 2 +
-      (MESH_HEIGHT / 2) * devicePerScale +
-      MARGIN,
+    x: -rendererDOM.clientWidth / 2 + (MESH_HEIGHT / 2) * devicePerScale,
     y: 0,
     rotation: -Math.PI / 2,
     scaleX: devicePerScale,
@@ -206,12 +194,12 @@ export class DeathAlertView {
    * @param preRender プリレンダー情報
    */
   engage(model: DeathAlertModel, preRender: PreRender): void {
+    const devicePerScale = hudUIScale(
+      preRender.rendererDOM,
+      preRender.safeAreaInset,
+    );
     this.#meshes.forEach(({ mesh, transformCreator }) => {
-      mesh.material.opacity = model.opacity * 0.6;
-      const devicePerScale = hudUIScale(
-        preRender.rendererDOM,
-        preRender.safeAreaInset,
-      );
+      mesh.material.opacity = model.opacity * MAX_OPACITY;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
       const transform = transformCreator({
         rendererDOM: preRender.rendererDOM,
