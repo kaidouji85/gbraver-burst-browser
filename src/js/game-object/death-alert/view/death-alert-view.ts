@@ -69,9 +69,7 @@ type MeshTransform = {
  * @param options 設定オプション
  * @returns 設定
  */
-type MeshTransformCreator = (
-  options: MeshTransformOptions,
-) => MeshTransform;
+type MeshTransformCreator = (options: MeshTransformOptions) => MeshTransform;
 
 /**
  * 上のメッシュ変換情報
