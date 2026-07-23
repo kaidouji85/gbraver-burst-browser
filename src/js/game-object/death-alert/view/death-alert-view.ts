@@ -42,16 +42,16 @@ const createMesh = (
   return mesh;
 };
 
-/** メッシュ設定の生成オプション */
-type MeshConfigOptions = {
+/** メッシュ変換情報の生成オプション */
+type MeshTransformOptions = {
   /** デバイスごとのスケール */
   devicePerScale: number;
   /** レンダラーのDOM要素 */
   rendererDOM: HTMLElement;
 };
 
-/** メッシュ設定 */
-type MeshConfig = {
+/** メッシュ変換情報 */
+type MeshTransform = {
   /** X座標 */
   x: number;
   /** Y座標 */
@@ -65,18 +65,20 @@ type MeshConfig = {
 };
 
 /**
- * メッシュ設定の生成関数
+ * メッシュ変換情報の生成関数
  * @param options 設定オプション
  * @returns 設定
  */
-type MeshConfigCreator = (options: MeshConfigOptions) => MeshConfig;
+type MeshTransformCreator = (
+  options: MeshTransformOptions,
+) => MeshTransform;
 
 /**
- * 上のメッシュ設定
+ * 上のメッシュ変換情報
  * @param options 設定オプション
  * @returns 設定
  */
-const top: MeshConfigCreator = (options) => {
+const top: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x: 0,
@@ -91,11 +93,11 @@ const top: MeshConfigCreator = (options) => {
 };
 
 /**
- * 下のメッシュ設定
+ * 下のメッシュ変換情報
  * @param options 設定オプション
  * @returns 設定
  */
-const bottom: MeshConfigCreator = (options) => {
+const bottom: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x: 0,
@@ -110,11 +112,11 @@ const bottom: MeshConfigCreator = (options) => {
 };
 
 /**
- * 右のメッシュ設定
+ * 右のメッシュ変換情報
  * @param options 設定オプション
  * @returns 設定
  */
-const right: MeshConfigCreator = (options) => {
+const right: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -129,11 +131,11 @@ const right: MeshConfigCreator = (options) => {
 };
 
 /**
- * 左のメッシュ設定
+ * 左のメッシュ変換情報
  * @param options 設定オプション
  * @returns 設定
  */
-const left: MeshConfigCreator = (options) => {
+const left: MeshTransformCreator = (options) => {
   const { rendererDOM, devicePerScale } = options;
   return {
     x:
@@ -153,8 +155,8 @@ export class DeathAlertView {
   #meshes: {
     /** メッシュ */
     mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
-    /** メッシュ設定の生成関数 */
-    configCreator: MeshConfigCreator;
+    /** メッシュ変換情報の生成関数 */
+    transformCreator: MeshTransformCreator;
   }[];
   /** グループ */
   #group: THREE.Group;
@@ -172,10 +174,10 @@ export class DeathAlertView {
     );
     this.#group = new THREE.Group();
     this.#meshes = [
-      { mesh: createMesh(texture), configCreator: top },
-      { mesh: createMesh(texture), configCreator: bottom },
-      { mesh: createMesh(texture), configCreator: right },
-      { mesh: createMesh(texture), configCreator: left },
+      { mesh: createMesh(texture), transformCreator: top },
+      { mesh: createMesh(texture), transformCreator: bottom },
+      { mesh: createMesh(texture), transformCreator: right },
+      { mesh: createMesh(texture), transformCreator: left },
     ];
     this.#meshes.forEach(({ mesh }) => {
       this.#group.add(mesh);
@@ -206,22 +208,22 @@ export class DeathAlertView {
    * @param preRender プリレンダー情報
    */
   engage(model: DeathAlertModel, preRender: PreRender): void {
-    this.#meshes.forEach(({ mesh, configCreator }, i) => {
+    this.#meshes.forEach(({ mesh, transformCreator }) => {
       mesh.material.opacity = model.opacity * 0.6;
       const devicePerScale = hudUIScale(
         preRender.rendererDOM,
         preRender.safeAreaInset,
       );
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
-      const config = configCreator({
+      const transform = transformCreator({
         rendererDOM: preRender.rendererDOM,
         devicePerScale,
       });
-      mesh.position.x = config.x;
-      mesh.position.y = config.y;
-      mesh.rotation.z = config.rotation;
-      mesh.scale.x = config.scaleX;
-      mesh.scale.y = config.scaleY;
+      mesh.position.x = transform.x;
+      mesh.position.y = transform.y;
+      mesh.rotation.z = transform.rotation;
+      mesh.scale.x = transform.scaleX;
+      mesh.scale.y = transform.scaleY;
     });
   }
 }
