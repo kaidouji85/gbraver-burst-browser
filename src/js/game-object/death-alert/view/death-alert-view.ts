@@ -58,10 +58,6 @@ type MeshTransform = {
   y: number;
   /** 回転角度 */
   rotation: number;
-  /** X方向のスケール */
-  scaleX: number;
-  /** Y方向のスケール */
-  scaleY: number;
 };
 
 /**
@@ -82,8 +78,6 @@ const top: MeshTransformCreator = (options) => {
     x: 0,
     y: rendererDOM.clientHeight / 2 - (MESH_HEIGHT / 2) * devicePerScale,
     rotation: Math.PI,
-    scaleX: devicePerScale,
-    scaleY: devicePerScale,
   };
 };
 
@@ -98,8 +92,6 @@ const bottom: MeshTransformCreator = (options) => {
     x: 0,
     y: -rendererDOM.clientHeight / 2 + (MESH_HEIGHT / 2) * devicePerScale,
     rotation: 0,
-    scaleX: devicePerScale,
-    scaleY: devicePerScale,
   };
 };
 
@@ -114,8 +106,6 @@ const right: MeshTransformCreator = (options) => {
     x: +rendererDOM.clientWidth / 2 - (MESH_HEIGHT / 2) * devicePerScale,
     y: 0,
     rotation: Math.PI / 2,
-    scaleX: devicePerScale,
-    scaleY: devicePerScale,
   };
 };
 
@@ -130,8 +120,6 @@ const left: MeshTransformCreator = (options) => {
     x: -rendererDOM.clientWidth / 2 + (MESH_HEIGHT / 2) * devicePerScale,
     y: 0,
     rotation: -Math.PI / 2,
-    scaleX: devicePerScale,
-    scaleY: devicePerScale,
   };
 };
 
@@ -199,8 +187,11 @@ export class DeathAlertView {
       preRender.safeAreaInset,
     );
     this.#meshes.forEach(({ mesh, transformCreator }) => {
+      mesh.scale.x = devicePerScale;
+      mesh.scale.y = devicePerScale;
       mesh.material.opacity = model.opacity * MAX_OPACITY;
       mesh.material.color.setRGB(model.color.r, model.color.g, model.color.b);
+
       const transform = transformCreator({
         rendererDOM: preRender.rendererDOM,
         devicePerScale,
@@ -208,8 +199,6 @@ export class DeathAlertView {
       mesh.position.x = transform.x;
       mesh.position.y = transform.y;
       mesh.rotation.z = transform.rotation;
-      mesh.scale.x = transform.scaleX;
-      mesh.scale.y = transform.scaleY;
     });
   }
 }
