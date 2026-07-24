@@ -12,7 +12,7 @@ export const playerDeathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
     .chain(onStart(() => alert.startPlayerAlert(200)))
-    .chain(delay(1000))
+    .chain(delay(3000))
     .chain(onStart(() => alert.stop(200)))
     .chain(delay(1000))
     .loop();
@@ -24,7 +24,7 @@ export const enemyDeathAlert = hudGameObjectStory((params) => {
   const alert = new DeathAlert(params);
   delay(1000)
     .chain(onStart(() => alert.startEnemyAlert(200)))
-    .chain(delay(1000))
+    .chain(delay(3000))
     .chain(onStart(() => alert.stop(200)))
     .chain(delay(1000))
     .loop();
