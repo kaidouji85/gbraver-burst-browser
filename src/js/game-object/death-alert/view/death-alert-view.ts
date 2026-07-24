@@ -95,10 +95,13 @@ const top: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const bottom: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
     x: 0,
-    y: -rendererDOM.clientHeight / 2 + (MESH_HEIGHT / 2) * devicePerScale,
+    y:
+      -rendererDOM.clientHeight / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale -
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     rotation: 0,
   };
 };
@@ -109,9 +112,12 @@ const bottom: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const right: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
-    x: +rendererDOM.clientWidth / 2 - (MESH_HEIGHT / 2) * devicePerScale,
+    x:
+      +rendererDOM.clientWidth / 2 -
+      (MESH_HEIGHT / 2) * devicePerScale +
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: Math.PI / 2,
   };
@@ -123,9 +129,12 @@ const right: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const left: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
-    x: -rendererDOM.clientWidth / 2 + (MESH_HEIGHT / 2) * devicePerScale,
+    x:
+      -rendererDOM.clientWidth / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale -
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: -Math.PI / 2,
   };
