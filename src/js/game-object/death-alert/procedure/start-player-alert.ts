@@ -1,5 +1,6 @@
 import { all } from "../../../animation/all";
 import { changeColor } from "../animation/change-color";
+import { changeMargin } from "../animation/change-margin";
 import { changeOpacity } from "../animation/change-opacity";
 import { PLAYER_DEATH_ALERT_COLOR } from "../color";
 import { DeathAlertProps } from "../props/death-alert-props";
@@ -23,6 +24,7 @@ export const startPlayerAlert = (
   all(
     changeOpacity(props.model, 1, duration),
     changeColor(props.model, PLAYER_DEATH_ALERT_COLOR, 0),
+    changeMargin(props.model, 1, duration),
   ).play({ group: props.tweenGroup });
   props.se.loop(props.sounds.deathAlert);
 };

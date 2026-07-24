@@ -22,6 +22,9 @@ const MESH_HEIGHT = 50 * ADJUST_SCALE;
 /** 最大不透明度 */
 const MAX_OPACITY = 0.6;
 
+/** ビネットの最大マージン */
+const MAX_MARGIN = 20;
+
 /**
  * メッシュを生成する
  * @param texture テクスチャ
@@ -48,6 +51,8 @@ type MeshTransformOptions = {
   devicePerScale: number;
   /** レンダラーのDOM要素 */
   rendererDOM: HTMLElement;
+  /** ビネットのマージン、0から1で指定 */
+  margin: number;
 };
 
 /** メッシュ変換情報 */
@@ -73,10 +78,13 @@ type MeshTransformCreator = (options: MeshTransformOptions) => MeshTransform;
  * @returns 設定
  */
 const top: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
     x: 0,
-    y: rendererDOM.clientHeight / 2 - (MESH_HEIGHT / 2) * devicePerScale,
+    y:
+      rendererDOM.clientHeight / 2 -
+      (MESH_HEIGHT / 2) * devicePerScale +
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     rotation: Math.PI,
   };
 };
@@ -87,10 +95,13 @@ const top: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const bottom: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
     x: 0,
-    y: -rendererDOM.clientHeight / 2 + (MESH_HEIGHT / 2) * devicePerScale,
+    y:
+      -rendererDOM.clientHeight / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale -
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     rotation: 0,
   };
 };
@@ -101,9 +112,12 @@ const bottom: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const right: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
-    x: +rendererDOM.clientWidth / 2 - (MESH_HEIGHT / 2) * devicePerScale,
+    x:
+      +rendererDOM.clientWidth / 2 -
+      (MESH_HEIGHT / 2) * devicePerScale +
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: Math.PI / 2,
   };
@@ -115,9 +129,12 @@ const right: MeshTransformCreator = (options) => {
  * @returns 設定
  */
 const left: MeshTransformCreator = (options) => {
-  const { rendererDOM, devicePerScale } = options;
+  const { rendererDOM, devicePerScale, margin } = options;
   return {
-    x: -rendererDOM.clientWidth / 2 + (MESH_HEIGHT / 2) * devicePerScale,
+    x:
+      -rendererDOM.clientWidth / 2 +
+      (MESH_HEIGHT / 2) * devicePerScale -
+      (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: -Math.PI / 2,
   };
@@ -195,6 +212,7 @@ export class DeathAlertView {
       const transform = transformCreator({
         rendererDOM: preRender.rendererDOM,
         devicePerScale,
+        margin: model.margin,
       });
       mesh.position.x = transform.x;
       mesh.position.y = transform.y;

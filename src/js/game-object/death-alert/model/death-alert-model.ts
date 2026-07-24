@@ -6,4 +6,6 @@ export type DeathAlertModel = {
   opacity: number;
   /** ビネットの色 */
   color: Color;
+  /** ビネットのマージン、0から1で指定 */
+  margin: number;
 };
