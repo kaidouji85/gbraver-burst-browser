@@ -1,5 +1,7 @@
 import { Animate } from "../../animation/animate";
 import { Resources } from "../../resource";
+import { PathIds } from "../../resource/path/ids";
+import { PathId } from "../../resource/path/resource";
 import {
   BatteryCommandSelectedEventProps,
   BurstSelectedEventProps,
@@ -27,6 +29,14 @@ import {
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** イベントプロパティ */
   #eventProps: BatterySystemTutorialProps;
+
+  /** @override */
+  readonly preloadImagePathIds: PathId[] = [
+    PathIds.MESSAGE_WINDOW_PLUS_BATTERY,
+    PathIds.MESSAGE_WINDOW_MINUS_BATTERY,
+    PathIds.MESSAGE_WINDOW_ATTACK_BATTERY,
+    PathIds.MESSAGE_WINDOW_DEFENSE_BATTERY,
+  ];
 
   /**
    * コンストラクタ

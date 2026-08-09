@@ -14,9 +14,6 @@ import {
 import { loadGlTF } from "../gltf/load-gltf";
 import { GlTFConfig, GlTFResource } from "../gltf/resource";
 import { getAllPaths } from "../path/get-all-paths";
-import { preLoadImage } from "../path/pre-load-image";
-import { PathConfig } from "../path/resource";
-import { toPath } from "../path/to-path";
 import { ResourceRoot } from "../resource-root";
 import { loadSound } from "../sound/load";
 import { SoundResource } from "../sound/resource";
@@ -43,11 +40,6 @@ export type LoadingTargetConfigs = {
 type LoadingStartParams = LoadingTargetConfigs & {
   /** リソースルート */
   resourceRoot: ResourceRoot;
-  /**
-   * プリロードする画像
-   * プリロードでは読み込み開始だけを行い、読み込み完了まで待たない
-   */
-  preLoadImages: PathConfig[];
 };
 
 /** リソース読み込みPromise */
@@ -70,9 +62,6 @@ type LoadingPromises = {
  * @returns リソース読み込み情報
  */
 function startLoading(params: LoadingStartParams): LoadingPromises {
-  params.preLoadImages
-    .map((v) => toPath(v, params.resourceRoot))
-    .forEach((v) => preLoadImage(v));
   return {
     gltfLoadings: params.gltfConfigs.map((v) =>
       loadGlTF(params.resourceRoot, v),

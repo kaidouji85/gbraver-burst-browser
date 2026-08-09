@@ -1,10 +1,6 @@
 /** 戦闘終了後の挙動の一覧 */
 export type PostBattle =
-  | GotoTitle
-  | NextStage
-  | GotoEpisodeSelect
-  | Retry
-  | GotoEnding;
+  GotoTitle | NextStage | GotoEpisodeSelect | Retry | GotoEnding;
 
 /** タイトルへ */
 export type GotoTitle = {

@@ -29,7 +29,6 @@ export const loadAdditionalResources = (options: {
     (t.type === "DynamicPilot" && additionalPilotIds.includes(t.pilotId));
   const additionalLoading = loadResources({
     resourceRoot: resources.rootPath,
-    preLoadImages: [],
     gltfConfigs: GLTF_CONFIGS.filter(shouldLoad),
     textureConfigs: TEXTURE_CONFIGS.filter(shouldLoad),
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS.filter(shouldLoad),

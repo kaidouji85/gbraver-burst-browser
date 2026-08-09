@@ -20,7 +20,6 @@ export function loadBootResources(options: {
   const isBoot = (c: ResourceType) => c.type === "Boot";
   return loadResources({
     resourceRoot,
-    preLoadImages: [],
     gltfConfigs: GLTF_CONFIGS.filter(isBoot),
     textureConfigs: TEXTURE_CONFIGS.filter(isBoot),
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS.filter(isBoot),

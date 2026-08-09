@@ -1,6 +1,6 @@
 import { BatteryNumberPushed } from "../../actions/battery-number-pushed";
 import type { BattleSceneProps } from "../../props";
-import { updatePredicatedDamage } from "../update-predicated-damage";
+import { updatePredicatedDamage } from "../predicated-damage";
 
 /**
  * バッテリーセレクタの数字が押された時の処理

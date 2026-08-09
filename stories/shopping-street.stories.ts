@@ -1,3 +1,4 @@
+import { delay } from "../src/js/animation/delay";
 import { Illumination } from "../src/js/game-object/illumination/illumination";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
@@ -23,6 +24,36 @@ export const game = tdGameObjectStory(({ resources, gameObjectAction }) => {
     skyBox,
   };
 });
+
+/** 照明テスト */
+export const illumination = tdGameObjectStory(
+  ({ resources, gameObjectAction }) => {
+    const illumination = new Illumination(gameObjectAction);
+    const shoppingStreet = new ShoppingStreet(resources);
+    const objects = [
+      ...shoppingStreet.getThreeJsObjects(),
+      ...illumination.getObject3Ds(),
+    ];
+    const skyBox = createSkyBox(resources);
+
+    delay(1000)
+      .chain(illumination.intensity(0.2, 1000))
+      .chain(delay(1000))
+      .chain(illumination.intensity(1, 1000))
+      .chain(delay(1000))
+      .chain(illumination.color({ r: 1, g: 0, b: 0 }, 1000))
+      .chain(delay(1000))
+      .chain(illumination.color({ r: 1, g: 1, b: 1 }, 1000))
+      .chain(delay(1000))
+      .loop();
+    illumination.intensity(0.5, 0);
+
+    return {
+      objects,
+      skyBox,
+    };
+  },
+);
 
 /** 静止画 ハイレゾリューション */
 export const highResolutionStillImage = (() => {

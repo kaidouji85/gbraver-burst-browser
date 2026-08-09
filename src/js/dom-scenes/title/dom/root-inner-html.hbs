@@ -35,19 +35,6 @@
       target="_blank"
       rel="noopener"
     >ロボ、パイロット説明</a>
-    <div class="{{ROOT_CLASS}}__help-menu-separation"></div>
-    <a
-      class="{{ROOT_CLASS}}__terms-of-service"
-      href="{{params.termsOfServiceURL}}"
-      target="_blank"
-      rel="noopener"
-    >利用規約</a>
-    <a
-      class="{{ROOT_CLASS}}__privacy-policy"
-      href="{{params.privacyPolicyURL}}"
-      target="_blank"
-      rel="noopener"
-    >プライバシーポリシー</a>
     <a
       class="{{ROOT_CLASS}}__contact"
       href="{{params.contactURL}}"
@@ -98,11 +85,8 @@
   <div class="{{ROOT_CLASS}}__title">
     <img class="{{ROOT_CLASS}}__title-logo" alt="タイトルロゴ" data-id="logo" />
     <small class="{{ROOT_CLASS}}__copy-rights">
-      <span class="{{ROOT_CLASS}}__copy-rights-symbol">&copy;</span>
-      <span class="{{ROOT_CLASS}}__copy-rights-year">2022</span>
-      <span class="{{ROOT_CLASS}}__copy-rights-owner">Pegass85</span>
+      &copy; 2022 Pegass85 | 音楽 魔王魂
     </small>
-    <small class="{{ROOT_CLASS}}__music">音楽 魔王魂</small>
   </div>
   <div class="{{gameMenuClassName}}">
     <button class="{{ROOT_CLASS}}__config" data-id="config">
@@ -127,10 +111,7 @@
       <span class="{{ROOT_CLASS}}__menu-button-label">あいことば対戦</span>
     </button>
     <button class="{{ROOT_CLASS}}__arcade" data-id="arcade">
-      <span
-        class="{{ROOT_CLASS}}__menu-button-icon"
-        aria-hidden="true"
-      >🕹</span>
+      <span class="{{ROOT_CLASS}}__menu-button-icon" aria-hidden="true">🕹</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">アーケード</span>
     </button>
     <button class="{{ROOT_CLASS}}__story" data-id="story">
@@ -147,5 +128,35 @@
       >🔰</span>
       <span class="{{ROOT_CLASS}}__menu-button-label">チュートリアル</span>
     </button>
+  </div>
+  <div class="{{ROOT_CLASS}}__confirm">
+    プレイ開始をもって
+    <a
+      class="{{ROOT_CLASS}}__terms-of-service"
+      href="{{params.termsOfServiceURL}}"
+      target="_blank"
+      rel="noopener"
+    >
+      利用規約
+      <img
+        class="{{ROOT_CLASS}}__link-icon"
+        alt="リンクアイコン"
+        src="{{linkIconPath}}"
+        data-id="termsOfServiceLinkIcon"
+      /></a>、
+    <a
+      class="{{ROOT_CLASS}}__privacy-policy"
+      href="{{params.privacyPolicyURL}}"
+      target="_blank"
+      rel="noopener"
+    >
+      プライバシーポリシー
+      <img
+        class="{{ROOT_CLASS}}__link-icon"
+        alt="リンクアイコン"
+        src="{{linkIconPath}}"
+        data-id="privacyPolicyLinkIcon"
+      /></a>
+    に同意したものとみなします
   </div>
 </div>

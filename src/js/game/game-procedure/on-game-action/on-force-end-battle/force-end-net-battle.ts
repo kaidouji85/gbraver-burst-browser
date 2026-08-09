@@ -33,6 +33,7 @@ export async function forceEndNetBattle(
 ) {
   const dialog = new WaitingDialog("通信中......");
   switchWaitingDialog(props, dialog);
+  props.suddenlyBattleEnd.unbind();
   await disconnectConnection(props);
   props.domDialogBinder.hidden();
   const [title] = await Promise.all([

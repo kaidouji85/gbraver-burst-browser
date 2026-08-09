@@ -118,6 +118,10 @@ module.exports = async () => ({
           from: path.resolve(__dirname, "src/pegass85.webp"),
           to: path.resolve(__dirname, BUILD_ROOT),
         },
+        {
+          from: path.resolve(__dirname, "src/config.json"),
+          to: path.resolve(__dirname, BUILD_ROOT),
+        },
       ],
     }),
     new webpack.DefinePlugin({

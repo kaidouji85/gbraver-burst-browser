@@ -1,8 +1,8 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-/** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
-export class FutureSuddenlyBattleEnd {
+/** バトル管理オブジェクトからバトル強制終了ストリームを取り出す */
+export class SuddenlyBattleEnd {
   #notifier: Subject<void>;
   #unsubscriber: Unsubscribable | null;
 

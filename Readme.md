@@ -40,7 +40,7 @@ npm start
 3. [aseetlinks.json](https://developers.google.com/digital-asset-links/v1/getting-started)を作成し、任意のS3バケットに配置する
 4. デプロイ対象のS3バケットを用意する
 
-### デプロイコマンド
+### 各種コマンド
 
 ```shell script
 # デプロイ
@@ -53,6 +53,13 @@ npm start
 # CDNのキャッシュをクリア
 # デプロイ、ステージ切り替えなどの一連の操作が終わったら実行する
 ./clear-cdn.bash <CloudFrontのdistributionId>
+
+# S3にあるconfig.jsonを上書きする
+# 本スクリプトの実行には、以下の環境変数が必要
+# - S3_BUCKET
+# - STAGE
+# - IS_BACKEND_SERVER_AVAILABLE（省略可能、デフォルトはtrue）
+./overwrite-config-json.bash
 ```
 
 ## AWSでCI/CDを構築する
@@ -67,10 +74,11 @@ npm start
 2. 「[Parameter Store（テスト環境）](#parameter-storeテスト環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割             | buildspec                 | 環境                                                                                                             | IAMポリシー                                                     | webhook                                                 |
-| ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------- |
-| ビルド           | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
-| ステージ切り替え | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                                |
+| 役割              | buildspec                 | 環境                                                                                                             | IAMポリシー                                                      | webhook                                                 |
+| ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| ビルド            | buildspec.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
+| ステージ切り替え  | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                                |
+| config.json上書き | buildspec.configJson.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                                |
 
 ### 本番環境
 
@@ -78,10 +86,11 @@ npm start
 2. 「[Parameter Store（本番環境）](#parameter-store本番環境)」を参考にParameter Storeに値を設定する
 3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
 
-| 役割             | buildspec                      | 環境                                                                                                             | IAMポリシー                                                     | webhook                                             |
-| ---------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
-| ビルド           | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                     | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
-| ステージ切り替え | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー) | 設定なし                                            |
+| 役割              | buildspec                      | 環境                                                                                                             | IAMポリシー                                                      | webhook                                             |
+| ----------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+| ビルド            | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
+| ステージ切り替え  | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
+| config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
 
 ## オフライン用LAN環境で動かす
 
@@ -299,6 +308,26 @@ shfmt -l -w *.bash
 }
 ```
 
+#### config.json上書き用IAMポリシー
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:PutObject"],
+      "Resource": "arn:aws:s3:::*/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ssm:GetParameters",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
 ### CodeBuild Webhook設定
 
 本節ではCodeBuildのWebhook設定の詳細を解説します。
@@ -320,8 +349,8 @@ developブランチにpushされた時に、CodeBuildが実行されるように
     - **イベントタイプ**
       - プッシュ
     - **これらの条件でビルドを開始する**
-      | タイプ | パターン |
-      |--------|---------|
+      | タイプ   | パターン             |
+      | -------- | -------------------- |
       | HEAD_REF | ^refs/heads/develop$ |
     - **これらの条件でビルドを開始しない**
       - なし
@@ -339,8 +368,8 @@ masterブランチにpushされた時に、CodeBuildが実行されるように�
     - **イベントタイプ**
       - プッシュ
     - **これらの条件でビルドを開始する**
-      | タイプ | パターン |
-      |--------|---------|
+      | タイプ   | パターン            |
+      | -------- | ------------------- |
       | HEAD_REF | ^refs/heads/master$ |
     - **これらの条件でビルドを開始しない**
       - なし

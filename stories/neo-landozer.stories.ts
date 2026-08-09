@@ -235,7 +235,12 @@ export const enemyActiveArmHammer = armdozerSpriteStub(
  * @param sprite スプライト
  */
 const down = (sprite: NeoLandozer) => {
-  delay(1000).chain(sprite.down()).chain(delay(1000)).loop();
+  delay(1000)
+    .chain(sprite.knockBack())
+    .chain(delay(1000))
+    .chain(sprite.down())
+    .chain(delay(1000))
+    .loop();
 };
 
 /**

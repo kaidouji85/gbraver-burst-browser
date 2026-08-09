@@ -33,7 +33,7 @@ export function onBurst(
     }
 
     const playAnimation = createAnimationPlay(props);
-    await playAnimation(decisionByBurstButton(props.view));
+    await playAnimation(decisionByBurstButton(props));
     await progressGame(props, burstCommand);
   });
 }

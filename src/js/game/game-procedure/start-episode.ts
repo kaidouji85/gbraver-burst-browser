@@ -1,7 +1,13 @@
+import { Player } from "gbraver-burst-core";
+
 import { fadeOut, stop } from "../../bgm/bgm-operators";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { EpisodeTitle } from "../../dom-scenes/episode-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import {
+  preloadBattleSceneImages,
+  preloadImages,
+} from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { BattleScene } from "../../td-scenes/battle";
 import { waitAnimationFrame } from "../../wait/wait-animation-frame";
@@ -48,10 +54,16 @@ export async function startEpisode(options: {
   const startTutorialStageTime = Date.now();
   const config = await props.config.load();
   props.renderer.setPixelRatio(config.webGLPixelRatio);
+  const players: [Player, Player] = [npcBattle.player, npcBattle.enemy];
   props.resources = await updateBattleSceneResources({
     resources: props.resources,
-    players: [npcBattle.player, npcBattle.enemy],
+    players,
   });
+  const customBattleEvent = episode.event(props.resources);
+  await Promise.all([
+    preloadBattleSceneImages(props.resources, players),
+    preloadImages(props.resources, customBattleEvent.preloadImagePathIds),
+  ]);
   const battleScene = new BattleScene({
     ...props,
     isRetry,
@@ -61,7 +73,7 @@ export async function startEpisode(options: {
     player: npcBattle.player,
     enemy: npcBattle.enemy,
     initialState: npcBattle.stateHistory(),
-    customBattleEvent: episode.event(props.resources),
+    customBattleEvent,
     controllerType: "BigButton",
     playerPilotVisibility: "visible",
     canRetry: true,

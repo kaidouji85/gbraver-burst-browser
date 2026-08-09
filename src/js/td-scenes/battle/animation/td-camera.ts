@@ -51,15 +51,26 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
   );
 }
 
+/** shakeYのオプション */
+type ShakeYOptions = {
+  /** 揺らす量 */
+  amount?: number;
+  /** 上に揺らす時間（ミリ秒） */
+  upDuration?: number;
+  /** 下に揺らす時間（ミリ秒） */
+  downDuration?: number;
+};
+
 /**
  * カメラをY軸方向に揺らす
  * @param camera カメラ
+ * @param options オプション
  * @returns アニメーション
  */
-export function shakeY(camera: TDCamera): Animate {
-  const amount = 70;
-  const upDuration = 120;
-  const downDuration = 120;
+export function shakeY(camera: TDCamera, options?: ShakeYOptions): Animate {
+  const amount = options?.amount ?? 70;
+  const upDuration = options?.upDuration ?? 120;
+  const downDuration = options?.downDuration ?? 120;
   return all(
     camera.move({ y: `+${amount}` }, upDuration, Easing.Quadratic.In),
     camera.lookAt({ y: `+${amount}` }, upDuration, Easing.Quadratic.In),

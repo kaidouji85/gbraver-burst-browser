@@ -51,5 +51,5 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
     ...props.inProgress,
     privateMatchGuest: { type: "Battle" },
   };
-  await startOnlineBattle(props, battle, "PRIVATE MATCH");
+  await startOnlineBattle(props, battle, "プライベートマッチ");
 }

@@ -27,12 +27,10 @@ export async function onDifficultySelectionComplete(
   options: Options,
 ): Promise<void> {
   const { props, action } = options;
-  if (
-    !(
-      props.inProgress.type === "NPCBattle" &&
-      props.inProgress.npcBattle.type === "DifficultySelect"
-    )
-  ) {
+  if (!(
+    props.inProgress.type === "NPCBattle" &&
+    props.inProgress.npcBattle.type === "DifficultySelect"
+  )) {
     return;
   }
 

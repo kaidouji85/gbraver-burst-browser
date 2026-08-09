@@ -1,6 +1,7 @@
 import { PathConfig } from "../resource";
 import { BatteryIconPathConfigs } from "./battery-icon";
 import { BattleHamburgerMenuConfigs } from "./battle-hamburger-menu";
+import { CameraIconConfigs } from "./camera-icon";
 import { CheckPathConfigs } from "./check";
 import { DialogPathConfig } from "./dialog";
 import { EndingPathConfigs } from "./ending";
@@ -10,6 +11,7 @@ import { GenesisBraverPathConfigs } from "./genesis-braver";
 import { GranDozerPathConfigs } from "./gran-dozer";
 import { HelpIconPathConfigs } from "./help-icon";
 import { LightningDozerPathConfigs } from "./lightning-dozer";
+import { LinkIconConfigs } from "./link-icon";
 import { LogoPathConfigs } from "./logo";
 import { MessageWindowPathConfigs } from "./message-window";
 import { NeoLandozerPathConfigs } from "./neo-landozer";
@@ -50,10 +52,6 @@ export const PathConfigs: PathConfig[] = [
   ...MessageWindowPathConfigs,
   ...TurnIndicatorConfigs,
   ...BattleHamburgerMenuConfigs,
-];
-
-/** プリロード対象となるパス設定 */
-export const PreLoadPathConfigs: PathConfig[] = [
-  ...NPCCoursePathConfigs,
-  ...MessageWindowPathConfigs,
+  ...CameraIconConfigs,
+  ...LinkIconConfigs,
 ];

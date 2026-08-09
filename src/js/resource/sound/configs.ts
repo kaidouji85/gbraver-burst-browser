@@ -144,4 +144,17 @@ export const SOUND_CONFIGS: SoundConfig[] = [
       `${resourceRoot.get()}/sounds/gran-dozer-strike.mp3`,
     volumeScale: 0.3,
   },
+  {
+    type: "Shared",
+    id: SOUND_IDS.DEATH_ALERT,
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/death-alert.mp3`,
+    volumeScale: 0.2,
+  },
+  {
+    type: "Shared",
+    id: SOUND_IDS.ENEMY_DEATH_ALERT,
+    path: (resourceRoot) =>
+      `${resourceRoot.get()}/sounds/enemy-death-alert.mp3`,
+    volumeScale: 0.4,
+  },
 ];

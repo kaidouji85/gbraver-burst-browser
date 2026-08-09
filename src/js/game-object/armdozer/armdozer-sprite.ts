@@ -20,6 +20,7 @@ export interface ArmdozerSprite {
   readonly predicatedDamagePosition: ArmdozerWorldCoordinate;
   /** ダウンアニメーション開始から衝撃演出までの遅延時間(ミリ秒) */
   readonly downImpactDelay: number;
+
   /**
    * デストラクタ相当の処理
    */
@@ -84,6 +85,12 @@ export interface ArmdozerSprite {
    * @returns アニメーション
    */
   avoidToStand(): Animate;
+
+  /**
+   * やられる
+   * @returns アニメーション
+   */
+  defeated(): Animate;
 
   /**
    * ダウン

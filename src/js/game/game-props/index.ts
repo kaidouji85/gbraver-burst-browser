@@ -17,11 +17,11 @@ import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
 import { PushWindow } from "../../window/push-window";
 import { Resize } from "../../window/resize";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
-import { FutureSuddenlyBattleEnd } from "../future-suddenly-battle-end";
 import { InProgress } from "../in-progress";
 import { InterruptScenes } from "../innterrupt-scenes";
 import { NetworkContext } from "../network-context";
 import { SharedResourceState } from "../shared-resource-state";
+import { SuddenlyBattleEnd } from "../suddenly-battle-end";
 import { GameActionManageContainer } from "./game-action-manage-container";
 
 /**
@@ -73,7 +73,7 @@ export interface GameProps
   /** ネットワークコンテキスト */
   readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */
-  readonly suddenlyBattleEnd: FutureSuddenlyBattleEnd;
+  readonly suddenlyBattleEnd: SuddenlyBattleEnd;
 
   /** リサイズ */
   readonly resize: Observable<Resize>;

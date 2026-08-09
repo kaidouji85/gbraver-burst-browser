@@ -1,4 +1,5 @@
 import { BatterySelector } from "../../../../../../game-object/battery-selector";
+import { DeathAlert } from "../../../../../../game-object/death-alert";
 import {
   frontmostFader,
   rearmostFader,
@@ -35,14 +36,9 @@ export function createHUDGameObjectsProps(
     pilotButton: createPilotButton(params),
     pilotButtonLeadLine: pilotButtonLeadLine(gameObjectAction),
     timeScaleButton: new TimeScaleButton(params),
-    frontmostFader: frontmostFader({
-      gameObjectAction: gameObjectAction,
-      isVisible: false,
-    }),
-    rearmostFader: rearmostFader({
-      gameObjectAction: gameObjectAction,
-      isVisible: false,
-    }),
+    frontmostFader: frontmostFader({ gameObjectAction, isVisible: false }),
+    rearmostFader: rearmostFader({ gameObjectAction, isVisible: false }),
+    deathAlert: new DeathAlert(params),
     drawIndicator: drawIndicator(resources, gameObjectAction),
   };
 }
