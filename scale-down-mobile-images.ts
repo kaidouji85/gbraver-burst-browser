@@ -10,8 +10,8 @@ sharp.cache(false);
  * @return 大きさ変更が完了したら発火するPromise
  */
 async function resizePng(origin: string, scale: number): Promise<void> {
-  const size = await sharp(origin).metadata();
-  const height = Math.floor((size.height ?? 0) * scale);
+  const metadata = await sharp(origin).metadata();
+  const height = Math.floor((metadata.height ?? 0) * scale);
   const buffer = await sharp(origin).resize(null, height).png().toBuffer();
   await sharp(buffer).toFile(origin);
 }
@@ -23,8 +23,8 @@ async function resizePng(origin: string, scale: number): Promise<void> {
  * @return 大きさ変更が完了したら発火するPromise
  */
 async function resizeWebp(origin: string, scale: number): Promise<void> {
-  const size = await sharp(origin).metadata();
-  const height = Math.floor((size.height ?? 0) * scale);
+  const metadata = await sharp(origin).metadata();
+  const height = Math.floor((metadata.height ?? 0) * scale);
   const buffer = await sharp(origin)
     .resize(null, height)
     .webp({ lossless: true, quality: 100 })
