@@ -1,7 +1,17 @@
 # Gブレイバーバースト
 
-ロボットで対戦するゲームです。
-[ここ](https://gbraver-burst.com)でサービスを公開しています。
+本リポジトリはGブレイバーバーストのSingle Page Application(SPA)のソースコードです。
+
+## 前提
+
+あらかじめ、[ネットワーク系リポジトリ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境を整え、同リポジトリをAWS環境にデプロイしてください。
+
+## 必須ソフトウェア
+
+- node.js（v24.19.0以上）
+- npm（11.17.0以上）
+- npx（11.17.0以上）
+- aws cli（2.36.25以上）
 
 ## ローカル環境で動かす
 
