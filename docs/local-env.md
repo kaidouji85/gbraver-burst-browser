@@ -17,10 +17,16 @@ npm ci
 npm start
 ```
 
-## S3へのデプロイ
+## storybookを動かす
 
-本プログラムは静的ファイルのみで構成されているので、
-ビルド生成物をPublicに公開すればデプロイ完了です。
+```shell script
+npm run start-storybook
+# ブラウザからlocalhost:6006を開く
+```
+
+## AWS環境へのデプロイ
+
+本プログラムは静的ファイルのみで構成されているので、ビルド生成物をPublicに公開すればデプロイ完了です。
 ここでは、S3にアップロードする手順を記載します。
 
 ### 事前準備
@@ -50,4 +56,29 @@ npm start
 # - STAGE
 # - IS_BACKEND_SERVER_AVAILABLE（省略可能、デフォルトはtrue）
 ./overwrite-config-json.bash
+```
+
+## その他スクリプト・コマンド
+
+### シェルスクリプトのチェック
+
+```shell
+# lint
+shellcheck *.bash
+
+# フォーマット
+shfmt -l -w *.bash
+```
+
+### Windows用バイナリをビルドする
+
+windowsで実行する場合は、管理者権限でターミナルを起動すること
+
+```bat
+npm run build:production
+npm run generate-icons
+npm run scale-down-mobile-images
+npm run build:electron
+
+rem build/electronフォルダにWindows用のバイナリが生成される
 ```

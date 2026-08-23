@@ -36,7 +36,7 @@
 
 ## AWSでCI/CDを構築する
 
-本リポジトリではAWS Code Buildを利用してCI/CDを構築することができます。
+本リポジトリではAWS Code Buildを利用してCI/CDを構築できます。
 このリポジトリには開発環境、本番環境用のbuildspecが含まれています。
 以下に環境ごとのCode Build設定、AWS Systems Manager Parameter Storeの項目名を記載します。
 
@@ -81,60 +81,6 @@ npm run scale-down-mobile-images
 
 # HTTPサーバーを起動する
 npm run serve
-```
-
-## storybookを動かす
-
-```shell script
-cd <本リポジトリをcloneした場所>
-npm run start-storybook
-# ブラウザからlocalhost:6006を開く
-```
-
-## Windows用バイナリをビルドする
-
-windowsで実行する場合は、管理者権限でターミナルを起動すること
-
-```bat
-npm run build:production
-npm run generate-icons
-npm run scale-down-mobile-images
-npm run build:electron
-
-rem build/electronフォルダにWindows用のバイナリが生成される
-```
-
-## その他コード解析
-
-本プロジェクトは、以下ツールでコード解析が可能です。
-以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
-
-- shfmt
-- shellcheck
-- [fixpack](https://www.npmjs.com/package/fixpack#configuration)
-
-### fixpad
-
-```shell
-# package.jsonをフォーマットする
-fixpad
-```
-
-### npm audit
-
-```shell
-# デプロイされるモジュールに脆弱性がないかチェック
-npm audit --omit=dev
-```
-
-### シェルスクリプトのチェック
-
-```shell
-# lint
-shellcheck *.bash
-
-# フォーマット
-shfmt -l -w *.bash
 ```
 
 ## スペシャルサンクス
