@@ -30,11 +30,11 @@
 
 | 役割              | buildspec                      | 環境                                                                                                             | IAMポリシー                                                      | webhook                                             |
 | ----------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| ビルド            | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
+| デプロイ          | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [デプロイ用IAMポリシー](#デプロイ用iamポリシー)                  | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
 | ステージ切り替え  | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
 | config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
 
-### ビルド用IAMポリシー
+### デプロイ用IAMポリシー
 
 ```json
 {
@@ -155,3 +155,27 @@ masterブランチにpushされた時に、CodeBuildが実行されるように�
       | HEAD_REF | ^refs/heads/master$ |
     - **これらの条件でビルドを開始しない**
       - なし
+
+## 環境新規作成
+
+1. S3バケットを準備して静的サイトホスティングの設定をする
+2. CodeBuildの「デプロイ」を実行
+3. CloudFrontを構築し、S3バケットをオリジンとして設定する
+   > [!NOTE]
+   > S3のルートにはステージ名のフォルダが作成されるので、これをCloudFrontのオリジンパスに設定する。
+4. Route53、AWS Certificate Managerを使って、ドメイン名、SSL証明書を設定する
+
+## ブルーグリーンデプロイ
+
+- 0. 事前準備
+  - 0.1. 本番環境のバックエンドを一式デプロイする
+    > [!NOTE]
+    > バックエンドデプロイ時に「旧ステージ」、「新ステージ」が明確になっている
+- 1. 新規環境作成
+  - 1.1. CodeBuildで「デプロイ」を実行
+  - 1.2. CodeBuildで「ステージ切り替え」を環境変数「STAGE」に「新ステージ」を指定して実行
+- 2. 旧環境への切り戻し（必要に応じて）
+  - 2.1. CodeBuildで「ステージ切り替え」を環境変数「STAGE」に「旧ステージ」を指定して実行
+  - 2.2. S3のルートから「新ステージ」の名前のフォルダを削除する
+- 3. 旧環境削除
+  - 3.1. S3のルートから「旧ステージ」の名前のフォルダを削除する
