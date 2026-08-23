@@ -2,7 +2,7 @@
 
 ## 前提条件
 
-[バックエンド](https://github.com/kaidouji85/gbraver-burst-network)の「通常バックエンド」の本番環境がデプロイされていること。
+[バックエンド](https://github.com/kaidouji85/gbraver-burst-network)の本番環境が一式デプロイされていること。
 
 ## Parameter Store
 
