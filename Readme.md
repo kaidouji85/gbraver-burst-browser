@@ -31,8 +31,8 @@
 
 ## 環境別マニュアル
 
-- [ローカル環境](docs/local-env.md)
-
+- [ローカル環境](./docs/local-env.md)
+- [オフライン環境](./docs/offline-env.md)
 
 ## AWSでCI/CDを構築する
 
@@ -63,25 +63,6 @@
 | ビルド            | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
 | ステージ切り替え  | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
 | config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
-
-## オフライン用LAN環境で動かす
-
-本ゲームはオフライン用LAN環境でも動作します。
-
-```bash
-# オフライン（LAN）用の.envテンプレートをコピーする
-# 展示用マシンのローカルIPなど、環境に応じた各種値を.envに記載する
-cp .env.offline-lan.template .env
-
-# ビルド
-npm run clean
-npm run build:production
-npm run generate-icons
-npm run scale-down-mobile-images
-
-# HTTPサーバーを起動する
-npm run serve
-```
 
 ## スペシャルサンクス
 
