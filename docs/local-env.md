@@ -58,9 +58,7 @@ npm run start-storybook
 ./overwrite-config-json.bash
 ```
 
-## その他スクリプト・コマンド
-
-### シェルスクリプトのチェック
+## シェルスクリプトのチェック
 
 ```shell
 # lint
@@ -70,7 +68,7 @@ shellcheck *.bash
 shfmt -l -w *.bash
 ```
 
-### Windows用バイナリをビルドする
+## Windows用バイナリをビルドする
 
 windowsで実行する場合は、管理者権限でターミナルを起動すること
 
