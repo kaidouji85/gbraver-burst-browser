@@ -32,6 +32,7 @@
 ## 環境別マニュアル
 
 - [ローカル環境](./docs/local-env.md)
+- [本番環境](./docs/prod-env.md)
 - [オフライン環境](./docs/offline-env.md)
 
 ## AWSでCI/CDを構築する
@@ -52,17 +53,6 @@
 | ステージ切り替え  | buildspec.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                                |
 | config.json上書き | buildspec.configJson.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                                |
 
-### 本番環境
-
-1. [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の本番環境をデプロイする
-2. 「[Parameter Store（本番環境）](#parameter-store本番環境)」を参考にParameter Storeに値を設定する
-3. 以下のCode Build（ソースコードは本リポジトリに設定したもの）を構築する
-
-| 役割              | buildspec                      | 環境                                                                                                             | IAMポリシー                                                      | webhook                                             |
-| ----------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| ビルド            | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ビルド用IAMポリシー](#ビルド用iamポリシー)                      | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
-| ステージ切り替え  | buildspec.prod.switchStage.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
-| config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
 
 ## スペシャルサンクス
 
@@ -101,24 +91,6 @@
 | /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                     |
 | /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 | /GbraverBurst/dev/coturnDomainName        | String | coturnサーバーのドメイン名                |
-
-#### Parameter Store（本番環境）
-
-| 名前                                       | 種類   | 値                                        |
-| ------------------------------------------ | ------ | ----------------------------------------- |
-| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI       |
-| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID       |
-| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名            |
-| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
-| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
-| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                 |
-| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
-| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                       |
-| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
-| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                       |
-| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
-| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                     |
-| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
 
 ### IAMポリシー
 
@@ -251,25 +223,6 @@ developブランチにpushされた時に、CodeBuildが実行されるように
       | タイプ   | パターン             |
       | -------- | -------------------- |
       | HEAD_REF | ^refs/heads/develop$ |
-    - **これらの条件でビルドを開始しない**
-      - なし
-
-#### 本番環境ビルド用Webhook
-
-masterブランチにpushされた時に、CodeBuildが実行されるように設定します。以下に、その設定内容を記載します。
-
-- **コードの変更がこのレポジトリにプッシュされるたびに再構築する**
-  - チェックを入れる
-- **ビルドタイプ**
-  - 単一ビルド
-- **ウェブフックイベントフィルタグループ**
-  - **フィルタグループ 1**
-    - **イベントタイプ**
-      - プッシュ
-    - **これらの条件でビルドを開始する**
-      | タイプ   | パターン            |
-      | -------- | ------------------- |
-      | HEAD_REF | ^refs/heads/master$ |
     - **これらの条件でビルドを開始しない**
       - なし
 
