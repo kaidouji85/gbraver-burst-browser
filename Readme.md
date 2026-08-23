@@ -23,7 +23,7 @@
   - 静的コンテンツ配信サービス（S3 + CloudFront）を利用
   - 原則としてAWS CodeBuildによるCI/CDで環境構築する
 - 本番環境
-  - AWS上に構築された本番
+  - AWS上に構築された本番環境
   - 静的コンテンツ配信サービス（S3 + CloudFront）を利用
   - 原則としてAWS CodeBuildによるCI/CDで環境構築する
 - オフライン環境
