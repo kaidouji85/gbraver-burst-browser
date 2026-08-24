@@ -22,7 +22,7 @@ export const startEnemyAlert = (
   props.tweenGroup.update();
   props.tweenGroup.removeAll();
   all(
-    changeOpacity(props.model, 1, duration),
+    changeOpacity(props.model, 1, 0),
     changeColor(props.model, ENEMY_DEATH_ALERT_COLOR, 0),
     changeMargin(props.model, 1, duration),
   ).play({ group: props.tweenGroup });
