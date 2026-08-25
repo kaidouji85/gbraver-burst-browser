@@ -83,7 +83,7 @@ const top: MeshTransformCreator = (options) => {
     x: 0,
     y:
       rendererDOM.clientHeight / 2 -
-      (MESH_HEIGHT / 2) * devicePerScale -
+      (MESH_HEIGHT / 2) * devicePerScale +
       (1 - margin) * MAX_MARGIN * devicePerScale,
     rotation: Math.PI,
   };
@@ -100,7 +100,7 @@ const bottom: MeshTransformCreator = (options) => {
     x: 0,
     y:
       -rendererDOM.clientHeight / 2 +
-      (MESH_HEIGHT / 2) * devicePerScale +
+      (MESH_HEIGHT / 2) * devicePerScale -
       (1 - margin) * MAX_MARGIN * devicePerScale,
     rotation: 0,
   };
@@ -116,7 +116,7 @@ const right: MeshTransformCreator = (options) => {
   return {
     x:
       +rendererDOM.clientWidth / 2 -
-      (MESH_HEIGHT / 2) * devicePerScale -
+      (MESH_HEIGHT / 2) * devicePerScale +
       (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: Math.PI / 2,
@@ -133,7 +133,7 @@ const left: MeshTransformCreator = (options) => {
   return {
     x:
       -rendererDOM.clientWidth / 2 +
-      (MESH_HEIGHT / 2) * devicePerScale +
+      (MESH_HEIGHT / 2) * devicePerScale -
       (1 - margin) * MAX_MARGIN * devicePerScale,
     y: 0,
     rotation: -Math.PI / 2,
