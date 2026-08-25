@@ -1,1 +1,17 @@
-<svg id="レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><style>.cls-1{fill:#c12b2b;}.cls-2{fill:#fff;}.cls-3{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:9px;}</style></defs><circle class="cls-1" cx="64" cy="64" r="64"/><path class="cls-2" d="M90.7,36.4,37.3,91.6Z"/><path class="cls-3" d="M90.7,36.4,37.3,91.6Z"/><path class="cls-2" d="M37.3,36.4,90.7,91.6Z"/><path class="cls-3" d="M37.3,36.4,90.7,91.6Z"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <g>
+    <path d="M64,126.5C29.54,126.5,1.5,98.46,1.5,64S29.54,1.5,64,1.5s62.5,28.04,62.5,62.5-28.04,62.5-62.5,62.5Z" style="fill: #c12b2b;"/>
+    <path d="M64,3c33.64,0,61,27.36,61,61s-27.36,61-61,61S3,97.64,3,64,30.36,3,64,3h0ZM64,0C28.65,0,0,28.65,0,64s28.65,64,64,64,64-28.65,64-64S99.35,0,64,0h0Z" style="fill: #fff;"/>
+  </g>
+  <g>
+    <g>
+      <path d="M90.7,36.4l-53.41,55.21,53.41-55.21Z" style="fill: #fff;"/>
+      <path d="M90.7,36.4l-53.41,55.21,53.41-55.21Z" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 9px;"/>
+    </g>
+    <g>
+      <path d="M37.3,36.4l53.41,55.21-53.41-55.21Z" style="fill: #fff;"/>
+      <path d="M37.3,36.4l53.41,55.21-53.41-55.21Z" style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 9px;"/>
+    </g>
+  </g>
+</svg>
