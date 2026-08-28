@@ -1,16 +1,16 @@
 import {
-  BrowserSDK,
-  createBrowserSDK,
-  initializeBrowserSDK,
-} from "@gbraver-burst-network/browser-sdk";
-import {
   AuthTokenManager,
   createAuthTokenManager,
   createGuestLocalWebRTCSDK,
   createHostLocalWebRTCSDK,
   GuestLocalWebRTCSDK,
   HostLocalWebRTCSDK,
-} from "@gbraver-burst-network/local-webrtc-browser-sdk";
+} from "@gbraver-burst-network/anonymous-browser-sdk";
+import {
+  BrowserSDK,
+  createBrowserSDK,
+  initializeBrowserSDK,
+} from "@gbraver-burst-network/browser-sdk";
 
 /** オンライン */
 export type Online = {

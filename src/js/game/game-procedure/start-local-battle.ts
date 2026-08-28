@@ -1,4 +1,4 @@
-import { BattleSDK } from "@gbraver-burst-network/local-webrtc-browser-sdk";
+import { BattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
