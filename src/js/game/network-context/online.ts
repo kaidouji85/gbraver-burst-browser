@@ -1,10 +1,10 @@
 import {
   AuthTokenManager,
   createAuthTokenManager,
-  createGuestLocalWebRTCSDK,
-  createHostLocalWebRTCSDK,
-  GuestLocalWebRTCSDK,
-  HostLocalWebRTCSDK,
+  createGuestAnonymousSDK,
+  createHostAnonymousSDK,
+  GuestAnonymousSDK,
+  HostAnonymousSDK,
 } from "@gbraver-burst-network/anonymous-browser-sdk";
 import {
   BrowserSDK,
@@ -27,10 +27,10 @@ export type Online = {
 
   /** ローカルWebRTC用認証トークンマネージャー */
   localAuthTokenManager: AuthTokenManager;
-  /** ローカルWebRTCホスト用のSDK */
-  localHostSDK: HostLocalWebRTCSDK;
-  /** ローカルWebRTCゲスト用のSDK */
-  localGuestSDK: GuestLocalWebRTCSDK;
+  /** ホスト用匿名バックエンドのSDK */
+  hostAnonymousSDK: HostAnonymousSDK;
+  /** ゲスト用匿名バックエンドのSDK */
+  guestAnonymousSDK: GuestAnonymousSDK;
 };
 
 /**
@@ -51,28 +51,32 @@ export async function createOnlineContext(options: {
   webSocketAPIURL: string;
   /** ローカルWebRTC用シグナルサーバーのURL */
   wsSignalUrl: string;
-  /** WebRTC対戦ヘルパーAPIのURL */
-  webRTCHelperApiURL: string;
+  /** 匿名バックエンド REST APIのURL */
+  anonymousBackendApiURL: string;
   /** coturn サーバーのドメイン名 */
   coturnDomainName: string;
   /** オンラインベータ機能が利用できるか否か、trueで利用できる */
   canBeta: boolean;
 }): Promise<Online> {
   initializeBrowserSDK(options);
-  const { webSocketAPIURL, wsSignalUrl, webRTCHelperApiURL, coturnDomainName } =
-    options;
+  const {
+    webSocketAPIURL,
+    wsSignalUrl,
+    anonymousBackendApiURL,
+    coturnDomainName,
+  } = options;
   const sdk = await createBrowserSDK(webSocketAPIURL);
-  const localAuthTokenManager = createAuthTokenManager(webRTCHelperApiURL);
-  const localHostSDK = createHostLocalWebRTCSDK({
+  const localAuthTokenManager = createAuthTokenManager(anonymousBackendApiURL);
+  const localHostSDK = createHostAnonymousSDK({
     authToken: localAuthTokenManager,
     wsSignalUrl,
-    webRTCHelperApiURL,
+    anonymousBackendApiURL,
     coturnDomainName,
   });
-  const localGuestSDK = createGuestLocalWebRTCSDK({
+  const localGuestSDK = createGuestAnonymousSDK({
     authToken: localAuthTokenManager,
     wsSignalUrl,
-    webRTCHelperApiURL,
+    anonymousBackendApiURL,
     coturnDomainName,
   });
   return {
@@ -82,7 +86,7 @@ export async function createOnlineContext(options: {
     sdk,
 
     localAuthTokenManager,
-    localHostSDK,
-    localGuestSDK,
+    hostAnonymousSDK: localHostSDK,
+    guestAnonymousSDK: localGuestSDK,
   };
 }

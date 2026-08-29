@@ -18,7 +18,7 @@ export const startLocalBattleHost = async (
   >,
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
-  props.networkContext.localHostSDK.disconnectWebRTC();
+  props.networkContext.hostAnonymousSDK.disconnectWebRTC();
   const battle = await waitUntilLocalBattleMatchingAsHost(props, action);
   await startLocalBattle(props, battle);
   return {

@@ -41,6 +41,6 @@ phases:
     commands:
       - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
       - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}"
-      - export WEBRTC_HELPER_API_URL="https://${BACKEND_CLOUDFRONT_DOMAIN_NAME}/${STAGE}"
+      - export ANONYMOUS_API_URL="https://${BACKEND_CLOUDFRONT_DOMAIN_NAME}/${STAGE}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"

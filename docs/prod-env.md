@@ -8,31 +8,65 @@
 
 以下の項目をAWS Systems Manager Parameter Storeに設定する。
 
-| 名前                                       | 種類   | 値                                        |
-| ------------------------------------------ | ------ | ----------------------------------------- |
-| /GbraverBurst/prod/assetlinksJsonURI       | String | 本番環境用のassetlinks.jsonのS3 URI       |
-| /GbraverBurst/prod/googleMeasurementID     | String | 本番環境用のGoogle Analytics 測定ID       |
-| /GbraverBurst/prod/s3Bucket                | String | デプロイ対象となるS3バケット名            |
-| /GbraverBurst/prod/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
-| /GbraverBurst/prod/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
-| /GbraverBurst/prod/ownRootUrl              | String | 本番環境を公開しているURL                 |
-| /GbraverBurst/prod/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
-| /GbraverBurst/prod/howToPlayUrl            | String | 遊び方スライドのURL                       |
-| /GbraverBurst/prod/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
-| /GbraverBurst/prod/termsOfServiceUrl       | String | 利用規約ページのURL                       |
-| /GbraverBurst/prod/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
-| /GbraverBurst/prod/contactURL              | String | 問い合わせページのURL                     |
-| /GbraverBurst/prod/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
+- `/GbraverBurst/prod/assetlinksJsonURI`
+  - String
+  - 本番環境用のassetlinks.jsonのS3 URI
+- `/GbraverBurst/prod/s3Bucket`
+  - String
+  - デプロイ対象となるS3バケット名
+- `/GbraverBurst/prod/distributionId`
+  - String
+  - デプロイ対象のCloudFrontのdistribution ID
+- `/GbraverBurst/prod/cloudFrontOriginName`
+  - String
+  - CloudFrontのs3バケットのオリジン名
+- `/GbraverBurst/prod/ownRootUrl`
+  - String
+  - 本番環境を公開しているURL
+- `/GbraverBurst/prod/twitterSite`
+  - String
+  - OGP twitter:site で使うtwitterアカウント
+- `/GbraverBurst/prod/howToPlayUrl`
+  - String
+  - 遊び方スライドのURL
+- `/GbraverBurst/prod/characterDescriptionUrl`
+  - String
+  - ロボ、パイロットの説明スライドのURL
+- `/GbraverBurst/prod/termsOfServiceUrl`
+  - String
+  - 利用規約ページのURL
+- `/GbraverBurst/prod/privacyPolicyUrl`
+  - String
+  - プライバシーポリシーページのURL
+- `/GbraverBurst/prod/contactURL`
+  - String
+  - 問い合わせページのURL
+- `/GbraverBurst/prod/cognitoHostedUIDomain`
+  - String
+  - cognito Hosted UI のドメイン
+- `/GbraverBurst/prod/coturnDomainName`
+  - String
+  - coturnサーバーのドメイン名
 
 ## AWS CodeBuild
 
 以下のAWS CodeBuildプロジェクトを作成する。
 
-| 役割              | buildspec                      | 環境                                                                                                             | IAMポリシー                                                      | webhook                                             |
-| ----------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| デプロイ          | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [デプロイ用IAMポリシー](#デプロイ用iamポリシー)                  | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
-| ステージ切り替え  | buildspec.switchStage.prod.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
-| config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
+- デプロイ
+  - buildspec.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [デプロイ用IAMポリシー](#デプロイ用iamポリシー)
+  - webhook: [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
+- ステージ切り替え
+  - buildspec.switchStage.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)
+  - webhook: 設定なし
+- config.json上書き
+  - buildspec.configJson.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー)
+  - webhook: 設定なし
 
 ### デプロイ用IAMポリシー
 
