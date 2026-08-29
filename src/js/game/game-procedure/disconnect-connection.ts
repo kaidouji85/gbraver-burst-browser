@@ -9,10 +9,10 @@ export const disconnectConnection = async (
   props: Readonly<GameProps>,
 ): Promise<void> => {
   if (props.networkContext.type === "online") {
-    props.networkContext.localHostSDK.disconnectWebRTC();
-    props.networkContext.localHostSDK.disconnectWebSocket();
-    props.networkContext.localGuestSDK.disconnectWebRTC();
-    props.networkContext.localGuestSDK.disconnectWebSocket();
+    props.networkContext.hostAnonymousSDK.disconnectWebRTC();
+    props.networkContext.hostAnonymousSDK.disconnectWebSocket();
+    props.networkContext.guestAnonymousSDK.disconnectWebRTC();
+    props.networkContext.guestAnonymousSDK.disconnectWebSocket();
     await props.networkContext.sdk.disconnectWebsocket();
   } else if (props.networkContext.type === "offline-lan") {
     props.networkContext.sdk.closeConnection();

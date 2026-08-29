@@ -22,7 +22,7 @@ export const waitUntilLocalBattleMatchingAsHost = async (
 ): Promise<BattleSDK> => {
   try {
     switchWaitingDialog(props, new WaitingDialog("ルーム作成中......"));
-    const room = await props.networkContext.localHostSDK.createRoom(action);
+    const room = await props.networkContext.hostAnonymousSDK.createRoom(action);
     if (!room) {
       throw new Error("ルームの作成に失敗");
     }

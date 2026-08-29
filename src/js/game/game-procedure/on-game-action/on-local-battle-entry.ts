@@ -32,7 +32,7 @@ export const onLocalBattleEntry = async (options: {
 
   const { armdozerId, pilotId } = props.inProgress.localBattleGuest;
   const { roomID } = action;
-  const battle = await props.networkContext.localGuestSDK.joinRoom({
+  const battle = await props.networkContext.guestAnonymousSDK.joinRoom({
     roomID,
     armdozerId,
     pilotId,

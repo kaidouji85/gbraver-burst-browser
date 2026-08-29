@@ -65,7 +65,7 @@ async function createNetworkContext(
         ownURL: GBRAVER_BURST_OWN_ROOT_URL,
         webSocketAPIURL: GBRAVER_BURST_WEBSOCKET_API_URL,
         wsSignalUrl: GBRAVER_BURST_SIGNAL_SERVER_URL,
-        webRTCHelperApiURL: GBRAVER_BURST_WEBRTC_HELPER_API_URL,
+        anonymousBackendApiURL: GBRAVER_BURST_WEBRTC_HELPER_API_URL,
         coturnDomainName: GBRAVER_BURST_COTURN_DOMAIN_NAME,
       });
     case "OFFLINE_LAN":
