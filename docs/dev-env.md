@@ -56,17 +56,17 @@
   - buildspec.yml
   - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
   - IAMポリシー: [デプロイ用IAMポリシー](#デプロイ用iamポリシー)
-  - 環境: [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
+  - webhook: [テスト環境ビルド用Webhook](#テスト環境ビルド用webhook) |
 - ステージ切り替え
   - buildspec.switchStage.yml
   - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
   - IAMポリシー: [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)
-  - 設定: 設定なし
+  - webhook: 設定なし
 - config.json上書き
   - buildspec.configJson.yml
   - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
   - IAMポリシー: [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー)
-  - 設定: 設定なし
+  - webhook: 設定なし
 
 ### デプロイ用IAMポリシー
 

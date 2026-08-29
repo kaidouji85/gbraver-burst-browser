@@ -49,11 +49,21 @@
 
 以下のAWS CodeBuildプロジェクトを作成する。
 
-| 役割              | buildspec                      | 環境                                                                                                             | IAMポリシー                                                      | webhook                                             |
-| ----------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
-| デプロイ          | buildspec.prod.yml             | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [デプロイ用IAMポリシー](#デプロイ用iamポリシー)                  | [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
-| ステージ切り替え  | buildspec.switchStage.prod.yml | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)  | 設定なし                                            |
-| config.json上書き | buildspec.configJson.prod.yml  | [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0) | [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー) | 設定なし                                            |
+- デプロイ
+  - buildspec.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/aws-codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [デプロイ用IAMポリシー](#デプロイ用iamポリシー)
+  - webhook: [本番環境ビルド用Webhook](#本番環境ビルド用webhook) |
+- ステージ切り替え
+  - buildspec.switchStage.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [ステージ切り替え用IAMポリシー](#ステージ切り替え用iamポリシー)
+  - webhook: 設定なし
+- config.json上書き
+  - buildspec.configJson.prod.yml
+  - 環境: [aws/codebuild/standard:7.0](https://github.com/aws/codebuild-docker-images/tree/master/ubuntu/standard/7.0)
+  - IAMポリシー: [config.json上書き用IAMポリシー](#configjson上書き用iamポリシー)
+  - webhook: 設定なし
 
 ### デプロイ用IAMポリシー
 
