@@ -28,8 +28,8 @@ env:
     COGNITO_USER_POOL_ID: /GbraverBurst/prod/cognitoUserPoolId
     COGNITO_CLIENT_ID: /GbraverBurst/prod/cognitoClientId
     COGNITO_HOSTED_UI_DOMAIN: /GbraverBurst/prod/cognitoHostedUIDomain
-    # BACKEND_CLOUDFRONT_DOMAIN_NAME: /GbraverBurst/prod/backendCloudfrontDomainName #あいことば対戦正式リリースまでコメントアウトする
-    # COTURN_DOMAIN_NAME: /GbraverBurst/prod/coturnDomainName #あいことば対戦正式リリースまでコメントアウトする
+    BACKEND_CLOUDFRONT_DOMAIN_NAME: /GbraverBurst/prod/backendCloudfrontDomainName
+    COTURN_DOMAIN_NAME: /GbraverBurst/prod/coturnDomainName
 phases:
   install:
     runtime-versions:
@@ -40,7 +40,7 @@ phases:
   build:
     commands:
       - export WEBSOCKET_API_URL="wss://${STAGE}.${WS_API_DOMAIN_NAME}"
-      # - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}" #あいことば対戦正式リリースまでコメントアウトする
-      # - export WEBRTC_HELPER_API_URL="https://${BACKEND_CLOUDFRONT_DOMAIN_NAME}/${STAGE}" #あいことば対戦正式リリースまでコメントアウトする
+      - export SIGNAL_SERVER_URL="wss://${STAGE}.${WS_SIGNAL_DOMAIN_NAME}"
+      - export ANONYMOUS_API_URL="https://${BACKEND_CLOUDFRONT_DOMAIN_NAME}/${STAGE}"
       - ./deploy.bash "${S3_BUCKET}" "${STAGE}" "${ASSETLINKS_JSON_URI}"
       - ./clear-cdn.bash "${DISTRIBUTION_ID}"
