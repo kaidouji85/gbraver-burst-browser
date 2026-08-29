@@ -8,22 +8,45 @@
 
 以下の項目をAWS Systems Manager Parameter Storeに設定する。
 
-| 名前                                      | 種類   | 値                                        |
-| ----------------------------------------- | ------ | ----------------------------------------- |
-| /GbraverBurst/dev/assetlinksJsonURI       | String | 開発環境用のassetlinks.jsonのS3 URI       |
-| /GbraverBurst/dev/googleMeasurementID     | String | 開発環境用のGoogle Analytics 測定ID       |
-| /GbraverBurst/dev/s3Bucket                | String | デプロイ対象となるS3バケット名            |
-| /GbraverBurst/dev/distributionId          | String | デプロイ対象のCloudFrontのdistribution ID |
-| /GbraverBurst/dev/cloudFrontOriginName    | String | CloudFrontのs3バケットのオリジン名        |
-| /GbraverBurst/dev/ownRootUrl              | String | 開発環境を公開しているURL                 |
-| /GbraverBurst/dev/twitterSite             | String | OGP twitter:site で使うtwitterアカウント  |
-| /GbraverBurst/dev/howToPlayUrl            | String | 遊び方スライドのURL                       |
-| /GbraverBurst/dev/characterDescriptionUrl | String | ロボ、パイロットの説明スライドのURL       |
-| /GbraverBurst/dev/termsOfServiceUrl       | String | 利用規約ページのURL                       |
-| /GbraverBurst/dev/privacyPolicyUrl        | String | プライバシーポリシーページのURL           |
-| /GbraverBurst/dev/contactURL              | String | 問い合わせページのURL                     |
-| /GbraverBurst/dev/cognitoHostedUIDomain   | String | cognito Hosted UI のドメイン              |
-| /GbraverBurst/dev/coturnDomainName        | String | coturnサーバーのドメイン名                |
+- `/GbraverBurst/dev/assetlinksJsonURI`
+  - String
+  - 開発環境用のassetlinks.jsonのS3 URI
+- `/GbraverBurst/dev/s3Bucket`
+  - String
+  - デプロイ対象となるS3バケット名
+- `/GbraverBurst/dev/distributionId`
+  - String
+  - デプロイ対象のCloudFrontのdistribution ID
+- `/GbraverBurst/dev/cloudFrontOriginName`
+  - String
+  - CloudFrontのs3バケットのオリジン名
+- `/GbraverBurst/dev/ownRootUrl`
+  - String
+  - 開発環境を公開しているURL
+- `/GbraverBurst/dev/twitterSite`
+  - String
+  - OGP twitter:site で使うtwitterアカウント
+- `/GbraverBurst/dev/howToPlayUrl`
+  - String
+  - 遊び方スライドのURL
+- `/GbraverBurst/dev/characterDescriptionUrl`
+  - String
+  - ロボ、パイロットの説明スライドのURL
+- `/GbraverBurst/dev/termsOfServiceUrl`
+  - String
+  - 利用規約ページのURL
+- `/GbraverBurst/dev/privacyPolicyUrl`
+  - String
+  - プライバシーポリシーページのURL
+- `/GbraverBurst/dev/contactURL`
+  - String
+  - 問い合わせページのURL
+- `/GbraverBurst/dev/cognitoHostedUIDomain`
+  - String
+  - cognito Hosted UI のドメイン
+- `/GbraverBurst/dev/coturnDomainName`
+  - String
+  - coturnサーバーのドメイン名
 
 ## AWS CodeBuild
 
