@@ -44,6 +44,9 @@
 - `/GbraverBurst/prod/cognitoHostedUIDomain`
   - String
   - cognito Hosted UI のドメイン
+- `/GbraverBurst/prod/coturnDomainName`
+  - String
+  - coturnサーバーのドメイン名
 
 ## AWS CodeBuild
 
