@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { LocalBattleSelectorDialog } from "../../../dom-dialogs/local-battle-selector";
+import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
 import { GameProps } from "../../game-props";
 
 /**
@@ -10,16 +10,16 @@ import { GameProps } from "../../game-props";
  */
 export const switchLocalBattleSelectorDialog = (
   props: GameProps,
-  dialog: LocalBattleSelectorDialog,
+  dialog: PasswordMatchSelectorDialog,
 ) =>
   props.domDialogBinder.bind(
     dialog,
     props.gameAction.connect([
       dialog
-        .notifyLocalBattleHostSelection()
+        .notifyHostSelection()
         .pipe(map(() => ({ type: "LocalBattleHostStart" }))),
       dialog
-        .notifyLocalBattleGuestSelection()
+        .notifyGuestSelection()
         .pipe(map(() => ({ type: "LocalBattleGuestStart" }))),
       dialog.notifyClosed().pipe(map(() => ({ type: "LocalBattleCancel" }))),
     ]),

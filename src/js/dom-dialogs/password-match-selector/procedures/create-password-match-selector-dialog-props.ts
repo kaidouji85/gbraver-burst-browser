@@ -12,20 +12,20 @@ import {
   extractLocalBattleHost,
 } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
-import { LocalBattleSelectorDialogProps } from "../props";
+import { PasswordMatchSelectorDialogProps } from "../props";
 
-/** ローカル対戦セレクターダイアログのプロパティ作成オプション */
-export type CreateLocalBattleSelectorPropsOptions = RootInnerHTMLOptions &
+/** あいことば対戦セレクターダイアログのプロパティ作成オプション */
+export type CreatePasswordMatchSelectorPropsOptions = RootInnerHTMLOptions &
   SEPlayerContainer;
 
 /**
- * ローカル対戦セレクターダイアログのプロパティを作成する
+ * あいことば対戦セレクターダイアログのプロパティを作成する
  * @param options 作成オプション
  * @returns 作成したプロパティ
  */
-export const createLocalBattleSelectorDialogProps = (
-  options: CreateLocalBattleSelectorPropsOptions,
-): LocalBattleSelectorDialogProps => {
+export const createPasswordMatchSelectorDialogProps = (
+  options: CreatePasswordMatchSelectorPropsOptions,
+): PasswordMatchSelectorDialogProps => {
   const { se, resources } = options;
 
   const root = document.createElement("div");
@@ -34,8 +34,8 @@ export const createLocalBattleSelectorDialogProps = (
 
   const closer = extractCloser(root);
   const backGround = extractBackGround(root);
-  const localBattleHostButton = extractLocalBattleHost(root);
-  const localBattleGuestButton = extractLocalBattleGuest(root);
+  const hostButton = extractLocalBattleHost(root);
+  const guestButton = extractLocalBattleGuest(root);
 
   const pushButtonSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
@@ -44,8 +44,8 @@ export const createLocalBattleSelectorDialogProps = (
     resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
 
-  const localBattleHostSelection = new Subject<void>();
-  const localBattleGuestSelection = new Subject<void>();
+  const hostSelection = new Subject<void>();
+  const guestSelection = new Subject<void>();
   const dialogClosed = new Subject<void>();
 
   const exclusive = new Exclusive();
@@ -54,15 +54,15 @@ export const createLocalBattleSelectorDialogProps = (
     root,
     backGround,
     closer,
-    localBattleHostButton,
-    localBattleGuestButton,
+    hostButton,
+    guestButton,
 
     se,
     pushButtonSound,
     closeButtonSound,
 
-    localBattleHostSelection,
-    localBattleGuestSelection,
+    hostSelection,
+    guestSelection,
     dialogClosed,
 
     exclusive,

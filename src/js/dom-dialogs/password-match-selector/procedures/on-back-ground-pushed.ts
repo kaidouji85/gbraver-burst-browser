@@ -1,5 +1,5 @@
 import { PushDOM } from "../../../dom/push-dom";
-import { LocalBattleSelectorDialogProps } from "../props";
+import { PasswordMatchSelectorDialogProps } from "../props";
 
 /**
  * バックグラウンドが押された時の処理
@@ -7,7 +7,7 @@ import { LocalBattleSelectorDialogProps } from "../props";
  * @param action アクション
  */
 export const onBackGroundPushed = (
-  props: LocalBattleSelectorDialogProps,
+  props: PasswordMatchSelectorDialogProps,
   action: PushDOM,
 ): void => {
   action.event.preventDefault();

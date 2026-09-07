@@ -3,27 +3,27 @@ import { Observable, Unsubscribable } from "rxjs";
 import { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
-  createLocalBattleSelectorDialogProps,
-  CreateLocalBattleSelectorPropsOptions,
-} from "./procedures/create-local-battle-selector-dialog-props";
-import { LocalBattleSelectorDialogProps } from "./props";
+  createPasswordMatchSelectorDialogProps,
+  CreatePasswordMatchSelectorPropsOptions,
+} from "./procedures/create-password-match-selector-dialog-props";
+import { PasswordMatchSelectorDialogProps } from "./props";
 
 /** コンストラクタのオプション */
-export type LocalBattleSelectorDialogOptions =
-  CreateLocalBattleSelectorPropsOptions;
+export type PasswordMatchSelectorDialogOptions =
+  CreatePasswordMatchSelectorPropsOptions;
 
-/** ローカル対戦セレクターダイアログ */
-export class LocalBattleSelectorDialog implements DOMDialog {
+/** あいことば対戦セレクターダイアログ */
+export class PasswordMatchSelectorDialog implements DOMDialog {
   /** プロパティ */
-  #props: LocalBattleSelectorDialogProps;
+  #props: PasswordMatchSelectorDialogProps;
   /** アンサブスクライバ */
   #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
    */
-  constructor(options: LocalBattleSelectorDialogOptions) {
-    this.#props = createLocalBattleSelectorDialogProps(options);
+  constructor(options: PasswordMatchSelectorDialogOptions) {
+    this.#props = createPasswordMatchSelectorDialogProps(options);
     this.#unsubscribers = bindEventListeners(this.#props);
   }
 
@@ -43,16 +43,16 @@ export class LocalBattleSelectorDialog implements DOMDialog {
    * ローカル対戦ホスト選択が選択されたことを通知する
    * @returns 通知ストリーム
    */
-  notifyLocalBattleHostSelection(): Observable<void> {
-    return this.#props.localBattleHostSelection;
+  notifyHostSelection(): Observable<void> {
+    return this.#props.hostSelection;
   }
 
   /**
    * ローカル対戦ゲスト選択が選択されたことを通知する
    * @returns 通知ストリーム
    */
-  notifyLocalBattleGuestSelection(): Observable<void> {
-    return this.#props.localBattleGuestSelection;
+  notifyGuestSelection(): Observable<void> {
+    return this.#props.guestSelection;
   }
 
   /**

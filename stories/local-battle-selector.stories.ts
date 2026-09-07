@@ -1,4 +1,4 @@
-import { LocalBattleSelectorDialog } from "../src/js/dom-dialogs/local-battle-selector";
+import { PasswordMatchSelectorDialog } from "../src/js/dom-dialogs/password-match-selector";
 import { domStub } from "./stub/dom-stub";
 
 export default {
@@ -7,11 +7,11 @@ export default {
 
 /** ダイアログ表示 */
 export const dialog = domStub((options) => {
-  const dialog = new LocalBattleSelectorDialog(options);
-  dialog.notifyLocalBattleHostSelection().subscribe(() => {
+  const dialog = new PasswordMatchSelectorDialog(options);
+  dialog.notifyHostSelection().subscribe(() => {
     console.log("local battle host selected");
   });
-  dialog.notifyLocalBattleGuestSelection().subscribe(() => {
+  dialog.notifyGuestSelection().subscribe(() => {
     console.log("local battle guest selected");
   });
   dialog.notifyClosed().subscribe(() => {

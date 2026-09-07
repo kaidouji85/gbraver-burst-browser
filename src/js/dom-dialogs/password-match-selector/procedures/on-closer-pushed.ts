@@ -1,6 +1,6 @@
 import { pop } from "../../../dom/pop";
 import { PushDOM } from "../../../dom/push-dom";
-import { LocalBattleSelectorDialogProps } from "../props";
+import { PasswordMatchSelectorDialogProps } from "../props";
 
 /**
  * クロージャーが押された時の処理
@@ -8,7 +8,7 @@ import { LocalBattleSelectorDialogProps } from "../props";
  * @param action アクション
  */
 export const onCloserPushed = (
-  props: LocalBattleSelectorDialogProps,
+  props: PasswordMatchSelectorDialogProps,
   action: PushDOM,
 ) => {
   action.event.preventDefault();
