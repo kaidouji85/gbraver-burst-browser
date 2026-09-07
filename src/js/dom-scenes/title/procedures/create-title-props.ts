@@ -20,12 +20,12 @@ import {
   extractHelpIcon,
   extractHelpMenu,
   extractLightningDozer,
-  extractPasswordMatch,
   extractLogin,
   extractLogo,
   extractLogout,
   extractNeoLandozer,
   extractNetBattle,
+  extractPasswordMatch,
   extractPrivacyPolicyLinkIcon,
   extractShinBraver,
   extractStory,
@@ -156,7 +156,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushStory: new Subject(),
     pushArcade: new Subject(),
     pushNetBattle: new Subject(),
-    pushLocalBattle: new Subject(),
+    pushPasswordMatch: new Subject(),
     pushConfig: new Subject(),
   };
 }

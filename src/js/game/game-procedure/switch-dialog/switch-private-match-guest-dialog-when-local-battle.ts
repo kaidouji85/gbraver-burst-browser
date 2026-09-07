@@ -17,7 +17,7 @@ export const switchPrivateMatchGuestDialogWhenLocalBattle = (
     props.gameAction.connect([
       dialog
         .notifyPrivateMatchStart()
-        .pipe(map((roomID) => ({ type: "LocalBattleEntry", roomID }))),
+        .pipe(map((roomID) => ({ type: "PasswordMatchEntry", roomID }))),
       dialog
         .notifyDialogClosed()
         .pipe(map(() => ({ type: "WithdrawLocalBattleEntry" }))),

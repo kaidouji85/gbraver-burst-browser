@@ -81,8 +81,8 @@ export type TitleProps = Readonly<SEPlayerContainer> &
     readonly pushArcade: Subject<void>;
     /** ネット対戦押下ストリーム */
     readonly pushNetBattle: Subject<void>;
-    /** ローカル対戦押下ストリーム */
-    readonly pushLocalBattle: Subject<void>;
+    /** あいことば対戦押下ストリーム */
+    readonly pushPasswordMatch: Subject<void>;
     /** 設定押下ストリーム */
     readonly pushConfig: Subject<void>;
   };

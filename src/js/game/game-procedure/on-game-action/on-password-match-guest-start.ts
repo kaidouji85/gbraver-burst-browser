@@ -2,7 +2,7 @@ import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loadi
 import { PathIds } from "../../../resource/path/ids";
 import { preloadImages } from "../../../resource/preload-images";
 import { waitTime } from "../../../wait/wait-time";
-import { LocalBattleGuestStart } from "../../game-actions/local-battle-guest-start";
+import { PasswordMatchGuestStart } from "../../game-actions/local-battle-guest-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
 import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
@@ -16,7 +16,7 @@ import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-l
  */
 export const onPasswordMatchGuestStart = async (options: {
   props: GameProps;
-  action: LocalBattleGuestStart;
+  action: PasswordMatchGuestStart;
 }) => {
   const { props } = options;
   props.domDialogBinder.hidden();

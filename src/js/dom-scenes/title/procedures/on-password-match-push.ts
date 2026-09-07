@@ -3,11 +3,11 @@ import { PushDOM } from "../../../dom/push-dom";
 import { TitleProps } from "../props";
 
 /**
- * ローカル対戦が押された時の処理
+ * あいことば対戦が押された時の処理
  * @param props プロパティ
  * @param action アクション
  */
-export const onLocalBattlePush = (
+export const onPasswordMatchPush = (
   props: Readonly<TitleProps>,
   action: Readonly<PushDOM>,
 ) => {
@@ -15,6 +15,6 @@ export const onLocalBattlePush = (
     action.event.preventDefault();
     props.se.play(props.pushButton);
     await pop(props.passwordMatch);
-    props.pushLocalBattle.next();
+    props.pushPasswordMatch.next();
   });
 };

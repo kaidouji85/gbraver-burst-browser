@@ -14,9 +14,7 @@ import { EndNetworkError } from "./end-network-error";
 import { EndNPCEnding } from "./end-npc-ending";
 import { ForceEndBattle } from "./force-end-battle";
 import { ForceRetry } from "./force-retry";
-import { LocalBattleCancel } from "./local-battle-cancel";
-import { LocalBattleEntry } from "./local-battle-entry";
-import { LocalBattleGuestStart } from "./local-battle-guest-start";
+import { PasswordMatchGuestStart } from "./local-battle-guest-start";
 import { LocalBattleHostStart } from "./local-battle-host-start";
 import { LocalBattleStart } from "./local-battle-start";
 import { LoginCancel } from "./login-cancel";
@@ -25,6 +23,8 @@ import { MatchingCanceled } from "./matching-canceled";
 import { NetBattleCancel } from "./net-battle-cancel";
 import { NetBattleStart } from "./net-battle-start";
 import { NetworkError } from "./network-error";
+import { PasswordMatchCancel } from "./password-match-cancel";
+import { PasswordMatchEntry } from "./password-match-entry";
 import { PostBattleAction } from "./post-battle-action";
 import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
@@ -56,10 +56,10 @@ export type GameAction =
   | PrivateMatchEntry
   | WithdrawPrivateMatchEntry
   | LocalBattleStart
-  | LocalBattleCancel
+  | PasswordMatchCancel
   | LocalBattleHostStart
-  | LocalBattleGuestStart
-  | LocalBattleEntry
+  | PasswordMatchGuestStart
+  | PasswordMatchEntry
   | WithdrawLocalBattleEntry
   | MatchingCanceled
   | SelectionComplete

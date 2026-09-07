@@ -1,4 +1,4 @@
-/** ローカル対戦ゲスト開始 */
-export type LocalBattleGuestStart = {
-  type: "LocalBattleGuestStart";
+/** あいことば対戦ゲスト開始 */
+export type PasswordMatchGuestStart = {
+  type: "PasswordMatchGuestStart";
 };

@@ -20,7 +20,7 @@ export const switchLocalBattleSelectorDialog = (
         .pipe(map(() => ({ type: "LocalBattleHostStart" }))),
       dialog
         .notifyGuestSelection()
-        .pipe(map(() => ({ type: "LocalBattleGuestStart" }))),
-      dialog.notifyClosed().pipe(map(() => ({ type: "LocalBattleCancel" }))),
+        .pipe(map(() => ({ type: "PasswordMatchGuestStart" }))),
+      dialog.notifyClosed().pipe(map(() => ({ type: "PasswordMatchCancel" }))),
     ]),
   );

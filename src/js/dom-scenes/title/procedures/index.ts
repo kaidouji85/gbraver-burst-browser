@@ -7,10 +7,10 @@ import { onAvatarPush } from "./on-avatar-push";
 import { onConfigPush } from "./on-config-push";
 import { onHelpAnkerPush } from "./on-help-anker-push";
 import { onHelpIconPush } from "./on-help-icon-push";
-import { onLocalBattlePush } from "./on-local-battle-push";
 import { onLoginPush } from "./on-login-push";
 import { onLogoutPush } from "./on-logout-push";
 import { onNetBattlePush } from "./on-net-battle-push";
+import { onPasswordMatchPush } from "./on-password-match-push";
 import { onPushDeleteAccount } from "./on-push-delete-account";
 import { onRootPush } from "./on-root-push";
 import { onStoryPush } from "./on-story-push";
@@ -60,7 +60,7 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
       onNetBattlePush(props, action);
     }),
     domPushStream(props.passwordMatch).subscribe((action) => {
-      onLocalBattlePush(props, action);
+      onPasswordMatchPush(props, action);
     }),
     domPushStream(props.config).subscribe((action) => {
       onConfigPush(props, action);

@@ -1,15 +1,15 @@
-import { LocalBattleCancel } from "../../game-actions/local-battle-cancel";
+import { PasswordMatchCancel } from "../../game-actions/password-match-cancel";
 import { GameProps } from "../../game-props";
 
 /**
- * ローカル対戦キャンセル時の処理
+ * あいことば対戦キャンセル時の処理
  * @param options オプション
  * @param options.props ゲームプロパティ
  * @param options.action アクション
  */
-export const onLocalBattleCancel = (options: {
+export const onPasswordMatchCancel = (options: {
   props: GameProps;
-  action: LocalBattleCancel;
+  action: PasswordMatchCancel;
 }) => {
   const { props } = options;
   props.domDialogBinder.hidden();
