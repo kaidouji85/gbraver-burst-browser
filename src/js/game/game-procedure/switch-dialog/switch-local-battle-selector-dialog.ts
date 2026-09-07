@@ -4,11 +4,11 @@ import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match
 import { GameProps } from "../../game-props";
 
 /**
- * ローカル対戦選択ダイアログに切り替える
+ * あいことば対戦選択ダイアログに切り替える
  * @param props プロパティ
  * @param dialog ダイアログ
  */
-export const switchLocalBattleSelectorDialog = (
+export const switchPasswordMatchSelectorDialog = (
   props: GameProps,
   dialog: PasswordMatchSelectorDialog,
 ) =>

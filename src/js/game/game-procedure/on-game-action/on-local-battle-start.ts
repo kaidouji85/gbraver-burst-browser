@@ -1,7 +1,7 @@
 import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
 import { PasswordMatchStart } from "../../game-actions/local-battle-start";
 import { GameProps } from "../../game-props";
-import { switchLocalBattleSelectorDialog } from "../switch-dialog/switch-local-battle-selector-dialog";
+import { switchPasswordMatchSelectorDialog } from "../switch-dialog/switch-local-battle-selector-dialog";
 
 /**
  * あいことば対戦が開始されたときの処理
@@ -16,5 +16,5 @@ export const onPasswordMatchStart = (options: {
 }) => {
   const { props } = options;
   const dialog = new PasswordMatchSelectorDialog(props);
-  switchLocalBattleSelectorDialog(props, dialog);
+  switchPasswordMatchSelectorDialog(props, dialog);
 };
