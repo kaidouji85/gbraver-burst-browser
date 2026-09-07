@@ -32,7 +32,7 @@ export const NET_BATTLE_CLASS = `${ROOT_CLASS}__net-battle`;
 export const INVISIBLE_NET_BATTLE_CLASS = `${NET_BATTLE_CLASS}--invisible`;
 
 /** あいことば対戦ボタン class属性 */
-export const PASSWORD_MATCH_CLASS = `${ROOT_CLASS}__local-battle`;
+export const PASSWORD_MATCH_CLASS = `${ROOT_CLASS}__password-match`;
 
 /** あいことば対戦ボタン 非表示 class属性 */
 export const INVISIBLE_PASSWORD_MATCH_CLASS = `${PASSWORD_MATCH_CLASS}--invisible`;
