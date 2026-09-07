@@ -2,7 +2,7 @@ import { PrivateMatchGuestDialog } from "../../../../dom-dialogs/private-match-g
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import { LocalBattleGuest } from "../../../in-progress/local-battle-guest";
+import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
@@ -12,7 +12,7 @@ import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../../switch-dialo
  * @returns InProgress更新結果
  */
 export const startLocalBattleGuest = async (
-  props: Readonly<GameProps & { inProgress: LocalBattleGuest }>,
+  props: Readonly<GameProps & { inProgress: PasswordMatchGuest }>,
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
   const { inProgress } = props;

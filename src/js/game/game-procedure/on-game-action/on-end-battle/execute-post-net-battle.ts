@@ -1,7 +1,7 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
-import { LocalBattleGuest } from "../../../in-progress/local-battle-guest";
+import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 import { LocalBattleHost } from "../../../in-progress/local-battle-host";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
@@ -16,7 +16,7 @@ type PostNetworkBattle =
   | PrivateMatchGuest
   | OfflineLANCasualMatch
   | LocalBattleHost
-  | LocalBattleGuest;
+  | PasswordMatchGuest;
 
 /**
  * ネット対戦後処理を実行する

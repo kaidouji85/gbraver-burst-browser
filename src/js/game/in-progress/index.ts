@@ -1,5 +1,5 @@
 import { CasualMatch } from "./casual-match";
-import { LocalBattleGuest } from "./local-battle-guest";
+import { PasswordMatchGuest } from "./password-match-guest";
 import { LocalBattleHost } from "./local-battle-host";
 import { None } from "./none";
 import { NPCBattle } from "./npc-battle";
@@ -18,4 +18,4 @@ export type InProgress =
   | PrivateMatchGuest
   | OfflineLANCasualMatch
   | LocalBattleHost
-  | LocalBattleGuest;
+  | PasswordMatchGuest;
