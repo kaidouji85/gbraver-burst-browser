@@ -2,17 +2,17 @@ import { PasswordMatchSelectorDialog } from "../src/js/dom-dialogs/password-matc
 import { domStub } from "./stub/dom-stub";
 
 export default {
-  title: "local-battle-selector",
+  title: "password-match-selector",
 };
 
 /** ダイアログ表示 */
 export const dialog = domStub((options) => {
   const dialog = new PasswordMatchSelectorDialog(options);
   dialog.notifyHostSelection().subscribe(() => {
-    console.log("local battle host selected");
+    console.log("password match host selected");
   });
   dialog.notifyGuestSelection().subscribe(() => {
-    console.log("local battle guest selected");
+    console.log("password match guest selected");
   });
   dialog.notifyClosed().subscribe(() => {
     console.log("dialog closed");

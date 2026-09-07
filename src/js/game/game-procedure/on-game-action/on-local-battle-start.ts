@@ -4,13 +4,13 @@ import { GameProps } from "../../game-props";
 import { switchLocalBattleSelectorDialog } from "../switch-dialog/switch-local-battle-selector-dialog";
 
 /**
- * ローカル対戦が開始されたときの処理
+ * あいことば対戦が開始されたときの処理
  * @param options オプション
  * @param options.props ゲームプロパティ
  * @param options.action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export const onLocalBattleStart = (options: {
+export const onPasswordMatchStart = (options: {
   props: Readonly<GameProps>;
   action: Readonly<LocalBattleStart>;
 }) => {

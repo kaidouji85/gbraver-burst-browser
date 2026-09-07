@@ -18,7 +18,7 @@ import { onForceEndBattle } from "./on-force-end-battle";
 import { onForceRetry } from "./on-force-retry";
 import { onLocalBattleCancel } from "./on-local-battle-cancel";
 import { onPasswordMatchHostStart } from "./on-local-battle-host-start";
-import { onLocalBattleStart } from "./on-local-battle-start";
+import { onPasswordMatchStart } from "./on-local-battle-start";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
@@ -132,7 +132,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "UnhandledRejection":
       return onUnhandledRejection({ props, action });
     case "LocalBattleStart":
-      return onLocalBattleStart({ props, action });
+      return onPasswordMatchStart({ props, action });
     case "LocalBattleCancel":
       return onLocalBattleCancel({ props, action });
     case "LocalBattleHostStart":

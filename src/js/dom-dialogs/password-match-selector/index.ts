@@ -21,6 +21,7 @@ export class PasswordMatchSelectorDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param options コンストラクタのオプション
    */
   constructor(options: PasswordMatchSelectorDialogOptions) {
     this.#props = createPasswordMatchSelectorDialogProps(options);
