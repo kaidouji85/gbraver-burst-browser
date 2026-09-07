@@ -3,7 +3,7 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
-import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
+import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
  * あいことば対戦（ゲスト）を開始する
@@ -18,7 +18,7 @@ export const startPasswordMatchGuest = async (
   const { inProgress } = props;
   const { armdozerId, pilotId } = action;
   const dialog = new PrivateMatchGuestDialog(props);
-  switchPrivateMatchGuestDialogWhenLocalBattle(props, dialog);
+  switchPrivateMatchGuestDialogWhenPasswordMatch(props, dialog);
   return {
     ...inProgress,
     passwordMatchGuest: { type: "Entry", armdozerId, pilotId },

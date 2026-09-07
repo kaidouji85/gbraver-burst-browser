@@ -5,7 +5,7 @@ import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
 import { startPasswordMatch } from "../start-password-match";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
-import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
+import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
  * ゲストがあいことば対戦にエントリーする
@@ -42,7 +42,7 @@ export const onPasswordMatchEntry = async (options: {
       ...props,
       initialRoomID: roomID,
     });
-    switchPrivateMatchGuestDialogWhenLocalBattle(props, dialog);
+    switchPrivateMatchGuestDialogWhenPasswordMatch(props, dialog);
     dialog.flashFailedMessage();
     return;
   }
