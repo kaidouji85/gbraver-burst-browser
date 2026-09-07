@@ -8,8 +8,8 @@ import { ROOT_CLASS } from "../dom/class-name";
 import {
   extractBackGround,
   extractCloser,
-  extractLocalBattleGuest,
-  extractLocalBattleHost,
+  extractGuest,
+  extractHost,
 } from "../dom/extract-element";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PasswordMatchSelectorDialogProps } from "../props";
@@ -34,8 +34,8 @@ export const createPasswordMatchSelectorDialogProps = (
 
   const closer = extractCloser(root);
   const backGround = extractBackGround(root);
-  const hostButton = extractLocalBattleHost(root);
-  const guestButton = extractLocalBattleGuest(root);
+  const hostButton = extractHost(root);
+  const guestButton = extractGuest(root);
 
   const pushButtonSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
