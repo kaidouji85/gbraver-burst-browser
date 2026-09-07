@@ -3,7 +3,7 @@ import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { Online } from "../../../network-context/online";
-import { startLocalBattle } from "../../start-local-battle";
+import { startPasswordMatch } from "../../start-password-match";
 import { waitUntilLocalBattleMatchingAsHost } from "../../wait-until-local-battle-matching-as-host";
 
 /**
@@ -20,7 +20,7 @@ export const startPasswordMatchHost = async (
 ): Promise<InProgress> => {
   props.networkContext.hostAnonymousSDK.disconnectWebRTC();
   const battle = await waitUntilLocalBattleMatchingAsHost(props, action);
-  await startLocalBattle(props, battle);
+  await startPasswordMatch(props, battle);
   return {
     ...props.inProgress,
     passwordMatchHost: { type: "Battle" },

@@ -54,12 +54,12 @@ const createBattleProgress = (
 };
 
 /**
- * ローカル対戦を開始する
+ * あいことば対戦を開始する
  * @param props ゲームプロパティ
  * @param battle ローカル対戦SDK
  * @returns 処理が完了したら発火するPromise
  */
-export const startLocalBattle = async (props: GameProps, battle: BattleSDK) => {
+export const startPasswordMatch = async (props: GameProps, battle: BattleSDK) => {
   props.suddenlyBattleEnd.bind(battle);
   await Promise.all([
     props.fader.fadeOut(),
