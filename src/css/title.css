@@ -302,13 +302,13 @@
 
 .title__game-menu--online-beta {
   grid-template:
-    "local-battle story    arcade" 1fr
-    "net-battle   tutorial config" 1fr / 1fr 1fr 1fr;
+    "password-match story    arcade" 1fr
+    "net-battle     tutorial config" 1fr / 1fr 1fr 1fr;
 }
 
 .title__config,
 .title__net-battle,
-.title__local-battle,
+.title__password-match,
 .title__arcade,
 .title__story,
 .title__tutorial {
@@ -337,11 +337,11 @@
   display: none;
 }
 
-.title__local-battle {
-  grid-area: local-battle;
+.title__password-match {
+  grid-area: password-match;
 }
 
-.title__local-battle--invisible {
+.title__password-match--invisible {
   display: none;
 }
 

@@ -14,7 +14,7 @@ export const onLocalBattlePush = (
   props.exclusive.execute(async () => {
     action.event.preventDefault();
     props.se.play(props.pushButton);
-    await pop(props.localBattle);
+    await pop(props.passwordMatch);
     props.pushLocalBattle.next();
   });
 };

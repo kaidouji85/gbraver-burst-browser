@@ -59,7 +59,7 @@ export function bindEventListeners(props: TitleProps): Unsubscribable[] {
     domPushStream(props.netBattle).subscribe((action) => {
       onNetBattlePush(props, action);
     }),
-    domPushStream(props.localBattle).subscribe((action) => {
+    domPushStream(props.passwordMatch).subscribe((action) => {
       onLocalBattlePush(props, action);
     }),
     domPushStream(props.config).subscribe((action) => {

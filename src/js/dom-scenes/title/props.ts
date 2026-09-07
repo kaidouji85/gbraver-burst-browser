@@ -51,8 +51,8 @@ export type TitleProps = Readonly<SEPlayerContainer> &
     readonly arcade: HTMLElement;
     /** ネット対戦 */
     readonly netBattle: HTMLElement;
-    /** ローカル対戦 */
-    readonly localBattle: HTMLElement;
+    /** あいことば対戦 */
+    readonly passwordMatch: HTMLElement;
     /** 設定 */
     readonly config: HTMLElement;
 
