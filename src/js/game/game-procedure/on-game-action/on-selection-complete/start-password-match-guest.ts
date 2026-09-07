@@ -3,7 +3,7 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
-import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
+import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../../switch-dialog/switch-private-match-guest-dialog-when-password-match";
 
 /**
  * あいことば対戦（ゲスト）を開始する

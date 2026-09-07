@@ -1,4 +1,4 @@
-import { WithdrawPasswordMatchEntry } from "../../game-actions/withdraw-local-battle-entry";
+import { WithdrawPasswordMatchEntry } from "../../game-actions/withdraw-password-match-entry";
 import { GameProps } from "../../game-props";
 
 /**

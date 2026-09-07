@@ -5,7 +5,7 @@ import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
 import { startPasswordMatch } from "../start-password-match";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
-import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
+import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../switch-dialog/switch-private-match-guest-dialog-when-password-match";
 
 /**
  * ゲストがあいことば対戦にエントリーする

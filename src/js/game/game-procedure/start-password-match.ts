@@ -26,7 +26,7 @@ import { switchMatchCard } from "./switch-scene/switch-match-card";
 /**
  * BattleProgressを生成するヘルパー関数
  * @param props ゲームプロパティ
- * @param battle ローカル対戦SDK
+ * @param battle あいことば対戦SDK
  * @returns 生成結果
  */
 const createBattleProgress = (
@@ -56,10 +56,13 @@ const createBattleProgress = (
 /**
  * あいことば対戦を開始する
  * @param props ゲームプロパティ
- * @param battle ローカル対戦SDK
+ * @param battle あいことば対戦SDK
  * @returns 処理が完了したら発火するPromise
  */
-export const startPasswordMatch = async (props: GameProps, battle: BattleSDK) => {
+export const startPasswordMatch = async (
+  props: GameProps,
+  battle: BattleSDK,
+) => {
   props.suddenlyBattleEnd.bind(battle);
   await Promise.all([
     props.fader.fadeOut(),

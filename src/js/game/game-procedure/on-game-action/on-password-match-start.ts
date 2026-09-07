@@ -1,5 +1,5 @@
 import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
-import { PasswordMatchStart } from "../../game-actions/local-battle-start";
+import { PasswordMatchStart } from "../../game-actions/password-match-start";
 import { GameProps } from "../../game-props";
 import { switchPasswordMatchSelectorDialog } from "../switch-dialog/switch-local-battle-selector-dialog";
 

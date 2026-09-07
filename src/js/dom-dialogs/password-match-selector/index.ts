@@ -41,7 +41,7 @@ export class PasswordMatchSelectorDialog implements DOMDialog {
   }
 
   /**
-   * ローカル対戦ホスト選択が選択されたことを通知する
+   * あいことば対戦ホスト選択が選択されたことを通知する
    * @returns 通知ストリーム
    */
   notifyHostSelection(): Observable<void> {
@@ -49,7 +49,7 @@ export class PasswordMatchSelectorDialog implements DOMDialog {
   }
 
   /**
-   * ローカル対戦ゲスト選択が選択されたことを通知する
+   * あいことば対戦ゲスト選択が選択されたことを通知する
    * @returns 通知ストリーム
    */
   notifyGuestSelection(): Observable<void> {
