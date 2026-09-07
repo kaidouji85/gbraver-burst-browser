@@ -1,4 +1,4 @@
-import { WithdrawLocalBattleEntry } from "../../game-actions/withdraw-local-battle-entry";
+import { WithdrawPasswordMatchEntry } from "../../game-actions/withdraw-local-battle-entry";
 import { GameProps } from "../../game-props";
 
 /**
@@ -9,7 +9,7 @@ import { GameProps } from "../../game-props";
  */
 export const onWithdrawLocalBattleEntry = async (options: {
   props: GameProps;
-  action: WithdrawLocalBattleEntry;
+  action: WithdrawPasswordMatchEntry;
 }) => {
   const { props } = options;
   props.domDialogBinder.hidden();

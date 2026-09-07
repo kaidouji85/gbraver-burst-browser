@@ -41,7 +41,7 @@ import { TutorialStart } from "./tutorial-start";
 import { UnhandledRejection } from "./unhandled-rejection";
 import { UniversalLogin } from "./universal-login";
 import { VisibilityChange } from "./visibility-change";
-import { WithdrawLocalBattleEntry } from "./withdraw-local-battle-entry";
+import { WithdrawPasswordMatchEntry } from "./withdraw-local-battle-entry";
 import { WithdrawPrivateMatchEntry } from "./withdraw-private-match-entry";
 
 /** ゲーム全体で利用するアクション */
@@ -60,7 +60,7 @@ export type GameAction =
   | PasswordMatchHostStart
   | PasswordMatchGuestStart
   | PasswordMatchEntry
-  | WithdrawLocalBattleEntry
+  | WithdrawPasswordMatchEntry
   | MatchingCanceled
   | SelectionComplete
   | SelectionCancel

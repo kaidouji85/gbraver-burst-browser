@@ -20,6 +20,6 @@ export const switchPrivateMatchGuestDialogWhenLocalBattle = (
         .pipe(map((roomID) => ({ type: "PasswordMatchEntry", roomID }))),
       dialog
         .notifyDialogClosed()
-        .pipe(map(() => ({ type: "WithdrawLocalBattleEntry" }))),
+        .pipe(map(() => ({ type: "WithdrawPasswordMatchEntry" }))),
     ]),
   );

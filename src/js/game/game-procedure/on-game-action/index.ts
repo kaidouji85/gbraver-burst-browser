@@ -141,7 +141,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onPasswordMatchGuestStart({ props, action });
     case "PasswordMatchEntry":
       return onPasswordMatchEntry({ props, action });
-    case "WithdrawLocalBattleEntry":
+    case "WithdrawPasswordMatchEntry":
       return onWithdrawLocalBattleEntry({ props, action });
   }
 }
