@@ -7,12 +7,12 @@ import { startLocalBattle } from "../../start-local-battle";
 import { waitUntilLocalBattleMatchingAsHost } from "../../wait-until-local-battle-matching-as-host";
 
 /**
- * ローカル対戦（ホスト）を開始する
+ * あいことば対戦（ホスト）を開始する
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns inProgress更新結果
  */
-export const startLocalBattleHost = async (
+export const startPasswordMatchHost = async (
   props: Readonly<
     GameProps & { networkContext: Online; inProgress: LocalBattleHost }
   >,

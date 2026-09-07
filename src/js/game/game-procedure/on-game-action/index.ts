@@ -17,8 +17,6 @@ import { onEndNPCEnding } from "./on-end-npc-ending";
 import { onForceEndBattle } from "./on-force-end-battle";
 import { onForceRetry } from "./on-force-retry";
 import { onLocalBattleCancel } from "./on-local-battle-cancel";
-import { onLocalBattleEntry } from "./on-local-battle-entry";
-import { onLocalBattleGuestStart } from "./on-local-battle-guest-start";
 import { onLocalBattleHostStart } from "./on-local-battle-host-start";
 import { onLocalBattleStart } from "./on-local-battle-start";
 import { onLoginCancel } from "./on-login-cancel";
@@ -27,6 +25,8 @@ import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
 import { onNetworkError } from "./on-network-error";
+import { onPasswordMatchEntry } from "./on-password-match-entry";
+import { onPasswordMatchGuestStart } from "./on-password-match-guest-start";
 import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
@@ -138,9 +138,9 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "LocalBattleHostStart":
       return onLocalBattleHostStart({ props, action });
     case "LocalBattleGuestStart":
-      return onLocalBattleGuestStart({ props, action });
+      return onPasswordMatchGuestStart({ props, action });
     case "LocalBattleEntry":
-      return onLocalBattleEntry({ props, action });
+      return onPasswordMatchEntry({ props, action });
     case "WithdrawLocalBattleEntry":
       return onWithdrawLocalBattleEntry({ props, action });
   }

@@ -2,9 +2,9 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { startCasualMatchIfNeeded } from "./start-casual-match-if-needed";
 import { startDifficultySelectionIfNeeded } from "./start-difficulty-selection-if-needed";
-import { startLocalBattleGuest } from "./start-local-battle-guest";
-import { startLocalBattleHost } from "./start-local-battle-host";
 import { startOfflineLANCasualMatch } from "./start-offline-lan-casual-match";
+import { startPasswordMatchGuest } from "./start-password-match-guest";
+import { startPasswordMatchHost } from "./start-password-match-host";
 import { startPrivateMatchGuestIfNeeded } from "./start-private-match-guest-if-needed";
 import { startPrivateMatchHostIfNeeded } from "./start-private-match-host-if-needed";
 
@@ -66,7 +66,7 @@ export async function onSelectionComplete(options: Options): Promise<void> {
     inProgress.type === "LocalBattleHost" &&
     networkContext.type === "online"
   ) {
-    props.inProgress = await startLocalBattleHost(
+    props.inProgress = await startPasswordMatchHost(
       { ...props, inProgress, networkContext },
       action,
     );
@@ -77,7 +77,7 @@ export async function onSelectionComplete(options: Options): Promise<void> {
     inProgress.type === "PasswordMatchGuest" &&
     networkContext.type === "online"
   ) {
-    props.inProgress = await startLocalBattleGuest(
+    props.inProgress = await startPasswordMatchGuest(
       { ...props, inProgress, networkContext },
       action,
     );

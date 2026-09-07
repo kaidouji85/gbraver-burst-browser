@@ -8,13 +8,13 @@ import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
- * ゲストがローカル対戦にエントリーする
+ * ゲストがあいことば対戦にエントリーする
  * @param options オプション
  * @param options.props ゲームプロパティ
  * @param options.action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export const onLocalBattleEntry = async (options: {
+export const onPasswordMatchEntry = async (options: {
   props: GameProps;
   action: LocalBattleEntry;
 }) => {

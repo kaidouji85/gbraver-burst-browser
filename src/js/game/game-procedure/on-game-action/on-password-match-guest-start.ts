@@ -8,13 +8,13 @@ import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-accordi
 import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 
 /**
- * ローカル対戦（ゲスト）スタート
+ * あいことば対戦（ゲスト）スタート
  * @param options オプション
  * @param options.props ゲームプロパティ
  * @param options.action アクション
  * @returns 処理が完了したら発火するPromise
  */
-export const onLocalBattleGuestStart = async (options: {
+export const onPasswordMatchGuestStart = async (options: {
   props: GameProps;
   action: LocalBattleGuestStart;
 }) => {

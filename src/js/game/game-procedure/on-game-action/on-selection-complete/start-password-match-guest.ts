@@ -6,12 +6,12 @@ import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 import { switchPrivateMatchGuestDialogWhenLocalBattle } from "../../switch-dialog/switch-private-match-guest-dialog-when-local-battle";
 
 /**
- * ローカル対戦（ゲスト）を開始する
+ * あいことば対戦（ゲスト）を開始する
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns InProgress更新結果
  */
-export const startLocalBattleGuest = async (
+export const startPasswordMatchGuest = async (
   props: Readonly<GameProps & { inProgress: PasswordMatchGuest }>,
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
