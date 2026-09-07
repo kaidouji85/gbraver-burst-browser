@@ -29,7 +29,7 @@ export type PasswordMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
 
 /** あいことば対戦（ゲスト） */
 export type PasswordMatchGuest = {
-  type: "LocalBattleGuest";
+  type: "PasswordMatchGuest";
   /** サブフロー */
-  readonly localBattleGuest: PasswordMatchGuestSubFlow;
+  readonly passwordMatchGuest: PasswordMatchGuestSubFlow;
 };

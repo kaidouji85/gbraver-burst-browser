@@ -23,8 +23,8 @@ export const onLocalBattleGuestStart = async (options: {
   await waitUntilSharedResourcesLoaded(props);
 
   props.inProgress = {
-    type: "LocalBattleGuest",
-    localBattleGuest: { type: "PlayerSelect" },
+    type: "PasswordMatchGuest",
+    passwordMatchGuest: { type: "PlayerSelect" },
   };
   await props.fader.fadeOut();
   const config = await props.config.load();

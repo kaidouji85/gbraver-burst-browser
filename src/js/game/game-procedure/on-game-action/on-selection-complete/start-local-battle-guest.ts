@@ -21,6 +21,6 @@ export const startLocalBattleGuest = async (
   switchPrivateMatchGuestDialogWhenLocalBattle(props, dialog);
   return {
     ...inProgress,
-    localBattleGuest: { type: "Entry", armdozerId, pilotId },
+    passwordMatchGuest: { type: "Entry", armdozerId, pilotId },
   };
 };

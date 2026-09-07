@@ -74,7 +74,7 @@ export async function onSelectionComplete(options: Options): Promise<void> {
   }
 
   if (
-    inProgress.type === "LocalBattleGuest" &&
+    inProgress.type === "PasswordMatchGuest" &&
     networkContext.type === "online"
   ) {
     props.inProgress = await startLocalBattleGuest(

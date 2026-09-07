@@ -20,8 +20,8 @@ export const onLocalBattleEntry = async (options: {
 }) => {
   const { props, action } = options;
   if (
-    props.inProgress.type !== "LocalBattleGuest" ||
-    props.inProgress.localBattleGuest.type !== "Entry" ||
+    props.inProgress.type !== "PasswordMatchGuest" ||
+    props.inProgress.passwordMatchGuest.type !== "Entry" ||
     props.networkContext.type !== "online"
   ) {
     return;
@@ -30,7 +30,7 @@ export const onLocalBattleEntry = async (options: {
   switchMatchingDialog(props, new MatchingDialog(props));
   await disconnectConnection(props);
 
-  const { armdozerId, pilotId } = props.inProgress.localBattleGuest;
+  const { armdozerId, pilotId } = props.inProgress.passwordMatchGuest;
   const { roomID } = action;
   const battle = await props.networkContext.guestAnonymousSDK.joinRoom({
     roomID,
@@ -49,7 +49,7 @@ export const onLocalBattleEntry = async (options: {
 
   props.inProgress = {
     ...props.inProgress,
-    localBattleGuest: { type: "Battle" },
+    passwordMatchGuest: { type: "Battle" },
   };
   await startLocalBattle(props, battle);
 };
