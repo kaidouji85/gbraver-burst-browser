@@ -4,11 +4,11 @@ import { PrivateMatchHostDialog } from "../../../dom-dialogs/private-match-host"
 import { GameProps } from "../../game-props";
 
 /**
- * ローカルバトルで利用するために、プライベートマッチ（ホスト）ダイアログに切り替える
+ * あいことば対戦で利用するために、プライベートマッチ（ホスト）ダイアログに切り替える
  * @param props ゲームプロパティ
  * @param dialog プライベートマッチ（ホスト）ダイアログ
  */
-export const switchPrivateMatchHostDialogWhenLocalBattle = (
+export const switchPrivateMatchHostDialogWhenPasswordMatch = (
   props: GameProps,
   dialog: PrivateMatchHostDialog,
 ) =>

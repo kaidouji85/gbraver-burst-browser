@@ -7,7 +7,7 @@ import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { Online } from "../network-context/online";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
-import { switchPrivateMatchHostDialogWhenLocalBattle } from "./switch-dialog/switch-private-match-host-dialog-when-local-battle";
+import { switchPrivateMatchHostDialogWhenPasswordMatch } from "./switch-dialog/switch-private-match-host-dialog-when-password-match";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 
 /**
@@ -31,7 +31,7 @@ export const waitUntilLocalBattleMatchingAsHost = async (
       ...props,
       roomID: room.roomID,
     });
-    switchPrivateMatchHostDialogWhenLocalBattle(props, dialog);
+    switchPrivateMatchHostDialogWhenPasswordMatch(props, dialog);
     return await room.waitUntilMatching();
   } catch (e) {
     const errorDialog = new NetworkErrorDialog({
