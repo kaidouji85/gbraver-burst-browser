@@ -1,7 +1,7 @@
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
-import { LocalBattleHost } from "../../../in-progress/local-battle-host";
+import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { Online } from "../../../network-context/online";
 import { startLocalBattle } from "../../start-local-battle";
 import { waitUntilLocalBattleMatchingAsHost } from "../../wait-until-local-battle-matching-as-host";
@@ -14,7 +14,7 @@ import { waitUntilLocalBattleMatchingAsHost } from "../../wait-until-local-battl
  */
 export const startPasswordMatchHost = async (
   props: Readonly<
-    GameProps & { networkContext: Online; inProgress: LocalBattleHost }
+    GameProps & { networkContext: Online; inProgress: PasswordMatchHost }
   >,
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
@@ -23,6 +23,6 @@ export const startPasswordMatchHost = async (
   await startLocalBattle(props, battle);
   return {
     ...props.inProgress,
-    localBattleHost: { type: "Battle" },
+    passwordMatchHost: { type: "Battle" },
   };
 };

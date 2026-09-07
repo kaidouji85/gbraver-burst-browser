@@ -63,7 +63,7 @@ export async function onSelectionComplete(options: Options): Promise<void> {
   }
 
   if (
-    inProgress.type === "LocalBattleHost" &&
+    inProgress.type === "PasswordMatchHost" &&
     networkContext.type === "online"
   ) {
     props.inProgress = await startPasswordMatchHost(

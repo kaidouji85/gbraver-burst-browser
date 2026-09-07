@@ -1,9 +1,9 @@
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
-import { LocalBattleHost } from "../../../in-progress/local-battle-host";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
+import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { PostNetworkBattleButtons } from "../../../post-battle-buttons";
@@ -15,7 +15,7 @@ type PostNetworkBattle =
   | PrivateMatchHost
   | PrivateMatchGuest
   | OfflineLANCasualMatch
-  | LocalBattleHost
+  | PasswordMatchHost
   | PasswordMatchGuest;
 
 /**
