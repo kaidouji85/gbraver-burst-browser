@@ -131,7 +131,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onForceRetry({ props, action });
     case "UnhandledRejection":
       return onUnhandledRejection({ props, action });
-    case "LocalBattleStart":
+    case "PasswordMatchStart":
       return onPasswordMatchStart({ props, action });
     case "PasswordMatchCancel":
       return onPasswordMatchCancel({ props, action });

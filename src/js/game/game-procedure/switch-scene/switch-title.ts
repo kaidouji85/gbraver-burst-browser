@@ -23,7 +23,7 @@ export const switchTitle = (props: GameProps, scene: Title) =>
       scene.notifyNetBattle().pipe(map(() => ({ type: "NetBattleStart" }))),
       scene
         .notifyPasswordMatch()
-        .pipe(map(() => ({ type: "LocalBattleStart" }))),
+        .pipe(map(() => ({ type: "PasswordMatchStart" }))),
       scene.notifyConfig().pipe(map(() => ({ type: "ConfigChangeStart" }))),
       scene.notifyTutorial().pipe(map(() => ({ type: "TutorialConsent" }))),
       scene.notifyStory().pipe(map(() => ({ type: "StoryStart" }))),

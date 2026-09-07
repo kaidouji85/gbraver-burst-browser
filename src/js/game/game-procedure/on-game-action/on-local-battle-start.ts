@@ -1,5 +1,5 @@
 import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
-import { LocalBattleStart } from "../../game-actions/local-battle-start";
+import { PasswordMatchStart } from "../../game-actions/local-battle-start";
 import { GameProps } from "../../game-props";
 import { switchLocalBattleSelectorDialog } from "../switch-dialog/switch-local-battle-selector-dialog";
 
@@ -12,7 +12,7 @@ import { switchLocalBattleSelectorDialog } from "../switch-dialog/switch-local-b
  */
 export const onPasswordMatchStart = (options: {
   props: Readonly<GameProps>;
-  action: Readonly<LocalBattleStart>;
+  action: Readonly<PasswordMatchStart>;
 }) => {
   const { props } = options;
   const dialog = new PasswordMatchSelectorDialog(props);
