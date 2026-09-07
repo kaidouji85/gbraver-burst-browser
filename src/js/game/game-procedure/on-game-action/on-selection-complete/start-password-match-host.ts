@@ -4,7 +4,7 @@ import { InProgress } from "../../../in-progress";
 import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { Online } from "../../../network-context/online";
 import { startPasswordMatch } from "../../start-password-match";
-import { waitUntilLocalBattleMatchingAsHost } from "../../wait-until-local-battle-matching-as-host";
+import { waitUntilPasswordMatchingAsHost } from "../../wait-until-password-matching-as-host";
 
 /**
  * あいことば対戦（ホスト）を開始する
@@ -19,7 +19,7 @@ export const startPasswordMatchHost = async (
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
   props.networkContext.hostAnonymousSDK.disconnectWebRTC();
-  const battle = await waitUntilLocalBattleMatchingAsHost(props, action);
+  const battle = await waitUntilPasswordMatchingAsHost(props, action);
   await startPasswordMatch(props, battle);
   return {
     ...props.inProgress,

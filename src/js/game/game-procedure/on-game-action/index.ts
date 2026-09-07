@@ -43,7 +43,7 @@ import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
-import { onWithdrawLocalBattleEntry } from "./on-withdraw-local-battle-entry";
+import { onWithdrawPasswordMatchEntry } from "./on-withdraw-password-match-entry";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
@@ -142,6 +142,6 @@ export function onGameAction(props: GameProps, action: GameAction) {
     case "PasswordMatchEntry":
       return onPasswordMatchEntry({ props, action });
     case "WithdrawPasswordMatchEntry":
-      return onWithdrawLocalBattleEntry({ props, action });
+      return onWithdrawPasswordMatchEntry({ props, action });
   }
 }

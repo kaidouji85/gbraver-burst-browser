@@ -11,12 +11,12 @@ import { switchPrivateMatchHostDialogWhenPasswordMatch } from "./switch-dialog/s
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 
 /**
- * ローカル対戦（ホスト）でマッチング成立まで待つ
+ * あいことば対戦（ホスト）でマッチング成立まで待つ
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns バトルSDK
  */
-export const waitUntilLocalBattleMatchingAsHost = async (
+export const waitUntilPasswordMatchingAsHost = async (
   props: Readonly<GameProps & { networkContext: Online }>,
   action: Readonly<SelectionComplete>,
 ): Promise<BattleSDK> => {
