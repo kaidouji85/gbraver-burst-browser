@@ -17,7 +17,7 @@ export const switchLocalBattleSelectorDialog = (
     props.gameAction.connect([
       dialog
         .notifyHostSelection()
-        .pipe(map(() => ({ type: "LocalBattleHostStart" }))),
+        .pipe(map(() => ({ type: "PasswordMatchHostStart" }))),
       dialog
         .notifyGuestSelection()
         .pipe(map(() => ({ type: "PasswordMatchGuestStart" }))),

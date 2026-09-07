@@ -15,7 +15,7 @@ import { EndNPCEnding } from "./end-npc-ending";
 import { ForceEndBattle } from "./force-end-battle";
 import { ForceRetry } from "./force-retry";
 import { PasswordMatchGuestStart } from "./local-battle-guest-start";
-import { LocalBattleHostStart } from "./local-battle-host-start";
+import { PasswordMatchHostStart } from "./local-battle-host-start";
 import { LocalBattleStart } from "./local-battle-start";
 import { LoginCancel } from "./login-cancel";
 import { Logout } from "./logout";
@@ -57,7 +57,7 @@ export type GameAction =
   | WithdrawPrivateMatchEntry
   | LocalBattleStart
   | PasswordMatchCancel
-  | LocalBattleHostStart
+  | PasswordMatchHostStart
   | PasswordMatchGuestStart
   | PasswordMatchEntry
   | WithdrawLocalBattleEntry

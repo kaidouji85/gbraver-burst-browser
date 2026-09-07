@@ -135,7 +135,7 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onPasswordMatchStart({ props, action });
     case "PasswordMatchCancel":
       return onPasswordMatchCancel({ props, action });
-    case "LocalBattleHostStart":
+    case "PasswordMatchHostStart":
       return onPasswordMatchHostStart({ props, action });
     case "PasswordMatchGuestStart":
       return onPasswordMatchGuestStart({ props, action });

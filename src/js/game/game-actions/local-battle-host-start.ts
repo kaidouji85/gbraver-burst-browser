@@ -1,4 +1,4 @@
-/** ローカル対戦ホスト開始 */
-export type LocalBattleHostStart = {
-  type: "LocalBattleHostStart";
+/** あいことば対戦ホスト開始 */
+export type PasswordMatchHostStart = {
+  type: "PasswordMatchHostStart";
 };
