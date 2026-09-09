@@ -289,7 +289,6 @@
   gap: calc(var(--responsive-font-size) * 0.3);
 }
 
-.title__game-menu,
 .title__game-menu--offline-lan {
   grid-template:
     "net-battle story    arcade" 1fr
@@ -300,6 +299,7 @@
   grid-template: "story tutorial arcade config" 1fr/ 1fr 1fr 1fr 1fr;
 }
 
+.title__game-menu,
 .title__game-menu--online-beta {
   grid-template:
     "password-match story    arcade" 1fr
@@ -339,10 +339,6 @@
 
 .title__password-match {
   grid-area: password-match;
-}
-
-.title__password-match--invisible {
-  display: none;
 }
 
 .title__arcade {
