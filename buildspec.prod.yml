@@ -9,7 +9,7 @@ env:
     CAN_PLAY_EPISODE_IN_DEVELOPMENT: false
     IS_TITLE_HELP_ICON_ENABLE: true
     NETWORK_MODE: "ONLINE"
-    CAN_ONLINE_BETA: false
+    CAN_ONLINE_BETA: true
   parameter-store:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
