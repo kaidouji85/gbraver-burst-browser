@@ -1,5 +1,6 @@
-import icongen from "icon-gen";
+import * as fs from "fs/promises";
 import * as path from "path";
+import pngToIco from "png-to-ico";
 import sharp from "sharp";
 
 const buildRoot = path.resolve(__dirname, "build/production");
@@ -22,13 +23,9 @@ async function resizeAppIcon(fileName: string, size: number): Promise<void> {
  * @return 処理が完了したら発火するPromise
  */
 async function toFavicon(): Promise<void> {
-  await icongen(originIconPath, buildRoot, {
-    report: true,
-    ico: {
-      name: "favicon",
-      sizes: [48],
-    },
-  });
+  const buffer = await sharp(originIconPath).resize(48, 48).toBuffer();
+  const ico = await pngToIco(buffer);
+  await fs.writeFile(path.resolve(buildRoot, "favicon.ico"), ico);
 }
 
 /**

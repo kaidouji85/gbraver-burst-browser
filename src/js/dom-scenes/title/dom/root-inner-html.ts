@@ -12,10 +12,8 @@ import {
   INVISIBLE_ACCOUNT_CLASS,
   INVISIBLE_ACCOUNT_MENU_CLASS,
   INVISIBLE_HELP_ICON_CLASS,
-  INVISIBLE_LOCAL_BATTLE_CLASS,
   INVISIBLE_LOGIN_CLASS,
   INVISIBLE_NET_BATTLE_CLASS,
-  LOCAL_BATTLE_CLASS,
   LOGIN_CLASS,
   NET_BATTLE_CLASS,
   ROOT_CLASS,
@@ -70,10 +68,6 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     params.titleMenuMode === "STANDALONE"
       ? INVISIBLE_NET_BATTLE_CLASS
       : NET_BATTLE_CLASS;
-  const localBattleClassName =
-    params.titleMenuMode === "ONLINE_BETA"
-      ? LOCAL_BATTLE_CLASS
-      : INVISIBLE_LOCAL_BATTLE_CLASS;
 
   const genesisBraverPath =
     params.resources.paths.find(
@@ -124,7 +118,6 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     accountName,
     accountClassName,
     netBattleClassName,
-    localBattleClassName,
 
     genesisBraverPath,
     shinBraverPath,

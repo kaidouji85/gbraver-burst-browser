@@ -20,12 +20,12 @@ import {
   extractHelpIcon,
   extractHelpMenu,
   extractLightningDozer,
-  extractLocalBattle,
   extractLogin,
   extractLogo,
   extractLogout,
   extractNeoLandozer,
   extractNetBattle,
+  extractPasswordMatch,
   extractPrivacyPolicyLinkIcon,
   extractShinBraver,
   extractStory,
@@ -129,7 +129,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     story: extractStory(root),
     arcade: extractArcade(root),
     netBattle: extractNetBattle(root),
-    localBattle: extractLocalBattle(root),
+    passwordMatch: extractPasswordMatch(root),
     config: extractConfig(root),
 
     armdozerImages: {
@@ -156,7 +156,7 @@ export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
     pushStory: new Subject(),
     pushArcade: new Subject(),
     pushNetBattle: new Subject(),
-    pushLocalBattle: new Subject(),
+    pushPasswordMatch: new Subject(),
     pushConfig: new Subject(),
   };
 }

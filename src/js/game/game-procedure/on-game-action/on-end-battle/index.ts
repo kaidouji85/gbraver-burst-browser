@@ -38,8 +38,8 @@ export async function onEndBattle(options: Options): Promise<void> {
       case "PrivateMatchHost":
       case "PrivateMatchGuest":
       case "OfflineLANCasualMatch":
-      case "LocalBattleHost":
-      case "LocalBattleGuest":
+      case "PasswordMatchHost":
+      case "PasswordMatchGuest":
         return executePostNetBattle({ ...props, inProgress });
       case "Story":
         return executePostEpisode({ ...props, inProgress }, action);

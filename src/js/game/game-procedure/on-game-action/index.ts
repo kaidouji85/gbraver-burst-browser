@@ -16,17 +16,17 @@ import { onEndNetworkError } from "./on-end-network-error";
 import { onEndNPCEnding } from "./on-end-npc-ending";
 import { onForceEndBattle } from "./on-force-end-battle";
 import { onForceRetry } from "./on-force-retry";
-import { onLocalBattleCancel } from "./on-local-battle-cancel";
-import { onLocalBattleEntry } from "./on-local-battle-entry";
-import { onLocalBattleGuestStart } from "./on-local-battle-guest-start";
-import { onLocalBattleHostStart } from "./on-local-battle-host-start";
-import { onLocalBattleStart } from "./on-local-battle-start";
 import { onLoginCancel } from "./on-login-cancel";
 import { onLogout } from "./on-logout";
 import { onMatchingCanceled } from "./on-matching-cancel";
 import { onNetBattleCancel } from "./on-net-battle-cancel";
 import { onNetBattleStart } from "./on-net-battle-start";
 import { onNetworkError } from "./on-network-error";
+import { onPasswordMatchCancel } from "./on-password-match-cancel";
+import { onPasswordMatchEntry } from "./on-password-match-entry";
+import { onPasswordMatchGuestStart } from "./on-password-match-guest-start";
+import { onPasswordMatchHostStart } from "./on-password-match-host-start";
+import { onPasswordMatchStart } from "./on-password-match-start";
 import { onPostBattleAction } from "./on-post-battle";
 import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
@@ -43,7 +43,7 @@ import { onTutorialStart } from "./on-tutorial-start";
 import { onUnhandledRejection } from "./on-unhandled-rejection";
 import { onUniversalLogin } from "./on-universal-login";
 import { onVisibilityChange } from "./on-visibility-change";
-import { onWithdrawLocalBattleEntry } from "./on-withdraw-local-battle-entry";
+import { onWithdrawPasswordMatchEntry } from "./on-withdraw-password-match-entry";
 import { onWithdrawPrivateMatchEntry } from "./on-withdraw-private-match-entry";
 
 /**
@@ -131,17 +131,17 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onForceRetry({ props, action });
     case "UnhandledRejection":
       return onUnhandledRejection({ props, action });
-    case "LocalBattleStart":
-      return onLocalBattleStart({ props, action });
-    case "LocalBattleCancel":
-      return onLocalBattleCancel({ props, action });
-    case "LocalBattleHostStart":
-      return onLocalBattleHostStart({ props, action });
-    case "LocalBattleGuestStart":
-      return onLocalBattleGuestStart({ props, action });
-    case "LocalBattleEntry":
-      return onLocalBattleEntry({ props, action });
-    case "WithdrawLocalBattleEntry":
-      return onWithdrawLocalBattleEntry({ props, action });
+    case "PasswordMatchStart":
+      return onPasswordMatchStart({ props, action });
+    case "PasswordMatchCancel":
+      return onPasswordMatchCancel({ props, action });
+    case "PasswordMatchHostStart":
+      return onPasswordMatchHostStart({ props, action });
+    case "PasswordMatchGuestStart":
+      return onPasswordMatchGuestStart({ props, action });
+    case "PasswordMatchEntry":
+      return onPasswordMatchEntry({ props, action });
+    case "WithdrawPasswordMatchEntry":
+      return onWithdrawPasswordMatchEntry({ props, action });
   }
 }

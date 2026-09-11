@@ -289,7 +289,6 @@
   gap: calc(var(--responsive-font-size) * 0.3);
 }
 
-.title__game-menu,
 .title__game-menu--offline-lan {
   grid-template:
     "net-battle story    arcade" 1fr
@@ -300,15 +299,16 @@
   grid-template: "story tutorial arcade config" 1fr/ 1fr 1fr 1fr 1fr;
 }
 
+.title__game-menu,
 .title__game-menu--online-beta {
   grid-template:
-    "local-battle story    arcade" 1fr
-    "net-battle   tutorial config" 1fr / 1fr 1fr 1fr;
+    "password-match story    arcade" 1fr
+    "net-battle     tutorial config" 1fr / 1fr 1fr 1fr;
 }
 
 .title__config,
 .title__net-battle,
-.title__local-battle,
+.title__password-match,
 .title__arcade,
 .title__story,
 .title__tutorial {
@@ -337,12 +337,8 @@
   display: none;
 }
 
-.title__local-battle {
-  grid-area: local-battle;
-}
-
-.title__local-battle--invisible {
-  display: none;
+.title__password-match {
+  grid-area: password-match;
 }
 
 .title__arcade {

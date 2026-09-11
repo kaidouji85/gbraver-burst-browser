@@ -181,8 +181,8 @@ module.exports = async () => ({
       GBRAVER_BURST_CAN_ONLINE_BETA: JSON.stringify(
         process.env.CAN_ONLINE_BETA,
       ),
-      GBRAVER_BURST_WEBRTC_HELPER_API_URL: JSON.stringify(
-        process.env.WEBRTC_HELPER_API_URL,
+      GBRAVER_BURST_ANONYMOUS_API_URL: JSON.stringify(
+        process.env.ANONYMOUS_API_URL,
       ),
       GBRAVER_BURST_COTURN_DOMAIN_NAME: JSON.stringify(
         process.env.COTURN_DOMAIN_NAME,

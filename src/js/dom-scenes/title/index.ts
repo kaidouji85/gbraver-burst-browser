@@ -99,11 +99,11 @@ export class Title implements DOMScene {
   }
 
   /**
-   * ローカル対戦ボタン押下通知
+   * あいことば対戦ボタン押下通知
    * @returns イベント通知ストリーム
    */
-  notifyLocalBattle(): Observable<void> {
-    return this.#props.pushLocalBattle;
+  notifyPasswordMatch(): Observable<void> {
+    return this.#props.pushPasswordMatch;
   }
 
   /**
