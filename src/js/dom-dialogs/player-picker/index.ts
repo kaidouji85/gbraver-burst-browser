@@ -1,6 +1,12 @@
 import { DOMDialog } from "../dialog";
-import { createPlayerPickerDialogProps } from "./procedures/create-player-selector-dialog-props";
+import {
+  createPlayerPickerDialogProps,
+  CreatePlayerPickerDialogPropsOptions,
+} from "./procedures/create-player-selector-dialog-props";
 import { PlayerPickerDialogProps } from "./props";
+
+/** コンストラクタのオプション */
+type PlayerPickerDialogOptions = CreatePlayerPickerDialogPropsOptions;
 
 /** プレイヤーピッカーダイアログ */
 export class PlayerPickerDialog implements DOMDialog {
@@ -9,9 +15,10 @@ export class PlayerPickerDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   * @param options オプション
    */
-  constructor() {
-    this.#props = createPlayerPickerDialogProps();
+  constructor(options: PlayerPickerDialogOptions) {
+    this.#props = createPlayerPickerDialogProps(options);
   }
 
   /** @override */
