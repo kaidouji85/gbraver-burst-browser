@@ -3,7 +3,7 @@
  */
 @media (orientation: landscape) {
   .player-picker {
-    --control-button-height: calc(var(--responsive-font-size) * 3);
+    --gap: calc(var(--responsive-font-size) * 0.5);
 
     display: block;
   }
@@ -44,6 +44,7 @@
     "pilot-detail    pilot-picker"
     "actions         actions";
   grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
@@ -78,6 +79,7 @@
 .player-picker__actions {
   grid-area: actions;
   display: flex;
+  gap: var(--gap);
 }
 
 .player-picker__goto-title,
