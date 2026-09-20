@@ -39,6 +39,11 @@
   background-color: var(--background-color);
   position: absolute;
   display: grid;
+  grid-template-areas:
+    "armdozer-detail armdozer-picker"
+    "pilot-detail    pilot-picker"
+    "actions         actions";
+  grid-template-columns: 1fr 1fr;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
@@ -52,4 +57,24 @@
 
   width: var(--size);
   height: var(--size);
+}
+
+.player-picker__armdozer-detail {
+  grid-area: armdozer-detail;
+}
+
+.player-picker__pilot-detail {
+  grid-area: pilot-detail;
+}
+
+.player-picker__armdozer-picker {
+  grid-area: armdozer-picker;
+}
+
+.player-picker__pilot-picker {
+  grid-area: pilot-picker;
+}
+
+.player-picker__actions {
+  grid-area: actions;
 }
