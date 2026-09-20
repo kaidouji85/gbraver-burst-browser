@@ -45,3 +45,10 @@
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
+
+.player-picker__armdozer-icon {
+  --size: calc(var(--responsive-font-size) * 3);
+
+  width: var(--size);
+  height: var(--size);
+}
