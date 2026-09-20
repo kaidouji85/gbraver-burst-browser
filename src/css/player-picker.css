@@ -46,7 +46,8 @@
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
 }
 
-.player-picker__armdozer-icon {
+.player-picker__armdozer-icon,
+.player-picker__pilot-icon {
   --size: calc(var(--responsive-font-size) * 3);
 
   width: var(--size);

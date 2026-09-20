@@ -7,6 +7,7 @@ import { ARMDOZER_ICON } from "./class-name";
 /**
  * アームドーザアイコンを生成する
  * @param options オプション
+ * @param options.resources リソース管理オブジェクト
  * @param options.armdozerId アームドーザID
  * @returns アームドーザアイコン
  */
