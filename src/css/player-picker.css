@@ -39,11 +39,10 @@
   background-color: var(--background-color);
   position: absolute;
   display: grid;
-  grid-template-areas:
-    "armdozer-detail armdozer-picker"
-    "pilot-detail    pilot-picker"
-    "actions         actions";
-  grid-template-columns: 1fr 1fr;
+  grid-template:
+    "armdozer-detail armdozer-picker" 1fr
+    "pilot-detail    pilot-picker" 1fr
+    "actions         actions" auto / 1fr 1fr;
   gap: var(--gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
