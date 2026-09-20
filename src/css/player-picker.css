@@ -3,7 +3,7 @@
  */
 @media (orientation: landscape) {
   .player-picker {
-    --gap: calc(var(--responsive-font-size) * 0.5);
+    --grid-gap: calc(var(--responsive-font-size) * 0.5);
 
     display: block;
   }
@@ -43,7 +43,7 @@
     "armdozer-detail armdozer-picker" 1fr
     "pilot-detail    pilot-picker" 1fr
     "actions         actions" auto / 1fr 1fr;
-  gap: var(--gap);
+  gap: var(--grid-gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
@@ -61,6 +61,68 @@
 
 .player-picker__armdozer-detail {
   grid-area: armdozer-detail;
+  display: grid;
+  grid-template:
+    "armdozer-name"
+    "armdozer-basic-status"
+    "burst";
+  gap: var(--grid-gap);
+  background: rgb(23 23 23 / 60%);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+  box-sizing: border-box;
+  align-items: start;
+  align-self: end;
+}
+
+.player-picker__armdozer-name {
+  grid-area: armdozer-name;
+  font-weight: bold;
+}
+
+.player-picker__armdozer-basic-status {
+  grid-area: armdozer-basic-status;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--grid-gap);
+}
+
+.player-picker__armdozer-hp,
+.player-picker__armdozer-battery,
+.player-picker__armdozer-power,
+.player-picker__armdozer-speed {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--responsive-font-size) * 0.2);
+}
+
+.player-picker__armdozer-hp-label,
+.player-picker__armdozer-battery-label,
+.player-picker__armdozer-power-label,
+.player-picker__armdozer-speed-label {
+  display: grid;
+  place-items: center;
+  min-width: calc(var(--responsive-font-size) * 3);
+  min-height: calc(var(--responsive-font-size) * 1.5);
+  box-sizing: border-box;
+  background-color: var(--button-background-color);
+  border: var(--label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.4);
+}
+
+.player-picker__armdozer-power-value--buffed {
+  color: var(--highlight-color);
+  font-weight: bold;
+}
+
+.player-picker__battery-icon {
+  width: var(--responsive-font-size);
+  height: var(--responsive-font-size);
+}
+
+.player-picker__burst {
+  grid-area: burst;
 }
 
 .player-picker__pilot-detail {
@@ -78,7 +140,7 @@
 .player-picker__actions {
   grid-area: actions;
   display: flex;
-  gap: var(--gap);
+  gap: var(--grid-gap);
 }
 
 .player-picker__goto-title,
