@@ -1,6 +1,5 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
-import { ResourcesContainer } from "../../../resource";
 import { armdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
@@ -8,11 +7,11 @@ import {
   extractPilotPicker,
 } from "../dom/extract-element";
 import { pilotIcon } from "../dom/pilot-icon";
-import { rootInnerHTML } from "../dom/root-inner-html";
+import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PlayerPickerDialogProps } from "../props";
 
 /** プロパティの生成オプション */
-export type CreatePlayerPickerDialogPropsOptions = ResourcesContainer & {
+export type CreatePlayerPickerDialogPropsOptions = RootInnerHTMLOptions & {
   /** ピッカーで選択可能なアームドーザID */
   armdozerIds: ArmdozerId[];
   /** ピッカーで選択可能なパイロットID */
@@ -31,7 +30,7 @@ export const createPlayerPickerDialogProps = (
 
   const root = document.createElement("div");
   root.className = ROOT;
-  root.innerHTML = rootInnerHTML();
+  root.innerHTML = rootInnerHTML(options);
 
   const armdozerIcons = armdozerIds.map((armdozerId) =>
     armdozerIcon({ resources, armdozerId }),
