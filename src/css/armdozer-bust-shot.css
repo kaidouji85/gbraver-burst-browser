@@ -4,8 +4,8 @@
   position: fixed;
   top: -5vh;
   top: -5dvh;
-  right: calc(25vw - 100vh);
-  right: calc(25dvw - 100dvh);
+  right: calc(25vw - 90vh);
+  right: calc(25dvw - 90dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -38,8 +38,8 @@
 
 .armdozer-bust-shot__wing-dozer {
   position: fixed;
-  top: -40vh;
-  top: -40dvh;
+  top: -35vh;
+  top: -35dvh;
   right: calc(25vw - 100vh);
   right: calc(25dvw - 100dvh);
   width: 200vh;
