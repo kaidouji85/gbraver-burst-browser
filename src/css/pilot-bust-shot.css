@@ -26,14 +26,14 @@
 
 .pilot-bust-shot__raito {
   position: fixed;
-  right: -8.5vh;
-  right: -8.5dvh;
-  top: calc(100vh - 76.5vh);
-  top: calc(100dvh - 76.5dvh);
-  width: 85vh;
-  width: 85dvh;
-  height: 85vh;
-  height: 85dvh;
+  right: -15vh;
+  right: -15dvh;
+  bottom: -10vh;
+  bottom: -10dvh;
+  width: 75vh;
+  width: 75dvh;
+  height: 75vh;
+  height: 75dvh;
 }
 
 .pilot-bust-shot__tsubasa {
