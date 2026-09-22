@@ -99,9 +99,9 @@
   align-self: start;
   display: grid;
   grid-template:
-    "armdozer-name"
-    "armdozer-basic-status"
-    "burst";
+    "armdozer-name" auto
+    "armdozer-basic-status" auto
+    "burst" 1fr;
   align-items: start;
 }
 
@@ -173,8 +173,8 @@
   align-self: start;
   display: grid;
   grid-template:
-    "pilot-name"
-    "pilot-skill";
+    "pilot-name" auto
+    "pilot-skill" 1fr;
   align-items: start;
 }
 
