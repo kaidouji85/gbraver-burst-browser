@@ -26,8 +26,8 @@
 
 .pilot-bust-shot__raito {
   position: fixed;
-  right: -15vh;
-  right: -15dvh;
+  right: -10vh;
+  right: -10dvh;
   bottom: -10vh;
   bottom: -10dvh;
   width: 75vh;
@@ -50,8 +50,8 @@
 
 .pilot-bust-shot__yuuya {
   position: fixed;
-  right: -10vh;
-  right: -10dvh;
+  right: -8vh;
+  right: -8dvh;
   bottom: -20vh;
   bottom: -20dvh;
   width: 95vh;
