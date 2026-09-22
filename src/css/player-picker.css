@@ -72,7 +72,7 @@
 
 .player-picker__armdozer-icon,
 .player-picker__pilot-icon {
-  --size: calc(var(--responsive-font-size) * 3);
+  --size: calc(var(--responsive-font-size) * 6);
 
   width: var(--size);
   height: var(--size);
