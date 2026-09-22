@@ -57,7 +57,7 @@
   grid-template:
     "armdozer-detail armdozer-picker" auto
     "pilot-detail    pilot-picker" 1fr
-    "actions         actions" auto / 1fr 1fr;
+    "actions         actions" auto / 1fr auto;
   gap: var(--grid-gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
