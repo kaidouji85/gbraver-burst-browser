@@ -2,11 +2,11 @@
 .armdozer-status {
   --parameter-label-width: calc(var(--responsive-font-size) * 2.2);
 
-  font-size: calc(var(--responsive-font-size) * 0.8);
+  flex: 1;
+  font-size: calc(var(--responsive-font-size) * 1);
   width: 50vw;
   box-sizing: border-box;
   overflow-y: scroll;
-  height: calc(var(--responsive-font-size) * 8);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: rgb(10 10 10 / 70%);
   border: var(--dialog-border);
@@ -29,16 +29,9 @@
 .armdozer-status__basic-params {
   flex-grow: 0;
   flex-shrink: 0;
-  display: grid;
-  grid-template-columns:
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .armdozer-status__battery-label,
