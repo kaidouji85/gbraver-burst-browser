@@ -62,9 +62,8 @@
   font-size: var(--responsive-font-size);
   display: grid;
   grid-template:
-    "armdozer-detail  pilot-detail " auto
-    "armdozer-picker  pilot-picker" 1fr
-    "actions          actions" auto / 1fr 1fr;
+    "armdozer pilot" 1fr
+    "actions  actions" auto / 1fr 1fr;
   gap: var(--grid-gap);
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
@@ -93,6 +92,17 @@
 /* ============================================================ 
  * アームドーザ
  * ============================================================ */
+
+.player-picker__armdozer {
+  grid-area: armdozer;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    "armdozer-detail" 1fr
+    "armdozer-picker" auto;
+}
 
 .player-picker__armdozer-detail {
   grid-area: armdozer-detail;
@@ -167,6 +177,16 @@
 /* ============================================================ 
  * パイロット
  * ============================================================ */
+
+.player-picker__pilot {
+  grid-area: pilot;
+  height: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    "pilot-detail" 1fr
+    "pilot-picker" auto;
+}
 
 .player-picker__pilot-detail {
   grid-area: pilot-detail;
