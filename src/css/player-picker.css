@@ -55,9 +55,9 @@
   position: absolute;
   display: grid;
   grid-template:
-    "armdozer-detail armdozer-picker" auto
-    "pilot-detail    pilot-picker" 1fr
-    "actions         actions" auto / 1fr auto;
+    "armdozer-picker" auto
+    "pilot-picker" 1fr
+    "actions" auto;
   gap: var(--grid-gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
@@ -82,75 +82,6 @@
  * アームドーザ
  * ============================================================ */
 
-.player-picker__armdozer-detail {
-  grid-area: armdozer-detail;
-  display: grid;
-  grid-template:
-    "armdozer-name"
-    "armdozer-basic-status"
-    "burst";
-  gap: var(--grid-gap);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
-  box-sizing: border-box;
-  align-items: start;
-  align-self: end;
-}
-
-.player-picker__armdozer-name {
-  grid-area: armdozer-name;
-  font-weight: bold;
-}
-
-.player-picker__armdozer-basic-status {
-  grid-area: armdozer-basic-status;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--grid-gap);
-}
-
-.player-picker__armdozer-hp,
-.player-picker__armdozer-battery,
-.player-picker__armdozer-power,
-.player-picker__armdozer-speed {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--responsive-font-size) * 0.2);
-}
-
-.player-picker__armdozer-hp-label,
-.player-picker__armdozer-battery-label,
-.player-picker__armdozer-power-label,
-.player-picker__armdozer-speed-label {
-  display: grid;
-  place-items: center;
-  min-width: calc(var(--responsive-font-size) * 3);
-  min-height: calc(var(--responsive-font-size) * 1.5);
-  box-sizing: border-box;
-  background-color: var(--button-background-color);
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.4);
-}
-
-.player-picker__burst-label {
-  display: inline-block;
-  text-align: center;
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.8);
-  background-color: var(--button-background-color);
-}
-
-.player-picker__battery-icon {
-  width: var(--responsive-font-size);
-  height: var(--responsive-font-size);
-}
-
-.player-picker__burst {
-  grid-area: burst;
-}
-
 .player-picker__armdozer-picker {
   grid-area: armdozer-picker;
 }
@@ -158,33 +89,6 @@
 /* ============================================================ 
  * パイロット
  * ============================================================ */
-
-.player-picker__pilot-detail {
-  grid-area: pilot-detail;
-  display: grid;
-  grid-template:
-    "pilot-name"
-    "pilot-skill";
-  gap: var(--grid-gap);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
-  box-sizing: border-box;
-  align-items: start;
-  align-self: end;
-}
-
-.player-picker__pilot-name {
-  grid-area: pilot-name;
-  font-weight: bold;
-}
-
-.player-picker__pilot-skill-label {
-  display: inline-block;
-  text-align: center;
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.8);
-  background-color: var(--button-background-color);
-}
 
 .player-picker__pilot-picker {
   grid-area: pilot-picker;
