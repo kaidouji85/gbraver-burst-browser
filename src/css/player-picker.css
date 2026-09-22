@@ -55,11 +55,9 @@
   position: absolute;
   display: grid;
   grid-template:
-    "armdozer-detail" auto
-    "armdozer-picker" 1fr
-    "pilot-detail" auto
-    "pilot-picker" 1fr
-    "actions" auto;
+    "armdozer-detail  pilot-detail " auto
+    "armdozer-picker  pilot-picker" 1fr
+    "actions          actions" auto / 1fr 1fr;
   gap: var(--grid-gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
@@ -74,7 +72,7 @@
 
 .player-picker__armdozer-icon,
 .player-picker__pilot-icon {
-  --size: calc(var(--responsive-font-size) * 5);
+  --size: calc(var(--responsive-font-size) * 4);
 
   width: var(--size);
   height: var(--size);
@@ -86,6 +84,7 @@
 
 .player-picker__armdozer-detail {
   grid-area: armdozer-detail;
+  align-self: start;
   display: grid;
   grid-template:
     "armdozer-name"
@@ -163,6 +162,7 @@
 
 .player-picker__pilot-detail {
   grid-area: pilot-detail;
+  align-self: start;
   display: grid;
   grid-template:
     "pilot-name"
