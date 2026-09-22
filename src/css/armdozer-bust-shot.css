@@ -40,8 +40,8 @@
   position: fixed;
   top: -35vh;
   top: -35dvh;
-  right: calc(25vw - 100vh);
-  right: calc(25dvw - 100dvh);
+  right: calc(25vw - 110vh);
+  right: calc(25dvw - 110dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -64,8 +64,8 @@
   position: fixed;
   top: -40vh;
   top: -40dvh;
-  right: calc(25vw - 125vh);
-  right: calc(25dvw - 125dvh);
+  right: calc(25vw - 135vh);
+  right: calc(25dvw - 135dvh);
   width: 250vh;
   width: 250dvh;
   height: 250vh;
