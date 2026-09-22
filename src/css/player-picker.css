@@ -55,9 +55,11 @@
   position: absolute;
   display: grid;
   grid-template:
-    "armdozer-detail armdozer-picker" auto
-    "pilot-detail    pilot-picker" 1fr
-    "actions         actions" auto / 1fr auto;
+    "armdozer-detail" auto
+    "armdozer-picker" 1fr
+    "pilot-detail" auto
+    "pilot-picker" 1fr
+    "actions" auto;
   gap: var(--grid-gap);
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
@@ -72,7 +74,7 @@
 
 .player-picker__armdozer-icon,
 .player-picker__pilot-icon {
-  --size: calc(var(--responsive-font-size) * 6);
+  --size: calc(var(--responsive-font-size) * 5);
 
   width: var(--size);
   height: var(--size);
