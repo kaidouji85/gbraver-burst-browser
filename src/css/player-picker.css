@@ -111,6 +111,15 @@
   padding: 0 calc(var(--responsive-font-size) * 0.4);
 }
 
+.player-picker__burst-label {
+  display: inline-block;
+  text-align: center;
+  border: var(--label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.8);
+  background-color: var(--button-background-color);
+}
+
 .player-picker__armdozer-power-value--buffed {
   color: var(--highlight-color);
   font-weight: bold;
