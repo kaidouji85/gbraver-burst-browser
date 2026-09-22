@@ -2,14 +2,14 @@
 
 .pilot-bust-shot__shinya {
   position: fixed;
-  right: -8.5vh;
-  right: -8.5dvh;
-  top: calc(100vh - 76.5vh);
-  top: calc(100dvh - 76.5dvh);
-  width: 85vh;
-  width: 85dvh;
-  height: 85vh;
-  height: 85dvh;
+  right: -15vh;
+  right: -15dvh;
+  bottom: -15vh;
+  bottom: -15dvh;
+  width: 70vh;
+  width: 70dvh;
+  height: 70vh;
+  height: 70dvh;
 }
 
 .pilot-bust-shot__gai {
