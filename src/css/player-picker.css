@@ -6,6 +6,7 @@
     --grid-gap: calc(var(--responsive-font-size) * 0.5);
 
     display: block;
+    position: relative;
   }
 }
 
@@ -67,7 +68,7 @@
     "armdozer-picker  pilot-picker" 1fr
     "actions          actions" auto / 1fr 1fr;
   gap: var(--grid-gap);
-  overflow: auto;
+  overflow: hidden;
 }
 
 /* ============================================================ 
@@ -82,6 +83,14 @@
   height: var(--size);
 }
 
+.player-picker__armdozer-detail,
+.player-picker__pilot-detail {
+  height: 100%;
+  overflow-y: scroll;
+  gap: var(--grid-gap);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+}
+
 /* ============================================================ 
  * アームドーザ
  * ============================================================ */
@@ -94,9 +103,6 @@
     "armdozer-name"
     "armdozer-basic-status"
     "burst";
-  gap: var(--grid-gap);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
-  box-sizing: border-box;
   align-items: start;
 }
 
@@ -170,9 +176,6 @@
   grid-template:
     "pilot-name"
     "pilot-skill";
-  gap: var(--grid-gap);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
-  box-sizing: border-box;
   align-items: start;
 }
 
