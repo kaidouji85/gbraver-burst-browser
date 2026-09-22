@@ -4,12 +4,12 @@
   position: fixed;
   right: -15vh;
   right: -15dvh;
-  bottom: -15vh;
-  bottom: -15dvh;
-  width: 70vh;
-  width: 70dvh;
-  height: 70vh;
-  height: 70dvh;
+  bottom: -10vh;
+  bottom: -10dvh;
+  width: 75vh;
+  width: 75dvh;
+  height: 75vh;
+  height: 75dvh;
 }
 
 .pilot-bust-shot__gai {
