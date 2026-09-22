@@ -142,11 +142,6 @@
   background-color: var(--button-background-color);
 }
 
-.player-picker__armdozer-power-value--buffed {
-  color: var(--highlight-color);
-  font-weight: bold;
-}
-
 .player-picker__battery-icon {
   width: var(--responsive-font-size);
   height: var(--responsive-font-size);
@@ -180,6 +175,15 @@
 .player-picker__pilot-name {
   grid-area: pilot-name;
   font-weight: bold;
+}
+
+.player-picker__pilot-skill-label {
+  display: inline-block;
+  text-align: center;
+  border: var(--label-border);
+  border-radius: calc(var(--responsive-font-size) * 0.2);
+  padding: 0 calc(var(--responsive-font-size) * 0.8);
+  background-color: var(--button-background-color);
 }
 
 .player-picker__pilot-picker {
