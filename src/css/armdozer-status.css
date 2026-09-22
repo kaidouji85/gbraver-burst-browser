@@ -29,16 +29,9 @@
 .armdozer-status__basic-params {
   flex-grow: 0;
   flex-shrink: 0;
-  display: grid;
-  grid-template-columns:
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto
-    auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .armdozer-status__battery-label,
