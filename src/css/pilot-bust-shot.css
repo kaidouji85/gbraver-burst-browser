@@ -50,12 +50,12 @@
 
 .pilot-bust-shot__yuuya {
   position: fixed;
-  right: -5vh;
-  right: -5dvh;
-  top: calc(100vh - 82vh);
-  top: calc(100dvh - 82dvh);
-  width: 100vh;
-  width: 100dvh;
-  height: 100vh;
-  height: 100dvh;
+  right: -10vh;
+  right: -10dvh;
+  bottom: -20vh;
+  bottom: -20dvh;
+  width: 95vh;
+  width: 95dvh;
+  height: 95vh;
+  height: 95dvh;
 }
