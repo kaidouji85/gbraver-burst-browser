@@ -24,6 +24,8 @@ export type CreatePlayerPickerDialogPropsOptions = ResourcesContainer &
     pilotIds: PilotId[];
     /** アームドーザIDの初期値 */
     initialArmdozerId: ArmdozerId;
+    /** パイロットIDの初期値 */
+    initialPilotId: PilotId;
   };
 
 /**
@@ -34,7 +36,14 @@ export type CreatePlayerPickerDialogPropsOptions = ResourcesContainer &
 export const createPlayerPickerDialogProps = (
   options: CreatePlayerPickerDialogPropsOptions,
 ): PlayerPickerDialogProps => {
-  const { resources, se, armdozerIds, pilotIds, initialArmdozerId } = options;
+  const {
+    resources,
+    se,
+    armdozerIds,
+    pilotIds,
+    initialArmdozerId,
+    initialPilotId,
+  } = options;
 
   const root = document.createElement("div");
   root.className = ROOT;
@@ -53,6 +62,10 @@ export const createPlayerPickerDialogProps = (
   const pilotIcons = pilotIds.map((pilotId) =>
     createPilotIcon({ resources, pilotId }),
   );
+  pilotIcons.forEach((icon) => {
+    const isChecked = icon.pilotId === initialPilotId;
+    icon.checked(isChecked);
+  });
   const pilotPicker = extractPilotPicker(root);
   pilotPicker.append(...pilotIcons.map((icon) => icon.getRootElement()));
 

@@ -1,4 +1,4 @@
-import { ArmdozerIds } from "gbraver-burst-core";
+import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { PlayerPickerDialog } from "../src/js/dom-dialogs/player-picker";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
@@ -16,6 +16,7 @@ export const dialog = domStub((options) => {
     armdozerIds: PlayableArmdozers,
     pilotIds: PlayablePilots,
     initialArmdozerId: ArmdozerIds.WING_DOZER,
+    initialPilotId: PilotIds.YUUYA,
   });
   return playerPicker.getRootHTMLElement();
 });
