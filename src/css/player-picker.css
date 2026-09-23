@@ -44,7 +44,7 @@
   --dialog-padding: calc(var(--responsive-font-size) * 2);
 
   box-sizing: border-box;
-  width: min(
+  /* width: min(
     calc(
       100vw - var(--safe-area-right) - var(--safe-area-left) -
         var(--closer-width)
@@ -57,7 +57,7 @@
         var(--safe-area-top) + var(--safe-area-bottom),
         var(--closer-height) + var(--responsive-font-size) * 2
       )
-  );
+  ); */
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   display: grid;
@@ -81,139 +81,20 @@
   height: var(--size);
 }
 
-.player-picker__armdozer-detail,
-.player-picker__pilot-detail {
-  height: 100%;
-  overflow-y: scroll;
-  gap: var(--grid-gap);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
-}
-
 /* ============================================================ 
  * アームドーザ
  * ============================================================ */
 
-.player-picker__armdozer {
-  grid-area: armdozer;
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    "armdozer-detail" 1fr
-    "armdozer-picker" auto;
-}
-
-.player-picker__armdozer-detail {
-  grid-area: armdozer-detail;
-  align-self: start;
-  display: grid;
-  grid-template:
-    "armdozer-name" auto
-    "armdozer-basic-status" auto
-    "burst" 1fr;
-  align-items: start;
-}
-
-.player-picker__armdozer-name {
-  grid-area: armdozer-name;
-  font-weight: bold;
-}
-
-.player-picker__armdozer-basic-status {
-  grid-area: armdozer-basic-status;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--grid-gap);
-}
-
-.player-picker__armdozer-hp,
-.player-picker__armdozer-battery,
-.player-picker__armdozer-power,
-.player-picker__armdozer-speed {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--responsive-font-size) * 0.2);
-}
-
-.player-picker__armdozer-hp-label,
-.player-picker__armdozer-battery-label,
-.player-picker__armdozer-power-label,
-.player-picker__armdozer-speed-label {
-  display: grid;
-  place-items: center;
-  min-width: calc(var(--responsive-font-size) * 3);
-  min-height: calc(var(--responsive-font-size) * 1.5);
-  box-sizing: border-box;
-  background-color: var(--button-background-color);
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.4);
-}
-
-.player-picker__burst-label {
-  display: inline-block;
-  text-align: center;
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.8);
-  background-color: var(--button-background-color);
-}
-
-.player-picker__battery-icon {
-  width: var(--responsive-font-size);
-  height: var(--responsive-font-size);
-}
-
-.player-picker__burst {
-  grid-area: burst;
-}
-
 .player-picker__armdozer-picker {
-  grid-area: armdozer-picker;
+  grid-area: armdozer;
 }
 
 /* ============================================================ 
  * パイロット
  * ============================================================ */
 
-.player-picker__pilot {
-  grid-area: pilot;
-  height: 100%;
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    "pilot-detail" 1fr
-    "pilot-picker" auto;
-}
-
-.player-picker__pilot-detail {
-  grid-area: pilot-detail;
-  align-self: start;
-  display: grid;
-  grid-template:
-    "pilot-name" auto
-    "pilot-skill" 1fr;
-  align-items: start;
-}
-
-.player-picker__pilot-name {
-  grid-area: pilot-name;
-  font-weight: bold;
-}
-
-.player-picker__pilot-skill-label {
-  display: inline-block;
-  text-align: center;
-  border: var(--label-border);
-  border-radius: calc(var(--responsive-font-size) * 0.2);
-  padding: 0 calc(var(--responsive-font-size) * 0.8);
-  background-color: var(--button-background-color);
-}
-
 .player-picker__pilot-picker {
-  grid-area: pilot-picker;
+  grid-area: pilot;
 }
 
 /* ============================================================ 
