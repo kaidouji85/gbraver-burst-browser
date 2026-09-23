@@ -15,3 +15,6 @@ export const ARMDOZER_IMAGE = `${ROOT}__armdozer-image`;
 
 /** パイロットアイコン */
 export const PILOT_ICON = `${ROOT}__pilot-icon`;
+
+/** チェックされたパイロットアイコン */
+export const PILOT_ICON_CHECKED = `${PILOT_ICON}--checked`;

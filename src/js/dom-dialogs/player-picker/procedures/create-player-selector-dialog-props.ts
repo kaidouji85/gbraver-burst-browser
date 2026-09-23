@@ -54,7 +54,7 @@ export const createPlayerPickerDialogProps = (
     pilotIcon({ resources, pilotId }),
   );
   const pilotPicker = extractPilotPicker(root);
-  pilotPicker.append(...pilotIcons);
+  pilotPicker.append(...pilotIcons.map((icon) => icon.getRootElement()));
 
   const changeValueSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
