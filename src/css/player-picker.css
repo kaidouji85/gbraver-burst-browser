@@ -97,34 +97,18 @@
   left: calc(100% - var(--size));
 }
 
-/* ここの要素全体で角丸にしたいので、あえて共通部分でスタイル指定している */
-
-.player-picker__armdozer-title {
-  border-top-left-radius: var(--dialog-border-radius);
-}
-
-.player-picker__pilot-title {
-  border-top-right-radius: var(--dialog-border-radius);
-}
-
-.player-picker__armdozer-picker {
-  border-bottom-left-radius: var(--dialog-border-radius);
-}
-
-.player-picker__pilot-picker {
-  border-bottom-right-radius: var(--dialog-border-radius);
-}
-
 /* ============================================================ 
  * アームドーザ
  * ============================================================ */
 
 .player-picker__armdozer-title {
   grid-area: armdozer-title;
+  border-top-left-radius: var(--dialog-border-radius);
 }
 
 .player-picker__armdozer-picker {
   grid-area: armdozer-picker;
+  border-bottom-left-radius: var(--dialog-border-radius);
 }
 
 .player-picker__armdozer-icon,
@@ -155,10 +139,12 @@
 
 .player-picker__pilot-title {
   grid-area: pilot-title;
+  border-top-right-radius: var(--dialog-border-radius);
 }
 
 .player-picker__pilot-picker {
   grid-area: pilot-picker;
+  border-bottom-right-radius: var(--dialog-border-radius);
 }
 
 .player-picker__pilot-icon {
