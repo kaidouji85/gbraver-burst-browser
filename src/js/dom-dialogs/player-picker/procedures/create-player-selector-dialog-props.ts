@@ -44,5 +44,5 @@ export const createPlayerPickerDialogProps = (
   const pilotPicker = extractPilotPicker(root);
   pilotPicker.append(...pilotIcons);
 
-  return { root };
+  return { root, armdozerIcons };
 };
