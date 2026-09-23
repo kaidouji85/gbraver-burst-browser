@@ -77,7 +77,7 @@ class ArmdozerIconImpl implements ArmdozerIcon {
 
   /** @override */
   checked(isChecked: boolean): void {
-    this.root.className = isChecked ? ARMDOZER_ICON : ARMDOZER_ICON_CHECKED;
+    this.root.className = isChecked ? ARMDOZER_ICON_CHECKED : ARMDOZER_ICON;
   }
 }
 
