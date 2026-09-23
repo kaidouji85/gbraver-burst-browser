@@ -13,8 +13,8 @@ export const bindEventListeners = (
 ): Unsubscribable[] => {
   return [
     ...props.armdozerIcons.map((icon) =>
-      icon.notifyPush().subscribe(() => {
-        onArmdozerIconPush({ props, armdozerIcon: icon });
+      icon.notifyPush().subscribe((action) => {
+        onArmdozerIconPush({ props, armdozerIcon: icon, action });
       }),
     ),
   ];
