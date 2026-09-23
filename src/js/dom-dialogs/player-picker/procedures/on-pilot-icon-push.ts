@@ -1,27 +1,27 @@
 import { PushDOM } from "../../../dom/push-dom";
-import { ArmdozerIcon } from "../dom/armdozer-icon";
+import { PilotIcon } from "../dom/pilot-icon";
 import { PlayerPickerDialogProps } from "../props";
 
 /**
- * アームドーザアイコンが押されたときの処理
+ * パイロットアイコンが押されたときの処理
  * @param options オプション
  * @param options.props プレイヤーピッカーダイアログのプロパティ
- * @param options.armdozerIcon 押されたアームドーザアイコン
+ * @param options.pilotIcon 押されたパイロットアイコン
  * @param options.action 押下アクション
  */
-export const onArmdozerIconPush = (options: {
+export const onPilotIconPush = (options: {
   props: PlayerPickerDialogProps;
-  armdozerIcon: ArmdozerIcon;
+  pilotIcon: PilotIcon;
   action: PushDOM;
 }) => {
-  const { props, armdozerIcon, action } = options;
+  const { props, pilotIcon, action } = options;
   action.event.preventDefault();
   action.event.stopPropagation();
 
   props.se.play(props.changeValueSound);
-  props.selectedArmdozerId = armdozerIcon.armdozerId;
-  props.armdozerIcons.forEach((icon) => {
-    const isChecked = icon.armdozerId === armdozerIcon.armdozerId;
+  props.selectedPilotId = pilotIcon.pilotId;
+  props.pilotIcons.forEach((icon) => {
+    const isChecked = icon.pilotId === pilotIcon.pilotId;
     icon.checked(isChecked);
     if (isChecked) {
       icon.pop();

@@ -1,4 +1,4 @@
-import { ArmdozerId } from "gbraver-burst-core";
+import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 import { SoundResource } from "../../resource/sound/resource";
 import { SEPlayerContainer } from "../../se/se-player";
@@ -9,6 +9,8 @@ import { PilotIcon } from "./dom/pilot-icon";
 export type PlayerPickerDialogProps = SEPlayerContainer & {
   /** 現在選択しているアームドーザID */
   selectedArmdozerId: ArmdozerId;
+  /** 現在選択しているパイロットID */
+  selectedPilotId: PilotId;
 
   /** ルートHTML要素 */
   readonly root: HTMLElement;

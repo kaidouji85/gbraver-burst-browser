@@ -75,6 +75,7 @@ export const createPlayerPickerDialogProps = (
 
   return {
     selectedArmdozerId: initialArmdozerId,
+    selectedPilotId: initialPilotId,
 
     root,
     armdozerIcons,
