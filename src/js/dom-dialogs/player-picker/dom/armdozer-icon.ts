@@ -3,7 +3,7 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ARMDOZER_ICON, ARMDOZER_ICON_CHECKED } from "./class-name";
+import { ARMDOZER_ICON, ARMDOZER_ICON_CHECKED, ARMDOZER_IMAGE, CHECK_MARK } from "./class-name";
 
 /** アームドーザアイコン */
 export type ArmdozerIcon = {
@@ -45,14 +45,14 @@ class ArmdozerIconImpl implements ArmdozerIcon {
       resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
         ?.path ?? "";
     const armdozerImage = document.createElement("img");
-    armdozerImage.className = ARMDOZER_ICON;
+    armdozerImage.className = ARMDOZER_IMAGE;
     armdozerImage.src = armdozerImagePath;
     this.root.appendChild(armdozerImage);
 
     const checkMarkPath =
       resources.paths.find((p) => p.id === PathIds.CHECK)?.path ?? "";
     const checkMark = document.createElement("img");
-    checkMark.className = ARMDOZER_ICON;
+    checkMark.className = CHECK_MARK;
     checkMark.src = checkMarkPath;
     this.root.appendChild(checkMark);
   }

@@ -11,7 +11,7 @@ export const ARMDOZER_ICON = `${ROOT}__armdozer-icon`;
 export const ARMDOZER_ICON_CHECKED = `${ARMDOZER_ICON}--checked`;
 
 /** アームドーザアイコンのメイン画像 */
-export const ARMDOZER_IMAGE = `${ROOT}__amrdozer-img`;
+export const ARMDOZER_IMAGE = `${ROOT}__armdozer-image`;
 
 /** パイロットアイコン */
 export const PILOT_ICON = `${ROOT}__pilot-icon`;
