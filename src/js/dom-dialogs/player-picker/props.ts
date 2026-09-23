@@ -1,9 +1,14 @@
+import { SoundResource } from "../../resource/sound/resource";
+import { SEPlayerContainer } from "../../se/se-player";
 import { ArmdozerIcon } from "./dom/armdozer-icon";
 
 /** プレイヤーピッカーダイアログのプロパティ */
-export type PlayerPickerDialogProps = {
+export type PlayerPickerDialogProps = SEPlayerContainer & {
   /** ルートHTML要素 */
-  root: HTMLElement;
+  readonly root: HTMLElement;
   /** アームドーザアイコンをあつめたもの */
-  armdozerIcons: ArmdozerIcon[];
+  readonly armdozerIcons: ArmdozerIcon[];
+
+  /** 値変更サウンド */
+  readonly changeValueSound: SoundResource;
 };

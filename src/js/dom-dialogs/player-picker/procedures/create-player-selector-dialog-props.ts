@@ -1,5 +1,9 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
+import { ResourcesContainer } from "../../../resource";
+import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
+import { SOUND_IDS } from "../../../resource/sound/ids";
+import { SEPlayerContainer } from "../../../se/se-player";
 import { createArmdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
@@ -11,14 +15,16 @@ import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PlayerPickerDialogProps } from "../props";
 
 /** プロパティの生成オプション */
-export type CreatePlayerPickerDialogPropsOptions = RootInnerHTMLOptions & {
-  /** ピッカーで選択可能なアームドーザID */
-  armdozerIds: ArmdozerId[];
-  /** ピッカーで選択可能なパイロットID */
-  pilotIds: PilotId[];
-  /** アームドーザIDの初期値 */
-  initialArmdozerId: ArmdozerId;
-};
+export type CreatePlayerPickerDialogPropsOptions = ResourcesContainer &
+  SEPlayerContainer &
+  RootInnerHTMLOptions & {
+    /** ピッカーで選択可能なアームドーザID */
+    armdozerIds: ArmdozerId[];
+    /** ピッカーで選択可能なパイロットID */
+    pilotIds: PilotId[];
+    /** アームドーザIDの初期値 */
+    initialArmdozerId: ArmdozerId;
+  };
 
 /**
  * PlayerPickerDialogPropsを生成する
@@ -28,7 +34,7 @@ export type CreatePlayerPickerDialogPropsOptions = RootInnerHTMLOptions & {
 export const createPlayerPickerDialogProps = (
   options: CreatePlayerPickerDialogPropsOptions,
 ): PlayerPickerDialogProps => {
-  const { resources, armdozerIds, pilotIds, initialArmdozerId } = options;
+  const { resources, se, armdozerIds, pilotIds, initialArmdozerId } = options;
 
   const root = document.createElement("div");
   root.className = ROOT;
@@ -50,5 +56,9 @@ export const createPlayerPickerDialogProps = (
   const pilotPicker = extractPilotPicker(root);
   pilotPicker.append(...pilotIcons);
 
-  return { root, armdozerIcons };
+  const changeValueSound =
+    resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
+    createEmptySoundResource();
+
+  return { root, armdozerIcons, se, changeValueSound };
 };
