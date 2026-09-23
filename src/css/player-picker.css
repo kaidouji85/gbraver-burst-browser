@@ -32,6 +32,20 @@
   top: 50dvh;
   left: 50vw;
   left: 50dvw;
+  width: min(
+    calc(
+      100vw - var(--safe-area-right) - var(--safe-area-left) -
+        var(--closer-width)
+    ),
+    80vw
+  );
+  /* height: calc(
+    100dvh -
+      max(
+        var(--safe-area-top) + var(--safe-area-bottom),
+        var(--closer-height) + var(--responsive-font-size) * 2
+      )
+  ); */
   transform: translate(-50%, -50%);
   background-color: var(--background-color);
   position: absolute;
@@ -44,20 +58,6 @@
   --dialog-padding: calc(var(--responsive-font-size) * 2);
 
   box-sizing: border-box;
-  /* width: min(
-    calc(
-      100vw - var(--safe-area-right) - var(--safe-area-left) -
-        var(--closer-width)
-    ),
-    80vw
-  );
-  height: calc(
-    100dvh -
-      max(
-        var(--safe-area-top) + var(--safe-area-bottom),
-        var(--closer-height) + var(--responsive-font-size) * 2
-      )
-  ); */
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   display: grid;
@@ -79,6 +79,20 @@
 
   width: var(--size);
   height: var(--size);
+}
+
+.player-picker__armdozer-picker,
+.player-picker__pilot-picker {
+  grid-area: armdozer;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  background-color: var(--sub-background-color);
 }
 
 /* ============================================================ 
