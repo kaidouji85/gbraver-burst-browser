@@ -1,4 +1,7 @@
+import { Unsubscribable } from "rxjs";
+
 import { DOMDialog } from "../dialog";
+import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createPlayerPickerDialogProps,
   CreatePlayerPickerDialogPropsOptions,
@@ -11,7 +14,9 @@ type PlayerPickerDialogOptions = CreatePlayerPickerDialogPropsOptions;
 /** プレイヤーピッカーダイアログ */
 export class PlayerPickerDialog implements DOMDialog {
   /** プロパティ */
-  #props: PlayerPickerDialogProps;
+  readonly #props: PlayerPickerDialogProps;
+  /** アンサブスクライバブル */
+  readonly #unsubscribers: Unsubscribable[];
 
   /**
    * コンストラクタ
@@ -19,11 +24,12 @@ export class PlayerPickerDialog implements DOMDialog {
    */
   constructor(options: PlayerPickerDialogOptions) {
     this.#props = createPlayerPickerDialogProps(options);
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /** @override */
   destructor(): void {
-    // デストラクタ相当の処理をここに記述
+    this.#unsubscribers.forEach((unsubscriber) => unsubscriber.unsubscribe());
   }
 
   /** @override */

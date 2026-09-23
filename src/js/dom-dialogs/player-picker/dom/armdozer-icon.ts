@@ -1,5 +1,5 @@
 import { ArmdozerId } from "gbraver-burst-core";
-import { Subscribable } from "rxjs";
+import { Observable } from "rxjs";
 
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
@@ -40,7 +40,7 @@ export type ArmdozerIcon = {
    * アームドーザアイコンが押されたことを通知する
    * @returns 通知ストリーム
    */
-  notifyPush(): Subscribable<PushDOM>;
+  notifyPush(): Observable<PushDOM>;
 };
 
 /** アームドーザアイコン生成時のオプション */
@@ -56,7 +56,7 @@ class ArmdozerIconImpl implements ArmdozerIcon {
   /** ルート要素 */
   readonly root: HTMLElement;
   /** プッシュ通知ストリーム */
-  readonly pushNotifier: Subscribable<PushDOM>;
+  readonly pushNotifier: Observable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -104,7 +104,7 @@ class ArmdozerIconImpl implements ArmdozerIcon {
   }
 
   /** @override */
-  notifyPush(): Subscribable<PushDOM> {
+  notifyPush(): Observable<PushDOM> {
     return this.pushNotifier;
   }
 }
