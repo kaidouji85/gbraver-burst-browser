@@ -1,6 +1,6 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
-import { armdozerIcon } from "../dom/armdozer-icon";
+import { createArmdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
   extractArmdozerPicker,
@@ -33,10 +33,10 @@ export const createPlayerPickerDialogProps = (
   root.innerHTML = rootInnerHTML(options);
 
   const armdozerIcons = armdozerIds.map((armdozerId) =>
-    armdozerIcon({ resources, armdozerId }),
+    createArmdozerIcon({ resources, armdozerId }),
   );
   const armdozerPicker = extractArmdozerPicker(root);
-  armdozerPicker.append(...armdozerIcons);
+  armdozerPicker.append(...armdozerIcons.map((icon) => icon.getRootElement()));
 
   const pilotIcons = pilotIds.map((pilotId) =>
     pilotIcon({ resources, pilotId }),

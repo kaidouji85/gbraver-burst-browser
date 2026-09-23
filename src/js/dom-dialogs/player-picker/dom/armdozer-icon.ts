@@ -2,7 +2,71 @@ import { ArmdozerId } from "gbraver-burst-core";
 
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
-import { ARMDOZER_ICON } from "./class-name";
+import { PathIds } from "../../../resource/path/ids";
+import { ARMDOZER_ICON, ARMDOZER_ICON_CHECKED } from "./class-name";
+
+/** アームドーザアイコン */
+export type ArmdozerIcon = {
+  /**
+   * ルート要素を取得する
+   * @returns ルート要素
+   */
+  getRootElement: () => HTMLElement;
+
+  /**
+   * チェック状態を設定する
+   * @param isChecked チェックされているか否か、trueで選択されている
+   */
+  checked(isChecked: boolean): void;
+};
+
+/** アームドーザアイコン生成時のオプション */
+type ArmdozerIconOptions = ResourcesContainer & {
+  /** アームドーザID */
+  armdozerId: ArmdozerId;
+};
+
+/** アームドーザアイコンの実装 */
+class ArmdozerIconImpl implements ArmdozerIcon {
+  /** ルート要素 */
+  readonly root: HTMLElement;
+
+  /**
+   * コンストラクタ
+   * @param options オプション
+   */
+  constructor(options: ArmdozerIconOptions) {
+    const { resources, armdozerId } = options;
+
+    this.root = document.createElement("div");
+    this.root.className = ARMDOZER_ICON;
+
+    const armdozerImagePath =
+      resources.paths.find((p) => p.id === getArmdozerIconPathId(armdozerId))
+        ?.path ?? "";
+    const armdozerImage = document.createElement("img");
+    armdozerImage.className = ARMDOZER_ICON;
+    armdozerImage.src = armdozerImagePath;
+    this.root.appendChild(armdozerImage);
+
+    const checkMarkPath =
+      resources.paths.find((p) => p.id === PathIds.CHECK)?.path ?? "";
+    const checkMark = document.createElement("img");
+    checkMark.className = ARMDOZER_ICON;
+    checkMark.src = checkMarkPath;
+    this.root.appendChild(checkMark);
+  }
+
+  /** @override */
+  getRootElement(): HTMLElement {
+    return this.root;
+  }
+
+  /** @override */
+  checked(isChecked: boolean): void {
+    this.root.className = isChecked ? ARMDOZER_ICON : ARMDOZER_ICON_CHECKED;
+  }
+}
 
 /**
  * アームドーザアイコンを生成する
@@ -11,16 +75,6 @@ import { ARMDOZER_ICON } from "./class-name";
  * @param options.armdozerId アームドーザID
  * @returns アームドーザアイコン
  */
-export const armdozerIcon = (
-  options: ResourcesContainer & { armdozerId: ArmdozerId },
-): HTMLImageElement => {
-  const { resources, armdozerId } = options;
-  const armdozerIconPathId = getArmdozerIconPathId(armdozerId);
-  const path =
-    resources.paths.find((p) => p.id === armdozerIconPathId)?.path ?? "";
-
-  const dom = document.createElement("img");
-  dom.className = ARMDOZER_ICON;
-  dom.src = path;
-  return dom;
-};
+export const createArmdozerIcon = (
+  options: ArmdozerIconOptions,
+): ArmdozerIcon => new ArmdozerIconImpl(options);
