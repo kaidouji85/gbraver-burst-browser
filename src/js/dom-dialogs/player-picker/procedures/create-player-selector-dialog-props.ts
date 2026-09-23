@@ -10,7 +10,7 @@ import {
   extractArmdozerPicker,
   extractPilotPicker,
 } from "../dom/extract-element";
-import { pilotIcon } from "../dom/pilot-icon";
+import { createPilotIcon } from "../dom/pilot-icon";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PlayerPickerDialogProps } from "../props";
 
@@ -51,7 +51,7 @@ export const createPlayerPickerDialogProps = (
   armdozerPicker.append(...armdozerIcons.map((icon) => icon.getRootElement()));
 
   const pilotIcons = pilotIds.map((pilotId) =>
-    pilotIcon({ resources, pilotId }),
+    createPilotIcon({ resources, pilotId }),
   );
   const pilotPicker = extractPilotPicker(root);
   pilotPicker.append(...pilotIcons.map((icon) => icon.getRootElement()));

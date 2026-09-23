@@ -6,7 +6,12 @@ import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { CHECK_MARK, PILOT_ICON, PILOT_ICON_CHECKED } from "./class-name";
+import {
+  CHECK_MARK,
+  PILOT_ICON,
+  PILOT_ICON_CHECKED,
+  PILOT_IMAGE,
+} from "./class-name";
 
 /** パイロットアイコン */
 export type PilotIcon = {
@@ -69,7 +74,7 @@ class PilotIconImpl implements PilotIcon {
       resources.paths.find((p) => p.id === getPilotIconPathId(pilotId))?.path ??
       "";
     const pilotImage = document.createElement("img");
-    pilotImage.className = PILOT_ICON;
+    pilotImage.className = PILOT_IMAGE;
     pilotImage.src = pilotImagePath;
     this.root.appendChild(pilotImage);
 
@@ -109,5 +114,5 @@ class PilotIconImpl implements PilotIcon {
  * @param options オプション
  * @returns パイロットアイコン
  */
-export const pilotIcon = (options: PilotIconOptions): PilotIcon =>
+export const createPilotIcon = (options: PilotIconOptions): PilotIcon =>
   new PilotIconImpl(options);

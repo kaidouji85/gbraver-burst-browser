@@ -147,11 +147,26 @@
   border-bottom-right-radius: var(--dialog-border-radius);
 }
 
-.player-picker__pilot-icon {
-  --size: calc(var(--responsive-font-size) * 4);
+.player-picker__pilot-icon,
+.player-picker__pilot-icon--checked {
+  position: relative;
+}
 
-  width: var(--size);
-  height: var(--size);
+.player-picker__pilot-image {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.player-picker__pilot-icon--checked .player-picker__pilot-image {
+  filter: brightness(0.4);
+}
+
+.player-picker__pilot-icon .player-picker__check-mark {
+  display: none;
+}
+
+.player-picker__pilot-icon--checked .player-picker__check-mark {
+  display: block;
 }
 
 /* ============================================================ 
