@@ -60,5 +60,13 @@ export const createPlayerPickerDialogProps = (
     resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
 
-  return { root, armdozerIcons, se, changeValueSound };
+  return {
+    selectedArmdozerId: initialArmdozerId,
+
+    root,
+    armdozerIcons,
+
+    se,
+    changeValueSound,
+  };
 };

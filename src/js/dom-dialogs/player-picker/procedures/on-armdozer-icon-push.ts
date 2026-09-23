@@ -19,6 +19,7 @@ export const onArmdozerIconPush = (options: {
   action.event.stopPropagation();
 
   props.se.play(props.changeValueSound);
+  props.selectedArmdozerId = armdozerIcon.armdozerId;
   props.armdozerIcons.forEach((icon) => {
     const isChecked = icon === armdozerIcon;
     icon.checked(isChecked);
