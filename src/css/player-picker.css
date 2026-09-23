@@ -3,7 +3,7 @@
  * ============================================================ */
 @media (orientation: landscape) {
   .player-picker {
-    --grid-gap: calc(var(--responsive-font-size) * 0.5);
+    --grid-gap: calc(var(--responsive-font-size) * 0.3);
 
     display: block;
     position: relative;
@@ -39,13 +39,6 @@
     ),
     80vw
   );
-  /* height: calc(
-    100dvh -
-      max(
-        var(--safe-area-top) + var(--safe-area-bottom),
-        var(--closer-height) + var(--responsive-font-size) * 2
-      )
-  ); */
   transform: translate(-50%, -50%);
   background-color: var(--background-color);
   position: absolute;
@@ -62,8 +55,9 @@
   font-size: var(--responsive-font-size);
   display: grid;
   grid-template:
-    "armdozer pilot" 1fr
-    "actions  actions" auto / 1fr 1fr;
+    "armdozer-title  pilot-title"
+    "armdozer-picker pilot-picker" 1fr
+    "actions         actions" auto / 1fr 1fr;
   gap: var(--grid-gap);
   padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
     var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
@@ -81,34 +75,64 @@
   height: var(--size);
 }
 
+.player-picker__armdozer-title,
+.player-picker__pilot-title {
+  text-align: center;
+  box-sizing: border-box;
+  border: var(--dialog-border);
+  padding: calc(var(--responsive-font-size) * 0.5);
+}
+
 .player-picker__armdozer-picker,
 .player-picker__pilot-picker {
-  grid-area: armdozer;
   display: flex;
   align-items: start;
   justify-content: start;
   flex-wrap: wrap;
   box-sizing: border-box;
   border: var(--dialog-border);
-  border-radius: var(--dialog-border-radius);
   padding: calc(var(--responsive-font-size) * 0.5);
   background-color: var(--sub-background-color);
+}
+
+.player-picker__armdozer-title {
+  border-top-left-radius: var(--dialog-border-radius);
+}
+
+.player-picker__pilot-title {
+  border-top-right-radius: var(--dialog-border-radius);
+}
+
+.player-picker__armdozer-picker {
+  border-bottom-left-radius: var(--dialog-border-radius);
+}
+
+.player-picker__pilot-picker {
+  border-bottom-right-radius: var(--dialog-border-radius);
 }
 
 /* ============================================================ 
  * アームドーザ
  * ============================================================ */
 
+.player-picker__armdozer-title {
+  grid-area: armdozer-title;
+}
+
 .player-picker__armdozer-picker {
-  grid-area: armdozer;
+  grid-area: armdozer-picker;
 }
 
 /* ============================================================ 
  * パイロット
  * ============================================================ */
 
+.player-picker__pilot-title {
+  grid-area: pilot-title;
+}
+
 .player-picker__pilot-picker {
-  grid-area: pilot;
+  grid-area: pilot-picker;
 }
 
 /* ============================================================ 
@@ -118,7 +142,8 @@
 .player-picker__actions {
   grid-area: actions;
   display: flex;
-  gap: var(--grid-gap);
+  gap: calc(var(--responsive-font-size) * 0.5);
+  margin-top: calc(var(--responsive-font-size) * 0.8);
 }
 
 .player-picker__goto-title,
