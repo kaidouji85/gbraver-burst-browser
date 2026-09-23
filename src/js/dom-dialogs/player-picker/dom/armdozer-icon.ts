@@ -1,5 +1,8 @@
 import { ArmdozerId } from "gbraver-burst-core";
+import { Subscribable } from "rxjs";
 
+import { pop } from "../../../dom/pop";
+import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
@@ -26,6 +29,18 @@ export type ArmdozerIcon = {
    * @param isChecked チェックされているか否か、trueで選択されている
    */
   checked(isChecked: boolean): void;
+
+  /**
+   * ポップされるアニメーションを実行する
+   * @returns アニメーションが完了したら発火するPromise
+   */
+  pop(): Promise<void>;
+
+  /**
+   * アームドーザアイコンが押されたことを通知する
+   * @returns 通知ストリーム
+   */
+  notifyPush(): Subscribable<PushDOM>;
 };
 
 /** アームドーザアイコン生成時のオプション */
@@ -38,9 +53,10 @@ type ArmdozerIconOptions = ResourcesContainer & {
 class ArmdozerIconImpl implements ArmdozerIcon {
   /** @override */
   readonly armdozerId: ArmdozerId;
-
   /** ルート要素 */
   readonly root: HTMLElement;
+  /** プッシュ通知ストリーム */
+  readonly pushNotifier: Subscribable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -68,6 +84,8 @@ class ArmdozerIconImpl implements ArmdozerIcon {
     checkMark.className = CHECK_MARK;
     checkMark.src = checkMarkPath;
     this.root.appendChild(checkMark);
+
+    this.pushNotifier = domPushStream(this.root);
   }
 
   /** @override */
@@ -78,6 +96,16 @@ class ArmdozerIconImpl implements ArmdozerIcon {
   /** @override */
   checked(isChecked: boolean): void {
     this.root.className = isChecked ? ARMDOZER_ICON_CHECKED : ARMDOZER_ICON;
+  }
+
+  /** @override */
+  pop(): Promise<void> {
+    return pop(this.root);
+  }
+
+  /** @override */
+  notifyPush(): Subscribable<PushDOM> {
+    return this.pushNotifier;
   }
 }
 
