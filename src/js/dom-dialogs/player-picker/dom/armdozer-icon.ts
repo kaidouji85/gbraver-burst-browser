@@ -3,10 +3,18 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
-import { ARMDOZER_ICON, ARMDOZER_ICON_CHECKED, ARMDOZER_IMAGE, CHECK_MARK } from "./class-name";
+import {
+  ARMDOZER_ICON,
+  ARMDOZER_ICON_CHECKED,
+  ARMDOZER_IMAGE,
+  CHECK_MARK,
+} from "./class-name";
 
 /** アームドーザアイコン */
 export type ArmdozerIcon = {
+  /** アームドーザID */
+  readonly armdozerId: ArmdozerId;
+
   /**
    * ルート要素を取得する
    * @returns ルート要素
@@ -28,6 +36,9 @@ type ArmdozerIconOptions = ResourcesContainer & {
 
 /** アームドーザアイコンの実装 */
 class ArmdozerIconImpl implements ArmdozerIcon {
+  /** @override */
+  readonly armdozerId: ArmdozerId;
+
   /** ルート要素 */
   readonly root: HTMLElement;
 
@@ -37,6 +48,8 @@ class ArmdozerIconImpl implements ArmdozerIcon {
    */
   constructor(options: ArmdozerIconOptions) {
     const { resources, armdozerId } = options;
+
+    this.armdozerId = armdozerId;
 
     this.root = document.createElement("div");
     this.root.className = ARMDOZER_ICON;

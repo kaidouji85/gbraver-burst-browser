@@ -16,6 +16,8 @@ export type CreatePlayerPickerDialogPropsOptions = RootInnerHTMLOptions & {
   armdozerIds: ArmdozerId[];
   /** ピッカーで選択可能なパイロットID */
   pilotIds: PilotId[];
+  /** アームドーザIDの初期値 */
+  initialArmdozerId: ArmdozerId;
 };
 
 /**
@@ -26,7 +28,7 @@ export type CreatePlayerPickerDialogPropsOptions = RootInnerHTMLOptions & {
 export const createPlayerPickerDialogProps = (
   options: CreatePlayerPickerDialogPropsOptions,
 ): PlayerPickerDialogProps => {
-  const { armdozerIds, pilotIds, resources } = options;
+  const { resources, armdozerIds, pilotIds, initialArmdozerId } = options;
 
   const root = document.createElement("div");
   root.className = ROOT;
@@ -35,6 +37,10 @@ export const createPlayerPickerDialogProps = (
   const armdozerIcons = armdozerIds.map((armdozerId) =>
     createArmdozerIcon({ resources, armdozerId }),
   );
+  armdozerIcons.forEach((icon) => {
+    const isChecked = icon.armdozerId === initialArmdozerId;
+    icon.checked(isChecked);
+  });
   const armdozerPicker = extractArmdozerPicker(root);
   armdozerPicker.append(...armdozerIcons.map((icon) => icon.getRootElement()));
 
