@@ -3,7 +3,7 @@ import { PilotIcon } from "../dom/pilot-icon";
 import { PlayerPickerDialogProps } from "../props";
 
 /**
- * パイロットアイコンが押されたときの処理
+ * 「パイロット」アイコンが押されたときの処理
  * @param options オプション
  * @param options.props プレイヤーピッカーダイアログのプロパティ
  * @param options.pilotIcon 押されたパイロットアイコン
