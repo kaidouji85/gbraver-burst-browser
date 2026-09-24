@@ -1,5 +1,7 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
+import { Subject } from "rxjs";
 
+import { Exclusive } from "../../../exclusive/exclusive";
 import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
@@ -8,10 +10,13 @@ import { createArmdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
   extractArmdozerPicker,
+  extractGotoTitleButton,
   extractPilotPicker,
+  extractRetryButton,
 } from "../dom/extract-element";
 import { createPilotIcon } from "../dom/pilot-icon";
 import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
+import { PlayerSelection } from "../player-selection";
 import { PlayerPickerDialogProps } from "../props";
 
 /** プロパティの生成オプション */
@@ -72,16 +77,27 @@ export const createPlayerPickerDialogProps = (
   const changeValueSound =
     resources.sounds.find((s) => s.id === SOUND_IDS.CHANGE_VALUE) ??
     createEmptySoundResource();
+  const pushButtonSound =
+    resources.sounds.find((s) => s.id === SOUND_IDS.PUSH_BUTTON) ??
+    createEmptySoundResource();
 
   return {
     selectedArmdozerId: initialArmdozerId,
     selectedPilotId: initialPilotId,
 
     root,
+    gotoTitleButton: extractGotoTitleButton(root),
+    retryButton: extractRetryButton(root),
     armdozerIcons,
     pilotIcons,
 
     se,
     changeValueSound,
+    pushButtonSound,
+
+    gotoTitleSubject: new Subject<void>(),
+    retrySubject: new Subject<PlayerSelection>(),
+
+    exclusive: new Exclusive(),
   };
 };

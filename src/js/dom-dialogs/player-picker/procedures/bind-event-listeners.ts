@@ -1,7 +1,9 @@
 import { Unsubscribable } from "rxjs";
 
+import { domPushStream } from "../../../dom/push-dom";
 import { PlayerPickerDialogProps } from "../props";
 import { onArmdozerIconPush } from "./on-armdozer-icon-push";
+import { onGotoTitleButtonPush } from "./on-goto-title-button-push";
 import { onPilotIconPush } from "./on-pilot-icon-push";
 
 /**
@@ -23,5 +25,8 @@ export const bindEventListeners = (
         onPilotIconPush({ props, pilotIcon: icon, action });
       }),
     ),
+    domPushStream(props.gotoTitleButton).subscribe((action) => {
+      onGotoTitleButtonPush({ props, action });
+    }),
   ];
 };
