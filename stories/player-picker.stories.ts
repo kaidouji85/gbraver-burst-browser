@@ -18,5 +18,8 @@ export const dialog = domStub((options) => {
     initialArmdozerId: ArmdozerIds.WING_DOZER,
     initialPilotId: PilotIds.YUUYA,
   });
+  playerPicker.notifyGotoTitle().subscribe(() => {
+    console.log("Goto Title button pressed");
+  });
   return playerPicker.getRootHTMLElement();
 });
