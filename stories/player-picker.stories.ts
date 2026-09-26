@@ -22,7 +22,9 @@ export const dialog = domStub((options) => {
     console.log("Goto Title button pressed");
   });
   playerPicker.notifyRetry().subscribe(({ armdozerId, pilotId }) => {
-    console.log(`Retry button pressed: armdozerId=${armdozerId}, pilotId=${pilotId}`);
+    console.log(
+      `Retry button pressed: armdozerId=${armdozerId}, pilotId=${pilotId}`,
+    );
   });
   return playerPicker.getRootHTMLElement();
 });

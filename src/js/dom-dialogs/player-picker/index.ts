@@ -6,7 +6,7 @@ import { bindEventListeners } from "./procedures/bind-event-listeners";
 import {
   createPlayerPickerDialogProps,
   CreatePlayerPickerDialogPropsOptions,
-} from "./procedures/create-player-selector-dialog-props";
+} from "./procedures/create-player-picker-dialog-props";
 import { PlayerPickerDialogProps } from "./props";
 
 /** コンストラクタのオプション */
