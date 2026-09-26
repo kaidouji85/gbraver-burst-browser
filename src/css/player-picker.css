@@ -1,0 +1,201 @@
+/* ============================================================ 
+ * プレイヤーピッカーダイアログ
+ * ============================================================ */
+@media (orientation: landscape) {
+  .player-picker {
+    --grid-gap: calc(var(--responsive-font-size) * 0.3);
+    --icon-size: calc(var(--responsive-font-size) * 4);
+
+    display: block;
+    position: relative;
+  }
+}
+
+@media (orientation: portrait) {
+  .player-picker {
+    display: none;
+  }
+}
+
+.player-picker__background {
+  position: absolute;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.player-picker__dialog {
+  top: 50vh;
+  top: 50dvh;
+  left: 50vw;
+  left: 50dvw;
+  width: min(
+    calc(
+      100vw - var(--safe-area-right) - var(--safe-area-left) -
+        var(--closer-width)
+    ),
+    80vw
+  );
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  position: absolute;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+}
+
+.player-picker__content {
+  --dialog-padding: calc(var(--responsive-font-size) * 2);
+
+  box-sizing: border-box;
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  display: grid;
+  grid-template:
+    "armdozer-title  pilot-title"
+    "armdozer-picker pilot-picker" 1fr
+    "actions         actions" auto / 1fr 1fr;
+  gap: var(--grid-gap);
+  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
+    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+}
+
+/* ============================================================ 
+ * 共通系
+ * ============================================================ */
+
+.player-picker__armdozer-title,
+.player-picker__pilot-title {
+  text-align: center;
+  box-sizing: border-box;
+  border: var(--dialog-border);
+  padding: calc(var(--responsive-font-size) * 0.5);
+}
+
+.player-picker__armdozer-picker,
+.player-picker__pilot-picker {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border: var(--dialog-border);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  background-color: var(--sub-background-color);
+}
+
+.player-picker__check-mark {
+  --size: calc(var(--responsive-font-size) * 2.5);
+
+  width: var(--size);
+  position: absolute;
+  top: 0;
+  left: calc(100% - var(--size));
+}
+
+/* ============================================================ 
+ * アームドーザ
+ * ============================================================ */
+
+.player-picker__armdozer-title {
+  grid-area: armdozer-title;
+  border-top-left-radius: var(--dialog-border-radius);
+}
+
+.player-picker__armdozer-picker {
+  grid-area: armdozer-picker;
+  border-bottom-left-radius: var(--dialog-border-radius);
+}
+
+.player-picker__armdozer-icon,
+.player-picker__armdozer-icon--checked {
+  position: relative;
+}
+
+.player-picker__armdozer-image {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.player-picker__armdozer-icon--checked .player-picker__armdozer-image {
+  filter: brightness(0.4);
+}
+
+.player-picker__armdozer-icon .player-picker__check-mark {
+  display: none;
+}
+
+.player-picker__armdozer-icon--checked .player-picker__check-mark {
+  display: block;
+}
+
+/* ============================================================ 
+ * パイロット
+ * ============================================================ */
+
+.player-picker__pilot-title {
+  grid-area: pilot-title;
+  border-top-right-radius: var(--dialog-border-radius);
+}
+
+.player-picker__pilot-picker {
+  grid-area: pilot-picker;
+  border-bottom-right-radius: var(--dialog-border-radius);
+}
+
+.player-picker__pilot-icon,
+.player-picker__pilot-icon--checked {
+  position: relative;
+}
+
+.player-picker__pilot-image {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.player-picker__pilot-icon--checked .player-picker__pilot-image {
+  filter: brightness(0.4);
+}
+
+.player-picker__pilot-icon .player-picker__check-mark {
+  display: none;
+}
+
+.player-picker__pilot-icon--checked .player-picker__check-mark {
+  display: block;
+}
+
+/* ============================================================ 
+ * アクションボタン
+ * ============================================================ */
+
+.player-picker__actions {
+  grid-area: actions;
+  display: flex;
+  gap: calc(var(--responsive-font-size) * 0.5);
+  margin-top: calc(var(--responsive-font-size) * 0.8);
+}
+
+.player-picker__goto-title,
+.player-picker__retry {
+  flex: 1;
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+}
+
+.player-picker__goto-title {
+  background-color: var(--sub-button-background-color);
+  border: var(--sub-button-border);
+}
+
+.player-picker__retry {
+  background-color: var(--button-background-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
