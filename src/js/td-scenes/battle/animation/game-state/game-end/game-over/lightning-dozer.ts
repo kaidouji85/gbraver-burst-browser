@@ -1,6 +1,5 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
-import { empty } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { LightningDozerTD } from "../../../../view/td/armdozer-objects/lightning-dozer";
@@ -35,5 +34,6 @@ export function lightningDozerWin(
     param.winnerTdArmdozer.lightningDozer.guts(),
     focusToLightningDozer(param),
     onStart(() => param.bgm.do(play(param.battleEndBGM))),
-  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
+    param.winnerHUD.resultIndicator.slideInToEdge(),
+  );
 }
