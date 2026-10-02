@@ -1,6 +1,5 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
-import { empty } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { ShinBraverTD } from "../../../../view/td/armdozer-objects/shin-braver";
@@ -31,5 +30,6 @@ export function shinBraverWin(param: GameOverParamX<ShinBraverTD>): Animate {
     param.winnerTdArmdozer.shinBraver.guts(),
     focusToShinBraver(param),
     onStart(() => param.bgm.do(play(param.battleEndBGM))),
-  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
+    param.winnerHUD.resultIndicator.slideInToEdge(),
+  );
 }

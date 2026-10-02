@@ -17,11 +17,11 @@ export function slideInToEdge(model: ResultIndicatorModel): Animate {
     model.worldCoordinate.y = 1;
     model.localCoordinate.x = 0;
     model.localCoordinate.y = 22.5;
-    model.scale = 1;
+    model.scale = 1.3;
   }).chain(
     all(
       tween(model.localCoordinate, (t) => t.to({ y: 0 }, duration)),
-      tween(model, (t) => t.to({ opacity: 1 }, duration)),
+      tween(model, (t) => t.to({ opacity: 1, scale: 1 }, duration)),
     ),
   );
 }

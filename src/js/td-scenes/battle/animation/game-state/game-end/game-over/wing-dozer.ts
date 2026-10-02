@@ -1,6 +1,5 @@
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
-import { empty } from "../../../../../../animation/delay";
 import { onStart } from "../../../../../../animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { WingDozerTD } from "../../../../view/td/armdozer-objects/wing-dozer";
@@ -31,5 +30,6 @@ export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
     param.winnerTdArmdozer.wingDozer.dash(),
     focusToWingDozer(param),
     onStart(() => param.bgm.do(play(param.battleEndBGM))),
-  ).chain(empty(), param.winnerHUD.resultIndicator.slideInToEdge());
+    param.winnerHUD.resultIndicator.slideInToEdge(),
+  );
 }
