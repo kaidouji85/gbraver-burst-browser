@@ -1,7 +1,7 @@
-import { all } from "../../../animation/all";
-import { Animate } from "../../../animation/animate";
-import { delay } from "../../../animation/delay";
-import { onStart } from "../../../animation/on-start";
+import { all } from "../../../animation/object-animation/all";
+import { Animate } from "../../../animation/object-animation/animate";
+import { delay } from "../../../animation/object-animation/delay";
+import { onStart } from "../../../animation/object-animation/on-start";
 import { stopDeathAlert } from "../procedure/death-alert";
 import { BattleSceneProps } from "../props";
 

@@ -1,8 +1,8 @@
 import { BuffPowerSkill, PilotSkill } from "gbraver-burst-core";
 
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { delay, empty } from "../../../../../animation/delay";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { delay, empty } from "../../../../../animation/object-animation/delay";
 import { GaiHUD } from "../../../view/hud/pilot-objects/gai";
 import { toInitial } from "../../td-camera";
 import { PilotSkillAnimationParamX } from "./animation-param";

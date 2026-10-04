@@ -1,7 +1,7 @@
 import { BattleResult } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../../../animation/animate";
-import { empty } from "../../../../../../../animation/delay";
+import { Animate } from "../../../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../../../animation/object-animation/delay";
 import { attack } from "./attack";
 import { down } from "./down";
 import { feint } from "./feint";

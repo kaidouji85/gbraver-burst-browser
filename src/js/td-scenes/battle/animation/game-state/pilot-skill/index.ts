@@ -1,7 +1,7 @@
 import type { GameStateX, PilotSkillEffect } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../animation/object-animation/delay";
 import { GaiHUD } from "../../../view/hud/pilot-objects/gai";
 import { RaitoHUD } from "../../../view/hud/pilot-objects/raito";
 import { ShinyaHUD } from "../../../view/hud/pilot-objects/shinya";

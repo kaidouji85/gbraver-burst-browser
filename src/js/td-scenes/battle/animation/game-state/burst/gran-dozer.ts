@@ -1,8 +1,8 @@
 import { Burst, EffectClear } from "gbraver-burst-core";
 
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { delay, empty } from "../../../../../animation/delay";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { delay, empty } from "../../../../../animation/object-animation/delay";
 import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { GranDozerTD } from "../../../view/td/armdozer-objects/gran-dozer";
 import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";

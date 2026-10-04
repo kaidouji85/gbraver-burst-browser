@@ -3,7 +3,7 @@ import * as THREE from "three";
 import {
   getViewPortHeight,
   getViewPortWidth,
-} from "../view-port/view-port-size";
+} from "../../view-port/view-port-size";
 
 /** HUDレイヤーのカメラを生成して返す */
 export function createHUDCamera(): THREE.OrthographicCamera {

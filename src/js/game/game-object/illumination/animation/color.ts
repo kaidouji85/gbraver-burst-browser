@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/animate";
-import { tween } from "../../../../animation/tween";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { tween } from "../../../../animation/object-animation/tween";
 import { IlluminationModel } from "../model/illumination-model";
 
 /**

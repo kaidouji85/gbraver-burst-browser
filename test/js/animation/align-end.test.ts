@@ -1,5 +1,5 @@
-import { alignEnd } from "../../../src/js/animation/align-end";
-import { delay } from "../../../src/js/animation/delay";
+import { alignEnd } from "../../../src/js/animation/object-animation/align-end";
+import { delay } from "../../../src/js/animation/object-animation/delay";
 
 test("alignEndだと、一番長いアニメーション時間で再生される", () => {
   const animation1 = delay(1000);

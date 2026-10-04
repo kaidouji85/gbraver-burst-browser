@@ -13,8 +13,8 @@ import {
 } from "../../src/js/game/game-object/action/game-object-action";
 import { GameObjectActionContainer } from "../../src/js/game/game-object/action/game-object-action-container";
 import { PlainHUDCamera } from "../../src/js/game/game-object/camera/plain-hud/plain-hud-camera";
-import { Renderer } from "../../src/js/render";
-import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
+import { Renderer } from "../../src/js/web-gl/render";
+import { OverlapEvent } from "../../src/js/web-gl/render/overlap-event/overlap-event";
 import { ResourcesContainer } from "../../src/js/resource";
 import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import {

@@ -1,7 +1,7 @@
 import { Miss } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../../../animation/animate";
-import { delay } from "../../../../../../../animation/delay";
+import { Animate } from "../../../../../../../animation/object-animation/animate";
+import { delay } from "../../../../../../../animation/object-animation/delay";
 import { LightningDozerBattle } from "./lightning-dozer-battle";
 
 /**

@@ -1,4 +1,4 @@
-import { delay } from "../src/js/animation/delay";
+import { delay } from "../src/js/animation/object-animation/delay";
 import { MiniController } from "../src/js/game/game-dom/mini-controller";
 import { ButtonConfig } from "../src/js/game/game-dom/mini-controller/button-config";
 import { domStub } from "./stub/dom-stub";

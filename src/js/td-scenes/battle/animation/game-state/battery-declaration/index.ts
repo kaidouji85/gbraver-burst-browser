@@ -1,8 +1,8 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../animation/object-animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
 import { declaration, declarationSound } from "./declaration";
 import {

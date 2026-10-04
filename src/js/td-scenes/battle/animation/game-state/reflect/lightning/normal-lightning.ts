@@ -1,6 +1,6 @@
-import { all } from "../../../../../../animation/all";
-import { Animate } from "../../../../../../animation/animate";
-import { delay } from "../../../../../../animation/delay";
+import { all } from "../../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../../animation/object-animation/animate";
+import { delay } from "../../../../../../animation/object-animation/delay";
 import { ReflectAnimationParam } from "../animation-param";
 
 /**

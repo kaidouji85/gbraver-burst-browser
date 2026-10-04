@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
-import { FADE_RENDER_ORDER } from "../../../../render/render-order/hud-render-order";
+import { FADE_RENDER_ORDER } from "../../../../web-gl/render/render-order/hud-render-order";
 import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";

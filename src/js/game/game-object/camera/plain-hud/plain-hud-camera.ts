@@ -1,8 +1,8 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { createHUDCamera } from "../../../../camera/create-hud-camera";
-import { onResizeOrthographicCamera } from "../../../../camera/resize";
+import { createHUDCamera } from "../../../../web-gl/camera/create-hud-camera";
+import { onResizeOrthographicCamera } from "../../../../web-gl/camera/resize";
 import type { Resize } from "../../../../window/resize";
 import { HUD_CAMERA_Z } from "../../hud-position";
 

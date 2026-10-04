@@ -1,7 +1,7 @@
 import { BurstEffect, GameStateX } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../animation/object-animation/delay";
 import { GenesisBraverHUD } from "../../../view/hud/armdozer-objects/genesis-braver";
 import { GranDozerHUD } from "../../../view/hud/armdozer-objects/gran-dozer";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";

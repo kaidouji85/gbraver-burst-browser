@@ -1,5 +1,5 @@
-import { Animate } from "../../animation/animate";
-import { empty } from "../../animation/delay";
+import { Animate } from "../../animation/object-animation/animate";
+import { empty } from "../../animation/object-animation/delay";
 import { PathId } from "../../resource/path/resource";
 import type {
   BatteryCommandSelectedEventProps,

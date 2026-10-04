@@ -1,8 +1,8 @@
 import { Command } from "gbraver-burst-core";
 
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { onStart } from "../../../../../animation/on-start";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { onStart } from "../../../../../animation/object-animation/on-start";
 import { ButtonConfig } from "../../../../../game/game-dom/mini-controller/button-config";
 import { canBurstButtonPush } from "../../../can-burst-button-push";
 import { canPilotButtonPush } from "../../../can-pilot-button-push";

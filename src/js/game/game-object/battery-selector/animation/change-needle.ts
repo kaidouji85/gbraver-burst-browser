@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/animate";
-import { tween } from "../../../../animation/tween";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { tween } from "../../../../animation/object-animation/tween";
 import { BatterySelectorAnimationProps } from "./animation-props";
 
 /** 最大アニメ時間 */

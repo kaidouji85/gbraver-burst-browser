@@ -1,4 +1,4 @@
-import { Animate } from "../../../animation/animate";
+import { Animate } from "../../../animation/object-animation/animate";
 import { Resources } from "../../../resource";
 import { PathIds } from "../../../resource/path/ids";
 import { PathId } from "../../../resource/path/resource";

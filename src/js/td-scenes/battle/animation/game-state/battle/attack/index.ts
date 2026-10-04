@@ -1,4 +1,4 @@
-import { Animate } from "../../../../../../animation/animate";
+import { Animate } from "../../../../../../animation/object-animation/animate";
 import { GenesisBraver } from "../../../../../../game/game-object/armdozer/genesis-braver/genesis-braver";
 import { GranDozer } from "../../../../../../game/game-object/armdozer/gran-dozer/gran-dozer";
 import { LightningDozer } from "../../../../../../game/game-object/armdozer/lightning-dozer/lightning-dozer";

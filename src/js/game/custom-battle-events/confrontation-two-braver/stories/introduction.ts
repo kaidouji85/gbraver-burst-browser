@@ -1,4 +1,4 @@
-import { delay } from "../../../../animation/delay";
+import { delay } from "../../../../animation/object-animation/delay";
 import { wbr } from "../../../../dom/wbr";
 import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { createAnimationPlay } from "../../../../td-scenes/battle/play-animation";

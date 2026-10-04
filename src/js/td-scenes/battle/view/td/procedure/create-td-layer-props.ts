@@ -5,7 +5,7 @@ import { PreRender } from "../../../../../game/game-loop/pre-render";
 import { Update } from "../../../../../game/game-loop/update";
 import { gameObjectStream } from "../../../../../game/game-object/action/game-object-action";
 import { TDCamera } from "../../../../../game/game-object/camera/td";
-import { OverlapNotifier } from "../../../../../render/overlap-notifier";
+import { OverlapNotifier } from "../../../../../web-gl/render/overlap-notifier";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "../armdozer-objects";
 import { TDLayerObjectCreatorParams } from "../creator-params";

@@ -2,9 +2,9 @@ import { Group } from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { all } from "../../../animation/all";
-import { Animate } from "../../../animation/animate";
-import { onStart } from "../../../animation/on-start";
+import { all } from "../../../animation/object-animation/all";
+import { Animate } from "../../../animation/object-animation/animate";
+import { onStart } from "../../../animation/object-animation/on-start";
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
 import type { ResourcesContainer } from "../../../resource";

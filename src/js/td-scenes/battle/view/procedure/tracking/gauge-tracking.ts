@@ -6,7 +6,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../../game/game-object/td-position";
-import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
+import { toHUDCoordinate } from "../../../../../web-gl/tracking/to-hud-coordinate";
 import { TrackingParams } from "./tracking-params";
 
 /**

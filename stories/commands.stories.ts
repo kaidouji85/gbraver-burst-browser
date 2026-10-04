@@ -1,6 +1,6 @@
 import { ArmdozerIds } from "gbraver-burst-core";
 
-import { all } from "../src/js/animation/all";
+import { all } from "../src/js/animation/object-animation/all";
 import { BatterySelector } from "../src/js/game/game-object/battery-selector";
 import { shinBraverBurstButton } from "../src/js/game/game-object/burst-button";
 import { shinyaPilotButton } from "../src/js/game/game-object/pilot-button";

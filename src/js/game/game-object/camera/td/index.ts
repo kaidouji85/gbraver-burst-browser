@@ -1,8 +1,8 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { Animate } from "../../../../animation/animate";
-import { onResizePerspectiveCamera } from "../../../../camera/resize";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { onResizePerspectiveCamera } from "../../../../web-gl/camera/resize";
 import { Update } from "../../../game-loop/update";
 import {
   getViewPortHeight,

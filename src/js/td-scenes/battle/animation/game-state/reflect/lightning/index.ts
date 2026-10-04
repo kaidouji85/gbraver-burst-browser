@@ -1,4 +1,4 @@
-import { Animate } from "../../../../../../animation/animate";
+import { Animate } from "../../../../../../animation/object-animation/animate";
 import { ReflectAnimationParam } from "../animation-param";
 import { deathLightning } from "./death-lightning";
 import { normalLightning } from "./normal-lightning";

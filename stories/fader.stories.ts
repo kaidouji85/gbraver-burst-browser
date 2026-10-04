@@ -1,4 +1,4 @@
-import { delay } from "../src/js/animation/delay";
+import { delay } from "../src/js/animation/object-animation/delay";
 import { frontmostFader, rearmostFader } from "../src/js/game/game-object/fader";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 

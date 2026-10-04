@@ -4,7 +4,7 @@ import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../../resource/texture/resource";
-import { outlineShader } from "../../../../shader/outline-shader";
+import { outlineShader } from "../../../../web-gl/shader/outline-shader";
 import { ArmdozerAnimation } from "./armdozer-animation";
 
 /** アウトラインカラー */

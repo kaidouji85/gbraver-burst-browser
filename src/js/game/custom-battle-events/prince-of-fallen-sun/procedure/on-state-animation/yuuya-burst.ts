@@ -1,4 +1,4 @@
-import { Animate } from "../../../../../animation/animate";
+import { Animate } from "../../../../../animation/object-animation/animate";
 import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { yuuyaBurstShout } from "../../animation/yuuya-burst-shout";

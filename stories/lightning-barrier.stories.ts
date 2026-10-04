@@ -1,4 +1,4 @@
-import { delay } from "../src/js/animation/delay";
+import { delay } from "../src/js/animation/object-animation/delay";
 import { LightningBarrierGameEffect } from "../src/js/game/game-object/barrier/lightning/lightning-barrier";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 

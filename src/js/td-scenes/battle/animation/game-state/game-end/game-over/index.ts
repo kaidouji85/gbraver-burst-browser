@@ -1,7 +1,7 @@
 import { GameEndX, GameOver, GameStateX } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../../animation/animate";
-import { empty } from "../../../../../../animation/delay";
+import { Animate } from "../../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../../animation/object-animation/delay";
 import { GenesisBraverTD } from "../../../../view/td/armdozer-objects/genesis-braver";
 import { GranDozerTD } from "../../../../view/td/armdozer-objects/gran-dozer";
 import { LightningDozerTD } from "../../../../view/td/armdozer-objects/lightning-dozer";

@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
-import { SPRITE_RENDER_ORDER } from "../render/render-order/td-render-order";
-import { animatedTexture } from "../texture/animation/texture-animation";
-import { normalizeTextureOffset } from "../texture/animation/texture-offset";
+import { SPRITE_RENDER_ORDER } from "../web-gl/render/render-order/td-render-order";
+import { animatedTexture } from "../web-gl/texture/animation/texture-animation";
+import { normalizeTextureOffset } from "../web-gl/texture/animation/texture-offset";
 
 /** コンストラクタのパラメータ */
 export type HorizontalAnimationMeshParam = {

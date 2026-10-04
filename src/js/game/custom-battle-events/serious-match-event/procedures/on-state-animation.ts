@@ -1,8 +1,8 @@
 import { PilotSkillEffect } from "gbraver-burst-core";
 
-import { Animate } from "../../../../animation/animate";
-import { empty } from "../../../../animation/delay";
-import { onStart } from "../../../../animation/on-start";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { empty } from "../../../../animation/object-animation/delay";
+import { onStart } from "../../../../animation/object-animation/on-start";
 import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
 import { enemyPilotShout, playerPilotShout } from "../../pilot-shout";
 import { getPilotSkillShout } from "./get-pilot-skill-shout";

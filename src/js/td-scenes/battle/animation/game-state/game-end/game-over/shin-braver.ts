@@ -1,6 +1,6 @@
-import { all } from "../../../../../../animation/all";
-import { Animate } from "../../../../../../animation/animate";
-import { onStart } from "../../../../../../animation/on-start";
+import { all } from "../../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../../animation/object-animation/animate";
+import { onStart } from "../../../../../../animation/object-animation/on-start";
 import { play } from "../../../../../../bgm/bgm-operators";
 import { ShinBraverTD } from "../../../../view/td/armdozer-objects/shin-braver";
 import { GameOverParamX } from "./game-over-param";

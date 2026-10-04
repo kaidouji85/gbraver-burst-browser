@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { Animate } from "../../../animation/animate";
+import { Animate } from "../../../animation/object-animation/animate";
 import { PreRender } from "../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { hidden } from "./animation/hidden";

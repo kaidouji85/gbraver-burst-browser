@@ -1,6 +1,6 @@
-import { Animate } from "../../../../../animation/animate";
-import { delay } from "../../../../../animation/delay";
-import { tween } from "../../../../../animation/tween";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { delay } from "../../../../../animation/object-animation/delay";
+import { tween } from "../../../../../animation/object-animation/tween";
 import { LightningDozerAnimationProps } from "./animation-props";
 
 /**

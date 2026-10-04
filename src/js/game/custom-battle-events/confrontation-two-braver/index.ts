@@ -1,4 +1,4 @@
-import { Animate } from "../../../animation/animate";
+import { Animate } from "../../../animation/object-animation/animate";
 import {
   CustomBattleEvent,
   CustomStateAnimationProps,

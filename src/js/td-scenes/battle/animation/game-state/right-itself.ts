@@ -1,7 +1,7 @@
 import type { BattleResult, GameStateX, RightItself } from "gbraver-burst-core";
 
-import { Animate } from "../../../../animation/animate";
-import { delay, empty } from "../../../../animation/delay";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { delay, empty } from "../../../../animation/object-animation/delay";
 import type { ArmdozerSprite } from "../../../../game/game-object/armdozer/armdozer-sprite";
 import type { StateAnimationProps } from "./state-animation-props";
 

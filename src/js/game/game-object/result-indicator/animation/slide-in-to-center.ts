@@ -1,9 +1,9 @@
 import { Easing } from "@tweenjs/tween.js";
 
-import { all } from "../../../../animation/all";
-import { Animate } from "../../../../animation/animate";
-import { onStart } from "../../../../animation/on-start";
-import { tween } from "../../../../animation/tween";
+import { all } from "../../../../animation/object-animation/all";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { onStart } from "../../../../animation/object-animation/on-start";
+import { tween } from "../../../../animation/object-animation/tween";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**

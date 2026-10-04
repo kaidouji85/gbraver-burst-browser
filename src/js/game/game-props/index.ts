@@ -8,7 +8,7 @@ import { PostBattleFloater } from "../../dom-floaters/post-battle";
 import { DOMSceneBinderContainer } from "../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { DOMFader } from "../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../game-loop/game-loop-container";
-import { Renderer } from "../../render";
+import { Renderer } from "../../web-gl/render";
 import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
 import { SEPlayerContainer } from "../../se/se-player";

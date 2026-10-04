@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { FADE_RENDER_ORDER } from "../../../../render/render-order/hud-render-order";
+import { FADE_RENDER_ORDER } from "../../../../web-gl/render/render-order/hud-render-order";
 import type { FaderModel } from "../model/fader-model";
 import type { FaderView } from "./fader-view";
 

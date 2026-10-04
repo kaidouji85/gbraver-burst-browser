@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import type { Animate } from "../../../animation/animate";
+import type { Animate } from "../../../animation/object-animation/animate";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { bindEventListener } from "./procedure/bind-event-listener";

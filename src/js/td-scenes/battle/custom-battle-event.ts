@@ -9,7 +9,7 @@ import {
 import { Observable } from "rxjs";
 
 import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
-import { Animate } from "../../animation/animate";
+import { Animate } from "../../animation/object-animation/animate";
 import { PathId } from "../../resource/path/resource";
 import { SEPlayerContainer } from "../../se/se-player";
 import { PushWindow } from "../../window/push-window";

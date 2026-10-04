@@ -1,6 +1,6 @@
-import { Animate } from "../../../../animation/animate";
-import { GBTween } from "../../../../animation/gb-tween";
-import { tween } from "../../../../animation/tween";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { GBTween } from "../../../../animation/object-animation/gb-tween";
+import { tween } from "../../../../animation/object-animation/tween";
 import { MiniControllerProps } from "../props";
 
 /** モデル */

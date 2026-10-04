@@ -1,4 +1,4 @@
-import { all } from "../../../../animation/all";
+import { all } from "../../../../animation/object-animation/all";
 import { changeColor } from "../animation/change-color";
 import { changeMargin } from "../animation/change-margin";
 import { changeOpacity } from "../animation/change-opacity";

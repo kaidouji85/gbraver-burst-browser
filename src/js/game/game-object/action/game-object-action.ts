@@ -2,7 +2,7 @@ import { merge, Observable, share } from "rxjs";
 
 import type { PreRender } from "../../game-loop/pre-render";
 import type { Update } from "../../game-loop/update";
-import type { OverlapEvent } from "../../../render/overlap-event/overlap-event";
+import type { OverlapEvent } from "../../../web-gl/render/overlap-event/overlap-event";
 
 /** 全てのゲームオブジェクトが受け取り可能なアクション */
 export type GameObjectAction = Update | PreRender | OverlapEvent;

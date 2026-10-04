@@ -1,4 +1,4 @@
-import { delay } from "../src/js/animation/delay";
+import { delay } from "../src/js/animation/object-animation/delay";
 import {
   EnemyShinBraver,
   PlayerShinBraver,

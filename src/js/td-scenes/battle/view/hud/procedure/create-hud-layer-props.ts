@@ -5,7 +5,7 @@ import { PreRender } from "../../../../../game/game-loop/pre-render";
 import { Update } from "../../../../../game/game-loop/update";
 import { gameObjectStream } from "../../../../../game/game-object/action/game-object-action";
 import { PlainHUDCamera } from "../../../../../game/game-object/camera/plain-hud/plain-hud-camera";
-import { OverlapNotifier } from "../../../../../render/overlap-notifier";
+import { OverlapNotifier } from "../../../../../web-gl/render/overlap-notifier";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "../armdozer-objects";
 import { HUDLayerObjectCreatorParams } from "../creator-params";

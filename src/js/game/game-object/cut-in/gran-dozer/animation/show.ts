@@ -1,7 +1,7 @@
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { delay } from "../../../../../animation/delay";
-import { tween } from "../../../../../animation/tween";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { delay } from "../../../../../animation/object-animation/delay";
+import { tween } from "../../../../../animation/object-animation/tween";
 import { ARMDOZER_SPRITE_FRONT_Z } from "../../../td-position";
 import { GranDozerCutInAnimationProps } from "./animation-props";
 

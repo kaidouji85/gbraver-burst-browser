@@ -1,8 +1,8 @@
 import { Burst, LightningBarrier } from "gbraver-burst-core";
 
-import { all } from "../../../../../animation/all";
-import { Animate } from "../../../../../animation/animate";
-import { delay, empty } from "../../../../../animation/delay";
+import { all } from "../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { delay, empty } from "../../../../../animation/object-animation/delay";
 import { LightningDozerHUD } from "../../../view/hud/armdozer-objects/lightning-dozer";
 import { LightningDozerTD } from "../../../view/td/armdozer-objects/lightning-dozer";
 import { toInitial } from "../../td-camera";

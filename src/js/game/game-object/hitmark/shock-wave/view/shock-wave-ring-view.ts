@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { SPRITE_RENDER_ORDER } from "../../../../../render/render-order/td-render-order";
+import { SPRITE_RENDER_ORDER } from "../../../../../web-gl/render/render-order/td-render-order";
 import { Resources } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";

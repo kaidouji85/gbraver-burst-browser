@@ -2,8 +2,8 @@ import * as THREE from "three";
 
 import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
 import { ARMDOZER_EFFECT_STANDARD_Y } from "../../../../../game/game-object/td-position";
-import { HUDCoordinate } from "../../../../../tracking/coordinate";
-import { toHUDCoordinate } from "../../../../../tracking/to-hud-coordinate";
+import { HUDCoordinate } from "../../../../../web-gl/tracking/coordinate";
+import { toHUDCoordinate } from "../../../../../web-gl/tracking/to-hud-coordinate";
 import { GenesisBraverHUD } from "../../hud/armdozer-objects/genesis-braver";
 import { GranDozerHUD } from "../../hud/armdozer-objects/gran-dozer";
 import { HUDArmdozerObjects } from "../../hud/armdozer-objects/hud-armdozer-objects";

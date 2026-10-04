@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { Animate } from "../../../animation/animate";
+import { Animate } from "../../../animation/object-animation/animate";
 
 /** アームドーザ用ワールド座標 */
 export type ArmdozerWorldCoordinate = {

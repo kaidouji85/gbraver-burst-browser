@@ -1,6 +1,6 @@
 import { map, Observable, Subject, tap } from "rxjs";
 
-import { GlobalTweenGroup } from "../../animation/global-tween-group";
+import { GlobalTweenGroup } from "../../animation/object-animation/global-tween-group";
 
 /** ゲームループ */
 export type GameLoop = {

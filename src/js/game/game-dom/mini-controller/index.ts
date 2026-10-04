@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { Animate } from "../../../animation/animate";
+import { Animate } from "../../../animation/object-animation/animate";
 import { BatteryPush } from "./battery-button/props";
 import { BurstPush } from "./burst-button/props";
 import { ButtonConfig } from "./button-config";

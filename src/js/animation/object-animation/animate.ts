@@ -1,6 +1,6 @@
 import { Group } from "@tweenjs/tween.js";
 
-import { SignalContainer } from "../abort-controller/signal-container";
+import { SignalContainer } from "../../abort-controller/signal-container";
 import { GBTween } from "./gb-tween";
 import { GlobalTweenGroup } from "./global-tween-group";
 
@@ -54,8 +54,8 @@ export type AnimationPlayOptions = Partial<SignalContainer> & {
  * const t2 = new Tween(model)
  *   .to({x: 0, y: 0}, 500)
  *   .chain(t1);
- * const animation = new Animate(t1, t2);
- * animation.play();
+ * const object-animation = new Animate(t1, t2);
+ * object-animation.play();
  */
 export class Animate {
   /* eslint-disable @typescript-eslint/no-explicit-any */

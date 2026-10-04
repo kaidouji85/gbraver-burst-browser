@@ -1,7 +1,7 @@
 import { GameStateX, Reflect } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../animation/object-animation/delay";
 import { StateAnimationProps } from "../state-animation-props";
 import { createReflectAnimationParam } from "./create-reflect-animation-param";
 import { lightning } from "./lightning";

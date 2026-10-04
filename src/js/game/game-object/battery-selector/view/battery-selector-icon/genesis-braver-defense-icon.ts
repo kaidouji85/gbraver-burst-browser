@@ -4,7 +4,7 @@ import { HorizontalAnimationMesh } from "../../../../../mesh/horizontal-animatio
 import { Resources } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";
-import { outlineShader } from "../../../../../shader/outline-shader";
+import { outlineShader } from "../../../../../web-gl/shader/outline-shader";
 import { BatterySelectorIcon } from "./battery-selector-icon";
 
 /** メッシュのサイズ */

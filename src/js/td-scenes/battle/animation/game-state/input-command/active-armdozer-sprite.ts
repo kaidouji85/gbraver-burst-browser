@@ -1,7 +1,7 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { Animate } from "../../../../../animation/animate";
-import { empty } from "../../../../../animation/delay";
+import { Animate } from "../../../../../animation/object-animation/animate";
+import { empty } from "../../../../../animation/object-animation/delay";
 import { TDArmdozerObjects } from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**

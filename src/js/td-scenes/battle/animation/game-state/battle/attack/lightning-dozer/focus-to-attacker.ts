@@ -1,5 +1,5 @@
-import { all } from "../../../../../../../animation/all";
-import { Animate } from "../../../../../../../animation/animate";
+import { all } from "../../../../../../../animation/object-animation/all";
+import { Animate } from "../../../../../../../animation/object-animation/animate";
 import { LightningDozer } from "../../../../../../../game/game-object/armdozer/lightning-dozer/lightning-dozer";
 import { TDCamera } from "../../../../../../../game/game-object/camera/td";
 

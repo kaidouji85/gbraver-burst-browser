@@ -13,8 +13,8 @@ import type {
   UpdateRemainingTurn,
 } from "gbraver-burst-core";
 
-import { Animate } from "../../../../animation/animate";
-import { empty } from "../../../../animation/delay";
+import { Animate } from "../../../../animation/object-animation/animate";
+import { empty } from "../../../../animation/object-animation/delay";
 import { batteryDeclarationAnimation } from "./battery-declaration";
 import { battleAnimation } from "./battle";
 import { burstAnimation } from "./burst";
