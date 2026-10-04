@@ -1,4 +1,4 @@
-import { BattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
+import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
@@ -31,7 +31,7 @@ import { switchMatchCard } from "./switch-scene/switch-match-card";
  */
 const createBattleProgress = (
   props: Readonly<GameProps>,
-  battle: BattleSDK,
+  battle: AnonymousBattleSDK,
 ): BattleProgress => {
   return {
     progress: async (v) => {
@@ -61,7 +61,7 @@ const createBattleProgress = (
  */
 export const startPasswordMatch = async (
   props: GameProps,
-  battle: BattleSDK,
+  battle: AnonymousBattleSDK,
 ) => {
   props.suddenlyBattleEnd.bind(battle);
   await Promise.all([

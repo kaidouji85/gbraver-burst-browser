@@ -1,4 +1,5 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { OfflineBattleSDK } from "@gbraver-burst-network/offline-browser-sdk";
 import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
@@ -31,7 +32,7 @@ import { switchMatchCard } from "./switch-scene/switch-match-card";
  */
 function createBattleProgress(
   props: Readonly<GameProps>,
-  battle: BattleSDK,
+  battle: BattleSDK | OfflineBattleSDK,
 ): BattleProgress {
   return {
     progress: async (v) => {
@@ -63,7 +64,7 @@ function createBattleProgress(
  */
 export async function startOnlineBattle(
   props: GameProps,
-  battle: BattleSDK,
+  battle: BattleSDK | OfflineBattleSDK,
   caption: string,
 ): Promise<void> {
   props.suddenlyBattleEnd.bind(battle);

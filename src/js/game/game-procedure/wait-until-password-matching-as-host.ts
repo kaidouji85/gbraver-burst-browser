@@ -1,4 +1,4 @@
-import { BattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
+import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
@@ -19,7 +19,7 @@ import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
 export const waitUntilPasswordMatchingAsHost = async (
   props: Readonly<GameProps & { networkContext: Online }>,
   action: Readonly<SelectionComplete>,
-): Promise<BattleSDK> => {
+): Promise<AnonymousBattleSDK> => {
   try {
     switchWaitingDialog(props, new WaitingDialog("ルーム作成中......"));
     const room = await props.networkContext.hostAnonymousSDK.createRoom(action);
