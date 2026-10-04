@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { NeoLandozerCutInModel } from "../model/neo-landozer-cutin-model";
 import { PlayerNeoLandozerCutInView } from "./player-neo-landozer-cutin-view";
 

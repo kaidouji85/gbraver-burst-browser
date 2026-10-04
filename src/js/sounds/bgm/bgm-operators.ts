@@ -1,5 +1,5 @@
-import { SoundResource } from "../../resource/sound/resource";
 import { waitTime } from "../../event/wait/wait-time";
+import { SoundResource } from "../../resource/sound/resource";
 import { BGM } from "./bgm";
 
 /**

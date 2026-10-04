@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../game-loop/pre-render";
 import { hudUIScale } from "../../scale";
 import { GaugeModel } from "../model/gauge-model";
 import { BATTERY_UNIT_GAUGE_PIXEL_WIDTH } from "./battery-gauge-unit";

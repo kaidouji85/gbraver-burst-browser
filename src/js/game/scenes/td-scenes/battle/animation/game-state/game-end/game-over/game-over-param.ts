@@ -1,8 +1,8 @@
 import { GameOver } from "gbraver-burst-core";
 
+import { SoundResource } from "../../../../../../../../resource/sound/resource";
 import { BGMManagerContainer } from "../../../../../../../../sounds/bgm/bgm-manager";
 import { TDCamera } from "../../../../../../../game-object/camera/td";
-import { SoundResource } from "../../../../../../../../resource/sound/resource";
 import { HUDPlayer } from "../../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "../../../../view/td/game-objects";

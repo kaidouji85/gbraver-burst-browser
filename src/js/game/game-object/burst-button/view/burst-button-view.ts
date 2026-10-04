@@ -1,10 +1,10 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import type { PreRender } from "../../../game-loop/pre-render";
-import { SimpleImageMesh } from "../../../../web-gl/mesh/simple-image-mesh";
 import type { ResourcesContainer } from "../../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../../resource/canvas-image/ids";
+import { SimpleImageMesh } from "../../../../web-gl/mesh/simple-image-mesh";
+import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import type { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";

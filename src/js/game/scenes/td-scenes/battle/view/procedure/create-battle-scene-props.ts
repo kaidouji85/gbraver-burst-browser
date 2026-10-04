@@ -1,8 +1,8 @@
 import { Subject } from "rxjs";
 
+import { createSafeAreaInset } from "../../../../../../dom/safe-area/safe-area-inset";
 import { PreRender } from "../../../../../game-loop/pre-render";
 import { Update } from "../../../../../game-loop/update";
-import { createSafeAreaInset } from "../../../../../../dom/safe-area/safe-area-inset";
 import { BattleViewCreatorParams } from "../creator-params";
 import { createDOMLayer } from "../dom";
 import { createHUDLayer } from "../hud";

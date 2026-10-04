@@ -1,15 +1,15 @@
+import { waitTime } from "../../event/wait/wait-time";
+import { ResourcesContainer } from "../../resource";
+import { PathIds } from "../../resource/path/ids";
+import { GameProps } from "../game-props";
+import { NetworkContext } from "../network-context";
+import { Online } from "../network-context/online";
 import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
 import { Title } from "../scenes/dom-scenes/title";
 import {
   LoggedInAccount,
   TitleAccount,
 } from "../scenes/dom-scenes/title/title-account";
-import { ResourcesContainer } from "../../resource";
-import { PathIds } from "../../resource/path/ids";
-import { waitTime } from "../../event/wait/wait-time";
-import { GameProps } from "../game-props";
-import { NetworkContext } from "../network-context";
-import { Online } from "../network-context/online";
 import { switchTitle } from "./switch-scene/switch-title";
 
 /**

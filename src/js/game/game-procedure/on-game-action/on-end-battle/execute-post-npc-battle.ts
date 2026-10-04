@@ -1,13 +1,13 @@
-import { PostBattleButtonConfig } from "../../../floaters/post-battle/post-battle-button-config";
-import { EndBattle } from "../../../game-actions/end-battle";
-import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
-import { NPCBattle } from "../../../in-progress/npc-battle";
 import {
   getNPCBattleResult,
   NPCBattleResult,
 } from "../../../arcade-mode/npc-battle-result";
 import { updateNPCBattleState } from "../../../arcade-mode/updated-npc-battle-state";
+import { PostBattleButtonConfig } from "../../../floaters/post-battle/post-battle-button-config";
+import { EndBattle } from "../../../game-actions/end-battle";
+import { GameProps } from "../../../game-props";
+import { InProgress } from "../../../in-progress";
+import { NPCBattle } from "../../../in-progress/npc-battle";
 import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,

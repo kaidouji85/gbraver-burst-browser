@@ -1,5 +1,5 @@
-import { NPC } from "../../npc/npc";
 import { SoundId } from "../../../resource/sound/resource";
+import { NPC } from "../../npc/npc";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {

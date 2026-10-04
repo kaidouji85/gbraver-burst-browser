@@ -1,7 +1,7 @@
 import { PilotId } from "gbraver-burst-core";
 
-import { getPilotIconPathId } from "../../../../path/pilot-icon-path";
 import { Resources } from "../../../../../resource";
+import { getPilotIconPathId } from "../../../../path/pilot-icon-path";
 import { PILOT_ICON } from "./class-name";
 
 /** パイロットアイコン */

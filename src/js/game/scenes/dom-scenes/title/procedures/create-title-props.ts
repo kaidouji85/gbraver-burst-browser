@@ -2,12 +2,12 @@ import { Subject } from "rxjs";
 
 import { AbortManagerContainer } from "../../../../../event/abort-controller/abort-manager-container";
 import { Exclusive } from "../../../../../event/exclusive/exclusive";
+import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
 import { ResourcesContainer } from "../../../../../resource";
 import { PathIds } from "../../../../../resource/path/ids";
 import { createEmptySoundResource } from "../../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../../resource/sound/ids";
 import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
-import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
 import { ROOT_CLASS } from "../dom/class-name";
 import {
   extractAccountMenu,

@@ -2,9 +2,9 @@ import { PilotId } from "gbraver-burst-core";
 import { Observable, tap } from "rxjs";
 
 import { domPushStream } from "../../../../dom/push-dom";
-import { getPilotIconPathId } from "../../../path/pilot-icon-path";
-import { Resources } from "../../../../resource";
 import { waitElementLoaded } from "../../../../event/wait/wait-element-loaded";
+import { Resources } from "../../../../resource";
+import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { PILOT_ICON } from "./dom/class-name";
 
 /** パイロットアイコン */

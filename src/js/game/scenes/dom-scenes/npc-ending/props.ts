@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
-import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
 import { SoundResource } from "../../../../resource/sound/resource";
+import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
 import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 
 /** NPCルート エンディング画面 プロパティ */

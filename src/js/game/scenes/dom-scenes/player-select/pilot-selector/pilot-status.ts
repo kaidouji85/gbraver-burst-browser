@@ -1,9 +1,9 @@
 import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
 
+import { domUuid } from "../../../../../uuid/dom-uuid";
 import { pilotSkillDetail } from "../../../../game-description/pilot-skill-detail";
 import { pilotSkillOverview } from "../../../../game-description/pilot-skill-overview";
-import { domUuid } from "../../../../../uuid/dom-uuid";
 
 /** ルート要素のクラス名 */
 const ROOT_CLASS_NAME = "pilot-status";

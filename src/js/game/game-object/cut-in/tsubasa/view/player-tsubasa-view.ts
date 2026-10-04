@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { Resources } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import { TsubasaModel } from "../model/tsubasa-model";

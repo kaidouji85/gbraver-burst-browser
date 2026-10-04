@@ -1,8 +1,8 @@
 import { ArmdozerIds, correctPower, PlayerState } from "gbraver-burst-core";
 
-import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { ResourcesContainer } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
+import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import {
   BATTLE_RESULT_NAME,
   DAMAGE,

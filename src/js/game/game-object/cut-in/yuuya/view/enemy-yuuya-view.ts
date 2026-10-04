@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { YuuyaModel } from "../model/yuuya-model";
 import { PlayerYuuyaView } from "./player-yuuya-view";
 

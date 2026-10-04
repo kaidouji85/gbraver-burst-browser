@@ -1,7 +1,7 @@
-import { EpisodeID } from "../../../../story-mode/episode";
+import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
 import { Resources } from "../../../../../resource";
 import { PathId } from "../../../../../resource/path/resource";
-import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { EpisodeID } from "../../../../story-mode/episode";
 import { EPISODE_IMAGE_CUT, EPISODE_IMAGE_CUT_INVISIBLE } from "./class-name";
 
 /** イメージカット設定 */

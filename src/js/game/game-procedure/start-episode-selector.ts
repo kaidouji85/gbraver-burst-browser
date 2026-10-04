@@ -1,7 +1,7 @@
-import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
-import { EpisodeSelector } from "../scenes/dom-scenes/episode-selector";
 import { waitTime } from "../../event/wait/wait-time";
 import { GameProps } from "../game-props";
+import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
+import { EpisodeSelector } from "../scenes/dom-scenes/episode-selector";
 import { EpisodeID } from "../story-mode/episode";
 import { getEpisodes } from "./get-episodes";
 import { switchEpisodeSelector } from "./switch-scene/switch-episode-selector";

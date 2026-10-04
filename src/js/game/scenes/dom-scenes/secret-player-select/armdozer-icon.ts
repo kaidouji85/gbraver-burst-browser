@@ -2,9 +2,9 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { Observable, tap } from "rxjs";
 
 import { domPushStream } from "../../../../dom/push-dom";
-import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
-import { Resources } from "../../../../resource";
 import { waitElementLoaded } from "../../../../event/wait/wait-element-loaded";
+import { Resources } from "../../../../resource";
+import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ARMDOZER_ICON } from "./dom/class-name";
 
 /** アームドーザアイコン */

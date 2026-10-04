@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
-import { Exclusive } from "../../../../event/exclusive/exclusive";
 import { drawPrivateMatchQRCode } from "../../../../dom/qr-code/private-match-qr-code";
+import { Exclusive } from "../../../../event/exclusive/exclusive";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
 import { ROOT_CLASS } from "../dom/class-name";

@@ -1,9 +1,9 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../../event/exclusive/exclusive";
-import { GameLoopContainer } from "../../../game-loop/game-loop-container";
 import { SoundResource } from "../../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../../sounds/se/se-player";
+import { GameLoopContainer } from "../../../game-loop/game-loop-container";
 
 /** プライベートマッチのQRコードリーダーのプロパティ */
 export type PrivateMatchQRCodeReaderProps = SEPlayerContainer &

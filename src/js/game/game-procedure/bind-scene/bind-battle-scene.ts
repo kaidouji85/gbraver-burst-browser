@@ -1,7 +1,7 @@
 import { map } from "rxjs";
 
-import { BattleScene } from "../../scenes/td-scenes/battle";
 import { GameProps } from "../../game-props";
+import { BattleScene } from "../../scenes/td-scenes/battle";
 
 /**
  * 戦闘シーンをバインドする

@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { ShinyaModel } from "../model/shinya-model";
 import { PlayerShinyaView } from "./player-shinya-view";
 

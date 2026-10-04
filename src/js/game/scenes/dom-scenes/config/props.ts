@@ -1,13 +1,13 @@
 import { Subject } from "rxjs";
 
-import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
 import { Exclusive } from "../../../../event/exclusive/exclusive";
-import { GBraverBurstBrowserConfig } from "../../../config/browser-config";
 import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
 import { SoundResource } from "../../../../resource/sound/resource";
+import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
 import { SEPlayerContainer } from "../../../../sounds/se/se-player";
+import { GBraverBurstBrowserConfig } from "../../../config/browser-config";
 import { ConfigChangedDialog } from "./config-changed-dialog";
 import { ROOT_CLASS } from "./dom/class-name";
 import {

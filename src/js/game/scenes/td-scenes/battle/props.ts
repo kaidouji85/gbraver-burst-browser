@@ -1,14 +1,14 @@
 import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
-import { AbortManagerContainer } from "../../../../event/abort-controller/abort-manager-container";
-import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
-import { DOMDialogBinder } from "../../../dialogs/dom-dialog-binder";
-import { Exclusive } from "../../../../event/exclusive/exclusive";
-import { PlayerPilotVisibility } from "../../../config/browser-config";
-import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { PushWindow } from "../../../../dom/window/push-window";
+import { AbortManagerContainer } from "../../../../event/abort-controller/abort-manager-container";
+import { Exclusive } from "../../../../event/exclusive/exclusive";
+import { ResourcesContainer } from "../../../../resource";
+import { BGMManagerContainer } from "../../../../sounds/bgm/bgm-manager";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
+import { PlayerPilotVisibility } from "../../../config/browser-config";
+import { DOMDialogBinder } from "../../../dialogs/dom-dialog-binder";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 import { BattleProgress } from "./battle-progress";
 import { BattleSceneActionManageContainer } from "./battle-scene-action-manage-container";

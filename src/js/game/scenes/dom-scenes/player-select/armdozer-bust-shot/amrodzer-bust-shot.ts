@@ -1,9 +1,9 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
 import { waitFinishAnimation } from "../../../../../dom/wait-finish-animation";
-import { getArmdozerBustShotPathId } from "../../../../path/armdozer-bust-shot-path";
-import { Resources } from "../../../../../resource";
 import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { Resources } from "../../../../../resource";
+import { getArmdozerBustShotPathId } from "../../../../path/armdozer-bust-shot-path";
 import { getArmdozerBustShotClassName } from "./class-name";
 
 /** アームドーザバストショット */

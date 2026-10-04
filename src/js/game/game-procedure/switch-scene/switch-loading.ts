@@ -1,5 +1,5 @@
-import { Loading } from "../../scenes/dom-scenes/loading";
 import { GameProps } from "../../game-props";
+import { Loading } from "../../scenes/dom-scenes/loading";
 import { switchDOMScene } from "./switch-dom-scene";
 
 /**

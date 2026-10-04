@@ -1,8 +1,8 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { SignalContainer } from "../../../event/abort-controller/signal-container";
 import { Animate } from "../../../animation/animate";
+import { SignalContainer } from "../../../event/abort-controller/signal-container";
 import { close } from "./animation/close";
 import { open } from "./animation/open";
 import { BatterySelectorOpenParam } from "./battery-selector-open-param";

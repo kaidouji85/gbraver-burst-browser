@@ -1,11 +1,11 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
+import { OverlapNotifier } from "../../../../../../../web-gl/render/overlap-notifier";
 import { PreRender } from "../../../../../../game-loop/pre-render";
 import { Update } from "../../../../../../game-loop/update";
 import { gameObjectStream } from "../../../../../../game-object/action/game-object-action";
 import { PlainHUDCamera } from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import { OverlapNotifier } from "../../../../../../../web-gl/render/overlap-notifier";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { enemyArmdozerHUD, playerArmdozerHUD } from "../armdozer-objects";
 import { HUDLayerObjectCreatorParams } from "../creator-params";

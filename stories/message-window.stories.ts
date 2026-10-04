@@ -1,7 +1,7 @@
+import { wbr } from "../src/js/dom/wbr";
 import { attackBatteryCaptionInnerHtml } from "../src/js/game/custom-battle-events/battery-system-tutorial/dom/attack-battery-caption-inner-html";
 import { defenseBatteryCaptionInnerHtml } from "../src/js/game/custom-battle-events/battery-system-tutorial/dom/defense-battery-caption-inner-html";
 import { yoroshikuOnegaiShimasu } from "../src/js/game/custom-battle-events/yoroshiku-onegai-shimasu";
-import { wbr } from "../src/js/dom/wbr";
 import { MessageWindow } from "../src/js/game/game-dom/message-window";
 import { ROOT_CLASS } from "../src/js/game/game-dom/message-window/dom/class-name";
 import { highlight } from "../src/js/game/game-dom/message-window/dom/highlight";

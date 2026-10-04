@@ -2,12 +2,12 @@ import * as R from "ramda";
 import { map, merge, Observable } from "rxjs";
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
-import { SimpleImageMesh } from "../../../../web-gl/mesh/simple-image-mesh";
 import { ResourcesContainer } from "../../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../../resource/canvas-image/ids";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { SimpleImageMesh } from "../../../../web-gl/mesh/simple-image-mesh";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { BatterySelectorModel } from "../model";
 import { BatteryNumber } from "./battery-number/battery-number";

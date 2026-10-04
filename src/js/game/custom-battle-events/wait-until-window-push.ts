@@ -1,5 +1,5 @@
-import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * 画面を押下するまで待機する

@@ -1,5 +1,5 @@
-import { DOMFader } from "../src/js/game/game-dom/dom-fader/dom-fader";
 import { waitTime } from "../src/js/event/wait/wait-time";
+import { DOMFader } from "../src/js/game/game-dom/dom-fader/dom-fader";
 import { domStub } from "./stub/dom-stub";
 
 export default {

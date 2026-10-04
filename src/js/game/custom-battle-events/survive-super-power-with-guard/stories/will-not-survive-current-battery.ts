@@ -1,7 +1,7 @@
 import { wbr } from "../../../../dom/wbr";
+import { waitTime } from "../../../../event/wait/wait-time";
 import { getMinimumSurvivableBattery } from "../../../npc/get-minimum-survivable-battery";
 import { BattleSimulatorEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../../event/wait/wait-time";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";

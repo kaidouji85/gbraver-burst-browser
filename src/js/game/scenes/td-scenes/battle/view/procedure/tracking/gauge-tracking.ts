@@ -1,12 +1,12 @@
 import * as THREE from "three";
 
+import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import { Gauge } from "../../../../../../game-object/gauge/gauge";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../../../game-object/td-position";
-import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import { TrackingParams } from "./tracking-params";
 
 /**

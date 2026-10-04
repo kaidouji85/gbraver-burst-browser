@@ -1,5 +1,5 @@
-import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../../resource";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { GranDozerCutInModel } from "../model/gran-dozer-cut-in-model";
 import { PlayerGranDozerCutInView } from "./player-gran-dozer-cut-in-view";
 

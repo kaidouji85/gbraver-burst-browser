@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
+import { OverlapEvent } from "../../../../../../web-gl/render/overlap-event/overlap-event";
 import { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import { TDCamera } from "../../../../../game-object/camera/td";
-import { OverlapEvent } from "../../../../../../web-gl/render/overlap-event/overlap-event";
 import { TDArmdozerObjects } from "./armdozer-objects/armdozer-objects";
 import { TDGameObjects } from "./game-objects";
 import { TDPlayer } from "./player";

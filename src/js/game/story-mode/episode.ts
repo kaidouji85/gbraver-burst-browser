@@ -1,9 +1,9 @@
 import { Player } from "gbraver-burst-core";
 
-import { NPC } from "../npc/npc";
 import { Resources } from "../../resource";
 import { PathId } from "../../resource/path/resource";
 import { SoundId } from "../../resource/sound/resource";
+import { NPC } from "../npc/npc";
 import { CustomBattleEvent } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /** エピソードID */

@@ -1,13 +1,13 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../event/exclusive/exclusive";
-import { NPCBattleCourseDifficulty } from "../../arcade-mode/courses/npc-battle-course";
 import type { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
+import { NPCBattleCourseDifficulty } from "../../arcade-mode/courses/npc-battle-course";
 import { ROOT_CLASS } from "./dom/class-name";
 import {
   extractBackGround,

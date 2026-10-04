@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,

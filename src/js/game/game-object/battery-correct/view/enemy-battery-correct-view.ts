@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../game-loop/pre-render";
 import type { Resources } from "../../../../resource";
+import type { PreRender } from "../../../game-loop/pre-render";
 import type { BatteryCorrectModel } from "../model/battery-correct-model";
 import { PlayerBatteryCorrectView } from "./player-battery-correct-view";
 

@@ -3,13 +3,13 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import { pop } from "../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../dom/push-dom";
 import { Exclusive } from "../../../event/exclusive/exclusive";
-import type { PostNetworkError } from "../../post-network-error";
 import type { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
 import { SEPlayer, SEPlayerContainer } from "../../../sounds/se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
+import type { PostNetworkError } from "../../post-network-error";
 import type { DOMDialog } from "../dialog";
 
 /** ルート要素のcssクラス名 */

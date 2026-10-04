@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { TsubasaModel } from "../model/tsubasa-model";
 import { PlayerTsubasaView } from "./player-tsubasa-view";
 

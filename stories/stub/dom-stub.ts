@@ -5,15 +5,18 @@ import React from "react";
 
 import { AbortManager } from "../../src/js/event/abort-controller/abort-manager";
 import { AbortManagerContainer } from "../../src/js/event/abort-controller/abort-manager-container";
-import {
-  BGMManagerContainer,
-  createBGMManager,
-} from "../../src/js/sounds/bgm/bgm-manager";
 import { createGameLoop } from "../../src/js/game/game-loop/game-loop";
 import { GameLoopContainer } from "../../src/js/game/game-loop/game-loop-container";
 import { ResourcesContainer } from "../../src/js/resource";
 import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
-import { createSEPlayer, SEPlayerContainer } from "../../src/js/sounds/se/se-player";
+import {
+  BGMManagerContainer,
+  createBGMManager,
+} from "../../src/js/sounds/bgm/bgm-manager";
+import {
+  createSEPlayer,
+  SEPlayerContainer,
+} from "../../src/js/sounds/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** 生成パラメータ */

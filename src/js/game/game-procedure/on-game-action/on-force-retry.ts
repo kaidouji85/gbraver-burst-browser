@@ -1,10 +1,10 @@
+import { getCurrentNPCStage } from "../../arcade-mode/get-current-npc-stage";
+import { getNPCStageLevel } from "../../arcade-mode/get-npc-stage-level";
+import { DefaultStage } from "../../arcade-mode/stages/default-stage";
 import { ForceRetry } from "../../game-actions/force-retry";
 import { GameProps } from "../../game-props";
 import { NPCBattle, PlayingNPCBattle } from "../../in-progress/npc-battle";
 import { Story } from "../../in-progress/story";
-import { getCurrentNPCStage } from "../../arcade-mode/get-current-npc-stage";
-import { getNPCStageLevel } from "../../arcade-mode/get-npc-stage-level";
-import { DefaultStage } from "../../arcade-mode/stages/default-stage";
 import { batterySystemTutorial } from "../../story-mode/episodes/battery-system-tutorial";
 import { startEpisode } from "../start-episode";
 import { startNPCBattleStage } from "../start-npc-battle-stage";

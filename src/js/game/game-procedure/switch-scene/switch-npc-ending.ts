@@ -1,7 +1,7 @@
 import { map } from "rxjs";
 
-import { NPCEnding } from "../../scenes/dom-scenes/npc-ending";
 import { GameProps } from "../../game-props";
+import { NPCEnding } from "../../scenes/dom-scenes/npc-ending";
 import { switchDOMScene } from "./switch-dom-scene";
 
 /**

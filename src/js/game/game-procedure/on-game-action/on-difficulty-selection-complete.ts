@@ -1,12 +1,12 @@
 import { playerUuid } from "../../../uuid/player";
-import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
-import { GameProps } from "../../game-props";
-import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
 import { DefaultStages, NPCBattleCourses } from "../../arcade-mode/courses";
 import { createNPCBattleState } from "../../arcade-mode/create-npc-battle-state";
 import { getCurrentNPCStage } from "../../arcade-mode/get-current-npc-stage";
 import { getNPCStageLevel } from "../../arcade-mode/get-npc-stage-level";
 import { DefaultStage } from "../../arcade-mode/stages/default-stage";
+import { DifficultySelectionComplete } from "../../game-actions/difficulty-selection-complete";
+import { GameProps } from "../../game-props";
+import { DifficultySelect, NPCBattle } from "../../in-progress/npc-battle";
 import { startNPCBattleStage } from "../start-npc-battle-stage";
 
 /** オプション */

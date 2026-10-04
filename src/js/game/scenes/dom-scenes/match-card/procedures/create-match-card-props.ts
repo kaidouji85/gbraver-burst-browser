@@ -1,9 +1,9 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
-import { getArmdozerIconPathId } from "../../../../path/armdozer-icon-path";
+import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
 import { ResourcesContainer } from "../../../../../resource";
 import { domUuid } from "../../../../../uuid/dom-uuid";
-import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { getArmdozerIconPathId } from "../../../../path/armdozer-icon-path";
 import { extractElements } from "../dom/elements";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { MatchCardProps } from "../props";

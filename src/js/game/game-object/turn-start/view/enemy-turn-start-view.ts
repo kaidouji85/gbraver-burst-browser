@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../game-loop/pre-render";
 import { hudScale } from "../../scale";
 import { TurnStartModel } from "../model/turn-start-model";
 import { TurnStartView } from "./turn-start-view";

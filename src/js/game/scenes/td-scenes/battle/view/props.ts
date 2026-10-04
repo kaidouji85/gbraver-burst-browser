@@ -1,12 +1,12 @@
 import { PlayerId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
-import { PreRender } from "../../../../game-loop/pre-render";
-import { Update } from "../../../../game-loop/update";
+import { SafeAreaInset } from "../../../../../dom/safe-area/safe-area-inset";
 import { OverlapNotifier } from "../../../../../web-gl/render/overlap-notifier";
 import { RendererDomGetter } from "../../../../../web-gl/render/renderer-dom-getter";
 import { Rendering } from "../../../../../web-gl/render/rendering";
-import { SafeAreaInset } from "../../../../../dom/safe-area/safe-area-inset";
+import { PreRender } from "../../../../game-loop/pre-render";
+import { Update } from "../../../../game-loop/update";
 import { DOMLayer } from "./dom";
 import { HUDLayer } from "./hud";
 import { TDLayer } from "./td";

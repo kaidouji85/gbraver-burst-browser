@@ -1,10 +1,10 @@
+import { HUDCoordinate } from "../../../../../../../web-gl/tracking/coordinate";
+import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z,
 } from "../../../../../../game-object/td-position";
-import { HUDCoordinate } from "../../../../../../../web-gl/tracking/coordinate";
-import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import { HUDLayer } from "../../hud";
 import { TrackingParams } from "./tracking-params";
 

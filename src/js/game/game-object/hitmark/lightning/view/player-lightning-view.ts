@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { Resources } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { LightningModel } from "../model/lightning-model";
 import { LightningView } from "./lightning-view";
 

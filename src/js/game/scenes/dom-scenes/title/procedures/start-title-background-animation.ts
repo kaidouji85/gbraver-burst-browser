@@ -1,5 +1,5 @@
-import { SignalContainer } from "../../../../../event/abort-controller/signal-container";
 import { waitFinishAnimation } from "../../../../../dom/wait-finish-animation";
+import { SignalContainer } from "../../../../../event/abort-controller/signal-container";
 import { waitTime } from "../../../../../event/wait/wait-time";
 import { TitleProps } from "../props";
 

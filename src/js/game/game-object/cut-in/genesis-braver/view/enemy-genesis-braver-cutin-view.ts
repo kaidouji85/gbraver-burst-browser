@@ -1,5 +1,5 @@
-import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../../resource";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { GenesisBraverCutInModel } from "../model/genesis-braver-cutin-model";
 import { PlayerGenesisBraverCutInView } from "./player-genesis-braver-cutin-view";
 

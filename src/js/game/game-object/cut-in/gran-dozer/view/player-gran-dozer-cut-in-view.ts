@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../../game-loop/pre-render";
 import { Resources } from "../../../../../resource";
+import { PreRender } from "../../../../game-loop/pre-render";
 import { HUD_CUT_IN_Z } from "../../../hud-position";
 import { hudScale } from "../../../scale";
 import { GranDozerCutInModel } from "../model/gran-dozer-cut-in-model";

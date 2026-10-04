@@ -1,5 +1,5 @@
-import { changeMasterVolume } from "../../../../../sounds/bgm/bgm-operators";
 import type { InputDOM } from "../../../../../dom/input-dom";
+import { changeMasterVolume } from "../../../../../sounds/bgm/bgm-operators";
 import { parseSoundVolume } from "../../../../config/parser/sound-volume";
 import { soundVolumeLabel } from "../dom/sound-volume-label";
 import type { ConfigProps } from "../props";

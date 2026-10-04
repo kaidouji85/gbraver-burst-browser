@@ -1,5 +1,5 @@
-import { AbortManagerContainer } from "../../../../event/abort-controller/abort-manager-container";
 import { Animate } from "../../../../animation/animate";
+import { AbortManagerContainer } from "../../../../event/abort-controller/abort-manager-container";
 import { AnimationTimeScaleContainer } from "./animation-time-scale-container";
 
 /** 戦闘シーンプロパティから本関数で利用するものをピックアップしたもの */

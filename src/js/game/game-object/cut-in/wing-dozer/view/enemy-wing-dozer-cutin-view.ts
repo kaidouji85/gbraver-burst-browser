@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { WingDozerCutInModel } from "../model/wing-dozer-cutin-model";
 import { PlayerWingDozerCutInView } from "./player-wing-dozer-cutin-view";
 

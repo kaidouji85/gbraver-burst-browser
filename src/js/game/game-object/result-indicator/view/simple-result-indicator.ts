@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../game-loop/pre-render";
 import { HUD_RESULT_INDICATOR_Z } from "../../hud-position";
 import { hudScale } from "../../scale";
 import { ResultIndicatorModel } from "../model/result-indicator-model";

@@ -1,10 +1,10 @@
 import { Player } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 
-import { GameLoopContainer } from "../../../../game-loop/game-loop-container";
+import { Resize } from "../../../../../dom/window/resize";
 import { ResourcesContainer } from "../../../../../resource";
 import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
-import { Resize } from "../../../../../dom/window/resize";
+import { GameLoopContainer } from "../../../../game-loop/game-loop-container";
 
 /** すべての戦闘画面ビュー生成処理で利用できるパラメータ */
 export type BattleViewCreatorParams = ResourcesContainer &

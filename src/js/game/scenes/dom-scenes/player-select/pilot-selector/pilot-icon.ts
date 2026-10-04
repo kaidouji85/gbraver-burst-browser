@@ -3,10 +3,10 @@ import { Observable, tap } from "rxjs";
 
 import { pop } from "../../../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../../../dom/push-dom";
-import { getPilotIconPathId } from "../../../../path/pilot-icon-path";
+import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
 import type { Resources } from "../../../../../resource";
 import { PathIds } from "../../../../../resource/path/ids";
-import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { getPilotIconPathId } from "../../../../path/pilot-icon-path";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS_NAME = "pilot-icon";

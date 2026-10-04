@@ -1,8 +1,8 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
-import { getArmdozerIconPathId } from "../../../../path/armdozer-icon-path";
-import { ResourcesContainer } from "../../../../../resource";
 import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { ResourcesContainer } from "../../../../../resource";
+import { getArmdozerIconPathId } from "../../../../path/armdozer-icon-path";
 import { BLOCK } from "../dom/class-name";
 import { extractArmdozerIcon, extractCaption } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";

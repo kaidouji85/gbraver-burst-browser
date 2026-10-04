@@ -1,21 +1,21 @@
 import { Command, Player } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
-import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
-import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
-import { StageTitle } from "../scenes/dom-scenes/stage-title";
-import { NPCBattleRoom } from "../npc/npc-battle-room";
+import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
+import { waitTime } from "../../event/wait/wait-time";
+import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
 import {
   preloadBattleSceneImages,
   preloadImages,
 } from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
-import { BattleScene } from "../scenes/td-scenes/battle";
-import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
-import { waitTime } from "../../event/wait/wait-time";
-import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
-import { GameProps } from "../game-props";
+import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
 import { NPCBattleStage } from "../arcade-mode/stages/npc-battle-stage";
+import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
+import { GameProps } from "../game-props";
+import { NPCBattleRoom } from "../npc/npc-battle-room";
+import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
+import { StageTitle } from "../scenes/dom-scenes/stage-title";
+import { BattleScene } from "../scenes/td-scenes/battle";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchStageTitle } from "./switch-scene/switch-stage-title";
 

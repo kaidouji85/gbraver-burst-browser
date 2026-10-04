@@ -1,7 +1,7 @@
 import { ArmdozerId } from "gbraver-burst-core";
 
-import { EpisodeNumber } from "../../../../story-mode/episode";
 import { ResourcesContainer } from "../../../../../resource";
+import { EpisodeNumber } from "../../../../story-mode/episode";
 import { createArmdozerPictureConfig } from "./armdozer-picture-config";
 import { ROOT_CLASS } from "./class-name";
 import rootInnerHTMLTemplate from "./root-inner-html.hbs";

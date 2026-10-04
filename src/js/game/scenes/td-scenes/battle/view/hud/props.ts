@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
+import { OverlapEvent } from "../../../../../../web-gl/render/overlap-event/overlap-event";
 import { GameObjectAction } from "../../../../../game-object/action/game-object-action";
 import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import { OverlapEvent } from "../../../../../../web-gl/render/overlap-event/overlap-event";
 import { HUDArmdozerObjects } from "./armdozer-objects/hud-armdozer-objects";
 import { HUDGameObjects } from "./game-objects";
 import { HUDPilotObjects } from "./pilot-objects/hud-pilot-objects";

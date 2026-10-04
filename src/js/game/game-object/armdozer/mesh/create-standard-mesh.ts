@@ -1,7 +1,7 @@
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TextureId } from "../../../../resource/texture/resource";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { ArmdozerAnimation } from "./armdozer-animation";
 
 /** オプション */

@@ -3,9 +3,9 @@ import { Observable } from "rxjs";
 
 import { pop } from "../../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../../dom/push-dom";
-import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import { ResourcesContainer } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
+import { getArmdozerIconPathId } from "../../../path/armdozer-icon-path";
 import {
   ARMDOZER_ICON,
   ARMDOZER_ICON_CHECKED,

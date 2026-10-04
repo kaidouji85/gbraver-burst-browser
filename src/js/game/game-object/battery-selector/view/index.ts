@@ -2,8 +2,8 @@ import { ArmdozerId } from "gbraver-burst-core";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
 import { ResourcesContainer } from "../../../../resource";
+import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { hudUIScale } from "../../scale";
 import { BatterySelectorModel } from "../model";

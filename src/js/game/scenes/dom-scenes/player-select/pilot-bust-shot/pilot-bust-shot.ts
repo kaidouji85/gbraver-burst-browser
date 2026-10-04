@@ -1,9 +1,9 @@
 import { PilotId } from "gbraver-burst-core";
 
 import { waitFinishAnimation } from "../../../../../dom/wait-finish-animation";
-import { getPilotSkillCutinPathId } from "../../../../path/pilot-skill-cutin-path";
-import { Resources } from "../../../../../resource";
 import { waitElementLoaded } from "../../../../../event/wait/wait-element-loaded";
+import { Resources } from "../../../../../resource";
+import { getPilotSkillCutinPathId } from "../../../../path/pilot-skill-cutin-path";
 import { getPilotBustShotClassName } from "./class-name";
 
 /** パイロットバストショット */

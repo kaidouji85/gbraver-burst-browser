@@ -2,11 +2,11 @@ import * as R from "ramda";
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";

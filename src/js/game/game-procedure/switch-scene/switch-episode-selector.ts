@@ -1,7 +1,7 @@
 import { map } from "rxjs";
 
-import { EpisodeSelector } from "../../scenes/dom-scenes/episode-selector";
 import { GameProps } from "../../game-props";
+import { EpisodeSelector } from "../../scenes/dom-scenes/episode-selector";
 import { switchDOMScene } from "./switch-dom-scene";
 
 /**

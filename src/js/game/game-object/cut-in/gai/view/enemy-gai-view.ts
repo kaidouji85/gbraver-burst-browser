@@ -1,5 +1,5 @@
-import type { PreRender } from "../../../../game-loop/pre-render";
 import type { Resources } from "../../../../../resource";
+import type { PreRender } from "../../../../game-loop/pre-render";
 import type { GaiModel } from "../model/gai-model";
 import { PlayerGaiView } from "./player-gai-view";
 

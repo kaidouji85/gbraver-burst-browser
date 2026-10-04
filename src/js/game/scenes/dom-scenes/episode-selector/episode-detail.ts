@@ -1,5 +1,5 @@
-import { EpisodeID } from "../../../story-mode/episode";
 import { Resources } from "../../../../resource";
+import { EpisodeID } from "../../../story-mode/episode";
 import { Episode } from "./episode";
 
 /** エピソード詳細で利用する情報 */

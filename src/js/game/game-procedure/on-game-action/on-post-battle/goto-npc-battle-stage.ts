@@ -1,9 +1,9 @@
-import { GameProps } from "../../../game-props";
-import { NPCBattle, PlayingNPCBattle } from "../../../in-progress/npc-battle";
 import { getCurrentNPCStage } from "../../../arcade-mode/get-current-npc-stage";
 import { getNPCStageLevel } from "../../../arcade-mode/get-npc-stage-level";
 import { NPCBattleState } from "../../../arcade-mode/npc-battle-state";
 import { DefaultStage } from "../../../arcade-mode/stages/default-stage";
+import { GameProps } from "../../../game-props";
+import { NPCBattle, PlayingNPCBattle } from "../../../in-progress/npc-battle";
 import { startNPCBattleStage } from "../../start-npc-battle-stage";
 
 /**

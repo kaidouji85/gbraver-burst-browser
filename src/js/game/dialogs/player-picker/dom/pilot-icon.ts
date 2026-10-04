@@ -3,9 +3,9 @@ import { Observable } from "rxjs";
 
 import { pop } from "../../../../dom/pop";
 import { domPushStream, PushDOM } from "../../../../dom/push-dom";
-import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import { ResourcesContainer } from "../../../../resource";
 import { PathIds } from "../../../../resource/path/ids";
+import { getPilotIconPathId } from "../../../path/pilot-icon-path";
 import {
   CHECK_MARK,
   PILOT_ICON,

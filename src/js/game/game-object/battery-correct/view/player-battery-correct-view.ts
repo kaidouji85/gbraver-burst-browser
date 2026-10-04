@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-import { PreRender } from "../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { Resources } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { PreRender } from "../../../game-loop/pre-render";
 import { ARMDOZER_EFFECT_STANDARD_Z } from "../../td-position";
 import { BatteryCorrectModel } from "../model/battery-correct-model";
 import { BatteryCorrectView } from "./battery-correct-view";
