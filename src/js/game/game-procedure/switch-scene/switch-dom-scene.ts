@@ -35,7 +35,7 @@ export const switchDOMScene = (options: Options): void => {
     scene,
     unsubscribers,
   } = options;
-  abort.getAbortController().abort(createAbortError("switch scenes"));
+  abort.getAbortController().abort(createAbortError("switch scene"));
   postBattle.hide();
   if (tdSceneBinder.isSceneBound()) {
     tdSceneBinder.dispose();
