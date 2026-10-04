@@ -1,0 +1,25 @@
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../scenes/td-scenes/battle/separate-players";
+import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { shinyaAttackShoutWhenYuuyaTakesDamage } from "../../animation/shinya-attack-shout-when-yuuya-takes-damage";
+import { ConfrontationTwoBraverProps } from "../../props";
+
+/** シンヤ 戦闘 ユウヤがダメージを受けている */
+export const shinyaBattleWhenYuuyaTakesDamage: ConditionalAnimation<
+  CustomStateAnimationProps & ConfrontationTwoBraverProps
+>[] = [
+  (props) => {
+    const separatedResult = separatePlayersFromCurrentState(props);
+    if (!separatedResult) {
+      return null;
+    }
+
+    const { player, enemy } = separatedResult;
+    const isYuuyaDamaged = enemy.armdozer.hp < enemy.armdozer.maxHp;
+    return isYuuyaDamaged &&
+      props.currentState.effect.name === "BatteryDeclaration" &&
+      props.currentState.effect.attacker === player.playerId
+      ? shinyaAttackShoutWhenYuuyaTakesDamage(props)
+      : null;
+  },
+];

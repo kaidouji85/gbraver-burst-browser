@@ -1,4 +1,4 @@
-import { BattleControllerType } from "../../td-scenes/battle/controller-type";
+import { BattleControllerType } from "../scenes/td-scenes/battle/controller-type";
 
 /** 有効なロボ、パイロット選択タイプ */
 export const PlayerSelectorTypes = ["open", "secret"] as const;

@@ -1,4 +1,4 @@
-import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
+import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";

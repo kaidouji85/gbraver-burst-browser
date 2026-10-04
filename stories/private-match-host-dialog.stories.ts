@@ -1,4 +1,4 @@
-import { PrivateMatchHostDialog } from "../src/js/dom-dialogs/private-match-host";
+import { PrivateMatchHostDialog } from "../src/js/game/dialogs/private-match-host";
 import { domStub } from "./stub/dom-stub";
 
 export default {

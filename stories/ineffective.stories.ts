@@ -3,8 +3,8 @@ import {
   EffectClearCreatorOptions,
   enemyEffectClear,
   playerEffectClear,
-} from "../src/js/game-object/effect-clear";
-import { EffectClear } from "../src/js/game-object/effect-clear/effectClear";
+} from "../src/js/game/game-object/effect-clear";
+import { EffectClear } from "../src/js/game/game-object/effect-clear/effectClear";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

@@ -3,8 +3,8 @@ import {
   BatteryNumberCreatorParams,
   enemyBatteryNumber,
   playerBatteryNumber,
-} from "../src/js/game-object/battery-number";
-import { BatteryNumber } from "../src/js/game-object/battery-number/battery-number";
+} from "../src/js/game/game-object/battery-number";
+import { BatteryNumber } from "../src/js/game/game-object/battery-number/battery-number";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

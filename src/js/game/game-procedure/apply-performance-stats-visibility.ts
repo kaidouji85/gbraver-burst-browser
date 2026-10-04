@@ -1,4 +1,4 @@
-import { PerformanceStats } from "../../stats/performance-stats";
+import { PerformanceStats } from "../../dom/stats/performance-stats";
 import { PerformanceStatsVisibility } from "../config/browser-config";
 import { GameProps } from "../game-props";
 

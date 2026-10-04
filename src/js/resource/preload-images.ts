@@ -1,7 +1,7 @@
 import { Player } from "gbraver-burst-core";
 
-import { getArmdozerStandPathId } from "../path/armdozer-stand-path";
-import { getPilotSkillCutinPathId } from "../path/pilot-skill-cutin-path";
+import { getArmdozerStandPathId } from "../game/path/armdozer-stand-path";
+import { getPilotSkillCutinPathId } from "../game/path/pilot-skill-cutin-path";
 import { Resources } from ".";
 import { PathIds } from "./path/ids";
 import { PathId } from "./path/resource";

@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyRaitoCutIn,
   playerRaitoCutIn,
-} from "../src/js/game-object/cut-in/raito";
-import { RaitoCutIn } from "../src/js/game-object/cut-in/raito/raito";
+} from "../src/js/game/game-object/cut-in/raito";
+import { RaitoCutIn } from "../src/js/game/game-object/cut-in/raito/raito";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

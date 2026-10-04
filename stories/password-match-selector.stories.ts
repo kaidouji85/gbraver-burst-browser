@@ -1,4 +1,4 @@
-import { PasswordMatchSelectorDialog } from "../src/js/dom-dialogs/password-match-selector";
+import { PasswordMatchSelectorDialog } from "../src/js/game/dialogs/password-match-selector";
 import { domStub } from "./stub/dom-stub";
 
 export default {

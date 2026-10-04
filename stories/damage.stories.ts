@@ -3,8 +3,8 @@ import {
   DamageIndicatorCreatprParams,
   enemyDamageIndicator,
   playerDamageIndicator,
-} from "../src/js/game-object/damage-indicator";
-import { DamageIndicator } from "../src/js/game-object/damage-indicator/damage-indicator";
+} from "../src/js/game/game-object/damage-indicator";
+import { DamageIndicator } from "../src/js/game/game-object/damage-indicator/damage-indicator";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

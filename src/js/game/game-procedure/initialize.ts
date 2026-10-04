@@ -1,10 +1,10 @@
-import { invisibleFirstView } from "../../first-view/first-view-visible";
+import { invisibleFirstView } from "../../dom/first-view/first-view-visible";
+import { waitTime } from "../../event/wait/wait-time";
 import { loadBootResources } from "../../resource/loading/load-boot-resources";
 import { loadSharedResources } from "../../resource/loading/load-shared-resources";
 import { PathIds } from "../../resource/path/ids";
 import { preloadImages } from "../../resource/preload-images";
 import { loadServiceWorker } from "../../service-worker/load-service-worker";
-import { waitTime } from "../../wait/wait-time";
 import { GameProps } from "../game-props";
 import { applyBattleWindowFontSize } from "./apply-battle-window-font-size";
 import { applyPerformanceStatsVisibility } from "./apply-performance-stats-visibility";

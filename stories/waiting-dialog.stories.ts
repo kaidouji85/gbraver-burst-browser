@@ -1,4 +1,4 @@
-import { WaitingDialog } from "../src/js/dom-dialogs/waiting/waiting-dialog";
+import { WaitingDialog } from "../src/js/game/dialogs/waiting/waiting-dialog";
 import { domStub } from "./stub/dom-stub";
 
 export default {

@@ -1,7 +1,7 @@
 import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
-import { EpisodeTitle } from "../src/js/dom-scenes/episode-title";
-import { EpisodeNumber } from "../src/js/game/story/episode";
+import { EpisodeTitle } from "../src/js/game/scenes/dom-scenes/episode-title";
+import { EpisodeNumber } from "../src/js/game/story-mode/episode";
 import { domStub } from "./stub/dom-stub";
 
 export default {

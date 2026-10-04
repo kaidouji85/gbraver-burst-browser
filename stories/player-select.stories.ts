@@ -1,6 +1,6 @@
-import { PlayerSelect } from "../src/js/dom-scenes/player-select";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import { PlayablePilots } from "../src/js/game/playable-pilots";
+import { PlayerSelect } from "../src/js/game/scenes/dom-scenes/player-select";
 import { domStub } from "./stub/dom-stub";
 
 export default {

@@ -1,23 +1,23 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { Player } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
-import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
-import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
-import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
-import { MatchCard } from "../../dom-scenes/match-card";
+import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
+import { waitTime } from "../../event/wait/wait-time";
 import {
   preloadBattleSceneImages,
   preloadImages,
 } from "../../resource/preload-images";
 import { SOUND_IDS } from "../../resource/sound/ids";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
-import { BattleScene } from "../../td-scenes/battle";
-import { BattleProgress } from "../../td-scenes/battle/battle-progress";
-import { waitAnimationFrame } from "../../wait/wait-animation-frame";
-import { waitTime } from "../../wait/wait-time";
+import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
+import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
+import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../game-props";
+import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
+import { MatchCard } from "../scenes/dom-scenes/match-card";
+import { BattleScene } from "../scenes/td-scenes/battle";
+import { BattleProgress } from "../scenes/td-scenes/battle/battle-progress";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";

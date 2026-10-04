@@ -1,4 +1,4 @@
-import { SignalContainer } from "../abort-controller/signal-container";
+import { SignalContainer } from "../event/abort-controller/signal-container";
 
 /**
  * アニメーションが完了するまで待機する

@@ -1,4 +1,4 @@
-import { DeleteAccountConsentDialog } from "../src/js/dom-dialogs/delete-account-consent";
+import { DeleteAccountConsentDialog } from "../src/js/game/dialogs/delete-account-consent";
 import { domStub } from "./stub/dom-stub";
 
 export default {

@@ -3,8 +3,8 @@ import {
   BatteryEnhancementCreatorParams,
   enemyBatteryEnhancement,
   playerBatteryEnhancement,
-} from "../src/js/game-object/battery-enhancement";
-import { BatteryEnhancement } from "../src/js/game-object/battery-enhancement/battery-enhancement";
+} from "../src/js/game/game-object/battery-enhancement";
+import { BatteryEnhancement } from "../src/js/game/game-object/battery-enhancement/battery-enhancement";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

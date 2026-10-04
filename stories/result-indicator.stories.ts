@@ -1,13 +1,13 @@
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
+import { GameObjectAction } from "../src/js/game/game-object/action/game-object-action";
 import {
   drawIndicator,
   loseIndicator,
   winIndicator,
-} from "../src/js/game-object/result-indicator";
-import { ResultIndicator } from "../src/js/game-object/result-indicator/result-indicator";
+} from "../src/js/game/game-object/result-indicator";
+import { ResultIndicator } from "../src/js/game/game-object/result-indicator/result-indicator";
 import { Resources } from "../src/js/resource";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 

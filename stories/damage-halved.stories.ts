@@ -3,8 +3,8 @@ import {
   DamageHalvedCreatorParams,
   enemyDamageHalved,
   playerDamageHalved,
-} from "../src/js/game-object/damage-halved";
-import { DamageHalved } from "../src/js/game-object/damage-halved/damage-halved";
+} from "../src/js/game/game-object/damage-halved";
+import { DamageHalved } from "../src/js/game/game-object/damage-halved/damage-halved";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

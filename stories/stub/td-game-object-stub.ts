@@ -2,27 +2,33 @@ import React from "react";
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
-import { AbortManager } from "../../src/js/abort-controller/abort-manager";
-import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
-import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
-import { PreRender } from "../../src/js/game-loop/pre-render";
-import { Update } from "../../src/js/game-loop/update";
-import {
-  GameObjectAction,
-  gameObjectStream,
-} from "../../src/js/game-object/action/game-object-action";
-import { GameObjectActionContainer } from "../../src/js/game-object/action/game-object-action-container";
-import { TDCamera } from "../../src/js/game-object/camera/td";
-import { Renderer } from "../../src/js/render";
-import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
-import { ResourcesContainer } from "../../src/js/resource";
-import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import {
   createSafeAreaInset,
   SafeAreaInset,
-} from "../../src/js/safe-area/safe-area-inset";
-import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
-import { Resize, resizeStream } from "../../src/js/window/resize";
+} from "../../src/js/dom/safe-area/safe-area-inset";
+import { Resize, resizeStream } from "../../src/js/dom/window/resize";
+import { AbortManager } from "../../src/js/event/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/event/abort-controller/abort-manager-container";
+import {
+  createGameLoop,
+  GameLoop,
+} from "../../src/js/game/game-loop/game-loop";
+import { PreRender } from "../../src/js/game/game-loop/pre-render";
+import { Update } from "../../src/js/game/game-loop/update";
+import {
+  GameObjectAction,
+  gameObjectStream,
+} from "../../src/js/game/game-object/action/game-object-action";
+import { GameObjectActionContainer } from "../../src/js/game/game-object/action/game-object-action-container";
+import { TDCamera } from "../../src/js/game/game-object/camera/td";
+import { ResourcesContainer } from "../../src/js/resource";
+import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
+import {
+  createSEPlayer,
+  SEPlayerContainer,
+} from "../../src/js/sounds/se/se-player";
+import { Renderer } from "../../src/js/web-gl/render";
+import { OverlapEvent } from "../../src/js/web-gl/render/overlap-event/overlap-event";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */

@@ -6,7 +6,7 @@ import {
   PlayerId,
 } from "gbraver-burst-core";
 
-import { getPlayerBattleCount } from "../../../src/js/custom-battle-events/get-battle-count";
+import { getPlayerBattleCount } from "../../../src/js/game/custom-battle-events/get-battle-count";
 
 /**
  * Battleのゲームステートを生成する
