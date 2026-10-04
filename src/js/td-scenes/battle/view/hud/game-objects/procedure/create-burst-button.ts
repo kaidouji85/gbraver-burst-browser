@@ -7,8 +7,8 @@ import {
   neoLandozerBurstButton,
   shinBraverBurstButton,
   wingDozerBurstButton,
-} from "../../../../../../game-object/burst-button";
-import { BurstButton } from "../../../../../../game-object/burst-button/burst-button";
+} from "../../../../../../game/game-object/burst-button";
+import { BurstButton } from "../../../../../../game/game-object/burst-button/burst-button";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 
 /**

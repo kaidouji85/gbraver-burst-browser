@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyYuuyaCutIn,
   playerYuuyaCutIn,
-} from "../../../../../game-object/cut-in/yuuya";
-import { YuuyaCutIn } from "../../../../../game-object/cut-in/yuuya/yuuya";
+} from "../../../../../game/game-object/cut-in/yuuya";
+import { YuuyaCutIn } from "../../../../../game/game-object/cut-in/yuuya/yuuya";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDPilotObjects } from "./hud-pilot-objects";
 

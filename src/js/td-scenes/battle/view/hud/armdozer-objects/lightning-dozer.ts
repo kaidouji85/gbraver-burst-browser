@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyLightningDozerCutIn,
   playerLightningDozerCutIn,
-} from "../../../../../game-object/cut-in/lightning-dozer";
-import { LightningDozerCutIn } from "../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+} from "../../../../../game/game-object/cut-in/lightning-dozer";
+import { LightningDozerCutIn } from "../../../../../game/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

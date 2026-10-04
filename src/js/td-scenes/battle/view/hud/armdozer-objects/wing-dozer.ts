@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyWingDozerCutIn,
   playerWingDozerCutIn,
-} from "../../../../../game-object/cut-in/wing-dozer";
-import { WingDozerCutIn } from "../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
+} from "../../../../../game/game-object/cut-in/wing-dozer";
+import { WingDozerCutIn } from "../../../../../game/game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

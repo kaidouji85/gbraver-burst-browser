@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyShinyaCutIn,
   playerShinyaCutIn,
-} from "../../../../../game-object/cut-in/shinya";
-import { ShinyaCutIn } from "../../../../../game-object/cut-in/shinya/shinya";
+} from "../../../../../game/game-object/cut-in/shinya";
+import { ShinyaCutIn } from "../../../../../game/game-object/cut-in/shinya/shinya";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDPilotObjects } from "./hud-pilot-objects";
 

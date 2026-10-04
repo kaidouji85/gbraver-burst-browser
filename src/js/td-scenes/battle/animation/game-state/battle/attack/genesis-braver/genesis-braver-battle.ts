@@ -1,6 +1,6 @@
 import { BattleResult } from "gbraver-burst-core";
 
-import { GenesisBraver } from "../../../../../../../game-object/armdozer/genesis-braver/genesis-braver";
+import { GenesisBraver } from "../../../../../../../game/game-object/armdozer/genesis-braver/genesis-braver";
 import { BattleAnimationParamX } from "../../animation-param";
 
 /**

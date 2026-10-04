@@ -3,7 +3,7 @@ import type { CriticalHit, Guard, NormalHit } from "gbraver-burst-core";
 import { all } from "../../../../../../animation/all";
 import { Animate } from "../../../../../../animation/animate";
 import { empty } from "../../../../../../animation/delay";
-import type { ArmdozerSprite } from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../../game/game-object/armdozer/armdozer-sprite";
 import type {
   BattleAnimationParam,
   BattleAnimationParamX,

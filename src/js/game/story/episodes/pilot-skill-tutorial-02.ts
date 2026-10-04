@@ -1,6 +1,6 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createPilotSkillTutorial02Event } from "../../../custom-battle-events/pilot-skill-tutorial-02";
+import { createPilotSkillTutorial02Event } from "../../custom-battle-events/pilot-skill-tutorial-02";
 import { pilotSkillTutorialNPC } from "../../../npc/pilot-skill-tutorial";
 import { PathIds } from "../../../resource/path/ids";
 import { SOUND_IDS } from "../../../resource/sound/ids";

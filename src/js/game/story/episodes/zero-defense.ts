@@ -1,6 +1,6 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
-import { createZeroDefenseTutorialEvent } from "../../../custom-battle-events/zero-defense-tutorial";
+import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-defense-tutorial";
 import { zeroDefenseTutorialNPC } from "../../../npc/zero-defense-tutorial";
 import { PathIds } from "../../../resource/path/ids";
 import { SOUND_IDS } from "../../../resource/sound/ids";

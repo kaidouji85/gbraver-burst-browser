@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyGaiCutIn,
   playerGaiCutIn,
-} from "../../../../../game-object/cut-in/gai";
-import { GaiCutIn } from "../../../../../game-object/cut-in/gai/gai";
+} from "../../../../../game/game-object/cut-in/gai";
+import { GaiCutIn } from "../../../../../game/game-object/cut-in/gai/gai";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDPilotObjects } from "./hud-pilot-objects";
 

@@ -1,7 +1,7 @@
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
-import { LightningDozer } from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { LightningDozer } from "../../../../../../../game/game-object/armdozer/lightning-dozer/lightning-dozer";
+import { TDCamera } from "../../../../../../../game/game-object/camera/td";
 
 /**
  * アタッカーにフォーカスを合わせる

@@ -9,8 +9,8 @@ import {
   BGMManagerContainer,
   createBGMManager,
 } from "../../src/js/bgm/bgm-manager";
-import { createGameLoop } from "../../src/js/game-loop/game-loop";
-import { GameLoopContainer } from "../../src/js/game-loop/game-loop-container";
+import { createGameLoop } from "../../src/js/game/game-loop/game-loop";
+import { GameLoopContainer } from "../../src/js/game/game-loop/game-loop-container";
 import { ResourcesContainer } from "../../src/js/resource";
 import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";

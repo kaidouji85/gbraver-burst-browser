@@ -1,5 +1,5 @@
-import type { BatterySelectorModel } from "../../../../../src/js/game-object/battery-selector/model";
-import { canNumberChanged } from "../../../../../src/js/game-object/battery-selector/model/can-number-change";
+import type { BatterySelectorModel } from "../../../../../src/js/game/game-object/battery-selector/model";
+import { canNumberChanged } from "../../../../../src/js/game/game-object/battery-selector/model/can-number-change";
 import { EMPTY_BATTERY_SELECTOR } from "../../../../data/battery-selector-model";
 
 test("値が範囲内の場合、変更できる", () => {

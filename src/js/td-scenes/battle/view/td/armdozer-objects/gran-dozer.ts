@@ -1,17 +1,17 @@
 import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
 import {
   EnemyGranDozer,
   PlayerGranDozer,
-} from "../../../../../game-object/armdozer/gran-dozer";
-import { GranDozer } from "../../../../../game-object/armdozer/gran-dozer/gran-dozer";
+} from "../../../../../game/game-object/armdozer/gran-dozer";
+import { GranDozer } from "../../../../../game/game-object/armdozer/gran-dozer/gran-dozer";
 import {
   enemyLightningShot,
   playerLightningShot,
-} from "../../../../../game-object/shot/lightning-shot";
-import { LightningShot } from "../../../../../game-object/shot/lightning-shot/lightning-shot";
+} from "../../../../../game/game-object/shot/lightning-shot";
+import { LightningShot } from "../../../../../game/game-object/shot/lightning-shot/lightning-shot";
 import { TDLayerObjectCreatorParams } from "../creator-params";
 import { TDArmdozerObjects } from "./armdozer-objects";
 

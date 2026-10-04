@@ -1,11 +1,11 @@
-import { BatterySelector } from "../../../../../game-object/battery-selector";
-import { BurstButton } from "../../../../../game-object/burst-button/burst-button";
-import { DeathAlert } from "../../../../../game-object/death-alert";
-import { Fader } from "../../../../../game-object/fader/fader";
-import { LeadLine } from "../../../../../game-object/lead-line/lead-line";
-import { PilotButton } from "../../../../../game-object/pilot-button/pilot-button";
-import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
-import { TimeScaleButton } from "../../../../../game-object/time-scale-button/time-scale-button";
+import { BatterySelector } from "../../../../../game/game-object/battery-selector";
+import { BurstButton } from "../../../../../game/game-object/burst-button/burst-button";
+import { DeathAlert } from "../../../../../game/game-object/death-alert";
+import { Fader } from "../../../../../game/game-object/fader/fader";
+import { LeadLine } from "../../../../../game/game-object/lead-line/lead-line";
+import { PilotButton } from "../../../../../game/game-object/pilot-button/pilot-button";
+import { ResultIndicator } from "../../../../../game/game-object/result-indicator/result-indicator";
+import { TimeScaleButton } from "../../../../../game/game-object/time-scale-button/time-scale-button";
 
 /** HUDレイヤーゲームオブジェクト プロパティ */
 export type HUDGameObjectsProps = {

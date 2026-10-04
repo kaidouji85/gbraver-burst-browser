@@ -1,7 +1,7 @@
 import { Subject } from "rxjs";
 
 import { Exclusive } from "../../../exclusive/exclusive";
-import { GameLoopContainer } from "../../../game-loop/game-loop-container";
+import { GameLoopContainer } from "../../../game/game-loop/game-loop-container";
 import { SoundResource } from "../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../se/se-player";
 

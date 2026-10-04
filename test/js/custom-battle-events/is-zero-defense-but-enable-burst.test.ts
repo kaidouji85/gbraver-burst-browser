@@ -1,6 +1,6 @@
 import { EMPTY_ARMDOZER_STATE, EMPTY_PLAYER_STATE } from "gbraver-burst-core";
 
-import { isZeroDefenseButEnableBurst } from "../../../src/js/custom-battle-events/is-zero-defense-but-enable-burst";
+import { isZeroDefenseButEnableBurst } from "../../../src/js/game/custom-battle-events/is-zero-defense-but-enable-burst";
 
 /** 攻撃側プレイヤー */
 const attacker = {

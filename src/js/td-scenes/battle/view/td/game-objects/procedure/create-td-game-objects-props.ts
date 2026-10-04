@@ -1,7 +1,7 @@
-import { Illumination } from "../../../../../../game-object/illumination/illumination";
-import { SkyBrightness } from "../../../../../../game-object/sky-brightness/sky-brightness";
-import ShoppingStreet from "../../../../../../game-object/stage/shopping-street/shopping-street";
-import { TurnIndicator } from "../../../../../../game-object/turn-indicator/turn-indicator";
+import { Illumination } from "../../../../../../game/game-object/illumination/illumination";
+import { SkyBrightness } from "../../../../../../game/game-object/sky-brightness/sky-brightness";
+import ShoppingStreet from "../../../../../../game/game-object/stage/shopping-street/shopping-street";
+import { TurnIndicator } from "../../../../../../game/game-object/turn-indicator/turn-indicator";
 import { TDLayerObjectCreatorParams } from "../../creator-params";
 import { TDGameObjectsProps } from "../props";
 

@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyGenesisBraverCutIn,
   playerGenesisBraverCutIn,
-} from "../../../../../game-object/cut-in/genesis-braver";
-import { GenesisBraverCutIn } from "../../../../../game-object/cut-in/genesis-braver/genesis-braver-cutin";
+} from "../../../../../game/game-object/cut-in/genesis-braver";
+import { GenesisBraverCutIn } from "../../../../../game/game-object/cut-in/genesis-braver/genesis-braver-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

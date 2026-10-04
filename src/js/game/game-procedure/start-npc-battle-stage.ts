@@ -1,7 +1,7 @@
 import { Command, Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
+import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
 import { StageTitle } from "../../dom-scenes/stage-title";
 import { NPCBattleRoom } from "../../npc/npc-battle-room";

@@ -4,15 +4,15 @@ import * as THREE from "three";
 
 import { AbortManager } from "../../src/js/abort-controller/abort-manager";
 import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
-import { createGameLoop, GameLoop } from "../../src/js/game-loop/game-loop";
-import { PreRender } from "../../src/js/game-loop/pre-render";
-import { Update } from "../../src/js/game-loop/update";
+import { createGameLoop, GameLoop } from "../../src/js/game/game-loop/game-loop";
+import { PreRender } from "../../src/js/game/game-loop/pre-render";
+import { Update } from "../../src/js/game/game-loop/update";
 import {
   GameObjectAction,
   gameObjectStream,
-} from "../../src/js/game-object/action/game-object-action";
-import { GameObjectActionContainer } from "../../src/js/game-object/action/game-object-action-container";
-import { PlainHUDCamera } from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
+} from "../../src/js/game/game-object/action/game-object-action";
+import { GameObjectActionContainer } from "../../src/js/game/game-object/action/game-object-action-container";
+import { PlainHUDCamera } from "../../src/js/game/game-object/camera/plain-hud/plain-hud-camera";
 import { Renderer } from "../../src/js/render";
 import { OverlapEvent } from "../../src/js/render/overlap-event/overlap-event";
 import { ResourcesContainer } from "../../src/js/resource";

@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyGranDozerCutIn,
   playerGranDozerCutIn,
-} from "../../../../../game-object/cut-in/gran-dozer";
-import { GranDozerCutIn } from "../../../../../game-object/cut-in/gran-dozer/gran-dozer-cut-in";
+} from "../../../../../game/game-object/cut-in/gran-dozer";
+import { GranDozerCutIn } from "../../../../../game/game-object/cut-in/gran-dozer/gran-dozer-cut-in";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

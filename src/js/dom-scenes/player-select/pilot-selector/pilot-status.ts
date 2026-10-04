@@ -1,8 +1,8 @@
 import type { PilotId } from "gbraver-burst-core";
 import { Pilots } from "gbraver-burst-core";
 
-import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
-import { pilotSkillOverview } from "../../../game-description/pilot-skill-overview";
+import { pilotSkillDetail } from "../../../game/game-description/pilot-skill-detail";
+import { pilotSkillOverview } from "../../../game/game-description/pilot-skill-overview";
 import { domUuid } from "../../../uuid/dom-uuid";
 
 /** ルート要素のクラス名 */

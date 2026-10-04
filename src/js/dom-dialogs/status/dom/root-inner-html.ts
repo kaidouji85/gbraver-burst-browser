@@ -1,8 +1,8 @@
 import { correctPower, PlayerState } from "gbraver-burst-core";
 
-import { burstDetail } from "../../../game-description/burst-detail";
-import { getEffectOverView } from "../../../game-description/effect-overview";
-import { pilotSkillDetail } from "../../../game-description/pilot-skill-detail";
+import { burstDetail } from "../../../game/game-description/burst-detail";
+import { getEffectOverView } from "../../../game/game-description/effect-overview";
+import { pilotSkillDetail } from "../../../game/game-description/pilot-skill-detail";
 import { getArmdozerStandPathId } from "../../../path/armdozer-stand-path";
 import { getPilotSkillCutinPathId } from "../../../path/pilot-skill-cutin-path";
 import { ResourcesContainer } from "../../../resource";

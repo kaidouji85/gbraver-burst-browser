@@ -3,7 +3,7 @@ import { Easing } from "@tweenjs/tween.js";
 import { all } from "../../../animation/all";
 import { Animate } from "../../../animation/animate";
 import { delay } from "../../../animation/delay";
-import { TDCamera } from "../../../game-object/camera/td";
+import { TDCamera } from "../../../game/game-object/camera/td";
 
 /** カメラ初期位置 X */
 export const INITIAL_CAMERA_POSITION_X = 0;

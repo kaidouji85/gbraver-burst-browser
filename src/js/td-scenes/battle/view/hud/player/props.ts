@@ -1,10 +1,10 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { Gauge } from "../../../../../game-object/gauge/gauge";
-import { PredicatedDamage } from "../../../../../game-object/predicated-damage";
-import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
-import { StatusIcon } from "../../../../../game-object/status-icon";
-import { TurnStart } from "../../../../../game-object/turn-start/turn-start";
+import { Gauge } from "../../../../../game/game-object/gauge/gauge";
+import { PredicatedDamage } from "../../../../../game/game-object/predicated-damage";
+import { ResultIndicator } from "../../../../../game/game-object/result-indicator/result-indicator";
+import { StatusIcon } from "../../../../../game/game-object/status-icon";
+import { TurnStart } from "../../../../../game/game-object/turn-start/turn-start";
 
 /** HUDプレイヤーオブジェクト プロパティ */
 export type HUDPlayerProps = {

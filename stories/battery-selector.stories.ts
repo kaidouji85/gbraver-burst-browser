@@ -1,7 +1,7 @@
 import { ArmdozerId, ArmdozerIds } from "gbraver-burst-core";
 
-import { BatterySelector } from "../src/js/game-object/battery-selector";
-import { ButtonLabel } from "../src/js/game-object/battery-selector/model/button-label";
+import { BatterySelector } from "../src/js/game/game-object/battery-selector";
+import { ButtonLabel } from "../src/js/game/game-object/battery-selector/model/button-label";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

@@ -1,16 +1,16 @@
-import { BatterySelector } from "../../../../../../game-object/battery-selector";
-import { DeathAlert } from "../../../../../../game-object/death-alert";
+import { BatterySelector } from "../../../../../../game/game-object/battery-selector";
+import { DeathAlert } from "../../../../../../game/game-object/death-alert";
 import {
   frontmostFader,
   rearmostFader,
-} from "../../../../../../game-object/fader";
+} from "../../../../../../game/game-object/fader";
 import {
   batterySelectorLeadLine,
   burstButtonLeadLine,
   pilotButtonLeadLine,
-} from "../../../../../../game-object/lead-line";
-import { drawIndicator } from "../../../../../../game-object/result-indicator";
-import { TimeScaleButton } from "../../../../../../game-object/time-scale-button/time-scale-button";
+} from "../../../../../../game/game-object/lead-line";
+import { drawIndicator } from "../../../../../../game/game-object/result-indicator";
+import { TimeScaleButton } from "../../../../../../game/game-object/time-scale-button/time-scale-button";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 import { HUDGameObjectsProps } from "../props";
 import { createBurstButton } from "./create-burst-button";

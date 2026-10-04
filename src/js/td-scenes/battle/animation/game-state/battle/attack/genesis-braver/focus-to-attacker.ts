@@ -1,7 +1,7 @@
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
-import { GenesisBraver } from "../../../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { GenesisBraver } from "../../../../../../../game/game-object/armdozer/genesis-braver/genesis-braver";
+import { TDCamera } from "../../../../../../../game/game-object/camera/td";
 
 /**
  * アタッカーにフォーカスを合わせる

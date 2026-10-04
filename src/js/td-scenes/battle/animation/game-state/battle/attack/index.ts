@@ -1,10 +1,10 @@
 import { Animate } from "../../../../../../animation/animate";
-import { GenesisBraver } from "../../../../../../game-object/armdozer/genesis-braver/genesis-braver";
-import { GranDozer } from "../../../../../../game-object/armdozer/gran-dozer/gran-dozer";
-import { LightningDozer } from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import { NeoLandozer } from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import { ShinBraver } from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import { WingDozer } from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
+import { GenesisBraver } from "../../../../../../game/game-object/armdozer/genesis-braver/genesis-braver";
+import { GranDozer } from "../../../../../../game/game-object/armdozer/gran-dozer/gran-dozer";
+import { LightningDozer } from "../../../../../../game/game-object/armdozer/lightning-dozer/lightning-dozer";
+import { NeoLandozer } from "../../../../../../game/game-object/armdozer/neo-landozer/neo-landozer";
+import { ShinBraver } from "../../../../../../game/game-object/armdozer/shin-braver/shin-braver";
+import { WingDozer } from "../../../../../../game/game-object/armdozer/wing-dozer/wing-dozer";
 import { BattleAnimationParam } from "../animation-param";
 import { emptyAttackAnimation } from "./empty-animation";
 import { genesisBraverAttack } from "./genesis-braver";

@@ -1,12 +1,12 @@
 import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
-} from "../../../../../game-object/armdozer/genesis-braver";
-import { GenesisBraver } from "../../../../../game-object/armdozer/genesis-braver/genesis-braver";
+} from "../../../../../game/game-object/armdozer/genesis-braver";
+import { GenesisBraver } from "../../../../../game/game-object/armdozer/genesis-braver/genesis-braver";
 import { TDLayerObjectCreatorParams } from "../creator-params";
 import { TDArmdozerObjects } from "./armdozer-objects";
 

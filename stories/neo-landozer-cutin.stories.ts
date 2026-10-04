@@ -3,8 +3,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyNeoLandozerCutIn,
   playerNeoLandozerCutIn,
-} from "../src/js/game-object/cut-in/neo-landozer";
-import { NeoLandozerCutIn } from "../src/js/game-object/cut-in/neo-landozer/neo-landozer-cutin";
+} from "../src/js/game/game-object/cut-in/neo-landozer";
+import { NeoLandozerCutIn } from "../src/js/game/game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

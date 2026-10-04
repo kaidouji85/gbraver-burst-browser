@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 import Stats from "stats.js";
 
-import { GameLoopContainer } from "../game-loop/game-loop-container";
+import { GameLoopContainer } from "../game/game-loop/game-loop-container";
 
 /** パフォーマンス統計コンストラクタのパラメータ */
 type PerformanceStatsOptions = GameLoopContainer;

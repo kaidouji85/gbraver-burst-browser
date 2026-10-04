@@ -5,8 +5,8 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { TDCamera } from "../../../../../game-object/camera/td";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
+import { TDCamera } from "../../../../../game/game-object/camera/td";
 import { HUDGameObjects } from "../../../view/hud/game-objects";
 import { HUDPilotObjects } from "../../../view/hud/pilot-objects/hud-pilot-objects";
 import { HUDPlayer } from "../../../view/hud/player";

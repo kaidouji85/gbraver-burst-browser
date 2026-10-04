@@ -1,17 +1,17 @@
 import { PlayerId } from "gbraver-burst-core";
 
-import { BatteryCorrect } from "../../../../../game-object/battery-correct/battery-correct";
-import { BatteryEnhancement } from "../../../../../game-object/battery-enhancement/battery-enhancement";
-import { BatteryNumber } from "../../../../../game-object/battery-number/battery-number";
-import { ContinuousAttackIndicator } from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
-import { DamageHalved } from "../../../../../game-object/damage-halved/damage-halved";
-import { DamageIndicator } from "../../../../../game-object/damage-indicator/damage-indicator";
-import { EffectClear } from "../../../../../game-object/effect-clear/effectClear";
-import { Lightning } from "../../../../../game-object/hitmark/lightning/lightning";
-import { ShockWave } from "../../../../../game-object/hitmark/shock-wave/shock-wave";
-import { PowerUp } from "../../../../../game-object/power-up/power-up";
-import { RecoverBattery } from "../../../../../game-object/recover-battery/recover-battery";
-import { ReflectIndicator } from "../../../../../game-object/reflect-indicator/reflect-indicator";
+import { BatteryCorrect } from "../../../../../game/game-object/battery-correct/battery-correct";
+import { BatteryEnhancement } from "../../../../../game/game-object/battery-enhancement/battery-enhancement";
+import { BatteryNumber } from "../../../../../game/game-object/battery-number/battery-number";
+import { ContinuousAttackIndicator } from "../../../../../game/game-object/continuous-attack/continuous-attack-indicator";
+import { DamageHalved } from "../../../../../game/game-object/damage-halved/damage-halved";
+import { DamageIndicator } from "../../../../../game/game-object/damage-indicator/damage-indicator";
+import { EffectClear } from "../../../../../game/game-object/effect-clear/effectClear";
+import { Lightning } from "../../../../../game/game-object/hitmark/lightning/lightning";
+import { ShockWave } from "../../../../../game/game-object/hitmark/shock-wave/shock-wave";
+import { PowerUp } from "../../../../../game/game-object/power-up/power-up";
+import { RecoverBattery } from "../../../../../game/game-object/recover-battery/recover-battery";
+import { ReflectIndicator } from "../../../../../game/game-object/reflect-indicator/reflect-indicator";
 
 /** 3Dレイヤー プレイヤーオブジェクト プロパティ */
 export interface TDPlayerProps {

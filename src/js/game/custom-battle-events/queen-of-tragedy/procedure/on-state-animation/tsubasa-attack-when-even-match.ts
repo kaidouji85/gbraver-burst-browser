@@ -1,0 +1,35 @@
+import { empty } from "../../../../../animation/delay";
+import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../../td-scenes/battle/separate-players";
+import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
+import { isEvenMatch } from "../../../is-even-match";
+import { tsubasaAttackShoutWhenEvenMatch } from "../../animation/tsubasa-attack-shout-when-even-match";
+import { QueenOfTragedyProps } from "../../props";
+
+/** ツバサ 攻撃（イーブンマッチ） */
+export const tsubasaAttackWhenEvenMatch: ConditionalAnimation<
+  CustomStateAnimationProps & QueenOfTragedyProps
+> = (props) => {
+  const { enemyId } = props;
+  const { effect } = props.currentState;
+  const separatedPlayers = separatePlayersFromCurrentState(props);
+  const isEvenMatchGame = separatedPlayers
+    ? isEvenMatch(separatedPlayers)
+    : false;
+
+  if (
+    effect.name === "BatteryDeclaration" &&
+    effect.attacker === enemyId &&
+    isEvenMatchGame
+  ) {
+    return tsubasaAttackShoutWhenEvenMatch(props);
+  } else if (
+    effect.name === "Battle" &&
+    effect.attacker === enemyId &&
+    isEvenMatchGame
+  ) {
+    return empty();
+  }
+
+  return null;
+};

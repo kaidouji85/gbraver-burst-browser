@@ -1,15 +1,15 @@
-import { enemyBatteryCorrect } from "../../../../../../game-object/battery-correct";
-import { enemyBatteryEnhancement } from "../../../../../../game-object/battery-enhancement";
-import { enemyBatteryNumber } from "../../../../../../game-object/battery-number";
-import { enemyContinuousAttack } from "../../../../../../game-object/continuous-attack";
-import { enemyDamageHalved } from "../../../../../../game-object/damage-halved";
-import { enemyDamageIndicator } from "../../../../../../game-object/damage-indicator";
-import { enemyEffectClear } from "../../../../../../game-object/effect-clear";
-import { enemyLightning } from "../../../../../../game-object/hitmark/lightning";
-import { enemyShockWave } from "../../../../../../game-object/hitmark/shock-wave";
-import { enemyPowerUp } from "../../../../../../game-object/power-up";
-import { enemyRecoverBattery } from "../../../../../../game-object/recover-battery";
-import { enemyReflectIndicator } from "../../../../../../game-object/reflect-indicator";
+import { enemyBatteryCorrect } from "../../../../../../game/game-object/battery-correct";
+import { enemyBatteryEnhancement } from "../../../../../../game/game-object/battery-enhancement";
+import { enemyBatteryNumber } from "../../../../../../game/game-object/battery-number";
+import { enemyContinuousAttack } from "../../../../../../game/game-object/continuous-attack";
+import { enemyDamageHalved } from "../../../../../../game/game-object/damage-halved";
+import { enemyDamageIndicator } from "../../../../../../game/game-object/damage-indicator";
+import { enemyEffectClear } from "../../../../../../game/game-object/effect-clear";
+import { enemyLightning } from "../../../../../../game/game-object/hitmark/lightning";
+import { enemyShockWave } from "../../../../../../game/game-object/hitmark/shock-wave";
+import { enemyPowerUp } from "../../../../../../game/game-object/power-up";
+import { enemyRecoverBattery } from "../../../../../../game/game-object/recover-battery";
+import { enemyReflectIndicator } from "../../../../../../game/game-object/reflect-indicator";
 import { TDLayerObjectCreatorParams } from "../../creator-params";
 import { TDPlayerProps } from "../props";
 

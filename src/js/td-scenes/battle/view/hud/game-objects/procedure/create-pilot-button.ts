@@ -6,8 +6,8 @@ import {
   shinyaPilotButton,
   tsubasaPilotButton,
   yuuyaPilotButton,
-} from "../../../../../../game-object/pilot-button";
-import { PilotButton } from "../../../../../../game-object/pilot-button/pilot-button";
+} from "../../../../../../game/game-object/pilot-button";
+import { PilotButton } from "../../../../../../game/game-object/pilot-button/pilot-button";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 
 /**

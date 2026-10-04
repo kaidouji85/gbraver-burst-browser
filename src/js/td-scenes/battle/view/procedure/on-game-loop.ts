@@ -1,4 +1,4 @@
-import { GameLoop } from "../../../../game-loop/game-loop";
+import { GameLoop } from "../../../../game/game-loop/game-loop";
 import { BattleSceneViewProps } from "../props";
 import { tracking } from "./tracking";
 

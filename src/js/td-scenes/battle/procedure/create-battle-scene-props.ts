@@ -7,7 +7,7 @@ import { BGMManagerContainer } from "../../../bgm/bgm-manager";
 import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../exclusive/exclusive";
 import { PlayerPilotVisibility } from "../../../game/config/browser-config";
-import { GameLoopContainer } from "../../../game-loop/game-loop-container";
+import { GameLoopContainer } from "../../../game/game-loop/game-loop-container";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
 import { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import { Rendering } from "../../../render/rendering";

@@ -1,6 +1,6 @@
 import { BattleResult } from "gbraver-burst-core";
 
-import { GranDozer } from "../../../../../../../game-object/armdozer/gran-dozer/gran-dozer";
+import { GranDozer } from "../../../../../../../game/game-object/armdozer/gran-dozer/gran-dozer";
 import { BattleAnimationParamX } from "../../animation-param";
 
 /**

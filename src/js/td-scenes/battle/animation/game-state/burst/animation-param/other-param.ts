@@ -1,5 +1,5 @@
-import { PlainHUDCamera } from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import { TDCamera } from "../../../../../../game-object/camera/td";
+import { PlainHUDCamera } from "../../../../../../game/game-object/camera/plain-hud/plain-hud-camera";
+import { TDCamera } from "../../../../../../game/game-object/camera/td";
 import { HUDGameObjects } from "../../../../view/hud/game-objects";
 import { TDGameObjects } from "../../../../view/td/game-objects";
 import { StateAnimationProps } from "../../state-animation-props";

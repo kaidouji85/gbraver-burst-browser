@@ -1,7 +1,7 @@
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
-import { GranDozer } from "../../../../../../../game-object/armdozer/gran-dozer/gran-dozer";
-import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { GranDozer } from "../../../../../../../game/game-object/armdozer/gran-dozer/gran-dozer";
+import { TDCamera } from "../../../../../../../game/game-object/camera/td";
 
 /**
  * アタッカーにフォーカスを合わせる

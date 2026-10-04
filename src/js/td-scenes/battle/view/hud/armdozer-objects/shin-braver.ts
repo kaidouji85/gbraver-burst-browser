@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyShinBraverCutIn,
   playerShinBraverCutIn,
-} from "../../../../../game-object/cut-in/shin-braver";
-import { ShinBraverCutIn } from "../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
+} from "../../../../../game/game-object/cut-in/shin-braver";
+import { ShinBraverCutIn } from "../../../../../game/game-object/cut-in/shin-braver/shin-braver-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

@@ -1,5 +1,5 @@
 import { delay } from "../src/js/animation/delay";
-import { LightningBarrierGameEffect } from "../src/js/game-object/barrier/lightning/lightning-barrier";
+import { LightningBarrierGameEffect } from "../src/js/game/game-object/barrier/lightning/lightning-barrier";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

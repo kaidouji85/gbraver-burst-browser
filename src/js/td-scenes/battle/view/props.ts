@@ -1,8 +1,8 @@
 import { PlayerId } from "gbraver-burst-core";
 import { Subject } from "rxjs";
 
-import { PreRender } from "../../../game-loop/pre-render";
-import { Update } from "../../../game-loop/update";
+import { PreRender } from "../../../game/game-loop/pre-render";
+import { Update } from "../../../game/game-loop/update";
 import { OverlapNotifier } from "../../../render/overlap-notifier";
 import { RendererDomGetter } from "../../../render/renderer-dom-getter";
 import { Rendering } from "../../../render/rendering";

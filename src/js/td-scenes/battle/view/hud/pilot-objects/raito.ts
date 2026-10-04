@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyRaitoCutIn,
   playerRaitoCutIn,
-} from "../../../../../game-object/cut-in/raito";
-import { RaitoCutIn } from "../../../../../game-object/cut-in/raito/raito";
+} from "../../../../../game/game-object/cut-in/raito";
+import { RaitoCutIn } from "../../../../../game/game-object/cut-in/raito/raito";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDPilotObjects } from "./hud-pilot-objects";
 

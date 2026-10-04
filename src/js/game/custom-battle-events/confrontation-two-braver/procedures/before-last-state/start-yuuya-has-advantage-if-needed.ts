@@ -1,0 +1,38 @@
+import {
+  CustomBattleEventProps,
+  LastStateContainer,
+} from "../../../../../td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../../../td-scenes/battle/separate-players";
+import { isEnemyAdvantage } from "../../../is-enemy-advantage";
+import { turnCount } from "../../../turn-count";
+import { ConfrontationTwoBraverProps } from "../../props";
+import { shinyaMonologueWhenYuuyaHasAdvantage } from "../../stories/shinya-monologue-when-yuuya-has-advantage";
+
+/**
+ * 条件を満たした場合、チャプター「ユウヤ有利」を開始する
+ * @param props イベントプロパティ
+ * @returns チャプターを開始した場合、trueを返す
+ */
+export async function startYuuyaHasAdvantageIfNeeded(
+  props: Readonly<
+    CustomBattleEventProps & LastStateContainer & ConfrontationTwoBraverProps
+  >,
+): Promise<boolean> {
+  const separatedPlayers = separatePlayersFromLastState(props);
+  if (!separatedPlayers) {
+    return false;
+  }
+
+  const { player, enemy } = separatedPlayers;
+  const turn = turnCount(props.stateHistory);
+  if (
+    props.eventState.chapter.type !== "YuuyaHasAdvantage" &&
+    turn === 3 &&
+    isEnemyAdvantage({ player, enemy })
+  ) {
+    await shinyaMonologueWhenYuuyaHasAdvantage(props);
+    return true;
+  }
+
+  return false;
+}

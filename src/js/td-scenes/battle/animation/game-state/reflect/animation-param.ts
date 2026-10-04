@@ -1,9 +1,9 @@
 import { PlayerState, Reflect } from "gbraver-burst-core";
 
 import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { TDCamera } from "../../../../../game-object/camera/td";
-import { ResultIndicator } from "../../../../../game-object/result-indicator/result-indicator";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
+import { TDCamera } from "../../../../../game/game-object/camera/td";
+import { ResultIndicator } from "../../../../../game/game-object/result-indicator/result-indicator";
 import { SoundResource } from "../../../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDPlayer } from "../../../view/hud/player";

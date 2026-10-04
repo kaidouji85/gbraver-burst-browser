@@ -1,6 +1,6 @@
 import { BattleResult } from "gbraver-burst-core";
 
-import { ShinBraver } from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
+import { ShinBraver } from "../../../../../../../game/game-object/armdozer/shin-braver/shin-braver";
 import { BattleAnimationParamX } from "../../animation-param";
 
 /**

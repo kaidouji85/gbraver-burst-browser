@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyLightningDozerCutIn,
   playerLightningDozerCutIn,
-} from "../src/js/game-object/cut-in/lightning-dozer";
-import { LightningDozerCutIn } from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+} from "../src/js/game/game-object/cut-in/lightning-dozer";
+import { LightningDozerCutIn } from "../src/js/game/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

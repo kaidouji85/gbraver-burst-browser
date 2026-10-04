@@ -1,10 +1,10 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { PreRender } from "../../../../../game-loop/pre-render";
-import { Update } from "../../../../../game-loop/update";
-import { gameObjectStream } from "../../../../../game-object/action/game-object-action";
-import { TDCamera } from "../../../../../game-object/camera/td";
+import { PreRender } from "../../../../../game/game-loop/pre-render";
+import { Update } from "../../../../../game/game-loop/update";
+import { gameObjectStream } from "../../../../../game/game-object/action/game-object-action";
+import { TDCamera } from "../../../../../game/game-object/camera/td";
 import { OverlapNotifier } from "../../../../../render/overlap-notifier";
 import { BattleViewCreatorParams } from "../../creator-params";
 import { enemyTDArmdozer, playerTDArmdozer } from "../armdozer-objects";

@@ -1,7 +1,7 @@
 import type { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import type { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import type { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
 
 /**
  * 3Dレイヤー アームドーザ固有のオブジェクトを集めたもの

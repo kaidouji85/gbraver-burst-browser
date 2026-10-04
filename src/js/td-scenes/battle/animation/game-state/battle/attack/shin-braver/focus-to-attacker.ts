@@ -1,7 +1,7 @@
 import { all } from "../../../../../../../animation/all";
 import { Animate } from "../../../../../../../animation/animate";
-import { ShinBraver } from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import { TDCamera } from "../../../../../../../game-object/camera/td";
+import { ShinBraver } from "../../../../../../../game/game-object/armdozer/shin-braver/shin-braver";
+import { TDCamera } from "../../../../../../../game/game-object/camera/td";
 
 /**
  * アタッカーにフォーカスを合わせる

@@ -1,7 +1,7 @@
-import { Illumination } from "../../../../../game-object/illumination/illumination";
-import { SkyBrightness } from "../../../../../game-object/sky-brightness/sky-brightness";
-import { Stage } from "../../../../../game-object/stage/stage";
-import { TurnIndicator } from "../../../../../game-object/turn-indicator/turn-indicator";
+import { Illumination } from "../../../../../game/game-object/illumination/illumination";
+import { SkyBrightness } from "../../../../../game/game-object/sky-brightness/sky-brightness";
+import { Stage } from "../../../../../game/game-object/stage/stage";
+import { TurnIndicator } from "../../../../../game/game-object/turn-indicator/turn-indicator";
 
 /** 3Dレイヤー その他ゲームオブジェクト プロパティ */
 export type TDGameObjectsProps = {

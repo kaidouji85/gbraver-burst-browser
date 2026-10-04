@@ -1,12 +1,12 @@
 import { PlayerId } from "gbraver-burst-core";
 import * as THREE from "three";
 
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
 import {
   EnemyShinBraver,
   PlayerShinBraver,
-} from "../../../../../game-object/armdozer/shin-braver";
-import { ShinBraver } from "../../../../../game-object/armdozer/shin-braver/shin-braver";
+} from "../../../../../game/game-object/armdozer/shin-braver";
+import { ShinBraver } from "../../../../../game/game-object/armdozer/shin-braver/shin-braver";
 import { TDLayerObjectCreatorParams } from "../creator-params";
 import { TDArmdozerObjects } from "./armdozer-objects";
 

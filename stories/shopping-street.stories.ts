@@ -1,6 +1,6 @@
 import { delay } from "../src/js/animation/delay";
-import { Illumination } from "../src/js/game-object/illumination/illumination";
-import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
+import { Illumination } from "../src/js/game/game-object/illumination/illumination";
+import ShoppingStreet from "../src/js/game/game-object/stage/shopping-street/shopping-street";
 import { createSkyBox } from "../src/js/td-scenes/battle/view/td/sky-box";
 import { Object3DsGeneratorParams } from "./stub/still-image-stub";
 import { stillImageStub } from "./stub/still-image-stub";

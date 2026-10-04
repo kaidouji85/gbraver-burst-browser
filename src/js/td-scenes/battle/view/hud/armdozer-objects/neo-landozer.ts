@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyNeoLandozerCutIn,
   playerNeoLandozerCutIn,
-} from "../../../../../game-object/cut-in/neo-landozer";
-import { NeoLandozerCutIn } from "../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
+} from "../../../../../game/game-object/cut-in/neo-landozer";
+import { NeoLandozerCutIn } from "../../../../../game/game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDArmdozerObjects } from "./hud-armdozer-objects";
 

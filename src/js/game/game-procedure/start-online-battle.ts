@@ -2,7 +2,7 @@ import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { createSeriousMatchEvent } from "../../custom-battle-events/serious-match-event";
+import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
 import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
 import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";

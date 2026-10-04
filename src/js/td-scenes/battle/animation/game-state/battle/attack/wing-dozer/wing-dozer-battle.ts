@@ -1,6 +1,6 @@
 import { BattleResult } from "gbraver-burst-core";
 
-import { WingDozer } from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
+import { WingDozer } from "../../../../../../../game/game-object/armdozer/wing-dozer/wing-dozer";
 import { BattleAnimationParamX } from "../../animation-param";
 
 /**

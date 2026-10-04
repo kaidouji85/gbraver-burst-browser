@@ -6,9 +6,9 @@ import {
 } from "gbraver-burst-core";
 
 import { BGMManagerContainer } from "../../../../../bgm/bgm-manager";
-import { ArmdozerSprite } from "../../../../../game-object/armdozer/armdozer-sprite";
-import { PlainHUDCamera } from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import { TDCamera } from "../../../../../game-object/camera/td";
+import { ArmdozerSprite } from "../../../../../game/game-object/armdozer/armdozer-sprite";
+import { PlainHUDCamera } from "../../../../../game/game-object/camera/plain-hud/plain-hud-camera";
+import { TDCamera } from "../../../../../game/game-object/camera/td";
 import { SoundResource } from "../../../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../../../se/se-player";
 import { HUDGameObjects } from "../../../view/hud/game-objects";

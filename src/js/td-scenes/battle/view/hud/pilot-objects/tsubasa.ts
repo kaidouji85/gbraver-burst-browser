@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   enemyTsubasaCutIn,
   playerTsubasaCutIn,
-} from "../../../../../game-object/cut-in/tsubasa";
-import { TsubasaCutIn } from "../../../../../game-object/cut-in/tsubasa/tsubasa";
+} from "../../../../../game/game-object/cut-in/tsubasa";
+import { TsubasaCutIn } from "../../../../../game/game-object/cut-in/tsubasa/tsubasa";
 import { HUDLayerObjectCreatorParams } from "../creator-params";
 import { HUDPilotObjects } from "./hud-pilot-objects";
 

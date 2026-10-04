@@ -1,8 +1,8 @@
-import { playerGauge } from "../../../../../../game-object/gauge";
-import { PredicatedDamage } from "../../../../../../game-object/predicated-damage";
-import { winIndicator } from "../../../../../../game-object/result-indicator";
-import { StatusIcon } from "../../../../../../game-object/status-icon";
-import { playerTurnStart } from "../../../../../../game-object/turn-start";
+import { playerGauge } from "../../../../../../game/game-object/gauge";
+import { PredicatedDamage } from "../../../../../../game/game-object/predicated-damage";
+import { winIndicator } from "../../../../../../game/game-object/result-indicator";
+import { StatusIcon } from "../../../../../../game/game-object/status-icon";
+import { playerTurnStart } from "../../../../../../game/game-object/turn-start";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 import { HUDPlayerProps } from "../props";
 

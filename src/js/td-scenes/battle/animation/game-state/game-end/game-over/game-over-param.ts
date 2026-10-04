@@ -1,7 +1,7 @@
 import { GameOver } from "gbraver-burst-core";
 
 import { BGMManagerContainer } from "../../../../../../bgm/bgm-manager";
-import { TDCamera } from "../../../../../../game-object/camera/td";
+import { TDCamera } from "../../../../../../game/game-object/camera/td";
 import { SoundResource } from "../../../../../../resource/sound/resource";
 import { HUDPlayer } from "../../../../view/hud/player";
 import { TDArmdozerObjects } from "../../../../view/td/armdozer-objects/armdozer-objects";

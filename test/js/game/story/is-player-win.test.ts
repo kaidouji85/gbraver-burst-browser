@@ -1,6 +1,6 @@
 import { EMPTY_PLAYER, GameEnd } from "gbraver-burst-core";
 
-import { EmptyCustomBattleEvent } from "../../../../src/js/custom-battle-events/empty-custom-battle-event";
+import { EmptyCustomBattleEvent } from "../../../../src/js/game/custom-battle-events/empty-custom-battle-event";
 import { Episode } from "../../../../src/js/game/story/episode";
 import { isPlayerWin } from "../../../../src/js/game/story/is-player-win";
 import { createEmptyNPC } from "../../../data/npc";
