@@ -1,4 +1,4 @@
-import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * ツバサ先輩のパイロットスキル発動か否かを判定する

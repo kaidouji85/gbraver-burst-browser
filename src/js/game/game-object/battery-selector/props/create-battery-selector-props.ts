@@ -1,6 +1,6 @@
 import { Group } from "@tweenjs/tween.js";
 
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { initialValue } from "../model/initial-value";
 import { createBatterySelectorSounds } from "../sounds/battery-selector-sounds";
 import { BatterySelectorView, BatterySelectorViewOptions } from "../view";

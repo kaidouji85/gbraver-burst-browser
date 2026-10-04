@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { TsubasaModel } from "../model/tsubasa-model";
 import { TsubasaSounds } from "../sounds/tsubasa-sounds";
 

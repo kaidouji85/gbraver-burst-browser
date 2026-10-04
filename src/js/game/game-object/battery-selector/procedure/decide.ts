@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { onStart } from "../../../../animation/object-animation/on-start";
+import { Animate } from "../../../../animation/animate";
+import { onStart } from "../../../../animation/on-start";
 import { popBatteryButton } from "../animation/pop-battery-button";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { stopAttention } from "./stop-attention";

@@ -1,7 +1,7 @@
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
-import { PlayerSelect } from "../../dom-scenes/player-select";
-import { SecretPlayerSelect } from "../../dom-scenes/secret-player-select";
+import { PlayerSelect } from "../scenes/dom-scenes/player-select";
+import { SecretPlayerSelect } from "../scenes/dom-scenes/secret-player-select";
 import { PlayerSelectorType } from "../config/browser-config";
 import { GameProps } from "../game-props";
 import { getPlayableArmdozers } from "../playable-amdozers";

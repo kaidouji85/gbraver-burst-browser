@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { GaiModel } from "../model/gai-model";
 import { GaiSounds } from "../sounds/gai-sounds";
 

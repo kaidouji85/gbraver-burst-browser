@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
-import { SignalContainer } from "../../abort-controller/signal-container";
+import { SignalContainer } from "../../event/abort-controller/signal-container";
 import { MessageWindow } from "../game-dom/message-window";
-import { SEPlayer } from "../../se/se-player";
-import { CustomBattleEventProps } from "../../td-scenes/battle/custom-battle-event";
-import { BattleSceneSounds } from "../../td-scenes/battle/sounds";
-import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
-import { PushWindow } from "../../window/push-window";
+import { SEPlayer } from "../../sounds/se/se-player";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
+import { BattleSceneSounds } from "../scenes/td-scenes/battle/sounds";
+import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
+import { PushWindow } from "../../dom/window/push-window";
 
 /** メッセージウインドウのパラグラフ */
 type Paragraph = string[];

@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { endGameIfNeeded } from "./end-game-if-needed";
 import { playZeroDefenseButEnableBurstIfNeeded } from "./play-zero-defense-but-enable-burst-if-needed";

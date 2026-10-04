@@ -1,5 +1,5 @@
-import { BatteryCommandSelectedEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayers } from "../../../../../td-scenes/battle/separate-players";
+import { BatteryCommandSelectedEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayers } from "../../../../scenes/td-scenes/battle/separate-players";
 import { activeNearBatterySelectorMessageWindow } from "../../../active-message-window";
 import { unattentionBurstButton } from "../../../attention";
 import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../../battery-selector-animations";

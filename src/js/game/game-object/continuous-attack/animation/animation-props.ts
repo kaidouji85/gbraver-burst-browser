@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { ContinuousAttackModel } from "../model/continuous-attack-model";
 import { ContinuousAttackSounds } from "../sounds/continuous-attack-sounds";
 

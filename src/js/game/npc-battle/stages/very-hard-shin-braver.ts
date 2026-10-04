@@ -1,4 +1,4 @@
-import { veryHardShinBraver } from "../../../npc/very-hard-shin-braver";
+import { veryHardShinBraver } from "../../npc/very-hard-shin-braver";
 
 /** ベリーハードコース シンブレイバー */
 export const VeryHardShinBraver = {

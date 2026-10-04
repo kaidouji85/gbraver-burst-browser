@@ -1,6 +1,6 @@
 import type { GameEnd, GameOver } from "gbraver-burst-core";
 
-import type { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import type { LastStateEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../props";
 import type { BurstTutorialState } from "../state";
 import { playerLose } from "../stories/player-lose";

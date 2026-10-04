@@ -1,7 +1,7 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { Animate } from "../../../../animation/object-animation/animate";
+import { Animate } from "../../../../animation/animate";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { popUp } from "./animation/pop-up";
 import {

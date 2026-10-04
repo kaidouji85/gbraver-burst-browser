@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { onStart } from "../../../../animation/object-animation/on-start";
+import { Animate } from "../../../../animation/animate";
+import { onStart } from "../../../../animation/on-start";
 import { hiddenRoot } from "../animation/hidden-root";
 import { ROOT_INVISIBLE } from "../dom/class-name";
 import { MiniControllerProps } from "../props";

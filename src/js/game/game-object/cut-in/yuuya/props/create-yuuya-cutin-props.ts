@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { YuuyaSounds } from "../sounds/yuuya-sounds";
 import { YuuyaView } from "../view/yuuya-view";

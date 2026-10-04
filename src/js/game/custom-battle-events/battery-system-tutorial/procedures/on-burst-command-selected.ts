@@ -1,7 +1,7 @@
 import type {
   BurstSelectedEventProps,
   CommandCanceled,
-} from "../../../../td-scenes/battle/custom-battle-event";
+} from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
 import { BatterySystemTutorialProps } from "../props";
 import type { BatterySystemTutorialState } from "../state";

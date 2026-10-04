@@ -1,4 +1,4 @@
-import { Loading } from "../../dom-scenes/loading";
+import { Loading } from "../scenes/dom-scenes/loading";
 import { mergeResources } from "../../resource/loading/merge-resources";
 import { GameProps } from "../game-props";
 import { switchLoading } from "./switch-scene/switch-loading";

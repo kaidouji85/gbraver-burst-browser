@@ -1,5 +1,5 @@
-import { Animate } from "../src/js/animation/object-animation/animate";
-import { delay } from "../src/js/animation/object-animation/delay";
+import { Animate } from "../src/js/animation/animate";
+import { delay } from "../src/js/animation/delay";
 import {
   enemyNeoLandozerCutIn,
   playerNeoLandozerCutIn,

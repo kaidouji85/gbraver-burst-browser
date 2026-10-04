@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { createWingDozerSounds } from "../sounds/wing-dozer-sounds";
 import { WingDozerView } from "../view/wing-dozer-view";

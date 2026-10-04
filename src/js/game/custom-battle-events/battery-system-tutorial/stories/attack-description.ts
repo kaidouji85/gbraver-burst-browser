@@ -1,5 +1,5 @@
-import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../../../wait/wait-time";
+import { LastStateEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
+import { waitTime } from "../../../../event/wait/wait-time";
 import { activeNearBatterySelectorMessageWindow } from "../../active-message-window";
 import {
   batterySelectorMinus,

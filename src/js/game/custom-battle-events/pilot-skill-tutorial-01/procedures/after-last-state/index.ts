@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenGameEnd } from "../../../invisible-shout-message-window";
 import { PilotSkillTutorial01Props } from "../../props";
 import { PilotSkillTutorial01State } from "../../state";

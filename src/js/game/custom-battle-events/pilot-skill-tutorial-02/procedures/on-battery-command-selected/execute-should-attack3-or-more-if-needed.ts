@@ -1,6 +1,6 @@
 import { totalCorrectPower } from "gbraver-burst-core";
 
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { PilotSkillTutorial02Props } from "../../props";
 import { shouldAttack3OrMore } from "../../stories/should-attack3-or-more";

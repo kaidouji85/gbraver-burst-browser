@@ -1,4 +1,4 @@
-import { Animate } from "../../../animation/object-animation/animate";
+import { Animate } from "../../../animation/animate";
 import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
@@ -6,7 +6,7 @@ import {
   CustomStateAnimationProps,
   LastStateEventProps,
   PilotSkillSelectedEventProps,
-} from "../../../td-scenes/battle/custom-battle-event";
+} from "../../scenes/td-scenes/battle/custom-battle-event";
 import { EmptyCustomBattleEvent } from "../empty-custom-battle-event";
 import { afterLastState } from "./procedures/after-last-state";
 import { beforeLastState } from "./procedures/before-last-state";

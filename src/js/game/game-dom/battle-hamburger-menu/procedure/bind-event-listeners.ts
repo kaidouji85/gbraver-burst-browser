@@ -1,7 +1,7 @@
 import { Unsubscribable } from "rxjs";
 
 import { domPushStream } from "../../../../dom/push-dom";
-import { pushWindowsStream } from "../../../../window/push-window";
+import { pushWindowsStream } from "../../../../dom/window/push-window";
 import {
   extractBackGround,
   extractEndBattle,

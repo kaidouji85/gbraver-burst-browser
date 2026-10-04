@@ -2,7 +2,7 @@ import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { PreRender } from "../../../game-loop/pre-render";
-import { HorizontalAnimationMesh } from "../../../../mesh/horizontal-animation";
+import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../resource";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";

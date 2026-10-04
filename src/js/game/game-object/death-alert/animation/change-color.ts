@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { tween } from "../../../../animation/object-animation/tween";
+import { Animate } from "../../../../animation/animate";
+import { tween } from "../../../../animation/tween";
 import { Color } from "../color";
 import { DeathAlertModel } from "../model/death-alert-model";
 

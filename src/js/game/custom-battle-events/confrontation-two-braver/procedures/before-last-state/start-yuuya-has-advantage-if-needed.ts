@@ -1,8 +1,8 @@
 import {
   CustomBattleEventProps,
   LastStateContainer,
-} from "../../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromLastState } from "../../../../../td-scenes/battle/separate-players";
+} from "../../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../../scenes/td-scenes/battle/separate-players";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
 import { turnCount } from "../../../turn-count";
 import { ConfrontationTwoBraverProps } from "../../props";

@@ -1,5 +1,5 @@
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromCurrentState } from "../../../../../td-scenes/battle/separate-players";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../scenes/td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { shinyaAttackShoutWhenYuuyaTakesDamage } from "../../animation/shinya-attack-shout-when-yuuya-takes-damage";
 import { ConfrontationTwoBraverProps } from "../../props";

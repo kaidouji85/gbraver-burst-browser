@@ -1,6 +1,6 @@
-import { SignalContainer } from "../../../../abort-controller/signal-container";
-import { all } from "../../../../animation/object-animation/all";
-import { onStart } from "../../../../animation/object-animation/on-start";
+import { SignalContainer } from "../../../../event/abort-controller/signal-container";
+import { all } from "../../../../animation/all";
+import { onStart } from "../../../../animation/on-start";
 import { changeNeedle } from "../animation/change-needle";
 import { getNeedleValue } from "../model/needle-value";
 import { BatterySelectorProps } from "../props/battery-selector-props";

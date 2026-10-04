@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { Title } from "../../../dom-scenes/title";
+import { Title } from "../../scenes/dom-scenes/title";
 import { GameProps } from "../../game-props";
 import { switchDOMScene } from "./switch-dom-scene";
 

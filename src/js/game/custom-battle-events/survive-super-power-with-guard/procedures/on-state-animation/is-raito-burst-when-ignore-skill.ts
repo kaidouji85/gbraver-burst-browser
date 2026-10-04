@@ -1,4 +1,4 @@
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * 「raitoBurstWhenIgnoreSkill」か否かを判定する

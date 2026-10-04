@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { ShinBraver } from "./shin-braver";
 import { EnemyShinBraverView } from "./view/enemy-shin-braver-view";

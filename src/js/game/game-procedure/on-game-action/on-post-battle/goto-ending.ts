@@ -1,7 +1,7 @@
-import { fadeOut, stop } from "../../../../bgm/bgm-operators";
-import { MAX_LOADING_TIME } from "../../../../dom-scenes/dom-scene-binder/max-loading-time";
-import { NPCEnding } from "../../../../dom-scenes/npc-ending";
-import { waitTime } from "../../../../wait/wait-time";
+import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
+import { MAX_LOADING_TIME } from "../../../scenes/dom-scenes/dom-scene-binder/max-loading-time";
+import { NPCEnding } from "../../../scenes/dom-scenes/npc-ending";
+import { waitTime } from "../../../../event/wait/wait-time";
 import { GameProps } from "../../../game-props";
 import { GotoEnding } from "../../../post-battle";
 import { switchNpcEnding } from "../../switch-scene/switch-npc-ending";

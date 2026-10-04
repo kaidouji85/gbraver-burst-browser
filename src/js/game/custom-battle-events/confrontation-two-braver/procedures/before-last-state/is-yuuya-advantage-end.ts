@@ -1,4 +1,4 @@
-import { CustomBattleEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { ConfrontationTwoBraverProps } from "../../props";
 

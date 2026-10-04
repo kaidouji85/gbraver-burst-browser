@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { StatusIconModel } from "../model/status-icon-model";
 import { StatusIconSounds } from "../sounds/status-icon-sounds";
 

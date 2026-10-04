@@ -1,6 +1,6 @@
 import { SilentlyBatteryAdjustOptions } from "../game-object/battery-selector/procedure/push-battery-adjust-buttons-silently";
-import { CustomBattleEventProps } from "../../td-scenes/battle/custom-battle-event";
-import { updatePredicatedDamage } from "../../td-scenes/battle/procedure/predicated-damage";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
+import { updatePredicatedDamage } from "../scenes/td-scenes/battle/procedure/predicated-damage";
 
 /**
  * バッテリーセレクターを+1するアニメーション

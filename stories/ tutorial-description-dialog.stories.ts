@@ -1,4 +1,4 @@
-import { TutorialDescriptionDialog } from "../src/js/dom-dialogs/tutorial-description";
+import { TutorialDescriptionDialog } from "../src/js/game/scenes/dom-dialogs/tutorial-description";
 import { domStub } from "./stub/dom-stub";
 
 export default {

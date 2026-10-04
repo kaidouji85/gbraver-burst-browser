@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { YuuyaModel } from "../model/yuuya-model";
 import { YuuyaSounds } from "../sounds/yuuya-sounds";
 

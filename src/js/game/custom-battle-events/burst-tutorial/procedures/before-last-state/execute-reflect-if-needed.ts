@@ -1,6 +1,6 @@
 import { Battle, GameState } from "gbraver-burst-core";
 
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { failReflectDamage } from "../../stories/fail-reflect-damage";
 import { successReflectDamage } from "../../stories/success-reflect-damage";
 

@@ -1,4 +1,4 @@
-import { onStart } from "../../../src/js/animation/object-animation/on-start";
+import { onStart } from "../../../src/js/animation/on-start";
 
 test("onStartの再生時間は0である", () => {
   const v = onStart(() => {

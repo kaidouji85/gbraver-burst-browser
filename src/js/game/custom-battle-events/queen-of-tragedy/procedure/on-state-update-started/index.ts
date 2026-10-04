@@ -1,4 +1,4 @@
-import { StateUpdateStartedEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { StateUpdateStartedEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { QueenOfTragedyProps } from "../../props";
 import { QueenOfTragedyState } from "../../state";
 import { createConditions } from "./create-conditions";

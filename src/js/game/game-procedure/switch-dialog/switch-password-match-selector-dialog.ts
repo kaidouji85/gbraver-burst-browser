@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
+import { PasswordMatchSelectorDialog } from "../../scenes/dom-dialogs/password-match-selector";
 import { GameProps } from "../../game-props";
 
 /**

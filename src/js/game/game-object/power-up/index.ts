@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../resource";
-import { SEPlayerContainer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { PowerUp } from "./power-up";
 import { EnemyPowerUpView } from "./view/enemy-power-up-view";

@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { BatterySelectorModel } from "../model";
 import { BatterySelectorSounds } from "../sounds/battery-selector-sounds";
 

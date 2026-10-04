@@ -1,5 +1,5 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { tween } from "../../../../../animation/object-animation/tween";
+import { Animate } from "../../../../../animation/animate";
+import { tween } from "../../../../../animation/tween";
 import { NeoLandozerAnimationProps } from "./animation-props";
 /**
  * 礼（倒れる）

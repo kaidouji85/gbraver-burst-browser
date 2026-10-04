@@ -1,5 +1,5 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../../../../../animation/animate";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { yuuyaAttackShoutWhenTraumaOfLastYear } from "../../animation/yuuya-attack-shout-when-trauma-of-last-year";
 import { yuuyaFullBatteryAttackShoutWhenTraumaOfLastYear } from "../../animation/yuuya-full-battery-attack-shout-when-trauma-of-last-year";

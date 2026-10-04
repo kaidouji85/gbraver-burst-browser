@@ -1,5 +1,5 @@
-import { delay } from "../../../../../animation/object-animation/delay";
-import { tween } from "../../../../../animation/object-animation/tween";
+import { delay } from "../../../../../animation/delay";
+import { tween } from "../../../../../animation/tween";
 import { ARMDOZER_SPRITE_FRONT_Z } from "../../../td-position";
 import { GranDozerAnimationProps } from "./animation-props";
 

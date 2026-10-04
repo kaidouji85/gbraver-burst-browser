@@ -1,7 +1,7 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { delay } from "../../../../animation/object-animation/delay";
-import { onStart } from "../../../../animation/object-animation/on-start";
-import { tween } from "../../../../animation/object-animation/tween";
+import { Animate } from "../../../../animation/animate";
+import { delay } from "../../../../animation/delay";
+import { onStart } from "../../../../animation/on-start";
+import { tween } from "../../../../animation/tween";
 import { ContinuousAttackAnimationProps } from "./animation-props";
 
 /**

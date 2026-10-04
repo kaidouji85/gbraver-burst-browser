@@ -5,7 +5,7 @@ import { ResourcesContainer } from "../../../resource";
 import { createEmptySoundResource } from "../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
-import { SEPlayerContainer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import { domUuid } from "../../../uuid/dom-uuid";
 import { BatteryButton } from "./battery-button";
 import { BatteryPush } from "./battery-button/props";

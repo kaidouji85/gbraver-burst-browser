@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { CanvasMesh } from "../../../../mesh/canvas-mesh";
+import { CanvasMesh } from "../../../../web-gl/mesh/canvas-mesh";
 import { SPRITE_RENDER_ORDER } from "../../../../web-gl/render/render-order/td-render-order";
 import type { Resources } from "../../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../../resource/canvas-image/ids";

@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { ShinyaModel } from "../model/shinya-model";
 import { ShinyaSounds } from "../sounds/shinya-sounds";
 

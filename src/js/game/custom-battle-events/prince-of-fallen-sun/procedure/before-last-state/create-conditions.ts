@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { PrinceOfFallenSunProps } from "../../props";
 import { Conditions } from "./conditions";

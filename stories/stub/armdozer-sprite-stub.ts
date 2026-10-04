@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { GameObjectAction } from "../../src/js/game/game-object/action/game-object-action";
 import { ArmdozerSprite } from "../../src/js/game/game-object/armdozer/armdozer-sprite";
 import { ResourcesContainer } from "../../src/js/resource";
-import { SEPlayerContainer } from "../../src/js/se/se-player";
+import { SEPlayerContainer } from "../../src/js/sounds/se/se-player";
 import { tdGameObjectStory } from "./td-game-object-stub";
 
 /** アームドーザスプライト ジェネレータ パラメータ */

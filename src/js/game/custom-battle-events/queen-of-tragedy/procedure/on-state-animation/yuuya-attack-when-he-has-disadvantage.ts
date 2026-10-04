@@ -1,6 +1,6 @@
-import { empty } from "../../../../../animation/object-animation/delay";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromCurrentState } from "../../../../../td-scenes/battle/separate-players";
+import { empty } from "../../../../../animation/delay";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayersFromCurrentState } from "../../../../scenes/td-scenes/battle/separate-players";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyAdvantage } from "../../../is-enemy-advantage";
 import { yuuyaAttackShoutWhenHeHasDisadvantage } from "../../animation/yuuya-attack-shout-when-he-has-disadvantage";

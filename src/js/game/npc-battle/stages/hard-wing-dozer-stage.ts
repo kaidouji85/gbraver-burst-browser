@@ -1,4 +1,4 @@
-import { hardWingDozer } from "../../../npc/hard-wing-dozer";
+import { hardWingDozer } from "../../npc/hard-wing-dozer";
 
 /** ハードコース ウィングドーザ */
 export const HardWingDozerStage = {

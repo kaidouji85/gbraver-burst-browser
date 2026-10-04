@@ -1,4 +1,4 @@
-import { hardShinBraver } from "../../../npc/hard-shin-braver";
+import { hardShinBraver } from "../../npc/hard-shin-braver";
 
 /** ハードコース シンブレイバー */
 export const HardShinBraverStage = {

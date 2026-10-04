@@ -1,4 +1,4 @@
-import { SignalContainer } from "../../../../abort-controller/signal-container";
+import { SignalContainer } from "../../../../event/abort-controller/signal-container";
 import { canNumberChanged } from "../model/can-number-change";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";

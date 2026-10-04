@@ -1,4 +1,4 @@
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { gaiBurst } from "../../animation/ga-burst";
 import { gaiFinishBlow } from "../../animation/gai-finish-blow";

@@ -1,7 +1,7 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createBatterySystemTutorialEvent } from "../../custom-battle-events/battery-system-tutorial";
-import { batterySystemTutorialNPC } from "../../../npc/battery-system-tutorial";
+import { batterySystemTutorialNPC } from "../../npc/battery-system-tutorial";
 import { PathIds } from "../../../resource/path/ids";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";

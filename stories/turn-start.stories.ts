@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 
-import { delay } from "../src/js/animation/object-animation/delay";
+import { delay } from "../src/js/animation/delay";
 import { GameObjectAction } from "../src/js/game/game-object/action/game-object-action";
 import {
   enemyTurnStart,

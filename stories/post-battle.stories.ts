@@ -1,5 +1,5 @@
-import { PostBattleFloater } from "../src/js/dom-floaters/post-battle";
-import { PostBattleButtonConfig } from "../src/js/dom-floaters/post-battle/post-battle-button-config";
+import { PostBattleFloater } from "../src/js/game/scenes/dom-floaters/post-battle";
+import { PostBattleButtonConfig } from "../src/js/game/scenes/dom-floaters/post-battle/post-battle-button-config";
 import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,
@@ -9,7 +9,7 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
 } from "../src/js/game/post-battle-buttons";
-import { waitTime } from "../src/js/wait/wait-time";
+import { waitTime } from "../src/js/event/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
 export default {

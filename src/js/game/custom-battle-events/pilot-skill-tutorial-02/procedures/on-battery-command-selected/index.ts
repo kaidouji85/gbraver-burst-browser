@@ -1,7 +1,7 @@
 import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
-} from "../../../../../td-scenes/battle/custom-battle-event";
+} from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { PilotSkillTutorial02Props } from "../../props";
 import { PilotSkillTutorial02State } from "../../state";
 import { executeLessThanAttack3IfNeeded } from "./execute-less-than-attack3-if-needed";

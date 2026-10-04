@@ -1,6 +1,6 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { LastStateEventProps } from "../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーが残っているのに0防御したかを判定する

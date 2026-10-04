@@ -1,22 +1,19 @@
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { Animate } from "../../../../animation/object-animation/animate";
+import { Animate } from "../../../../animation/animate";
 import { onResizePerspectiveCamera } from "../../../../web-gl/camera/resize";
 import { Update } from "../../../game-loop/update";
-import {
-  getViewPortHeight,
-  getViewPortWidth,
-} from "../../../../view-port/view-port-size";
-import { Resize } from "../../../../window/resize";
+import { Resize } from "../../../../dom/window/resize";
 import { lookAt } from "./animation/look-at";
 import { move } from "./animation/move";
 import { engage } from "./engauge";
 import { createInitialValue } from "./model/initial-value";
 import { Battle3DCameraModel } from "./model/model";
 import { Position } from "./position";
-// TODO カメラ位置、カメラ視点をコンストラクタから渡す
+import { getViewPortHeight, getViewPortWidth } from "../../../../dom/view-port/view-port-size";
 
+// TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
   /** モデル */

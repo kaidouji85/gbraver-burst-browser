@@ -1,8 +1,8 @@
 import {
   BurstSelectedEventProps,
   CommandCanceled,
-} from "../../../../td-scenes/battle/custom-battle-event";
-import { separatePlayersFromLastState } from "../../../../td-scenes/battle/separate-players";
+} from "../../../scenes/td-scenes/battle/custom-battle-event";
+import { separatePlayersFromLastState } from "../../../scenes/td-scenes/battle/separate-players";
 import { focusOutBurstButton, isBurstButtonFocused } from "../../focus";
 import { BurstTutorialProps } from "../props";
 import { BurstTutorialState } from "../state";

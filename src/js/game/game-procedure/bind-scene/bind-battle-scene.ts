@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { BattleScene } from "../../../td-scenes/battle";
+import { BattleScene } from "../../scenes/td-scenes/battle";
 import { GameProps } from "../../game-props";
 
 /**

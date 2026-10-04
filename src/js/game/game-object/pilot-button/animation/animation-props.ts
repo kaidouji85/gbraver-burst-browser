@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { PilotButtonModel } from "../model/pilot-button-model";
 import { PilotButtonSounds } from "../sounds/pilot-button-sounds";
 

@@ -1,5 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { focusBattleSimulatorButton } from "../../focus";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";

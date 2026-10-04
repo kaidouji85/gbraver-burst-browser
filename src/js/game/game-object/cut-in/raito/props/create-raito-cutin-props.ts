@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { RaitoSounds } from "../sounds/raito-sounds";
 import { RaitoView } from "../view/raito-view";

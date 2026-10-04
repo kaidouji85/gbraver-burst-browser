@@ -1,7 +1,7 @@
 import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
-} from "../../../../../td-scenes/battle/custom-battle-event";
+} from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { recommendZeroAttack } from "../../stories/recommend-zero-attack";

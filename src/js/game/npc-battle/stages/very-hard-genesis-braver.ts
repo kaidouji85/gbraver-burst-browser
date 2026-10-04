@@ -1,4 +1,4 @@
-import { genesisBraverNPC } from "../../../npc/genesis-braver";
+import { genesisBraverNPC } from "../../npc/genesis-braver";
 
 /** ベリーハードコース ジェネシスブレイバー */
 export const VeryHardGenesisBraver = {

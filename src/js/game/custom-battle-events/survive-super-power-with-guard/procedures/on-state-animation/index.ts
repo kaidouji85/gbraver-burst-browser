@@ -1,6 +1,6 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { empty } from "../../../../../animation/object-animation/delay";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../../../../../animation/animate";
+import { empty } from "../../../../../animation/delay";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { invisibleShoutMessageWindowWhenTurnChange } from "../../../invisible-shout-message-window";
 import { raitoAttackShoutWhenAdvantage } from "../../animation/raito-attack-shout-when-advantage";
 import { raitoAttackShoutWhenDisadvantage } from "../../animation/raito-attack-shout-when-disadvantage";

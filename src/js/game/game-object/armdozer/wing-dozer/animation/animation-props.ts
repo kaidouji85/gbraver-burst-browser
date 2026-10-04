@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { WingDozerModel } from "../model/wing-dozer-model";
 import { WingDozerSounds } from "../sounds/wing-dozer-sounds";
 

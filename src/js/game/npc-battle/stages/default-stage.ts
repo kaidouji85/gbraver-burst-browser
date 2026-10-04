@@ -1,4 +1,4 @@
-import { hardNeoLandozer } from "../../../npc/hard-neo-landozer";
+import { hardNeoLandozer } from "../../npc/hard-neo-landozer";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { NPCBattleStage } from "./npc-battle-stage";
 

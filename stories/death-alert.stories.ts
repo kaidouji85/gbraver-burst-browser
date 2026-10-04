@@ -1,5 +1,5 @@
-import { delay } from "../src/js/animation/object-animation/delay";
-import { onStart } from "../src/js/animation/object-animation/on-start";
+import { delay } from "../src/js/animation/delay";
+import { onStart } from "../src/js/animation/on-start";
 import { DeathAlert } from "../src/js/game/game-object/death-alert";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 

@@ -1,4 +1,4 @@
-import { Config } from "../../../dom-scenes/config";
+import { Config } from "../../scenes/dom-scenes/config";
 import { ConfigChangeStart } from "../../game-actions/config-change-start";
 import { GameProps } from "../../game-props";
 import { switchConfig } from "../switch-scene/switch-config";

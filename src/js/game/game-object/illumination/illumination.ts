@@ -2,7 +2,7 @@ import * as TWEEN from "@tweenjs/tween.js";
 import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { Animate } from "../../../animation/object-animation/animate";
+import { Animate } from "../../../animation/animate";
 import { Update } from "../../game-loop/update";
 import type { GameObjectAction } from "../action/game-object-action";
 import { color } from "./animation/color";

@@ -1,4 +1,4 @@
-import type { SafeAreaInset } from "../../safe-area/safe-area-inset";
+import type { SafeAreaInset } from "../../dom/safe-area/safe-area-inset";
 
 /**
  * HUDレイヤーのゲームオブジェクトが利用するスケール

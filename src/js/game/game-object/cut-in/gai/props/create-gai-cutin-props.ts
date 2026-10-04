@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { GaiSounds } from "../sounds/gai-sounds";
 import { GaiView } from "../view/gai-view";

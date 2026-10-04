@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { RaitoCutIn } from "./raito";
 import { EnemyRaitoView } from "./view/enemy-raito-view";

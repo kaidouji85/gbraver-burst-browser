@@ -1,4 +1,4 @@
-import { tween } from "../../../src/js/animation/object-animation/tween";
+import { tween } from "../../../src/js/animation/tween";
 
 test("シンプルなTweenの再生時間が正しくセットされている", () => {
   const v = tween({}, (t) => t.to({}, 500));

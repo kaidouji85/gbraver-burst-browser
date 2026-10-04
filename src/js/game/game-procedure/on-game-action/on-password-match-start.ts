@@ -1,4 +1,4 @@
-import { PasswordMatchSelectorDialog } from "../../../dom-dialogs/password-match-selector";
+import { PasswordMatchSelectorDialog } from "../../scenes/dom-dialogs/password-match-selector";
 import { PasswordMatchStart } from "../../game-actions/password-match-start";
 import { GameProps } from "../../game-props";
 import { switchPasswordMatchSelectorDialog } from "../switch-dialog/switch-password-match-selector-dialog";

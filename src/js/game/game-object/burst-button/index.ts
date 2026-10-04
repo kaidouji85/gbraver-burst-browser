@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../resource";
-import { SEPlayerContainer } from "../../../se/se-player";
+import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import { GameObjectActionContainer } from "../action/game-object-action-container";
 import { BurstButton } from "./burst-button";
 import { createGenesisBraverIcon } from "./view/genesis-braver-icon";

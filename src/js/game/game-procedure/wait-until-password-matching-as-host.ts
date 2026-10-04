@@ -1,8 +1,8 @@
 import { BattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 
-import { NetworkErrorDialog } from "../../dom-dialogs/network-error/network-error-dialog";
-import { PrivateMatchHostDialog } from "../../dom-dialogs/private-match-host";
-import { WaitingDialog } from "../../dom-dialogs/waiting/waiting-dialog";
+import { NetworkErrorDialog } from "../scenes/dom-dialogs/network-error/network-error-dialog";
+import { PrivateMatchHostDialog } from "../scenes/dom-dialogs/private-match-host";
+import { WaitingDialog } from "../scenes/dom-dialogs/waiting/waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { Online } from "../network-context/online";

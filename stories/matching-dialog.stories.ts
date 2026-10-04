@@ -1,4 +1,4 @@
-import { MatchingDialog } from "../src/js/dom-dialogs/matching/matching-dialog";
+import { MatchingDialog } from "../src/js/game/scenes/dom-dialogs/matching/matching-dialog";
 import { domStub } from "./stub/dom-stub";
 
 export default {

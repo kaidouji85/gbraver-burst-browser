@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { BurstTutorialProps } from "../../props";
 import { selfInitiatedPilotSkill } from "../../stories/self-initiated-pilot-skill";
 

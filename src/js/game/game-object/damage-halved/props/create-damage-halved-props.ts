@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
 import { DamageHalvedView } from "../view/damage-halved-view";

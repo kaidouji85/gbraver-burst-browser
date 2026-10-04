@@ -1,5 +1,5 @@
-import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
-import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
+import { MatchingDialog } from "../../scenes/dom-dialogs/matching/matching-dialog";
+import { PrivateMatchGuestDialog } from "../../scenes/dom-dialogs/private-match-guest";
 import { PasswordMatchEntry } from "../../game-actions/password-match-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";

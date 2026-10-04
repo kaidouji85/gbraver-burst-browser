@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { DifficultyDialog } from "../../../dom-dialogs/difficulty";
+import { DifficultyDialog } from "../../scenes/dom-dialogs/difficulty";
 import { GameProps } from "../../game-props";
 
 /**

@@ -1,7 +1,7 @@
 import {
   CommandCanceled,
   PilotSkillSelectedEventProps,
-} from "../../../../td-scenes/battle/custom-battle-event";
+} from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { focusOutPilotButton, isPilotButtonFocused } from "../../focus";
 import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";

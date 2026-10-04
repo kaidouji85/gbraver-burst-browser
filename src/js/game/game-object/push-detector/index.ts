@@ -1,7 +1,7 @@
 import { Observable, Subject, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
-import { isMeshOverlap } from "../../../overlap/mesh-overlap";
+import { isMeshOverlap } from "../../../web-gl/overlap/mesh-overlap";
 import { MouseDownRaycaster } from "../../../web-gl/render/overlap-event/mouse-down-raycaster";
 import { TouchStartRaycaster } from "../../../web-gl/render/overlap-event/touch-start-raycaster";
 import { GameObjectAction } from "../action/game-object-action";

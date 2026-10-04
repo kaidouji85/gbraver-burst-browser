@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 import { PredicatedDamageSounds } from "../sounds/predicated-damage-sounds";
 

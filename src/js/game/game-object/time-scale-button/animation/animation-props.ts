@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { TimeScaleButtonModel } from "../model/time-scale-button-model";
 import { TimeScaleButtonSounds } from "../sounds/time-scale-sounds";
 

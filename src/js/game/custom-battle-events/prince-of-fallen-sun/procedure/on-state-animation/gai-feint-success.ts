@@ -1,6 +1,6 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { empty } from "../../../../../animation/object-animation/delay";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../../../../../animation/animate";
+import { empty } from "../../../../../animation/delay";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { gaiFeintSuccessShout } from "../../animation/gai-feint-success-shout";
 import { PrinceOfFallenSunProps } from "../../props";

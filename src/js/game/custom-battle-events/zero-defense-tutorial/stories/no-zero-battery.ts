@@ -1,5 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
-import type { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import type { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
   invisibleAllMessageWindows,

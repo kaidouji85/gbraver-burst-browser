@@ -1,5 +1,5 @@
-import { SignalContainer } from "../../../../abort-controller/signal-container";
-import { waitTime } from "../../../../wait/wait-time";
+import { SignalContainer } from "../../../../event/abort-controller/signal-container";
+import { waitTime } from "../../../../event/wait/wait-time";
 import { BatterySelectorProps } from "../props/battery-selector-props";
 import { batteryChange } from "./battery-change";
 import { playSilentlyBatteryMinusPop } from "./play-silently-battery-minus-pop";

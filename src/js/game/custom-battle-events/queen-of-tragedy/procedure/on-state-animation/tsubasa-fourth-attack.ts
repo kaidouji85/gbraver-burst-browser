@@ -1,5 +1,5 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../../../../../animation/animate";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaFourthAttackShout1 } from "../../animation/tsubasa-fourth-attack-shout1";

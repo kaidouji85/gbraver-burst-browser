@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { SimpleImageMesh } from "../../../../mesh/simple-image-mesh";
+import { SimpleImageMesh } from "../../../../web-gl/mesh/simple-image-mesh";
 import { Resources } from "../../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../../resource/canvas-image/ids";
 import { BatteryGaugeUnitProps } from "../model/battery-gauge-unit-model";

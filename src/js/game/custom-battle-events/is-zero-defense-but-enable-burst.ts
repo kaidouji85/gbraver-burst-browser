@@ -1,6 +1,6 @@
 import { BatteryDeclaration, GameStateX } from "gbraver-burst-core";
 
-import { LastStateEventProps } from "../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * バーストが使えるのに0防御したかを判定する

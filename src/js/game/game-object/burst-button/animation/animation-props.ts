@@ -1,5 +1,5 @@
 import { SoundResource } from "../../../../resource/sound/resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { BurstButtonModel } from "../model/burst-button-model";
 
 /** バーストボタン アニメーション プロパティ */

@@ -1,5 +1,5 @@
-import { all } from "../../../../animation/object-animation/all";
-import { delay } from "../../../../animation/object-animation/delay";
+import { all } from "../../../../animation/all";
+import { delay } from "../../../../animation/delay";
 import { popBatteryButtonSilently } from "../animation/pop-battery-button";
 import { popBatteryMinusSilently } from "../animation/pop-battery-minus";
 import { popBatteryPlusSilently } from "../animation/pop-battery-plus";

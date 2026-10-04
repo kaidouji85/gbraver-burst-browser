@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { SecretPlayerSelect } from "../../../dom-scenes/secret-player-select";
+import { SecretPlayerSelect } from "../../scenes/dom-scenes/secret-player-select";
 import { GameProps } from "../../game-props";
 import { switchDOMScene } from "./switch-dom-scene";
 

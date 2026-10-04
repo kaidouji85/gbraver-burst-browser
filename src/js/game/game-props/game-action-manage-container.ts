@@ -1,4 +1,4 @@
-import { ActionManager } from "../../action-manager/action-manager";
+import { ActionManager } from "../../event/action-manager/action-manager";
 import { GameAction } from "../game-actions";
 
 /** ゲームアクション管理コンテナ */

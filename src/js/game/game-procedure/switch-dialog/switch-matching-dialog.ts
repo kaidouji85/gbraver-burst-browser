@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
+import { MatchingDialog } from "../../scenes/dom-dialogs/matching/matching-dialog";
 import { GameProps } from "../../game-props";
 
 /**

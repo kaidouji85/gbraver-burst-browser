@@ -1,9 +1,9 @@
 import { Observable, Unsubscribable } from "rxjs";
 
 import { hudUIScale } from "../game/game-object/scale";
-import type { SafeAreaInset } from "../safe-area/safe-area-inset";
-import { createSafeAreaInset } from "../safe-area/safe-area-inset";
-import type { Resize } from "../window/resize";
+import type { SafeAreaInset } from "../dom/safe-area/safe-area-inset";
+import { createSafeAreaInset } from "../dom/safe-area/safe-area-inset";
+import type { Resize } from "../dom/window/resize";
 
 /** cssカスタムプロパティ --hud-ui-scale */
 const HUD_UI_SCALE = "--hud-ui-scale";

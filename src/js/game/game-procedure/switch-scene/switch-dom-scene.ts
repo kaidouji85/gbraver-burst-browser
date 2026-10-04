@@ -1,11 +1,11 @@
 import { Unsubscribable } from "rxjs";
 
-import { createAbortError } from "../../../abort-controller/abort-error";
-import { AbortManagerContainer } from "../../../abort-controller/abort-manager-container";
-import { PostBattleFloater } from "../../../dom-floaters/post-battle";
-import { DOMScene } from "../../../dom-scenes/dom-scene";
-import { DOMSceneBinderContainer } from "../../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
-import { TDSceneBinder } from "../../../td-scenes/td-scene-binder";
+import { createAbortError } from "../../../event/abort-controller/abort-error";
+import { AbortManagerContainer } from "../../../event/abort-controller/abort-manager-container";
+import { PostBattleFloater } from "../../scenes/dom-floaters/post-battle";
+import { DOMScene } from "../../scenes/dom-scenes/dom-scene";
+import { DOMSceneBinderContainer } from "../../scenes/dom-scenes/dom-scene-binder/dom-scene-binder-container";
+import { TDSceneBinder } from "../../scenes/td-scenes/td-scene-binder";
 
 /** シーン切り替えオプション */
 type Options = Readonly<AbortManagerContainer> &
@@ -35,7 +35,7 @@ export const switchDOMScene = (options: Options): void => {
     scene,
     unsubscribers,
   } = options;
-  abort.getAbortController().abort(createAbortError("switch scene"));
+  abort.getAbortController().abort(createAbortError("switch scenes"));
   postBattle.hide();
   if (tdSceneBinder.isSceneBound()) {
     tdSceneBinder.dispose();

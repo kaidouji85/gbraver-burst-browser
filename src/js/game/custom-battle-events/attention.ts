@@ -1,5 +1,5 @@
 import { HUD_ATTENTION_Z } from "../game-object/hud-position";
-import { CustomBattleEventProps } from "../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーセレクタに注目する

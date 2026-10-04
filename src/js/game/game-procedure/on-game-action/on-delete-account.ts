@@ -1,4 +1,4 @@
-import { WaitingDialog } from "../../../dom-dialogs/waiting/waiting-dialog";
+import { WaitingDialog } from "../../scenes/dom-dialogs/waiting/waiting-dialog";
 import { DeleteAccount } from "../../game-actions/delete-account";
 import { GameProps } from "../../game-props";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";

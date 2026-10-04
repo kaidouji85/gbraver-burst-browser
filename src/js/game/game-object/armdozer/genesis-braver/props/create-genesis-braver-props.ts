@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { createGenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 import { GenesisBraverView } from "../view/genesis-braver-view";

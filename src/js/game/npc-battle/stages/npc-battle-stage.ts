@@ -1,4 +1,4 @@
-import { NPC } from "../../../npc/npc";
+import { NPC } from "../../npc/npc";
 import { SoundId } from "../../../resource/sound/resource";
 
 /** NPCバトル ステージ */

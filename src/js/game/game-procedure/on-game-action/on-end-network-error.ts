@@ -1,4 +1,4 @@
-import { fadeOut, stop } from "../../../bgm/bgm-operators";
+import { fadeOut, stop } from "../../../sounds/bgm/bgm-operators";
 import { EndNetworkError } from "../../game-actions/end-network-error";
 import { GameProps } from "../../game-props";
 import { playTitleBGM } from "../play-title-bgm";

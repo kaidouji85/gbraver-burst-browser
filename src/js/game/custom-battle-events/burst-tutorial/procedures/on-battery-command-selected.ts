@@ -1,7 +1,7 @@
 import {
   BatteryCommandSelectedEventProps,
   CommandCanceled,
-} from "../../../../td-scenes/battle/custom-battle-event";
+} from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { focusInBurstButton } from "../../focus";
 import { shouldBurst } from "../captions";

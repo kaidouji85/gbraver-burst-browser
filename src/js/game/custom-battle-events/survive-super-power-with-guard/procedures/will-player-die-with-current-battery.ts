@@ -1,5 +1,5 @@
-import { canBeatDown } from "../../../../npc/can-beat-down";
-import { BattleSimulatorEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { canBeatDown } from "../../../npc/can-beat-down";
+import { BattleSimulatorEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../props";
 
 /**

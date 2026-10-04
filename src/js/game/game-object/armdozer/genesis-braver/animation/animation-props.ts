@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { GenesisBraverModel } from "../model/genesis-braver-model";
 import { GenesisBraverSounds } from "../sounds/genesis-braver-sounds";
 

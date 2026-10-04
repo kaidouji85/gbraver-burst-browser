@@ -1,7 +1,7 @@
 import { ArmdozerIds, Armdozers, PilotIds, Pilots } from "gbraver-burst-core";
 
 import { createQueenOfTragedy } from "../../custom-battle-events/queen-of-tragedy";
-import { wingDozerNPCForQueenOfTragedy } from "../../../npc/wing-dozer-for-queen-of-tragedy";
+import { wingDozerNPCForQueenOfTragedy } from "../../npc/wing-dozer-for-queen-of-tragedy";
 import { PathIds } from "../../../resource/path/ids";
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";

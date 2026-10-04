@@ -2,8 +2,8 @@ import React from "react";
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
-import { AbortManager } from "../../src/js/abort-controller/abort-manager";
-import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
+import { AbortManager } from "../../src/js/event/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/event/abort-controller/abort-manager-container";
 import { createGameLoop, GameLoop } from "../../src/js/game/game-loop/game-loop";
 import { PreRender } from "../../src/js/game/game-loop/pre-render";
 import { Update } from "../../src/js/game/game-loop/update";
@@ -20,9 +20,9 @@ import { loadFullResources } from "../../src/js/resource/loading/load-full-resou
 import {
   createSafeAreaInset,
   SafeAreaInset,
-} from "../../src/js/safe-area/safe-area-inset";
-import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
-import { Resize, resizeStream } from "../../src/js/window/resize";
+} from "../../src/js/dom/safe-area/safe-area-inset";
+import { createSEPlayer, SEPlayerContainer } from "../../src/js/sounds/se/se-player";
+import { Resize, resizeStream } from "../../src/js/dom/window/resize";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */

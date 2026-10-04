@@ -1,7 +1,7 @@
 import { Group } from "@tweenjs/tween.js";
 
 import { ResourcesContainer } from "../../../../../resource";
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
 import { LightningBarrierView } from "../view/lightning-barrier-view";

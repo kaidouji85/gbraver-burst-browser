@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { PilotSkillTutorial02Props } from "../props";
 import { PilotSkillTutorial02State } from "../state";

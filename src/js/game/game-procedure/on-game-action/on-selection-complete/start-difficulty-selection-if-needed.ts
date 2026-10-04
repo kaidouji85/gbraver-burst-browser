@@ -1,4 +1,4 @@
-import { DifficultyDialog } from "../../../../dom-dialogs/difficulty";
+import { DifficultyDialog } from "../../../scenes/dom-dialogs/difficulty";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { switchDifficultyDialog } from "../../switch-dialog/switch-difficulty-dialog";

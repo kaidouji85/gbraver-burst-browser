@@ -1,4 +1,4 @@
-import { BatteryCommandSelectedEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import {
   focusOutBatterySelector,
   isBatterySelectorFocused,

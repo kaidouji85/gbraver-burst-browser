@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { BatteryEnhancementModel } from "../model/battery-enhancement-model";
 import { BatteryEnhancementSounds } from "../sounds/battery-enhancement-sounds";
 

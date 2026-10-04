@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { ResourcesContainer } from "../../../../resource";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { createInitialValue } from "../model/initial-value";
 import { ArmdozerIcon } from "../view/armdozer-icon";

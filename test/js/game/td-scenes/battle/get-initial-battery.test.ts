@@ -1,4 +1,4 @@
-import { getInitialBattery } from "../../../../../src/js/td-scenes/battle/get-initial-battery";
+import { getInitialBattery } from "../../../../../src/js/game/scenes/td-scenes/battle/get-initial-battery";
 test("選択可能なバッテリー上限が1以上の場合、バッテリーセレクタの初期値は1になる", () => {
   const result = getInitialBattery(4);
   expect(result).toBe(1);

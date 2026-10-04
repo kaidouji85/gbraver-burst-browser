@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { LightningBarrierModel } from "../model/lightning-barrier-model";
 import { LightningBarrierSounds } from "../sounds/lightning-barrier-sounds";
 

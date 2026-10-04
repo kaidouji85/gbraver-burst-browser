@@ -1,4 +1,4 @@
-import { BatteryCommandSelectedEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { BatteryCommandSelectedEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../../battery-selector-animations";
 import { noZeroDefense } from "../../stories/no-zero-defense";
 

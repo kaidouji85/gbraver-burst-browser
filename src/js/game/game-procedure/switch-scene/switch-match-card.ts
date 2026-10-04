@@ -1,4 +1,4 @@
-import { MatchCard } from "../../../dom-scenes/match-card";
+import { MatchCard } from "../../scenes/dom-scenes/match-card";
 import { GameProps } from "../../game-props";
 import { switchDOMScene } from "./switch-dom-scene";
 

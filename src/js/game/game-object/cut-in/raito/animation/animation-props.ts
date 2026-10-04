@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { RaitoModel } from "../model/raito-model";
 import { RaitoSounds } from "../sounds/raito-sounds";
 

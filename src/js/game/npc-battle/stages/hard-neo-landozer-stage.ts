@@ -1,4 +1,4 @@
-import { hardNeoLandozer } from "../../../npc/hard-neo-landozer";
+import { hardNeoLandozer } from "../../npc/hard-neo-landozer";
 
 /** ハードコース ネオランドーザ */
 export const HardNeoLandozerStage = {

@@ -1,5 +1,5 @@
-import { CustomBattleEventProps } from "../../td-scenes/battle/custom-battle-event";
-import { waitTime } from "../../wait/wait-time";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
+import { waitTime } from "../../event/wait/wait-time";
 
 /**
  * 全メッセージウインドウを非表示にする

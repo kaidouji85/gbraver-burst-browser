@@ -1,4 +1,4 @@
-import { maxBatteryAttackWingDozerNPC } from "../../../npc/max-battery-attack";
+import { maxBatteryAttackWingDozerNPC } from "../../npc/max-battery-attack";
 
 /** 全力攻撃 ウィングドーザ */
 export const MaxAttackWingDozerStage = {

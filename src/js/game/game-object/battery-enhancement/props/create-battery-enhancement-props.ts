@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { BatteryEnhancementSounds } from "../sounds/battery-enhancement-sounds";
 import { BatteryEnhancementView } from "../view/battery-enhancement-view";

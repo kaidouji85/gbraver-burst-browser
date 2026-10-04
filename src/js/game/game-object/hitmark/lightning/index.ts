@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import type { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { Lightning } from "./lightning";
 import { EnemyLightningView } from "./view/enemy-lightning-view";

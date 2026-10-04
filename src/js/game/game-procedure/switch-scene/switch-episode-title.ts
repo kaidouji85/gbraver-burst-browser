@@ -1,4 +1,4 @@
-import { EpisodeTitle } from "../../../dom-scenes/episode-title";
+import { EpisodeTitle } from "../../scenes/dom-scenes/episode-title";
 import { GameProps } from "../../game-props";
 import { switchDOMScene } from "./switch-dom-scene";
 

@@ -1,5 +1,5 @@
-import { Animate } from "../../animation/object-animation/animate";
-import { empty } from "../../animation/object-animation/delay";
+import { Animate } from "../../animation/animate";
+import { empty } from "../../animation/delay";
 import { PathId } from "../../resource/path/resource";
 import type {
   BatteryCommandSelectedEventProps,
@@ -11,7 +11,7 @@ import type {
   LastStateEventProps,
   PilotSkillSelectedEventProps,
   StateUpdateStartedEventProps,
-} from "../../td-scenes/battle/custom-battle-event";
+} from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * 空のカスタムバトルイベント

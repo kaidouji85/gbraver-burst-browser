@@ -1,10 +1,10 @@
-import { Animate } from "../../animation/object-animation/animate";
-import { onStart } from "../../animation/object-animation/on-start";
+import { Animate } from "../../animation/animate";
+import { onStart } from "../../animation/on-start";
 import {
   CustomBattleEventProps,
   CustomStateAnimationProps,
   LastStateEventProps,
-} from "../../td-scenes/battle/custom-battle-event";
+} from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * 全ての叫びウインドウを非表示にする

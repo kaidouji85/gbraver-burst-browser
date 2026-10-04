@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-import { Animate } from "../../../animation/object-animation/animate";
-import { empty } from "../../../animation/object-animation/delay";
+import { Animate } from "../../../animation/animate";
+import { empty } from "../../../animation/delay";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,

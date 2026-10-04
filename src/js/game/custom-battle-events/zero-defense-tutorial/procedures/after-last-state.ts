@@ -5,7 +5,7 @@ import type {
   GameStateX,
 } from "gbraver-burst-core";
 
-import type { LastStateEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import type { LastStateEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import {
   extractBatteryDeclaration,
   extractGameEnd,

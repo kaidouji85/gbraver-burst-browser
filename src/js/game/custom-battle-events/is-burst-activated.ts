@@ -1,6 +1,6 @@
 import { GameState, PlayerId } from "gbraver-burst-core";
 
-import { CustomStateAnimationProps } from "../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * @deprecated

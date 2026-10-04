@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import type { SafeAreaInset } from "../../safe-area/safe-area-inset";
+import type { SafeAreaInset } from "../../dom/safe-area/safe-area-inset";
 
 /** レンダリングの直前 */
 export type PreRender = {

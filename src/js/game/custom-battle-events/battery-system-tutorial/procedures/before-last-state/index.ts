@@ -1,4 +1,4 @@
-import { LastStateEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { LastStateEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { turnCount } from "../../../turn-count";
 import { BatterySystemTutorialProps } from "../../props";
 import { BatterySystemTutorialState } from "../../state";

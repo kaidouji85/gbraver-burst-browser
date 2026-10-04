@@ -1,4 +1,4 @@
-import { BattleSimulatorEventProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { BattleSimulatorEventProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { SurviveSuperPowerWithGuardProps } from "../../props";
 import { SurviveSuperPowerWithGuardState } from "../../state";
 import { willNotSurviveCurrentBattery } from "../../stories/will-not-survive-current-battery";

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { delay } from "../src/js/animation/object-animation/delay";
+import { delay } from "../src/js/animation/delay";
 import {
   PredicatedDamage,
   PredicatedDamageConstructParams,

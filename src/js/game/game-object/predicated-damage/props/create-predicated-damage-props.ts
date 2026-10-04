@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { initialValue } from "../model/initial-value";
 import { BattleSimulatorIconPosition } from "../model/predicated-damage-model";
 import { createPredicatedDamageSounds } from "../sounds/create-status-icon-sounds";

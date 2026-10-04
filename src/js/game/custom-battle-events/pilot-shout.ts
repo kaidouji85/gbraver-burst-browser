@@ -1,6 +1,6 @@
 import { MessageWindow } from "../game-dom/message-window";
 import { FaceType } from "../game-dom/message-window/face-graphic/config/face-type";
-import { CustomBattleEventProps } from "../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
  * パイロットの叫び

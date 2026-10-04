@@ -1,0 +1,110 @@
+import { GameState, Player } from "gbraver-burst-core";
+import { Observable, Subject } from "rxjs";
+
+import { AbortManagerContainer } from "../../../../../event/abort-controller/abort-manager-container";
+import { createActionManager } from "../../../../../event/action-manager/action-manager";
+import { BGMManagerContainer } from "../../../../../sounds/bgm/bgm-manager";
+import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
+import { Exclusive } from "../../../../../event/exclusive/exclusive";
+import { PlayerPilotVisibility } from "../../../../config/browser-config";
+import { GameLoopContainer } from "../../../../game-loop/game-loop-container";
+import { OverlapNotifier } from "../../../../../web-gl/render/overlap-notifier";
+import { RendererDomGetter } from "../../../../../web-gl/render/renderer-dom-getter";
+import { Rendering } from "../../../../../web-gl/render/rendering";
+import { ResourcesContainer } from "../../../../../resource";
+import { SoundId } from "../../../../../resource/sound/resource";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
+import { PushWindow } from "../../../../../dom/window/push-window";
+import { Resize } from "../../../../../dom/window/resize";
+import { BattleSceneAction } from "../actions";
+import { BattleProgress } from "../battle-progress";
+import { BattleControllerType } from "../controller-type";
+import { CustomBattleEvent } from "../custom-battle-event";
+import { BattleSceneProps } from "../props";
+import { createBattleSceneSounds } from "../sounds";
+import { createBattleSceneView } from "../view";
+
+/** 戦闘シーンで利用するレンダラ */
+export interface OwnRenderer
+  extends OverlapNotifier, RendererDomGetter, Rendering {}
+
+/** 戦闘シーンプロパティ生成関数のパラメータ */
+export type BattleScenePropsCreatorParams = BGMManagerContainer &
+  Readonly<ResourcesContainer> &
+  Readonly<SEPlayerContainer> &
+  Readonly<GameLoopContainer> &
+  Readonly<AbortManagerContainer> &
+  Readonly<{
+    /**
+     * リトライした戦闘かどうか、trueでリトライした
+     * @default false
+     */
+    isRetry?: boolean;
+
+    /** 再生するBGM ID */
+    playingBGM: SoundId;
+
+    /** レンダラ */
+    renderer: OwnRenderer;
+
+    /** DOMダイアログバインダー */
+    domDialogBinder: DOMDialogBinder;
+
+    /** コントローラータイプ */
+    controllerType: BattleControllerType;
+    /** プレイヤー側のパイロット情報の表示設定 */
+    playerPilotVisibility: PlayerPilotVisibility;
+
+    /** リトライ可能かどうか、trueで可能 */
+    canRetry: boolean;
+
+    /** バトル進行オブジェクト */
+    battleProgress: BattleProgress;
+    /** カスタムバトルイベント */
+    customBattleEvent?: CustomBattleEvent;
+
+    /** アニメーションスケールの初期値 */
+    initialAnimationTimeScale: number;
+
+    /** 初期ゲームステート */
+    initialState: GameState[];
+    /** プレイヤー情報 */
+    player: Player;
+    /** 敵情報 */
+    enemy: Player;
+
+    /** リサイズストリーム */
+    resize: Observable<Resize>;
+    /** window押下ストリーム */
+    pushWindow: Observable<PushWindow>;
+  }>;
+
+/**
+ * 戦闘シーンプロパティを生成する
+ * @param params パラメータ
+ * @returns 生成結果
+ */
+export function createBattleSceneProps(
+  params: BattleScenePropsCreatorParams,
+): BattleSceneProps {
+  return {
+    ...params,
+
+    isRetry: params.isRetry ?? false,
+
+    playerId: params.player.playerId,
+    enemyId: params.enemy.playerId,
+    stateHistory: params.initialState,
+
+    animationTimeScale: params.initialAnimationTimeScale,
+
+    customBattleEvent: params.customBattleEvent ?? null,
+    exclusive: new Exclusive(),
+
+    view: createBattleSceneView(params),
+    sounds: createBattleSceneSounds(params),
+
+    endBattle: new Subject(),
+    battleSceneAction: createActionManager<BattleSceneAction>(),
+  };
+}

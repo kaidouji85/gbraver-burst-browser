@@ -1,9 +1,9 @@
 import { Subject } from "rxjs";
 
-import { Exclusive } from "../../../../exclusive/exclusive";
+import { Exclusive } from "../../../../event/exclusive/exclusive";
 import { createEmptySoundResource } from "../../../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../../../resource/sound/ids";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { ROOT_HIDDEN } from "../dom/class-name";
 import {
   extractBackGround,

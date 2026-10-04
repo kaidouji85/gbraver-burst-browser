@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../../../mesh/horizontal-animation";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { ResourcesContainer } from "../../../../../resource";
 import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../../resource/texture/ids";

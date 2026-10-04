@@ -1,5 +1,5 @@
-import { Animate } from "../../../../../animation/object-animation/animate";
-import { tween } from "../../../../../animation/object-animation/tween";
+import { Animate } from "../../../../../animation/animate";
+import { tween } from "../../../../../animation/tween";
 import { ARMDOZER_SPRITE_STANDARD_Z } from "../../../td-position";
 import { LightningDozerAnimationProps } from "./animation-props";
 

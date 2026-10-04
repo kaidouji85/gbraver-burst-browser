@@ -1,6 +1,6 @@
 import { wbr } from "../../../../dom/wbr";
 import { highlight } from "../../../game-dom/message-window/dom/highlight";
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import { batterySelectorPushBatteryAdjustButtonsSilently } from "../../battery-selector-animations";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";

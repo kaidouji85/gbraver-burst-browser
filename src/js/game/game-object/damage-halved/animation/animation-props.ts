@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { DamageHalvedModel } from "../model/damage-halved-model";
 import { DamageHalvedSounds } from "../sounds/damage-halved-sounds";
 

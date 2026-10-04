@@ -1,4 +1,4 @@
-import { CustomBattleEventProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";

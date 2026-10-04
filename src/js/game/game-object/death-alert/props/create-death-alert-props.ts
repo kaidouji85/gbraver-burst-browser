@@ -1,7 +1,7 @@
 import * as TWEEN from "@tweenjs/tween.js";
 
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { createDeathAlertSounds } from "../sounds/create-death-alert-sounds";
 import { DeathAlertView } from "../view/death-alert-view";

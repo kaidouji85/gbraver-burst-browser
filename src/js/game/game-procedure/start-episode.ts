@@ -1,18 +1,18 @@
 import { Player } from "gbraver-burst-core";
 
-import { fadeOut, stop } from "../../bgm/bgm-operators";
-import { MAX_LOADING_TIME } from "../../dom-scenes/dom-scene-binder/max-loading-time";
-import { EpisodeTitle } from "../../dom-scenes/episode-title";
-import { NPCBattleRoom } from "../../npc/npc-battle-room";
+import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
+import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
+import { EpisodeTitle } from "../scenes/dom-scenes/episode-title";
+import { NPCBattleRoom } from "../npc/npc-battle-room";
 import {
   preloadBattleSceneImages,
   preloadImages,
 } from "../../resource/preload-images";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
-import { BattleScene } from "../../td-scenes/battle";
-import { waitAnimationFrame } from "../../wait/wait-animation-frame";
-import { waitTime } from "../../wait/wait-time";
-import { waitUntilWindowPushWithStream } from "../../wait/wait-until-window-push-with-stream";
+import { BattleScene } from "../scenes/td-scenes/battle";
+import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
+import { waitTime } from "../../event/wait/wait-time";
+import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
 import { GameProps } from "../game-props";
 import { Episode } from "../story/episode";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";

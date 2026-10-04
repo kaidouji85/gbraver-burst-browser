@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { HorizontalAnimationMesh } from "../../../../../mesh/horizontal-animation";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 
 /**
  * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数

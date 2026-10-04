@@ -1,4 +1,4 @@
-import { HorizontalAnimationMesh } from "../../../../../mesh/horizontal-animation";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
 import { AnimationType } from "../model/gran-dozer-cut-in-model";
 
 /** アニメーション、メッシュマッピング */

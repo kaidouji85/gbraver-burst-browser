@@ -1,7 +1,7 @@
-import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
+import { MAX_LOADING_TIME } from "../../scenes/dom-scenes/dom-scene-binder/max-loading-time";
 import { PathIds } from "../../../resource/path/ids";
 import { preloadImages } from "../../../resource/preload-images";
-import { waitTime } from "../../../wait/wait-time";
+import { waitTime } from "../../../event/wait/wait-time";
 import { PrivateMatchGuestStart } from "../../game-actions/private-match-guest-start";
 import { GameProps } from "../../game-props";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";

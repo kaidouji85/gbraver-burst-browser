@@ -4,8 +4,8 @@ import * as THREE from "three";
 import {
   getViewPortHeight,
   getViewPortWidth,
-} from "../../view-port/view-port-size";
-import type { Resize } from "../../window/resize";
+} from "../../dom/view-port/view-port-size";
+import type { Resize } from "../../dom/window/resize";
 import type { RendererDOMEvent } from "./dom-event/dom-event";
 import { createDOMEventStream } from "./dom-event/dom-event";
 import type { OverlapEvent } from "./overlap-event/overlap-event";

@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { GameObjectAction } from "../../action/game-object-action";
 import { GranDozer } from "./gran-dozer";
 import { EnemyGranDozerView } from "./view/enemy-gran-dozer-view";

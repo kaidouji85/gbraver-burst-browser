@@ -1,4 +1,4 @@
-import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
+import { PostBattleButtonConfig } from "../../../scenes/dom-floaters/post-battle/post-battle-button-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";

@@ -1,4 +1,4 @@
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { isEnemyBurstActivatedFromCurrentState } from "../../../is-burst-activated";
 import { yuuyaShout1WhenEvenMatch } from "../../animation/yuuya-shout1-when-even-match";

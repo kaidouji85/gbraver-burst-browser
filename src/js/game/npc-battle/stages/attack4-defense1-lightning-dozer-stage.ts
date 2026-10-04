@@ -1,4 +1,4 @@
-import { attack4Defense1LightningDozerNPC } from "../../../npc/attack-4-defense-1";
+import { attack4Defense1LightningDozerNPC } from "../../npc/attack-4-defense-1";
 
 /** 4攻撃1防御 ライトニングドーザ */
 export const Attack4Defense1LightningDozerStage = {

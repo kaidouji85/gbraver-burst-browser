@@ -1,4 +1,4 @@
-import { oneBatteryNeoLandozerNPC } from "../../../npc/one-battery";
+import { oneBatteryNeoLandozerNPC } from "../../npc/one-battery";
 
 /** 1バッテリー ネオランドーザ */
 export const OneBatteryNeoLandozerStage = {

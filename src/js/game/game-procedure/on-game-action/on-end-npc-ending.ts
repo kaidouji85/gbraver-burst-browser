@@ -1,4 +1,4 @@
-import { fadeOut, stop } from "../../../bgm/bgm-operators";
+import { fadeOut, stop } from "../../../sounds/bgm/bgm-operators";
 import { EndNPCEnding } from "../../game-actions/end-npc-ending";
 import { GameProps } from "../../game-props";
 import { playTitleBGM } from "../play-title-bgm";

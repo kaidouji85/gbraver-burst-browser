@@ -1,4 +1,4 @@
-import { SEPlayerContainer } from "../../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../../sounds/se/se-player";
 import { NeoLandozerModel } from "../model/neo-landozer-model";
 import { NeoLandozerSounds } from "../sounds/neo-landozer-sounds";
 

@@ -1,7 +1,7 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { empty } from "../../../../animation/object-animation/delay";
-import { onStart } from "../../../../animation/object-animation/on-start";
-import { CustomStateAnimationProps } from "../../../../td-scenes/battle/custom-battle-event";
+import { Animate } from "../../../../animation/animate";
+import { empty } from "../../../../animation/delay";
+import { onStart } from "../../../../animation/on-start";
+import { CustomStateAnimationProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 
 /**

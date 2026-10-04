@@ -1,4 +1,4 @@
-import { NPCEnding } from "../src/js/dom-scenes/npc-ending";
+import { NPCEnding } from "../src/js/game/scenes/dom-scenes/npc-ending";
 import { domStub } from "./stub/dom-stub";
 
 export default {

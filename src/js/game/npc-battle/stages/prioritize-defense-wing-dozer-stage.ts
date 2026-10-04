@@ -1,4 +1,4 @@
-import { prioritizeDefenseWingDozer } from "../../../npc/prioritize-defense";
+import { prioritizeDefenseWingDozer } from "../../npc/prioritize-defense";
 
 /** 防御優先 ウィングドーザ */
 export const PrioritizeDefenseWingDozerStage = {

@@ -1,5 +1,5 @@
-import { empty } from "../../../../../animation/object-animation/delay";
-import { CustomStateAnimationProps } from "../../../../../td-scenes/battle/custom-battle-event";
+import { empty } from "../../../../../animation/delay";
+import { CustomStateAnimationProps } from "../../../../scenes/td-scenes/battle/custom-battle-event";
 import { ConditionalAnimation } from "../../../get-animation-if-conditional-met";
 import { getPlayerBattleCount } from "../../../get-battle-count";
 import { tsubasaAttackShoutWhenContinuousAttack } from "../../animation/tsubasa-attack-shout-when-continuous-attack";

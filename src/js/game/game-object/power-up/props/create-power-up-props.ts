@@ -1,5 +1,5 @@
 import { ResourcesContainer } from "../../../../resource";
-import { SEPlayerContainer } from "../../../../se/se-player";
+import { SEPlayerContainer } from "../../../../sounds/se/se-player";
 import { createInitialValue } from "../model/initial-value";
 import { PowerUpSounds } from "../sounds/power-up-sounds";
 import { PowerUpView } from "../view/power-up-view";

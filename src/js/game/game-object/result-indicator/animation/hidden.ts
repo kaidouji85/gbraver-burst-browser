@@ -1,5 +1,5 @@
-import { Animate } from "../../../../animation/object-animation/animate";
-import { onStart } from "../../../../animation/object-animation/on-start";
+import { Animate } from "../../../../animation/animate";
+import { onStart } from "../../../../animation/on-start";
 import type { ResultIndicatorModel } from "../model/result-indicator-model";
 
 /**

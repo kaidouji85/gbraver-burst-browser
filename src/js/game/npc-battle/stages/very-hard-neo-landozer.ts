@@ -1,4 +1,4 @@
-import { veryHardNeoLandozer } from "../../../npc/very-hard-neo-landozer";
+import { veryHardNeoLandozer } from "../../npc/very-hard-neo-landozer";
 
 /** ベリーハードコース ネオランドーザ */
 export const VeryHardNeoLandozer = {

@@ -1,5 +1,5 @@
-import { PrivateMatchQRCodeReader } from "../src/js/dom-dialogs/private-match-guest/qr-code-reader";
-import { waitTime } from "../src/js/wait/wait-time";
+import { PrivateMatchQRCodeReader } from "../src/js/game/scenes/dom-dialogs/private-match-guest/qr-code-reader";
+import { waitTime } from "../src/js/event/wait/wait-time";
 import { domStub } from "./stub/dom-stub";
 
 export default {
