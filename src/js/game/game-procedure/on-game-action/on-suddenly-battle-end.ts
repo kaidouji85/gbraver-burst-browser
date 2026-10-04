@@ -1,4 +1,4 @@
-import { NetworkErrorDialog } from "../../scenes/dom-dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../dialogs/network-error/network-error-dialog";
 import { SuddenlyBattleEnd } from "../../game-actions/suddenly-battle-end";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";

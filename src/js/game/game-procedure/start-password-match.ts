@@ -3,8 +3,8 @@ import { Player } from "gbraver-burst-core";
 
 import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
-import { NetworkErrorDialog } from "../scenes/dom-dialogs/network-error/network-error-dialog";
-import { WaitingDialog } from "../scenes/dom-dialogs/waiting/waiting-dialog";
+import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
 import { MatchCard } from "../scenes/dom-scenes/match-card";
 import {

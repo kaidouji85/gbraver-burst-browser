@@ -2,8 +2,8 @@ import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
 import { StorySubFLow } from "../../../in-progress/story";
 import { GotoEpisodeSelect } from "../../../post-battle";
-import { EpisodeID } from "../../../story/episode";
-import { EpisodeIDs } from "../../../story/episodes/episode-ids";
+import { EpisodeID } from "../../../story-mode/episode";
+import { EpisodeIDs } from "../../../story-mode/episodes/episode-ids";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startEpisodeSelector } from "../../start-episode-selector";
 

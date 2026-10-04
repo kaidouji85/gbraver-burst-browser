@@ -1,6 +1,6 @@
 import { TutorialStart } from "../../game-actions/tutorial-start";
 import { GameProps } from "../../game-props";
-import { batterySystemTutorial } from "../../story/episodes/battery-system-tutorial";
+import { batterySystemTutorial } from "../../story-mode/episodes/battery-system-tutorial";
 import { getEpisodes } from "../get-episodes";
 import { startEpisode } from "../start-episode";
 import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";

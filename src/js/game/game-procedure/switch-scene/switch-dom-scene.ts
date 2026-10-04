@@ -2,7 +2,7 @@ import { Unsubscribable } from "rxjs";
 
 import { createAbortError } from "../../../event/abort-controller/abort-error";
 import { AbortManagerContainer } from "../../../event/abort-controller/abort-manager-container";
-import { PostBattleFloater } from "../../scenes/dom-floaters/post-battle";
+import { PostBattleFloater } from "../../floaters/post-battle";
 import { DOMScene } from "../../scenes/dom-scenes/dom-scene";
 import { DOMSceneBinderContainer } from "../../scenes/dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { TDSceneBinder } from "../../scenes/td-scenes/td-scene-binder";

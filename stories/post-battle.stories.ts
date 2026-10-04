@@ -1,5 +1,5 @@
-import { PostBattleFloater } from "../src/js/game/scenes/dom-floaters/post-battle";
-import { PostBattleButtonConfig } from "../src/js/game/scenes/dom-floaters/post-battle/post-battle-button-config";
+import { PostBattleFloater } from "../src/js/game/floaters/post-battle";
+import { PostBattleButtonConfig } from "../src/js/game/floaters/post-battle/post-battle-button-config";
 import {
   PostEpisodeButtons,
   PostEpisodeLoseButtons,

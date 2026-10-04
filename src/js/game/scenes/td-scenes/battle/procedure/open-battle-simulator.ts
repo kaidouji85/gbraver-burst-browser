@@ -1,4 +1,4 @@
-import { BattleSimulator } from "../../../dom-dialogs/battle-simulator";
+import { BattleSimulator } from "../../../../dialogs/battle-simulator";
 import { BattleSceneProps } from "../props";
 import { switchBattleSimulator } from "./switch-battle-simulator";
 

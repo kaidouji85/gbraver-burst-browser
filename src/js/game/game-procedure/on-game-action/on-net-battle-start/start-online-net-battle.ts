@@ -1,7 +1,7 @@
-import { LoginDialog } from "../../../scenes/dom-dialogs/login";
-import { NetBattleSelectorDialog } from "../../../scenes/dom-dialogs/net-battle-selector";
-import { NetworkErrorDialog } from "../../../scenes/dom-dialogs/network-error/network-error-dialog";
-import { WaitingDialog } from "../../../scenes/dom-dialogs/waiting/waiting-dialog";
+import { LoginDialog } from "../../../dialogs/login";
+import { NetBattleSelectorDialog } from "../../../dialogs/net-battle-selector";
+import { NetworkErrorDialog } from "../../../dialogs/network-error/network-error-dialog";
+import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { Online } from "../../../network-context/online";
 import { switchLoginDialog } from "../../switch-dialog/switch-login-dialog";

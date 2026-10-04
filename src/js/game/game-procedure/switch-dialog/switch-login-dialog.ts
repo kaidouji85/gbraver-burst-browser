@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { LoginDialog } from "../../scenes/dom-dialogs/login";
+import { LoginDialog } from "../../dialogs/login";
 import { GameProps } from "../../game-props";
 
 /**

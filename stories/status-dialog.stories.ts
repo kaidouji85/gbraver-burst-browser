@@ -11,7 +11,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { StatusDialog } from "../src/js/game/scenes/dom-dialogs/status";
+import { StatusDialog } from "../src/js/game/dialogs/status";
 import { domStub } from "./stub/dom-stub";
 
 export default {

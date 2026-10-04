@@ -1,4 +1,4 @@
-import { TutorialDescriptionDialog } from "../../scenes/dom-dialogs/tutorial-description";
+import { TutorialDescriptionDialog } from "../../dialogs/tutorial-description";
 import { TutorialConsent } from "../../game-actions/tutorial-consent";
 import { GameProps } from "../../game-props";
 import { switchTutorialDescriptionDialog } from "../switch-dialog/switch-tutorial-description-dialog";

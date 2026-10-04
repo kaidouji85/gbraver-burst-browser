@@ -1,7 +1,7 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
-import { MatchingDialog } from "../scenes/dom-dialogs/matching/matching-dialog";
-import { NetworkErrorDialog } from "../scenes/dom-dialogs/network-error/network-error-dialog";
+import { MatchingDialog } from "../dialogs/matching/matching-dialog";
+import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
 import { OfflineLAN } from "../network-context/offline-lan";

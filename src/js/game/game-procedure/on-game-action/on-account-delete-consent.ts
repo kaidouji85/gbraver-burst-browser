@@ -1,4 +1,4 @@
-import { DeleteAccountConsentDialog } from "../../scenes/dom-dialogs/delete-account-consent";
+import { DeleteAccountConsentDialog } from "../../dialogs/delete-account-consent";
 import { AccountDeleteConsent } from "../../game-actions/account-delete-consent";
 import { GameProps } from "../../game-props";
 import { switchAccountConsentDialog } from "../switch-dialog/switch-account-consent-dialog";

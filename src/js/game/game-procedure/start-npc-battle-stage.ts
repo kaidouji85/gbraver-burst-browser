@@ -15,7 +15,7 @@ import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
 import { waitTime } from "../../event/wait/wait-time";
 import { waitUntilWindowPushWithStream } from "../../event/wait/wait-until-window-push-with-stream";
 import { GameProps } from "../game-props";
-import { NPCBattleStage } from "../npc-battle/stages/npc-battle-stage";
+import { NPCBattleStage } from "../arcade-mode/stages/npc-battle-stage";
 import { bindBattleScene } from "./bind-scene/bind-battle-scene";
 import { switchStageTitle } from "./switch-scene/switch-stage-title";
 

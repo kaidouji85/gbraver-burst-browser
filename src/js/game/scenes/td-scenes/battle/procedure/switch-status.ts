@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { StatusDialog } from "../../../dom-dialogs/status";
+import { StatusDialog } from "../../../../dialogs/status";
 import { BattleSceneProps } from "../props";
 
 /**

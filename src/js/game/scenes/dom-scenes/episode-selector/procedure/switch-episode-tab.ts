@@ -1,4 +1,4 @@
-import { EpisodeType } from "../../../../story/episode";
+import { EpisodeType } from "../../../../story-mode/episode";
 import { EPISODE_TYPE, EPISODE_TYPE_SELECTED } from "../dom/class-name";
 import { EpisodeSelectorProps } from "../props";
 

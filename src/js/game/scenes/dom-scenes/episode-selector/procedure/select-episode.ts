@@ -1,4 +1,4 @@
-import { EpisodeID } from "../../../../story/episode";
+import { EpisodeID } from "../../../../story-mode/episode";
 import { EpisodeSelectorProps } from "../props";
 
 /**

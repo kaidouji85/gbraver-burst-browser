@@ -1,6 +1,6 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { EpisodeID } from "../../../story/episode";
+import { EpisodeID } from "../../../story-mode/episode";
 import { DOMScene } from "../dom-scene";
 import { EpisodeSelect } from "./episode-element/episode-select";
 import { bindEventListeners } from "./procedure/bind-event-listeners";

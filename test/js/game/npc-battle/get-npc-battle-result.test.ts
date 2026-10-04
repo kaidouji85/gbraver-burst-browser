@@ -1,10 +1,10 @@
 import { EMPTY_PLAYER } from "gbraver-burst-core";
 
-import { getNPCBattleResult } from "../../../../src/js/game/npc-battle/npc-battle-result";
-import { DefaultStage } from "../../../../src/js/game/npc-battle/stages/default-stage";
+import { getNPCBattleResult } from "../../../../src/js/game/arcade-mode/npc-battle-result";
+import { DefaultStage } from "../../../../src/js/game/arcade-mode/stages/default-stage";
 
 /** テストプレイヤー情報 */
-const player = { ...EMPTY_PLAYER, playerId: "npc-battle-player" };
+const player = { ...EMPTY_PLAYER, playerId: "arcade-mode-player" };
 
 /** ステージ情報 */
 const stages = [DefaultStage, DefaultStage, DefaultStage];
@@ -14,7 +14,7 @@ test("プレイヤーが勝利した場合はステージクリアである", ()
   expect(
     getNPCBattleResult(state, {
       type: "GameOver",
-      winner: "npc-battle-player",
+      winner: "arcade-mode-player",
     }),
   ).toEqual("StageClear");
 });
@@ -36,7 +36,7 @@ test("最終ステージでプレイヤーが勝利した場合はNPCバトル�
   expect(
     getNPCBattleResult(state, {
       type: "GameOver",
-      winner: "npc-battle-player",
+      winner: "arcade-mode-player",
     }),
   ).toEqual("NPCBattleComplete");
 });

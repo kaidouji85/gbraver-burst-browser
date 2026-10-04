@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { PrivateMatchGuestDialog } from "../../scenes/dom-dialogs/private-match-guest";
+import { PrivateMatchGuestDialog } from "../../dialogs/private-match-guest";
 import { GameProps } from "../../game-props";
 
 /**

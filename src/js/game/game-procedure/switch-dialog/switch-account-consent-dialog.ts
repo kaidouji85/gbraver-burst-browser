@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { DeleteAccountConsentDialog } from "../../scenes/dom-dialogs/delete-account-consent";
+import { DeleteAccountConsentDialog } from "../../dialogs/delete-account-consent";
 import { GameProps } from "../../game-props";
 
 /**

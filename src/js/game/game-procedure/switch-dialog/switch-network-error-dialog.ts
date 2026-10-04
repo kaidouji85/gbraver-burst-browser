@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { NetworkErrorDialog } from "../../scenes/dom-dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../dialogs/network-error/network-error-dialog";
 import { GameProps } from "../../game-props";
 
 /**

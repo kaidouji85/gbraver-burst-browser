@@ -1,5 +1,5 @@
 import { EpisodeSelector } from "../src/js/game/scenes/dom-scenes/episode-selector";
-import { EpisodesInDevelopment } from "../src/js/game/story/episodes";
+import { EpisodesInDevelopment } from "../src/js/game/story-mode/episodes";
 import { domStub } from "./stub/dom-stub";
 
 export default {

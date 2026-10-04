@@ -1,4 +1,4 @@
-import { PrivateMatchGuestDialog } from "../../../scenes/dom-dialogs/private-match-guest";
+import { PrivateMatchGuestDialog } from "../../../dialogs/private-match-guest";
 import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";

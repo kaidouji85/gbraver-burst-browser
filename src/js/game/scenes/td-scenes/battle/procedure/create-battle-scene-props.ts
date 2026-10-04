@@ -4,7 +4,7 @@ import { Observable, Subject } from "rxjs";
 import { AbortManagerContainer } from "../../../../../event/abort-controller/abort-manager-container";
 import { createActionManager } from "../../../../../event/action-manager/action-manager";
 import { BGMManagerContainer } from "../../../../../sounds/bgm/bgm-manager";
-import { DOMDialogBinder } from "../../../dom-dialogs/dom-dialog-binder";
+import { DOMDialogBinder } from "../../../../dialogs/dom-dialog-binder";
 import { Exclusive } from "../../../../../event/exclusive/exclusive";
 import { PlayerPilotVisibility } from "../../../../config/browser-config";
 import { GameLoopContainer } from "../../../../game-loop/game-loop-container";

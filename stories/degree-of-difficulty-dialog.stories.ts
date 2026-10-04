@@ -1,4 +1,4 @@
-import { DifficultyDialog } from "../src/js/game/scenes/dom-dialogs/difficulty";
+import { DifficultyDialog } from "../src/js/game/dialogs/difficulty";
 import { domStub } from "./stub/dom-stub";
 
 export default {

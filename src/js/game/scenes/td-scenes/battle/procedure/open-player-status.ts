@@ -1,4 +1,4 @@
-import { StatusDialog } from "../../../dom-dialogs/status";
+import { StatusDialog } from "../../../../dialogs/status";
 import { BattleSceneProps } from "../props";
 import { switchStatus } from "./switch-status";
 

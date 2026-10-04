@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { TutorialDescriptionDialog } from "../../scenes/dom-dialogs/tutorial-description";
+import { TutorialDescriptionDialog } from "../../dialogs/tutorial-description";
 import { GameProps } from "../../game-props";
 
 /**
