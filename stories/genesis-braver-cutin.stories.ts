@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyGenesisBraverCutIn,
   playerGenesisBraverCutIn,
-} from "../src/js/game-object/cut-in/genesis-braver";
-import { GenesisBraverCutIn } from "../src/js/game-object/cut-in/genesis-braver/genesis-braver-cutin";
+} from "../src/js/game/game-object/cut-in/genesis-braver";
+import { GenesisBraverCutIn } from "../src/js/game/game-object/cut-in/genesis-braver/genesis-braver-cutin";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

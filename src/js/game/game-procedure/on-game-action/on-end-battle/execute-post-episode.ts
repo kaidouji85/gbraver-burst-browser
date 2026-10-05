@@ -1,6 +1,6 @@
 import { GameEnd } from "gbraver-burst-core";
 
-import { PostBattleButtonConfig } from "../../../../dom-floaters/post-battle/post-battle-button-config";
+import { PostBattleButtonConfig } from "../../../floaters/post-battle/post-battle-button-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
@@ -17,11 +17,11 @@ import {
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../../../post-battle-buttons";
-import { Episode } from "../../../story/episode";
-import { getNextEpisode } from "../../../story/get-next-episode";
-import { getNextTutorial } from "../../../story/get-next-tutorial";
-import { isPlayerWin } from "../../../story/is-player-win";
-import { isLastTutorial } from "../../../story/is-tutorial-end";
+import { Episode } from "../../../story-mode/episode";
+import { getNextEpisode } from "../../../story-mode/get-next-episode";
+import { getNextTutorial } from "../../../story-mode/get-next-tutorial";
+import { isPlayerWin } from "../../../story-mode/is-player-win";
+import { isLastTutorial } from "../../../story-mode/is-tutorial-end";
 import { getEpisodes } from "../../get-episodes";
 
 /** エピソード終了後の結果 */

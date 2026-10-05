@@ -1,5 +1,5 @@
-import { Config } from "../src/js/dom-scenes/config";
-import { ConfigChangedDialog } from "../src/js/dom-scenes/config/config-changed-dialog";
+import { Config } from "../src/js/game/scenes/dom-scenes/config";
+import { ConfigChangedDialog } from "../src/js/game/scenes/dom-scenes/config/config-changed-dialog";
 import { domStub } from "./stub/dom-stub";
 
 export default {

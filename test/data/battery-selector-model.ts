@@ -1,4 +1,4 @@
-import type { BatterySelectorModel } from "../../src/js/game-object/battery-selector/model";
+import type { BatterySelectorModel } from "../../src/js/game/game-object/battery-selector/model";
 
 /** 空のバッテリーセレクタモデル */
 export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {

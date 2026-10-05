@@ -1,6 +1,6 @@
 import { EMPTY_GAME_STATE, GameState } from "gbraver-burst-core";
 
-import { turnCount } from "../../../src/js/custom-battle-events/turn-count";
+import { turnCount } from "../../../src/js/game/custom-battle-events/turn-count";
 
 /** TurnChangeのゲームステート */
 const turnChange: GameState = {

@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyGranDozer,
   PlayerGranDozer,
-} from "../src/js/game-object/armdozer/gran-dozer";
-import { GranDozer } from "../src/js/game-object/armdozer/gran-dozer/gran-dozer";
+} from "../src/js/game/game-object/armdozer/gran-dozer";
+import { GranDozer } from "../src/js/game/game-object/armdozer/gran-dozer/gran-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

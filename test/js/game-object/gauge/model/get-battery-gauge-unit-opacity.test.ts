@@ -1,4 +1,4 @@
-import { getBatteryGaugeUnitOpacity } from "../../../../../src/js/game-object/gauge/model/get-battery-gauge-unit-opacity";
+import { getBatteryGaugeUnitOpacity } from "../../../../../src/js/game/game-object/gauge/model/get-battery-gauge-unit-opacity";
 
 test("ゲージユニット値が最大バッテリーより小さい場合、不透明度=1となる", () => {
   const gaugeUnit = 1;

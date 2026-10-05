@@ -1,4 +1,4 @@
-import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../src/js/qr-code/private-match-qr-code";
+import { extractRoomIDFromPrivateMatchQRCodeText } from "../../../src/js/dom/qr-code/private-match-qr-code";
 
 test("ひらがな5文字は正しいフォーマットなので、ルームIDを抽出できる", () => {
   const roomID = "あかんやろ";

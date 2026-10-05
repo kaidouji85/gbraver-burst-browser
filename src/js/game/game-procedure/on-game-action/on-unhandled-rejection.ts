@@ -1,4 +1,4 @@
-import { isAbortError } from "../../../abort-controller/abort-error";
+import { isAbortError } from "../../../event/abort-controller/abort-error";
 import { UnhandledRejection } from "../../game-actions/unhandled-rejection";
 import { GameProps } from "../../game-props";
 

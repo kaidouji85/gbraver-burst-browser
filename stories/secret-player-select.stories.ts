@@ -1,6 +1,6 @@
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
-import { SecretPlayerSelect } from "../src/js/dom-scenes/secret-player-select";
+import { SecretPlayerSelect } from "../src/js/game/scenes/dom-scenes/secret-player-select";
 import { domStub } from "./stub/dom-stub";
 
 export default {

@@ -1,4 +1,4 @@
-import { TimeScaleButton } from "../src/js/game-object/time-scale-button/time-scale-button";
+import { TimeScaleButton } from "../src/js/game/game-object/time-scale-button/time-scale-button";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

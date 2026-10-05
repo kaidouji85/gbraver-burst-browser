@@ -5,7 +5,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isAllPlayerNoDamage } from "../../../src/js/custom-battle-events/is-all-player-no-damage";
+import { isAllPlayerNoDamage } from "../../../src/js/game/custom-battle-events/is-all-player-no-damage";
 
 /**
  * ノーダメージのプレイヤーを生成する

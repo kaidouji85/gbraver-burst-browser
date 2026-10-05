@@ -6,8 +6,8 @@ import {
   neoLandozerBurstButton,
   shinBraverBurstButton,
   wingDozerBurstButton,
-} from "../src/js/game-object/burst-button";
-import { BurstButton } from "../src/js/game-object/burst-button/burst-button";
+} from "../src/js/game/game-object/burst-button";
+import { BurstButton } from "../src/js/game/game-object/burst-button/burst-button";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

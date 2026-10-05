@@ -1,8 +1,8 @@
-import { Title } from "../src/js/dom-scenes/title";
+import { Title } from "../src/js/game/scenes/dom-scenes/title";
 import {
   GuestAccount,
   LoggedInAccount,
-} from "../src/js/dom-scenes/title/title-account";
+} from "../src/js/game/scenes/dom-scenes/title/title-account";
 import { domStub } from "./stub/dom-stub";
 
 export default {

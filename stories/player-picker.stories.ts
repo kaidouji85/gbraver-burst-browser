@@ -1,6 +1,6 @@
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
-import { PlayerPickerDialog } from "../src/js/dom-dialogs/player-picker";
+import { PlayerPickerDialog } from "../src/js/game/dialogs/player-picker";
 import { PlayableArmdozers } from "../src/js/game/playable-amdozers";
 import { PlayablePilots } from "../src/js/game/playable-pilots";
 import { domStub } from "./stub/dom-stub";

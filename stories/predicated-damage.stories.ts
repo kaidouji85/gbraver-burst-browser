@@ -4,7 +4,7 @@ import { delay } from "../src/js/animation/delay";
 import {
   PredicatedDamage,
   PredicatedDamageConstructParams,
-} from "../src/js/game-object/predicated-damage";
+} from "../src/js/game/game-object/predicated-damage";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

@@ -1,0 +1,65 @@
+import * as THREE from "three";
+
+import { Resources } from "../../../../../resource";
+import { findTextureOrThrow } from "../../../../../resource/find-texture-or-throw";
+import { TEXTURE_IDS } from "../../../../../resource/texture/ids";
+import { HorizontalAnimationMesh } from "../../../../../web-gl/mesh/horizontal-animation";
+import { outlineShader } from "../../../../../web-gl/shader/outline-shader";
+import { BatterySelectorIcon } from "./battery-selector-icon";
+
+/** メッシュのサイズ */
+const MESH_SIZE = 500;
+
+/** アウトラインメッシュのサイズ */
+const OUTLINE_SIZE = MESH_SIZE + 35;
+
+/**
+ * ライトニングドーザ攻撃アイコンを生成する
+ * @param options オプション
+ * @returns 生成結果
+ */
+export const lightningDozerAttackIcon = (
+  resources: Resources,
+): BatterySelectorIcon => {
+  const group = new THREE.Group();
+
+  const texture = findTextureOrThrow(
+    resources,
+    TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
+  ).texture;
+  const mesh = new HorizontalAnimationMesh({
+    texture,
+    maxAnimation: 4,
+    width: MESH_SIZE,
+    height: MESH_SIZE,
+  });
+  const colorStrength = 0.8;
+  mesh.color(colorStrength, colorStrength, colorStrength);
+  mesh.animate(1);
+  group.add(mesh.getObject3D());
+
+  const outlineMesh = new HorizontalAnimationMesh({
+    texture,
+    maxAnimation: 4,
+    width: OUTLINE_SIZE,
+    height: OUTLINE_SIZE,
+    shader: outlineShader,
+  });
+  outlineMesh.color(0 / 255, 255 / 255, 0 / 255);
+  outlineMesh.animate(1);
+  outlineMesh.getObject3D().position.set(0, 0, -0.01);
+  group.add(outlineMesh.getObject3D());
+
+  return {
+    destructor: () => {
+      mesh.destructor();
+      outlineMesh.destructor();
+    },
+    getObject3D: () => group,
+    opacity: (value: number) => {
+      mesh.opacity(value);
+      outlineMesh.opacity(value);
+    },
+    position: { x: 10, y: 90 },
+  };
+};

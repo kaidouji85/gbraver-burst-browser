@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getMinimumBatteryToHitOrCritical } from "../../../src/js/npc/get-minimum-battery-to-hit-or-critical";
+import { getMinimumBatteryToHitOrCritical } from "../../../src/js/game/npc/get-minimum-battery-to-hit-or-critical";
 
 /** 攻撃側プレイヤー */
 const attacker: PlayerState = {

@@ -1,4 +1,4 @@
-import { getSize } from "../../../src/js/safe-area/safe-area-inset";
+import { getSize } from "../../../src/js/dom/safe-area/safe-area-inset";
 test("セーフエリアインセットプロパティから、正しく数字だけを取り出すことができる", () => {
   const data = "12345px";
   const result = getSize(data);

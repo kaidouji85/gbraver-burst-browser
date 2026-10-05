@@ -3,8 +3,8 @@ import {
   enemyLightning,
   LightningCreatorParams,
   playerLightning,
-} from "../src/js/game-object/hitmark/lightning";
-import { Lightning } from "../src/js/game-object/hitmark/lightning/lightning";
+} from "../src/js/game/game-object/hitmark/lightning";
+import { Lightning } from "../src/js/game/game-object/hitmark/lightning/lightning";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

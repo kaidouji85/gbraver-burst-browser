@@ -2,7 +2,7 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyGaiCutIn,
   playerGaiCutIn,
-} from "../src/js/game-object/cut-in/gai";
+} from "../src/js/game/game-object/cut-in/gai";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

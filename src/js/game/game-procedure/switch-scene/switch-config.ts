@@ -1,7 +1,7 @@
 import { map } from "rxjs";
 
-import { Config } from "../../../dom-scenes/config";
 import { GameProps } from "../../game-props";
+import { Config } from "../../scenes/dom-scenes/config";
 import { switchDOMScene } from "./switch-dom-scene";
 
 /**

@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isEnemyAdvantage } from "../../../src/js/custom-battle-events/is-enemy-advantage";
+import { isEnemyAdvantage } from "../../../src/js/game/custom-battle-events/is-enemy-advantage";
 
 /**
  * プレイヤーのプレイヤーステートを生成する

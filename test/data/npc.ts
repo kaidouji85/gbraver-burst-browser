@@ -6,7 +6,7 @@ import {
   Pilots,
 } from "gbraver-burst-core";
 
-import type { NPC } from "../../src/js/npc/npc";
+import type { NPC } from "../../src/js/game/npc/npc";
 
 /** 空NPCのシンプルな実装 */
 class SimpleEmptyNPC implements NPC {

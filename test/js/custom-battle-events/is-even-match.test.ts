@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { isEvenMatch } from "../../../src/js/custom-battle-events/is-even-match";
+import { isEvenMatch } from "../../../src/js/game/custom-battle-events/is-even-match";
 
 /**
  * プレイヤーのプレイヤーステートを生成する
