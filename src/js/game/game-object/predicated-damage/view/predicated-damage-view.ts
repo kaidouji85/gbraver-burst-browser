@@ -17,7 +17,7 @@ import { PredicatedDamageModel } from "../model/predicated-damage-model";
 const MAX_ANIMATION = 11;
 
 /** 数字系メッシュの縮小率、大きさ調整に利用する */
-const NUMBER_SIZE_SCALE = 0.3;
+const NUMBER_SIZE_SCALE = 0.25;
 
 /** 数字メッシュサイズ */
 const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
