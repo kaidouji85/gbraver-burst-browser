@@ -29,7 +29,7 @@ export function createEnemyProps(
   });
   predicatedDamage
     .getObject3D()
-    .position.set(500, 50, HUD_PREDICATED_DAMAGE_Z);
+    .position.set(400, 80, HUD_PREDICATED_DAMAGE_Z);
   gauge.getObject3D().add(predicatedDamage.getObject3D());
 
   const statusIcon = new StatusIcon(params);

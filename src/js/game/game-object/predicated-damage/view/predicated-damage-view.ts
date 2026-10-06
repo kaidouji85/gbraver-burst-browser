@@ -15,7 +15,7 @@ import { PredicatedDamageModel } from "../model/predicated-damage-model";
 const MAX_ANIMATION = 11;
 
 /** 数字系メッシュの縮小率、大きさ調整に利用する */
-const NUMBER_SIZE_SCALE = 1;
+const NUMBER_SIZE_SCALE = 0.7;
 
 /** 数字メッシュサイズ */
 const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
@@ -33,7 +33,7 @@ const MAX_DISPLAYABLE_DAMAGE = 9999;
 const MIN_DISPLAYABLE_DAMAGE = 0;
 
 /** バトルシミュレーターアイコンのサイズ */
-const BATTLE_SIMULATOR_ICON_SIZE = 256;
+const BATTLE_SIMULATOR_ICON_SIZE = 256 * 0.9;
 
 /** 数字とアイコンの間のマージン */
 const NUMBER_TO_ICON_MARGIN = 64;
