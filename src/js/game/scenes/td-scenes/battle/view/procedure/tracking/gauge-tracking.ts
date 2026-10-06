@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
+import { toHUDCoordinate } from "../../../../../../tracking/to-hud-coordinate";
 import { Gauge } from "../../../../../../game-object/gauge/gauge";
 import {
   ARMDOZER_EFFECT_STANDARD_X,

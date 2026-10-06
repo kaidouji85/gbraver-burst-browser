@@ -1,4 +1,4 @@
-import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
+import { toHUDCoordinate } from "../../../../../../tracking/to-hud-coordinate";
 import { TrackingParams } from "./tracking-params";
 
 /**

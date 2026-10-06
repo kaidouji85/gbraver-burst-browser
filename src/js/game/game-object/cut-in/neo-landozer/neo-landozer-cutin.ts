@@ -2,8 +2,8 @@ import { Observable, Unsubscribable } from "rxjs";
 import * as THREE from "three";
 
 import { Animate } from "../../../../animation/animate";
-import { HUDCoordinate } from "../../../../web-gl/tracking/coordinate";
-import type { HUDTracking } from "../../../../web-gl/tracking/hud-tracking";
+import { HUDCoordinate } from "../../../tracking/coordinate";
+import type { HUDTracking } from "../../../tracking/hud-tracking";
 import type { PreRender } from "../../../game-loop/pre-render";
 import type { GameObjectAction } from "../../action/game-object-action";
 import { hidden } from "./animation/hidden";
