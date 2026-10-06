@@ -6,19 +6,16 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
-import { PreRender } from "../../../game-loop/pre-render";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import { hudUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
-import { HUD_PREDICATED_DAMAGE_Z } from "../../hud-position";
 
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 11;
 
 /** 数字系メッシュの縮小率、大きさ調整に利用する */
-const NUMBER_SIZE_SCALE = 0.25;
+const NUMBER_SIZE_SCALE = 1;
 
 /** 数字メッシュサイズ */
 const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
@@ -36,10 +33,10 @@ const MAX_DISPLAYABLE_DAMAGE = 9999;
 const MIN_DISPLAYABLE_DAMAGE = 0;
 
 /** バトルシミュレーターアイコンのサイズ */
-const BATTLE_SIMULATOR_ICON_SIZE = 70;
+const BATTLE_SIMULATOR_ICON_SIZE = 256;
 
 /** 数字とアイコンの間のマージン */
-const NUMBER_TO_ICON_MARGIN = 16;
+const NUMBER_TO_ICON_MARGIN = 64;
 
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
@@ -105,7 +102,6 @@ export class PredicatedDamageView {
       height: BATTLE_SIMULATOR_ICON_SIZE,
     });
     this.#group.add(this.#battleSimulatorIcon.getObject3D());
-    this.#group.position.z = HUD_PREDICATED_DAMAGE_Z;
   }
 
   /**
@@ -124,13 +120,8 @@ export class PredicatedDamageView {
    * @param model モデル
    * @param preRender プリレンダリング情報
    */
-  engage(model: PredicatedDamageModel, preRender: PreRender): void {
+  engage(model: PredicatedDamageModel): void {
     const { damage, opacity } = model;
-    const { safeAreaInset, rendererDOM } = preRender;
-
-    const scale = hudUIScale(rendererDOM, safeAreaInset);
-    this.#group.scale.set(scale, scale, scale);
-
     const correctDamage = Math.max(
       MIN_DISPLAYABLE_DAMAGE,
       Math.min(damage, MAX_DISPLAYABLE_DAMAGE),

@@ -1,4 +1,3 @@
-import { PreRender } from "../../../game-loop/pre-render";
 import { PredicatedDamageProps } from "../props/predicated-damage-props";
 
 /**
@@ -6,7 +5,7 @@ import { PredicatedDamageProps } from "../props/predicated-damage-props";
  * @param props ゲームオブジェクトプロパティ
  * @param action アクション情報
  */
-export function onPreRender(props: PredicatedDamageProps, action: PreRender) {
+export function onPreRender(props: PredicatedDamageProps) {
   const { model, view } = props;
-  view.engage(model, action);
+  view.engage(model);
 }
