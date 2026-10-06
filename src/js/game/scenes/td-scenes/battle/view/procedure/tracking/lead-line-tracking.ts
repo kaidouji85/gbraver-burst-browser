@@ -1,5 +1,5 @@
-import { HUDCoordinate } from "../../../../../../tracking/coordinate";
-import { toHUDCoordinate } from "../../../../../../tracking/to-hud-coordinate";
+import { HUDCoordinate } from "../../../../../../../web-gl/tracking/coordinate";
+import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
