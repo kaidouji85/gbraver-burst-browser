@@ -24,7 +24,7 @@ export function createEnemyProps(
 
   const predicatedDamage = new PredicatedDamage({
     ...params,
-    battleSimulatorIconPosition: "left",
+    battleSimulatorIconPosition: "right",
   });
 
   const statusIcon = new StatusIcon(params);

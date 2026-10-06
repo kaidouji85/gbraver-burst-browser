@@ -24,7 +24,7 @@ const playerPredicatedDamageTracking = (options: {
   const { predicatedDamage, camera, rendererDOM } = options;
   const origin = {
     x: ARMDOZER_EFFECT_STANDARD_X,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 200,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 220,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, camera, rendererDOM);
@@ -47,7 +47,7 @@ const enemyPredicatedDamageTracking = (options: {
   const { predicatedDamage, camera, rendererDOM } = options;
   const origin = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 200,
+    y: ARMDOZER_EFFECT_STANDARD_Y + 220,
     z: ARMDOZER_EFFECT_STANDARD_Z,
   };
   const hudCoordinate = toHUDCoordinate(origin, camera, rendererDOM);

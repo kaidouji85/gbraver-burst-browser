@@ -24,7 +24,7 @@ export function createPlayerProps(
 
   const predicatedDamage = new PredicatedDamage({
     ...params,
-    battleSimulatorIconPosition: "right",
+    battleSimulatorIconPosition: "left",
   });
 
   const statusIcon = new StatusIcon(params);
