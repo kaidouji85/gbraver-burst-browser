@@ -12,6 +12,7 @@ import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { hudUIScale } from "../../scale";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
+import { HUD_PREDICATED_DAMAGE_Z } from "../../hud-position";
 
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 11;
@@ -104,6 +105,7 @@ export class PredicatedDamageView {
       height: BATTLE_SIMULATOR_ICON_SIZE,
     });
     this.#group.add(this.#battleSimulatorIcon.getObject3D());
+    this.#group.position.z = HUD_PREDICATED_DAMAGE_Z;
   }
 
   /**
