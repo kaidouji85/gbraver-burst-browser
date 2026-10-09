@@ -16,5 +16,8 @@ export const HUD_RESULT_INDICATOR_Z = 7;
 /** カットインのz座標 */
 export const HUD_CUT_IN_Z = 6;
 
+/** 予測ダメージのz座標 */
+export const HUD_PREDICATED_DAMAGE_Z = 5;
+
 /** 最背面 画面フェーダーのz座標 */
 export const HUD_REARMOST_FADER_Z = -1;

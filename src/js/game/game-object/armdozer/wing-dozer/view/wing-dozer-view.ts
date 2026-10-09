@@ -7,8 +7,6 @@ import { WingDozerModel } from "../model/wing-dozer-model";
 export interface WingDozerView {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
-  /** 予測ダメージの位置（ワールド座標） */
-  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処理
