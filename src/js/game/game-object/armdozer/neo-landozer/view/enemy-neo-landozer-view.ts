@@ -14,7 +14,6 @@ export class EnemyNeoLandozerView extends PlayerNeoLandozerView {
   constructor(resources: Resources) {
     super(resources);
     this.statusIconPosition.x *= -1;
-    this.predicatedDamagePosition.x *= -1;
   }
 
   /** @override */
