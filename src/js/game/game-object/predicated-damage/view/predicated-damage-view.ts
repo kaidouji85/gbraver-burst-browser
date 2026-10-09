@@ -35,6 +35,9 @@ const MIN_DISPLAYABLE_DAMAGE = 0;
 /** バトルシミュレーターアイコンのサイズ */
 const BATTLE_SIMULATOR_ICON_SIZE = 256 * 0.9;
 
+/** バトルシミュレーターアイコンのプッシュ検出器の半径 */
+const BATTLE_SIMULATOR_ICON_PUSH_DETECTOR_RADIUS = 80;
+
 /** 数字とアイコンの間のマージン */
 const NUMBER_TO_ICON_MARGIN = 64;
 
@@ -85,7 +88,7 @@ export class PredicatedDamageView {
 
     this.#battleSimulatorIconPushDetector = circlePushDetector({
       ...params,
-      radius: 30,
+      radius: BATTLE_SIMULATOR_ICON_PUSH_DETECTOR_RADIUS,
       segments: 32,
       visible: false,
     });
