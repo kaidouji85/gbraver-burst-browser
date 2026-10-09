@@ -2,7 +2,6 @@ import * as THREE from "three";
 
 import { toHUDCoordinate } from "../../../../../../../web-gl/tracking/to-hud-coordinate";
 import { Gauge } from "../../../../../../game-object/gauge/gauge";
-import { PredicatedDamage } from "../../../../../../game-object/predicated-damage";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,

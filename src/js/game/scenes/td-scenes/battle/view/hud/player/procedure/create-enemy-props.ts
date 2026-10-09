@@ -27,9 +27,7 @@ export function createEnemyProps(
     ...params,
     battleSimulatorIconPosition: "right",
   });
-  predicatedDamage
-    .getObject3D()
-    .position.set(400, 80, HUD_PREDICATED_DAMAGE_Z);
+  predicatedDamage.getObject3D().position.set(400, 80, HUD_PREDICATED_DAMAGE_Z);
   gauge.getObject3D().add(predicatedDamage.getObject3D());
 
   const statusIcon = new StatusIcon(params);
