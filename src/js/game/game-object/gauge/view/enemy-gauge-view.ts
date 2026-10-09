@@ -17,7 +17,7 @@ import { HpNumber } from "./hp-number";
 export const BASE_SCALE = 0.3;
 
 /** 上余白 最小値 */
-export const MIN_PADDING_TOP = 70;
+export const MIN_PADDING_TOP = 55;
 
 /** 敵のビュー */
 export class EnemyGaugeView implements GaugeView {
