@@ -65,6 +65,8 @@ export function attentionBattleSimulatorButton(
   props: CustomBattleEventProps,
 ): void {
   props.view.hud.players.forEach((p) => {
+    // ワールド座標でHUD_ATTENTION_Zとなるようにしたいので、
+    // 親のスケールを加味している
     const parent = p.gauge.getObject3D();
     const target = p.predicatedDamage.getObject3D();
     target.position.z = HUD_ATTENTION_Z / parent.scale.z;
@@ -79,6 +81,7 @@ export function unattentionBattleSimulatorButton(
   props: CustomBattleEventProps,
 ): void {
   props.view.hud.players.forEach((p) => {
+    // ローカル座標の初期値に戻す
     p.predicatedDamage.getObject3D().position.z = HUD_PREDICATED_DAMAGE_Z;
   });
 }
