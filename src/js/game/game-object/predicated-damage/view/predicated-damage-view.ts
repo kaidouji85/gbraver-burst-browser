@@ -121,7 +121,6 @@ export class PredicatedDamageView {
   /**
    * モデルをビューに反映させる
    * @param model モデル
-   * @param preRender プリレンダリング情報
    */
   engage(model: PredicatedDamageModel): void {
     const { damage, opacity } = model;
