@@ -1,4 +1,5 @@
 import { enemyGauge } from "../../../../../../../game-object/gauge";
+import { HUD_PREDICATED_DAMAGE_Z } from "../../../../../../../game-object/hud-position";
 import { PredicatedDamage } from "../../../../../../../game-object/predicated-damage";
 import { loseIndicator } from "../../../../../../../game-object/result-indicator";
 import { StatusIcon } from "../../../../../../../game-object/status-icon";
@@ -24,8 +25,10 @@ export function createEnemyProps(
 
   const predicatedDamage = new PredicatedDamage({
     ...params,
-    battleSimulatorIconPosition: "left",
+    battleSimulatorIconPosition: "right",
   });
+  predicatedDamage.getObject3D().position.set(400, 80, HUD_PREDICATED_DAMAGE_Z);
+  gauge.getObject3D().add(predicatedDamage.getObject3D());
 
   const statusIcon = new StatusIcon(params);
 

@@ -22,7 +22,7 @@ export function bindEventListener(params: Params): Unsubscribable[] {
   return [
     gameObjectAction.subscribe((action) => {
       if (action.type === "PreRender") {
-        onPreRender(props, action);
+        onPreRender(props);
       }
     }),
   ];

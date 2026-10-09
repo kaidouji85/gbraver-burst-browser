@@ -16,8 +16,6 @@ export type ArmdozerWorldCoordinate = {
 export interface ArmdozerSprite {
   /** ステータスアイコンの位置（ワールド座標） */
   readonly statusIconPosition: ArmdozerWorldCoordinate;
-  /** ダメージ予想の位置（ワールド座標） */
-  readonly predicatedDamagePosition: ArmdozerWorldCoordinate;
   /** ダウンアニメーション開始から衝撃演出までの遅延時間(ミリ秒) */
   readonly downImpactDelay: number;
 

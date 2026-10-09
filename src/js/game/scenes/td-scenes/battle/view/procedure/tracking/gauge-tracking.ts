@@ -11,16 +11,18 @@ import { TrackingParams } from "./tracking-params";
 
 /**
  * プレイヤー側ゲージのトラッキング
- * @param gauge トラッキングするゲージ
- * @param tdCamera 3Dレイヤーのカメラ
- * @param rendererDOM レンダラDOM
+ * @param options オプション
+ * @param options.gauge トラッキングするゲージ
+ * @param options.tdCamera 3Dレイヤーのカメラ
+ * @param options.rendererDOM レンダラDOM
  * @returns 変換結果
  */
-function playerGaugeTracking(
-  gauge: Gauge,
-  tdCamera: Readonly<THREE.PerspectiveCamera>,
-  rendererDOM: Readonly<HTMLElement>,
-) {
+function playerGaugeTracking(options: {
+  gauge: Gauge;
+  tdCamera: Readonly<THREE.PerspectiveCamera>;
+  rendererDOM: Readonly<HTMLElement>;
+}) {
+  const { gauge, tdCamera, rendererDOM } = options;
   const origin = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -32,16 +34,18 @@ function playerGaugeTracking(
 
 /**
  * 敵側ゲージのトラッキング
- * @param gauge トラッキングするゲージ
- * @param tdCamera 3Dレイヤーのカメラ
- * @param rendererDOM レンダラDOM
+ * @param options オプション
+ * @param options.gauge トラッキングするゲージ
+ * @param options.tdCamera 3Dレイヤーのカメラ
+ * @param options.rendererDOM レンダラDOM
  * @returns 変換結果
  */
-function enemyGaugeTracking(
-  gauge: Gauge,
-  tdCamera: Readonly<THREE.PerspectiveCamera>,
-  rendererDOM: Readonly<HTMLElement>,
-) {
+function enemyGaugeTracking(options: {
+  gauge: Gauge;
+  tdCamera: Readonly<THREE.PerspectiveCamera>;
+  rendererDOM: Readonly<HTMLElement>;
+}) {
+  const { gauge, tdCamera, rendererDOM } = options;
   const origin = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -60,6 +64,7 @@ export function gaugeTracking(params: TrackingParams): void {
   hud.players.forEach(({ playerId: currentPlayerId, gauge }) => {
     const isPlayer = currentPlayerId === playerId;
     const tracking = isPlayer ? playerGaugeTracking : enemyGaugeTracking;
-    tracking(gauge, td.camera.getCamera(), rendererDOM);
+    const camera = td.camera.getCamera();
+    tracking({ gauge, tdCamera: camera, rendererDOM });
   });
 }

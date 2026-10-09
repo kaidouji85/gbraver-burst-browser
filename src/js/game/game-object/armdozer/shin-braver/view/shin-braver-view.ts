@@ -7,8 +7,6 @@ import { ShinBraverModel } from "../model/shin-braver-model";
 export interface ShinBraverView {
   /** ステータスアイコンの位置（ワールド座標） */
   statusIconPosition: ArmdozerWorldCoordinate;
-  /** ダメージ予測の位置（ワールド座標） */
-  predicatedDamagePosition: ArmdozerWorldCoordinate;
 
   /**
    * デストラクタ相当の処置
