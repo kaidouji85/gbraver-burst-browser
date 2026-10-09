@@ -17,7 +17,7 @@ import { PlayerHpBar } from "./player-hp-bar";
 export const BASE_SCALE = 0.3;
 
 /** 上余白 最小値 */
-export const MIN_PADDING_TOP = 50;
+export const MIN_PADDING_TOP = 55;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
