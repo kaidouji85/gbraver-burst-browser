@@ -1,4 +1,7 @@
-import { HUD_ATTENTION_Z } from "../game-object/hud-position";
+import {
+  HUD_ATTENTION_Z,
+  HUD_PREDICATED_DAMAGE_Z,
+} from "../game-object/hud-position";
 import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
@@ -62,7 +65,9 @@ export function attentionBattleSimulatorButton(
   props: CustomBattleEventProps,
 ): void {
   props.view.hud.players.forEach((p) => {
-    p.predicatedDamage.getObject3D().position.z = HUD_ATTENTION_Z;
+    const parent = p.gauge.getObject3D();
+    const target = p.predicatedDamage.getObject3D();
+    target.position.z = HUD_ATTENTION_Z / parent.scale.z;
   });
 }
 
@@ -74,7 +79,7 @@ export function unattentionBattleSimulatorButton(
   props: CustomBattleEventProps,
 ): void {
   props.view.hud.players.forEach((p) => {
-    p.predicatedDamage.getObject3D().position.z = 0;
+    p.predicatedDamage.getObject3D().position.z = HUD_PREDICATED_DAMAGE_Z;
   });
 }
 
