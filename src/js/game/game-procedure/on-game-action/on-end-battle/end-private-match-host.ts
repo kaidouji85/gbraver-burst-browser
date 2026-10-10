@@ -1,6 +1,7 @@
 import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
 
 import { PlayerPickerDialog } from "../../../dialogs/player-picker";
+import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
@@ -10,19 +11,20 @@ import { switchPlayerPickerDialog } from "../../switch-dialog/switch-player-pick
 
 /**
  * プライベートマッチ（ホスト）を終了する
- * 本関数はすべてのネットワークコンテキストに対応している
  * @param props ゲームプロパティ
+ * @param action 戦闘終了アクション
  * @returns inProgress更新結果
  */
 export async function endPrivateMatchHost(
   props: Readonly<GameProps & { inProgress: PrivateMatchHost }>,
+  action: Readonly<EndBattle>,
 ): Promise<InProgress> {
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
   const dialog = new PlayerPickerDialog({
     ...props,
-    initialArmdozerId: ArmdozerIds.SHIN_BRAVER, // TODO プレイヤーが選択したものをセットする
-    initialPilotId: PilotIds.SHINYA, // TODO プレイヤーが選択したものをセットする
+    initialArmdozerId: action.player.armdozerId,
+    initialPilotId: action.player.pilotId,
     armdozerIds: getPlayableArmdozers(props),
     pilotIds: getPlayablePilots(props),
     confirmLabel: "再戦",
