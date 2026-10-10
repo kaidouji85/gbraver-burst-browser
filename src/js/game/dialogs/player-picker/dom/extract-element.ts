@@ -25,7 +25,7 @@ export const extractPilotPicker = (root: HTMLElement): HTMLElement => {
 /**
  * ルートHTML要素から閉じるボタンを抽出する
  * @param root ルートHTML要素
- * @returns タイトルへボタンのHTML要素（存在しない場合は空のdiv要素）
+ * @returns 閉じるボタンのHTML要素（存在しない場合は空のdiv要素）
  */
 export const extractCloseButton = (root: HTMLElement): HTMLElement => {
   return (
@@ -36,7 +36,7 @@ export const extractCloseButton = (root: HTMLElement): HTMLElement => {
 /**
  * ルートHTML要素から決定ボタンを抽出する
  * @param root ルートHTML要素
- * @returns 再戦ボタンのHTML要素（存在しない場合は空のdiv要素）
+ * @returns 決定ボタンのHTML要素（存在しない場合は空のdiv要素）
  */
 export const extractConfirmButton = (root: HTMLElement): HTMLElement => {
   return (
