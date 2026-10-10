@@ -8,8 +8,13 @@ export type Battle = {
   type: "Battle";
 };
 
+/** プライベートマッチ（ホスト）サブフロー 再戦 */
+export type Rematch = {
+  type: "Rematch";
+};
+
 /** プライベートマッチ（ホスト）のサブフロー */
-export type PrivateMatchHostSubFlow = PlayerSelect | Battle;
+export type PrivateMatchHostSubFlow = PlayerSelect | Battle | Rematch;
 
 /**
  * プライベートマッチ（ホスト）

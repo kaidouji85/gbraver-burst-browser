@@ -24,8 +24,13 @@ export type Battle = {
   type: "Battle";
 };
 
+/** プライベートマッチ（ゲスト）サブフロー 再戦 */
+export type Rematch = {
+  type: "Rematch";
+};
+
 /** プライベートマッチ（ゲスト）のサブフロー */
-export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
+export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle | Rematch;
 
 /**
  * プライベートマッチ（ゲスト）

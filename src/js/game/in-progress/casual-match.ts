@@ -7,9 +7,13 @@ export type PlayerSelect = {
 export type Battle = {
   type: "Battle";
 };
+/** 再戦 */
+export type Rematch = {
+  type: "Rematch";
+};
 
 /** カジュアルマッチのサブフロー */
-export type CasualMatchSubFlow = PlayerSelect | Battle;
+export type CasualMatchSubFlow = PlayerSelect | Battle | Rematch;
 
 /**
  * カジュアルマッチ
