@@ -1,3 +1,5 @@
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+
 /** キャラ選択 */
 export type PlayerSelect = {
   type: "PlayerSelect";
@@ -6,6 +8,8 @@ export type PlayerSelect = {
 /** 戦闘中 */
 export type Battle = {
   type: "Battle";
+  /** バトルSDK */
+  battle: BattleSDK;
 };
 /** 再戦 */
 export type Rematch = {

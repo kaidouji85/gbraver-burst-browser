@@ -49,7 +49,7 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
 
   props.inProgress = {
     ...props.inProgress,
-    privateMatchGuest: { type: "Battle" },
+    privateMatchGuest: { type: "Battle", battle },
   };
   await startOnlineBattle(props, battle, "プライベートマッチ");
 }

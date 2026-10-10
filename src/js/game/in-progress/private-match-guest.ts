@@ -1,3 +1,4 @@
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 /** プライベートマッチ（ゲスト）サブフロー キャラ選択 */
@@ -22,6 +23,8 @@ export type Waiting = {
 /** プライベートマッチ（ゲスト）サブフロー 戦闘中 */
 export type Battle = {
   type: "Battle";
+  /** バトルSDK */
+  battle: BattleSDK;
 };
 
 /** プライベートマッチ（ゲスト）サブフロー 再戦 */

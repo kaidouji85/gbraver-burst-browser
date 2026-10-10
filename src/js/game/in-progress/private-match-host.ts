@@ -1,3 +1,5 @@
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+
 /** プライベートマッチ（ホスト）サブフロー キャラ選択 */
 export type PlayerSelect = {
   type: "PlayerSelect";
@@ -6,6 +8,8 @@ export type PlayerSelect = {
 /** プライベートマッチ（ホスト）サブフロー 戦闘中 */
 export type Battle = {
   type: "Battle";
+  /** バトルSDK */
+  battle: BattleSDK;
 };
 
 /** プライベートマッチ（ホスト）サブフロー 再戦 */
