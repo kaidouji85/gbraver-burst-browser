@@ -1,5 +1,5 @@
 import { createOfflineBrowserSDK } from "@gbraver-burst-network/offline-browser-sdk";
-import { OfflineBrowserSDK } from "@gbraver-burst-network/offline-browser-sdk/lib/offline-browser-sdk";
+import { OfflineBrowserSDK } from "@gbraver-burst-network/offline-browser-sdk";
 
 /** オフラインLAN */
 export type OfflineLAN = {

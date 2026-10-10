@@ -47,7 +47,7 @@ export async function startCasualMatchIfNeeded(
     isStarted: true,
     inProgress: {
       ...props.inProgress,
-      casualMatch: { type: "Battle" },
+      casualMatch: { type: "Battle", battle },
     },
   };
 }
