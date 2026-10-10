@@ -15,13 +15,14 @@ import {
   extractPilotPicker,
 } from "../dom/extract-element";
 import { createPilotIcon } from "../dom/pilot-icon";
-import { rootInnerHTML } from "../dom/root-inner-html";
+import { rootInnerHTML, RootInnerHTMLOptions } from "../dom/root-inner-html";
 import { PlayerSelection } from "../player-selection";
 import { PlayerPickerDialogProps } from "../props";
 
 /** プロパティの生成オプション */
 export type CreatePlayerPickerDialogPropsOptions = ResourcesContainer &
-  SEPlayerContainer & {
+  SEPlayerContainer &
+  RootInnerHTMLOptions & {
     /** ピッカーで選択可能なアームドーザID */
     armdozerIds: ArmdozerId[];
     /** ピッカーで選択可能なパイロットID */
@@ -51,7 +52,7 @@ export const createPlayerPickerDialogProps = (
 
   const root = document.createElement("div");
   root.className = ROOT;
-  root.innerHTML = rootInnerHTML();
+  root.innerHTML = rootInnerHTML(options);
 
   const armdozerIcons = armdozerIds.map((armdozerId) =>
     createArmdozerIcon({ resources, armdozerId }),
