@@ -30,16 +30,15 @@ type RematchResult = SuccessRematch | FailRematch;
 /**
  * カジュアルマッチから再戦を行う
  * @param options オプション
- * @param options.props ゲームプロパティ
+ * @param options.inProgress ステート
  * @param options.postAction 再戦アクション
  * @returns 再戦結果
  */
 const rematchCasualMatch = async (options: {
-  props: Readonly<GameProps & { inProgress: CasualMatch }>;
+  inProgress: Readonly<CasualMatch>;
   postAction: Readonly<Rematch>;
 }): Promise<RematchResult> => {
-  const { props, postAction } = options;
-  const { inProgress } = props;
+  const { inProgress, postAction } = options;
   if (inProgress.casualMatch.type !== "Rematch") {
     return { isSuccess: false };
   }
@@ -49,26 +48,22 @@ const rematchCasualMatch = async (options: {
   return {
     isSuccess: true,
     battle,
-    inProgress: {
-      ...props.inProgress,
-      casualMatch: { type: "Battle", battle },
-    },
+    inProgress: { ...inProgress, casualMatch: { type: "Battle", battle } },
   };
 };
 
 /**
  * プライベートマッチ（ホスト）から再戦を行う
  * @param options オプション
- * @param options.props ゲームプロパティ
+ * @param options.inProgress ステート
  * @param options.postAction 再戦アクション
  * @returns 再戦結果
  */
 const rematchPrivateMatchHost = async (options: {
-  props: Readonly<GameProps & { inProgress: PrivateMatchHost }>;
+  inProgress: Readonly<PrivateMatchHost>;
   postAction: Readonly<Rematch>;
 }): Promise<RematchResult> => {
-  const { props, postAction } = options;
-  const { inProgress } = props;
+  const { inProgress, postAction } = options;
   if (inProgress.privateMatchHost.type !== "Rematch") {
     return { isSuccess: false };
   }
@@ -78,10 +73,7 @@ const rematchPrivateMatchHost = async (options: {
   return {
     isSuccess: true,
     battle,
-    inProgress: {
-      ...props.inProgress,
-      privateMatchHost: { type: "Battle", battle },
-    },
+    inProgress: { ...inProgress, privateMatchHost: { type: "Battle", battle } },
   };
 };
 
@@ -93,11 +85,10 @@ const rematchPrivateMatchHost = async (options: {
  * @returns 再戦結果
  */
 const rematchPrivateMatchGuest = async (options: {
-  props: Readonly<GameProps & { inProgress: PrivateMatchGuest }>;
+  inProgress: Readonly<PrivateMatchGuest>;
   postAction: Readonly<Rematch>;
 }): Promise<RematchResult> => {
-  const { props, postAction } = options;
-  const { inProgress } = props;
+  const { inProgress, postAction } = options;
   if (inProgress.privateMatchGuest.type !== "Rematch") {
     return { isSuccess: false };
   }
@@ -108,7 +99,7 @@ const rematchPrivateMatchGuest = async (options: {
     isSuccess: true,
     battle,
     inProgress: {
-      ...props.inProgress,
+      ...inProgress,
       privateMatchGuest: { type: "Battle", battle },
     },
   };
@@ -133,20 +124,11 @@ export const rematch = async (options: {
 
   let result: RematchResult = { isSuccess: false };
   if (inProgress.type === "CasualMatch") {
-    result = await rematchCasualMatch({
-      props: { ...props, inProgress },
-      postAction,
-    });
+    result = await rematchCasualMatch({ inProgress, postAction });
   } else if (inProgress.type === "PrivateMatchHost") {
-    result = await rematchPrivateMatchHost({
-      props: { ...props, inProgress },
-      postAction,
-    });
+    result = await rematchPrivateMatchHost({ inProgress, postAction });
   } else if (inProgress.type === "PrivateMatchGuest") {
-    result = await rematchPrivateMatchGuest({
-      props: { ...props, inProgress },
-      postAction,
-    });
+    result = await rematchPrivateMatchGuest({ inProgress, postAction });
   }
 
   if (!result.isSuccess) {
