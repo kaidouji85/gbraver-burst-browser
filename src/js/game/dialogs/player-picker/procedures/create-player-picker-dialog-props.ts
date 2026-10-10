@@ -10,9 +10,9 @@ import { createArmdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
   extractArmdozerPicker,
-  extractGotoTitleButton,
+  extractCloseButton,
+  extractConfirmButton,
   extractPilotPicker,
-  extractRetryButton,
 } from "../dom/extract-element";
 import { createPilotIcon } from "../dom/pilot-icon";
 import { rootInnerHTML } from "../dom/root-inner-html";
@@ -85,8 +85,8 @@ export const createPlayerPickerDialogProps = (
     selectedPilotId: initialPilotId,
 
     root,
-    gotoTitleButton: extractGotoTitleButton(root),
-    retryButton: extractRetryButton(root),
+    closeButton: extractCloseButton(root),
+    confirmButton: extractConfirmButton(root),
     armdozerIcons,
     pilotIcons,
 
@@ -94,8 +94,8 @@ export const createPlayerPickerDialogProps = (
     changeValueSound,
     pushButtonSound,
 
-    gotoTitleSubject: new Subject<void>(),
-    retrySubject: new Subject<PlayerSelection>(),
+    closeSubject: new Subject<void>(),
+    confirmSubject: new Subject<PlayerSelection>(),
 
     exclusive: new Exclusive(),
   };

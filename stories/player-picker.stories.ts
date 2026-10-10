@@ -18,10 +18,10 @@ export const dialog = domStub((options) => {
     initialArmdozerId: ArmdozerIds.WING_DOZER,
     initialPilotId: PilotIds.YUUYA,
   });
-  playerPicker.notifyGotoTitle().subscribe(() => {
+  playerPicker.notifyConfirm().subscribe(() => {
     console.log("Goto Title button pressed");
   });
-  playerPicker.notifyRetry().subscribe(({ armdozerId, pilotId }) => {
+  playerPicker.notifyClose().subscribe(({ armdozerId, pilotId }) => {
     console.log(
       `Retry button pressed: armdozerId=${armdozerId}, pilotId=${pilotId}`,
     );

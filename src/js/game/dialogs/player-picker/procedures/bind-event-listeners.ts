@@ -3,9 +3,9 @@ import { Unsubscribable } from "rxjs";
 import { domPushStream } from "../../../../dom/push-dom";
 import { PlayerPickerDialogProps } from "../props";
 import { onArmdozerIconPush } from "./on-armdozer-icon-push";
-import { onGotoTitleButtonPush } from "./on-goto-title-button-push";
+import { onCloseButtonPush } from "./on-close-button-push";
+import { onConfirmButtonPush } from "./on-confirm-button-push";
 import { onPilotIconPush } from "./on-pilot-icon-push";
-import { onRetryButtonPush } from "./on-retry-button-push";
 
 /**
  * イベントリスナーをバインドする
@@ -26,11 +26,11 @@ export const bindEventListeners = (
         onPilotIconPush({ props, pilotIcon: icon, action });
       }),
     ),
-    domPushStream(props.gotoTitleButton).subscribe((action) => {
-      onGotoTitleButtonPush({ props, action });
+    domPushStream(props.closeButton).subscribe((action) => {
+      onCloseButtonPush({ props, action });
     }),
-    domPushStream(props.retryButton).subscribe((action) => {
-      onRetryButtonPush({ props, action });
+    domPushStream(props.confirmButton).subscribe((action) => {
+      onConfirmButtonPush({ props, action });
     }),
   ];
 };
