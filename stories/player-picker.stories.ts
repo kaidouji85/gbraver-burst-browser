@@ -20,10 +20,10 @@ export const dialog = domStub((options) => {
     confirmLabel: "🌟再戦",
     closeLabel: "タイトルへ",
   });
-  playerPicker.notifyConfirm().subscribe(() => {
+  playerPicker.notifyClose().subscribe(() => {
     console.log("close");
   });
-  playerPicker.notifyClose().subscribe(({ armdozerId, pilotId }) => {
+  playerPicker.notifyConfirm().subscribe(({ armdozerId, pilotId }) => {
     console.log(`confirmP: armdozerId=${armdozerId}, pilotId=${pilotId}`);
   });
   return playerPicker.getRootHTMLElement();
