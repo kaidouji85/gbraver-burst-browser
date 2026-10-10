@@ -1,4 +1,4 @@
-import type { GameEnd } from "gbraver-burst-core";
+import { ArmdozerIds, GameEnd, PilotIds } from "gbraver-burst-core";
 
 import { EndBattle } from "../../src/js/game/game-actions/end-battle";
 
@@ -19,4 +19,8 @@ export const EMPTY_END_BATTLE: EndBattle = {
   type: "EndBattle",
   gameEnd: EMPTY_GAME_END,
   animationTimeScale: 1,
+  player: {
+    armdozerId: ArmdozerIds.SHIN_BRAVER,
+    pilotId: PilotIds.SHINYA,
+  },
 };

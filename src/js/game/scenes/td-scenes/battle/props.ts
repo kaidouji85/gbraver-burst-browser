@@ -1,4 +1,10 @@
-import { GameEnd, GameState, PlayerId } from "gbraver-burst-core";
+import {
+  ArmdozerId,
+  GameEnd,
+  GameState,
+  PilotId,
+  PlayerId,
+} from "gbraver-burst-core";
 import { Observable, Subject } from "rxjs";
 
 import { PushWindow } from "../../../../dom/window/push-window";
@@ -23,6 +29,13 @@ export type BattleEnd = {
   gameEnd: GameEnd;
   /** アニメーションタイムスケール */
   animationTimeScale: number;
+  /** プレイヤー情報 */
+  player: {
+    /** アームドーザ */
+    armdozerId: ArmdozerId;
+    /** プレイヤー */
+    pilotId: PilotId;
+  };
 };
 
 /** 戦闘シーンプロパティ */

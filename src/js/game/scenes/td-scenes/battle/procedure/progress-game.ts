@@ -1,4 +1,4 @@
-import { Command, GameEnd, GameState } from "gbraver-burst-core";
+import { Command, GameEnd, GameState, GameStateX } from "gbraver-burst-core";
 
 import { BattleSceneProps } from "../props";
 import { playUpdatedStateHistory } from "./play-updated-state-history";
@@ -50,12 +50,22 @@ const repeatProgressWhenUnselectable = async (
  */
 const onGameEnd = async (
   props: Readonly<BattleSceneProps>,
-  gameEnd: GameEnd,
+  lastState: GameStateX<GameEnd>,
 ): Promise<void> => {
+  const { effect: gameEnd, players } = lastState;
+  const player = players.find((v) => v.playerId === props.playerId);
+  if (!player) {
+    return;
+  }
+
   props.view.dom.hamburgerMenu.hidden();
   props.endBattle.next({
     gameEnd,
     animationTimeScale: props.animationTimeScale,
+    player: {
+      armdozerId: player.armdozer.id,
+      pilotId: player.pilot.id,
+    },
   });
 };
 
@@ -71,6 +81,6 @@ export async function progressGame(
 ): Promise<void> {
   const lastState = await repeatProgressWhenUnselectable(props, command);
   if (lastState && lastState.effect.name === "GameEnd") {
-    await onGameEnd(props, lastState.effect);
+    await onGameEnd(props, { ...lastState, effect: lastState.effect });
   }
 }
