@@ -25,6 +25,7 @@ export async function endPrivateMatchHost(
   if (!rematchRoom) {
     return inProgress;
   }
+
   props.suddenlyBattleEnd.unbind();
   const dialog = createPlayerPickerDialog(props, action);
   switchPlayerPickerDialog(props, dialog);
