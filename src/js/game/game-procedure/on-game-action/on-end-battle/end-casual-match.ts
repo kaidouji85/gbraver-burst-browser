@@ -11,7 +11,7 @@ import { createPlayerPickerDialog } from "./create-player-picker-dialog";
  * @param action 戦闘終了アクション
  * @returns inProgress更新結果
  */
-export async function endCasualMatchGuest(
+export async function endCasualMatch(
   props: Readonly<GameProps & { inProgress: CasualMatch }>,
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {

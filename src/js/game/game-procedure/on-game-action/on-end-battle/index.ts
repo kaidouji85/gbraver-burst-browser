@@ -1,7 +1,7 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
-import { endCasualMatchGuest } from "./end-casual-match";
+import { endCasualMatch } from "./end-casual-match";
 import { endEpisode } from "./end-episode";
 import { endNetBattle } from "./end-net-battle";
 import { endNPCBattle } from "./end-npc-battle";
@@ -38,7 +38,7 @@ export async function onEndBattle(options: Options): Promise<void> {
       case "NPCBattle":
         return endNPCBattle({ ...props, inProgress }, action);
       case "CasualMatch":
-        return endCasualMatchGuest({ ...props, inProgress }, action);
+        return endCasualMatch({ ...props, inProgress }, action);
       case "PrivateMatchHost":
         return endPrivateMatchHost({ ...props, inProgress }, action);
       case "PrivateMatchGuest":
