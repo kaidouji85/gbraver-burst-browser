@@ -21,13 +21,11 @@ export const switchPlayerPickerDialog = (
           postAction: { type: "Rematch", armdozerId, pilotId },
         })),
       ),
-      dialog
-        .notifyClose()
-        .pipe(
-          map(() => ({
-            type: "PostBattleAction",
-            postAction: { type: "GotoTitle" },
-          })),
-        ),
+      dialog.notifyClose().pipe(
+        map(() => ({
+          type: "PostBattleAction",
+          postAction: { type: "GotoTitle" },
+        })),
+      ),
     ]),
   );

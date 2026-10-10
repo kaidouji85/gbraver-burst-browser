@@ -16,8 +16,17 @@ export async function endPrivateMatchHost(
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {
   const { inProgress } = props;
+  if (inProgress.privateMatchHost.type !== "Battle") {
+    return inProgress;
+  }
+
+  const { battle } = inProgress.privateMatchHost;
+  const rematchRoom = battle.getRematchRoom();
+  if (!rematchRoom) {
+    return inProgress;
+  }
   props.suddenlyBattleEnd.unbind();
   const dialog = createPlayerPickerDialog(props, action);
   switchPlayerPickerDialog(props, dialog);
-  return { ...inProgress, privateMatchHost: { type: "Rematch" } };
+  return { ...inProgress, privateMatchHost: { type: "Rematch", rematchRoom } };
 }

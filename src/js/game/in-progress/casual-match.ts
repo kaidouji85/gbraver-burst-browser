@@ -1,4 +1,4 @@
-import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { BattleSDK, RematchRoom } from "@gbraver-burst-network/browser-sdk";
 
 /** キャラ選択 */
 export type PlayerSelect = {
@@ -14,6 +14,8 @@ export type Battle = {
 /** 再戦 */
 export type Rematch = {
   type: "Rematch";
+  /** 再戦ルーム */
+  rematchRoom: RematchRoom;
 };
 
 /** カジュアルマッチのサブフロー */

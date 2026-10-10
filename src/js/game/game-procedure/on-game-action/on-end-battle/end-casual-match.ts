@@ -16,8 +16,18 @@ export async function endCasualMatchGuest(
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {
   const { inProgress } = props;
+  if (inProgress.casualMatch.type !== "Battle") {
+    return inProgress;
+  }
+
+  const { battle } = inProgress.casualMatch;
+  const rematchRoom = battle.getRematchRoom();
+  if (!rematchRoom) {
+    return inProgress;
+  }
+
   props.suddenlyBattleEnd.unbind();
   const dialog = createPlayerPickerDialog(props, action);
   switchPlayerPickerDialog(props, dialog);
-  return { ...inProgress, casualMatch: { type: "Rematch" } };
+  return { ...inProgress, casualMatch: { type: "Rematch", rematchRoom } };
 }
