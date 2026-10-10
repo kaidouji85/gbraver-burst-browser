@@ -1,51 +1,54 @@
-import { RematchRoom } from "@gbraver-burst-network/browser-sdk";
-
+import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
-import { InProgress } from "../../../in-progress";
+import { CasualMatch } from "../../../in-progress/casual-match";
 import { Rematch } from "../../../post-battle";
+import { startOnlineBattle } from "../../start-online-battle";
+import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 
 /**
- * inProgress から再戦ルームを抽出する
- * @param inProgress 抽出対象
- * @returns 抽出された再戦ルーム、存在しない場合は null
- */
-const extractRematchRoom = (
-  inProgress: Readonly<InProgress>,
-): RematchRoom | null => {
-  if (
-    inProgress.type === "CasualMatch" &&
-    inProgress.casualMatch.type === "Rematch"
-  ) {
-    return inProgress.casualMatch.rematchRoom;
-  } else if (
-    inProgress.type === "PrivateMatchHost" &&
-    inProgress.privateMatchHost.type === "Rematch"
-  ) {
-    return inProgress.privateMatchHost.rematchRoom;
-  } else if (
-    inProgress.type === "PrivateMatchGuest" &&
-    inProgress.privateMatchGuest.type === "Rematch"
-  ) {
-    return inProgress.privateMatchGuest.rematchRoom;
-  }
-
-  return null;
-};
-
-/**
- * 再戦を行う
+ * カジュアルマッチから再戦を行う
+ * 本関数はprops.inProgressを変更する副作用を持つ
  * @param options オプション
  * @param options.props ゲームプロパティ
  * @param options.postAction 再戦アクション
  */
-export const rematch = (options: {
-  props: Readonly<GameProps>;
+const rematchCasualMatch = async (options: {
+  props: GameProps & { inProgress: CasualMatch };
   postAction: Readonly<Rematch>;
 }) => {
-  const { props } = options;
+  const { props, postAction } = options;
   const { inProgress } = props;
-  const rematchRoom = extractRematchRoom(inProgress);
-  if (!rematchRoom) {
-    return inProgress;
+  if (inProgress.casualMatch.type !== "Rematch") {
+    return;
+  }
+
+  const { rematchRoom } = inProgress.casualMatch;
+  const dialog = new WaitingDialog("通信中......");
+  switchWaitingDialog(props, dialog);
+  const battle = await rematchRoom.requestRematch(postAction);
+  props.inProgress = {
+    ...props.inProgress,
+    casualMatch: { type: "Battle", battle },
+  };
+  await startOnlineBattle(props, battle, "再戦");
+};
+
+/**
+ * 再戦を行う
+ * 本関数はprops.inProgressを変更する副作用を持つ
+ * @param options オプション
+ * @param options.props ゲームプロパティ
+ * @param options.postAction 再戦アクション
+ */
+export const rematch = async (options: {
+  props: GameProps;
+  postAction: Readonly<Rematch>;
+}) => {
+  const { props, postAction } = options;
+  const { inProgress } = props;
+  switch (inProgress.type) {
+    case "CasualMatch":
+      await rematchCasualMatch({ props: { ...props, inProgress }, postAction });
+      break;
   }
 };
