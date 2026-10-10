@@ -17,10 +17,10 @@ export type PlayerPickerDialogProps = SEPlayerContainer & {
 
   /** ルートHTML要素 */
   readonly root: HTMLElement;
-  /** タイトルへボタンのHTML要素 */
-  readonly gotoTitleButton: HTMLElement;
-  /** 再戦ボタンのHTML要素 */
-  readonly retryButton: HTMLElement;
+  /** 閉じるボタンのHTML要素 */
+  readonly closeButton: HTMLElement;
+  /** 決定ボタンのHTML要素 */
+  readonly confirmButton: HTMLElement;
   /** アームドーザアイコンをあつめたもの */
   readonly armdozerIcons: ArmdozerIcon[];
   /** パイロットアイコンをあつめたもの */
@@ -31,10 +31,10 @@ export type PlayerPickerDialogProps = SEPlayerContainer & {
   /** 押下ボタンサウンド */
   readonly pushButtonSound: SoundResource;
 
-  /** 「タイトルへ」通知用のSubject */
-  readonly gotoTitleSubject: Subject<void>;
-  /** 「再戦」通知用のSubject */
-  readonly retrySubject: Subject<PlayerSelection>;
+  /** 閉じる通知用のSubject */
+  readonly closeSubject: Subject<void>;
+  /** 決定通知用のSubject */
+  readonly confirmSubject: Subject<PlayerSelection>;
 
   /** 排他制御 */
   readonly exclusive: Exclusive;

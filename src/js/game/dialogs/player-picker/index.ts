@@ -39,18 +39,18 @@ export class PlayerPickerDialog implements DOMDialog {
   }
 
   /**
-   * 「タイトルへ」ボタンが押されたことを通知する
+   * 閉じられたことを通知する
    * @returns 通知ストリーム
    */
-  notifyGotoTitle(): Observable<void> {
-    return this.#props.gotoTitleSubject;
+  notifyClose(): Observable<void> {
+    return this.#props.closeSubject;
   }
 
   /**
-   * 「リトライ」ボタンが押されたことを通知する
+   * 決定ボタンが押されたことを通知する
    * @returns 通知ストリーム
    */
-  notifyRetry(): Observable<PlayerSelection> {
-    return this.#props.retrySubject;
+  notifyConfirm(): Observable<PlayerSelection> {
+    return this.#props.confirmSubject;
   }
 }

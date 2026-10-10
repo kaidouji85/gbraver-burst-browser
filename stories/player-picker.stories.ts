@@ -17,14 +17,14 @@ export const dialog = domStub((options) => {
     pilotIds: PlayablePilots,
     initialArmdozerId: ArmdozerIds.WING_DOZER,
     initialPilotId: PilotIds.YUUYA,
+    confirmLabel: "🌟再戦",
+    closeLabel: "タイトルへ",
   });
-  playerPicker.notifyGotoTitle().subscribe(() => {
-    console.log("Goto Title button pressed");
+  playerPicker.notifyClose().subscribe(() => {
+    console.log("close");
   });
-  playerPicker.notifyRetry().subscribe(({ armdozerId, pilotId }) => {
-    console.log(
-      `Retry button pressed: armdozerId=${armdozerId}, pilotId=${pilotId}`,
-    );
+  playerPicker.notifyConfirm().subscribe(({ armdozerId, pilotId }) => {
+    console.log(`confirmP: armdozerId=${armdozerId}, pilotId=${pilotId}`);
   });
   return playerPicker.getRootHTMLElement();
 });
