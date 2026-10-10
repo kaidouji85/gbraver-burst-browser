@@ -23,24 +23,23 @@ export const extractPilotPicker = (root: HTMLElement): HTMLElement => {
 };
 
 /**
- * ルートHTML要素からタイトルへボタンを抽出する
+ * ルートHTML要素から閉じるボタンを抽出する
  * @param root ルートHTML要素
- * @returns タイトルへボタンのHTML要素（存在しない場合は空のdiv要素）
+ * @returns 閉じるボタンのHTML要素（存在しない場合は空のdiv要素）
  */
-export const extractGotoTitleButton = (root: HTMLElement): HTMLElement => {
+export const extractCloseButton = (root: HTMLElement): HTMLElement => {
   return (
-    root.querySelector(`[data-id="goto-title"]`) ??
-    document.createElement("div")
+    root.querySelector(`[data-id="close"]`) ?? document.createElement("div")
   );
 };
 
 /**
- * ルートHTML要素から再戦ボタンを抽出する
+ * ルートHTML要素から決定ボタンを抽出する
  * @param root ルートHTML要素
- * @returns 再戦ボタンのHTML要素（存在しない場合は空のdiv要素）
+ * @returns 決定ボタンのHTML要素（存在しない場合は空のdiv要素）
  */
-export const extractRetryButton = (root: HTMLElement): HTMLElement => {
+export const extractConfirmButton = (root: HTMLElement): HTMLElement => {
   return (
-    root.querySelector(`[data-id="retry"]`) ?? document.createElement("div")
+    root.querySelector(`[data-id="confirm"]`) ?? document.createElement("div")
   );
 };

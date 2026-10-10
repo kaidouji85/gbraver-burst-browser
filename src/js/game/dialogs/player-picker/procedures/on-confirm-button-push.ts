@@ -3,12 +3,12 @@ import { PushDOM } from "../../../../dom/push-dom";
 import { PlayerPickerDialogProps } from "../props";
 
 /**
- * 「再戦」ボタンが押されたときの処理
+ * 決定ボタンが押されたときの処理
  * @param options オプション
  * @param options.props プレイヤーピッカーダイアログのプロパティ
  * @param options.action 押下アクション
  */
-export const onRetryButtonPush = (options: {
+export const onConfirmButtonPush = (options: {
   props: PlayerPickerDialogProps;
   action: PushDOM;
 }) => {
@@ -18,8 +18,8 @@ export const onRetryButtonPush = (options: {
 
   props.exclusive.execute(async () => {
     props.se.play(props.pushButtonSound);
-    await pop(props.retryButton);
-    props.retrySubject.next({
+    await pop(props.confirmButton);
+    props.confirmSubject.next({
       armdozerId: props.selectedArmdozerId,
       pilotId: props.selectedPilotId,
     });
