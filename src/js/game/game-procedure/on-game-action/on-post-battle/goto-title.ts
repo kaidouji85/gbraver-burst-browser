@@ -20,6 +20,7 @@ type Options = {
  */
 export async function gotoTitle(options: Options) {
   const { props } = options;
+  props.domDialogBinder.hidden();
   const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
