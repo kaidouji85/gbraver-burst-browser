@@ -1,9 +1,11 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
+import { endCasualMatchGuest } from "./end-casual-match";
 import { endEpisode } from "./end-episode";
 import { endNetBattle } from "./end-net-battle";
 import { endNPCBattle } from "./end-npc-battle";
+import { endPrivateMatchGuest } from "./end-private-match-guest";
 import { endPrivateMatchHost } from "./end-private-match-host";
 
 /** オプション */
@@ -35,10 +37,12 @@ export async function onEndBattle(options: Options): Promise<void> {
     switch (inProgress.type) {
       case "NPCBattle":
         return endNPCBattle({ ...props, inProgress }, action);
+      case "CasualMatch":
+        return endCasualMatchGuest({ ...props, inProgress }, action);
       case "PrivateMatchHost":
         return endPrivateMatchHost({ ...props, inProgress }, action);
-      //case "CasualMatch":
-      //case "PrivateMatchGuest":
+      case "PrivateMatchGuest":
+        return endPrivateMatchGuest({ ...props, inProgress }, action);
       case "OfflineLANCasualMatch":
       case "PasswordMatchHost":
       case "PasswordMatchGuest":
