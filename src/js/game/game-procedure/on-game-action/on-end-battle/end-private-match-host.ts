@@ -1,13 +1,9 @@
-import { ArmdozerIds, PilotIds } from "gbraver-burst-core";
-
-import { PlayerPickerDialog } from "../../../dialogs/player-picker";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
-import { getPlayableArmdozers } from "../../../playable-amdozers";
-import { getPlayablePilots } from "../../../playable-pilots";
 import { switchPlayerPickerDialog } from "../../switch-dialog/switch-player-picker-dialog";
+import { createPlayerPickerDialog } from "./create-player-picker-dialog";
 
 /**
  * プライベートマッチ（ホスト）を終了する
@@ -21,15 +17,7 @@ export async function endPrivateMatchHost(
 ): Promise<InProgress> {
   const { inProgress } = props;
   props.suddenlyBattleEnd.unbind();
-  const dialog = new PlayerPickerDialog({
-    ...props,
-    initialArmdozerId: action.player.armdozerId,
-    initialPilotId: action.player.pilotId,
-    armdozerIds: getPlayableArmdozers(props),
-    pilotIds: getPlayablePilots(props),
-    confirmLabel: "再戦",
-    closeLabel: "タイトルへ",
-  });
+  const dialog = createPlayerPickerDialog(props, action);
   switchPlayerPickerDialog(props, dialog);
   return { ...inProgress, privateMatchHost: { type: "Rematch" } };
 }

@@ -4,6 +4,7 @@ import { GameProps } from "../../../game-props";
 import { endEpisode } from "./end-episode";
 import { endNetBattle } from "./end-net-battle";
 import { endNPCBattle } from "./end-npc-battle";
+import { endPrivateMatchHost } from "./end-private-match-host";
 
 /** オプション */
 type Options = {
@@ -34,9 +35,10 @@ export async function onEndBattle(options: Options): Promise<void> {
     switch (inProgress.type) {
       case "NPCBattle":
         return endNPCBattle({ ...props, inProgress }, action);
-      case "CasualMatch":
       case "PrivateMatchHost":
-      case "PrivateMatchGuest":
+        return endPrivateMatchHost({ ...props, inProgress }, action);
+      //case "CasualMatch":
+      //case "PrivateMatchGuest":
       case "OfflineLANCasualMatch":
       case "PasswordMatchHost":
       case "PasswordMatchGuest":
