@@ -34,12 +34,12 @@ const postNPCBattleButtons = (
 };
 
 /**
- * NPCバトル終了後処理を実行する
+ * NPCバトルを終了する
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns inProgress更新結果
  */
-export async function executePostNPCBattle(
+export async function endNPCBattle(
   props: Readonly<GameProps & { inProgress: NPCBattle }>,
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {

@@ -100,12 +100,12 @@ const createPostEpisodeResultWhenTutorial = (options: {
 };
 
 /**
- * エピソード終了後処理を実行する
+ * エピソードを終了する
  * @param props ゲームプロパティ
  * @param action アクション
  * @returns inProgress更新結果
  */
-export async function executePostEpisode(
+export async function endEpisode(
   props: Readonly<GameProps & { inProgress: Story }>,
   action: Readonly<EndBattle>,
 ): Promise<InProgress> {

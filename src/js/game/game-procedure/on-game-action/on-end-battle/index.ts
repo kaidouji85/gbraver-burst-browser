@@ -1,9 +1,9 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
-import { executePostEpisode } from "./execute-post-episode";
-import { executePostNetBattle } from "./execute-post-net-battle";
-import { executePostNPCBattle } from "./execute-post-npc-battle";
+import { endEpisode } from "./end-episode";
+import { endNetBattle } from "./end-net-battle";
+import { endNPCBattle } from "./end-npc-battle";
 
 /** オプション */
 type Options = {
@@ -33,16 +33,16 @@ export async function onEndBattle(options: Options): Promise<void> {
   props.inProgress = await (() => {
     switch (inProgress.type) {
       case "NPCBattle":
-        return executePostNPCBattle({ ...props, inProgress }, action);
+        return endNPCBattle({ ...props, inProgress }, action);
       case "CasualMatch":
       case "PrivateMatchHost":
       case "PrivateMatchGuest":
       case "OfflineLANCasualMatch":
       case "PasswordMatchHost":
       case "PasswordMatchGuest":
-        return executePostNetBattle({ ...props, inProgress });
+        return endNetBattle({ ...props, inProgress });
       case "Story":
-        return executePostEpisode({ ...props, inProgress }, action);
+        return endEpisode({ ...props, inProgress }, action);
       default:
         return inProgress;
     }

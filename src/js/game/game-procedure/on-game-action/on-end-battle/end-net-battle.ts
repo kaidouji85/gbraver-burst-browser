@@ -19,12 +19,12 @@ type PostNetworkBattle =
   | PasswordMatchGuest;
 
 /**
- * ネット対戦後処理を実行する
+ * ネット対戦を終了する
  * 本関数はすべてのネットワークコンテキストに対応している
  * @param props ゲームプロパティ
  * @returns inProgress更新結果
  */
-export async function executePostNetBattle(
+export async function endNetBattle(
   props: Readonly<GameProps & { inProgress: PostNetworkBattle }>,
 ): Promise<InProgress> {
   const { inProgress } = props;
