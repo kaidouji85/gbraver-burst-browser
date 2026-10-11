@@ -12,5 +12,5 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  */
 export function drawIndicatorView(resources: Resources): ResultIndicatorView {
   const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.DRAW);
-  return new SimpleIndicatorView(texture, 150, 60);
+  return new SimpleIndicatorView(texture, 120, 40);
 }

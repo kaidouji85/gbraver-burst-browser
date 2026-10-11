@@ -2,8 +2,7 @@ import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
-import { switchPlayerPickerDialog } from "../../switch-dialog/switch-player-picker-dialog";
-import { createPlayerPickerDialog } from "./create-player-picker-dialog";
+import { showPlayerPickerDialog } from "./show-player-picker-dialog";
 
 /**
  * プライベートマッチ（ホスト）を終了する
@@ -27,7 +26,6 @@ export async function endPrivateMatchHost(
   }
 
   props.suddenlyBattleEnd.unbind();
-  const dialog = createPlayerPickerDialog(props, action);
-  switchPlayerPickerDialog(props, dialog);
+  await showPlayerPickerDialog(props, action);
   return { ...inProgress, privateMatchHost: { type: "Rematch", rematchRoom } };
 }
