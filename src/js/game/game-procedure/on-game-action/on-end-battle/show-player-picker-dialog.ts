@@ -1,4 +1,3 @@
-import { waitTime } from "../../../../event/wait/wait-time";
 import { PlayerPickerDialog } from "../../../dialogs/player-picker";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
@@ -22,7 +21,7 @@ const createPlayerPickerDialog = (
     initialPilotId: action.player.pilotId,
     armdozerIds: getPlayableArmdozers(props),
     pilotIds: getPlayablePilots(props),
-    confirmLabel: "🌟再戦",
+    confirmLabel: "🌟再戦(β)",
     closeLabel: "タイトルへ",
   });
 
@@ -36,7 +35,6 @@ export const showPlayerPickerDialog = async (
   props: Readonly<GameProps>,
   action: Readonly<EndBattle>,
 ) => {
-  await waitTime(300);
   const dialog = createPlayerPickerDialog(props, action);
   switchPlayerPickerDialog(props, dialog);
   await dialog.show();
