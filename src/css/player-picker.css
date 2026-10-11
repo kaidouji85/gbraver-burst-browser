@@ -17,18 +17,6 @@
   }
 }
 
-.player-picker__background {
-  display: none;
-  position: absolute;
-  width: 100vw;
-  width: 100dvw;
-  height: 100vh;
-  height: 100dvh;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: var(--zindex-background);
-}
-
 .player-picker__dialog {
   top: 50vh;
   top: 50dvh;
@@ -50,19 +38,17 @@
 }
 
 .player-picker__content {
-  --dialog-padding: calc(var(--responsive-font-size) * 2);
+  --dialog-padding: calc(var(--responsive-font-size) * 1);
 
   box-sizing: border-box;
   color: var(--font-color);
   font-size: var(--responsive-font-size);
   display: grid;
   grid-template:
-    "armdozer-title  pilot-title"
     "armdozer-picker pilot-picker" 1fr
     "actions         actions" auto / 1fr 1fr;
   gap: var(--grid-gap);
-  padding: max(var(--dialog-padding), calc(var(--closer-height) / 2))
-    var(--dialog-padding) var(--dialog-padding) var(--dialog-padding);
+  padding: var(--dialog-padding);
 }
 
 /* ============================================================ 
@@ -102,14 +88,9 @@
  * アームドーザ
  * ============================================================ */
 
-.player-picker__armdozer-title {
-  grid-area: armdozer-title;
-  border-top-left-radius: var(--dialog-border-radius);
-}
-
 .player-picker__armdozer-picker {
   grid-area: armdozer-picker;
-  border-bottom-left-radius: var(--dialog-border-radius);
+  border-radius: var(--dialog-border-radius);
 }
 
 .player-picker__armdozer-icon,
@@ -145,7 +126,7 @@
 
 .player-picker__pilot-picker {
   grid-area: pilot-picker;
-  border-bottom-right-radius: var(--dialog-border-radius);
+  border-radius: var(--dialog-border-radius);
 }
 
 .player-picker__pilot-icon,
@@ -178,7 +159,6 @@
   grid-area: actions;
   display: flex;
   gap: calc(var(--responsive-font-size) * 0.5);
-  margin-top: calc(var(--responsive-font-size) * 0.8);
 }
 
 .player-picker__close,
