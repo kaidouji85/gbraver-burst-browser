@@ -12,5 +12,5 @@ import { SimpleIndicatorView } from "./simple-result-indicator";
  */
 export function loseIndicatorView(resources: Resources): ResultIndicatorView {
   const { texture } = findTextureOrThrow(resources, TEXTURE_IDS.LOSE);
-  return new SimpleIndicatorView(texture, 150, 60);
+  return new SimpleIndicatorView(texture, 110, 40);
 }
