@@ -1,16 +1,4 @@
 /**
- * ルートHTML要素から背景を抽出する
- * @param root ルートHTML要素
- * @returns 背景のHTML要素（存在しない場合は空のdiv要素）
- */
-export const extractBackground = (root: HTMLElement): HTMLElement => {
-  return (
-    root.querySelector(`[data-id="background"]`) ??
-    document.createElement("div")
-  );
-};
-
-/**
  * ルートHTML要素からダイアログを抽出する
  * @param root ルートHTML要素
  * @returns ダイアログのHTML要素（存在しない場合は空のdiv要素）
