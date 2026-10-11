@@ -65,6 +65,5 @@
 .match-card__now-loading {
   grid-area: l;
   font-size: calc(var(--responsive-font-size) * 1.5);
-  justify-self: end;
-  align-self: end;
+  place-self: end end;
 }
