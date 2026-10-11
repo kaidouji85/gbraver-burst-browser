@@ -54,14 +54,6 @@
  * 共通系
  * ============================================================ */
 
-.player-picker__armdozer-title,
-.player-picker__pilot-title {
-  text-align: center;
-  box-sizing: border-box;
-  border: var(--dialog-border);
-  padding: calc(var(--responsive-font-size) * 0.5);
-}
-
 .player-picker__armdozer-picker,
 .player-picker__pilot-picker {
   display: flex;
