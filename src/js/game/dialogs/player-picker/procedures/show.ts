@@ -8,10 +8,12 @@ import { PlayerPickerDialogProps } from "../props";
  */
 export const show = (props: PlayerPickerDialogProps) => {
   return waitFinishAnimation(
-    props.dialog.animate([{ opacity: 0 }, { opacity: 1 }], {
-      duration: 300,
-      easing: "ease-out",
-      fill: "forwards",
-    }),
+    props.dialog.animate(
+      [
+        { transform: "translate(-50%, 50%)" },
+        { transform: "translate(-50%, 0)" },
+      ],
+      { duration: 400, fill: "forwards", easing: "ease" },
+    ),
   );
 };
