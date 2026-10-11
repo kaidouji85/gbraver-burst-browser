@@ -1,8 +1,10 @@
+import { waitTime } from "../../../../event/wait/wait-time";
 import { PlayerPickerDialog } from "../../../dialogs/player-picker";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
 import { getPlayableArmdozers } from "../../../playable-amdozers";
 import { getPlayablePilots } from "../../../playable-pilots";
+import { switchPlayerPickerDialog } from "../../switch-dialog/switch-player-picker-dialog";
 
 /**
  * プレイヤーピッカーダイアログを生成するヘルパー関数
@@ -10,7 +12,7 @@ import { getPlayablePilots } from "../../../playable-pilots";
  * @param action 戦闘終了アクション
  * @returns プレイヤーピッカーダイアログ
  */
-export const createPlayerPickerDialog = (
+const createPlayerPickerDialog = (
   props: Readonly<GameProps>,
   action: Readonly<EndBattle>,
 ) =>
@@ -23,3 +25,19 @@ export const createPlayerPickerDialog = (
     confirmLabel: "🌟再戦",
     closeLabel: "タイトルへ",
   });
+
+/**
+ * プレイヤーピッカーダイアログを表示するヘルパー関数
+ * @param props ゲームプロパティ
+ * @param action 戦闘終了アクション
+ * @returns ダイアログ表示が完了したら発火するPromise
+ */
+export const showPlayerPickerDialog = async (
+  props: Readonly<GameProps>,
+  action: Readonly<EndBattle>,
+) => {
+  await waitTime(300);
+  const dialog = createPlayerPickerDialog(props, action);
+  switchPlayerPickerDialog(props, dialog);
+  await dialog.show();
+};
