@@ -18,8 +18,7 @@
 }
 
 .player-picker__dialog {
-  top: 50vh;
-  top: 50dvh;
+  bottom: max(var(--safe-area-bottom), calc(var(--responsive-font-size) * 1));
   left: 50vw;
   left: 50dvw;
   width: min(
@@ -29,9 +28,9 @@
     ),
     80vw
   );
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background-color: var(--background-color);
-  position: absolute;
+  position: fixed;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
