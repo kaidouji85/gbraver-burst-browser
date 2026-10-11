@@ -26,5 +26,6 @@ export const dialog = domStub((options) => {
   playerPicker.notifyConfirm().subscribe(({ armdozerId, pilotId }) => {
     console.log(`confirmP: armdozerId=${armdozerId}, pilotId=${pilotId}`);
   });
+  playerPicker.show();
   return playerPicker.getRootHTMLElement();
 });

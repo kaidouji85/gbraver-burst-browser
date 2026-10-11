@@ -15,6 +15,10 @@ export type PlayerPickerDialogProps = SEPlayerContainer & {
   /** 現在選択しているパイロットID */
   selectedPilotId: PilotId;
 
+  /** 背景のHTML要素 */
+  readonly background: HTMLElement;
+  /** ダイアログのルートHTML要素 */
+  readonly dialog: HTMLElement;
   /** ルートHTML要素 */
   readonly root: HTMLElement;
   /** 閉じるボタンのHTML要素 */

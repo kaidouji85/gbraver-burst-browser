@@ -10,8 +10,10 @@ import { createArmdozerIcon } from "../dom/armdozer-icon";
 import { ROOT } from "../dom/class-name";
 import {
   extractArmdozerPicker,
+  extractBackground,
   extractCloseButton,
   extractConfirmButton,
+  extractDialog,
   extractPilotPicker,
 } from "../dom/extract-element";
 import { createPilotIcon } from "../dom/pilot-icon";
@@ -86,6 +88,8 @@ export const createPlayerPickerDialogProps = (
     selectedPilotId: initialPilotId,
 
     root,
+    background: extractBackground(root),
+    dialog: extractDialog(root),
     closeButton: extractCloseButton(root),
     confirmButton: extractConfirmButton(root),
     armdozerIcons,

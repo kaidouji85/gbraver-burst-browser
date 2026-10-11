@@ -7,6 +7,7 @@ import {
   createPlayerPickerDialogProps,
   CreatePlayerPickerDialogPropsOptions,
 } from "./procedures/create-player-picker-dialog-props";
+import { show } from "./procedures/show";
 import { PlayerPickerDialogProps } from "./props";
 
 /** コンストラクタのオプション */
@@ -52,5 +53,13 @@ export class PlayerPickerDialog implements DOMDialog {
    */
   notifyConfirm(): Observable<PlayerSelection> {
     return this.#props.confirmSubject;
+  }
+
+  /**
+   * ダイアログを表示する
+   * @returns 表示アニメーションの完了を示すPromise
+   */
+  show(): Promise<void> {
+    return show(this.#props);
   }
 }
