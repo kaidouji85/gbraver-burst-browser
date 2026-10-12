@@ -7,10 +7,10 @@ import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
+import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
-import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 11;
