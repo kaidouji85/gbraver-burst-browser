@@ -40,16 +40,13 @@ const BATTLE_SIMULATOR_ICON_SIZE = 256 * 0.9;
 const BATTLE_SIMULATOR_ICON_PUSH_DETECTOR_RADIUS = 80;
 
 /** 数字とアイコンの間のマージン */
-const NUMBER_TO_ICON_MARGIN = 60;
+const NUMBER_TO_ICON_MARGIN = 64;
 
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
 
 /** 台座の色 */
 const PEDESTAL_COLOR = 0x000000;
-
-/** 台座のX方向のパディング */
-const PEDESTAL_X_PADDING = 32;
 
 /** 台座の高さ */
 const PEDESTAL_HEIGHT = 80;
@@ -195,11 +192,9 @@ export class PredicatedDamageView {
     }
 
     const pedestalWidth =
-      values.length * NUMBER_MESH_INTERVAL +
-      NUMBER_MESH_SIZE +
-      PEDESTAL_X_PADDING;
+      values.length * NUMBER_MESH_INTERVAL + NUMBER_MESH_SIZE;
     const pedestalCenterOffset =
-      ((values.length + 1) * NUMBER_MESH_INTERVAL) / 2 + NUMBER_TO_ICON_MARGIN;
+      ((values.length + 2) * NUMBER_MESH_INTERVAL) / 2 + NUMBER_TO_ICON_MARGIN;
     this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
     this.#pedestal.position.x =
       model.battleSimulatorIconPosition === "left"
