@@ -40,7 +40,7 @@ const BATTLE_SIMULATOR_ICON_SIZE = 256 * 0.9;
 const BATTLE_SIMULATOR_ICON_PUSH_DETECTOR_RADIUS = 80;
 
 /** 数字とアイコンの間のマージン */
-const NUMBER_TO_ICON_MARGIN = 64;
+const NUMBER_TO_ICON_MARGIN = 60;
 
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
@@ -49,10 +49,10 @@ const BATTLE_SIMULATOR_ICON_Y = 2;
 const PEDESTAL_COLOR = 0x000000;
 
 /** 台座の横方向の余白、数字スプライトの端が切れないようにするための値 */
-const PEDESTAL_HORIZONTAL_PADDING = 24;
+const PEDESTAL_HORIZONTAL_PADDING = 80;
 
-/** 台座の縦方向の余白 */
-const PEDESTAL_VERTICAL_PADDING = 24;
+/** 台座の高さ */
+const PEDESTAL_HEIGHT = 80;
 
 /**
  * 台座のrenderOrder
@@ -191,10 +191,8 @@ export class PredicatedDamageView {
     // 台座は、数字（values.length桁）と符号（1文字）をあわせた表示幅をすべて覆う
     const displayedCharacters = values.length + 1;
     const pedestalWidth =
-      (displayedCharacters - 1) * NUMBER_MESH_INTERVAL +
-      NUMBER_MESH_SIZE +
-      PEDESTAL_HORIZONTAL_PADDING * 2;
-    const pedestalHeight = NUMBER_MESH_SIZE + PEDESTAL_VERTICAL_PADDING * 2;
+      values.length * NUMBER_MESH_INTERVAL + PEDESTAL_HORIZONTAL_PADDING;
+    const pedestalHeight = PEDESTAL_HEIGHT;
     const pedestalCenterOffset =
       ((displayedCharacters + 1) / 2) * NUMBER_MESH_INTERVAL +
       NUMBER_TO_ICON_MARGIN;
@@ -203,6 +201,7 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
+    this.#pedestal.position.z = -1;
     this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
