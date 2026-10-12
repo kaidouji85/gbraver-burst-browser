@@ -6,8 +6,8 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { FADE_RENDER_ORDER } from "../../../../web-gl/render/render-order/hud-render-order";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
-import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
@@ -70,7 +70,7 @@ const createPedestal = (): THREE.Mesh<
     depthTest: false,
   });
   const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
-  pedestal.renderOrder = HUD_REARMOST_FADER_Z - 1;
+  pedestal.renderOrder = FADE_RENDER_ORDER - 1;
   return pedestal;
 };
 
@@ -205,7 +205,6 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
-    this.#pedestal.position.z = HUD_REARMOST_FADER_Z;
     this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
