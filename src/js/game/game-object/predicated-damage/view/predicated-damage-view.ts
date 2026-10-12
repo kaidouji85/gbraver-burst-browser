@@ -6,6 +6,7 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { SPRITE_RENDER_ORDER } from "../../../../web-gl/render/render-order/td-render-order";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
@@ -44,6 +45,21 @@ const NUMBER_TO_ICON_MARGIN = 64;
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
 
+/** 台座の色 */
+const PEDESTAL_COLOR = 0x000000;
+
+/** 台座の横方向の余白、数字スプライトの端が切れないようにするための値 */
+const PEDESTAL_HORIZONTAL_PADDING = 24;
+
+/** 台座の縦方向の余白 */
+const PEDESTAL_VERTICAL_PADDING = 24;
+
+/**
+ * 台座のrenderOrder
+ * 数字メッシュ（SPRITE_RENDER_ORDER）より背面に描画するため、それより小さい値にする
+ */
+const PEDESTAL_RENDER_ORDER = SPRITE_RENDER_ORDER - 1;
+
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer &
   GameObjectActionContainer;
@@ -52,6 +68,8 @@ export type PredicatedDamageViewConstructParams = ResourcesContainer &
 export class PredicatedDamageView {
   /** グループ */
   #group: THREE.Group;
+  /** 数字の背面に表示する台座 */
+  #pedestal: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
   /** バトルシミュレーターアイコン */
@@ -67,6 +85,17 @@ export class PredicatedDamageView {
     const { resources } = params;
 
     this.#group = new THREE.Group();
+
+    const pedestalGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    const pedestalMaterial = new THREE.MeshBasicMaterial({
+      color: PEDESTAL_COLOR,
+      side: THREE.DoubleSide,
+      transparent: true,
+    });
+    this.#pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
+    this.#pedestal.renderOrder = PEDESTAL_RENDER_ORDER;
+    this.#pedestal.material.depthTest = false;
+    this.#group.add(this.#pedestal);
 
     const { texture: numberTexture } = findTextureOrThrow(
       resources,
@@ -111,6 +140,8 @@ export class PredicatedDamageView {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this.#pedestal.geometry.dispose();
+    this.#pedestal.material.dispose();
     this.#numbers.forEach((n) => {
       n.destructor();
     });
@@ -156,6 +187,23 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
+
+    // 台座は、数字（values.length桁）と符号（1文字）をあわせた表示幅をすべて覆う
+    const displayedCharacters = values.length + 1;
+    const pedestalWidth =
+      (displayedCharacters - 1) * NUMBER_MESH_INTERVAL +
+      NUMBER_MESH_SIZE +
+      PEDESTAL_HORIZONTAL_PADDING * 2;
+    const pedestalHeight = NUMBER_MESH_SIZE + PEDESTAL_VERTICAL_PADDING * 2;
+    const pedestalCenterOffset =
+      ((displayedCharacters + 1) / 2) * NUMBER_MESH_INTERVAL +
+      NUMBER_TO_ICON_MARGIN;
+    this.#pedestal.scale.set(pedestalWidth, pedestalHeight, 1);
+    this.#pedestal.position.x =
+      model.battleSimulatorIconPosition === "left"
+        ? pedestalCenterOffset
+        : -pedestalCenterOffset;
+    this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =
