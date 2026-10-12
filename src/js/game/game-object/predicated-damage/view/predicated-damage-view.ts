@@ -67,9 +67,10 @@ const createPedestal = (): THREE.Mesh<
     color: PEDESTAL_COLOR,
     side: THREE.DoubleSide,
     transparent: true,
+    depthTest: false,
   });
   const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
-  pedestal.material.depthTest = false;
+  pedestal.renderOrder = HUD_REARMOST_FADER_Z - 1;
   return pedestal;
 };
 
