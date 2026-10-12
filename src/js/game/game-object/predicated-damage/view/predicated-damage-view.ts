@@ -10,6 +10,7 @@ import { GameObjectActionContainer } from "../../action/game-object-action-conta
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
+import { HUD_REARMOST_FADER_Z } from "../../hud-position";
 
 /** 最大アニメーション枚数 */
 const MAX_ANIMATION = 11;
@@ -203,7 +204,7 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
-    this.#pedestal.position.z = -1;
+    this.#pedestal.position.z = HUD_REARMOST_FADER_Z;
     this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
