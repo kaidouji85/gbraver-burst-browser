@@ -45,13 +45,13 @@ const NUMBER_TO_ICON_MARGIN = 64;
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
 
-/** 台座の色 */
+/** ダメージ数字台座の色 */
 const PEDESTAL_COLOR = 0x000000;
 
 /** ダメージ数字台座のX方向のパディング */
 const PEDESTAL_X_PADDING = 16;
 
-/** 台座の高さ */
+/** ダメージ数字台座の高さ */
 const PEDESTAL_HEIGHT = 80;
 
 /**
