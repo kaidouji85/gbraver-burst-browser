@@ -6,6 +6,7 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
+import { FADE_RENDER_ORDER } from "../../../../web-gl/render/render-order/hud-render-order";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
@@ -44,6 +45,35 @@ const NUMBER_TO_ICON_MARGIN = 64;
 /** バトルシミュレーターアイコンのY位置 */
 const BATTLE_SIMULATOR_ICON_Y = 2;
 
+/** ダメージ数字台座の色 */
+const PEDESTAL_COLOR = 0x000000;
+
+/** ダメージ数字台座のX方向のパディング */
+const PEDESTAL_X_PADDING = 16;
+
+/** ダメージ数字台座の高さ */
+const PEDESTAL_HEIGHT = 80;
+
+/**
+ * ダメージ数字台座を生成する
+ * @returns 生成されたダメージ数字台座のメッシュ
+ */
+const createPedestal = (): THREE.Mesh<
+  THREE.PlaneGeometry,
+  THREE.MeshBasicMaterial
+> => {
+  const pedestalGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+  const pedestalMaterial = new THREE.MeshBasicMaterial({
+    color: PEDESTAL_COLOR,
+    side: THREE.DoubleSide,
+    transparent: true,
+    depthTest: false,
+  });
+  const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
+  pedestal.renderOrder = FADE_RENDER_ORDER - 1;
+  return pedestal;
+};
+
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer &
   GameObjectActionContainer;
@@ -52,6 +82,8 @@ export type PredicatedDamageViewConstructParams = ResourcesContainer &
 export class PredicatedDamageView {
   /** グループ */
   #group: THREE.Group;
+  /** ダメージ数字台座 */
+  #pedestal: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
   /** バトルシミュレーターアイコン */
@@ -67,6 +99,9 @@ export class PredicatedDamageView {
     const { resources } = params;
 
     this.#group = new THREE.Group();
+
+    this.#pedestal = createPedestal();
+    this.#group.add(this.#pedestal);
 
     const { texture: numberTexture } = findTextureOrThrow(
       resources,
@@ -111,6 +146,8 @@ export class PredicatedDamageView {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this.#pedestal.geometry.dispose();
+    this.#pedestal.material.dispose();
     this.#numbers.forEach((n) => {
       n.destructor();
     });
@@ -156,6 +193,19 @@ export class PredicatedDamageView {
       sign.opacity(opacity);
       sign.animate(10 / MAX_ANIMATION);
     }
+
+    const pedestalWidth =
+      values.length * NUMBER_MESH_INTERVAL +
+      NUMBER_MESH_SIZE +
+      PEDESTAL_X_PADDING;
+    const pedestalCenterOffset =
+      ((values.length + 2) * NUMBER_MESH_INTERVAL) / 2 + NUMBER_TO_ICON_MARGIN;
+    this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
+    this.#pedestal.position.x =
+      model.battleSimulatorIconPosition === "left"
+        ? pedestalCenterOffset
+        : -pedestalCenterOffset;
+    this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =

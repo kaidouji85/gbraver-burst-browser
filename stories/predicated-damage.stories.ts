@@ -84,25 +84,25 @@ export const multi = hudGameObjectStory((params) => [
   createPredicatedDamage({
     ...params,
     damage: 2000,
-    y: 0,
+    y: 200,
     battleSimulatorIconPosition: "right",
   }),
   createPredicatedDamage({
     ...params,
     damage: 200,
-    y: 50,
+    y: 0,
     battleSimulatorIconPosition: "right",
   }),
   createPredicatedDamage({
     ...params,
     damage: 20,
-    y: 100,
+    y: -200,
     battleSimulatorIconPosition: "right",
   }),
   createPredicatedDamage({
     ...params,
     damage: 2,
-    y: 150,
+    y: -400,
     battleSimulatorIconPosition: "right",
   }),
 ]);
