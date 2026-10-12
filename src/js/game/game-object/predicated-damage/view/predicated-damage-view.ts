@@ -6,7 +6,6 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-animation";
-import { SPRITE_RENDER_ORDER } from "../../../../web-gl/render/render-order/td-render-order";
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
@@ -55,10 +54,23 @@ const PEDESTAL_X_PADDING = 32;
 const PEDESTAL_HEIGHT = 80;
 
 /**
- * 台座のrenderOrder
- * 数字メッシュ（SPRITE_RENDER_ORDER）より背面に描画するため、それより小さい値にする
+ * ダメージ数字台座を生成する
+ * @returns 生成されたダメージ数字台座のメッシュ
  */
-const PEDESTAL_RENDER_ORDER = SPRITE_RENDER_ORDER - 1;
+const createPedestal = (): THREE.Mesh<
+  THREE.PlaneGeometry,
+  THREE.MeshBasicMaterial
+> => {
+  const pedestalGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+  const pedestalMaterial = new THREE.MeshBasicMaterial({
+    color: PEDESTAL_COLOR,
+    side: THREE.DoubleSide,
+    transparent: true,
+  });
+  const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
+  pedestal.material.depthTest = false;
+  return pedestal;
+};
 
 /** コンストラクタのパラメータ */
 export type PredicatedDamageViewConstructParams = ResourcesContainer &
@@ -68,7 +80,7 @@ export type PredicatedDamageViewConstructParams = ResourcesContainer &
 export class PredicatedDamageView {
   /** グループ */
   #group: THREE.Group;
-  /** 数字の背面に表示する台座 */
+  /** ダメージ数字台座 */
   #pedestal: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
   /** 数字メッシュをあつめたもの */
   #numbers: HorizontalAnimationMesh[];
@@ -86,15 +98,7 @@ export class PredicatedDamageView {
 
     this.#group = new THREE.Group();
 
-    const pedestalGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
-    const pedestalMaterial = new THREE.MeshBasicMaterial({
-      color: PEDESTAL_COLOR,
-      side: THREE.DoubleSide,
-      transparent: true,
-    });
-    this.#pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
-    this.#pedestal.renderOrder = PEDESTAL_RENDER_ORDER;
-    this.#pedestal.material.depthTest = false;
+    this.#pedestal = createPedestal();
     this.#group.add(this.#pedestal);
 
     const { texture: numberTexture } = findTextureOrThrow(
