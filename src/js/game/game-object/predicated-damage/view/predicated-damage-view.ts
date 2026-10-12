@@ -21,7 +21,7 @@ const NUMBER_SIZE_SCALE = 0.7;
 const NUMBER_MESH_SIZE = 128 * NUMBER_SIZE_SCALE;
 
 /** 数字メッシュ間隔 */
-const NUMBER_MESH_INTERVAL = 90 * NUMBER_SIZE_SCALE;
+const NUMBER_MESH_INTERVAL = 72 * NUMBER_SIZE_SCALE;
 
 /** 数字表示に必要な最大文字数（マイナス符号含む） */
 const MAX_NUMBER_CHARACTERS = 5;
