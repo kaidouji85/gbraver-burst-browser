@@ -48,8 +48,8 @@ const BATTLE_SIMULATOR_ICON_Y = 2;
 /** 台座の色 */
 const PEDESTAL_COLOR = 0x000000;
 
-/** 台座の横方向の余白、数字スプライトの端が切れないようにするための値 */
-const PEDESTAL_HORIZONTAL_PADDING = 80;
+/** 台座のX方向のパディング */
+const PEDESTAL_X_PADDING = 32;
 
 /** 台座の高さ */
 const PEDESTAL_HEIGHT = 80;
@@ -191,12 +191,13 @@ export class PredicatedDamageView {
     // 台座は、数字（values.length桁）と符号（1文字）をあわせた表示幅をすべて覆う
     const displayedCharacters = values.length + 1;
     const pedestalWidth =
-      values.length * NUMBER_MESH_INTERVAL + PEDESTAL_HORIZONTAL_PADDING;
-    const pedestalHeight = PEDESTAL_HEIGHT;
+      values.length * NUMBER_MESH_INTERVAL +
+      NUMBER_MESH_SIZE +
+      PEDESTAL_X_PADDING;
     const pedestalCenterOffset =
       ((displayedCharacters + 1) / 2) * NUMBER_MESH_INTERVAL +
       NUMBER_TO_ICON_MARGIN;
-    this.#pedestal.scale.set(pedestalWidth, pedestalHeight, 1);
+    this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
     this.#pedestal.position.x =
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
