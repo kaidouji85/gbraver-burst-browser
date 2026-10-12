@@ -198,7 +198,7 @@ export class PredicatedDamageView {
       NUMBER_MESH_SIZE +
       PEDESTAL_X_PADDING;
     const pedestalCenterOffset =
-      ((values.length + 1) / 2) * NUMBER_MESH_INTERVAL + NUMBER_TO_ICON_MARGIN;
+      ((values.length + 1) * NUMBER_MESH_INTERVAL) / 2 + NUMBER_TO_ICON_MARGIN;
     this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
     this.#pedestal.position.x =
       model.battleSimulatorIconPosition === "left"
