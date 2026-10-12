@@ -6,7 +6,6 @@
   .stage-title {
     display: grid;
     place-items: center;
-    grid-template-rows: minmax(0, 1fr);
     width: 100vw;
     width: 100dvw;
     height: 100vh;
