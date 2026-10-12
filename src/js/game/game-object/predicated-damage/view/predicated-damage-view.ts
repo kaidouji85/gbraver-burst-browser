@@ -188,15 +188,12 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    // 台座は、数字（values.length桁）と符号（1文字）をあわせた表示幅をすべて覆う
-    const displayedCharacters = values.length + 1;
     const pedestalWidth =
       values.length * NUMBER_MESH_INTERVAL +
       NUMBER_MESH_SIZE +
       PEDESTAL_X_PADDING;
     const pedestalCenterOffset =
-      ((displayedCharacters + 1) / 2) * NUMBER_MESH_INTERVAL +
-      NUMBER_TO_ICON_MARGIN;
+      ((values.length + 1) / 2) * NUMBER_MESH_INTERVAL + NUMBER_TO_ICON_MARGIN;
     this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
     this.#pedestal.position.x =
       model.battleSimulatorIconPosition === "left"
