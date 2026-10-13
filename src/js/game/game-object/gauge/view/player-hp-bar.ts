@@ -3,8 +3,8 @@ import * as THREE from "three";
 import type { Resources } from "../../../../resource";
 import { CANVAS_IMAGE_IDS } from "../../../../resource/canvas-image/ids";
 import { CanvasMesh } from "../../../../web-gl/mesh/canvas-mesh";
-import { SPRITE_RENDER_ORDER } from "../../render-order";
 import { animatedTexture } from "../../../../web-gl/texture/animation/texture-animation";
+import { SPRITE_RENDER_ORDER } from "../../render-order";
 
 /** HPバー キャンバス横幅 */
 export const BAR_CANVAS_WIDTH = 1024;

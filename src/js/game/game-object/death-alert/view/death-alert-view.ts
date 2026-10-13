@@ -4,9 +4,9 @@ import { ResourcesContainer } from "../../../../resource";
 import { findTextureOrThrow } from "../../../../resource/find-texture-or-throw";
 import { TEXTURE_IDS } from "../../../../resource/texture/ids";
 import { TextureResource } from "../../../../resource/texture/resource";
-import { FADE_RENDER_ORDER } from "../../render-order";
 import { PreRender } from "../../../game-loop/pre-render";
 import { HUD_REARMOST_FADER_Z } from "../../hud-position";
+import { FADE_RENDER_ORDER } from "../../render-order";
 import { hudUIScale } from "../../scale";
 import { DeathAlertModel } from "../model/death-alert-model";
 
