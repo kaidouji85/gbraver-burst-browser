@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import { SPRITE_RENDER_ORDER } from "../render/render-order/td-render-order";
+import { SPRITE_RENDER_ORDER } from "../../game/game-object/render-order";
 
 /** パラメータ */
 type Params = {
