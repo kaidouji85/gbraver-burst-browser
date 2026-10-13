@@ -203,6 +203,7 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
+    // ワールドz座標が-0.1になるように調整
     this.#pedestal.position.z = -this.#group.position.z - 0.1;
     this.#pedestal.material.opacity = opacity;
 
