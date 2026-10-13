@@ -49,7 +49,7 @@ const BATTLE_SIMULATOR_ICON_Y = 2;
 const PEDESTAL_COLOR = 0x000000;
 
 /** ダメージ数字台座の幅 */
-const PEDESTAL_WIDTH = 370;
+const PEDESTAL_WIDTH = 360;
 
 /** ダメージ数字台座の高さ */
 const PEDESTAL_HEIGHT = 100;
