@@ -1,3 +1,0 @@
-export const LOCAL_PREDICATED_DAMAGE_Z = 0.1;
-
-export const LOCAL_PEDESTAL_Z = -LOCAL_PREDICATED_DAMAGE_Z - 0.1;
