@@ -48,11 +48,11 @@ const BATTLE_SIMULATOR_ICON_Y = 2;
 /** ダメージ数字台座の色 */
 const PEDESTAL_COLOR = 0x000000;
 
-/** ダメージ数字台座のX方向のパディング */
-const PEDESTAL_X_PADDING = 16;
+/** ダメージ数字台座の幅 */
+const PEDESTAL_WIDTH = 370;
 
 /** ダメージ数字台座の高さ */
-const PEDESTAL_HEIGHT = 80;
+const PEDESTAL_HEIGHT = 100;
 
 /**
  * ダメージ数字台座を生成する
@@ -62,7 +62,12 @@ const createPedestal = (): THREE.Mesh<
   THREE.PlaneGeometry,
   THREE.MeshBasicMaterial
 > => {
-  const pedestalGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+  const pedestalGeometry = new THREE.PlaneGeometry(
+    PEDESTAL_WIDTH,
+    PEDESTAL_HEIGHT,
+    1,
+    1,
+  );
   const pedestalMaterial = new THREE.MeshBasicMaterial({
     color: PEDESTAL_COLOR,
     side: THREE.DoubleSide,
@@ -194,13 +199,7 @@ export class PredicatedDamageView {
       sign.animate(10 / MAX_ANIMATION);
     }
 
-    const pedestalWidth =
-      values.length * NUMBER_MESH_INTERVAL +
-      NUMBER_MESH_SIZE +
-      PEDESTAL_X_PADDING;
-    const pedestalCenterOffset =
-      ((values.length + 2) * NUMBER_MESH_INTERVAL) / 2 + NUMBER_TO_ICON_MARGIN;
-    this.#pedestal.scale.set(pedestalWidth, PEDESTAL_HEIGHT, 1);
+    const pedestalCenterOffset = PEDESTAL_WIDTH / 2;
     this.#pedestal.position.x =
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
