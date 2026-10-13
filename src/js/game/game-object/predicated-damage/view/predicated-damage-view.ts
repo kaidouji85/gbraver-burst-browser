@@ -10,7 +10,6 @@ import { GameObjectActionContainer } from "../../action/game-object-action-conta
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
 import { SPRITE_RENDER_ORDER } from "../../render-order";
-import { LOCAL_PEDESTAL_Z } from "../local-coordinate";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -76,7 +75,6 @@ const createPedestal = (): THREE.Mesh<
   });
   const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
   pedestal.renderOrder = SPRITE_RENDER_ORDER;
-  pedestal.position.z = LOCAL_PEDESTAL_Z;
   return pedestal;
 };
 
@@ -205,6 +203,7 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
+    this.#pedestal.position.z = -this.#group.position.z - 0.1;
     this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
