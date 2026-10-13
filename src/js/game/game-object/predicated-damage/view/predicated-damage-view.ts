@@ -187,7 +187,7 @@ export class PredicatedDamageView {
     this.#pedestal.getObject3D().position.z = -this.#group.position.z - 0.1;
     this.#pedestal.getObject3D().scale.x =
       model.battleSimulatorIconPosition === "left" ? -1 : 1;
-    this.#pedestal.getObject3D().material.opacity = opacity;
+    this.#pedestal.opacity(opacity);
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;
     this.#battleSimulatorIcon.getObject3D().position.y =
