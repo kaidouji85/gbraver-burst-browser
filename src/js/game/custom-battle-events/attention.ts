@@ -1,7 +1,4 @@
-import {
-  HUD_ATTENTION_Z,
-  HUD_PREDICATED_DAMAGE_Z,
-} from "../game-object/hud-position";
+import { HUD_ATTENTION_Z } from "../game-object/hud-position";
 import { CustomBattleEventProps } from "../scenes/td-scenes/battle/custom-battle-event";
 
 /**
@@ -58,32 +55,27 @@ export function unattentionPilotButton(props: CustomBattleEventProps): void {
 }
 
 /**
- * バトルシミュレーターボタンに注目する
+ * プレイヤーのゲージに注目する
  * @param props イベントプロパティ
  */
-export function attentionBattleSimulatorButton(
-  props: CustomBattleEventProps,
-): void {
-  props.view.hud.players.forEach((p) => {
-    // ワールド座標でHUD_ATTENTION_Zとなるようにしたいので、
-    // 親のスケールを加味している
-    const parent = p.gauge.getObject3D();
-    const target = p.predicatedDamage.getObject3D();
-    target.position.z = HUD_ATTENTION_Z / parent.scale.z;
-  });
+export function attentionPlayerGauge(props: CustomBattleEventProps) {
+  props.view.hud.players
+    .filter((p) => p.playerId === props.playerId)
+    .forEach((p) => {
+      p.gauge.getObject3D().position.z = HUD_ATTENTION_Z;
+    });
 }
 
 /**
- * バトルシミュレーターボタンの注目を解除する
+ * プレイヤーのゲージの注目を解除する
  * @param props イベントプロパティ
  */
-export function unattentionBattleSimulatorButton(
-  props: CustomBattleEventProps,
-): void {
-  props.view.hud.players.forEach((p) => {
-    // ローカル座標の初期値に戻す
-    p.predicatedDamage.getObject3D().position.z = HUD_PREDICATED_DAMAGE_Z;
-  });
+export function unattentionPlayerGauge(props: CustomBattleEventProps) {
+  props.view.hud.players
+    .filter((p) => p.playerId === props.playerId)
+    .forEach((p) => {
+      p.gauge.getObject3D().position.z = 0;
+    });
 }
 
 /**
@@ -95,5 +87,5 @@ export function unAttentionAllButtons(props: CustomBattleEventProps): void {
   unattentionBatterySelector(props);
   unattentionBurstButton(props);
   unattentionPilotButton(props);
-  unattentionBattleSimulatorButton(props);
+  unattentionPlayerGauge(props);
 }
