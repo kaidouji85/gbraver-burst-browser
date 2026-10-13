@@ -9,7 +9,7 @@ import { HorizontalAnimationMesh } from "../../../../web-gl/mesh/horizontal-anim
 import { GameObjectActionContainer } from "../../action/game-object-action-container";
 import { PushDetector } from "../../push-detector";
 import { circlePushDetector } from "../../push-detector/circle-push-detector";
-import { FADE_RENDER_ORDER } from "../../render-order";
+import { SPRITE_RENDER_ORDER } from "../../render-order";
 import { PredicatedDamageModel } from "../model/predicated-damage-model";
 
 /** 最大アニメーション枚数 */
@@ -72,10 +72,9 @@ const createPedestal = (): THREE.Mesh<
     color: PEDESTAL_COLOR,
     side: THREE.DoubleSide,
     transparent: true,
-    depthTest: false,
   });
   const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
-  pedestal.renderOrder = FADE_RENDER_ORDER - 1;
+  pedestal.renderOrder = SPRITE_RENDER_ORDER;
   return pedestal;
 };
 
@@ -204,6 +203,8 @@ export class PredicatedDamageView {
       model.battleSimulatorIconPosition === "left"
         ? pedestalCenterOffset
         : -pedestalCenterOffset;
+    // ワールドz座標が-0.1になるように調整
+    this.#pedestal.position.z = -this.#group.position.z - 0.1;
     this.#pedestal.material.opacity = opacity;
 
     this.#battleSimulatorIcon.getObject3D().position.x = 0;

@@ -1,11 +1,11 @@
 import { playerGauge } from "../../../../../../../game-object/gauge";
-import { HUD_PREDICATED_DAMAGE_Z } from "../../../../../../../game-object/hud-position";
 import { PredicatedDamage } from "../../../../../../../game-object/predicated-damage";
 import { winIndicator } from "../../../../../../../game-object/result-indicator";
 import { StatusIcon } from "../../../../../../../game-object/status-icon";
 import { playerTurnStart } from "../../../../../../../game-object/turn-start";
 import { HUDLayerObjectCreatorParams } from "../../creator-params";
 import { HUDPlayerProps } from "../props";
+import { LOCAL_PREDICATED_DAMAGE_Z } from "./local-coordinate";
 
 /**
  * プレイヤー側のHUDPlayerPropsを生成する
@@ -29,7 +29,7 @@ export function createPlayerProps(
   });
   predicatedDamage
     .getObject3D()
-    .position.set(-400, 80, HUD_PREDICATED_DAMAGE_Z);
+    .position.set(-400, 80, LOCAL_PREDICATED_DAMAGE_Z);
   gauge.getObject3D().add(predicatedDamage.getObject3D());
 
   const statusIcon = new StatusIcon(params);

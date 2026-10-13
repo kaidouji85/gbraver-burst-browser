@@ -7,14 +7,14 @@ import {
 } from "./active-message-window";
 import {
   attentionBatterySelector,
-  attentionBattleSimulatorButton,
   attentionBurstButton,
   attentionPilotButton,
+  attentionPlayerGauge,
   unAttentionAllButtons,
   unattentionBatterySelector,
-  unattentionBattleSimulatorButton,
   unattentionBurstButton,
   unattentionPilotButton,
+  unattentionPlayerGauge,
 } from "./attention";
 import { disabledAllButtons, enabledAllButtons } from "./button-disabled";
 import { invisibleAllMessageWindows } from "./invisible-all-message-windows";
@@ -201,7 +201,7 @@ export async function focusBattleSimulatorButton(
   const playAnimation = createAnimationPlay(props);
   unAttentionAllButtons(props);
   disabledAllButtons(props);
-  attentionBattleSimulatorButton(props);
+  attentionPlayerGauge(props);
   props.view.hud.players.forEach((p) => {
     p.predicatedDamage.disabled(false);
   });
@@ -239,6 +239,6 @@ export const focusOutBattleSimulatorButton = async (
   const playAnimation = createAnimationPlay(props);
   props.view.dom.nearPlayerBattleSimulatorButtonMessageWindow.visible(false);
   await playAnimation(props.view.hud.gameObjects.frontmostFader.opacity(0, 0));
-  unattentionBattleSimulatorButton(props);
+  unattentionPlayerGauge(props);
   enabledAllButtons(props);
 };

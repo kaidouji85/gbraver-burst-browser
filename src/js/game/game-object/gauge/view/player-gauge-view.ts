@@ -115,7 +115,6 @@ export class PlayerGaugeView implements GaugeView {
       preRender.safeAreaInset.top * devicePerScale;
     this.#group.position.x = model.tracking.x;
     this.#group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
-    this.#group.position.z = 0;
     this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
