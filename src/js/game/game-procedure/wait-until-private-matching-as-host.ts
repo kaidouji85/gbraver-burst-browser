@@ -34,13 +34,15 @@ export async function waitUntilPrivateMatchingAsHost(
     switchPrivateMatchHostDialog(props, dialog);
     return await room.waitUntilMatching();
   } catch (e) {
-    if (!isAbortError(e)) {
-      const errorDialog = new NetworkErrorDialog({
-        ...props,
-        postNetworkError: { type: "GotoTitle" },
-      });
-      switchNetworkErrorDialog(props, errorDialog);
+    if (isAbortError(e)) {
+      throw e;
     }
+
+    const errorDialog = new NetworkErrorDialog({
+      ...props,
+      postNetworkError: { type: "GotoTitle" },
+    });
+    switchNetworkErrorDialog(props, errorDialog);
     throw e;
   }
 }
