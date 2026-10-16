@@ -1,5 +1,6 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
+import { isAbortError } from "../../event/abort-controller/abort-error";
 import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
 import { PrivateMatchHostDialog } from "../dialogs/private-match-host";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
@@ -33,11 +34,13 @@ export async function waitUntilPrivateMatchingAsHost(
     switchPrivateMatchHostDialog(props, dialog);
     return await room.waitUntilMatching();
   } catch (e) {
-    const errorDialog = new NetworkErrorDialog({
-      ...props,
-      postNetworkError: { type: "GotoTitle" },
-    });
-    switchNetworkErrorDialog(props, errorDialog);
+    if (!isAbortError(e)) {
+      const errorDialog = new NetworkErrorDialog({
+        ...props,
+        postNetworkError: { type: "GotoTitle" },
+      });
+      switchNetworkErrorDialog(props, errorDialog);
+    }
     throw e;
   }
 }
