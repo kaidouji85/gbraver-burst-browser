@@ -1,5 +1,6 @@
 import type { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
+import { isAbortError } from "../../event/abort-controller/abort-error";
 import { MatchingDialog } from "../dialogs/matching/matching-dialog";
 import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
@@ -25,6 +26,10 @@ export async function waitUntilCasualMatching(
       action.pilotId,
     );
   } catch (e) {
+    if (isAbortError(e)) {
+      throw e;
+    }
+
     const dialog = new NetworkErrorDialog({
       ...props,
       postNetworkError: {

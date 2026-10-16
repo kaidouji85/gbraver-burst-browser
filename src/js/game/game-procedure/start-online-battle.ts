@@ -2,6 +2,7 @@ import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { OfflineBattleSDK } from "@gbraver-burst-network/offline-browser-sdk";
 import { Player } from "gbraver-burst-core";
 
+import { isAbortError } from "../../event/abort-controller/abort-error";
 import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
 import { waitTime } from "../../event/wait/wait-time";
 import {
@@ -43,6 +44,10 @@ function createBattleProgress(
         props.domDialogBinder.hidden();
         return update;
       } catch (e) {
+        if (isAbortError(e)) {
+          throw e;
+        }
+
         const dialog = new NetworkErrorDialog({
           ...props,
           postNetworkError: {
