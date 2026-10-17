@@ -1,12 +1,11 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { domPushStream } from "../../../dom/push-dom";
 import type { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import type { PostNetworkError } from "../../post-network-error";
 import type { DOMDialog } from "../dialog";
+import { bindEventListeners } from "./procedure/bind-event-listeners";
 import { createNetworkErrorDialogProps } from "./procedure/create-network-error-dialog-props";
-import { onPostNetworkErrorButtonPush } from "./procedure/on-post-network-error-button-push";
 import { NetworkErrorDialogProps } from "./props";
 
 /** コンストラクタのオプション */
@@ -29,11 +28,7 @@ export class NetworkErrorDialog implements DOMDialog {
    */
   constructor(options: NetworkErrorDialogOptions) {
     this.#props = createNetworkErrorDialogProps(options);
-    this.#unsubscribers = [
-      domPushStream(this.#props.postNetworkErrorButton).subscribe((action) => {
-        onPostNetworkErrorButtonPush({ props: this.#props, action });
-      }),
-    ];
+    this.#unsubscribers = bindEventListeners(this.#props);
   }
 
   /**
