@@ -30,6 +30,7 @@ import { PrivateMatchEntry } from "./private-match-entry";
 import { PrivateMatchGuestStart } from "./private-match-guest-start";
 import { PrivateMatchHostStart } from "./private-match-host-start";
 import { ReloadRequest } from "./reload-request";
+import { RematchCancelled } from "./rematch-cancelled";
 import { SelectEpisode } from "./select-episode";
 import { SelectionCancel } from "./selection-cancel";
 import { SelectionComplete } from "./selection-complete";
@@ -68,6 +69,7 @@ export type GameAction =
   | DifficultySelectionCancel
   | EndBattle
   | SuddenlyBattleEnd
+  | RematchCancelled
   | PostBattleAction
   | EndNPCEnding
   | UniversalLogin

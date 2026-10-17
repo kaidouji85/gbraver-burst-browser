@@ -26,6 +26,7 @@ export async function endCasualMatch(
   }
 
   props.suddenlyBattleEnd.unbind();
+  props.rematchCancelled.bind(rematchRoom);
   await showPlayerPickerDialog(props, action);
   return { ...inProgress, casualMatch: { type: "Rematch", rematchRoom } };
 }

@@ -18,6 +18,18 @@ const createSuddenlyBattleEnd = (
     .pipe(map(() => ({ type: "SuddenlyBattleEnd" })));
 
 /**
+ * 再戦キャンセルの通知ストリームを生成する
+ * @param props ゲームプロパティ
+ * @returns 再戦キャンセルの通知ストリーム
+ */
+const createRematchCancelled = (
+  props: Readonly<GameProps>,
+): Observable<GameAction> =>
+  props.rematchCancelled
+    .stream()
+    .pipe(map(() => ({ type: "RematchCancelled" })));
+
+/**
  * オンラインネットワークエラーの通知ストリームを生成する
  * @param networkContext ネットワークコンテキスト（オンライン）
  * @returns ネットワークエラーの通知ストリーム
@@ -86,6 +98,7 @@ export const createGameActionNotifier = (
     props.gameAction.notify(),
     createPostBattleAction(props),
     createSuddenlyBattleEnd(props),
+    createRematchCancelled(props),
     props.networkContext.type === "online"
       ? createOnlineNetworkError(props.networkContext)
       : EMPTY,

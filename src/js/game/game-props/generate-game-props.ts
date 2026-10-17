@@ -15,6 +15,7 @@ import { GameAction } from "../game-actions";
 import { DOMFader } from "../game-dom/dom-fader/dom-fader";
 import { createGameLoop } from "../game-loop/game-loop";
 import { NetworkContext } from "../network-context";
+import { RematchCancelled } from "../rematch-cancelled";
 import { DOMSceneBinder } from "../scenes/dom-scenes/dom-scene-binder";
 import { InterruptScenes } from "../scenes/innterrupt-scenes";
 import { TDSceneBinder } from "../scenes/td-scenes/td-scene-binder";
@@ -86,6 +87,7 @@ export function generateGameProps(params: GamePropsGeneratorParams): GameProps {
     gameAction: createActionManager<GameAction>(),
     hudUIScale: new CssHUDUIScale(renderer.getRendererDOM(), resize),
     suddenlyBattleEnd: new SuddenlyBattleEnd(),
+    rematchCancelled: new RematchCancelled(),
     fader: new DOMFader(),
     interruptScenes: new InterruptScenes(),
     domSceneBinder: new DOMSceneBinder(),

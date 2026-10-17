@@ -17,6 +17,7 @@ import { DOMFader } from "../game-dom/dom-fader/dom-fader";
 import { GameLoopContainer } from "../game-loop/game-loop-container";
 import { InProgress } from "../in-progress";
 import { NetworkContext } from "../network-context";
+import { RematchCancelled } from "../rematch-cancelled";
 import { DOMSceneBinderContainer } from "../scenes/dom-scenes/dom-scene-binder/dom-scene-binder-container";
 import { InterruptScenes } from "../scenes/innterrupt-scenes";
 import { TDSceneBinder } from "../scenes/td-scenes/td-scene-binder";
@@ -74,6 +75,8 @@ export interface GameProps
   readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */
   readonly suddenlyBattleEnd: SuddenlyBattleEnd;
+  /** 再戦キャンセル監視 */
+  readonly rematchCancelled: RematchCancelled;
 
   /** リサイズ */
   readonly resize: Observable<Resize>;

@@ -21,6 +21,8 @@ type Options = {
 export async function gotoTitle(options: Options) {
   const { props } = options;
   props.domDialogBinder.hidden();
+  props.suddenlyBattleEnd.unbind();
+  props.rematchCancelled.unbind();
   const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();

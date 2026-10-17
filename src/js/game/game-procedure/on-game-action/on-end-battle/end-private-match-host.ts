@@ -26,6 +26,7 @@ export async function endPrivateMatchHost(
   }
 
   props.suddenlyBattleEnd.unbind();
+  props.rematchCancelled.bind(rematchRoom);
   await showPlayerPickerDialog(props, action);
   return { ...inProgress, privateMatchHost: { type: "Rematch", rematchRoom } };
 }
