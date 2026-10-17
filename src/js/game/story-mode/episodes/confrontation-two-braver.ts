@@ -12,7 +12,7 @@ import { EpisodeIDs } from "./episode-ids";
 /** 導入 */
 const introduction = `新人戦から数日後、シンヤのもとに 全国大会の覇者ユウヤから対戦申し込みが入った。憧れの人と対戦できることに、心躍らせるシンヤであったが……。
 
-${HAS_EASTER_EGG}`; 
+${HAS_EASTER_EGG}`;
 
 /** 対決、二人のブレイバー！！ */
 export const confrontationTwoBraver: Episode = {

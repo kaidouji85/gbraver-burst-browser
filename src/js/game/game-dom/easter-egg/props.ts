@@ -2,7 +2,7 @@ import { SoundResource } from "../../../resource/sound/resource";
 import { SEPlayerContainer } from "../../../sounds/se/se-player";
 
 /** イースターエッグのプロパティ */
-export type EasterEggProps =  SEPlayerContainer & {
+export type EasterEggProps = SEPlayerContainer & {
   /** ルートHTML要素 */
   root: HTMLElement;
   /** コンテンツ */
