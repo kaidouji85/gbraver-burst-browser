@@ -26,3 +26,7 @@
   color: var(--button-font-color);
   box-shadow: var(--sub-button-box-shadow);
 }
+
+.easter-egg__icon {
+  padding-right: calc(var(--responsive-font-size) * 0.5);
+}

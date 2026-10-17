@@ -1,21 +1,17 @@
 import { waitFinishAnimation } from "../../../dom/wait-finish-animation";
+import { createEasterEggProps } from "./procedure/create-easter-egg-props";
+import { EasterEggProps } from "./props";
 
 /** イースターエッグ */
 export class EasterEgg {
-  /** ルートHTML要素 */
-  #root: HTMLElement;
+  /** プロパティ */
+  #props: EasterEggProps;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this.#root = document.createElement("div");
-    this.#root.className = "easter-egg";
-
-    const content = document.createElement("div");
-    content.className = "easter-egg__content";
-    content.textContent = "🎉イースターエッグ";
-    this.#root.appendChild(content);
+    this.#props = createEasterEggProps();
   }
 
   /**
@@ -23,7 +19,7 @@ export class EasterEgg {
    * @returns アニメーションが終了したら発火するPromise
    */
   async show(): Promise<void> {
-    const animation = this.#root.animate(
+    const animation = this.#props.root.animate(
       [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }],
       { duration: 400, fill: "forwards", easing: "ease" },
     );
@@ -35,6 +31,6 @@ export class EasterEgg {
    * @returns 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 }
