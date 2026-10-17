@@ -1,4 +1,5 @@
 import { BattleHamburgerMenu } from "../../../../../../game-dom/battle-hamburger-menu";
+import { EasterEgg } from "../../../../../../game-dom/easter-egg";
 import { MessageWindow } from "../../../../../../game-dom/message-window";
 import { MiniController } from "../../../../../../game-dom/mini-controller";
 import { BattleViewCreatorParams } from "../../creator-params";
@@ -77,6 +78,8 @@ export function createDOMLayerProps(
   });
   enemyShoutMessageWindow.visible(false);
 
+  const easterEgg = new EasterEgg();
+
   const hamburgerMenu = new BattleHamburgerMenu(params);
 
   const miniController = new MiniController(params);
@@ -89,6 +92,8 @@ export function createDOMLayerProps(
     nearPlayerBattleSimulatorButtonMessageWindow,
     playerShoutMessageWindow,
     enemyShoutMessageWindow,
+
+    easterEgg,
 
     hamburgerMenu,
 

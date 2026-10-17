@@ -1,4 +1,5 @@
 import { BattleHamburgerMenu } from "../../../../../game-dom/battle-hamburger-menu";
+import { EasterEgg } from "../../../../../game-dom/easter-egg";
 import { MessageWindow } from "../../../../../game-dom/message-window";
 import { MiniController } from "../../../../../game-dom/mini-controller";
 
@@ -20,6 +21,9 @@ export type DOMLayerProps = {
   playerShoutMessageWindow: MessageWindow;
   /** 叫びメッセージウインドウ 敵 */
   enemyShoutMessageWindow: MessageWindow;
+
+  /** イースターエッグ */
+  easterEgg: EasterEgg;
 
   /** ハンバーガーメニュー */
   hamburgerMenu: BattleHamburgerMenu;
