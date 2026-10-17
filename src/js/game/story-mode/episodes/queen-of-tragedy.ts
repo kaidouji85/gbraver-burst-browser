@@ -5,12 +5,15 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
 import { createQueenOfTragedy } from "../../custom-battle-events/queen-of-tragedy";
 import { wingDozerNPCForQueenOfTragedy } from "../../npc/wing-dozer-for-queen-of-tragedy";
+import { HAS_EASTER_EGG } from "../easter-egg";
 import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
 const introduction = `（Episode6. 対決、二人のブレイバー！！ からの続き）
-一年前の全国大会決勝戦、ツバサは優勝確実と言われていたがGブレイバーに惨敗してしまった。いつしか彼女は悲劇の女王と呼ばれるようになったが、今日こそ汚名返上できるのだろうか。`;
+一年前の全国大会決勝戦、ツバサは優勝確実と言われていたがGブレイバーに惨敗してしまった。いつしか彼女は悲劇の女王と呼ばれるようになったが、今日こそ汚名返上できるのだろうか。
+
+${HAS_EASTER_EGG}`;
 
 /** 悲劇の女王 */
 export const QueenOfTragedy: Episode = {

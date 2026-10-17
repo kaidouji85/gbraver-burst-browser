@@ -5,11 +5,14 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
 import { createSurviveSuperPowerWithGuardEvent } from "../../custom-battle-events/survive-super-power-with-guard";
 import { granDozerForSurviveSuperPowerWithGuardNPC } from "../../npc/gran-dozer-for-survive-super-power-with-guard";
+import { HAS_EASTER_EGG } from "../easter-egg";
 import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-export const introduction = `大田高校と台東高校、関東の二大強豪校が打倒Gブレイバーのために統合することになった。最終確認のため、各校代表のツバサ、ライトの会談が行われるが……。`;
+export const introduction = `大田高校と台東高校、関東の二大強豪校が打倒Gブレイバーのために統合することになった。最終確認のため、各校代表のツバサ、ライトの会談が行われるが……。
+
+${HAS_EASTER_EGG}`; 
 
 /** 超火力はガードで凌げ */
 export const surviveSuperPowerWithGuard: Episode = {

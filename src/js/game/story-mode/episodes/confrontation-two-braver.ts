@@ -5,11 +5,14 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
 import { createConfrontationTwoBraverEvent } from "../../custom-battle-events/confrontation-two-braver";
 import { genesisBraverNPC } from "../../npc/genesis-braver";
+import { HAS_EASTER_EGG } from "../easter-egg";
 import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `新人戦から数日後、シンヤのもとに 全国大会の覇者ユウヤから対戦申し込みが入った。憧れの人と対戦できることに、心躍らせるシンヤであったが……。`;
+const introduction = `新人戦から数日後、シンヤのもとに 全国大会の覇者ユウヤから対戦申し込みが入った。憧れの人と対戦できることに、心躍らせるシンヤであったが……。
+
+${HAS_EASTER_EGG}`; 
 
 /** 対決、二人のブレイバー！！ */
 export const confrontationTwoBraver: Episode = {

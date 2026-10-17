@@ -5,11 +5,14 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
 import { createBurstTutorialEvent } from "../../custom-battle-events/burst-tutorial";
 import { burstTutorialNPC } from "../../npc/burst-tutorial";
+import { HAS_EASTER_EGG } from "../easter-egg";
 import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** 導入 */
-const introduction = `デビュー戦を見事勝利で飾ったシンヤ、そんなシンヤを見て台東高校のライト先輩は何かを企んでいるようだが……。`;
+const introduction = `デビュー戦を見事勝利で飾ったシンヤ、そんなシンヤを見て台東高校のライト先輩は何かを企んでいるようだが……。
+
+${HAS_EASTER_EGG}`;
 
 /** バーストチュートリアル */
 export const burstTutorial: Episode = {
