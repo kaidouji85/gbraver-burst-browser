@@ -8,65 +8,17 @@ import { createEmptySoundResource } from "../../../resource/sound/empty-sound-re
 import { SOUND_IDS } from "../../../resource/sound/ids";
 import { SoundResource } from "../../../resource/sound/resource";
 import { SEPlayer, SEPlayerContainer } from "../../../sounds/se/se-player";
-import { domUuid } from "../../../uuid/dom-uuid";
 import type { PostNetworkError } from "../../post-network-error";
 import type { DOMDialog } from "../dialog";
-
-/** ルート要素のcssクラス名 */
-const ROOT_CLASS_NAME = "network-error";
-
-/** data-idを集めたもの */
-type DataIDs = {
-  postNetworkErrorButton: string;
-};
+import { ROOT_CLASS } from "./dom/class-name";
+import { extractPostNetworkErrorButton } from "./dom/extract-element";
+import { rootInnerHtml } from "./dom/root-inner-html";
 
 /** 通信エラー後処理ボタンの文言 */
 const postNetworkErrorLabels = {
   Close: "閉じる",
   GotoTitle: "タイトルへ",
 };
-
-/**
- * ルート要素のinnerHTML
- *
- * @param ids data-idを集めたもの
- * @param postNetworkErrorLabel 通信エラー後処理ボタンの文言
- * @returns innerHTML
- */
-function rootInnerHTML(ids: DataIDs, postNetworkErrorLabel: string): string {
-  return `
-    <div class="${ROOT_CLASS_NAME}__background"></div>
-    <div class="${ROOT_CLASS_NAME}__dialog">
-      <span class="${ROOT_CLASS_NAME}__caption">通信エラーが発生しました</span>
-      <button class="${ROOT_CLASS_NAME}__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkErrorLabel}</button>
-    </div>
-  `;
-}
-
-/** ルート要素の子孫要素 */
-type Elements = {
-  postNetworkErrorButton: HTMLButtonElement;
-};
-
-/**
- * ルート要素から子孫要素を抽出する
- *
- * @param root ルート要素
- * @param ids data-idを集めたもの
- * @returns 抽出結果
- */
-function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const postNetworkErrorButtonElement = root.querySelector(
-    `[data-id="${ids.postNetworkErrorButton}"]`,
-  );
-  const postNetworkErrorButton =
-    postNetworkErrorButtonElement instanceof HTMLButtonElement
-      ? postNetworkErrorButtonElement
-      : document.createElement("button");
-  return {
-    postNetworkErrorButton,
-  };
-}
 
 /** コンストラクタのパラメータ */
 export type NetworkErrorDialogParams = ResourcesContainer &
@@ -102,15 +54,13 @@ export class NetworkErrorDialog implements DOMDialog {
     const { resources, se, postNetworkError } = params;
     this.#se = se;
     this.#postNetworkError = postNetworkError;
-    const dataIDs = {
-      postNetworkErrorButton: domUuid(),
-    };
     this.#root = document.createElement("div");
-    this.#root.className = ROOT_CLASS_NAME;
-    const label = postNetworkErrorLabels[postNetworkError.type] ?? "";
-    this.#root.innerHTML = rootInnerHTML(dataIDs, label);
-    const elements = extractElements(this.#root, dataIDs);
-    this.#postNetworkErrorButton = elements.postNetworkErrorButton;
+    this.#root.className = ROOT_CLASS;
+    const postNetworkErrorLabel =
+      postNetworkErrorLabels[postNetworkError.type] ?? "";
+    this.#root.innerHTML = rootInnerHtml({ postNetworkErrorLabel });
+    
+    this.#postNetworkErrorButton = extractPostNetworkErrorButton(this.#root);
     this.#postNetworkErrorSource = new Subject();
     this.#unsubscribers = [
       domPushStream(this.#postNetworkErrorButton).subscribe((action) => {
