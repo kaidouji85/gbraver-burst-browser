@@ -1,7 +1,7 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { isAbortError } from "../../event/abort-controller/abort-error";
-import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../dialogs/network-error";
 import { PrivateMatchHostDialog } from "../dialogs/private-match-host";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";

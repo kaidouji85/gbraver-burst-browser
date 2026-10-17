@@ -13,7 +13,7 @@ import { SOUND_IDS } from "../../resource/sound/ids";
 import { updateBattleSceneResources } from "../../resource/update-battle-scene-resources";
 import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
-import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../dialogs/network-error";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../game-props";
 import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
