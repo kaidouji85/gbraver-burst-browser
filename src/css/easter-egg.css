@@ -13,7 +13,8 @@
 }
 
 @media (orientation: portrait) {
-  .easter-egg {
+  .easter-egg,
+  .easter-egg--hidden {
     display: none;
   }
 }
