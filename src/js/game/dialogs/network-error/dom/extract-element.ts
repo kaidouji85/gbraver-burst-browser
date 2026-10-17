@@ -6,7 +6,7 @@
 export const extractPostNetworkErrorButton = (
   root: HTMLElement,
 ): HTMLButtonElement => {
-  const found = root.querySelector("button");
+  const found = root.querySelector(`[data-id="post-network-error"]`);
   return found instanceof HTMLButtonElement
     ? found
     : document.createElement("button");
