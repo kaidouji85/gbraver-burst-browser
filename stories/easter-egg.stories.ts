@@ -14,6 +14,7 @@ export const easterEgg = domStub(() => {
     await waitTime(2000);
     await easterEgg.show();
     await waitTime(2000);
+    await easterEgg.hidden();
   })();
 
   return easterEgg.getRootHTMLElement();
