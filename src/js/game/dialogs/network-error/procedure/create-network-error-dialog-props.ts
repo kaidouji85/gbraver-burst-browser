@@ -9,7 +9,6 @@ import { PostNetworkError } from "../../../post-network-error";
 import { ROOT_CLASS } from "../dom/class-name";
 import { extractPostNetworkErrorButton } from "../dom/extract-element";
 import { rootInnerHtml, RootInnerHtmlOptions } from "../dom/root-inner-html";
-import { postNetworkErrorLabels } from "../post-network-error-labels";
 import { NetworkErrorDialogProps } from "../props";
 
 /** NetworkErrorDialogProps 生成オプション */
@@ -20,21 +19,18 @@ export type CreateNetworkErrorDialogPropsOptions = ResourcesContainer &
     postNetworkError: PostNetworkError;
   };
 
-  /**
-   * NetworkErrorDialogPropsを生成する
-   * @param options オプション
-   * @returns 生成結果
-   */
+/**
+ * NetworkErrorDialogPropsを生成する
+ * @param options オプション
+ * @returns 生成結果
+ */
 export const createNetworkErrorDialogProps = (
   options: CreateNetworkErrorDialogPropsOptions,
 ): NetworkErrorDialogProps => {
   const { resources, se, postNetworkError } = options;
   const root = document.createElement("div");
   root.className = ROOT_CLASS;
-
-  const postNetworkErrorLabel =
-    postNetworkErrorLabels[postNetworkError.type] ?? "";
-  root.innerHTML = rootInnerHtml({ postNetworkErrorLabel });
+  root.innerHTML = rootInnerHtml(options);
 
   const postNetworkErrorButton = extractPostNetworkErrorButton(root);
   const postNetworkErrorSource = new Subject<PostNetworkError>();
