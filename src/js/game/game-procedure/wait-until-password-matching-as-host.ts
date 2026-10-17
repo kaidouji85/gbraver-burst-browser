@@ -1,6 +1,6 @@
 import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 
-import { NetworkErrorDialog } from "../dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../dialogs/network-error";
 import { PrivateMatchHostDialog } from "../dialogs/private-match-host";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";

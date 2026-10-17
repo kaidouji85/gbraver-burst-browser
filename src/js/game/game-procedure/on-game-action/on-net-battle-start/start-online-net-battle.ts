@@ -1,6 +1,6 @@
 import { LoginDialog } from "../../../dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dialogs/net-battle-selector";
-import { NetworkErrorDialog } from "../../../dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../../dialogs/network-error";
 import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { Online } from "../../../network-context/online";

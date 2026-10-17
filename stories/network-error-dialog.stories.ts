@@ -1,4 +1,4 @@
-import { NetworkErrorDialog } from "../src/js/game/dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../src/js/game/dialogs/network-error";
 import { Close } from "../src/js/game/post-network-error";
 import { domStub } from "./stub/dom-stub";
 

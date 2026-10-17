@@ -1,4 +1,4 @@
-import { NetworkErrorDialog } from "../../dialogs/network-error/network-error-dialog";
+import { NetworkErrorDialog } from "../../dialogs/network-error";
 import { NetworkError } from "../../game-actions/network-error";
 import { GameProps } from "../../game-props";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
