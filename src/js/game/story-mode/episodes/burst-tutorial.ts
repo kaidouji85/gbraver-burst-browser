@@ -16,7 +16,7 @@ export const burstTutorial: Episode = {
   id: EpisodeIDs.BURST,
   type: "Episode",
   number: "3",
-  title: "バーストで一発逆転",
+  title: "🎁バーストで一発逆転",
   isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_BURST,
