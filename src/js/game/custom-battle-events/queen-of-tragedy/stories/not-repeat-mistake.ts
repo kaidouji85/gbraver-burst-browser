@@ -12,11 +12,13 @@ import { QueenOfTragedyProps } from "../props";
 export async function notRepeatMistake(
   props: CustomBattleEventProps & QueenOfTragedyProps,
 ) {
+  props.view.dom.easterEgg.show();
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「去年は${wbr}これで${wbr}負けたんだ`],
     [`同じ轍は${wbr}踏まないぞ ユウヤ」`],
   ]);
   props.view.dom.leftMessageWindow.darken();
+  props.view.dom.easterEgg.hidden();
   invisibleAllMessageWindows(props);
 }
