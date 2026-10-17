@@ -7,8 +7,8 @@ export default {
 };
 
 /** イースターエッグ */
-export const easterEgg = domStub(() => {
-  const easterEgg = new EasterEgg();
+export const easterEgg = domStub((options) => {
+  const easterEgg = new EasterEgg(options);
 
   (async () => {
     await waitTime(2000);

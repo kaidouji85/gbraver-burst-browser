@@ -1,7 +1,13 @@
-import { createEasterEggProps } from "./procedure/create-easter-egg-props";
+import {
+  createEasterEggProps,
+  CreateEasterEggPropsOptions,
+} from "./procedure/create-easter-egg-props";
 import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { EasterEggProps } from "./props";
+
+/** コンストラクタのオプション */
+type EasterEggOptions = CreateEasterEggPropsOptions;
 
 /** イースターエッグ */
 export class EasterEgg {
@@ -10,9 +16,10 @@ export class EasterEgg {
 
   /**
    * コンストラクタ
+   * @param options オプション
    */
-  constructor() {
-    this.#props = createEasterEggProps();
+  constructor(options: EasterEggOptions) {
+    this.#props = createEasterEggProps(options);
   }
 
   /**

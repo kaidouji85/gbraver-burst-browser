@@ -8,6 +8,8 @@ import { EasterEggProps } from "../props";
  * @returns アニメーションが終了したら発火するPromise
  */
 export const show = async (props: Readonly<EasterEggProps>): Promise<void> => {
+  props.se.play(props.sound);
+
   props.root.className = ROOT_CLASS;
   const animation = props.content.animate(
     [{ transform: "translateY(-25%)" }, { transform: "translateY(0)" }],

@@ -157,4 +157,10 @@ export const SOUND_CONFIGS: SoundConfig[] = [
       `${resourceRoot.get()}/sounds/enemy-death-alert.mp3`,
     volumeScale: 0.4,
   },
+  {
+    type: "Shared",
+    id: SOUND_IDS.EASTER_EGG,
+    path: (resourceRoot) => `${resourceRoot.get()}/sounds/easter-egg.mp3`,
+    volumeScale: 0.4,
+  },
 ];

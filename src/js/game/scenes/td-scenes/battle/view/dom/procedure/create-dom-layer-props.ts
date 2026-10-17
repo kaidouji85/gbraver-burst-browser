@@ -78,7 +78,7 @@ export function createDOMLayerProps(
   });
   enemyShoutMessageWindow.visible(false);
 
-  const easterEgg = new EasterEgg();
+  const easterEgg = new EasterEgg(params);
 
   const hamburgerMenu = new BattleHamburgerMenu(params);
 
