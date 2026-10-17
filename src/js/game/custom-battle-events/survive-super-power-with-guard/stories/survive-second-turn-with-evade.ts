@@ -19,6 +19,7 @@ import { RAITO_AKANYARO } from "./raito-akanyaro";
 export async function surviveSecondTurnWithEvade(
   props: CustomBattleEventProps,
 ) {
+  props.view.dom.easterEgg.show();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     ["ガイ", `「6回避だと！！`],
@@ -46,6 +47,6 @@ export async function surviveSecondTurnWithEvade(
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, RAITO_AKANYARO);
   props.view.dom.leftMessageWindow.darken();
-
+  props.view.dom.easterEgg.hidden();
   invisibleAllMessageWindows(props);
 }
