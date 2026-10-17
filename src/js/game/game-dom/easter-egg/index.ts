@@ -25,9 +25,10 @@ export class EasterEgg {
 
   /**
    * イースターエッグを非表示にする
+   * @returns アニメーションが終了したら発火するPromise
    */
-  hidden(): void {
-    hidden(this.#props);
+  async hidden(): Promise<void> {
+    await hidden(this.#props);
   }
 
   /**
