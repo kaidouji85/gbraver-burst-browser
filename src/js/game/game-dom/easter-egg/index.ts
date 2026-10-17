@@ -1,4 +1,5 @@
 import { createEasterEggProps } from "./procedure/create-easter-egg-props";
+import { hidden } from "./procedure/hidden";
 import { show } from "./procedure/show";
 import { EasterEggProps } from "./props";
 
@@ -20,6 +21,13 @@ export class EasterEgg {
    */
   async show(): Promise<void> {
     await show(this.#props);
+  }
+
+  /**
+   * イースターエッグを非表示にする
+   */
+  hidden(): void {
+    hidden(this.#props);
   }
 
   /**
