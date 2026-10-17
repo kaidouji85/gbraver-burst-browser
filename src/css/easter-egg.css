@@ -1,0 +1,37 @@
+/* ============================================================ 
+ * イースターエッグ
+ * ============================================================ */
+@media (orientation: landscape) {
+  .easter-egg {
+    display: block;
+    position: relative;
+  }
+
+  .easter-egg--hidden {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) {
+  .easter-egg,
+  .easter-egg--hidden {
+    display: none;
+  }
+}
+
+.easter-egg__content {
+  position: fixed;
+  top: var(--screen-padding-top);
+  left: 50%;
+  padding: calc(var(--responsive-font-size) * 0.5);
+  border: var(--sub-button-border);
+  background-color: var(--sub-button-background-color);
+  font-size: calc(var(--responsive-font-size) * 1.3);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  box-shadow: var(--sub-button-box-shadow);
+}
+
+.easter-egg__icon {
+  padding-right: calc(var(--responsive-font-size) * 0.5);
+}
