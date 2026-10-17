@@ -1,6 +1,7 @@
 import { wbr } from "../../../../dom/wbr";
 import type { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeLeftMessageWindowWithFace } from "../../active-message-window";
+import { popUpEaasterEgg } from "../../easter-egg";
 import { invisibleAllMessageWindows } from "../../invisible-all-message-windows";
 import { scrollLeftMessages } from "../../scroll-messages";
 
@@ -10,6 +11,7 @@ import { scrollLeftMessages } from "../../scroll-messages";
  * @returns ストーリーが完了したら発火するPromise
  */
 export const failReflectDamage = async (props: CustomBattleEventProps) => {
+  popUpEaasterEgg(props);
   activeLeftMessageWindowWithFace(props, "Raito");
   await scrollLeftMessages(props, [
     ["ライト", `「さすが${wbr}大田高校の${wbr}エース君`],

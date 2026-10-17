@@ -15,6 +15,7 @@ export function getHTMLElements(props: DOMLayerProps): HTMLElement[] {
     props.nearPlayerBattleSimulatorButtonMessageWindow.getRootHTMLElement(),
     props.playerShoutMessageWindow.getRootHTMLElement(),
     props.enemyShoutMessageWindow.getRootHTMLElement(),
+    props.easterEgg.getRootHTMLElement(),
     props.hamburgerMenu.getRootHTMLElement(),
     props.miniController.getRootHTMLElement(),
   ];
