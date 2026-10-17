@@ -11,6 +11,7 @@ import { scrollLeftMessages, scrollRightMessages } from "../../scroll-messages";
  * @param props イベントプロパティ
  */
 export async function shinyaVictory(props: CustomBattleEventProps) {
+  props.view.dom.easterEgg.show();
   activeLeftMessageWindowWithFace(props, "Yuuya");
   await scrollLeftMessages(props, [
     ["ユウヤ", `「負けイベントに${wbr}勝つだと`],
@@ -28,4 +29,5 @@ export async function shinyaVictory(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     [`負けた${wbr}ショックで メタい${wbr}ことを」`],
   ]);
+  props.view.dom.easterEgg.hidden();
 }
