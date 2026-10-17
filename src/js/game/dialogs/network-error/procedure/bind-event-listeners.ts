@@ -7,7 +7,7 @@ import { onPostNetworkErrorButtonPush } from "./on-post-network-error-button-pus
 /**
  * イベントリスナーをバインドする
  * @param props ネットワークエラーダイアログのプロパティ
- * @returns サンサブスクライバ
+ * @returns アンサブスクライバ
  */
 export const bindEventListeners = (
   props: NetworkErrorDialogProps,
