@@ -35,7 +35,7 @@ export const createNetworkErrorDialogProps = (
   const postNetworkErrorButton = extractPostNetworkErrorButton(root);
   const postNetworkErrorSource = new Subject<PostNetworkError>();
   const exclusive = new Exclusive();
-  const pushButton =
+  const pushButtonSound =
     resources.sounds.find((v) => v.id === SOUND_IDS.PUSH_BUTTON) ??
     createEmptySoundResource();
   return {
@@ -48,6 +48,6 @@ export const createNetworkErrorDialogProps = (
     exclusive,
 
     se,
-    pushButton,
+    pushButtonSound,
   };
 };

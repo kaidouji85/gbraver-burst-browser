@@ -68,7 +68,7 @@ export class NetworkErrorDialog implements DOMDialog {
   #onPostNetworkErrorButtonPush(action: PushDOM): void {
     this.#props.exclusive.execute(async () => {
       action.event.preventDefault();
-      this.#props.se.play(this.#props.pushButton);
+      this.#props.se.play(this.#props.pushButtonSound);
       await pop(this.#props.postNetworkErrorButton);
       this.#props.postNetworkErrorSource.next(this.#props.postNetworkError);
     });

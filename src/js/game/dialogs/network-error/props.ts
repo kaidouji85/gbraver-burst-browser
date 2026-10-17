@@ -22,5 +22,5 @@ export type NetworkErrorDialogProps = SEPlayerContainer & {
   readonly postNetworkErrorSource: Subject<PostNetworkError>;
 
   /** ボタンプッシュ音 */
-  readonly pushButton: SoundResource;
+  readonly pushButtonSound: SoundResource;
 };
