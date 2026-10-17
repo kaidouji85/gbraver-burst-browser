@@ -1,0 +1,15 @@
+/* ============================================================ 
+ * イースターエッグ
+ * ============================================================ */
+@media (orientation: landscape) {
+  .easter-egg {
+    display: block;
+    position: relative;
+  }
+}
+
+@media (orientation: portrait) {
+  .easter-egg {
+    display: none;
+  }
+}
