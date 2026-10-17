@@ -6,6 +6,10 @@
     display: block;
     position: relative;
   }
+
+  .easter-egg--hidden {
+    display: none;
+  }
 }
 
 @media (orientation: portrait) {

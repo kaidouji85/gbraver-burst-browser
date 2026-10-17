@@ -1,4 +1,5 @@
 import { waitFinishAnimation } from "../../../../dom/wait-finish-animation";
+import { ROOT_CLASS } from "../dom/class-name";
 import { EasterEggProps } from "../props";
 
 /**
@@ -7,9 +8,10 @@ import { EasterEggProps } from "../props";
  * @returns アニメーションが終了したら発火するPromise
  */
 export const show = async (props: Readonly<EasterEggProps>): Promise<void> => {
-  const animation = props.root.animate(
-    [{ transform: "translateY(100%)" }, { transform: "translateY(0)" }],
-    { duration: 400, fill: "forwards", easing: "ease" },
+  props.root.className = ROOT_CLASS;
+  const animation = props.content.animate(
+    [{ transform: "translateY(80%)" }, { transform: "translateY(0)" }],
+    { duration: 200, fill: "forwards", easing: "ease" },
   );
   await waitFinishAnimation(animation);
 };

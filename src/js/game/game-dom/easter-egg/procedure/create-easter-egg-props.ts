@@ -1,4 +1,5 @@
-import { ROOT_CLASS } from "../dom/class-name";
+import { ROOT_CLASS_HIDDEN } from "../dom/class-name";
+import { extractContent } from "../dom/extract-element";
 import { rootInnerHTML } from "../dom/root-inner-html";
 import { EasterEggProps } from "../props";
 
@@ -8,9 +9,12 @@ import { EasterEggProps } from "../props";
  */
 export const createEasterEggProps = (): EasterEggProps => {
   const root = document.createElement("div");
-  root.className = ROOT_CLASS;
+  root.className = ROOT_CLASS_HIDDEN;
   root.innerHTML = rootInnerHTML();
+
+  const content = extractContent(root);
   return {
     root,
+    content,
   };
 };

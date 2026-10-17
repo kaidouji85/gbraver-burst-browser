@@ -1,3 +1,4 @@
+import { waitTime } from "../src/js/event/wait/wait-time";
 import { EasterEgg } from "../src/js/game/game-dom/easter-egg";
 import { domStub } from "./stub/dom-stub";
 
@@ -8,5 +9,12 @@ export default {
 /** イースターエッグ */
 export const easterEgg = domStub(() => {
   const easterEgg = new EasterEgg();
+
+  (async () => {
+    await waitTime(2000);
+    await easterEgg.show();
+    await waitTime(2000);
+  })();
+
   return easterEgg.getRootHTMLElement();
 });
