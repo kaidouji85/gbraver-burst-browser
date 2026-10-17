@@ -12,7 +12,10 @@ export const show = async (props: Readonly<EasterEggProps>): Promise<void> => {
 
   props.root.className = ROOT_CLASS;
   const animation = props.content.animate(
-    [{ transform: "translateY(-25%)" }, { transform: "translateY(0)" }],
+    [
+      { transform: "translate(-50%, -25%)" },
+      { transform: "translate(-50%, 0)" },
+    ],
     { duration: 300, fill: "forwards", easing: "ease" },
   );
   await waitFinishAnimation(animation);
