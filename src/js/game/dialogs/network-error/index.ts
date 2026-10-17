@@ -1,12 +1,12 @@
 import { Observable, Unsubscribable } from "rxjs";
 
-import { pop } from "../../../dom/pop";
-import { domPushStream, PushDOM } from "../../../dom/push-dom";
+import { domPushStream } from "../../../dom/push-dom";
 import type { ResourcesContainer } from "../../../resource";
 import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import type { PostNetworkError } from "../../post-network-error";
 import type { DOMDialog } from "../dialog";
 import { createNetworkErrorDialogProps } from "./procedure/create-network-error-dialog-props";
+import { onPostNetworkErrorButtonPush } from "./procedure/on-post-network-error-button-push";
 import { NetworkErrorDialogProps } from "./props";
 
 /** コンストラクタのオプション */
@@ -31,7 +31,7 @@ export class NetworkErrorDialog implements DOMDialog {
     this.#props = createNetworkErrorDialogProps(options);
     this.#unsubscribers = [
       domPushStream(this.#props.postNetworkErrorButton).subscribe((action) => {
-        this.#onPostNetworkErrorButtonPush(action);
+        onPostNetworkErrorButtonPush({ props: this.#props, action });
       }),
     ];
   }
@@ -59,18 +59,5 @@ export class NetworkErrorDialog implements DOMDialog {
    */
   notifyPostNetworkError(): Observable<PostNetworkError> {
     return this.#props.postNetworkErrorSource;
-  }
-
-  /**
-   * 通信エラー後処理ボタンを押した時の処理
-   * @param action アクション
-   */
-  #onPostNetworkErrorButtonPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async () => {
-      action.event.preventDefault();
-      this.#props.se.play(this.#props.pushButtonSound);
-      await pop(this.#props.postNetworkErrorButton);
-      this.#props.postNetworkErrorSource.next(this.#props.postNetworkError);
-    });
   }
 }
