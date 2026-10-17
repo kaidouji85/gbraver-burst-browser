@@ -5,15 +5,16 @@ import { SEPlayerContainer } from "../../../sounds/se/se-player";
 import type { PostNetworkError } from "../../post-network-error";
 import type { DOMDialog } from "../dialog";
 import { bindEventListeners } from "./procedure/bind-event-listeners";
-import { createNetworkErrorDialogProps } from "./procedure/create-network-error-dialog-props";
+import {
+  createNetworkErrorDialogProps,
+  CreateNetworkErrorDialogPropsOptions,
+} from "./procedure/create-network-error-dialog-props";
 import { NetworkErrorDialogProps } from "./props";
 
 /** コンストラクタのオプション */
 export type NetworkErrorDialogOptions = ResourcesContainer &
-  SEPlayerContainer & {
-    /** 通信エラーの後処理 */
-    postNetworkError: PostNetworkError;
-  };
+  SEPlayerContainer &
+  CreateNetworkErrorDialogPropsOptions;
 
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {

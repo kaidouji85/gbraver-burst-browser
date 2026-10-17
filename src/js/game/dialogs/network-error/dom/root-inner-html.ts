@@ -5,6 +5,8 @@ import template from "./root-inner-html.hbs";
 
 /** ルートinnerHTML要素のオプション */
 export type RootInnerHtmlOptions = {
+  /** エラーメッセージ */
+  message?: string;
   /** ネットワークエラー後の処理 */
   postNetworkError: PostNetworkError;
 };
@@ -16,10 +18,12 @@ export type RootInnerHtmlOptions = {
  */
 export const rootInnerHtml = (options: RootInnerHtmlOptions) => {
   const { postNetworkError } = options;
+  const message = options.message ?? "通信エラーが発生しました";
   const postNetworkErrorLabel =
     postNetworkErrorLabels[postNetworkError.type] ?? "";
   return template({
     ROOT_CLASS,
+    message,
     postNetworkErrorLabel,
   });
 };
