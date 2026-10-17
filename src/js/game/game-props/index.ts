@@ -23,6 +23,7 @@ import { TDSceneBinder } from "../scenes/td-scenes/td-scene-binder";
 import { SharedResourceState } from "../shared-resource-state";
 import { SuddenlyBattleEnd } from "../suddenly-battle-end";
 import { GameActionManageContainer } from "./game-action-manage-container";
+import { RematchCancelled } from "../rematch-cancelled";
 
 /**
  * ゲームプロパティ
@@ -74,6 +75,8 @@ export interface GameProps
   readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */
   readonly suddenlyBattleEnd: SuddenlyBattleEnd;
+  /** 再戦キャンセル監視 */
+  readonly rematchCancelled: RematchCancelled;
 
   /** リサイズ */
   readonly resize: Observable<Resize>;

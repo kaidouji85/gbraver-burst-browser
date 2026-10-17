@@ -3,7 +3,7 @@ import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 import { OfflineBattleSDK } from "@gbraver-burst-network/offline-browser-sdk";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-/** バトル管理オブジェクトからバトル強制終了ストリームを取り出す */
+/** バトル強制終了監視 */
 export class SuddenlyBattleEnd {
   #notifier: Subject<void>;
   #unsubscriber: Unsubscribable | null;
