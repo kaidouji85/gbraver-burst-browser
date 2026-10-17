@@ -11,7 +11,11 @@ export class EasterEgg {
   constructor() {
     this.#root = document.createElement("div");
     this.#root.className = "easter-egg";
-    this.#root.textContent = "🎉イースターエッグ";
+
+    const content = document.createElement("div");
+    content.className = "easter-egg__content";
+    content.textContent = "🎉イースターエッグ";
+    this.#root.appendChild(content);
   }
 
   /**
