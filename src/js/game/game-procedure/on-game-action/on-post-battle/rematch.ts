@@ -131,6 +131,7 @@ export const rematch = async (options: {
     result = await rematchPrivateMatchGuest({ inProgress, postAction });
   }
 
+  props.rematchCancelled.unbind();
   if (!result.isSuccess) {
     props.domDialogBinder.hidden();
     return;
