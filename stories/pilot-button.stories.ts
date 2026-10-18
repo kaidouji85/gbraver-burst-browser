@@ -6,8 +6,8 @@ import {
   shinyaPilotButton,
   tsubasaPilotButton,
   yuuyaPilotButton,
-} from "../src/js/game-object/pilot-button";
-import { PilotButton } from "../src/js/game-object/pilot-button/pilot-button";
+} from "../src/js/game/game-object/pilot-button";
+import { PilotButton } from "../src/js/game/game-object/pilot-button/pilot-button";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

@@ -1,7 +1,7 @@
 import {
   createAbortError,
   isAbortError,
-} from "../../../src/js/abort-controller/abort-error";
+} from "../../../src/js/event/abort-controller/abort-error";
 
 test("createAbortErrorで生成したものはAbortErrorである", () => {
   const error = createAbortError("test");

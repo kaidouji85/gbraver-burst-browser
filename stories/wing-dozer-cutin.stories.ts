@@ -3,8 +3,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyWingDozerCutIn,
   playerWingDozerCutIn,
-} from "../src/js/game-object/cut-in/wing-dozer";
-import { WingDozerCutIn } from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
+} from "../src/js/game/game-object/cut-in/wing-dozer";
+import { WingDozerCutIn } from "../src/js/game/game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyWingDozer,
   PlayerWingDozer,
-} from "../src/js/game-object/armdozer/wing-dozer";
-import { WingDozer } from "../src/js/game-object/armdozer/wing-dozer/wing-dozer";
+} from "../src/js/game/game-object/armdozer/wing-dozer";
+import { WingDozer } from "../src/js/game/game-object/armdozer/wing-dozer/wing-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

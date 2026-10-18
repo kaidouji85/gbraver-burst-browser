@@ -118,8 +118,8 @@
   }
 
   .message-window--near-player-battle-simulator-button {
-    right: 30vw;
-    bottom: max(15vh, var(--safe-area-bottom));
+    left: 50vw;
+    top: max(20vh, var(--safe-area-bottom));
   }
 
   .message-window--player-shout {

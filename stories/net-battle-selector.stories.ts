@@ -1,4 +1,4 @@
-import { NetBattleSelectorDialog } from "../src/js/dom-dialogs/net-battle-selector";
+import { NetBattleSelectorDialog } from "../src/js/game/dialogs/net-battle-selector";
 import { domStub } from "./stub/dom-stub";
 
 export default {

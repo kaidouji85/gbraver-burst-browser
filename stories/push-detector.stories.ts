@@ -1,5 +1,5 @@
-import { circlePushDetector } from "../src/js/game-object/push-detector/circle-push-detector";
-import { planePushDetector } from "../src/js/game-object/push-detector/plane-push-detector";
+import { circlePushDetector } from "../src/js/game/game-object/push-detector/circle-push-detector";
+import { planePushDetector } from "../src/js/game/game-object/push-detector/plane-push-detector";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

@@ -2,10 +2,10 @@
 
 .armdozer-bust-shot__shin-braver {
   position: fixed;
-  top: -10vh;
-  top: -10dvh;
-  right: -20vh;
-  right: -20dvh;
+  top: -5vh;
+  top: -5dvh;
+  right: calc(25vw - 90vh);
+  right: calc(25dvw - 90dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -14,10 +14,10 @@
 
 .armdozer-bust-shot__neo-landozer {
   position: fixed;
-  top: -25vh;
-  top: -25dvh;
-  right: -20vh;
-  right: -20dvh;
+  top: -20vh;
+  top: -20dvh;
+  right: calc(25vw - 100vh);
+  right: calc(25dvw - 100dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -26,10 +26,10 @@
 
 .armdozer-bust-shot__lightning-dozer {
   position: fixed;
-  top: -25vh;
-  top: -25dvh;
-  right: -20vh;
-  right: -20dvh;
+  top: -20vh;
+  top: -20dvh;
+  right: calc(25vw - 100vh);
+  right: calc(25dvw - 100dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -38,10 +38,10 @@
 
 .armdozer-bust-shot__wing-dozer {
   position: fixed;
-  top: -40vh;
-  top: -40dvh;
-  right: -40vh;
-  right: -40dvh;
+  top: -35vh;
+  top: -35dvh;
+  right: calc(25vw - 110vh);
+  right: calc(25dvw - 110dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -50,10 +50,10 @@
 
 .armdozer-bust-shot__genesis-braver {
   position: fixed;
-  top: -20vh;
-  top: -20dvh;
-  right: -30vh;
-  right: -30dvh;
+  top: -10vh;
+  top: -10dvh;
+  right: calc(25vw - 100vh);
+  right: calc(25dvw - 100dvh);
   width: 200vh;
   width: 200dvh;
   height: 200vh;
@@ -64,8 +64,8 @@
   position: fixed;
   top: -40vh;
   top: -40dvh;
-  right: 70vh;
-  right: -70dvh;
+  right: calc(25vw - 135vh);
+  right: calc(25dvw - 135dvh);
   width: 250vh;
   width: 250dvh;
   height: 250vh;

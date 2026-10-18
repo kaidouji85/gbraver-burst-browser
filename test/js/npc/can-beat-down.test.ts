@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { canBeatDown } from "../../../src/js/npc/can-beat-down";
+import { canBeatDown } from "../../../src/js/game/npc/can-beat-down";
 
 /** 攻撃側プレイヤー */
 const attacker: PlayerState = {

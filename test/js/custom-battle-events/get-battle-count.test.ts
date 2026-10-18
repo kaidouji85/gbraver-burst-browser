@@ -1,6 +1,6 @@
 import { EMPTY_GAME_STATE, GameState } from "gbraver-burst-core";
 
-import { getBattleCount } from "../../../src/js/custom-battle-events/get-battle-count";
+import { getBattleCount } from "../../../src/js/game/custom-battle-events/get-battle-count";
 
 /** Battleのゲームステート */
 const battle: GameState = {

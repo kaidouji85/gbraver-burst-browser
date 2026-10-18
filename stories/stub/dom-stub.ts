@@ -3,17 +3,20 @@ import "../../src/css/style.css";
 import { StoryFn } from "@storybook/react";
 import React from "react";
 
-import { AbortManager } from "../../src/js/abort-controller/abort-manager";
-import { AbortManagerContainer } from "../../src/js/abort-controller/abort-manager-container";
+import { AbortManager } from "../../src/js/event/abort-controller/abort-manager";
+import { AbortManagerContainer } from "../../src/js/event/abort-controller/abort-manager-container";
+import { createGameLoop } from "../../src/js/game/game-loop/game-loop";
+import { GameLoopContainer } from "../../src/js/game/game-loop/game-loop-container";
+import { ResourcesContainer } from "../../src/js/resource";
+import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import {
   BGMManagerContainer,
   createBGMManager,
-} from "../../src/js/bgm/bgm-manager";
-import { createGameLoop } from "../../src/js/game-loop/game-loop";
-import { GameLoopContainer } from "../../src/js/game-loop/game-loop-container";
-import { ResourcesContainer } from "../../src/js/resource";
-import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
-import { createSEPlayer, SEPlayerContainer } from "../../src/js/se/se-player";
+} from "../../src/js/sounds/bgm/bgm-manager";
+import {
+  createSEPlayer,
+  SEPlayerContainer,
+} from "../../src/js/sounds/se/se-player";
 import { StorybookResourceRoot } from "../storybook-resource-root";
 
 /** 生成パラメータ */

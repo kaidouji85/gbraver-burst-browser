@@ -1,4 +1,4 @@
-import { getEnableMaxBattery } from "../../../../../src/js/td-scenes/battle/get-enable-max-battery";
+import { getEnableMaxBattery } from "../../../../../src/js/game/scenes/td-scenes/battle/get-enable-max-battery";
 test("一番大きいバッテリー値を返す", () => {
   const result = getEnableMaxBattery([
     {

@@ -1,5 +1,5 @@
-import { fadeOut, stop } from "../../../../bgm/bgm-operators";
-import { WaitingDialog } from "../../../../dom-dialogs/waiting/waiting-dialog";
+import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
+import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { CasualMatch } from "../../../in-progress/casual-match";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";

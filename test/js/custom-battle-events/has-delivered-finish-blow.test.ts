@@ -6,7 +6,7 @@ import {
   PlayerId,
 } from "gbraver-burst-core";
 
-import { hasDeliveredFinishBlow } from "../../../src/js/custom-battle-events/has-delivered-finish-blow";
+import { hasDeliveredFinishBlow } from "../../../src/js/game/custom-battle-events/has-delivered-finish-blow";
 
 /**
  * Battleのゲームステートを生成する

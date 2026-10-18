@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getOptimalDefenseBattery } from "../../../src/js/npc/get-optimal-defense-battery";
+import { getOptimalDefenseBattery } from "../../../src/js/game/npc/get-optimal-defense-battery";
 
 /**
  * モックプレイヤーステートを生成する

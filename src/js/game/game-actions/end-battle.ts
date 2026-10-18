@@ -1,4 +1,4 @@
-import { GameEnd } from "gbraver-burst-core";
+import { ArmdozerId, GameEnd, PilotId } from "gbraver-burst-core";
 
 /** 戦闘終了 */
 export type EndBattle = {
@@ -7,4 +7,11 @@ export type EndBattle = {
   gameEnd: GameEnd;
   /** アニメーションタイムスケール */
   animationTimeScale: number;
+  /** プレイヤー情報 */
+  player: {
+    /** アームドーザ */
+    armdozerId: ArmdozerId;
+    /** プレイヤー */
+    pilotId: PilotId;
+  };
 };

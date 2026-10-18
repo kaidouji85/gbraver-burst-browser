@@ -1,4 +1,4 @@
-import { changeMasterVolume } from "../../bgm/bgm-operators";
+import { changeMasterVolume } from "../../sounds/bgm/bgm-operators";
 import { GBraverBurstBrowserConfig } from "../config/browser-config";
 import { GameProps } from "../game-props";
 

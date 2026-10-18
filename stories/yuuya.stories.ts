@@ -3,8 +3,8 @@ import {
   enemyYuuyaCutIn,
   playerYuuyaCutIn,
   YuuyaCutInCreatorParams,
-} from "../src/js/game-object/cut-in/yuuya";
-import { YuuyaCutIn } from "../src/js/game-object/cut-in/yuuya/yuuya";
+} from "../src/js/game/game-object/cut-in/yuuya";
+import { YuuyaCutIn } from "../src/js/game/game-object/cut-in/yuuya/yuuya";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

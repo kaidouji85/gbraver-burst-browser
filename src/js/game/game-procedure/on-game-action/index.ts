@@ -32,6 +32,7 @@ import { onPrivateMatchEntry } from "./on-private-match-entry";
 import { onPrivateMatchGuestStart } from "./on-private-match-guest-start";
 import { onPrivateMatchHostStart } from "./on-private-match-host-start";
 import { onReloadRequest } from "./on-reload-request";
+import { onRematchCancelled } from "./on-rematch-cancelled";
 import { onSelectEpisode } from "./on-select-episode";
 import { onSelectionCancel } from "./on-selection-cancel";
 import { onSelectionComplete } from "./on-selection-complete";
@@ -59,6 +60,8 @@ export function onGameAction(props: GameProps, action: GameAction) {
       return onEndBattle({ props, action });
     case "SuddenlyBattleEnd":
       return onSuddenlyBattleEnd({ props, action });
+    case "RematchCancelled":
+      return onRematchCancelled({ props });
     case "PostBattleAction":
       return onPostBattleAction({ props, action });
     case "ArcadeStart":

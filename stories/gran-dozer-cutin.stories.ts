@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyGranDozerCutIn,
   playerGranDozerCutIn,
-} from "../src/js/game-object/cut-in/gran-dozer";
-import { GranDozerCutIn } from "../src/js/game-object/cut-in/gran-dozer/gran-dozer-cut-in";
+} from "../src/js/game/game-object/cut-in/gran-dozer";
+import { GranDozerCutIn } from "../src/js/game/game-object/cut-in/gran-dozer/gran-dozer-cut-in";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

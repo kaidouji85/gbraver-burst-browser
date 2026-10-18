@@ -3,8 +3,8 @@ import {
   enemyShockWave,
   playerShockWave,
   ShockWaveCreatorParams,
-} from "../src/js/game-object/hitmark/shock-wave";
-import { ShockWave } from "../src/js/game-object/hitmark/shock-wave/shock-wave";
+} from "../src/js/game/game-object/hitmark/shock-wave";
+import { ShockWave } from "../src/js/game/game-object/hitmark/shock-wave/shock-wave";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

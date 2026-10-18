@@ -4,6 +4,7 @@ import { gotoEnding } from "./goto-ending";
 import { gotoEpisodeSelect } from "./goto-episode-select";
 import { gotoTitle } from "./goto-title";
 import { nextStage } from "./next-stage";
+import { rematch } from "./rematch";
 import { retry } from "./retry";
 
 /** オプション */
@@ -38,6 +39,9 @@ export async function onPostBattleAction(options: Options): Promise<void> {
       break;
     case "GotoEpisodeSelect":
       await gotoEpisodeSelect({ props, postAction });
+      break;
+    case "Rematch":
+      await rematch({ props, postAction });
       break;
   }
 }

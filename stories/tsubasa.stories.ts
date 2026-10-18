@@ -2,7 +2,7 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyTsubasaCutIn,
   playerTsubasaCutIn,
-} from "../src/js/game-object/cut-in/tsubasa";
+} from "../src/js/game/game-object/cut-in/tsubasa";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

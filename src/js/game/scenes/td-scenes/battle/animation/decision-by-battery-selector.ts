@@ -1,0 +1,41 @@
+import { all } from "../../../../../animation/all";
+import { Animate } from "../../../../../animation/animate";
+import { delay } from "../../../../../animation/delay";
+import { onStart } from "../../../../../animation/on-start";
+import { stopDeathAlert } from "../procedure/death-alert";
+import { BattleSceneProps } from "../props";
+
+/**
+ * バッテリーセレクタによる決定アニメーション
+ * @param props 戦闘シーンプロパティ
+ * @returns アニメーション
+ */
+export function decisionByBatterySelector(
+  props: Readonly<BattleSceneProps>,
+): Animate {
+  const { view } = props;
+  return all(
+    view.hud.gameObjects.batterySelector.decide(),
+    view.hud.gameObjects.burstButton.close(),
+    view.hud.gameObjects.burstButtonLeadLine.hidden(),
+    view.hud.gameObjects.pilotButton.close(),
+    view.hud.gameObjects.pilotButtonLeadLine.hidden(),
+    view.hud.gameObjects.timeScaleButton.close(),
+    ...view.hud.players.map((p) => p.statusIcon.close()),
+    ...view.hud.players.map(({ predicatedDamage }) =>
+      predicatedDamage.hidden(),
+    ),
+    onStart(() => {
+      view.dom.hamburgerMenu.disableBattleSimulator();
+      view.dom.hamburgerMenu.disableStatusOpening();
+      stopDeathAlert(props);
+    }),
+  )
+    .chain(delay(500))
+    .chain(
+      all(
+        view.hud.gameObjects.batterySelector.close(),
+        view.hud.gameObjects.batterySelectorLeadLine.hidden(),
+      ),
+    );
+}

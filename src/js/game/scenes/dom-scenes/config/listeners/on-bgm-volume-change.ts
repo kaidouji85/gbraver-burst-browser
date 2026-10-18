@@ -1,0 +1,24 @@
+import type { InputDOM } from "../../../../../dom/input-dom";
+import { changeMasterVolume } from "../../../../../sounds/bgm/bgm-operators";
+import { parseSoundVolume } from "../../../../config/parser/sound-volume";
+import { soundVolumeLabel } from "../dom/sound-volume-label";
+import type { ConfigProps } from "../props";
+
+/**
+ * BGM音量を変更した際の処理
+ *
+ * @param props 画面プロパティ
+ * @param action アクション
+ */
+export function onBGMVolumeChange(
+  props: ConfigProps,
+  action: Readonly<InputDOM>,
+): void {
+  action.event.preventDefault();
+  action.event.stopPropagation();
+  props.exclusive.execute(async () => {
+    const value = parseSoundVolume(props.bgmVolumeSelector.value) ?? 1;
+    props.bgmVolumeValue.innerText = soundVolumeLabel(value);
+    await props.bgm.do(changeMasterVolume(value));
+  });
+}

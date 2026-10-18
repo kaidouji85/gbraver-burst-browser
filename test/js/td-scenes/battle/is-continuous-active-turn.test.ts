@@ -1,6 +1,6 @@
 import { EMPTY_GAME_STATE, GameState } from "gbraver-burst-core";
 
-import { isContinuousActiveTurn } from "../../../../src/js/td-scenes/battle/is-continuous-active-turn";
+import { isContinuousActiveTurn } from "../../../../src/js/game/scenes/td-scenes/battle/is-continuous-active-turn";
 
 /** TurnStartのゲームステート */
 const TURN_START: GameState = {

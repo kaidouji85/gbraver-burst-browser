@@ -2,7 +2,7 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyShinyaCutIn,
   playerShinyaCutIn,
-} from "../src/js/game-object/cut-in/shinya";
+} from "../src/js/game/game-object/cut-in/shinya";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

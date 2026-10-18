@@ -1,6 +1,6 @@
 import { EMPTY_ARMDOZER_STATE, EMPTY_PLAYER_STATE } from "gbraver-burst-core";
 
-import { isZeroDefenseButBatteryPositive } from "../../../src/js/custom-battle-events/is-zero-defense-but-battery-positive";
+import { isZeroDefenseButBatteryPositive } from "../../../src/js/game/custom-battle-events/is-zero-defense-but-battery-positive";
 
 /** 攻撃側プレイヤー */
 const attacker = {

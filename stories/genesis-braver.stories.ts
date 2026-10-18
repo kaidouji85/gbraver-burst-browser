@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyGenesisBraver,
   PlayerGenesisBraver,
-} from "../src/js/game-object/armdozer/genesis-braver";
-import { GenesisBraver } from "../src/js/game-object/armdozer/genesis-braver/genesis-braver";
+} from "../src/js/game/game-object/armdozer/genesis-braver";
+import { GenesisBraver } from "../src/js/game/game-object/armdozer/genesis-braver/genesis-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

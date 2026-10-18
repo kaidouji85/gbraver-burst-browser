@@ -1,6 +1,6 @@
 import { map } from "rxjs";
 
-import { NetBattleSelectorDialog } from "../../../dom-dialogs/net-battle-selector";
+import { NetBattleSelectorDialog } from "../../dialogs/net-battle-selector";
 import { GameProps } from "../../game-props";
 
 /**

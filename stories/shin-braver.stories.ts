@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyShinBraver,
   PlayerShinBraver,
-} from "../src/js/game-object/armdozer/shin-braver";
-import { ShinBraver } from "../src/js/game-object/armdozer/shin-braver/shin-braver";
+} from "../src/js/game/game-object/armdozer/shin-braver";
+import { ShinBraver } from "../src/js/game/game-object/armdozer/shin-braver/shin-braver";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

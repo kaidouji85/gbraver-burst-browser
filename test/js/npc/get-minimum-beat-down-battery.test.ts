@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getMinimumBeatDownBattery } from "../../../src/js/npc/get-minimum-beat-down-battery";
+import { getMinimumBeatDownBattery } from "../../../src/js/game/npc/get-minimum-beat-down-battery";
 
 /** 攻撃側プレイヤー */
 const attacker: PlayerState = {

@@ -1,6 +1,6 @@
-import { fadeIn, play } from "../../bgm/bgm-operators";
 import { createEmptySoundResource } from "../../resource/sound/empty-sound-resource";
 import { SOUND_IDS } from "../../resource/sound/ids";
+import { fadeIn, play } from "../../sounds/bgm/bgm-operators";
 import type { GameProps } from "../game-props";
 
 /**

@@ -1,3 +1,4 @@
+import { BattleSDK, RematchRoom } from "@gbraver-burst-network/browser-sdk";
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 /** プライベートマッチ（ゲスト）サブフロー キャラ選択 */
@@ -22,10 +23,20 @@ export type Waiting = {
 /** プライベートマッチ（ゲスト）サブフロー 戦闘中 */
 export type Battle = {
   type: "Battle";
+  /** バトルSDK */
+  battle: BattleSDK;
+};
+
+/** プライベートマッチ（ゲスト）サブフロー 再戦 */
+export type Rematch = {
+  type: "Rematch";
+  /** 再戦ルーム */
+  rematchRoom: RematchRoom;
 };
 
 /** プライベートマッチ（ゲスト）のサブフロー */
-export type PrivateMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
+export type PrivateMatchGuestSubFlow =
+  PlayerSelect | Entry | Waiting | Battle | Rematch;
 
 /**
  * プライベートマッチ（ゲスト）

@@ -1,4 +1,4 @@
-import { getBatteryGaugeUnitBrightness } from "../../../../../src/js/game-object/gauge/model/get-battery-gauge-unit-brightness";
+import { getBatteryGaugeUnitBrightness } from "../../../../../src/js/game/game-object/gauge/model/get-battery-gauge-unit-brightness";
 
 test("ゲージユニット値が現在値より小さい場合、輝度=1となる", () => {
   const gaugeUnitValue = 1;

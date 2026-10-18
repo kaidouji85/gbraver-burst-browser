@@ -1,4 +1,4 @@
-import { fadeOut, stop } from "../../../../bgm/bgm-operators";
+import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PlayingEpisode, Story } from "../../../in-progress/story";

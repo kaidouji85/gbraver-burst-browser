@@ -2,7 +2,7 @@ import { StoryFn } from "@storybook/react";
 import { Observable, Subject } from "rxjs";
 import * as THREE from "three";
 
-import type { GameObjectAction } from "../../src/js/game-object/action/game-object-action";
+import type { GameObjectAction } from "../../src/js/game/game-object/action/game-object-action";
 import type { ResourcesContainer } from "../../src/js/resource";
 import { loadFullResources } from "../../src/js/resource/loading/load-full-resources";
 import { StorybookResourceRoot } from "../storybook-resource-root";

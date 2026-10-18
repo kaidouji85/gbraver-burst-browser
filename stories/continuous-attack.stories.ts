@@ -3,8 +3,8 @@ import {
   ContinuousAttackCreatorParams,
   enemyContinuousAttack,
   playerContinuousAttack,
-} from "../src/js/game-object/continuous-attack";
-import { ContinuousAttackIndicator } from "../src/js/game-object/continuous-attack/continuous-attack-indicator";
+} from "../src/js/game/game-object/continuous-attack";
+import { ContinuousAttackIndicator } from "../src/js/game/game-object/continuous-attack/continuous-attack-indicator";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

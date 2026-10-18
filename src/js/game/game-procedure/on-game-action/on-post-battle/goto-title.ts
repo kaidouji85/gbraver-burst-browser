@@ -1,6 +1,7 @@
-import { fadeOut, stop } from "../../../../bgm/bgm-operators";
+import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
 import { GotoTitle } from "../../../post-network-error";
+import { disconnectConnection } from "../../disconnect-connection";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 
@@ -19,6 +20,9 @@ type Options = {
  */
 export async function gotoTitle(options: Options) {
   const { props } = options;
+  props.domDialogBinder.hidden();
+  props.suddenlyBattleEnd.unbind();
+  props.rematchCancelled.unbind();
   const [title] = await Promise.all([
     (async () => {
       await props.fader.fadeOut();
@@ -28,6 +32,7 @@ export async function gotoTitle(options: Options) {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
+    disconnectConnection(props),
   ]);
   title.startTitleBackgroundLoop();
   await props.fader.fadeIn();

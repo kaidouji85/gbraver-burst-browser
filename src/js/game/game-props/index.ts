@@ -1,25 +1,26 @@
 import { Observable } from "rxjs";
 
-import { AbortManagerContainer } from "../../abort-controller/abort-manager-container";
-import { BGMManagerContainer } from "../../bgm/bgm-manager";
 import { CssHUDUIScale } from "../../css/hud-ui-scale";
-import { DOMDialogBinder } from "../../dom-dialogs/dom-dialog-binder";
-import { PostBattleFloater } from "../../dom-floaters/post-battle";
-import { DOMSceneBinderContainer } from "../../dom-scenes/dom-scene-binder/dom-scene-binder-container";
-import { DOMFader } from "../../game-dom/dom-fader/dom-fader";
-import { GameLoopContainer } from "../../game-loop/game-loop-container";
-import { Renderer } from "../../render";
+import { PerformanceStats } from "../../dom/stats/performance-stats";
+import { PushWindow } from "../../dom/window/push-window";
+import { Resize } from "../../dom/window/resize";
+import { AbortManagerContainer } from "../../event/abort-controller/abort-manager-container";
 import { ResourcesContainer } from "../../resource";
 import { ResourceRoot } from "../../resource/resource-root";
-import { SEPlayerContainer } from "../../se/se-player";
-import { PerformanceStats } from "../../stats/performance-stats";
-import { TDSceneBinder } from "../../td-scenes/td-scene-binder";
-import { PushWindow } from "../../window/push-window";
-import { Resize } from "../../window/resize";
+import { BGMManagerContainer } from "../../sounds/bgm/bgm-manager";
+import { SEPlayerContainer } from "../../sounds/se/se-player";
+import { Renderer } from "../../web-gl/render";
 import { GBraverBurstBrowserConfigRepository } from "../config/repository/repository";
+import { DOMDialogBinder } from "../dialogs/dom-dialog-binder";
+import { PostBattleFloater } from "../floaters/post-battle";
+import { DOMFader } from "../game-dom/dom-fader/dom-fader";
+import { GameLoopContainer } from "../game-loop/game-loop-container";
 import { InProgress } from "../in-progress";
-import { InterruptScenes } from "../innterrupt-scenes";
 import { NetworkContext } from "../network-context";
+import { RematchCancelled } from "../rematch-cancelled";
+import { DOMSceneBinderContainer } from "../scenes/dom-scenes/dom-scene-binder/dom-scene-binder-container";
+import { InterruptScenes } from "../scenes/innterrupt-scenes";
+import { TDSceneBinder } from "../scenes/td-scenes/td-scene-binder";
 import { SharedResourceState } from "../shared-resource-state";
 import { SuddenlyBattleEnd } from "../suddenly-battle-end";
 import { GameActionManageContainer } from "./game-action-manage-container";
@@ -74,6 +75,8 @@ export interface GameProps
   readonly networkContext: NetworkContext;
   /** バトル強制終了監視 */
   readonly suddenlyBattleEnd: SuddenlyBattleEnd;
+  /** 再戦キャンセル監視 */
+  readonly rematchCancelled: RematchCancelled;
 
   /** リサイズ */
   readonly resize: Observable<Resize>;

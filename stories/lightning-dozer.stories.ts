@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyLightningDozer,
   PlayerLightningDozer,
-} from "../src/js/game-object/armdozer/lightning-dozer";
-import { LightningDozer } from "../src/js/game-object/armdozer/lightning-dozer/lightning-dozer";
+} from "../src/js/game/game-object/armdozer/lightning-dozer";
+import { LightningDozer } from "../src/js/game/game-object/armdozer/lightning-dozer/lightning-dozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

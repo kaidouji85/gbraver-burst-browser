@@ -4,7 +4,7 @@ import {
   PlayerState,
 } from "gbraver-burst-core";
 
-import { getMinimumSurvivableBattery } from "../../../src/js/npc/get-minimum-survivable-battery";
+import { getMinimumSurvivableBattery } from "../../../src/js/game/npc/get-minimum-survivable-battery";
 
 /** 防御側プレイヤー */
 const defender: PlayerState = {

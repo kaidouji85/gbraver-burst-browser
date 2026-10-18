@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import * as THREE from "three";
 
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
-import { LeadLine } from "../src/js/game-object/lead-line/lead-line";
-import { LeadLineView } from "../src/js/game-object/lead-line/view/lead-line-view";
+import { GameObjectAction } from "../src/js/game/game-object/action/game-object-action";
+import { LeadLine } from "../src/js/game/game-object/lead-line/lead-line";
+import { LeadLineView } from "../src/js/game/game-object/lead-line/view/lead-line-view";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

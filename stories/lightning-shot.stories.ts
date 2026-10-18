@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyLightningShot,
   playerLightningShot,
-} from "../src/js/game-object/shot/lightning-shot";
-import { LightningShot } from "../src/js/game-object/shot/lightning-shot/lightning-shot";
+} from "../src/js/game/game-object/shot/lightning-shot";
+import { LightningShot } from "../src/js/game/game-object/shot/lightning-shot/lightning-shot";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

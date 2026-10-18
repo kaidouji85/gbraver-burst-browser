@@ -1,4 +1,4 @@
-import { canBurstButtonPush } from "../../../../../src/js/td-scenes/battle/can-burst-button-push";
+import { canBurstButtonPush } from "../../../../../src/js/game/scenes/td-scenes/battle/can-burst-button-push";
 test("バーストコマンドが選択可能な場合、バーストボタンは操作可能である", () => {
   const result = canBurstButtonPush([
     {

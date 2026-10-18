@@ -1,6 +1,6 @@
 import { EMPTY_ARMDOZER_STATE, EMPTY_PLAYER_STATE } from "gbraver-burst-core";
 
-import { getExtraBatteryAtTurnStart } from "../../../src/js/npc/get-extra-battery-at-turn-start";
+import { getExtraBatteryAtTurnStart } from "../../../src/js/game/npc/get-extra-battery-at-turn-start";
 
 /**
  * プレイヤーを生成する

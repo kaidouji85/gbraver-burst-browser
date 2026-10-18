@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
+import { GameObjectAction } from "../src/js/game/game-object/action/game-object-action";
 import {
   enemyTurnStart,
   playerTurnStart,
-} from "../src/js/game-object/turn-start";
-import { TurnStart } from "../src/js/game-object/turn-start/turn-start";
+} from "../src/js/game/game-object/turn-start";
+import { TurnStart } from "../src/js/game/game-object/turn-start/turn-start";
 import { Resources } from "../src/js/resource";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 

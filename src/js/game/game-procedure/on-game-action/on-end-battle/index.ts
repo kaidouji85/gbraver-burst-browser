@@ -1,9 +1,12 @@
 import { parseBrowserConfig } from "../../../config/parser/browser-config";
 import { EndBattle } from "../../../game-actions/end-battle";
 import { GameProps } from "../../../game-props";
-import { executePostEpisode } from "./execute-post-episode";
-import { executePostNetBattle } from "./execute-post-net-battle";
-import { executePostNPCBattle } from "./execute-post-npc-battle";
+import { endCasualMatch } from "./end-casual-match";
+import { endEpisode } from "./end-episode";
+import { endNetBattle } from "./end-net-battle";
+import { endNPCBattle } from "./end-npc-battle";
+import { endPrivateMatchGuest } from "./end-private-match-guest";
+import { endPrivateMatchHost } from "./end-private-match-host";
 
 /** オプション */
 type Options = {
@@ -33,16 +36,19 @@ export async function onEndBattle(options: Options): Promise<void> {
   props.inProgress = await (() => {
     switch (inProgress.type) {
       case "NPCBattle":
-        return executePostNPCBattle({ ...props, inProgress }, action);
+        return endNPCBattle({ ...props, inProgress }, action);
       case "CasualMatch":
+        return endCasualMatch({ ...props, inProgress }, action);
       case "PrivateMatchHost":
+        return endPrivateMatchHost({ ...props, inProgress }, action);
       case "PrivateMatchGuest":
+        return endPrivateMatchGuest({ ...props, inProgress }, action);
       case "OfflineLANCasualMatch":
       case "PasswordMatchHost":
       case "PasswordMatchGuest":
-        return executePostNetBattle({ ...props, inProgress });
+        return endNetBattle({ ...props, inProgress });
       case "Story":
-        return executePostEpisode({ ...props, inProgress }, action);
+        return endEpisode({ ...props, inProgress }, action);
       default:
         return inProgress;
     }

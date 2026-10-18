@@ -3,7 +3,7 @@ import "../css/style.css";
 import * as THREE from "three";
 
 import { ConfigJSON, fetchConfigJSON } from "./config-json";
-import { isMobile } from "./device-ditect/is-mobile";
+import { isMobile } from "./dom/device-ditect/is-mobile";
 import { Game } from "./game";
 import { createLocalStorageConfigRepository } from "./game/config/repository/local-storage";
 import { NetworkContext } from "./game/network-context";

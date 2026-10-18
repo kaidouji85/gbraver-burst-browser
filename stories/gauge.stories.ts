@@ -1,8 +1,8 @@
 import { all } from "../src/js/animation/all";
 import { Animate } from "../src/js/animation/animate";
 import { delay } from "../src/js/animation/delay";
-import { enemyGauge, playerGauge } from "../src/js/game-object/gauge";
-import { Gauge } from "../src/js/game-object/gauge/gauge";
+import { enemyGauge, playerGauge } from "../src/js/game/game-object/gauge";
+import { Gauge } from "../src/js/game/game-object/gauge/gauge";
 import { hudGameObjectStory } from "./stub/hud-game-object-stub";
 
 export default {

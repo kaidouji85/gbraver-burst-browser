@@ -1,7 +1,7 @@
-import { MAX_LOADING_TIME } from "../../../dom-scenes/dom-scene-binder/max-loading-time";
-import { waitTime } from "../../../wait/wait-time";
+import { waitTime } from "../../../event/wait/wait-time";
 import { PasswordMatchHostStart } from "../../game-actions/password-match-host-start";
 import { GameProps } from "../../game-props";
+import { MAX_LOADING_TIME } from "../../scenes/dom-scenes/dom-scene-binder/max-loading-time";
 import { bindPlayerSelectAccordingToConfig } from "../bind-player-select-according-to-config";
 import { waitUntilSharedResourcesLoaded } from "../wait-until-shared-resources-loaded";
 

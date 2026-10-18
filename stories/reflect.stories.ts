@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 
 import { delay } from "../src/js/animation/delay";
-import { GameObjectAction } from "../src/js/game-object/action/game-object-action";
+import { GameObjectAction } from "../src/js/game/game-object/action/game-object-action";
 import {
   enemyReflectIndicator,
   playerReflectIndicator,
-} from "../src/js/game-object/reflect-indicator";
-import { ReflectIndicator } from "../src/js/game-object/reflect-indicator/reflect-indicator";
+} from "../src/js/game/game-object/reflect-indicator";
+import { ReflectIndicator } from "../src/js/game/game-object/reflect-indicator/reflect-indicator";
 import { Resources } from "../src/js/resource";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 

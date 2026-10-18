@@ -3,8 +3,8 @@ import {
   enemyPowerUp,
   playerPowerUp,
   PowerUpCreatorParams,
-} from "../src/js/game-object/power-up";
-import { PowerUp } from "../src/js/game-object/power-up/power-up";
+} from "../src/js/game/game-object/power-up";
+import { PowerUp } from "../src/js/game/game-object/power-up/power-up";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

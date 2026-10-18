@@ -1,7 +1,9 @@
+import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { OfflineBattleSDK } from "@gbraver-burst-network/offline-browser-sdk";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
-/** バトル管理オブジェクトからバトル強制終了ストリームを取り出す */
+/** バトル強制終了監視 */
 export class SuddenlyBattleEnd {
   #notifier: Subject<void>;
   #unsubscriber: Unsubscribable | null;
@@ -16,10 +18,9 @@ export class SuddenlyBattleEnd {
 
   /**
    * バトル強制終了監視を開始する
-   *
    * @param battle 監視対象となるバトル
    */
-  bind(battle: BattleSDK): void {
+  bind(battle: BattleSDK | AnonymousBattleSDK | OfflineBattleSDK): void {
     this.unbind();
     this.#unsubscriber = battle.suddenlyBattleEndNotifier().subscribe(() => {
       this.#notifier.next();
@@ -40,7 +41,6 @@ export class SuddenlyBattleEnd {
 
   /**
    * バトル強制終了ストリームを取得する
-   *
    * @returns 通知ストリーム
    */
   stream(): Observable<void> {

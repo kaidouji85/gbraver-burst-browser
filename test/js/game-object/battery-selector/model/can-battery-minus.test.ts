@@ -1,5 +1,5 @@
-import type { BatterySelectorModel } from "../../../../../src/js/game-object/battery-selector/model";
-import { canBatteryMinus } from "../../../../../src/js/game-object/battery-selector/model/can-battery-minus";
+import type { BatterySelectorModel } from "../../../../../src/js/game/game-object/battery-selector/model";
+import { canBatteryMinus } from "../../../../../src/js/game/game-object/battery-selector/model/can-battery-minus";
 import { EMPTY_BATTERY_SELECTOR } from "../../../../data/battery-selector-model";
 
 test("バッテリーが0以下なら-バッテリーボタンが押せない", () => {

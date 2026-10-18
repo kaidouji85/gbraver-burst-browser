@@ -1,4 +1,4 @@
-import { PrivateMatchGuestDialog } from "../src/js/dom-dialogs/private-match-guest";
+import { PrivateMatchGuestDialog } from "../src/js/game/dialogs/private-match-guest";
 import { domStub } from "./stub/dom-stub";
 
 export default {

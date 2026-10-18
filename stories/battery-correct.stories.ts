@@ -2,7 +2,7 @@ import { delay } from "../src/js/animation/delay";
 import {
   enemyBatteryCorrect,
   playerBatteryCorrect,
-} from "../src/js/game-object/battery-correct";
+} from "../src/js/game/game-object/battery-correct";
 import { tdGameObjectStory } from "./stub/td-game-object-stub";
 
 export default {

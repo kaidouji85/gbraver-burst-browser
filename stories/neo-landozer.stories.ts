@@ -2,8 +2,8 @@ import { delay } from "../src/js/animation/delay";
 import {
   EnemyNeoLandozer,
   PlayerNeoLandozer,
-} from "../src/js/game-object/armdozer/neo-landozer";
-import { NeoLandozer } from "../src/js/game-object/armdozer/neo-landozer/neo-landozer";
+} from "../src/js/game/game-object/armdozer/neo-landozer";
+import { NeoLandozer } from "../src/js/game/game-object/armdozer/neo-landozer/neo-landozer";
 import { armdozerSpriteStub } from "./stub/armdozer-sprite-stub";
 
 export default {

@@ -1,4 +1,4 @@
-import { BattleHamburgerMenu } from "../src/js/game-dom/battle-hamburger-menu";
+import { BattleHamburgerMenu } from "../src/js/game/game-dom/battle-hamburger-menu";
 import { domStub } from "./stub/dom-stub";
 
 export default {

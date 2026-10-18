@@ -1,5 +1,5 @@
-import { MatchingDialog } from "../../../dom-dialogs/matching/matching-dialog";
-import { PrivateMatchGuestDialog } from "../../../dom-dialogs/private-match-guest";
+import { MatchingDialog } from "../../dialogs/matching/matching-dialog";
+import { PrivateMatchGuestDialog } from "../../dialogs/private-match-guest";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
 import { disconnectConnection } from "../disconnect-connection";
@@ -49,7 +49,7 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
 
   props.inProgress = {
     ...props.inProgress,
-    privateMatchGuest: { type: "Battle" },
+    privateMatchGuest: { type: "Battle", battle },
   };
   await startOnlineBattle(props, battle, "プライベートマッチ");
 }
