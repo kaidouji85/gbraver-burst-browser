@@ -25,7 +25,7 @@ export async function perfectVictory(props: CustomBattleEventProps) {
   await scrollRightMessages(props, [
     ["ユウヤ", `「生兵法は${wbr}怪我のもと`],
     [
-      `強力な${wbr}戦術を${wbr}押し通す${wbr}だけで${wbr}勝てるほど 機動倶楽部は${wbr}甘くない」`,
+      `戦術の${wbr}押し付け${wbr}だけで${wbr}勝てるほど 機動倶楽部は${wbr}甘くない」`,
     ],
   ]);
   props.view.dom.easterEgg.hidden();
