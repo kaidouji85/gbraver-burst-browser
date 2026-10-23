@@ -5,18 +5,21 @@ import { SOUND_IDS } from "../../../resource/sound/ids";
 import { playerUuid } from "../../../uuid/player";
 import { createZeroDefenseTutorialEvent } from "../../custom-battle-events/zero-defense-tutorial";
 import { zeroDefenseTutorialNPC } from "../../npc/zero-defense-tutorial";
+import { HAS_EASTER_EGG } from "../easter-egg";
 import { Episode } from "../episode";
 import { EpisodeIDs } from "./episode-ids";
 
 /** イントロダクション */
-const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……。`;
+const introduction = `今日は機動倶楽部の新人戦、シンヤは同学年のガイと対峙することになるが序盤からリードをとられてしまい……。
+
+${HAS_EASTER_EGG}`;
 
 /** ゼロ防御チュートリアル */
 export const zeroDefenseTutorial: Episode = {
   id: EpisodeIDs.ZERO_DEFENSE,
   type: "Episode",
   number: "2",
-  title: "ゼロ防御だと即死する",
+  title: "🎁ゼロ防御だと即死する",
   isTutorial: true,
   introduction,
   imageCutPathId: PathIds.IMAGE_CUT_ZERO_DEFENSE,
