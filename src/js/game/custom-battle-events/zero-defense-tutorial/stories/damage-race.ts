@@ -24,6 +24,7 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
  * @returns ストーリーが完了したら発火するPromise
  */
 const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
+  props.view.dom.easterEgg.show();
   activeLeftMessageWindowWithFace(props, "Gai");
   await scrollLeftMessages(props, [
     [
@@ -32,6 +33,7 @@ const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
     ],
     [`少しは${wbr}本気を${wbr}出さんとな」`],
   ]);
+  props.view.dom.easterEgg.hidden();
   await refreshConversation(props);
 };
 
