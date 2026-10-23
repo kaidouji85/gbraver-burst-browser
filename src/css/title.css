@@ -296,7 +296,7 @@
 }
 
 .title__game-menu--standalone {
-  grid-template: "story tutorial arcade config" 1fr/ 1fr 1fr 1fr 1fr;
+  grid-template: "story tutorial arcade config" 1fr 1fr 1fr 1fr;
 }
 
 .title__game-menu,
@@ -339,6 +339,10 @@
 
 .title__password-match {
   grid-area: password-match;
+}
+
+.title__password-match--invisible {
+  display: none;
 }
 
 .title__arcade {
