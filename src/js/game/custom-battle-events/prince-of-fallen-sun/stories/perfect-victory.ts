@@ -24,9 +24,10 @@ export async function perfectVictory(props: CustomBattleEventProps) {
   activeRightMessageWindowWithFace(props, "Yuuya");
   await scrollRightMessages(props, [
     ["ユウヤ", `「生兵法は${wbr}怪我のもと`],
-    [`強力な${wbr}戦術を${wbr}押し通す${wbr}だけで${wbr}勝てるほど`],
-    [`機動倶楽部は${wbr}甘くない」`],
+    [
+      `強力な${wbr}戦術を${wbr}押し通す${wbr}だけで${wbr}勝てるほど 機動倶楽部は${wbr}甘くない」`,
+    ],
   ]);
-
+  props.view.dom.easterEgg.hidden();
   invisibleAllMessageWindows(props);
 }
