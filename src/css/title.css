@@ -296,7 +296,7 @@
 }
 
 .title__game-menu--standalone {
-  grid-template: "story tutorial arcade config" 1fr 1fr 1fr 1fr;
+  grid-template: "story tutorial arcade config";
 }
 
 .title__game-menu,
