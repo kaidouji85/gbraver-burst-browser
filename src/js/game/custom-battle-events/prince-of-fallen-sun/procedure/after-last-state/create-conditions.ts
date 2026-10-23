@@ -11,10 +11,12 @@ export function createConditions(
   props: LastStateEventProps & PrinceOfFallenSunProps,
 ): Conditions {
   const { update } = props;
+  const player =
+    update.at(-1)?.players.find((p) => p.playerId === props.playerId) ?? null;
   const gameEnd =
     update
       .map((s) => s.effect)
       .filter((e) => e.name === "GameEnd")
       .at(0) ?? null;
-  return { ...props, gameEnd };
+  return { ...props, player, gameEnd };
 }

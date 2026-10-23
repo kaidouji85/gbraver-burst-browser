@@ -4,11 +4,13 @@ import { isZeroDefenseButBatteryPositiveFromLastState } from "../../../is-zero-d
 import { isZeroDefenseButEnableBurstFromLastState } from "../../../is-zero-defense-but-enable-burst";
 import { PrinceOfFallenSunProps } from "../../props";
 import { gaiVictory } from "../../stories/gai-victory";
+import { perfectVictory } from "../../stories/perfect-victory";
 import { yuuyaVictory } from "../../stories/yuuya-victory";
 import { zeroDefenseButEnableBurst } from "../../stories/zero-defense-but-enable-burst";
 import { zeroDefenseButPositiveBattery } from "../../stories/zero-defense-but-positive-battery";
 import { createConditions } from "./create-conditions";
 import { shouldGaiVictory } from "./should-gai-victory";
+import { shouldPerfectVictory } from "./should-perfect-victory";
 import { shouldYuuyaVictory } from "./should-yuuya-victory";
 
 /**
@@ -27,6 +29,8 @@ export async function afterLastState(
     await zeroDefenseButEnableBurst(props);
   } else if (shouldGaiVictory(conditions)) {
     await gaiVictory(props);
+  } else if (shouldPerfectVictory(conditions)) {
+    await perfectVictory(props);
   } else if (shouldYuuyaVictory(conditions)) {
     await yuuyaVictory(props);
   }
