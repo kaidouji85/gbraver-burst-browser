@@ -14,8 +14,10 @@ import {
   INVISIBLE_HELP_ICON_CLASS,
   INVISIBLE_LOGIN_CLASS,
   INVISIBLE_NET_BATTLE_CLASS,
+  INVISIBLE_PASSWORD_MATCH_CLASS,
   LOGIN_CLASS,
   NET_BATTLE_CLASS,
+  PASSWORD_MATCH_CLASS,
   ROOT_CLASS,
 } from "./class-name";
 import template from "./root-inner-html.hbs";
@@ -68,6 +70,10 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     params.titleMenuMode === "STANDALONE"
       ? INVISIBLE_NET_BATTLE_CLASS
       : NET_BATTLE_CLASS;
+  const passwordMatchClassName =
+    params.titleMenuMode === "STANDALONE"
+      ? INVISIBLE_PASSWORD_MATCH_CLASS
+      : PASSWORD_MATCH_CLASS;
 
   const genesisBraverPath =
     params.resources.paths.find(
@@ -118,6 +124,7 @@ export function rootInnerHTML(params: RootInnerHTMLParams): string {
     accountName,
     accountClassName,
     netBattleClassName,
+    passwordMatchClassName,
 
     genesisBraverPath,
     shinBraverPath,

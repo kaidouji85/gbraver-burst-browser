@@ -1,4 +1,4 @@
-import { GameEnd, PlayerId } from "gbraver-burst-core";
+import { GameEnd, PlayerId, PlayerState } from "gbraver-burst-core";
 
 /**
  * 条件オブジェクト
@@ -8,6 +8,8 @@ import { GameEnd, PlayerId } from "gbraver-burst-core";
 export type Conditions = {
   /** プレイヤーID */
   readonly playerId: PlayerId;
+  /** 最新のプレイヤーステート、存在しない場合はnull */
+  readonly player: PlayerState | null;
   /** 敵ID */
   readonly enemyId: PlayerId;
   /** updateから抽出したGameEnd情報、存在しない場合はnull */
