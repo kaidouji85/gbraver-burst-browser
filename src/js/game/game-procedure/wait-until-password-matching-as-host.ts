@@ -1,5 +1,6 @@
 import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 
+import { isAbortError } from "../../event/abort-controller/abort-error";
 import { NetworkErrorDialog } from "../dialogs/network-error";
 import { PrivateMatchHostDialog } from "../dialogs/private-match-host";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
@@ -9,7 +10,6 @@ import { Online } from "../network-context/online";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchPrivateMatchHostDialogWhenPasswordMatch } from "./switch-dialog/switch-private-match-host-dialog-when-password-match";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
-import { isAbortError } from "../../event/abort-controller/abort-error";
 
 /**
  * あいことば対戦（ホスト）でマッチング成立まで待つ
