@@ -9,6 +9,7 @@ import { Online } from "../network-context/online";
 import { switchNetworkErrorDialog } from "./switch-dialog/switch-network-error-dialog";
 import { switchPrivateMatchHostDialogWhenPasswordMatch } from "./switch-dialog/switch-private-match-host-dialog-when-password-match";
 import { switchWaitingDialog } from "./switch-dialog/switch-waiting-dialog";
+import { isAbortError } from "../../event/abort-controller/abort-error";
 
 /**
  * あいことば対戦（ホスト）でマッチング成立まで待つ
@@ -34,6 +35,10 @@ export const waitUntilPasswordMatchingAsHost = async (
     switchPrivateMatchHostDialogWhenPasswordMatch(props, dialog);
     return await room.waitUntilMatching();
   } catch (e) {
+    if (isAbortError(e)) {
+      throw e;
+    }
+
     const errorDialog = new NetworkErrorDialog({
       ...props,
       postNetworkError: { type: "GotoTitle" },
