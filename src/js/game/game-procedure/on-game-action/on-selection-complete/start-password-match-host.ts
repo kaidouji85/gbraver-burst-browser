@@ -18,7 +18,6 @@ export const startPasswordMatchHost = async (
   >,
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
-  props.networkContext.hostAnonymousSDK.disconnectWebRTC();
   const battle = await waitUntilPasswordMatchingAsHost(props, action);
   await startPasswordMatch(props, battle);
   return {
