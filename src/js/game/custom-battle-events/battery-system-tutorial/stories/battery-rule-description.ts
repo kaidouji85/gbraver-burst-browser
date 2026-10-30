@@ -1,4 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import type { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -15,7 +16,10 @@ export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
     ["ツバサ", `「……と このように${wbr}攻撃が当たるかは`],
-    [`互いに出した${wbr}バッテリー${wbr}の大きさ${wbr}だけで決まるんだ」`],
+    [
+      highlight(`互いに出した${wbr}バッテリー${wbr}の大きさ`) +
+        `${wbr}だけで決まるんだ」`,
+    ],
   ]);
   props.view.dom.leftMessageWindow.darken();
   activeRightMessageWindowWithFace(props, "Shinya");
