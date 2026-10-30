@@ -1,4 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import type { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -27,7 +28,10 @@ export const doBurstToRecoverBattery = async (
   await scrollRightMessages(props, [
     ["ツバサ", `「ならば${wbr}バーストを${wbr}発動${wbr}させよう`],
     [
-      `バーストは${wbr}1試合に${wbr}1回しか${wbr}使え${wbr}ないが${wbr} 一気に${wbr}バッテリーを${wbr}回復${wbr}できるんだ」`,
+      highlight(`バースト`) +
+        `は${wbr}1試合に${wbr}1回しか${wbr}使え${wbr}ないが${wbr} ` +
+        highlight(`一気に${wbr}バッテリーを${wbr}回復`) +
+        `${wbr}できるんだ」`,
     ],
   ]);
   invisibleAllMessageWindows(props);

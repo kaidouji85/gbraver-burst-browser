@@ -1,4 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
@@ -49,7 +50,10 @@ export async function playerWin(
     [
       `普段なら${wbr}ギリギリ${wbr}倒しきれない${wbr}相手に${wbr}とどめを刺せる${wbr}など`,
     ],
-    [`相手の${wbr}意表を${wbr}突く${wbr}ことが${wbr}できるんだ」`],
+    [
+      highlight(`相手の${wbr}意表を${wbr}突く`) +
+        `${wbr}ことが${wbr}できるんだ」`,
+    ],
   ]);
   activeLeftMessageWindowWithFace(props, "Tsubasa");
   await scrollLeftMessages(props, [
