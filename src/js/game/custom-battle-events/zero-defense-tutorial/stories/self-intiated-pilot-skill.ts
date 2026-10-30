@@ -21,7 +21,7 @@ export async function selfInitiatedPilotSkill(
     ],
     [`君の${wbr}パイロットスキルは${wbr}バッテリー3回復`],
     [
-      `多くの状況で${wbr}有利がとれる${wbr} 汎用的かつ${wbr}奇襲性も${wbr}高い${wbr}パイロットスキルだ`,
+      `多くの状況で${wbr}有利がとれる${wbr} 汎用的かつ${wbr}奇襲性も${wbr}高い${wbr}パイロットスキルだ」`,
     ],
   ]);
   invisibleAllMessageWindows(props);
