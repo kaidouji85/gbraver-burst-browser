@@ -1,4 +1,5 @@
 import { wbr } from "../../../../dom/wbr";
+import { highlight } from "../../../game-dom/message-window/dom/highlight";
 import type { CustomBattleEventProps } from "../../../scenes/td-scenes/battle/custom-battle-event";
 import { activeRightMessageWindowWithFace } from "../../active-message-window";
 import {
@@ -30,7 +31,12 @@ export const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, "Tsubasa");
   await scrollRightMessages(props, [
     ["ツバサ", `「いい質問だな${wbr} シンヤ`],
-    [`0防御${wbr}すると${wbr} HPが${wbr}満タンでも${wbr}即死${wbr}するんだ」`],
+    [
+      highlight(`0防御${wbr}`) +
+        `すると${wbr} ` +
+        highlight(`HPが${wbr}満タンでも${wbr}即死`) +
+        `${wbr}するんだ」`,
+    ],
   ]);
   await refreshConversation(props, 100);
   activeRightMessageWindowWithFace(props, "Shinya");
