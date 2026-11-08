@@ -5,41 +5,36 @@ import { playUpdatedStateHistory } from "./play-updated-state-history";
 
 /**
  * コマンド選択可能になるまでゲームを進める
- * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
- * @returns 最終ステート、ゲームが進行できなかった場合はnull
+ * @returns 更新したステート
  */
 const repeatProgressWhenUnselectable = async (
-  props: BattleSceneProps,
-  command: Command,
-): Promise<GameState | null> => {
+  props: Readonly<BattleSceneProps>,
+  command: Readonly<Command>,
+): Promise<GameState[]> => {
   let lastCommand: Command = command;
+  let ret: GameState[] = [];
   const maxProgressCount = 100;
   for (let i = 0; i < maxProgressCount; i++) {
-    const updateState = await props.battleProgress.progress(lastCommand);
-    if (updateState.length < 1) {
-      return null;
-    }
-
-    props.stateHistory = [...props.stateHistory, ...updateState];
-    await playUpdatedStateHistory(props, updateState);
-    const lastState: GameState = updateState[updateState.length - 1];
-    if (lastState.effect.name !== "InputCommand") {
-      return lastState;
+    const updateStates = await props.battleProgress.progress(lastCommand);
+    ret = [...ret, ...updateStates];
+    const lastState = updateStates.at(-1);
+    if (lastState?.effect.name !== "InputCommand") {
+      break;
     }
 
     const playerCommand = lastState.effect.players.find(
       (v) => v.playerId === props.playerId,
     );
     if (!playerCommand || playerCommand.selectable) {
-      return lastState;
+      break;
     }
 
     lastCommand = playerCommand.nextTurnCommand;
   }
 
-  return null;
+  return ret;
 };
 
 /**
@@ -79,8 +74,17 @@ export async function progressGame(
   props: BattleSceneProps,
   command: Command,
 ): Promise<void> {
-  const lastState = await repeatProgressWhenUnselectable(props, command);
-  if (lastState && lastState.effect.name === "GameEnd") {
-    await onGameEnd(props, { ...lastState, effect: lastState.effect });
+  const updateStates = await repeatProgressWhenUnselectable(props, command);
+  if (updateStates.length === 0) {
+    return;
   }
+
+  props.stateHistory = [...props.stateHistory, ...updateStates];
+  await playUpdatedStateHistory(props, updateStates);
+  const lastState = updateStates.at(-1);
+  if (lastState?.effect.name !== "GameEnd") {
+    return;
+  }
+
+  await onGameEnd(props, { ...lastState, effect: lastState.effect });
 }
