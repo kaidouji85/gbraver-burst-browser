@@ -8,7 +8,7 @@ import { playUpdatedStateHistory } from "./play-updated-state-history";
  * 本関数ではprops.stateHistoryを更新する副作用がある
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
- * @returns 処理が完了したら発火するPromise
+ * @returns 最終ステート、ゲームが進行できなかった場合はnull
  */
 const repeatProgressWhenUnselectable = async (
   props: BattleSceneProps,
