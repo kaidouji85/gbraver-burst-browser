@@ -12,14 +12,14 @@ import { playUpdatedStateHistory } from "./play-updated-state-history";
 const repeatProgressWhenUnselectable = async (
   props: Readonly<BattleSceneProps>,
   command: Readonly<Command>,
-): Promise<GameState[]> => {
+): Promise<GameState[][]> => {
   let lastCommand: Command = command;
-  let ret: GameState[] = [];
+  let updates: GameState[][] = [];
   const maxProgressCount = 100;
   for (let i = 0; i < maxProgressCount; i++) {
-    const updateStates = await props.battleProgress.progress(lastCommand);
-    ret = [...ret, ...updateStates];
-    const lastState = updateStates.at(-1);
+    const update = await props.battleProgress.progress(lastCommand);
+    updates = [...updates, update];
+    const lastState = update.at(-1);
     if (lastState?.effect.name !== "InputCommand") {
       break;
     }
@@ -34,7 +34,7 @@ const repeatProgressWhenUnselectable = async (
     lastCommand = playerCommand.nextTurnCommand;
   }
 
-  return ret;
+  return updates;
 };
 
 /**
@@ -74,14 +74,17 @@ export async function progressGame(
   props: BattleSceneProps,
   command: Command,
 ): Promise<void> {
-  const updateStates = await repeatProgressWhenUnselectable(props, command);
-  if (updateStates.length === 0) {
+  const updates = await repeatProgressWhenUnselectable(props, command);
+  if (updates.length === 0) {
     return;
   }
 
-  props.stateHistory = [...props.stateHistory, ...updateStates];
-  await playUpdatedStateHistory(props, updateStates);
-  const lastState = updateStates.at(-1);
+  for (const update of updates) {
+    props.stateHistory = [...props.stateHistory, ...update];
+    await playUpdatedStateHistory(props, update);
+  }
+
+  const lastState = props.stateHistory.at(-1);
   if (lastState?.effect.name !== "GameEnd") {
     return;
   }
