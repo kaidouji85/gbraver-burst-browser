@@ -5,6 +5,7 @@ import { playUpdatedStateHistory } from "./play-updated-state-history";
 
 /**
  * コマンド選択可能になるまでゲームを進める
+ * カスタムバトルイベントの後方互換を保つために、戻り値はprogressで取得した単位で取り出せるように、二重配列になっている
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
  * @returns 更新したステート
@@ -80,6 +81,8 @@ export async function progressGame(
     return;
   }
 
+  // カスタムバトルイベントの後方互換を保つために
+  // updatesから順にステートを取り出して処理する
   for (const update of updates) {
     props.stateHistory = [...props.stateHistory, ...update];
     await playUpdatedStateHistory(props, update);
