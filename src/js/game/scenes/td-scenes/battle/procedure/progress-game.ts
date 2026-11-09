@@ -75,7 +75,8 @@ export async function progressGame(
   command: Command,
 ): Promise<void> {
   const updates = await repeatProgressWhenUnselectable(props, command);
-  if (updates.length === 0) {
+  const isEmpty = updates.flat().length === 0;
+  if (isEmpty) {
     return;
   }
 
