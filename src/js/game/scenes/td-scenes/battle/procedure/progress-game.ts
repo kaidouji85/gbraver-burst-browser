@@ -5,41 +5,37 @@ import { playUpdatedStateHistory } from "./play-updated-state-history";
 
 /**
  * コマンド選択可能になるまでゲームを進める
- * 本関数ではprops.stateHistoryを更新する副作用がある
+ * カスタムバトルイベントの後方互換を保つために、戻り値はprogressで取得した単位で取り出せるように、二重配列になっている
  * @param props 戦闘シーンプロパティ
  * @param command プレイヤーが入力したコマンド
- * @returns 処理が完了したら発火するPromise
+ * @returns 更新したステート
  */
 const repeatProgressWhenUnselectable = async (
-  props: BattleSceneProps,
-  command: Command,
-): Promise<GameState | null> => {
+  props: Readonly<BattleSceneProps>,
+  command: Readonly<Command>,
+): Promise<GameState[][]> => {
   let lastCommand: Command = command;
+  let updates: GameState[][] = [];
   const maxProgressCount = 100;
   for (let i = 0; i < maxProgressCount; i++) {
-    const updateState = await props.battleProgress.progress(lastCommand);
-    if (updateState.length < 1) {
-      return null;
-    }
-
-    props.stateHistory = [...props.stateHistory, ...updateState];
-    await playUpdatedStateHistory(props, updateState);
-    const lastState: GameState = updateState[updateState.length - 1];
-    if (lastState.effect.name !== "InputCommand") {
-      return lastState;
+    const update = await props.battleProgress.progress(lastCommand);
+    updates = [...updates, update];
+    const lastState = update.at(-1);
+    if (lastState?.effect.name !== "InputCommand") {
+      break;
     }
 
     const playerCommand = lastState.effect.players.find(
       (v) => v.playerId === props.playerId,
     );
     if (!playerCommand || playerCommand.selectable) {
-      return lastState;
+      break;
     }
 
     lastCommand = playerCommand.nextTurnCommand;
   }
 
-  return null;
+  return updates;
 };
 
 /**
@@ -79,8 +75,23 @@ export async function progressGame(
   props: BattleSceneProps,
   command: Command,
 ): Promise<void> {
-  const lastState = await repeatProgressWhenUnselectable(props, command);
-  if (lastState && lastState.effect.name === "GameEnd") {
-    await onGameEnd(props, { ...lastState, effect: lastState.effect });
+  const updates = await repeatProgressWhenUnselectable(props, command);
+  const isEmpty = updates.flat().length === 0;
+  if (isEmpty) {
+    return;
   }
+
+  // カスタムバトルイベントの後方互換を保つために
+  // updatesから順にステートを取り出して処理する
+  for (const update of updates) {
+    props.stateHistory = [...props.stateHistory, ...update];
+    await playUpdatedStateHistory(props, update);
+  }
+
+  const lastState = props.stateHistory.at(-1);
+  if (lastState?.effect.name !== "GameEnd") {
+    return;
+  }
+
+  await onGameEnd(props, { ...lastState, effect: lastState.effect });
 }
