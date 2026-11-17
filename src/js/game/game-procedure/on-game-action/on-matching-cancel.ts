@@ -1,3 +1,4 @@
+import { COMMUNICATING } from "../../dialogs/waiting/waiting-captions";
 import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
@@ -20,7 +21,7 @@ type Options = {
  */
 export async function onMatchingCanceled(options: Options): Promise<void> {
   const { props } = options;
-  const dialog = new WaitingDialog("通信中......");
+  const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
   await disconnectConnection(props);
   props.domDialogBinder.hidden();

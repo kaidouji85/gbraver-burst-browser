@@ -1,3 +1,4 @@
+import { DELETING_ACCOUNT } from "../../dialogs/waiting/waiting-captions";
 import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { DeleteAccount } from "../../game-actions/delete-account";
 import { GameProps } from "../../game-props";
@@ -22,7 +23,7 @@ export async function onDeleteAccount(options: Options): Promise<void> {
     return;
   }
 
-  const dialog = new WaitingDialog("アカウント削除中");
+  const dialog = new WaitingDialog(DELETING_ACCOUNT);
   switchWaitingDialog(props, dialog);
   await props.networkContext.sdk.deleteLoggedInUser();
   await props.fader.fadeOut();

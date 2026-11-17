@@ -14,6 +14,7 @@ import { updateBattleSceneResources } from "../../resource/update-battle-scene-r
 import { fadeOut, stop } from "../../sounds/bgm/bgm-operators";
 import { createSeriousMatchEvent } from "../custom-battle-events/serious-match-event";
 import { NetworkErrorDialog } from "../dialogs/network-error";
+import { OPPONENT_THINKING } from "../dialogs/waiting/waiting-captions";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../game-props";
 import { MAX_LOADING_TIME } from "../scenes/dom-scenes/dom-scene-binder/max-loading-time";
@@ -38,7 +39,7 @@ function createBattleProgress(
   return {
     progress: async (v) => {
       try {
-        const dialog = new WaitingDialog("相手が考え中......");
+        const dialog = new WaitingDialog(OPPONENT_THINKING);
         switchWaitingDialog(props, dialog);
         const update = await battle.progress(v);
         props.domDialogBinder.hidden();
