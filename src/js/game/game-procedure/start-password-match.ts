@@ -36,7 +36,7 @@ const createBattleProgress = (
   return {
     progress: async (v) => {
       try {
-        const dialog = new WaitingDialog("通信中......");
+        const dialog = new WaitingDialog("相手が考え中......");
         switchWaitingDialog(props, dialog);
         const update = await battle.progress(v);
         props.domDialogBinder.hidden();
