@@ -1,4 +1,4 @@
-import { DELETING_ACCOUNT } from "../../dialogs/waiting/waiting-captions";
+import { DELETING_ACCOUNT } from "../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { DeleteAccount } from "../../game-actions/delete-account";
 import { GameProps } from "../../game-props";

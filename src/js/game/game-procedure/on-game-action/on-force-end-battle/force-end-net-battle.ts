@@ -1,5 +1,5 @@
 import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
-import { COMMUNICATING } from "../../../dialogs/waiting/waiting-captions";
+import { COMMUNICATING } from "../../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { CasualMatch } from "../../../in-progress/casual-match";

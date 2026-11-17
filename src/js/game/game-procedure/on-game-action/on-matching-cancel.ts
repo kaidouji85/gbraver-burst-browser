@@ -1,4 +1,4 @@
-import { COMMUNICATING } from "../../dialogs/waiting/waiting-captions";
+import { COMMUNICATING } from "../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
