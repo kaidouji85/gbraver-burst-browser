@@ -1,4 +1,4 @@
-import { Unsubscribable } from "rxjs";
+import { fromEvent, Unsubscribable } from "rxjs";
 
 import { domClickStream, domPushStream } from "../../../../dom/push-dom";
 import { PrivateMatchGuestDialogProps } from "../props";
@@ -7,6 +7,7 @@ import { onEnterButtonPush } from "./on-enter-button-push";
 import { onQRCodeRead } from "./on-qr-code-read";
 import { onQrCodeReaderClose } from "./on-qr-code-reader-close";
 import { onQrCodeReaderStart } from "./on-qr-code-reader-start";
+import { onRoomIDFormSubmit } from "./on-room-id-form-submit";
 
 /**
  * イベントリスナーをバインドする
@@ -31,6 +32,9 @@ export function bindEventListeners(
     }),
     domPushStream(props.enterButton).subscribe((action) => {
       onEnterButtonPush(props, action);
+    }),
+    fromEvent<SubmitEvent>(props.roomIDForm, "submit").subscribe((event) => {
+      onRoomIDFormSubmit(props, event);
     }),
   ];
 }

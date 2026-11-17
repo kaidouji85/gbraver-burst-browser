@@ -25,7 +25,7 @@
     QRコードでバトルスタート
   </button>
   <div class="{{ROOT_CLASS}}__separator">または</div>
-  <div class="{{ROOT_CLASS}}__room-id-form">
+  <form class="{{ROOT_CLASS}}__room-id-form" data-id="roomIDForm">
     <div class="{{ROOT_CLASS}}__room-id-description">
       あいことばを入れてね
       <span class="{{ROOT_CLASS}}__room-id-arrow">⬇</span>
@@ -33,12 +33,14 @@
     <input
       class="{{ROOT_CLASS}}__room-id"
       type="text"
+      enterkeyhint="go"
       data-id="roomID"
       value="{{initialRoomID}}"
     />
     <button
       class="{{ROOT_CLASS}}__enter"
+      type="button"
       data-id="enterButton"
     >バトルスタート</button>
-  </div>
+  </form>
 </div>

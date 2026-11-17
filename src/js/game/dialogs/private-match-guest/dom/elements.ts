@@ -28,6 +28,18 @@ export const extractRoomID = (root: HTMLElement): HTMLInputElement => {
 };
 
 /**
+ * ルームID入力フォーム全体(form要素)を抽出する
+ * @param root ルート要素
+ * @returns 抽出結果
+ */
+export const extractRoomIDForm = (root: HTMLElement): HTMLFormElement => {
+  const extractedRoomIDForm = root.querySelector(`[data-id="roomIDForm"]`);
+  return extractedRoomIDForm instanceof HTMLFormElement
+    ? extractedRoomIDForm
+    : document.createElement("form");
+};
+
+/**
  * プライベートマッチ開始ボタンを抽出する
  * @param root ルート要素
  * @returns 抽出結果
