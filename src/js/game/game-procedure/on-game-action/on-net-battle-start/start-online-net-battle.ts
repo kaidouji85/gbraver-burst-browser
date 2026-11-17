@@ -1,6 +1,7 @@
 import { LoginDialog } from "../../../dialogs/login";
 import { NetBattleSelectorDialog } from "../../../dialogs/net-battle-selector";
 import { NetworkErrorDialog } from "../../../dialogs/network-error";
+import { LOGIN_CHECKING } from "../../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { Online } from "../../../network-context/online";
@@ -37,7 +38,7 @@ async function callLoginCheckAPI(
 export async function startOnlineNetBattle(
   props: Readonly<GameProps & { networkContext: Online }>,
 ): Promise<void> {
-  switchWaitingDialog(props, new WaitingDialog("ログインチェック中......"));
+  switchWaitingDialog(props, new WaitingDialog(LOGIN_CHECKING));
   const isLogin = await callLoginCheckAPI(props);
   props.domDialogBinder.hidden();
   if (!isLogin) {

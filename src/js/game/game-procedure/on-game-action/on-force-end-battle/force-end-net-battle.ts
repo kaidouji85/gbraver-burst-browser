@@ -1,4 +1,5 @@
 import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
+import { COMMUNICATING } from "../../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { CasualMatch } from "../../../in-progress/casual-match";
@@ -31,7 +32,7 @@ export async function forceEndNetBattle(
     }
   >,
 ) {
-  const dialog = new WaitingDialog("通信中......");
+  const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
   await disconnectConnection(props);

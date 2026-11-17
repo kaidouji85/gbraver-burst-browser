@@ -3,6 +3,7 @@ import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk
 import { isAbortError } from "../../event/abort-controller/abort-error";
 import { NetworkErrorDialog } from "../dialogs/network-error";
 import { PrivateMatchHostDialog } from "../dialogs/private-match-host";
+import { CREATING_ROOM } from "../dialogs/waiting/captions";
 import { WaitingDialog } from "../dialogs/waiting/waiting-dialog";
 import { SelectionComplete } from "../game-actions/selection-complete";
 import { GameProps } from "../game-props";
@@ -22,7 +23,7 @@ export const waitUntilPasswordMatchingAsHost = async (
   action: Readonly<SelectionComplete>,
 ): Promise<AnonymousBattleSDK> => {
   try {
-    switchWaitingDialog(props, new WaitingDialog("ルーム作成中......"));
+    switchWaitingDialog(props, new WaitingDialog(CREATING_ROOM));
     const room = await props.networkContext.hostAnonymousSDK.createRoom(action);
     if (!room) {
       throw new Error("ルームの作成に失敗");
