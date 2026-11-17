@@ -2,7 +2,7 @@
 export const LOGIN_CHECKING = "ログインチェック中......";
 
 /** アカウント削除中 */
-export const DELETING_ACCOUNT = "アカウント削除中";
+export const DELETING_ACCOUNT = "アカウント削除中......";
 
 /** 通信中 */
 export const COMMUNICATING = "通信中......";
