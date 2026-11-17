@@ -3,7 +3,7 @@ import { startPrivateMatch } from "./start-private-match";
 
 /**
  * ルームID入力フォームがsubmitされた時の処理
- * テキスト入力でEnterを押すと、ブラウザの暗黙送信でsubmitされる
+ * テキスト入力でのEnterやキーボードによる送信ボタン操作でsubmitされる
  * @param props ダイアログプロパティ
  * @param event submitイベント
  */
