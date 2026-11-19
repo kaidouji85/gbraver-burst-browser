@@ -1,6 +1,6 @@
-import { pop } from "../../../../dom/pop";
 import { PushDOM } from "../../../../dom/push-dom";
 import { PrivateMatchGuestDialogProps } from "../props";
+import { startPrivateMatch } from "./start-private-match";
 
 /**
  * プライベートマッチ開始ボタンが押された時の処理
@@ -14,8 +14,6 @@ export function onEnterButtonPush(
   action.event.preventDefault();
   action.event.stopPropagation();
   props.exclusive.execute(async () => {
-    props.se.play(props.pushButton);
-    await pop(props.enterButton);
-    props.privateMatchStart.next(props.roomID.value);
+    await startPrivateMatch(props);
   });
 }
