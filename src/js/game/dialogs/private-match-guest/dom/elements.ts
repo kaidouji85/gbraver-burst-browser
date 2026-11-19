@@ -21,7 +21,7 @@ export const extractMatchingFailed = (root: HTMLElement): HTMLElement =>
  * @returns 抽出結果
  */
 export const extractRoomID = (root: HTMLElement): HTMLInputElement => {
-  const extractedRoomID = root.querySelector(`[data-id="roomID"]`);
+  const extractedRoomID = root.querySelector(`[data-id="room-id"]`);
   return extractedRoomID instanceof HTMLInputElement
     ? extractedRoomID
     : document.createElement("input");
@@ -33,7 +33,7 @@ export const extractRoomID = (root: HTMLElement): HTMLInputElement => {
  * @returns 抽出結果
  */
 export const extractRoomIDForm = (root: HTMLElement): HTMLFormElement => {
-  const extractedRoomIDForm = root.querySelector(`[data-id="roomIDForm"]`);
+  const extractedRoomIDForm = root.querySelector(`[data-id="room-id-form"]`);
   return extractedRoomIDForm instanceof HTMLFormElement
     ? extractedRoomIDForm
     : document.createElement("form");
@@ -45,7 +45,7 @@ export const extractRoomIDForm = (root: HTMLElement): HTMLFormElement => {
  * @returns 抽出結果
  */
 export const extractEnterButton = (root: HTMLElement): HTMLElement =>
-  root.querySelector(`[data-id="enterButton"]`) ??
+  root.querySelector(`[data-id="enter-button"]`) ??
   document.createElement("div");
 
 /**
