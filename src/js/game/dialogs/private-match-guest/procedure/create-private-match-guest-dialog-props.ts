@@ -13,6 +13,7 @@ import {
   extractEnterButton,
   extractMatchingFailed,
   extractRoomID,
+  extractRoomIDForm,
   extractStartQRCodeReader,
 } from "../dom/elements";
 import { RootHTMLOptions, rootInnerHtml } from "../dom/root-inner-html";
@@ -49,6 +50,7 @@ export function createPrivateMatchGuestDialogProps(
     root,
     closer: extractCloser(root),
     matchingFailed: extractMatchingFailed(root),
+    roomIDForm: extractRoomIDForm(root),
     roomID: extractRoomID(root),
     startQRCodeReader: extractStartQRCodeReader(root),
     enterButton: extractEnterButton(root),

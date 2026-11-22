@@ -1,5 +1,6 @@
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
+import { COMMUNICATING } from "../../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
@@ -119,7 +120,7 @@ export const rematch = async (options: {
   const { props, postAction } = options;
   const { inProgress } = props;
 
-  const dialog = new WaitingDialog("通信中......");
+  const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
 
   let result: RematchResult = { isSuccess: false };
