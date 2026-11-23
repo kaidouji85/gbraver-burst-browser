@@ -49,7 +49,7 @@ export const onPasswordMatchEntry = async (options: {
 
   props.inProgress = {
     ...props.inProgress,
-    passwordMatchGuest: { type: "Battle" },
+    passwordMatchGuest: { type: "Battle", battle },
   };
   await startPasswordMatch(props, battle);
 };

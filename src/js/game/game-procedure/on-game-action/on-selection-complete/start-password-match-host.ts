@@ -22,6 +22,6 @@ export const startPasswordMatchHost = async (
   await startPasswordMatch(props, battle);
   return {
     ...props.inProgress,
-    passwordMatchHost: { type: "Battle" },
+    passwordMatchHost: { type: "Battle", battle },
   };
 };
