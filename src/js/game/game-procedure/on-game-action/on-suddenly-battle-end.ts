@@ -1,7 +1,7 @@
 import { NetworkErrorDialog } from "../../dialogs/network-error";
 import { SuddenlyBattleEnd } from "../../game-actions/suddenly-battle-end";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../disconnect-connection";
+import { disconnectAll } from "../disconnect-all";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /** オプション */
@@ -26,5 +26,5 @@ export async function onSuddenlyBattleEnd(options: Options): Promise<void> {
   });
   switchNetworkErrorDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
-  await disconnectConnection(props);
+  await disconnectAll(props);
 }

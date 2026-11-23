@@ -5,13 +5,13 @@ import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
+import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { Rematch } from "../../../post-battle";
 import { startOnlineBattle } from "../../start-online-battle";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
-import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 
 /** 再戦成功 */
 type SuccessRematch = {

@@ -2,7 +2,7 @@ import { MatchingDialog } from "../../dialogs/matching/matching-dialog";
 import { PrivateMatchGuestDialog } from "../../dialogs/private-match-guest";
 import { PasswordMatchEntry } from "../../game-actions/password-match-entry";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../disconnect-connection";
+import { disconnectAll } from "../disconnect-all";
 import { startPasswordMatch } from "../start-password-match";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../switch-dialog/switch-private-match-guest-dialog-when-password-match";
@@ -28,7 +28,7 @@ export const onPasswordMatchEntry = async (options: {
   }
 
   switchMatchingDialog(props, new MatchingDialog(props));
-  await disconnectConnection(props);
+  await disconnectAll(props);
 
   const { armdozerId, pilotId } = props.inProgress.passwordMatchGuest;
   const { roomID } = action;

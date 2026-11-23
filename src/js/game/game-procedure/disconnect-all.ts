@@ -1,11 +1,11 @@
 import { GameProps } from "../game-props";
 
 /**
- * ネットワークコンテキストに応じた通信接続の切断を行う
+ * ネットワークコンテキストに応じて、すべての通信接続の切断を行う
  * @param props ゲームプロパティ
  * @returns 処理が完了したら発火するPromise
  */
-export const disconnectConnection = async (
+export const disconnectAll = async (
   props: Readonly<GameProps>,
 ): Promise<void> => {
   if (props.networkContext.type === "online") {
