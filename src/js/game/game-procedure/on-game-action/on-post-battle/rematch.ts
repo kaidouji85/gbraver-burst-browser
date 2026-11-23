@@ -123,14 +123,18 @@ export const rematch = async (options: {
   const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
 
-  let result: RematchResult = { isSuccess: false };
-  if (inProgress.type === "CasualMatch") {
-    result = await rematchCasualMatch({ inProgress, postAction });
-  } else if (inProgress.type === "PrivateMatchHost") {
-    result = await rematchPrivateMatchHost({ inProgress, postAction });
-  } else if (inProgress.type === "PrivateMatchGuest") {
-    result = await rematchPrivateMatchGuest({ inProgress, postAction });
-  }
+  const result: RematchResult = await (async () => {
+    switch (inProgress.type) {
+      case "CasualMatch":
+        return await rematchCasualMatch({ inProgress, postAction });
+      case "PrivateMatchHost":
+        return await rematchPrivateMatchHost({ inProgress, postAction });
+      case "PrivateMatchGuest":
+        return await rematchPrivateMatchGuest({ inProgress, postAction });
+      default:
+        return { isSuccess: false };
+    }
+  })();
 
   props.rematchCancelled.unbind();
   if (!result.isSuccess) {
