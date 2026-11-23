@@ -5,11 +5,13 @@ import { WaitingDialog } from "../../../dialogs/waiting/waiting-dialog";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { CasualMatch } from "../../../in-progress/casual-match";
+import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { Rematch } from "../../../post-battle";
 import { startOnlineBattle } from "../../start-online-battle";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
+import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 
 /** 再戦成功 */
 type SuccessRematch = {
@@ -107,6 +109,62 @@ const rematchPrivateMatchGuest = async (options: {
 };
 
 /**
+ * あいことば対戦（ホスト）から再戦を行う
+ * @param options オプション
+ * @param options.inProgress ステート
+ * @param options.postAction 再戦アクション
+ * @returns 再戦結果
+ */
+const rematchPasswordMatchHost = async (options: {
+  inProgress: Readonly<PasswordMatchHost>;
+  postAction: Readonly<Rematch>;
+}): Promise<RematchResult> => {
+  const { inProgress, postAction } = options;
+  if (inProgress.passwordMatchHost.type !== "Rematch") {
+    return { isSuccess: false };
+  }
+
+  const { rematchRoom } = inProgress.passwordMatchHost;
+  const battle = await rematchRoom.requestRematch(postAction);
+  return {
+    isSuccess: true,
+    battle,
+    inProgress: {
+      ...inProgress,
+      passwordMatchHost: { type: "Battle", battle },
+    },
+  };
+};
+
+/**
+ * あいことば対戦（ゲスト）から再戦を行う
+ * @param options オプション
+ * @param options.props ゲームプロパティ
+ * @param options.postAction 再戦アクション
+ * @returns 再戦結果
+ */
+const rematchPasswordMatchGuest = async (options: {
+  inProgress: Readonly<PasswordMatchGuest>;
+  postAction: Readonly<Rematch>;
+}): Promise<RematchResult> => {
+  const { inProgress, postAction } = options;
+  if (inProgress.passwordMatchGuest.type !== "Rematch") {
+    return { isSuccess: false };
+  }
+
+  const { rematchRoom } = inProgress.passwordMatchGuest;
+  const battle = await rematchRoom.requestRematch(postAction);
+  return {
+    isSuccess: true,
+    battle,
+    inProgress: {
+      ...inProgress,
+      passwordMatchGuest: { type: "Battle", battle },
+    },
+  };
+};
+
+/**
  * 再戦を行う
  * 本関数はprops.inProgressを変更する副作用を持つ
  * @param options オプション
@@ -131,6 +189,10 @@ export const rematch = async (options: {
         return await rematchPrivateMatchHost({ inProgress, postAction });
       case "PrivateMatchGuest":
         return await rematchPrivateMatchGuest({ inProgress, postAction });
+      case "PasswordMatchHost":
+        return await rematchPasswordMatchHost({ inProgress, postAction });
+      case "PasswordMatchGuest":
+        return await rematchPasswordMatchGuest({ inProgress, postAction });
       default:
         return { isSuccess: false };
     }
