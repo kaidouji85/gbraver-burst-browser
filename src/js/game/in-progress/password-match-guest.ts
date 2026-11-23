@@ -1,3 +1,4 @@
+import { AnonymousRematchRoom } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { ArmdozerId, PilotId } from "gbraver-burst-core";
 
 /** あいことば対戦（ゲスト）サブフロー キャラ選択 */
@@ -24,8 +25,16 @@ export type Battle = {
   type: "Battle";
 };
 
+/** 再戦 */
+export type Rematch = {
+  type: "Rematch";
+  /** 再戦ルーム */
+  rematchRoom: AnonymousRematchRoom;
+};
+
 /** あいことば対戦（ゲスト）のサブフロー */
-export type PasswordMatchGuestSubFlow = PlayerSelect | Entry | Waiting | Battle;
+export type PasswordMatchGuestSubFlow =
+  PlayerSelect | Entry | Waiting | Battle | Rematch;
 
 /** あいことば対戦（ゲスト） */
 export type PasswordMatchGuest = {

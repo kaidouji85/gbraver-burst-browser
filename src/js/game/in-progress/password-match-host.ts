@@ -1,3 +1,5 @@
+import { AnonymousRematchRoom } from "@gbraver-burst-network/anonymous-browser-sdk";
+
 /** あいことば対戦（ホスト）サブフロー キャラ選択 */
 export type PlayerSelect = {
   type: "PlayerSelect";
@@ -8,8 +10,15 @@ export type Battle = {
   type: "Battle";
 };
 
+/** 再戦 */
+export type Rematch = {
+  type: "Rematch";
+  /** 再戦ルーム */
+  rematchRoom: AnonymousRematchRoom;
+};
+
 /** あいことば対戦（ホスト）のサブフロー */
-export type PasswordMatchHostSubFlow = PlayerSelect | Battle;
+export type PasswordMatchHostSubFlow = PlayerSelect | Battle | Rematch;
 
 /** あいことば対戦（ホスト） */
 export type PasswordMatchHost = {
