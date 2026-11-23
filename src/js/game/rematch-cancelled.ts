@@ -1,3 +1,4 @@
+import { AnonymousRematchRoom } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { RematchRoom } from "@gbraver-burst-network/browser-sdk";
 import { Observable, Subject, Unsubscribable } from "rxjs";
 
@@ -20,11 +21,13 @@ export class RematchCancelled {
    * 再戦キャンセル監視を開始する
    * @param room 監視対象となるルーム
    */
-  bind(room: RematchRoom): void {
+  bind(room: RematchRoom | AnonymousRematchRoom): void {
     this.unbind();
-    this.#unsubscriber = room.rematchCancelledNotifier().subscribe(() => {
-      this.#notifier.next();
-    });
+    this.#unsubscriber = room
+      .opponentCancelledRematchNotifier()
+      .subscribe(() => {
+        this.#notifier.next();
+      });
   }
 
   /**
