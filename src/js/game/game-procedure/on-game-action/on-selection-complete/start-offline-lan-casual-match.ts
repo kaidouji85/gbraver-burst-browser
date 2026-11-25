@@ -3,7 +3,7 @@ import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { OfflineLANCasualMatch } from "../../../in-progress/offline-lan-casual-match";
 import { OfflineLAN } from "../../../network-context/offline-lan";
-import { startOnlineBattle } from "../../start-online-battle";
+import { startNetworkBattle } from "../../start-network-battle";
 import { waitUntilOfflineLANCasualMatching } from "../../wait-until-offline-lan-casual-matching";
 
 /**
@@ -23,7 +23,7 @@ export async function startOfflineLANCasualMatch(
 ): Promise<InProgress> {
   props.networkContext.sdk.closeConnection();
   const battle = await waitUntilOfflineLANCasualMatching(props, action);
-  await startOnlineBattle(props, battle, "カジュアルマッチ");
+  await startNetworkBattle(props, battle, "カジュアルマッチ");
   return {
     ...props.inProgress,
     offlineLANCasualMatch: { type: "Battle" },

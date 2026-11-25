@@ -2,7 +2,7 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { disconnectAll } from "../../disconnect-all";
-import { startOnlineBattle } from "../../start-online-battle";
+import { startNetworkBattle } from "../../start-network-battle";
 import { waitUntilPrivateMatchingAsHost } from "../../wait-until-private-matching-as-host";
 
 /** プライベートマッチ（ホスト）を開始した */
@@ -43,7 +43,7 @@ export async function startPrivateMatchHostIfNeeded(
     { ...props, networkContext },
     action,
   );
-  await startOnlineBattle(props, battle, "プライベートマッチ");
+  await startNetworkBattle(props, battle, "プライベートマッチ");
   return {
     isStarted: true,
     inProgress: {

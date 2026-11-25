@@ -11,7 +11,7 @@ import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
 import { Rematch } from "../../../post-battle";
-import { startOnlineBattle } from "../../start-online-battle";
+import { startNetworkBattle } from "../../start-network-battle";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 
 /** 再戦成功 */
@@ -208,5 +208,5 @@ export const rematch = async (options: {
   }
 
   props.inProgress = result.inProgress;
-  await startOnlineBattle(props, result.battle, "再戦");
+  await startNetworkBattle(props, result.battle, "再戦");
 };

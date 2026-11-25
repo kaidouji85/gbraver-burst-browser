@@ -2,7 +2,7 @@ import { SelectionComplete } from "../../../game-actions/selection-complete";
 import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { disconnectAll } from "../../disconnect-all";
-import { startOnlineBattle } from "../../start-online-battle";
+import { startNetworkBattle } from "../../start-network-battle";
 import { waitUntilCasualMatching } from "../../wait-until-casual-matching";
 
 /** カジュアルマッチが開始された */
@@ -42,7 +42,7 @@ export async function startCasualMatchIfNeeded(
     { ...props, networkContext },
     action,
   );
-  await startOnlineBattle(props, battle, "カジュアルマッチ");
+  await startNetworkBattle(props, battle, "カジュアルマッチ");
   return {
     isStarted: true,
     inProgress: {

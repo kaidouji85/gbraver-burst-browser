@@ -3,7 +3,7 @@ import { PrivateMatchGuestDialog } from "../../dialogs/private-match-guest";
 import { PasswordMatchEntry } from "../../game-actions/password-match-entry";
 import { GameProps } from "../../game-props";
 import { disconnectAll } from "../disconnect-all";
-import { startPasswordMatch } from "../start-password-match";
+import { startNetworkBattle } from "../start-network-battle";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchPrivateMatchGuestDialogWhenPasswordMatch } from "../switch-dialog/switch-private-match-guest-dialog-when-password-match";
 
@@ -51,5 +51,5 @@ export const onPasswordMatchEntry = async (options: {
     ...props.inProgress,
     passwordMatchGuest: { type: "Battle", battle },
   };
-  await startPasswordMatch(props, battle);
+  await startNetworkBattle(props, battle, "あいことば対戦");
 };

@@ -1,6 +1,9 @@
 import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
+import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
+import { OfflineBattleSDK } from "@gbraver-burst-network/offline-browser-sdk";
 import { Player } from "gbraver-burst-core";
 
+import { isAbortError } from "../../event/abort-controller/abort-error";
 import { waitAnimationFrame } from "../../event/wait/wait-animation-frame";
 import { waitTime } from "../../event/wait/wait-time";
 import {
@@ -27,13 +30,13 @@ import { switchMatchCard } from "./switch-scene/switch-match-card";
 /**
  * BattleProgressを生成するヘルパー関数
  * @param props ゲームプロパティ
- * @param battle あいことば対戦SDK
+ * @param battle バトルSDK
  * @returns 生成結果
  */
-const createBattleProgress = (
+function createBattleProgress(
   props: Readonly<GameProps>,
-  battle: AnonymousBattleSDK,
-): BattleProgress => {
+  battle: BattleSDK | OfflineBattleSDK,
+): BattleProgress {
   return {
     progress: async (v) => {
       try {
@@ -43,6 +46,10 @@ const createBattleProgress = (
         props.domDialogBinder.hidden();
         return update;
       } catch (e) {
+        if (isAbortError(e)) {
+          throw e;
+        }
+
         const dialog = new NetworkErrorDialog({
           ...props,
           postNetworkError: { type: "GotoTitle" },
@@ -52,18 +59,20 @@ const createBattleProgress = (
       }
     },
   };
-};
+}
 
 /**
- * あいことば対戦を開始する
+ * 通信対戦を開始する
+ * ネット対戦、あいことば対戦、オフラインLAN対戦が対象となる
  * @param props ゲームプロパティ
- * @param battle あいことば対戦SDK
- * @returns 処理が完了したら発火するPromise
+ * @param battle バトルSDK
+ * @param caption 対戦カードのキャプション
  */
-export const startPasswordMatch = async (
+export async function startNetworkBattle(
   props: GameProps,
-  battle: AnonymousBattleSDK,
-) => {
+  battle: BattleSDK | AnonymousBattleSDK | OfflineBattleSDK,
+  caption: string,
+): Promise<void> {
   props.suddenlyBattleEnd.bind(battle);
   await Promise.all([
     props.fader.fadeOut(),
@@ -77,7 +86,7 @@ export const startPasswordMatch = async (
     resources: props.resources,
     player: battle.player.armdozer.id,
     enemy: battle.enemy.armdozer.id,
-    caption: "あいことば対戦",
+    caption,
   });
   switchMatchCard(props, scene);
   await Promise.race([scene.waitUntilLoaded(), waitTime(MAX_LOADING_TIME)]);
@@ -115,4 +124,4 @@ export const startPasswordMatch = async (
   props.domSceneBinder.dispose();
   await props.fader.fadeIn();
   await battleScene.start();
-};
+}
