@@ -127,6 +127,7 @@ const rematchPasswordMatchHost = async (options: {
 
   const { rematchRoom } = inProgress.passwordMatchHost;
   const battle = await rematchRoom.requestRematch(postAction);
+  rematchRoom.destructor();
   return {
     isSuccess: true,
     battle,
@@ -155,6 +156,7 @@ const rematchPasswordMatchGuest = async (options: {
 
   const { rematchRoom } = inProgress.passwordMatchGuest;
   const battle = await rematchRoom.requestRematch(postAction);
+  rematchRoom.destructor();
   return {
     isSuccess: true,
     battle,
