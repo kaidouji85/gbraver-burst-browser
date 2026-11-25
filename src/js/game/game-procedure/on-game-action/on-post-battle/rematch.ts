@@ -1,3 +1,4 @@
+import { AnonymousBattleSDK } from "@gbraver-burst-network/anonymous-browser-sdk";
 import { BattleSDK } from "@gbraver-burst-network/browser-sdk";
 
 import { COMMUNICATING } from "../../../dialogs/waiting/captions";
@@ -17,7 +18,7 @@ import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
 type SuccessRematch = {
   isSuccess: true;
   /** バトルSDK */
-  battle: BattleSDK;
+  battle: BattleSDK | AnonymousBattleSDK;
   /** inProgress更新結果 */
   inProgress: InProgress;
 };
