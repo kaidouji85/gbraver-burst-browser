@@ -3,7 +3,7 @@ import { GameProps } from "../../../game-props";
 import { InProgress } from "../../../in-progress";
 import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { Online } from "../../../network-context/online";
-import { startPasswordMatch } from "../../start-password-match";
+import { startNetworkBattle } from "../../start-network-battle";
 import { waitUntilPasswordMatchingAsHost } from "../../wait-until-password-matching-as-host";
 
 /**
@@ -19,9 +19,9 @@ export const startPasswordMatchHost = async (
   action: Readonly<SelectionComplete>,
 ): Promise<InProgress> => {
   const battle = await waitUntilPasswordMatchingAsHost(props, action);
-  await startPasswordMatch(props, battle);
+  await startNetworkBattle(props, battle, "あいことば対戦");
   return {
     ...props.inProgress,
-    passwordMatchHost: { type: "Battle" },
+    passwordMatchHost: { type: "Battle", battle },
   };
 };

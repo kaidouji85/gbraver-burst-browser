@@ -8,7 +8,7 @@ import { PasswordMatchGuest } from "../../../in-progress/password-match-guest";
 import { PasswordMatchHost } from "../../../in-progress/password-match-host";
 import { PrivateMatchGuest } from "../../../in-progress/private-match-guest";
 import { PrivateMatchHost } from "../../../in-progress/private-match-host";
-import { disconnectConnection } from "../../disconnect-connection";
+import { disconnectAll } from "../../disconnect-all";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 import { switchWaitingDialog } from "../../switch-dialog/switch-waiting-dialog";
@@ -35,7 +35,7 @@ export async function forceEndNetBattle(
   const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
   props.suddenlyBattleEnd.unbind();
-  await disconnectConnection(props);
+  await disconnectAll(props);
   props.domDialogBinder.hidden();
   const [title] = await Promise.all([
     (async () => {

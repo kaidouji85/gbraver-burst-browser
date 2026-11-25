@@ -2,7 +2,7 @@ import { COMMUNICATING } from "../../dialogs/waiting/captions";
 import { WaitingDialog } from "../../dialogs/waiting/waiting-dialog";
 import { MatchingCanceled } from "../../game-actions/matching-canceled";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../disconnect-connection";
+import { disconnectAll } from "../disconnect-all";
 import { switchWaitingDialog } from "../switch-dialog/switch-waiting-dialog";
 
 /** オプション */
@@ -23,6 +23,6 @@ export async function onMatchingCanceled(options: Options): Promise<void> {
   const { props } = options;
   const dialog = new WaitingDialog(COMMUNICATING);
   switchWaitingDialog(props, dialog);
-  await disconnectConnection(props);
+  await disconnectAll(props);
   props.domDialogBinder.hidden();
 }

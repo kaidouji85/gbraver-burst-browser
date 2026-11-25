@@ -5,6 +5,8 @@ import { endCasualMatch } from "./end-casual-match";
 import { endEpisode } from "./end-episode";
 import { endNetBattle } from "./end-net-battle";
 import { endNPCBattle } from "./end-npc-battle";
+import { endPasswordMatchGuest } from "./end-password-match-guest";
+import { endPasswordMatchHost } from "./end-password-match-host";
 import { endPrivateMatchGuest } from "./end-private-match-guest";
 import { endPrivateMatchHost } from "./end-private-match-host";
 
@@ -43,9 +45,11 @@ export async function onEndBattle(options: Options): Promise<void> {
         return endPrivateMatchHost({ ...props, inProgress }, action);
       case "PrivateMatchGuest":
         return endPrivateMatchGuest({ ...props, inProgress }, action);
-      case "OfflineLANCasualMatch":
       case "PasswordMatchHost":
+        return endPasswordMatchHost({ ...props, inProgress }, action);
       case "PasswordMatchGuest":
+        return endPasswordMatchGuest({ ...props, inProgress }, action);
+      case "OfflineLANCasualMatch":
         return endNetBattle({ ...props, inProgress });
       case "Story":
         return endEpisode({ ...props, inProgress }, action);

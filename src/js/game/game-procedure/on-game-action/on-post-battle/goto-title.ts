@@ -1,7 +1,7 @@
 import { fadeOut, stop } from "../../../../sounds/bgm/bgm-operators";
 import { GameProps } from "../../../game-props";
 import { GotoTitle } from "../../../post-network-error";
-import { disconnectConnection } from "../../disconnect-connection";
+import { disconnectAll } from "../../disconnect-all";
 import { playTitleBGM } from "../../play-title-bgm";
 import { startTitle } from "../../start-title";
 
@@ -32,7 +32,20 @@ export async function gotoTitle(options: Options) {
       await props.bgm.do(fadeOut);
       await props.bgm.do(stop);
     })(),
-    disconnectConnection(props),
+    (async () => {
+      if (
+        props.inProgress.type === "PasswordMatchHost" &&
+        props.inProgress.passwordMatchHost.type === "Rematch"
+      ) {
+        await props.inProgress.passwordMatchHost.rematchRoom.cancelRematch();
+      } else if (
+        props.inProgress.type === "PasswordMatchGuest" &&
+        props.inProgress.passwordMatchGuest.type === "Rematch"
+      ) {
+        await props.inProgress.passwordMatchGuest.rematchRoom.cancelRematch();
+      }
+      await disconnectAll(props);
+    })(),
   ]);
   title.startTitleBackgroundLoop();
   await props.fader.fadeIn();

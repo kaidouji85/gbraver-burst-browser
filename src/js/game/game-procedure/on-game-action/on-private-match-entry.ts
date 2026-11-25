@@ -2,8 +2,8 @@ import { MatchingDialog } from "../../dialogs/matching/matching-dialog";
 import { PrivateMatchGuestDialog } from "../../dialogs/private-match-guest";
 import { PrivateMatchEntry } from "../../game-actions/private-match-entry";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../disconnect-connection";
-import { startOnlineBattle } from "../start-online-battle";
+import { disconnectAll } from "../disconnect-all";
+import { startNetworkBattle } from "../start-network-battle";
 import { switchMatchingDialog } from "../switch-dialog/switch-matching-dialog";
 import { switchPrivateMatchGuestDialog } from "../switch-dialog/switch-private-match-guest-dialog";
 
@@ -30,7 +30,7 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
   }
 
   switchMatchingDialog(props, new MatchingDialog(props));
-  await disconnectConnection(props);
+  await disconnectAll(props);
   const { armdozerId, pilotId } = props.inProgress.privateMatchGuest;
   const battle = await props.networkContext.sdk.enterPrivateMatchRoom(
     action.roomID,
@@ -51,5 +51,5 @@ export async function onPrivateMatchEntry(options: Options): Promise<void> {
     ...props.inProgress,
     privateMatchGuest: { type: "Battle", battle },
   };
-  await startOnlineBattle(props, battle, "プライベートマッチ");
+  await startNetworkBattle(props, battle, "プライベートマッチ");
 }

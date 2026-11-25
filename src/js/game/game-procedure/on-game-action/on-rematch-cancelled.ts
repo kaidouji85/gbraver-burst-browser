@@ -1,6 +1,6 @@
 import { NetworkErrorDialog } from "../../dialogs/network-error";
 import { GameProps } from "../../game-props";
-import { disconnectConnection } from "../disconnect-connection";
+import { disconnectAll } from "../disconnect-all";
 import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-dialog";
 
 /**
@@ -11,7 +11,7 @@ import { switchNetworkErrorDialog } from "../switch-dialog/switch-network-error-
 export const onRematchCancelled = (options: { props: Readonly<GameProps> }) => {
   const { props } = options;
   props.rematchCancelled.unbind();
-  disconnectConnection(props);
+  disconnectAll(props);
 
   const dialog = new NetworkErrorDialog({
     ...props,
