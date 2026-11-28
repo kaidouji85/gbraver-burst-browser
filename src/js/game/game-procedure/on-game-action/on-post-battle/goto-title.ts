@@ -33,17 +33,6 @@ export async function gotoTitle(options: Options) {
       await props.bgm.do(stop);
     })(),
     (async () => {
-      if (
-        props.inProgress.type === "PasswordMatchHost" &&
-        props.inProgress.passwordMatchHost.type === "Rematch"
-      ) {
-        await props.inProgress.passwordMatchHost.rematchRoom.cancelRematch();
-      } else if (
-        props.inProgress.type === "PasswordMatchGuest" &&
-        props.inProgress.passwordMatchGuest.type === "Rematch"
-      ) {
-        await props.inProgress.passwordMatchGuest.rematchRoom.cancelRematch();
-      }
       await disconnectAll(props);
     })(),
   ]);
